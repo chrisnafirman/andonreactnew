@@ -206,7 +206,7 @@ const RealTime = () => {
   const updateStatus = (data) => {
     setStatus(data);
     setBackgroundColor(
-      data === "Good" ? "#31A207" : data === "Repair" ? "#E9CE08" : data === "Damage" ? "#DA0404" : "#565454"
+      data === "Go" ? "#31A207" : data === "Present" ? "#E9CE08" : data === "Leader" ? "#C00000" : data === "Maintenance" ? "#be4f62" : "#565454"
 
     );
   };

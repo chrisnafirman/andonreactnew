@@ -13,7 +13,7 @@ import Mobile from "./components/Mobile/Mobile.jsx"
 import Line from "./components/Line.jsx"
 import Line1 from "./components/Line1/Line1.jsx"
 import PPIC from "./components/Ppic/Ppic.jsx"
-import ReportPPIC from "./components/Ppic/Reportppic.jsx"
+import TaskPPIC from "./components/Ppic/Reportppic.jsx"
 
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
         <Route path="Line" element={<Line/>}/>
         <Route path="Line1" element={<Line1/>}/>
         <Route path="PPIC" element={<PPIC/>}/>
-        <Route path="Reportppic" element={<ReportPPIC/>}/>
+        <Route path="TaskPPIC" element={<TaskPPIC/>}/>
       </Routes>
     </>
   );

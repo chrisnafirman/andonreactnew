@@ -145,9 +145,9 @@ const Line1 = () => {
                       </div>
                       <div class="flex-1 text-right md:text-center">
                         <h2 class="font-bold uppercase text-gray-600">
-                          Server Uptime
+                          DATE TIME
                         </h2>
-                        <p class="font-bold text-3xl">152 days</p>
+                        <p class="font-bold text-3xl">UNKNOWN</p>
                       </div>
                     </div>
                   </div>
@@ -162,9 +162,9 @@ const Line1 = () => {
                       </div>
                       <div class="flex-1 text-right md:text-center">
                         <h2 class="font-bold uppercase text-gray-600">
-                          To Do List
+                          UNKNOWN
                         </h2>
-                        <p class="font-bold text-3xl">7 tasks</p>
+                        <p class="font-bold text-3xl">UNKNWON</p>
                       </div>
                     </div>
                   </div>

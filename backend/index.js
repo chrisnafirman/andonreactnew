@@ -108,6 +108,13 @@ app.get("/api/get/data", (req, res) => {
 });
 
 
+app.get("/api/get/PPIC", (req, res) => {
+  const sqlSelect = "SELECT * FROM ppic";
+  db.query(sqlSelect, (err, results) => {
+    res.send(results);
+  });
+});
+
 app.get("/api/get/datakerusakan", (req, res) => {
   const sqlSelect = "SELECT * FROM datakerusakan";
   db.query(sqlSelect, (err, results) => {

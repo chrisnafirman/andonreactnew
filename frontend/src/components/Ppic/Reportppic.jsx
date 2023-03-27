@@ -9,6 +9,8 @@ const RepairReport = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
 
+  const [selectedItem, setSelectedItem] = useState(null);
+
   //  fungsi export to pdf
   const exportToPDF = () => {
     const doc = new jsPDF();
@@ -32,24 +34,21 @@ const RepairReport = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/get/data")
+    fetch("http://localhost:3001/api/get/PPIC")
       .then((response) => response.json())
       .then((json) => {
-        const YellowData = json.filter((item) => item.status === "Repair");
         // mengubah properti timestamp menjadi tanggal saja
-        YellowData.forEach((item) => {
-          const date = new Date(item.timestamp);
+        json.forEach((item) => {
+          const date = new Date(item.waktu);
           const formattedDate = `${date.getDate()}/${
             date.getMonth() + 1
           }/${date.getFullYear()}`;
-          item.timestamp = formattedDate;
+          item.waktu = formattedDate;
         });
-        YellowData.sort(
-          (a, b) => Date.parse(a.timestamp) - Date.parse(b.timestamp)
-        );
-        YellowData.reverse();
-        setData(YellowData);
-        setFilteredData(YellowData);
+        json.sort((a, b) => Date.parse(a.waktu) - Date.parse(b.waktu));
+        json.reverse();
+        setData(json);
+        setFilteredData(json);
       });
   }, []);
 
@@ -57,23 +56,20 @@ const RepairReport = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://localhost:3001/api/get/data?date=${selectedDate}`)
+    fetch(`http://localhost:3001/api/get/PPIC?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
-        const YellowData = json.filter((item) => item.status === "Repair");
-        // mengubah properti timestamp menjadi tanggal saja
-        YellowData.forEach((item) => {
-          const date = new Date(item.timestamp);
+        // mengubah properti waktu menjadi tanggal saja
+        json.forEach((item) => {
+          const date = new Date(item.waktu);
           const formattedDate = `${date.getDate()}/${
             date.getMonth() + 1
           }/${date.getFullYear()}`;
-          item.timestamp = formattedDate;
+          item.waktu = formattedDate;
         });
-        YellowData.sort(
-          (a, b) => Date.parse(a.timestamp) - Date.parse(b.timestamp)
-        );
-        YellowData.reverse();
-        setFilteredData(YellowData);
+        json.sort((a, b) => Date.parse(a.waktu) - Date.parse(b.waktu));
+        json.reverse();
+        setFilteredData(json);
       });
   };
 
@@ -84,10 +80,10 @@ const RepairReport = () => {
       date.getMonth() + 1
     }/${date.getFullYear()}`;
     const filteredData = data.filter(
-      (item) => item.timestamp === formattedDate
+      (item) => item.waktu === formattedDate
     );
     filteredData.sort(
-      (a, b) => Date.parse(b.timestamp) - Date.parse(a.timestamp)
+      (a, b) => Date.parse(b.waktu) - Date.parse(a.waktu)
     );
     setFilteredData(filteredData);
   };
@@ -108,15 +104,18 @@ const RepairReport = () => {
           </a>
 
           <div class="flex md:order-2">
+            <a href="PPIC">
             <button
               className="text-white md:inline-block hidden bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               type="button"
               data-drawer-target="drawer-navigation"
-              onClick={toggleDrawer}
+              
               aria-controls="drawer-navigation"
             >
-              Menu
+              Back
             </button>
+
+            </a>
 
             <button
               data-collapse-toggle="navbar-sticky"
@@ -150,7 +149,7 @@ const RepairReport = () => {
           id="drawer-navigation"
           className={`fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform ${
             showDrawer ? "" : "-translate-x-full"
-          } bg-[#1b1c27] dark:bg-gray-800`}
+          } bg-gray-100  dark:bg-gray-100 `}
           tabIndex="-1"
           aria-labelledby="drawer-navigation-label"
         >
@@ -186,12 +185,12 @@ const RepairReport = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="/"
+                  href="/Leader"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
                 >
                   <svg
                     aria-hidden="true"
-                    className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    className="w-6  h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -199,12 +198,12 @@ const RepairReport = () => {
                     <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                     <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                   </svg>
-                  <span class="ml-3 text-white">Realtime Report</span>
+                  <span class="ml-3 text-gray-500">Realtime Dashboard</span>
                 </a>
               </li>
               <li>
                 <a
-                  href="/DamageReport"
+                  href="/Leader"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
                 >
                   <svg
@@ -221,75 +220,9 @@ const RepairReport = () => {
                       clip-rule="evenodd"
                     ></path>
                   </svg>
-                  <span class="ml-3 text-white">Report Damage Machine</span>
+                  <span class="ml-3 text-gray-500">Report Machine</span>
                 </a>
-              </li>
-              <li>
-                <a
-                  href="/RepairReport"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span class="ml-3 text-white">Report Repair Machine</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/GoodReport"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span class="ml-3 text-white">Report Good Machine</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/LoginMaintenance"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span class="ml-3 text-red-700 ">Maintenance Page</span>
-                </a>
-              </li>
+              </li>    
             </ul>
           </div>
         </div>
@@ -350,7 +283,7 @@ const RepairReport = () => {
               </button>
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Yellow Status
+                  PPIC Task
                 </div>
               </header>
 
@@ -368,10 +301,10 @@ const RepairReport = () => {
                         <div className="font-semibold text-left">Line</div>
                       </th>
                       <th className="p-1 w-10">
-                        <div className="font-semibold text-center"> Nama AREA</div>
+                        <div className="font-semibold text-center">AREA</div>
                       </th>
                       <th className="p-1 w-10">
-                        <div className="font-semibold text-center">Nama Station</div>
+                        <div className="font-semibold text-center">Station</div>
                       </th>
                       <th className="p-1 w-10">
                         <div className="font-semibold text-center">DETAILS</div>
@@ -389,26 +322,29 @@ const RepairReport = () => {
                       >
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
-                            {item.mesin}
+                            {item.MachineName}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
-                            {item.line}
+                            {item.MachineLine}
                           </div>
                         </td>
                         <td className="p-2 ">
                           <div className="font-medium text-gray-800">
-                            {item.line}
+                            {item.MachineArea}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
-                            {item.line}
+                            {item.MachineStation}
                           </div>
                         </td>
                         <td className="p-5 ">
-                          <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out">
+                          <button
+                            onClick={() => setSelectedItem(item)}
+                            className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 20 20"
@@ -425,6 +361,159 @@ const RepairReport = () => {
                             <span>DETAIL</span>
                           </button>
                         </td>
+
+                        {selectedItem && (
+                          <>
+                            <div className="fixed z-10 inset-0 overflow-y-auto">
+                              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                <div className="fixed inset-0 transition-opacity">
+                                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                                </div>
+
+                                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+
+                                <div
+                                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                                  role="dialog"
+                                  aria-modal="true"
+                                  aria-labelledby="modal-headline"
+                                >
+                                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                                    <div className="sm:flex sm:items-start">
+                                      <div className="w-full max-w-lg">
+                                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
+                                          <span>PROBLEM</span>
+                                        </div>
+                                        <div class="flex flex-wrap -mx-3 ">
+                                          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                              for="grid-first-name"
+                                            >
+                                              Nama PIC
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.NamaPIC}{" "}
+                                            </div>
+                                          </div>
+                                          <div class="w-full md:w-1/2 px-3">
+                                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                              NPK PIC
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.NpkPIC}{" "}
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div class="flex flex-wrap -mx-3 mb-6">
+                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                              for="grid-city"
+                                            >
+                                              Machine Name
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.MachineName}{" "}
+                                            </div>
+                                          </div>
+
+                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                              for="grid-city"
+                                            >
+                                              Machine Area
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.MachineArea}{" "}
+                                            </div>
+                                          </div>
+                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                              for="grid-city"
+                                            >
+                                              Machine Line
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.MachineArea}{" "}
+                                            </div>
+                                          </div>
+                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                              for="grid-city"
+                                            >
+                                              Machine Station
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.MachineStation}{" "}
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="flex flex-wrap -mx-3 ">
+                                          <div class="w-full px-1">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                                              for="grid-password"
+                                            >
+                                              Kerusakan
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.Kerusakan}{" "}
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div className="flex justify-end">
+                                          <button
+                                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                            onClick={() =>
+                                              setSelectedItem(false)
+                                            }
+                                          >
+                                            CLOSE
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+                          </>
+                        )}
 
                         {/* <td className="p-5 w-40">
                           <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out">
@@ -446,7 +535,7 @@ const RepairReport = () => {
 
                         <td className="p-2">
                           <div className="text-center h-6 text-black...">
-                            {item.timestamp}
+                            {item.waktu}
                           </div>
                         </td>
                       </tr>
