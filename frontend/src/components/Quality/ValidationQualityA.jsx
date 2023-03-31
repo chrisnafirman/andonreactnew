@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
+
 
 const RepairReport = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
@@ -11,13 +11,7 @@ const RepairReport = () => {
 
   const [selectedItem, setSelectedItem] = useState(null);
 
-  //  fungsi export to pdf
-  const exportToPDF = () => {
-    const doc = new jsPDF();
-    const table = document.getElementById("data-table");
-    doc.autoTable({ html: table });
-    doc.save(`Report Repair Status.pdf`);
-  };
+
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
@@ -33,16 +27,24 @@ const RepairReport = () => {
 
   updateTime();
 
+ 
   useEffect(() => {
-    fetch("http://localhost:3001/api/get/PPIC")
+    fetch("http://localhost:3001/api/get/validationqa")
       .then((response) => response.json())
       .then((json) => {
-        // mengubah properti timestamp menjadi tanggal saja
+        // mengubah properti timestamp menjadi tanggal dan waktu
         json.forEach((item) => {
           const date = new Date(item.waktu);
-          const formattedDate = `${date.getDate()}/${
-            date.getMonth() + 1
-          }/${date.getFullYear()}`;
+          const day = date.getDate();
+          const month = date.getMonth() + 1;
+          const year = date.getFullYear();
+          const hours = date.getHours();
+          const minutes = date.getMinutes();
+          const formattedDate = `${day.toString().padStart(2, "0")}-${month
+            .toString()
+            .padStart(2, "0")}-${year} / ${hours.toString().padStart(2, "0")}:${minutes
+            .toString()
+            .padStart(2, "0")}`;
           item.waktu = formattedDate;
         });
         json.sort((a, b) => Date.parse(a.waktu) - Date.parse(b.waktu));
@@ -51,20 +53,23 @@ const RepairReport = () => {
         setFilteredData(json);
       });
   }, []);
-
+  
   const handleFilterByDate = (e) => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://localhost:3001/api/get/PPIC?date=${selectedDate}`)
+    fetch(`http://localhost:3001/api/get/validationqa?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti waktu menjadi tanggal saja
         json.forEach((item) => {
           const date = new Date(item.waktu);
-          const formattedDate = `${date.getDate()}/${
-            date.getMonth() + 1
-          }/${date.getFullYear()}`;
+          const day = date.getDate();
+          const month = date.getMonth() + 1;
+          const year = date.getFullYear();
+          const formattedDate = `${day.toString().padStart(2, "0")}-${month
+            .toString()
+            .padStart(2, "0")}-${year}`;
           item.waktu = formattedDate;
         });
         json.sort((a, b) => Date.parse(a.waktu) - Date.parse(b.waktu));
@@ -72,49 +77,50 @@ const RepairReport = () => {
         setFilteredData(json);
       });
   };
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!selectedDate) {
+      setFilteredData([]);
+      return;
+    }
     const date = new Date(selectedDate);
-    const formattedDate = `${date.getDate()}/${
+    const formattedDate = `${date.getDate().toString().padStart(2, "0")}-${(
       date.getMonth() + 1
-    }/${date.getFullYear()}`;
-    const filteredData = data.filter(
-      (item) => item.waktu === formattedDate
-    );
-    filteredData.sort(
-      (a, b) => Date.parse(b.waktu) - Date.parse(a.waktu)
-    );
+    )
+      .toString()
+      .padStart(2, "0")}-${date.getFullYear()}`;
+    const filteredData = data.filter((item) => item.waktu.includes(formattedDate));
+    filteredData.sort((a, b) => Date.parse(b.waktu) - Date.parse(a.waktu));
     setFilteredData(filteredData);
   };
-
+  
+  
   return (
-    <body className="h-full w-full bg-stone-700">
+    <body className="h-full w-full bg-[#93C2C4]">
       <nav class="bg-gray-100 px-2 sm:px-4 py-2.5 dark:bg-gray-900  w-full sticky z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
-          <a href="/" class="flex items-center">
+          <a href="#" class="flex items-center">
             <img
               src={process.env.PUBLIC_URL + "/AVI.png"}
               alt="Logo"
               class="h-6 mr-3 sm:h-9"
             />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              PPIC
+              Quality A
             </span>
           </a>
 
           <div class="flex md:order-2">
-            <a href="PPIC">
-            <button
-              className="text-white md:inline-block hidden bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-              type="button"
-              data-drawer-target="drawer-navigation"
-              
-              aria-controls="drawer-navigation"
-            >
-              Back
-            </button>
-
+            <a href="/QualityA">
+              <button
+                className="text-white md:inline-block hidden bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                type="button"
+                data-drawer-target="drawer-navigation"
+                aria-controls="drawer-navigation"
+              >
+                Back
+              </button>
             </a>
 
             <button
@@ -185,7 +191,7 @@ const RepairReport = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="/Leader"
+                  href="/QualityA"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
                 >
                   <svg
@@ -203,7 +209,7 @@ const RepairReport = () => {
               </li>
               <li>
                 <a
-                  href="/Leader"
+                  href="/QualityA"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
                 >
                   <svg
@@ -222,7 +228,7 @@ const RepairReport = () => {
                   </svg>
                   <span class="ml-3 text-gray-500">Report Machine</span>
                 </a>
-              </li>    
+              </li>
             </ul>
           </div>
         </div>
@@ -273,17 +279,9 @@ const RepairReport = () => {
             </form>
             {/* <!-- Table --> */}
             <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-              <button className="flex" onClick={exportToPDF}>
-                Export To:
-                <img
-                  className="w-[25px]"
-                  src={process.env.PUBLIC_URL + "/pdf.png"}
-                  alt=""
-                />
-              </button>
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  PPIC Task
+                 Validation Quality
                 </div>
               </header>
 
@@ -307,7 +305,7 @@ const RepairReport = () => {
                         <div className="font-semibold text-center">Station</div>
                       </th>
                       <th className="p-1 w-10">
-                        <div className="font-semibold text-center">DETAILS</div>
+                        <div className="font-semibold text-center">File</div>
                       </th>
                       <th className="p-1 w-26">
                         <div className="font-semibold text-center">Date</div>
@@ -318,7 +316,7 @@ const RepairReport = () => {
                     {filteredData.map((item, index) => (
                       <tr
                         key={item.id}
-                        className={index === 0 ? "bg-green-400" : ""}
+                        
                       >
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
@@ -358,7 +356,7 @@ const RepairReport = () => {
                                 clipRule="evenodd"
                               />
                             </svg>
-                            <span>DETAIL</span>
+                            <span>FILE</span>
                           </button>
                         </td>
 
@@ -382,7 +380,7 @@ const RepairReport = () => {
                                     <div className="sm:flex sm:items-start">
                                       <div className="w-full max-w-lg">
                                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                          <span>PROBLEM</span>
+                                          <span>Validation By</span>
                                         </div>
                                         <div class="flex flex-wrap -mx-3 ">
                                           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -483,14 +481,18 @@ const RepairReport = () => {
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                                               for="grid-password"
                                             >
-                                              Kerusakan
+                                              Validation
                                             </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Kerusakan}{" "}
+                                            <div class="flex items-center">
+                                              <a
+                                                href={`http://localhost:3001/${selectedItem.Validation}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="text-blue-600 hover:text-blue-800"
+                                              >
+                                                <i class="far fa-file-pdf mr-2"></i>
+                                                View PDF
+                                              </a>
                                             </div>
                                           </div>
                                         </div>

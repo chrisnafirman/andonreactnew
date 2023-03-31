@@ -15,6 +15,8 @@ const Ppic = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [status, setStatus] = useState("");
   const [mesin, setMesin] = useState("");
+  const [area, setArea] = useState("");
+  const [station, setStation] = useState("");
   const [line, setLine] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
   const [nama, setNama] = useState("");
@@ -23,6 +25,31 @@ const Ppic = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [prevStatus, setPrevStatus] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
+  ////
+  const [NamaPIC, setNamaPIC] = useState("");
+  const [NpkPIC, setNpkPIC] = useState("");
+  const [MachineArea, setMachineArea] = useState("");
+  const [MachineLine, setMachineLine] = useState("");
+  const [MachineStation, setMachineStation] = useState("");
+  const [Kerusakan, setKerusakan] = useState("");
+
+
+
+  /// PPIC
+  const namaList = [
+    "Agus Sofian Warsito",
+    "Allan Mulyana",
+    "Alwan Luchi",
+    "Ari Ramdani",
+    "Arif Setiawan",
+  ];
+  const npkList = [
+    "0601", 
+    "0686", 
+    "0594", 
+    "0789", 
+    "0214"
+  ];
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
@@ -106,6 +133,18 @@ const Ppic = () => {
       setTimer(data);
     });
 
+    const ref6 = firebase.database().ref("Mesin/Area");
+    ref6.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setArea(data);
+    });
+
+    const ref7 = firebase.database().ref("Mesin/Station");
+    ref7.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setStation(data);
+    });
+
     return () => {};
   }, []);
   ////////////
@@ -181,18 +220,67 @@ const Ppic = () => {
   const updateStatus = (data) => {
     setStatus(data);
     setBackgroundColor(
-      data === "Good"
+      data === "Go"
         ? "#31A207"
         : data === "Repair"
         ? "#E9CE08"
-        : data === "Damage"
+        : data === "Leader"
         ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
         : data === "PPIC"
         ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
         : "#565454"
     );
   };
 
+  const submit = () => {
+    const data = {
+      NamaPIC: NamaPIC,
+      NpkPIC: NpkPIC,
+      MachineName: mesin,
+      MachineArea: area,
+      MachineLine: line,
+      MachineStation: station,
+      Kerusakan: Kerusakan,
+    };
+
+    let department;
+    switch (selectedStatus) {
+      case "QC":
+        department = "QC";
+        break;
+      case "QA":
+        department = "QA";
+        break;
+      default:
+        department = "";
+    }
+
+    fetch(`http://localhost:3001/api/post/${department}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("success");
+          setIsOpen(false);
+          window.location.reload();
+        } else {
+          throw new Error("Error adding data");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   // ----
 
@@ -235,7 +323,7 @@ const Ppic = () => {
               alt="Flowbite Logo"
             />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              PPIC
+              PPIC Line 1
             </span>
           </a>
           <ul class="space-y-2">
@@ -259,7 +347,7 @@ const Ppic = () => {
             </li>
             <li>
               <a
-                href="/TaskPPIC"
+                href="/RequestPpic"
                 class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <svg
@@ -271,7 +359,7 @@ const Ppic = () => {
                 >
                   <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                 </svg>
-                <span class="flex-1 ml-3 whitespace-nowrap">Task PPIC</span>
+                <span class="flex-1 ml-3 whitespace-nowrap">Request For PPIC</span>
               </a>
             </li>
           </ul>
@@ -337,7 +425,7 @@ const Ppic = () => {
               </li>
               <li>
                 <a
-                  href="/TaskPPIC"
+                  href="/RequestPpic"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
                 >
                   <svg
@@ -354,9 +442,9 @@ const Ppic = () => {
                       clip-rule="evenodd"
                     ></path>
                   </svg>
-                  <span class="ml-3 text-gray-500">TASK PPIC</span>
+                  <span class="ml-3 text-gray-500">Request For PPIC</span>
                 </a>
-              </li>    
+              </li>
             </ul>
           </div>
         </div>
@@ -413,8 +501,6 @@ const Ppic = () => {
         </div>
       </nav> */}
 
-      
-
       {/*  */}
       <main class="pt-3 flex justify-center items-center flex-col md:flex-row p-4 sm:ml-64">
         <section class="antialiased  text-gray-600 h-screen px-2" x-data="app">
@@ -441,7 +527,12 @@ const Ppic = () => {
                         </th>
                         <th class="p-1">
                           <div id="request" class="font-semibold text-left ">
-                            PIC
+                            Area
+                          </div>
+                        </th>
+                        <th class="p-1">
+                          <div id="request" class="font-semibold text-left ">
+                            Station
                           </div>
                         </th>
                       </tr>
@@ -452,18 +543,37 @@ const Ppic = () => {
                           <div class="font-medium text-white">{line}</div>
                         </td>
                         <td class="p-1">
-                          <div class="font-medium text-white">{nama}</div>
+                          <div class="font-medium text-white">{area}</div>
+                        </td>
+                        <td class="p-1">
+                          <div class="font-medium text-white">{station}</div>
                         </td>
                       </tr>
                     </tbody>
+
                     <td class="p-1   ">
                       <span className="text-xs uppercase text-black font-bold">
-                        TIME
+                        PIC
                       </span>
                       <div id="timer" class="font-medium  text-white">
-                        {timer}
+                        {nama}
                       </div>
                     </td>
+
+                    {/* <td class="p-1   ">
+                      {status === "Go" ||
+                      status === "Leader" ||
+                      status === "Maintenance" ? (
+                        <>
+                          <span className="text-xs uppercase text-black font-bold">
+                            TIME
+                          </span>
+                          <div id="timer" class="font-medium  text-white">
+                            {timer}
+                          </div>
+                        </>
+                      ) : null}
+                    </td> */}
 
                     {/* POP UP */}
                     <td class="">
@@ -510,7 +620,7 @@ const Ppic = () => {
                                       }}
                                     >
                                       <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                        <span>Request For Quality</span>
+                                        <span>Quality</span>
                                       </div>
                                       <div class="flex flex-wrap -mx-3 ">
                                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -520,28 +630,42 @@ const Ppic = () => {
                                           >
                                             Nama PIC
                                           </label>
-                                          <input
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                            id="grid-first-name"
-                                            type="text"
-                                            placeholder="Nama"
-                                          />
-                                          <p class="text-red-500 text-xs italic">
-                                            Please fill out this field.
-                                          </p>
+                                          <select
+                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                            name="NamaPIC"
+                                            required
+                                            onChange={(e) => {
+                                              setNamaPIC(e.target.value);
+                                              setNpkPIC(
+                                                npkList[
+                                                  namaList.indexOf(
+                                                    e.target.value
+                                                  )
+                                                ]
+                                              );
+                                            }}
+                                          >
+                                            <option value="">
+                                              - -Pilih Nama Leader- -
+                                            </option>
+                                            {namaList.map((nama, index) => (
+                                              <option value={nama} key={index}>
+                                                {nama}
+                                              </option>
+                                            ))}
+                                          </select>
                                         </div>
                                         <div class="w-full md:w-1/2 px-3">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="grid-last-name"
-                                          >
+                                          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                             NPK PIC
                                           </label>
                                           <input
-                                            class=" block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            id="grid-last-name"
-                                            type="text"
+                                            class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                            type="number"
                                             placeholder="0000"
+                                            name="NpkPIC"
+                                            value={NpkPIC}
+                                            readOnly
                                           />
                                         </div>
                                       </div>
@@ -563,30 +687,13 @@ const Ppic = () => {
                                               setSelectedStatus(e.target.value)
                                             }
                                             required
+                                            defaultValue={""}
                                           >
                                             <option value="">
                                               -- Pilih Depart --
                                             </option>
-                                            <option value="PPIC">PPIC</option>
-                                            <option value="Purchasing">
-                                              Purchasing
-                                            </option>
-                                            <option value="MP&L">MP&L</option>
-                                            <option value="Fin Acc">
-                                              Fin Acc
-                                            </option>
-                                            <option value="Engineering & RND">
-                                              Engineering & RND
-                                            </option>
-                                            <option value="Maintenance & IT">
-                                              Maintenance & IT
-                                            </option>
                                             <option value="QA">QA</option>
                                             <option value="QC">QC</option>
-                                            <option value="Opex">Opex</option>
-                                            <option value="HRGA & EHS">
-                                              HRGA & EHS
-                                            </option>
                                           </select>
                                         </div>
                                       </div>
@@ -603,6 +710,7 @@ const Ppic = () => {
                                             id="grid-city"
                                             type="text"
                                             placeholder="ICT"
+                                            name="MachineName"
                                           >
                                             {mesin}
                                           </span>
@@ -615,12 +723,15 @@ const Ppic = () => {
                                           >
                                             Machine Area
                                           </label>
-                                          <input
+                                          <span
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                             id="grid-city"
                                             type="text"
-                                            placeholder="Area"
-                                          />
+                                            placeholder="ICT"
+                                            name="MachineName"
+                                          >
+                                            {area}
+                                          </span>
                                         </div>
                                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                           <label
@@ -629,12 +740,15 @@ const Ppic = () => {
                                           >
                                             Machine Line
                                           </label>
-                                          <input
+                                          <span
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                             id="grid-city"
                                             type="text"
-                                            placeholder="Line"
-                                          />
+                                            placeholder="ICT"
+                                            name="MachineName"
+                                          >
+                                            {line}
+                                          </span>
                                         </div>
                                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                           <label
@@ -643,12 +757,15 @@ const Ppic = () => {
                                           >
                                             Machine Station
                                           </label>
-                                          <input
+                                          <span
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                             id="grid-city"
                                             type="text"
-                                            placeholder="Station"
-                                          />
+                                            placeholder="ICT"
+                                            name="MachineName"
+                                          >
+                                            {station}
+                                          </span>
                                         </div>
                                       </div>
                                       <div class="flex flex-wrap -mx-3 ">
@@ -657,16 +774,21 @@ const Ppic = () => {
                                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                                             for="grid-password"
                                           >
-                                            Kerusakan
+                                            Tindakan
                                           </label>
                                           <input
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                             id="grid-password"
                                             type="text"
                                             placeholder=""
+                                            name="Kerusakan"
+                                            onChange={(e) => {
+                                              setKerusakan(e.target.value);
+                                            }}
+                                            required
                                           />
                                           <p class="text-gray-600 text-xs italic">
-                                            Laporkan Permasalahan Yang Ditemukan
+                                            Tindakan Yang Di Lakukan
                                           </p>
                                         </div>
                                       </div>
@@ -680,6 +802,7 @@ const Ppic = () => {
                                         <button
                                           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                                           type="submit"
+                                          onClick={submit}
                                         >
                                           Simpan
                                         </button>

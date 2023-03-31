@@ -19,19 +19,28 @@ const RealTime = () => {
   const [selectedStatus, setSelectedStatus] = useState("");
   const [nama, setNama] = useState("");
   const [timer, setTimer] = useState(0);
+  const [area, setArea] = useState("");
+  const [station, setStation] = useState("");
   const [backgroundColor, setBackgroundColor] = useState("");
   const [time, setTime] = useState(new Date().toLocaleString());
   const [prevStatus, setPrevStatus] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
+
   ////
   const [NamaPIC, setNamaPIC] = useState("");
-  const [NpkPIC, setNpkPIC] = useState(""); 
+  const [NpkPIC, setNpkPIC] = useState("");
   const [MachineArea, setMachineArea] = useState("");
-  const [MachineLine, setMachineLine] = useState(""); 
+  const [MachineLine, setMachineLine] = useState("");
   const [MachineStation, setMachineStation] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
-
-
+  const namaList = [
+    "Dwi Anggraeny",
+    "Eko Purwanto",
+    "Ila Kurnia",
+    "Marsisto Utoyo",
+    "Siti Ningrum",
+  ];
+  const npkList = ["0141", "0015", "0018", "0144", "0040"];
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
@@ -47,7 +56,7 @@ const RealTime = () => {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
-    
+
         navigator.permissions
           .query({ name: "clipboard-write" })
           .then((permissionStatus) => {
@@ -111,6 +120,18 @@ const RealTime = () => {
     ref5.on("value", (snapshot) => {
       const data = snapshot.val();
       setTimer(data);
+    });
+
+    const ref6 = firebase.database().ref("Mesin/Area");
+    ref6.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setArea(data);
+    });
+
+    const ref7 = firebase.database().ref("Mesin/Station");
+    ref7.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setStation(data);
     });
 
     return () => {};
@@ -185,68 +206,76 @@ const RealTime = () => {
 
   // fungsi mengubah warna status
 
-
   const updateStatus = (data) => {
     setStatus(data);
     setBackgroundColor(
-      data === "Go" ? "#31A207" : data === "Present" ? "#E9CE08" : data === "Leader" ? "#C00000" : data === "Maintenance" ? "#be4f62"  : data === "PPIC"
-      ? "#7A6544" : "#565454"
-
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
     );
   };
 
- 
-
   const submit = () => {
-  const data = {
-    NamaPIC: NamaPIC,
-    NpkPIC: NpkPIC,
-    MachineName: mesin,
-    MachineArea: MachineArea,
-    MachineLine: MachineLine,
-    MachineStation: MachineStation,
-    Kerusakan: Kerusakan,
-  }
+    const data = {
+      NamaPIC: NamaPIC,
+      NpkPIC: NpkPIC,
+      MachineName: mesin,
+      MachineArea: area,
+      MachineLine: line,
+      MachineStation: station,
+      Kerusakan: Kerusakan,
+    };
 
-  let department;
-  switch (selectedStatus) {
-    case "PPIC":
-      department = "PPIC";
-      break;
-    case "Purchasing":
-      department = "Purchasing";
-      break;
-    case "QC":
-      department = "QC";
-      break;
-    case "QA":
-      department = "QA";
-      break;
-    default:
-      department = "";
-  }
-  
-  fetch(`http://localhost:3001/api/post/${department}`, {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => {
-      if (response.status === 200) {
-        alert("success");
-        setIsOpen(false);
-        window.location.reload();
-      } else {
-        throw new Error("Error adding data");
-      }
+    let department;
+    switch (selectedStatus) {
+      case "PPIC":
+        department = "PPIC";
+        break;
+      case "Purchasing":
+        department = "Purchasing";
+        break;
+      case "QC":
+        department = "QC";
+        break;
+      case "QA":
+        department = "QA";
+        break;
+      default:
+        department = "";
+    }
+
+    fetch(`http://localhost:3001/api/post/${department}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     })
-    .catch((err) => {
-      console.log(err);
-    });
-    
-};
+      .then((response) => {
+        if (response.status === 200) {
+          alert("success");
+          setIsOpen(false);
+          window.location.reload();
+        } else {
+          throw new Error("Error adding data");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <body className="h-full w-full bg-slate-900">
@@ -287,7 +316,7 @@ const RealTime = () => {
               alt="Flowbite Logo"
             />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              Leader
+              Leader Line 1
             </span>
           </a>
           <ul class="space-y-2">
@@ -323,7 +352,9 @@ const RealTime = () => {
                 >
                   <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                 </svg>
-                <span class="flex-1 ml-3 whitespace-nowrap">Report Machine</span>
+                <span class="flex-1 ml-3 whitespace-nowrap">
+                  Report Machine
+                </span>
               </a>
             </li>
           </ul>
@@ -408,7 +439,7 @@ const RealTime = () => {
                   </svg>
                   <span class="ml-3 text-gray-500">Report Machine</span>
                 </a>
-              </li>    
+              </li>
             </ul>
           </div>
         </div>
@@ -465,8 +496,6 @@ const RealTime = () => {
         </div>
       </nav> */}
 
-      
-
       {/*  */}
       <main class="pt-3 flex justify-center items-center flex-col md:flex-row p-4 sm:ml-64">
         <section class="antialiased  text-gray-600 h-screen px-2" x-data="app">
@@ -493,7 +522,12 @@ const RealTime = () => {
                         </th>
                         <th class="p-1">
                           <div id="request" class="font-semibold text-left ">
-                            PIC
+                            Area
+                          </div>
+                        </th>
+                        <th class="p-1">
+                          <div id="request" class="font-semibold text-left ">
+                            Station
                           </div>
                         </th>
                       </tr>
@@ -504,10 +538,23 @@ const RealTime = () => {
                           <div class="font-medium text-white">{line}</div>
                         </td>
                         <td class="p-1">
-                          <div class="font-medium text-white">{nama}</div>
+                          <div class="font-medium text-white">{area}</div>
+                        </td>
+                        <td class="p-1">
+                          <div class="font-medium text-white">{station}</div>
                         </td>
                       </tr>
                     </tbody>
+
+                    <td class="p-1   ">
+                      <span className="text-xs uppercase text-black font-bold">
+                        PIC
+                      </span>
+                      <div id="timer" class="font-medium  text-white">
+                        {nama}
+                      </div>
+                    </td>
+
                     <td class="p-1   ">
                       <span className="text-xs uppercase text-black font-bold">
                         TIME
@@ -516,6 +563,19 @@ const RealTime = () => {
                         {timer}
                       </div>
                     </td>
+
+                    {/* <td class="p-1   ">
+                      {status === "Good" || status === "Damage" ? (
+                        <>
+                          <span className="text-xs uppercase text-black font-bold">
+                            TIME
+                          </span>
+                          <div id="timer" class="font-medium  text-white">
+                            {timer}
+                          </div>
+                        </>
+                      ) : null}
+                    </td> */}
 
                     {/* POP UP */}
                     <td class="">
@@ -552,7 +612,7 @@ const RealTime = () => {
                               >
                                 <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                                   <div className="sm:flex sm:items-start">
-                                  <form
+                                    <form
                                       className="w-full max-w-lg"
                                       onSubmit={(e) => {
                                         e.preventDefault();
@@ -572,38 +632,46 @@ const RealTime = () => {
                                           >
                                             Nama PIC
                                           </label>
-                                          <input
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                           
-                                            type="text"
-                                            placeholder="Nama"
-                                            name="NamaPIC" 
+                                          <select
+                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                            name="NamaPIC"
+                                            required
                                             onChange={(e) => {
                                               setNamaPIC(e.target.value);
+                                              setNpkPIC(
+                                                npkList[
+                                                  namaList.indexOf(
+                                                    e.target.value
+                                                  )
+                                                ]
+                                              );
                                             }}
-                                            
-                                          />
+                                          >
+                                            <option value="">
+                                              - -Pilih Nama Leader- -
+                                            </option>
+                                            {namaList.map((nama, index) => (
+                                              <option value={nama} key={index}>
+                                                {nama}
+                                              </option>
+                                            ))}
+                                          </select>
                                         </div>
                                         <div class="w-full md:w-1/2 px-3">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                          
-                                          >
+                                          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                             NPK PIC
                                           </label>
                                           <input
-                                            class=" block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                        
-                                            type="text"
+                                            class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                            type="number"
                                             placeholder="0000"
                                             name="NpkPIC"
-                                            onChange={(e) => {
-                                              setNpkPIC(e.target.value);
-                                            }}
-                                            
+                                            value={NpkPIC}
+                                            readOnly
                                           />
                                         </div>
                                       </div>
+
                                       {/*Status*/}
                                       <div className="mb-4">
                                         <label
@@ -631,7 +699,22 @@ const RealTime = () => {
                                             <option value="Purchasing">
                                               Purchasing
                                             </option>
-                                            
+                                            <option value="MP&L">MP&L</option>
+                                            <option value="Accounting">
+                                              Accounting
+                                            </option>
+                                            <option value="Engineering & RND">
+                                              Engineering & RND
+                                            </option>
+                                            <option value="Maintenance & IT">
+                                              Maintenance & IT
+                                            </option>
+                                            <option value="QA">QA</option>
+                                            <option value="QC">QC</option>
+                                            <option value="Opex">Opex</option>
+                                            <option value="HRGA & EHS">
+                                              HRGA & EHS
+                                            </option>
                                           </select>
                                         </div>
                                       </div>
@@ -649,7 +732,6 @@ const RealTime = () => {
                                             type="text"
                                             placeholder="ICT"
                                             name="MachineName"
-                                  
                                           >
                                             {mesin}
                                           </span>
@@ -662,18 +744,15 @@ const RealTime = () => {
                                           >
                                             Machine Area
                                           </label>
-                                          <input
+                                          <span
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                             id="grid-city"
                                             type="text"
-                                            placeholder="Area"
-                                            
-                                            name="MachineArea"
-                                            onChange={(e) => {
-                                              setMachineArea(e.target.value);
-                                            }}
-                                            required
-                                          />
+                                            placeholder="ICT"
+                                            name="MachineName"
+                                          >
+                                            {area}
+                                          </span>
                                         </div>
                                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                           <label
@@ -682,17 +761,15 @@ const RealTime = () => {
                                           >
                                             Machine Line
                                           </label>
-                                          <input
+                                          <span
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                             id="grid-city"
                                             type="text"
-                                            placeholder="Line"
-                                            name="MachineLine"
-                                            onChange={(e) => {
-                                              setMachineLine(e.target.value);
-                                            }}
-                                            required
-                                          />
+                                            placeholder="ICT"
+                                            name="MachineName"
+                                          >
+                                            {line}
+                                          </span>
                                         </div>
                                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                           <label
@@ -701,17 +778,15 @@ const RealTime = () => {
                                           >
                                             Machine Station
                                           </label>
-                                          <input
+                                          <span
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                             id="grid-city"
                                             type="text"
-                                            placeholder="Station"
-                                            name="MachineStation"
-                                            onChange={(e) => {
-                                              setMachineStation(e.target.value);
-                                            }}
-                                            required
-                                          />
+                                            placeholder="ICT"
+                                            name="MachineName"
+                                          >
+                                            {station}
+                                          </span>
                                         </div>
                                       </div>
                                       <div class="flex flex-wrap -mx-3 ">

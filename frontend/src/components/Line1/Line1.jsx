@@ -1,6 +1,21 @@
-import React from "react";
+import {React,useState,useEffect} from "react";
 
 const Line1 = () => {
+  const [time, setTime] = useState ("");
+
+  function updateTime() {
+    const interval = setInterval(() => {
+      setTime(new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }));
+    }, 1000);
+    return () => clearInterval(interval);
+  }
+  
+  useEffect(() => {
+    updateTime();
+  }, []);
+  
+
+  
   return (
     <body className="bg-gray-800" >
 
@@ -147,7 +162,7 @@ const Line1 = () => {
                         <h2 class="font-bold uppercase text-gray-600">
                           DATE TIME
                         </h2>
-                        <p class="font-bold text-3xl">UNKNOWN</p>
+                        <p class="font-bold text-3xl">{time}</p>
                       </div>
                     </div>
                   </div>

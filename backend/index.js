@@ -3,7 +3,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mysql = require("mysql");
 const app = express();
-const path = require("path");
+const multer = require("multer");
+const path = require ("path");
+
+
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
@@ -16,6 +19,53 @@ const db = mysql.createPool({
   password: "",
   database: "andoniot",
 });
+
+
+
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./public/uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      path.parse(file.originalname).name +
+        "-" +
+        Date.now() +
+        path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({ storage });
+
+app.post("/api/post/validationqa", upload.single("validation"), (req, res) => {
+  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation } = req.body;
+  const Validation = req.file.path.replace(/\\/g, "/").substring(7); // mengubah backslash menjadi slash dan menghapus "./public"
+
+  db.query(
+    "INSERT INTO validationqa(NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, validation) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Validation],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+      res.status(200).json({ message: "Data has been added successfully" });
+    }
+  );
+});
+
+
+
+
+
+
+
+
+
 
 
 
@@ -97,6 +147,26 @@ app.post("/api/post/PPIC", (req, res) => {
   );
 });
 
+///post To QA
+app.post("/api/post/QA", (req, res) => {
+  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan } = req.body;
+  
+  db.query(
+    "INSERT INTO qualitya (NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been added successfully' });
+    }
+  );
+});
+
+
+
+
 
 
 
@@ -115,8 +185,23 @@ app.get("/api/get/PPIC", (req, res) => {
   });
 });
 
+
+app.get("/api/get/QA",(req,res) => {
+const sqlSelect = "SELECT * FROM qualitya";
+db.query(sqlSelect,(err,results) =>  {
+  res.send(results);
+})
+});
+
 app.get("/api/get/datakerusakan", (req, res) => {
   const sqlSelect = "SELECT * FROM datakerusakan";
+  db.query(sqlSelect, (err, results) => {
+    res.send(results);
+  });
+});
+
+app.get("/api/get/validationqa", (req, res) => {
+  const sqlSelect = "SELECT * FROM validationqa";
   db.query(sqlSelect, (err, results) => {
     res.send(results);
   });

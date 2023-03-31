@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
+
 
 const RepairReport = () => {
   const [time, setTime] = useState(new Date().toLocaleString());

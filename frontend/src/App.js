@@ -5,6 +5,7 @@ import GoodReport from "./components/Report/GoodReport.jsx";
 import RepairReport from "./components/Report/RepairReport.jsx";
 import InputDamage from "./components/Input/InputDamage.jsx"
 import DamageReport from "./components/Report/DamageReport.jsx"
+import AllReport from "./components/Report/AllReport.jsx"
 import Login from "./components/Maintenance/Login.jsx"
 import Leader from "./components/Leader/RealTimeLeader.jsx"
 import Home from "./components/Home.jsx"
@@ -13,7 +14,10 @@ import Mobile from "./components/Mobile/Mobile.jsx"
 import Line from "./components/Line.jsx"
 import Line1 from "./components/Line1/Line1.jsx"
 import PPIC from "./components/Ppic/Ppic.jsx"
-import TaskPPIC from "./components/Ppic/Reportppic.jsx"
+import RequestPpic from "./components/Ppic/RequestPpic.jsx"
+import QualityA from "./components/Quality/QualityA.jsx"
+import RequestQualityA from "./components/Quality/RequestQualityA.jsx"
+import ValidationQualityA from "./components/Quality/ValidationQualityA.jsx"
 
 
 function App() {
@@ -33,7 +37,11 @@ function App() {
         <Route path="Line" element={<Line/>}/>
         <Route path="Line1" element={<Line1/>}/>
         <Route path="PPIC" element={<PPIC/>}/>
-        <Route path="TaskPPIC" element={<TaskPPIC/>}/>
+        <Route path="RequestPpic" element={<RequestPpic/>}/>
+        <Route path="AllReport" element={<AllReport/>}/>
+        <Route path="QualityA" element={<QualityA/>}/>
+        <Route path="RequestQA" element={<RequestQualityA/>}/>
+        <Route path="ValidationQualityA" element={<ValidationQualityA/>}/>
       </Routes>
     </>
   );

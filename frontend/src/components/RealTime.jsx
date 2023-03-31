@@ -16,6 +16,8 @@ const RealTime = () => {
   const [mesin, setMesin] = useState("");
   const [line, setLine] = useState("");
   const [nama, setNama] = useState("");
+  const [area, setArea] = useState("");
+  const [station, setStation] = useState("");
   const [timer, setTimer] = useState("");
   const [backgroundColor, setBackgroundColor] = useState("");
   const [time, setTime] = useState(new Date().toLocaleString());
@@ -131,6 +133,18 @@ const RealTime = () => {
       setTimer(data);
     });
 
+    const ref6 = firebase.database().ref("Mesin/Area");
+    ref6.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setArea(data);
+    });
+
+    const ref7 = firebase.database().ref("Mesin/Station");
+    ref7.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setStation(data);
+    });
+
     return () => {};
   }, []);
   ////////////
@@ -180,7 +194,16 @@ const RealTime = () => {
   // fungsi post ke backend
 
   useEffect(() => {
+    let intervalId;
+  
     if (status !== "" && prevStatus !== status) {
+      // If the status has changed to Leader, Go, or Maintenance, start a timer
+      if (status === "Leader" || status === "Go" || status === "Maintenance") {
+        intervalId = setInterval(() => {
+        }, 1000);
+      } else {
+        clearInterval(intervalId);
+      }
       fetch("http://localhost:3001/api/post/data", {
         method: "POST",
         headers: {
@@ -197,20 +220,38 @@ const RealTime = () => {
         .then((data) => console.log(data))
         .catch((error) => console.error(error));
     }
+  
     setPrevStatus(status);
+  
+    // Clean up the interval when the component unmounts or the status changes to something other than Leader, Go, or Maintenance
+    return () => clearInterval(intervalId);
   }, [status, mesin, line, timer, prevStatus]);
+  
   // ------
 
   // fungsi mengubah warna status
 
-  const updateStatus = (data) => {
+const updateStatus = (data) => {
     setStatus(data);
     setBackgroundColor(
-      data === "Go" ? "#31A207" : data === "Present" ? "#E9CE08" : data === "Leader" ? "#C00000" : data === "Maintenance" ? "#be4f62" : "#565454"
-
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
     );
   };
-
+  
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/avi.jpg)`,
     backgroundSize: "1300px",
@@ -313,7 +354,7 @@ const RealTime = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="/"
+                  href="/Home"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
                 >
                   <svg
@@ -353,7 +394,7 @@ const RealTime = () => {
               </li>
               <li>
                 <a
-                  href="/RepairReport"
+                  href="/AllReport"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
                 >
                   <svg
@@ -370,29 +411,7 @@ const RealTime = () => {
                       clip-rule="evenodd"
                     ></path>
                   </svg>
-                  <span class="ml-3 text-white">Report Repair Machine</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/GoodReport"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span class="ml-3 text-white">Report Good Machine</span>
+                  <span class="ml-3 text-white">Report All </span>
                 </a>
               </li>
               <li>
@@ -423,7 +442,8 @@ const RealTime = () => {
       </sidebar>
 
       {/*  */}
-      <main class="pt-3 flex justify-center items-center flex-col md:flex-row">
+       {/*  */}
+       <main class="pt-3 flex justify-center items-center flex-col md:flex-row p-4 sm:ml-64">
         <section class="antialiased  text-gray-600 h-screen px-2" x-data="app">
           <div class="flex flex-col ">
             {/* <!-- Table --> */}
@@ -448,7 +468,12 @@ const RealTime = () => {
                         </th>
                         <th class="p-1">
                           <div id="request" class="font-semibold text-left ">
-                            PIC
+                            Area
+                          </div>
+                        </th>
+                        <th class="p-1">
+                          <div id="request" class="font-semibold text-left ">
+                            Station
                           </div>
                         </th>
                       </tr>
@@ -459,13 +484,28 @@ const RealTime = () => {
                           <div class="font-medium text-white">{line}</div>
                         </td>
                         <td class="p-1">
-                          <div class="font-medium text-white">{nama}</div>
+                          <div class="font-medium text-white">{area}</div>
+                        </td>
+                        <td class="p-1">
+                          <div class="font-medium text-white">{station}</div>
                         </td>
                       </tr>
                     </tbody>
 
                     <td class="p-1   ">
-                      <span className="text-xs uppercase text-black font-bold">TIME</span>
+                      
+                      <span className="text-xs uppercase text-black font-bold">
+                        PIC
+                      </span>
+                      <div id="timer" class="font-medium  text-white">
+                      {nama}
+                      </div>
+                    </td>
+                    
+                    <td class="p-1   ">
+                      <span className="text-xs uppercase text-black font-bold">
+                        TIME
+                      </span>
                       <div id="timer" class="font-medium  text-white">
                         {timer}
                       </div>
