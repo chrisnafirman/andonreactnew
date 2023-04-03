@@ -15,6 +15,7 @@ import Line from "./components/Line.jsx"
 import Line1 from "./components/Line1/Line1.jsx"
 import PPIC from "./components/Ppic/Ppic.jsx"
 import RequestPpic from "./components/Ppic/RequestPpic.jsx"
+import ReturnPpic from "./components/Ppic/ReturnPpic.jsx"
 import QualityA from "./components/Quality/QualityA.jsx"
 import RequestQualityA from "./components/Quality/RequestQualityA.jsx"
 import ValidationQualityA from "./components/Quality/ValidationQualityA.jsx"
@@ -38,6 +39,7 @@ function App() {
         <Route path="Line1" element={<Line1/>}/>
         <Route path="PPIC" element={<PPIC/>}/>
         <Route path="RequestPpic" element={<RequestPpic/>}/>
+        <Route path="ReturnPpic" element={<ReturnPpic/>}/>
         <Route path="AllReport" element={<AllReport/>}/>
         <Route path="QualityA" element={<QualityA/>}/>
         <Route path="RequestQA" element={<RequestQualityA/>}/>

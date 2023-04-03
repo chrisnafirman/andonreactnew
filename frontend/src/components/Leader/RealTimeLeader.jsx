@@ -630,7 +630,7 @@ const RealTime = () => {
                                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                             for="grid-first-name"
                                           >
-                                            Nama PIC
+                                            Nama LEADER PIC
                                           </label>
                                           <select
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -659,7 +659,7 @@ const RealTime = () => {
                                         </div>
                                         <div class="w-full md:w-1/2 px-3">
                                           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                            NPK PIC
+                                            NPK LEADER PIC
                                           </label>
                                           <input
                                             class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"

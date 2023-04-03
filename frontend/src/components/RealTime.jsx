@@ -194,16 +194,7 @@ const RealTime = () => {
   // fungsi post ke backend
 
   useEffect(() => {
-    let intervalId;
-  
     if (status !== "" && prevStatus !== status) {
-      // If the status has changed to Leader, Go, or Maintenance, start a timer
-      if (status === "Leader" || status === "Go" || status === "Maintenance") {
-        intervalId = setInterval(() => {
-        }, 1000);
-      } else {
-        clearInterval(intervalId);
-      }
       fetch("http://localhost:3001/api/post/data", {
         method: "POST",
         headers: {
@@ -220,11 +211,7 @@ const RealTime = () => {
         .then((data) => console.log(data))
         .catch((error) => console.error(error));
     }
-  
     setPrevStatus(status);
-  
-    // Clean up the interval when the component unmounts or the status changes to something other than Leader, Go, or Maintenance
-    return () => clearInterval(intervalId);
   }, [status, mesin, line, timer, prevStatus]);
   
   // ------
@@ -503,12 +490,16 @@ const updateStatus = (data) => {
                     </td>
                     
                     <td class="p-1   ">
-                      <span className="text-xs uppercase text-black font-bold">
-                        TIME
-                      </span>
-                      <div id="timer" class="font-medium  text-white">
-                        {timer}
-                      </div>
+                      {status === "Go" || status === "Leader" || status === "Maintenance" ? (
+                        <>
+                          <span className="text-xs uppercase text-black font-bold">
+                            TIME
+                          </span>
+                          <div id="timer" class="font-medium  text-white">
+                            {timer}
+                          </div>
+                        </>
+                      ) : null}
                     </td>
                   </table>
                 </div>

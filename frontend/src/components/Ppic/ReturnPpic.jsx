@@ -34,7 +34,7 @@ const RepairReport = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/get/PPIC")
+    fetch("http://localhost:3001/api/get/ReturnPPIC")
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti timestamp menjadi tanggal dan waktu
@@ -63,7 +63,7 @@ const RepairReport = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://localhost:3001/api/get/PPIC?date=${selectedDate}`)
+    fetch(`http://localhost:3001/api/get/ReturnPPIC?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti waktu menjadi tanggal saja
@@ -297,7 +297,7 @@ const RepairReport = () => {
               </button>
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Request For PPIC
+                  Retrun From Quality
                 </div>
               </header>
 

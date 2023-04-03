@@ -34,16 +34,9 @@ const Ppic = () => {
   const [MachineStation, setMachineStation] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
   const [file, setFile] = useState(null);
- /// PPIC
- const namaList = [
-  "Fajar Eko Susanto",
-  "Marsisto Utoyo",
-
-];
-const npkList = [
-  "0064", 
-  "0144"
-];
+  /// PPIC
+  const namaList = ["Fajar Eko Susanto", "Marsisto Utoyo"];
+  const npkList = ["0064", "0144"];
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
@@ -215,7 +208,7 @@ const npkList = [
     setBackgroundColor(
       data === "Go" ? "#31A207" : data === "Repair" ? "#E9CE08" : data === "Leader" ? "#C00000" : data === "Maintenance" ? "#be4f62"  : data === "PPIC"
       ? "#7A6544" : data === "QA" ? "#93C2C4" : data === "QC" ? "#BDD0D1" : "#565454"
-
+       
     );
   };
 
@@ -224,16 +217,16 @@ const npkList = [
       NamaPIC: NamaPIC,
       NpkPIC: NpkPIC,
       MachineName: mesin,
-      MachineArea: MachineArea,
-      MachineLine: MachineLine,
-      MachineStation: MachineStation,
+      MachineArea: area,
+      MachineLine: line,
+      MachineStation: station,
       Kerusakan: Kerusakan,
     };
 
     let department;
     switch (selectedStatus) {
       case "PPIC":
-        department = "PPIC";
+        department = "ReturnPPIC";
         break;
       case "Purchasing":
         department = "Purchasing";
@@ -270,7 +263,7 @@ const npkList = [
   };
 
   // ----
- 
+
   const submit2 = () => {
     const data = new FormData();
     data.append("NamaPIC", NamaPIC);
@@ -280,7 +273,7 @@ const npkList = [
     data.append("MachineLine", line);
     data.append("MachineStation", station);
     data.append("validation", file);
-  
+
     fetch("http://localhost:3001/api/post/validationqa", {
       method: "POST",
       body: data,
@@ -298,7 +291,7 @@ const npkList = [
         console.log(err);
       });
   };
-  
+
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -480,7 +473,7 @@ const npkList = [
                   </svg>
                   <span class="ml-3 text-gray-500">Reqquest QA</span>
                 </a>
-              </li>    
+              </li>
               <li>
                 <a
                   href="/RequestQA"
@@ -502,7 +495,7 @@ const npkList = [
                   </svg>
                   <span class="ml-3 text-gray-500">Validation QA</span>
                 </a>
-              </li>    
+              </li>
             </ul>
           </div>
         </div>
@@ -559,8 +552,6 @@ const npkList = [
         </div>
       </nav> */}
 
-      
-
       {/*  */}
       <main class="pt-3 flex justify-center items-center flex-col md:flex-row p-4 sm:ml-64">
         <section class="antialiased  text-gray-600 h-screen px-2" x-data="app">
@@ -597,7 +588,7 @@ const npkList = [
                         </th>
                         <th class="p-1">
                           <div id="request" class="font-semibold text-left ">
-                          PIC
+                            PIC
                           </div>
                         </th>
                       </tr>
@@ -619,11 +610,9 @@ const npkList = [
                       </tr>
                     </tbody>
 
-
-
                     {/* POP UP */}
                     <td class="">
-                      {status === "QA" && (
+                      {status === "QA" ? (
                         <div>
                           <span className="text-xs uppercase text-black font-bold">
                             Return
@@ -632,6 +621,20 @@ const npkList = [
                             <button
                               className="bg-blue-500 hover:bg-blue-700 text-white text-xs px-3 py-1 rounded"
                               onClick={() => setIsOpen(true)}
+                            >
+                              To
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div>
+                          <span className="text-xs uppercase text-gray-500 font-bold">
+                            Return
+                          </span>
+                          <div id="timer" className="font-medium text-gray-500">
+                            <button
+                              className="bg-gray-300 text-white text-xs px-3 py-1 rounded"
+                              disabled
                             >
                               To
                             </button>
@@ -738,8 +741,24 @@ const npkList = [
                                             <option value="">
                                               -- Pilih Depart --
                                             </option>
-                                            <option value="QA">QA</option>
-                                            <option value="QC">QC</option>
+                                            <option value="PPIC">PPIC</option>
+                                            <option value="Purchasing">
+                                              Purchasing
+                                            </option>
+                                            <option value="MP&L">MP&L</option>
+                                            <option value="Accounting">
+                                              Accounting
+                                            </option>
+                                            <option value="Engineering & RND">
+                                              Engineering & RND
+                                            </option>
+                                            <option value="Maintenance & IT">
+                                              Maintenance & IT
+                                            </option>
+                                            <option value="Opex">Opex</option>
+                                            <option value="HRGA & EHS">
+                                              HRGA & EHS
+                                            </option>
                                           </select>
                                         </div>
                                       </div>
@@ -899,9 +918,7 @@ const npkList = [
                               >
                                 <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                                   <div className="sm:flex sm:items-start">
-                                    <form
-                                      className="w-full max-w-lg"
-                                    >
+                                    <form className="w-full max-w-lg">
                                       <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
                                         <span>Validation Quality</span>
                                       </div>
@@ -951,7 +968,7 @@ const npkList = [
                                             readOnly
                                           />
                                         </div>
-                                      </div>     
+                                      </div>
                                       <div class="flex flex-wrap -mx-3 mb-6">
                                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                           <label

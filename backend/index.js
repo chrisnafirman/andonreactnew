@@ -164,6 +164,23 @@ app.post("/api/post/QA", (req, res) => {
   );
 });
 
+///post PPIC
+app.post("/api/post/ReturnPPIC", (req, res) => {
+  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan } = req.body;
+  
+  db.query(
+    "INSERT INTO returnppic (NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been added successfully' });
+    }
+  );
+});
+
 
 
 
@@ -202,6 +219,14 @@ app.get("/api/get/datakerusakan", (req, res) => {
 
 app.get("/api/get/validationqa", (req, res) => {
   const sqlSelect = "SELECT * FROM validationqa";
+  db.query(sqlSelect, (err, results) => {
+    res.send(results);
+  });
+});
+
+
+app.get("/api/get/ReturnPPIC", (req, res) => {
+  const sqlSelect = "SELECT * FROM returnppic";
   db.query(sqlSelect, (err, results) => {
     res.send(results);
   });
