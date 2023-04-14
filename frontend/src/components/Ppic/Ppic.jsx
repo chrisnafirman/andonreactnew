@@ -28,9 +28,6 @@ const Ppic = () => {
   ////
   const [NamaPIC, setNamaPIC] = useState("");
   const [NpkPIC, setNpkPIC] = useState("");
-  const [MachineArea, setMachineArea] = useState("");
-  const [MachineLine, setMachineLine] = useState("");
-  const [MachineStation, setMachineStation] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
 
 
@@ -195,7 +192,7 @@ const Ppic = () => {
 
   useEffect(() => {
     if (status !== "" && prevStatus !== status) {
-      fetch("http://localhost:3001/api/post/data", {
+      fetch("http://192.168.101.236:3001/api/post/data", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -226,6 +223,8 @@ const Ppic = () => {
         ? "#E9CE08"
         : data === "Leader"
         ? "#C00000"
+        : data === "Purchasing"
+        ? "#eab676"
         : data === "Maintenance"
         ? "#be4f62"
         : data === "PPIC"
@@ -236,7 +235,6 @@ const Ppic = () => {
         ? "#BDD0D1"
         : "#565454"
     );
-    setTimer("0");
   };
   
 
@@ -263,7 +261,7 @@ const Ppic = () => {
         department = "";
     }
 
-    fetch(`http://localhost:3001/api/post/${department}`, {
+    fetch(`http://192.168.101.236:3001/api/post/${department}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -287,7 +285,7 @@ const Ppic = () => {
   // ----
 
   return (
-    <body className="h-full w-full bg-stone-700">
+    <body style={{ height: "200vh" }} class="bg-stone-700 h-screen">
       <button
         data-drawer-target="logo-sidebar"
         data-drawer-toggle="logo-sidebar"
@@ -483,7 +481,7 @@ const Ppic = () => {
                       clip-rule="evenodd"
                     ></path>
                   </svg>
-                  <span class="ml-3 text-gray-500">Return FRom Quality</span>
+                  <span class="ml-3 text-gray-500">Return From Quality</span>
                 </a>
               </li>
             </ul>
@@ -669,7 +667,7 @@ const Ppic = () => {
                                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                             for="grid-first-name"
                                           >
-                                            Nama PIC
+                                             Masukan Nama Anda
                                           </label>
                                           <select
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -687,7 +685,7 @@ const Ppic = () => {
                                             }}
                                           >
                                             <option value="">
-                                              - -Pilih Nama Leader- -
+                                              - -Pilih Nama Anda- -
                                             </option>
                                             {namaList.map((nama, index) => (
                                               <option value={nama} key={index}>
@@ -698,7 +696,7 @@ const Ppic = () => {
                                         </div>
                                         <div class="w-full md:w-1/2 px-3">
                                           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                            NPK PIC
+                                            NPK 
                                           </label>
                                           <input
                                             class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -941,163 +939,6 @@ const Ppic = () => {
                     </thead>
                     <tbody class="text-sm divide-y divide-gray-100">
                       {/* <!-- record 1 --> */}
-                      <tr>
-                        <td class="p-1">
-                          <div class="font-medium text-gray-800">Unknown</div>
-                        </td>
-                        <td class="p-1 w-36">
-                          <div
-                            id="data"
-                            class="text-center h-6 bg-black text-black font-medium w-full rounded-lg"
-                          >
-                            Unknown
-                          </div>
-                        </td>
-                      </tr>
-                      <td class="p-1 w-56 ">
-                        <span>Time:</span>
-                        <div id="timer" class="font-medium text-gray-800">
-                          Unknown
-                        </div>
-                      </td>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            {/*  */}
-          </div>
-        </section>
-        <section class="antialiased  text-gray-600 h-screen px-2" x-data="app">
-          <div class="flex flex-col ">
-            {/* <!-- Table --> */}
-            <div className="w-72">
-              <div class="w-full max-w-sm  bg-gray-500 shadow-lg rounded-xl border border-gray-200">
-                <header class="px-5 py-4 border-b border-gray-100">
-                  <div class="font-semibold text-center text-gray-800">
-                    Unknown
-                  </div>
-                </header>
-
-                <div class="overflow-x-auto p-3">
-                  <table class="table-auto w-full">
-                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                      <tr>
-                        <th class="p-1">
-                          <div class="font-semibold text-left">Line</div>
-                        </th>
-
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-center">
-                            PIC
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-sm divide-y divide-gray-100">
-                      {/* <!-- record 1 --> */}
-                      <tr>
-                        <td class="p-1">
-                          <div class="font-medium text-gray-800">Unknown</div>
-                        </td>
-                        <td class="p-1 w-36">
-                          <div
-                            id="data"
-                            class="text-center h-6 bg-black text-black font-medium w-full rounded-lg"
-                          >
-                            Unknown
-                          </div>
-                        </td>
-                      </tr>
-                      <td class="p-1 w-56 ">
-                        <span>Time:</span>
-                        <div id="timer" class="font-medium text-gray-800">
-                          Unknown
-                        </div>
-                      </td>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            {/*  */}
-            {/* <!-- Table 3 --> */}
-            <div className="w-72 pt-2">
-              <div class="w-full max-w-sm  bg-gray-500 shadow-lg rounded-xl border border-gray-200">
-                <header class="px-5 py-4 border-b border-gray-100">
-                  <div class="font-semibold text-center text-gray-800">
-                    Unknown
-                  </div>
-                </header>
-
-                <div class="overflow-x-auto p-3">
-                  <table class="table-auto w-full">
-                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                      <tr>
-                        <th class="p-1">
-                          <div class="font-semibold text-left">Line</div>
-                        </th>
-
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-center">
-                            PIC
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-sm divide-y divide-gray-100">
-                      {/* <!-- record 3 --> */}
-                      <tr>
-                        <td class="p-1">
-                          <div class="font-medium text-gray-800">Unknown</div>
-                        </td>
-                        <td class="p-1 w-36">
-                          <div
-                            id="data"
-                            class="text-center h-6 bg-black text-black font-medium w-full rounded-lg"
-                          >
-                            Unknown
-                          </div>
-                        </td>
-                      </tr>
-                      <td class="p-1 w-56 ">
-                        <span>Time:</span>
-                        <div id="timer" class="font-medium text-gray-800">
-                          Unknown
-                        </div>
-                      </td>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            {/*  */}
-            {/* <!-- Table 3 --> */}
-            <div className="w-72 pt-2">
-              <div class="w-full max-w-sm  bg-gray-500 shadow-lg rounded-xl border border-gray-200">
-                <header class="px-5 py-4 border-b border-gray-100">
-                  <div class="font-semibold text-center text-gray-800">
-                    Unknown
-                  </div>
-                </header>
-
-                <div class="overflow-x-auto p-3">
-                  <table class="table-auto w-full">
-                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                      <tr>
-                        <th class="p-1">
-                          <div class="font-semibold text-left">Line</div>
-                        </th>
-
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-center">
-                            PIC
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-sm divide-y divide-gray-100">
-                      {/* <!-- record 3 --> */}
                       <tr>
                         <td class="p-1">
                           <div class="font-medium text-gray-800">Unknown</div>

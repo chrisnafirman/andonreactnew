@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 
-const RepairReport = () => {
+
+const RequestQA = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -35,7 +35,7 @@ const RepairReport = () => {
 
   
   useEffect(() => {
-    fetch("http://localhost:3001/api/get/QA")
+    fetch("http://192.168.101.236:3001/api/get/QA")
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti timestamp menjadi tanggal dan waktu
@@ -64,7 +64,7 @@ const RepairReport = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://localhost:3001/api/get/QA?date=${selectedDate}`)
+    fetch(`http://192.168.101.236:3001/api/get/QA?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti waktu menjadi tanggal saja
@@ -106,7 +106,7 @@ const RepairReport = () => {
     <body className="h-full w-full bg-[#93C2C4]">
       <nav class="bg-gray-100 px-2 sm:px-4 py-2.5 dark:bg-gray-900  w-full sticky z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
-          <a href="#" class="flex items-center">
+          <a href="/QualityA" class="flex items-center">
             <img
               src={process.env.PUBLIC_URL + "/AVI.png"}
               alt="Logo"
@@ -213,28 +213,6 @@ const RepairReport = () => {
                     <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                   </svg>
                   <span class="ml-3 text-gray-500">Realtime Dashboard</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/QualityA"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span class="ml-3 text-gray-500">Report Machine</span>
                 </a>
               </li>    
             </ul>
@@ -565,4 +543,4 @@ const RepairReport = () => {
   );
 };
 
-export default RepairReport;
+export default RequestQA;

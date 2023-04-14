@@ -34,7 +34,7 @@ const RepairReport = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/get/PPIC")
+    fetch("http://192.168.101.236:3001/api/get/PPIC")
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti timestamp menjadi tanggal dan waktu
@@ -63,7 +63,7 @@ const RepairReport = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://localhost:3001/api/get/PPIC?date=${selectedDate}`)
+    fetch(`http://192.168.101.236:3001/api/get/PPIC?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti waktu menjadi tanggal saja
@@ -199,7 +199,7 @@ const RepairReport = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="/Leader"
+                  href="/PPIC"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
                 >
                   <svg
@@ -214,29 +214,7 @@ const RepairReport = () => {
                   </svg>
                   <span class="ml-3 text-gray-500">Realtime Dashboard</span>
                 </a>
-              </li>
-              <li>
-                <a
-                  href="/Leader"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span class="ml-3 text-gray-500">Report Machine</span>
-                </a>
-              </li>    
+              </li>  
             </ul>
           </div>
         </div>

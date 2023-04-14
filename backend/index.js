@@ -22,8 +22,6 @@ const db = mysql.createPool({
 
 
 
-
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./public/uploads/");
@@ -46,6 +44,7 @@ app.post("/api/post/validationqa", upload.single("validation"), (req, res) => {
   const Validation = req.file.path.replace(/\\/g, "/").substring(7); // mengubah backslash menjadi slash dan menghapus "./public"
 
   db.query(
+    
     "INSERT INTO validationqa(NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, validation) VALUES (?, ?, ?, ?, ?, ?, ?)",
     [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Validation],
     (error, results) => {
@@ -59,15 +58,22 @@ app.post("/api/post/validationqa", upload.single("validation"), (req, res) => {
 });
 
 
+app.post("/api/post/validationqc", upload.single("validation"), (req, res) => {
+  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation } = req.body;
+  const Validation = req.file.path.replace(/\\/g, "/").substring(7); // mengubah backslash menjadi slash dan menghapus "./public"
 
-
-
-
-
-
-
-
-
+  db.query(
+    "INSERT INTO validationqc(NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, validation) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Validation],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+      res.status(200).json({ message: "Data has been added successfully" });
+    }
+  );
+});
 
 
 // Define a global variable to store the previous status
@@ -147,6 +153,63 @@ app.post("/api/post/PPIC", (req, res) => {
   );
 });
 
+
+/// Purchasing
+app.post("/api/post/PURCHASING", (req, res) => {
+  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan } = req.body;
+  
+  db.query(
+    "INSERT INTO purchasing (NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been added successfully' });
+    }
+  );
+});
+
+
+
+///post PPIC
+app.post("/api/post/ReturnPPIC", (req, res) => {
+  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan } = req.body;
+  
+  db.query(
+    "INSERT INTO returnppic (NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been added successfully' });
+    }
+  );
+});
+
+///post PPIC
+app.post("/api/post/ReturnPURCHASING", (req, res) => {
+  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan } = req.body;
+  
+  db.query(
+    "INSERT INTO returnpurchasing (NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been added successfully' });
+    }
+  );
+});
+
+
+
+
 ///post To QA
 app.post("/api/post/QA", (req, res) => {
   const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan } = req.body;
@@ -164,12 +227,14 @@ app.post("/api/post/QA", (req, res) => {
   );
 });
 
-///post PPIC
-app.post("/api/post/ReturnPPIC", (req, res) => {
+
+
+///post To QC
+app.post("/api/post/QC", (req, res) => {
   const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan } = req.body;
   
   db.query(
-    "INSERT INTO returnppic (NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO qualityc (NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan) VALUES (?, ?, ?, ?, ?, ?, ?)",
     [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan],
     (error, results) => {
       if (error) {
@@ -202,6 +267,13 @@ app.get("/api/get/PPIC", (req, res) => {
   });
 });
 
+app.get("/api/get/PURCHASING", (req, res) => {
+  const sqlSelect = "SELECT * FROM purchasing";
+  db.query(sqlSelect, (err, results) => {
+    res.send(results);
+  });
+});
+
 
 app.get("/api/get/QA",(req,res) => {
 const sqlSelect = "SELECT * FROM qualitya";
@@ -209,6 +281,13 @@ db.query(sqlSelect,(err,results) =>  {
   res.send(results);
 })
 });
+
+app.get("/api/get/QC",(req,res) => {
+  const sqlSelect = "SELECT * FROM qualityc";
+  db.query(sqlSelect,(err,results) =>  {
+    res.send(results);
+  })
+  });
 
 app.get("/api/get/datakerusakan", (req, res) => {
   const sqlSelect = "SELECT * FROM datakerusakan";
@@ -224,9 +303,22 @@ app.get("/api/get/validationqa", (req, res) => {
   });
 });
 
+app.get("/api/get/validationqc", (req, res) => {
+  const sqlSelect = "SELECT * FROM validationqc";
+  db.query(sqlSelect, (err, results) => {
+    res.send(results);
+  });
+});
 
 app.get("/api/get/ReturnPPIC", (req, res) => {
   const sqlSelect = "SELECT * FROM returnppic";
+  db.query(sqlSelect, (err, results) => {
+    res.send(results);
+  });
+});
+
+app.get("/api/get/ReturnPURCHASING", (req, res) => {
+  const sqlSelect = "SELECT * FROM returnpurchasing";
   db.query(sqlSelect, (err, results) => {
     res.send(results);
   });

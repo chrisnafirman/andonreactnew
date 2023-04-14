@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 
-const RepairReport = () => {
+
+const ReturnPurchasing = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -34,7 +34,7 @@ const RepairReport = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/get/ReturnPPIC")
+    fetch("http://192.168.101.236:3001/api/get/ReturnPURCHASING")
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti timestamp menjadi tanggal dan waktu
@@ -63,7 +63,7 @@ const RepairReport = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://192.168.101.236:3001/api/get/ReturnPPIC?date=${selectedDate}`)
+    fetch(`http://192.168.101.236:3001/api/get/ReturnPURCHASING?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti waktu menjadi tanggal saja
@@ -103,22 +103,22 @@ const RepairReport = () => {
   
 
   return (
-    <body className="h-full w-full bg-stone-700">
+    <body className="h-full w-full bg-stone-400">
       <nav class="bg-gray-100 px-2 sm:px-4 py-2.5 dark:bg-gray-900  w-full sticky z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
-          <a href="/PPIC" class="flex items-center">
+          <a href="/PURCHASING" class="flex items-center">
             <img
               src={process.env.PUBLIC_URL + "/AVI.png"}
               alt="Logo"
               class="h-6 mr-3 sm:h-9"
             />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              PPIC
+              PURCHASING
             </span>
           </a>
 
           <div class="flex md:order-2">
-            <a href="PPIC">
+            <a href="/PURCHASING">
             <button
               className="text-white md:inline-block hidden bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               type="button"
@@ -199,7 +199,7 @@ const RepairReport = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="/PPIC"
+                  href="/PURCHASING"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
                 >
                   <svg
@@ -214,7 +214,7 @@ const RepairReport = () => {
                   </svg>
                   <span class="ml-3 text-gray-500">Realtime Dashboard</span>
                 </a>
-              </li>    
+              </li>
             </ul>
           </div>
         </div>
@@ -543,4 +543,4 @@ const RepairReport = () => {
   );
 };
 
-export default RepairReport;
+export default ReturnPurchasing;

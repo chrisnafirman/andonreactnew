@@ -11,7 +11,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const Ppic = () => {
+const QA = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [status, setStatus] = useState("");
@@ -29,9 +29,6 @@ const Ppic = () => {
   ////
   const [NamaPIC, setNamaPIC] = useState("");
   const [NpkPIC, setNpkPIC] = useState("");
-  const [MachineArea, setMachineArea] = useState("");
-  const [MachineLine, setMachineLine] = useState("");
-  const [MachineStation, setMachineStation] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
   const [file, setFile] = useState(null);
   /// PPIC
@@ -181,7 +178,7 @@ const Ppic = () => {
 
   useEffect(() => {
     if (status !== "" && prevStatus !== status) {
-      fetch("http://localhost:3001/api/post/data", {
+      fetch("http://192.168.101.236:3001/api/post/data", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -206,10 +203,25 @@ const Ppic = () => {
   const updateStatus = (data) => {
     setStatus(data);
     setBackgroundColor(
-      data === "Go" ? "#31A207" : data === "Repair" ? "#E9CE08" : data === "Leader" ? "#C00000" : data === "Maintenance" ? "#be4f62"  : data === "PPIC"
-      ? "#7A6544" : data === "QA" ? "#93C2C4" : data === "QC" ? "#BDD0D1" : "#565454"
-       
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Purchasing"
+        ? "#eab676"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
     );
+    setTimer("0");
   };
 
   const submit = () => {
@@ -229,7 +241,7 @@ const Ppic = () => {
         department = "ReturnPPIC";
         break;
       case "Purchasing":
-        department = "Purchasing";
+        department = "ReturnPurchasing";
         break;
       case "QC":
         department = "QC";
@@ -241,7 +253,7 @@ const Ppic = () => {
         department = "";
     }
 
-    fetch(`http://localhost:3001/api/post/${department}`, {
+    fetch(`http://192.168.101.236:3001/api/post/${department}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -274,7 +286,7 @@ const Ppic = () => {
     data.append("MachineStation", station);
     data.append("validation", file);
 
-    fetch("http://localhost:3001/api/post/validationqa", {
+    fetch("http://192.168.101.236:3001/api/post/validationqc", {
       method: "POST",
       body: data,
     })
@@ -297,7 +309,7 @@ const Ppic = () => {
   };
 
   return (
-    <body className="h-full w-full bg-[#93C2C4]">
+    <body className="h-full w-full bg-[#BDD0D1]">
       <button
         data-drawer-target="logo-sidebar"
         data-drawer-toggle="logo-sidebar"
@@ -328,20 +340,20 @@ const Ppic = () => {
         aria-label="Sidebar"
       >
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-          <a href="/QualityA" class="flex items-center pl-2.5 mb-5">
+          <a href="/QualityC" class="flex items-center pl-2.5 mb-5">
             <img
               src={process.env.PUBLIC_URL + "/AVI.png"}
               class="h-6 mr-3 sm:h-7"
               alt="Flowbite Logo"
             />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              QA Line 1
+              QC Line 1
             </span>
           </a>
           <ul class="space-y-2">
             <li>
               <a
-                href="/QualityA"
+                href="/QualityC"
                 class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <svg
@@ -359,7 +371,7 @@ const Ppic = () => {
             </li>
             <li>
               <a
-                href="/RequestQA"
+                href="/RequestQC"
                 class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <svg
@@ -371,12 +383,12 @@ const Ppic = () => {
                 >
                   <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                 </svg>
-                <span class="flex-1 ml-3 whitespace-nowrap">Request QA</span>
+                <span class="flex-1 ml-3 whitespace-nowrap">Request QC</span>
               </a>
             </li>
             <li>
               <a
-                href="/ValidationQualityA"
+                href="/ValidationQC"
                 class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <svg
@@ -388,7 +400,7 @@ const Ppic = () => {
                 >
                   <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                 </svg>
-                <span class="flex-1 ml-3 whitespace-nowrap">Validation QA</span>
+                <span class="flex-1 ml-3 whitespace-nowrap">Validation QC</span>
               </a>
             </li>
           </ul>
@@ -436,7 +448,7 @@ const Ppic = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="/QualityA"
+                  href="/QualityC"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
                 >
                   <svg
@@ -454,7 +466,7 @@ const Ppic = () => {
               </li>
               <li>
                 <a
-                  href="/RequestQA"
+                  href="/RequestQC"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
                 >
                   <svg
@@ -471,12 +483,12 @@ const Ppic = () => {
                       clip-rule="evenodd"
                     ></path>
                   </svg>
-                  <span class="ml-3 text-gray-500">Reqquest QA</span>
+                  <span class="ml-3 text-gray-500">Reqquest QC</span>
                 </a>
               </li>
               <li>
                 <a
-                  href="/RequestQA"
+                  href="/RequestQC"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
                 >
                   <svg
@@ -493,7 +505,7 @@ const Ppic = () => {
                       clip-rule="evenodd"
                     ></path>
                   </svg>
-                  <span class="ml-3 text-gray-500">Validation QA</span>
+                  <span class="ml-3 text-gray-500">Validation QC</span>
                 </a>
               </li>
             </ul>
@@ -612,7 +624,7 @@ const Ppic = () => {
 
                     {/* POP UP */}
                     <td class="">
-                      {status === "QA" ? (
+                      {status === "QC" ? (
                         <div>
                           <span className="text-xs uppercase text-black font-bold">
                             Return
@@ -677,7 +689,7 @@ const Ppic = () => {
                                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                             for="grid-first-name"
                                           >
-                                            Nama PIC
+                                            Masukan Nama Anda
                                           </label>
                                           <select
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -695,7 +707,7 @@ const Ppic = () => {
                                             }}
                                           >
                                             <option value="">
-                                              - -Pilih Nama Leader- -
+                                              - -Pilih Nama Anda- -
                                             </option>
                                             {namaList.map((nama, index) => (
                                               <option value={nama} key={index}>
@@ -706,7 +718,7 @@ const Ppic = () => {
                                         </div>
                                         <div class="w-full md:w-1/2 px-3">
                                           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                            NPK PIC
+                                            NPK 
                                           </label>
                                           <input
                                             class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -885,7 +897,7 @@ const Ppic = () => {
                     </td>
                     {/* POP UP */}
                     <td class="">
-                      {status === "QA" && (
+                      {status === "QC" && (
                         <div>
                           <span className="text-xs uppercase text-black font-bold">
                             Validation
@@ -920,7 +932,7 @@ const Ppic = () => {
                                   <div className="sm:flex sm:items-start">
                                     <form className="w-full max-w-lg">
                                       <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                        <span>Validation Quality</span>
+                                        <span>Validation Quality Control</span>
                                       </div>
                                       <div class="flex flex-wrap -mx-3 ">
                                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -928,7 +940,7 @@ const Ppic = () => {
                                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                             for="grid-first-name"
                                           >
-                                            Nama PIC
+                                             Masukan Nama Anda
                                           </label>
                                           <select
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -946,7 +958,7 @@ const Ppic = () => {
                                             }}
                                           >
                                             <option value="">
-                                              - -Pilih Nama Leader- -
+                                              - -Pilih Nama Anda- -
                                             </option>
                                             {namaList.map((nama, index) => (
                                               <option value={nama} key={index}>
@@ -957,7 +969,7 @@ const Ppic = () => {
                                         </div>
                                         <div class="w-full md:w-1/2 px-3">
                                           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                            NPK PIC
+                                            NPK
                                           </label>
                                           <input
                                             class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -1247,163 +1259,6 @@ const Ppic = () => {
                         <td class="p-1 w-36">
                           <div
                             id="data"
-                            class="text-center h-6 bg-black text-black font-medium w-full rounded-lg"
-                          >
-                            Unknown
-                          </div>
-                        </td>
-                      </tr>
-                      <td class="p-1 w-56 ">
-                        <span>Time:</span>
-                        <div id="timer" class="font-medium text-gray-800">
-                          Unknown
-                        </div>
-                      </td>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            {/*  */}
-            {/* <!-- Table 3 --> */}
-            <div className="w-72 pt-2">
-              <div class="w-full max-w-sm  bg-gray-500 shadow-lg rounded-xl border border-gray-200">
-                <header class="px-5 py-4 border-b border-gray-100">
-                  <div class="font-semibold text-center text-gray-800">
-                    Unknown
-                  </div>
-                </header>
-
-                <div class="overflow-x-auto p-3">
-                  <table class="table-auto w-full">
-                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                      <tr>
-                        <th class="p-1">
-                          <div class="font-semibold text-left">Line</div>
-                        </th>
-
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-center">
-                            PIC
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-sm divide-y divide-gray-100">
-                      {/* <!-- record 3 --> */}
-                      <tr>
-                        <td class="p-1">
-                          <div class="font-medium text-gray-800">Unknown</div>
-                        </td>
-                        <td class="p-1 w-36">
-                          <div
-                            id="data"
-                            class="text-center h-6 bg-black text-black font-medium w-full rounded-lg"
-                          >
-                            Unknown
-                          </div>
-                        </td>
-                      </tr>
-                      <td class="p-1 w-56 ">
-                        <span>Time:</span>
-                        <div id="timer" class="font-medium text-gray-800">
-                          Unknown
-                        </div>
-                      </td>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            {/*  */}
-            {/* <!-- Table 3 --> */}
-            <div className="w-72 pt-2">
-              <div class="w-full max-w-sm  bg-gray-500 shadow-lg rounded-xl border border-gray-200">
-                <header class="px-5 py-4 border-b border-gray-100">
-                  <div class="font-semibold text-center text-gray-800">
-                    Unknown
-                  </div>
-                </header>
-
-                <div class="overflow-x-auto p-3">
-                  <table class="table-auto w-full">
-                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                      <tr>
-                        <th class="p-1">
-                          <div class="font-semibold text-left">Line</div>
-                        </th>
-
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-center">
-                            PIC
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-sm divide-y divide-gray-100">
-                      {/* <!-- record 3 --> */}
-                      <tr>
-                        <td class="p-1">
-                          <div class="font-medium text-gray-800">Unknown</div>
-                        </td>
-                        <td class="p-1 w-36">
-                          <div
-                            id="data"
-                            class="text-center h-6 bg-black text-black font-medium w-full rounded-lg"
-                          >
-                            Unknown
-                          </div>
-                        </td>
-                      </tr>
-                      <td class="p-1 w-56 ">
-                        <span>Time:</span>
-                        <div id="timer" class="font-medium text-gray-800">
-                          Unknown
-                        </div>
-                      </td>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            {/*  */}
-          </div>
-        </section>
-        <section class="antialiased  text-gray-600 h-screen px-2" x-data="app">
-          <div class="flex flex-col ">
-            {/* <!-- Table --> */}
-            <div className="w-72">
-              <div class="w-full max-w-sm  bg-gray-500 shadow-lg rounded-xl border border-gray-200">
-                <header class="px-5 py-4 border-b border-gray-100">
-                  <div class="font-semibold text-center text-gray-800">
-                    Unknown
-                  </div>
-                </header>
-
-                <div class="overflow-x-auto p-3">
-                  <table class="table-auto w-full">
-                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                      <tr>
-                        <th class="p-1">
-                          <div class="font-semibold text-left">Line</div>
-                        </th>
-
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-center">
-                            PIC
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-sm divide-y divide-gray-100">
-                      {/* <!-- record 1 --> */}
-                      <tr>
-                        <td class="p-1">
-                          <div class="font-medium text-gray-800">Unknown</div>
-                        </td>
-                        <td class="p-1 w-36">
-                          <div
-                            id="data"
                             class="text-center bg-black h-6 text-black font-medium w-full rounded-lg"
                           >
                             Unknown
@@ -1531,4 +1386,4 @@ const Ppic = () => {
   );
 };
 
-export default Ppic;
+export default QA;
