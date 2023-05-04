@@ -11,18 +11,46 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const RealTime = () => {
-  const [status, setStatus] = useState("");
+const SmtTop= () => {
   const [mesin, setMesin] = useState("");
   const [line, setLine] = useState("");
   const [nama, setNama] = useState("");
   const [area, setArea] = useState("");
   const [station, setStation] = useState("");
   const [timer, setTimer] = useState("");
-  const [backgroundColor, setBackgroundColor] = useState("");
   const [time, setTime] = useState(new Date().toLocaleString());
   const [prevStatus, setPrevStatus] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  // popup 1
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState("");
+  const [NamaPIC, setNamaPIC] = useState("");
+  const [NpkPIC, setNpkPIC] = useState("");
+  const [Kerusakan, setKerusakan] = useState("");
+
+  /// Purchasing
+  const namaList = [
+    "Agus Sofian Warsito",
+    "Allan Mulyana",
+    "Alwan Luchi",
+    "Ari Ramdani",
+    "Arif Setiawan",
+  ];
+  const npkList = ["0601", "0686", "0594", "0789", "0214"];
+
+  // Area Station
+
+  const [status, setStatus] = useState("");
+  const [desteckerTop, setStatusDesteckerTop] = useState("");
+
+  //
+  const [backgroundColorDesteckerTop, setBackgroundColorDesteckerTop] =
+    useState("");
+  const [backgroundColor, setBackgroundColor] = useState("");
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
@@ -145,6 +173,13 @@ const RealTime = () => {
       setStation(data);
     });
 
+    // TOP
+    const ref8 = firebase.database().ref("AreaLine1TOP/Destecker");
+    ref8.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updatedesteckerTop(data);
+    });
+
     return () => {};
   }, []);
   ////////////
@@ -213,12 +248,12 @@ const RealTime = () => {
     }
     setPrevStatus(status);
   }, [status, mesin, line, timer, prevStatus]);
-  
+
   // ------
 
   // fungsi mengubah warna status
 
-const updateStatus = (data) => {
+  const updateStatus = (data) => {
     setStatus(data);
     setBackgroundColor(
       data === "Go"
@@ -238,62 +273,118 @@ const updateStatus = (data) => {
         : "#565454"
     );
   };
-  
+
+  const updatedesteckerTop = (data) => {
+    setStatusDesteckerTop(data);
+    setBackgroundColorDesteckerTop(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
 
   // ----
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formattedTime = `${currentTime.getDate()}/${
+    currentTime.getMonth() + 1
+  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+
+  const submit = () => {
+    const data = {
+      NamaPIC: NamaPIC,
+      NpkPIC: NpkPIC,
+      MachineName: mesin,
+      MachineArea: area,
+      MachineLine: line,
+      MachineStation: station,
+      Kerusakan: Kerusakan,
+    };
+
+    let department;
+    switch (selectedStatus) {
+      case "QC":
+        department = "QC";
+        break;
+      case "QA":
+        department = "QA";
+        break;
+      default:
+        department = "";
+    }
+
+    fetch(`http://192.168.101.236:3001/api/post/${department}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("success");
+          setIsOpen(false);
+          window.location.reload();
+        } else {
+          throw new Error("Error adding data");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const styles = {
+    backgroundImage: `url(${process.env.PUBLIC_URL}/l.jpg)`,
+    backgroundSize: "1300px",
+    backgroundPosition: "500px",
+    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
+  };
+
   return (
-    <body style={{ height: "200vh" }} class="bg-zinc-900 ">
-      <nav class="bg-slate px-2 sm:px-4 py-2.5 dark:bg-gray-900 bg-white w-full z-20 top-0 left-0  dark:border-gray-600">
-        <div class="container flex flex-wrap items-center justify-between mx-auto">
-          <a href="/" class="flex items-center">
-            <img
-              src={process.env.PUBLIC_URL + "/AVI.png"}
-              alt="Logo"
-              class="h-6 mr-3 sm:h-9"
-            />
-          </a>
-
-          <div>
-            <h1 class="text-center">ANDON LINE 1</h1>
+    <body style={styles}>
+      <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
+        <div class="flex h-14 items-center justify-between">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <img
+                src={process.env.PUBLIC_URL + "/smt.jpeg"}
+                alt="Logo"
+                class="h-6 ml-4 sm:h-9 bg-white rounded-md"
+              />
+            </div>
           </div>
-
-          <div class="flex md:order-2">
-            <button
-              className="text-white md:inline-block hidden bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-              type="button"
-              data-drawer-target="drawer-navigation"
-              onClick={toggleDrawer}
-              aria-controls="drawer-navigation"
-            >
-              Menu
-            </button>
-            <button
-              data-collapse-toggle="navbar-sticky"
-              type="button"
-              class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-              aria-controls="navbar-sticky"
-              aria-expanded="false"
-              onClick={toggleDrawer}
-            >
-              <span class="sr-only">Open main menu</span>
-              <svg
-                class="w-6 h-6"
-                aria-hidden="true"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
-            </button>
-          </div>
+          <p class="text-gray-500 text-sm">{formattedTime}</p>
         </div>
       </nav>
+
+      <header class="bg-white shadow mb-3">
+        <div class="mx-auto max-w-7xl px-4">
+          <marquee behavior="scroll" direction="right">
+            <h1 class="text-xl font-bold tracking-tight text-gray-900">
+            SMT LINE 1 - SMT TOP
+            </h1>
+          </marquee>
+        </div>
+      </header>
 
       <sidebar>
         <div
@@ -423,185 +514,114 @@ const updateStatus = (data) => {
         </div>
       </sidebar>
 
-       {/*  */}
-       <main>
-       <span className=" pt-3 sm:ml-5 text-4xl text-white font-bold px-2">Area 1</span>
-       <div class="pt-3 flex   flex-col md:flex-row p-4 sm:ml-5">
-        
-        <section class="antialiased  text-gray-600  px-2" x-data="app">
-          <div class="flex flex-col ">
-            {/* <!-- Table --> */}
-            <div className="w-72 sm:w-48 lg:w-72">
-              <div
-                style={{ backgroundColor: backgroundColor }}
-                value={status}
-                class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
-              >
-                <header class="px-5 py-4  ">
-                  <div class="font-semibold text-center text-white">
-                    SMT BE
-                  </div>
-                </header>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="antialiased  text-gray-600  px-2" x-data="app">
-          <div class="flex flex-col ">
-            {/* <!-- Table --> */}
-            <div className="w-72 sm:w-48 lg:w-72">
-              <div
-                style={{ backgroundColor: backgroundColor }}
-                value={status}
-                class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
-              >
-                <header class="px-5 py-4  ">
-                  <div class="font-semibold text-center text-white">
-                   -
-                  </div>
-                </header>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="antialiased  text-gray-600  px-2" x-data="app">
-          <div class="flex flex-col ">
-            {/* <!-- Table --> */}
-            <div className="w-72 sm:w-48 lg:w-72">
-              <div
-                style={{ backgroundColor: backgroundColor }}
-                value={status}
-                class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
-              >
-                <header class="px-5 py-4  ">
-                  <div class="font-semibold text-center text-white">
-                   -
-                  </div>
-                </header>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="antialiased  text-gray-600  px-2" x-data="app">
-          <div class="flex flex-col ">
-            {/* <!-- Table --> */}
-            <div className="w-72 sm:w-48 lg:w-72">
-              <div
-                style={{ backgroundColor: backgroundColor }}
-                value={status}
-                class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
-              >
-                <header class="px-5 py-4  ">
-                  <div class="font-semibold text-center text-white">
-                    -
-                  </div>
-                </header>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+      {/*  */}
+      <main>
+        <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
+          <li class="w-60 sm:w-36 lg:w-32">
+            <a
+              href="/Andonline1"
+              class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white"
+              aria-current="page"
+            >
+              SMT LINE 1
+            </a>
+          </li>
+          <button onClick={() => setIsOpen2(true)} class="w-60 sm:w-36 lg:w-32">
+            <a
+              href="#"
+              class="inline-block w-full p-4 text-orange-500 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+            >
+              ISA 
+            </a>
+          </button>
 
-      <span className=" pt-3 sm:ml-5 text-4xl text-white font-bold px-2">Area 2</span>
-       <div class="pt-3 flex   flex-col md:flex-row p-4 sm:ml-5">
+          <button class="w-60 sm:w-36 lg:w-32">
+            <a
+              href="/Andonline1"
+              class="inline-block w-full p-4 400 bg-blue-700 text-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+            >
+              BACK
+            </a>
+          </button>
+        </ul>
+
+    
+        <div className=" pt-3">
+          <span className=" pt-4 sm:ml-5 text-2xl text-white font-thin px-2">
+            Input Schedule Production
+          </span>
+        </div>
+
         
-        <section class="antialiased  text-gray-600  px-2" x-data="app">
-          <div class="flex flex-col ">
-            {/* <!-- Table --> */}
-            <div className="w-72 sm:w-48 lg:w-72">
-              <div
-                style={{ backgroundColor: backgroundColor }}
-                value={status}
-                class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
-              >
-                <header class="px-5 py-4  ">
-                  <div class="font-semibold text-center text-white">
-                    -
-                  </div>
-                </header>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="antialiased  text-gray-600  px-2" x-data="app">
-          <div class="flex flex-col ">
-            {/* <!-- Table --> */}
-            <div className="w-72 sm:w-48 lg:w-72">
-              <div
-                style={{ backgroundColor: backgroundColor }}
-                value={status}
-                class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
-              >
-                <header class="px-5 py-4  ">
-                  <div class="font-semibold text-center text-white">
-                -
-                  </div>
-                </header>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="antialiased  text-gray-600  px-2" x-data="app">
-          <div class="flex flex-col ">
-            {/* <!-- Table --> */}
-            <div className="w-72 sm:w-48 lg:w-72">
-              <div
-                style={{ backgroundColor: backgroundColor }}
-                value={status}
-                class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
-              >
-                <header class="px-5 py-4  ">
-                  <div class="font-semibold text-center text-white">
-                   -
-                  </div>
-                </header>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="antialiased  text-gray-600  px-2" x-data="app">
-          <div class="flex flex-col ">
-            {/* <!-- Table --> */}
-            <div className="w-72 sm:w-48 lg:w-72">
-              <div
-                style={{ backgroundColor: backgroundColor }}
-                value={status}
-                class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
-              >
-                <header class="px-5 py-4  ">
-                  <div class="font-semibold text-center text-white">
-                   -
-                  </div>
-                </header>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+<form className="bg-slate-300 w-[900px] mx-auto rounded-lg ">
+    <div class=" gap-2 mb-6 flex py-2 px-3 ">
+        <div>
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">SHIFT</label>
+            <input type="time" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required/>
+        </div>
+        <div>
+            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Planned Production Time    </label>
+            <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required/>
+        </div>
+        <div>
+            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
+            <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required/>
+        </div>
+        <div>
+            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
+            <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required/>
+        </div>
+
+        
+        
+    </div>
+    <div class=" gap-2 mb-6 flex ">
+        <div>
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
+            <input type="time" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required/>
+        </div>
+        <div>
+            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
+            <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required/>
+        </div>
+        
+    </div>
+    <div class=" gap-2 mb-6 flex ">
+        <div>
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
+            <input type="time" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required/>
+        </div>
+        <div>
+            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
+            <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required/>
+        </div>
+        
+    </div>
+    <div class="mb-6">
+        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email address</label>
+        <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@company.com" required/>
+    </div> 
+    <div class="mb-6">
+        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+        <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required/>
+    </div> 
+    <div class="mb-6">
+        <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
+        <input type="password" id="confirm_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required/>
+    </div> 
+    <div class="flex items-start mb-6">
+        <div class="flex items-center h-5">
+        <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required/>
+        </div>
+        <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
+    </div>
+    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+</form>
 
       </main>
-       {/* <div class="overflow-x-auto p-3">
-                  <table class="table-auto w-full">
-                    <td class="p-1   ">
-                      {status === "Go" || status === "Leader" || status === "Maintenance" ? (
-                        <>
-                          <span className="text-xs uppercase text-black font-bold">
-                            TIME
-                          </span>
-                          <div id="timer" class="font-medium  text-white">
-                            {timer}
-                          </div>
-                        </>
-                      ) : null}
-                    </td>
-                  </table>
-                </div> */}
     </body>
   );
 };
 
-
-export default RealTime;
-
-
+export default SmtTop;
 

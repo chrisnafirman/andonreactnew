@@ -12,7 +12,7 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const RealTime = () => {
-  const [status, setStatus] = useState("");
+  const [isOpen2, setIsOpen2] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [notif, setNotif] = useState(false);
   const [mesin, setMesin] = useState("");
@@ -21,11 +21,25 @@ const RealTime = () => {
   const [area, setArea] = useState("");
   const [station, setStation] = useState("");
   const [timer, setTimer] = useState("");
-  const [backgroundColor, setBackgroundColor] = useState("");
+
   const [time, setTime] = useState(new Date().toLocaleString());
   const [prevStatus, setPrevStatus] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+
+  //
+  const [status, setStatus] = useState("");
+  const [Destecker, setDestecker] = useState("");
+
+  //
+  const [backgroundColor, setBackgroundColor] = useState("");
+  const [backgroundColorStation, setBackgroundColorStation] = useState("");
+
+  const [showInfo, setShowInfo] = useState(false);
+
+  const toggleInfo = () => {
+    setShowInfo(!showInfo);
+  };
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -152,6 +166,13 @@ const RealTime = () => {
       setStation(data);
     });
 
+    // area
+    const ref8 = firebase.database().ref("AreaLine1TOP/Destecker");
+    ref8.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateDestecker(data);
+    });
+
     return () => {};
   }, []);
   ////////////
@@ -246,6 +267,27 @@ const RealTime = () => {
     );
   };
 
+  const updateDestecker = (data) => {
+    setDestecker(data);
+    setBackgroundColorStation(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
   // ----
   const handleSubmit = (event) => {
     event.preventDefault(); // prevent default form submission behavior
@@ -258,7 +300,22 @@ const RealTime = () => {
     firebase.database().ref("Mesin/Mesin1").set(newStatus);
 
     alert("success");
-    setIsOpen(false);
+    setIsOpen2(false);
+    window.location.reload();
+  };
+
+  const handleSubmitStation = (event) => {
+    event.preventDefault(); // prevent default form submission behavior
+
+    // get the current value of the selected option
+    const newStatus =
+      selectedOption === "Maintenance" ? "Maintenance" : "Leader";
+
+    // update the Firebase database with the new status value
+    firebase.database().ref("AreaLine1TOP/Destecker").set(newStatus);
+
+    alert("success");
+    setIsOpen2(false);
     window.location.reload();
   };
 
@@ -275,7 +332,7 @@ const RealTime = () => {
           </a>
 
           <div>
-            <h1 class="text-center">ANDON LINE 1</h1>
+            <h1 class="text-center">DESTECKER(TOP) LINE 1</h1>
           </div>
         </div>
       </nav>
@@ -412,9 +469,8 @@ const RealTime = () => {
 
       {/*  */}
       <main class="flex  flex-col md:flex-row  sm:ml-2">
-
         <section class="antialiased text-gray-600 h-screen " x-data="app">
-          <div class="bg-gray-200  p-2 w-64 mt-2 rounded-lg">
+          <div class="bg-gray-200 p-2 w-64 mt-2 rounded-lg">
             <div class="flex md:order-2 ml-3 mt-2">
               <img
                 src={process.env.PUBLIC_URL + "/user.png"}
@@ -423,24 +479,40 @@ const RealTime = () => {
               />
 
               <div class="ml-2">
-                <p class="font-medium text-gray-800 mb-1 text-sm">
-                  Informasi Operator
+                <p
+                  class="font-medium text-gray-800 mb-1 text-sm"
+                  onClick={toggleInfo}
+                >
+                  Informasi Operator {showInfo ? "▲" : "▼"}
                 </p>
-                <div class="border-t border-b border-gray-400 py-1">
-                  <p class="text-xs text-gray-600">Nama Operator:</p>
-                  <p class="font-medium text-sm">CHRISNA</p>
-                </div>
-                <div class="border-b border-gray-400 py-1">
-                  <p class="text-xs text-gray-600">NPK Operator:</p>
-                  <p class="font-medium text-sm">0134</p>
-                </div>
-                <div class="border-b border-gray-400 py-1">
-                  <p class="text-xs text-gray-600">Waktu Bekerja:</p>
-                  <p class="font-medium text-sm">{timer}</p>
+                <div class="ml-2">
+                  <p
+                    class="font-medium text-gray-800 mb-1 text-sm"
+                    onClick={toggleInfo}
+                  >
+                    Informasi Operator {showInfo ? "▲" : "▼"}
+                  </p>
+                  {showInfo && (
+                    <div>
+                      <div class="border-t border-b border-gray-400 py-1">
+                        <p class="text-xs text-gray-600">Nama Operator:</p>
+                        <p class="font-medium text-sm">CHRISNA</p>
+                      </div>
+                      <div class="border-b border-gray-400 py-1">
+                        <p class="text-xs text-gray-600">NPK Operator:</p>
+                        <p class="font-medium text-sm">0134</p>
+                      </div>
+                      <div class="border-b border-gray-400 py-1">
+                        <p class="text-xs text-gray-600">Waktu Bekerja:</p>
+                        <p class="font-medium text-sm">{timer}</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           </div>
+
           <div class="bg-gray-200  p-2 w-64 mt-2 rounded-lg">
             <div class="flex md:order-2 ml-3 mt-2">
               <img
@@ -497,33 +569,137 @@ const RealTime = () => {
           </div>
         </section>
 
-        <section class="antialiased px-48   sm:px-48 lg:px-80  p-3 text-gray-600 h-screen " x-data="app">
+        <section
+          class="antialiased px-48   sm:px-48 lg:px-80  p-3 text-gray-600 h-screen "
+          x-data="app"
+        >
           <div class="flex flex-col ">
             {/* <!-- Table --> */}
             <div className="w-72 sm:w-72 lg:w-72">
-              <div
-                style={{ backgroundColor: backgroundColor }}
-                value={status}
+              <button
+                style={{ backgroundColor: backgroundColorStation }}
+                value={Destecker}
                 class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                onClick={Destecker === "Go" ? () => setIsOpen2(true) : null}
               >
                 <header class="px-5 py-4  ">
                   <div class="font-semibold text-center text-white">
-                    SMT BE
+                    Destecker
                   </div>
                 </header>
-              </div>
+              </button>
             </div>
+            {isOpen2 ? (
+              <>
+                <div className="fixed z-10 inset-0 overflow-y-auto">
+                  <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                    <div className="fixed inset-0 transition-opacity">
+                      <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                    </div>
+                    <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                    <div
+                      className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                      role="dialog"
+                      aria-modal="true"
+                      aria-labelledby="modal-headline"
+                    >
+                      <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                        <div className="sm:flex sm:items-start">
+                          <form>
+                            <div className="mx-auto flex flex-wrap justify-center">
+                              <label className="w-full md:w-1/2  p-4">
+                                <div
+                                  style={{
+                                    backgroundColor:
+                                      selectedOption === "Maintenance"
+                                        ? "#be4f62"
+                                        : "#FFFFFF",
+                                    color:
+                                      selectedOption === "Maintenance"
+                                        ? "#be4f62"
+                                        : "#4B5563",
+                                  }}
+                                  className="shadow-md rounded-lg p-6 hover:shadow-xl transition-shadow"
+                                >
+                                  <div className="text-gray-700 font-bold mr-9 mb-2">
+                                    Maintenance
+                                  </div>
+                                  <input
+                                    type="radio"
+                                    id="Maintenance"
+                                    name="option"
+                                    value="Maintenance"
+                                    className="hidden"
+                                    onChange={handleOptionChange}
+                                    checked={selectedOption === "Maintenance"}
+                                  />
+                                </div>
+                              </label>
+                              <label className="w-full md:w-1/2 p-4">
+                                <div
+                                  style={{
+                                    backgroundColor:
+                                      selectedOption === "Leader"
+                                        ? "#C00000"
+                                        : "#FFFFFF",
+                                    color:
+                                      selectedOption === "Leader"
+                                        ? "#C00000"
+                                        : "#4B5563",
+                                  }}
+                                  className="shadow-md rounded-lg p-6 hover:shadow-xl transition-shadow"
+                                >
+                                  <div className="text-gray-700 font-bold mr-9 mb-2">
+                                    Leader
+                                  </div>
+                                  <input
+                                    type="radio"
+                                    id="Leader"
+                                    name="option"
+                                    value="Leader"
+                                    className="hidden"
+                                    onChange={handleOptionChange}
+                                    checked={selectedOption === "Leader"}
+                                  />
+                                </div>
+                              </label>
+                            </div>
+
+                            <div className="flex justify-end">
+                              <button
+                                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                onClick={() => setIsOpen2(false)}
+                              >
+                                Batal
+                              </button>
+                              <button
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                type="submit"
+                                onClick={handleSubmitStation}
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+              </>
+            ) : null}
           </div>
 
-          
-           {/* kotak  */}
+          {/* kotak  */}
           <div class="flex pt-10 flex-col ">
             {/* <!-- Table --> */}
             <div className="w-72">
               <button
                 style={{ backgroundColor: backgroundColor }}
                 value={status}
-                onClick={() => setIsOpen(true)}
+                onClick={() => setIsOpen2(true)}
                 className="w-full max-w-sm bg-lime-600 shadow-lg rounded-xl"
                 disabled={status !== "Go"}
               >
@@ -654,7 +830,7 @@ const RealTime = () => {
                               <div className="flex justify-end">
                                 <button
                                   className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                  onClick={() => setIsOpen(false)}
+                                  onClick={() => setIsOpen2(false)}
                                 >
                                   Batal
                                 </button>
@@ -689,7 +865,7 @@ const RealTime = () => {
               <button
                 style={{ backgroundColor: backgroundColor }}
                 value={status}
-                onClick={() => setIsOpen(true)}
+                onClick={() => setIsOpen2(true)}
                 className="w-full max-w-sm bg-lime-600 shadow-lg rounded-xl"
                 disabled={status !== "Go"}
               >
@@ -820,7 +996,7 @@ const RealTime = () => {
                               <div className="flex justify-end">
                                 <button
                                   className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                  onClick={() => setIsOpen(false)}
+                                  onClick={() => setIsOpen2(false)}
                                 >
                                   Batal
                                 </button>

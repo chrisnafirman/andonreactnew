@@ -184,7 +184,7 @@ const Leader = () => {
 
   useEffect(() => {
     if (status !== "" && prevStatus !== status) {
-      fetch("http://localhost:3001/api/post/data", {
+      fetch("http://192.168.101.236:3001/api/post/data", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -258,7 +258,7 @@ const Leader = () => {
         department = "";
     }
 
-    fetch(`http://localhost:3001/api/post/${department}`, {
+    fetch(`http://192.168.101.236:3001/api/post/${department}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

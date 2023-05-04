@@ -47,7 +47,7 @@ const Line1 = () => {
                 <ul class="list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left">
                   <li class="mr-3 flex-1">
                     <a
-                      href="/Home"
+                      href="/Andonline1"
                       class="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500"
                     >
                       <i class="fas fa-tasks pr-0 md:pr-3"></i>
