@@ -11,7 +11,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const SmtTop= () => {
+const SmtTop = () => {
   const [mesin, setMesin] = useState("");
   const [line, setLine] = useState("");
   const [nama, setNama] = useState("");
@@ -31,189 +31,123 @@ const SmtTop= () => {
   const [NamaPIC, setNamaPIC] = useState("");
   const [NpkPIC, setNpkPIC] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
+  const [data, setData] = useState(null);
 
-  /// Purchasing
-  const namaList = [
-    "Agus Sofian Warsito",
-    "Allan Mulyana",
-    "Alwan Luchi",
-    "Ari Ramdani",
-    "Arif Setiawan",
-  ];
-  const npkList = ["0601", "0686", "0594", "0789", "0214"];
+    // SCHE PRODUCTION
+    const [SHIFT, setSHIFT] = useState("");
+    const [PT1_IN, setPT1_IN] = useState("");
+    const [PT1_OUT, setPT1_OUT] = useState("");
+    const [PT2_IN, setPT2_IN] = useState("");
+    const [PT2_OUT, setPT2_OUT] = useState("");
+    const [PT3_IN, setPT3_IN] = useState("");
+    const [PT3_OUT, setPT3_OUT] = useState("");
+    const [PT4_IN, setPT4_IN] = useState("");
+    const [PT4_OUT, setPT4_OUT] = useState("");
+    const [BR1_IN, setBR1_IN] = useState("");
+    const [BR1_OUT, setBR1_OUT] = useState("");
+    const [BR2_IN, setBR2_IN] = useState("");
+    const [BR2_OUT, setBR2_OUT] = useState("");
+    const [BR3_IN, setBR3_IN] = useState("");
+    const [BR3_OUT, setBR3_OUT] = useState("");
+    const [BR4_IN, setBR4_IN] = useState("");
+    const [BR4_OUT, setBR4_OUT] = useState("");
+    const [PD_IN, setPD_IN] = useState("");
+    const [PD_OUT, setPD_OUT] = useState("");
+    const [OT_IN, setOT_IN] = useState("");
+    const [OT_OUT, setOT_OUT] = useState("");
+    const [PP, setPP] = useState("");
+    const [PD, setPD] = useState("");
+    const [CMA, setCMA] = useState("");
+    const [PDATE, setPDATE] = useState("");
+    
 
-  // Area Station
 
-  const [status, setStatus] = useState("");
-  const [desteckerTop, setStatusDesteckerTop] = useState("");
+    
 
-  //
-  const [backgroundColorDesteckerTop, setBackgroundColorDesteckerTop] =
-    useState("");
-  const [backgroundColor, setBackgroundColor] = useState("");
+    const submit = () => {
+      const data = {
+        SHIFT: SHIFT,
+        PT1_IN: PT1_IN,
+        PT1_OUT: PT1_OUT,
+        PT2_IN: PT2_IN,
+        PT2_OUT: PT2_OUT,
+        PT3_IN: PT3_IN,
+        PT3_OUT: PT3_OUT,
+        PT4_IN: PT4_IN,
+        PT4_OUT: PT4_OUT,
+        BR1_IN: BR1_IN,
+        BR1_OUT: BR1_OUT,
+        BR2_IN: BR2_IN,
+        BR2_OUT: BR2_OUT,
+        BR3_IN: BR3_IN,
+        BR3_OUT: BR3_OUT,
+        BR4_IN: BR4_IN,
+        BR4_OUT: BR4_OUT,
+        PD_IN: PD_IN,
+        PD_OUT: PD_OUT,
+        OT_IN: OT_IN,
+        OT_OUT: OT_OUT,
+        PP: PP,
+        PD: PD,
+        CMA: CMA,
+        PDATE: PDATE,
+      };
+  
+    
+  
+      fetch(`http://192.168.101.236:3001/api/post/Inputsche`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            alert("success");
+            setIsOpen(false);
+            window.location.reload();
+          } else {
+            throw new Error("Error adding data");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+
+    function formatDate(dateString) {
+      const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
+      const formattedDate = new Date(dateString).toLocaleDateString('id-ID', options);
+      return formattedDate;
+    }
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch('http://localhost:3001/api/get/Inputsche');
+          const jsonData = await response.json();
+          const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
+  
+          setData(latestData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      fetchData();
+    }, []);
+  
+  
+    
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
   };
 
-  useEffect(() => {
-    const ref = firebase.database().ref("Mesin/Mesin1");
-    ref.on("value", (snapshot) => {
-      const data = snapshot.val();
-      updateStatus(data);
-      if (data === "Damage") {
-        const audio = new Audio("Sound.mp3");
-        audio.autoplay = true;
-        audio.play();
-
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
-              const text =
-                "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-              navigator.clipboard
-                .writeText(text)
-                .then(() => {
-                  const botToken =
-                    "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
-                  const chatIds = [1563609464, 6019720343, -692863121];
-                  const message =
-                    "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakukan Perbaikan";
-                  chatIds.forEach((chatId) => {
-                    fetch(
-                      `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
-                    )
-                      .then((response) => {
-                        if (!response.ok) {
-                          throw new Error("Error sending telegram message");
-                        }
-                      })
-                      .catch((error) => {
-                        console.error(error);
-                      });
-                  });
-                })
-                .catch((error) => {
-                  console.error(error);
-                });
-            } else if (permissionStatus.state === "prompt") {
-              permissionStatus.onchange = () => {
-                if (permissionStatus.state === "granted") {
-                  const text =
-                    "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-                  navigator.clipboard
-                    .writeText(text)
-                    .then(() => {
-                      const botToken =
-                        "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
-                      const chatIds = [1563609464, 6019720343, -692863121];
-                      const message =
-                        "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-                      chatIds.forEach((chatId) => {
-                        fetch(
-                          `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
-                        )
-                          .then((response) => {
-                            if (!response.ok) {
-                              throw new Error("Error sending telegram message");
-                            }
-                          })
-                          .catch((error) => {
-                            console.error(error);
-                          });
-                      });
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                }
-              };
-            } else {
-              // Izin ditolak
-            }
-          });
-      }
-    });
-
-    const ref2 = firebase.database().ref("Mesin/NamaMesin");
-    ref2.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setMesin(data);
-    });
-
-    const ref3 = firebase.database().ref("Mesin/LineMesin");
-    ref3.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setLine(data);
-    });
-
-    const ref4 = firebase.database().ref("Mesin/Nama");
-    ref4.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setNama(data);
-    });
-
-    const ref5 = firebase.database().ref("Mesin/timer");
-    ref5.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setTimer(data);
-    });
-
-    const ref6 = firebase.database().ref("Mesin/Area");
-    ref6.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setArea(data);
-    });
-
-    const ref7 = firebase.database().ref("Mesin/Station");
-    ref7.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setStation(data);
-    });
-
-    // TOP
-    const ref8 = firebase.database().ref("AreaLine1TOP/Destecker");
-    ref8.on("value", (snapshot) => {
-      const data = snapshot.val();
-      updatedesteckerTop(data);
-    });
-
-    return () => {};
-  }, []);
-  ////////////
-
-  // DATA2
-  ////////////
-  // const ref5 = database.ref("Mesin2/Status");
-  // ref5.on("value", (snapshot) => {
-  //   const data = snapshot.val();
-  //   updateStatus2(data);
-  // });
-
-  // const ref6 = firebase.database().ref("Mesin2/NamaMesin");
-  // ref6.on("value", (snapshot) => {
-  //   const data = snapshot.val();
-  //   setMesin2(data);
-  // });
-
-  // const ref7 = firebase.database().ref("Mesin2/LineMesin");
-  // ref7.on("value", (snapshot) => {
-  //   const data = snapshot.val();
-  //   setLine2(data);
-  // });
-
-  // const ref8 = firebase.database().ref("Mesin2/Nama");
-  // ref8.on("value", (snapshot) => {
-  //   const data = snapshot.val();
-  //   setNama2(data);
-  // });
-
-  // ----
-
-  // fungsi time di navbar
-
+  
   function updateTime() {
     const interval = setInterval(() => {
       setTime(new Date().toLocaleString());
@@ -224,78 +158,7 @@ const SmtTop= () => {
   useEffect(() => {
     updateTime();
   }, []);
-  // ----
-
-  // fungsi post ke backend
-
-  useEffect(() => {
-    if (status !== "" && prevStatus !== status) {
-      fetch("http://192.168.101.236:3001/api/post/data", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          status: prevStatus,
-          mesin: mesin,
-          line: line,
-          timer: timer,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error(error));
-    }
-    setPrevStatus(status);
-  }, [status, mesin, line, timer, prevStatus]);
-
-  // ------
-
-  // fungsi mengubah warna status
-
-  const updateStatus = (data) => {
-    setStatus(data);
-    setBackgroundColor(
-      data === "Go"
-        ? "#31A207"
-        : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
-    );
-  };
-
-  const updatedesteckerTop = (data) => {
-    setStatusDesteckerTop(data);
-    setBackgroundColorDesteckerTop(
-      data === "Go"
-        ? "#31A207"
-        : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
-    );
-  };
-
-  // ----
+ 
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -308,55 +171,13 @@ const SmtTop= () => {
     currentTime.getMonth() + 1
   }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
-  const submit = () => {
-    const data = {
-      NamaPIC: NamaPIC,
-      NpkPIC: NpkPIC,
-      MachineName: mesin,
-      MachineArea: area,
-      MachineLine: line,
-      MachineStation: station,
-      Kerusakan: Kerusakan,
-    };
-
-    let department;
-    switch (selectedStatus) {
-      case "QC":
-        department = "QC";
-        break;
-      case "QA":
-        department = "QA";
-        break;
-      default:
-        department = "";
-    }
-
-    fetch(`http://192.168.101.236:3001/api/post/${department}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          alert("success");
-          setIsOpen(false);
-          window.location.reload();
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  
 
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/l.jpg)`,
     backgroundSize: "1300px",
     backgroundPosition: "500px",
-    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
+    height: "8000px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
 
   return (
@@ -380,7 +201,7 @@ const SmtTop= () => {
         <div class="mx-auto max-w-7xl px-4">
           <marquee behavior="scroll" direction="right">
             <h1 class="text-xl font-bold tracking-tight text-gray-900">
-            SMT LINE 1 - SMT TOP
+              SMT LINE 1 - LEADER - Input Schedule Production
             </h1>
           </marquee>
         </div>
@@ -531,7 +352,7 @@ const SmtTop= () => {
               href="#"
               class="inline-block w-full p-4 text-orange-500 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
             >
-              ISA 
+              ISA
             </a>
           </button>
 
@@ -545,83 +366,570 @@ const SmtTop= () => {
           </button>
         </ul>
 
-    
         <div className=" pt-3">
-          <span className=" pt-4 sm:ml-5 text-2xl text-white font-thin px-2">
+          <span className=" pt-4 sm:ml-5 text-2xl text-white font-normal px-2">
             Input Schedule Production
           </span>
         </div>
 
-        
-<form className="bg-slate-300 w-[900px] mx-auto rounded-lg ">
-    <div class=" gap-2 mb-6 flex py-2 px-3 ">
-        <div>
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">SHIFT</label>
-            <input type="time" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required/>
-        </div>
-        <div>
-            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Planned Production Time    </label>
-            <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required/>
-        </div>
-        <div>
-            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
-            <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required/>
-        </div>
-        <div>
-            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
-            <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required/>
-        </div>
+        <div className="flex">
+          <form className="bg-slate-50 w-[900px] sm:w-[600px] lg:w-[650px] px-3 ml-5 rounded-lg ">
+            <div class=" gap-2 mb-6 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Production Date
+                </label>
+                <input
+                  type="Date"
+                  id="Production_Date"
+                  class="ml-5  g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder=""
+                  required
+                  onChange={(e) => {
+                    setPDATE(e.target.value);
+                      }}
+                />
+              </div>
+              <div className="flex  ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Shift
+                </label>
+                <input
+                  type="number"
+                  max="5"
+                  id="Shift"
+                  class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="1-5"
+                  required
+                  onChange={(e) => {
+                    setSHIFT(e.target.value);
+                      }}
+                />
+              </div>
+            </div>
 
-        
-        
-    </div>
-    <div class=" gap-2 mb-6 flex ">
-        <div>
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
-            <input type="time" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required/>
-        </div>
-        <div>
-            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
-            <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required/>
-        </div>
-        
-    </div>
-    <div class=" gap-2 mb-6 flex ">
-        <div>
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
-            <input type="time" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required/>
-        </div>
-        <div>
-            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
-            <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required/>
-        </div>
-        
-    </div>
-    <div class="mb-6">
-        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email address</label>
-        <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="john.doe@company.com" required/>
-    </div> 
-    <div class="mb-6">
-        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-        <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required/>
-    </div> 
-    <div class="mb-6">
-        <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-        <input type="password" id="confirm_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="•••••••••" required/>
-    </div> 
-    <div class="flex items-start mb-6">
-        <div class="flex items-center h-5">
-        <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required/>
-        </div>
-        <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
-    </div>
-    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-</form>
+            {/* production time 1 */}
+            <div class=" gap-2 mb-6 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Production Time 1
+                </label>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setPT1_IN(e.target.value);
+                      }}
+                />
+                <h1 className="mt-3 ml-2">To</h1>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setPT1_OUT(e.target.value);
+                      }}
+                />
+              </div>
+            </div>
 
+            {/* production time 2 */}
+            <div class=" gap-2 mb-6 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Production Time 2
+                </label>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setPT2_IN(e.target.value);
+                      }}
+                />
+                <h1 className="mt-3 ml-2">To</h1>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setPT2_OUT(e.target.value);
+                      }}
+                />
+              </div>
+            </div>
+            {/* production time 3 */}
+            <div class=" gap-2 mb-6 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Production Time 3
+                </label>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setPT3_IN(e.target.value);
+                      }}
+                />
+                <h1 className="mt-3 ml-2">To</h1>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setPT3_OUT(e.target.value);
+                      }}
+                />
+              </div>
+            </div>
+
+            {/* production time 4 */}
+            <div class=" gap-2 mb-6 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Production Time 4
+                </label>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setPT4_IN(e.target.value);
+                      }}
+                />
+                <h1 className="mt-3 ml-2">To</h1>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setPT4_OUT(e.target.value);
+                      }}
+                />
+              </div>
+            </div>
+
+            {/* break1 */}
+            <div class=" gap-2 mb-6 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Break Time 1
+                </label>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setBR1_IN(e.target.value);
+                      }}
+                />
+                <h1 className="mt-3 ml-2">To</h1>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setBR1_OUT(e.target.value);
+                      }}
+                />
+              </div>
+            </div>
+
+            {/* break 2 */}
+            <div class=" gap-2 mb-6 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Break Time 2
+                </label>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setBR2_IN(e.target.value);
+                      }}
+                />
+                <h1 className="mt-3 ml-2">To</h1>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setBR2_OUT(e.target.value);
+                      }}
+                />
+              </div>
+            </div>
+
+            {/* break 3 */}
+            <div class=" gap-2 mb-6 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Break Time 3
+                </label>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setBR3_IN(e.target.value);
+                      }}
+                />
+                <h1 className="mt-3 ml-2">To</h1>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setBR3_OUT(e.target.value);
+                      }}
+                />
+              </div>
+            </div>
+
+            {/* break 4 */}
+            <div class=" gap-2 mb-6 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Break Time 4
+                </label>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setBR4_IN(e.target.value);
+                      }}
+                />
+                <h1 className="mt-3 ml-2">To</h1>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setBR4_OUT(e.target.value);
+                      }}
+                />
+              </div>
+            </div>
+
+            {/* Over Time */}
+            <div class=" gap-2 mb-6 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Over Time Time 
+                </label>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-4 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setOT_IN(e.target.value);
+                      }}
+                />
+                <h1 className="mt-3 ml-2">To</h1>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setOT_OUT(e.target.value);
+                      }}
+                />
+              </div>
+            </div>
+
+            {/* PLANNED DOWN TIME */}
+            <div class=" gap-2 mb-4 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Planned DownTime
+                </label>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setPD_IN(e.target.value);
+                      }}
+                />
+                <h1 className="mt-3 ml-2">To</h1>
+                <input
+                  type="time"
+                  id="first_name"
+                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="John"
+                  required
+                  onChange={(e) => {
+                    setPD_OUT(e.target.value);
+                      }}
+                />
+              </div>
+            </div>
+
+            <div class=" gap-2 mb-6 flex py-2 px-1 ">
+              <div className="flex ">
+                <h1>
+              ---------------------------------------------------------------------------------------------
+                </h1>
+              </div>
+            </div>
+             {/*  Planned Production  */}
+             <div class=" gap-2 mb-4 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Planned Production 
+                </label>
+                <input
+                  type="number"
+                  id="first_name"
+                  class="ml-14 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="0"
+                  required
+                  onChange={(e) => {
+                    setPP(e.target.value);
+                      }}
+                />
+                <h1 className="mt-3 ml-2">Minutes</h1>
+              </div>
+            </div>
+
+            {/* Planned Downtime */}
+            <div class=" gap-2 mb-4 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Planned Downtime
+                </label>
+                <input
+                  type="number"
+                  id="first_name"
+                  class="ml-14 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="0"
+                  required
+                  onChange={(e) => {
+                    setPD(e.target.value);
+                      }}
+                />
+                <h1 className="mt-3 ml-2">Minutes</h1>
+              </div>
+            </div>
+
+            {/* change model */}
+            <div class=" gap-2 mb-4 flex py-2 px-3 ">
+              <div className="flex ">
+                <label
+                  for="first_name"
+                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                >
+                  Change Model Alocation
+                </label>
+                <input
+                  type="number"
+                  id="first_name"
+                  class="ml-5 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="0"
+                  required
+                  onChange={(e) => {
+                    setCMA(e.target.value);
+                      }}
+                />
+                <h1 className="mt-3 ml-2">Minutes</h1>
+              </div>
+            </div>
+
+
+
+            {/* submit */}
+            <div class="flex justify-end">
+              <button
+                type="submit"
+                class=" mb-2 items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-auto"
+                onClick={submit}
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+
+          <ol class="relative border-l border-gray-200 ml-7 dark:border-gray-700">
+            <li class="mb-10 ml-6">
+              <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                <img
+                  class="rounded-full shadow-lg"
+                  src={process.env.PUBLIC_URL + "/Lead.png"}
+                  alt="Bonnie image"
+                />
+              </span>
+              <div class="items-center justify-between p-4  bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
+                <div className="bg-white px-4 h-auto w-96 sm:w-72 lg:w-[400px]  py-6 sm:p-6 ml-3 sm:ml-3 lg:ml-3 rounded-lg shadow-md">
+                  <h3 className="text-lg font-bold mb-4">
+                    PRODUCTION TIME PLANNING
+                  </h3>
+                  {data ? (
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td className="font-bold text-xs">Date : {formatDate(data.PDATE)}</td>
+                        <td className="font-bold text-xs">Shift :  {data.SHIFT} </td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">Planned Production :</td>
+                        <td className="text-sm">{data.PT1_IN} - {data.PT1_OUT}</td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">Break 1:</td>
+                        <td  className="text-sm" >09.45 - 10.00</td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">Production Time 2:</td>
+                        <td  className="text-sm" >10.00 - 12.00</td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">Break 2:</td>
+                        <td  className="text-sm" >12.00 - 13.00</td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">Planned DT:</td>
+                        <td  className="text-sm" >13.00 - 14.00</td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">Production Time 3:</td>
+                        <td  className="text-sm" >14.00 - 15.45</td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">Break 3:</td>
+                        <td  className="text-sm" >15.45 - 16.00</td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">Production Time 4:</td>
+                        <td  className="text-sm" >16.00 - 16.30</td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">Break 4:</td>
+                        <td  className="text-sm" >16.30 - 16.40</td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">Over Time:</td>
+                        <td  className="text-sm" >16.40 - 18.00</td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">--------------------</td>
+                      </tr>
+
+                       <tr>
+                        <td className="font-bold text-xs">Planned Production :</td>
+                        <td  className="text-sm" >525 minutes</td>
+                      </tr>
+
+                      <tr>
+                        <td className="font-bold text-xs">Planned Downtime :</td>
+                        <td  className="text-sm" >: 60 minutes</td>
+                      </tr>
+
+                      <tr>
+                        <td className="font-bold text-xs">Change Model Allocation :</td>
+                        <td  className="text-sm" >15 minutes</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  ) : (
+                    <p>Loading...</p>
+                    )}
+                  <div className="pt-3">
+                          <button className="bg-red-500 hover:bg-red-700 text-white text-xs font-bold py-2 px-4 rounded">
+                            STOP PRODUCTION TIME PLANNING
+                          </button>
+                        </div>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
       </main>
     </body>
   );
 };
 
 export default SmtTop;
-

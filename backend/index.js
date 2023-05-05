@@ -249,7 +249,31 @@ app.post("/api/post/QC", (req, res) => {
 
 
 
+app.post("/api/post/Inputsche", (req, res) => {
+  const { SHIFT, PT1_IN,  PT1_OUT, PT2_IN, PT2_OUT, PT3_IN, PT3_OUT, PT4_IN,  PT4_OUT,  BR1_IN, BR1_OUT, BR2_IN, BR2_OUT, BR3_IN, BR3_OUT, BR4_IN, BR4_OUT, PD_IN,  PD_OUT,  OT_IN, OT_OUT,  PP, PD, CMA, PDATE } = req.body;
+  
+  db.query(
+    "INSERT INTO scheprod (SHIFT, PT1_IN,  PT1_OUT, PT2_IN, PT2_OUT, PT3_IN, PT3_OUT, PT4_IN,  PT4_OUT,  BR1_IN, BR1_OUT, BR2_IN, BR2_OUT, BR3_IN, BR3_OUT, BR4_IN, BR4_OUT, PD_IN,  PD_OUT,  OT_IN, OT_OUT,  PP, PD, CMA, PDATE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [SHIFT, PT1_IN,  PT1_OUT, PT2_IN, PT2_OUT, PT3_IN, PT3_OUT, PT4_IN,  PT4_OUT,  BR1_IN, BR1_OUT, BR2_IN, BR2_OUT, BR3_IN, BR3_OUT, BR4_IN, BR4_OUT, PD_IN,  PD_OUT,  OT_IN, OT_OUT,  PP, PD, CMA, PDATE],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been added successfully' });
+    }
+  );
+});
 
+
+
+
+app.get("/api/get/Inputsche", (req, res) => {
+  const sqlSelect = "SELECT * FROM scheprod";
+  db.query(sqlSelect, (err, results) => {
+    res.send(results);
+  });
+});
 
 
 app.get("/api/get/data", (req, res) => {
