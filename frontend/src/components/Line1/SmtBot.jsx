@@ -342,7 +342,7 @@ const SmtBot= () => {
         if (response.status === 200) {
           alert("success");
           setIsOpen(false);
-          window.location.reload();
+          window.location.reload(); 
         } else {
           throw new Error("Error adding data");
         }

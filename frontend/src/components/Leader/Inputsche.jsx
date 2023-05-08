@@ -33,121 +33,168 @@ const SmtTop = () => {
   const [Kerusakan, setKerusakan] = useState("");
   const [data, setData] = useState(null);
 
-    // SCHE PRODUCTION
-    const [SHIFT, setSHIFT] = useState("");
-    const [PT1_IN, setPT1_IN] = useState("");
-    const [PT1_OUT, setPT1_OUT] = useState("");
-    const [PT2_IN, setPT2_IN] = useState("");
-    const [PT2_OUT, setPT2_OUT] = useState("");
-    const [PT3_IN, setPT3_IN] = useState("");
-    const [PT3_OUT, setPT3_OUT] = useState("");
-    const [PT4_IN, setPT4_IN] = useState("");
-    const [PT4_OUT, setPT4_OUT] = useState("");
-    const [BR1_IN, setBR1_IN] = useState("");
-    const [BR1_OUT, setBR1_OUT] = useState("");
-    const [BR2_IN, setBR2_IN] = useState("");
-    const [BR2_OUT, setBR2_OUT] = useState("");
-    const [BR3_IN, setBR3_IN] = useState("");
-    const [BR3_OUT, setBR3_OUT] = useState("");
-    const [BR4_IN, setBR4_IN] = useState("");
-    const [BR4_OUT, setBR4_OUT] = useState("");
-    const [PD_IN, setPD_IN] = useState("");
-    const [PD_OUT, setPD_OUT] = useState("");
-    const [OT_IN, setOT_IN] = useState("");
-    const [OT_OUT, setOT_OUT] = useState("");
-    const [PP, setPP] = useState("");
-    const [PD, setPD] = useState("");
-    const [CMA, setCMA] = useState("");
-    const [PDATE, setPDATE] = useState("");
-    
+  // SCHE PRODUCTION
+  const [SHIFT, setSHIFT] = useState("");
+  const [PT1_IN, setPT1_IN] = useState("");
+  const [PT1_OUT, setPT1_OUT] = useState("");
+  const [PT2_IN, setPT2_IN] = useState("");
+  const [PT2_OUT, setPT2_OUT] = useState("");
+  const [PT3_IN, setPT3_IN] = useState("");
+  const [PT3_OUT, setPT3_OUT] = useState("");
+  const [PT4_IN, setPT4_IN] = useState("");
+  const [PT4_OUT, setPT4_OUT] = useState("");
+  const [BR1_IN, setBR1_IN] = useState("");
+  const [BR1_OUT, setBR1_OUT] = useState("");
+  const [BR2_IN, setBR2_IN] = useState("");
+  const [BR2_OUT, setBR2_OUT] = useState("");
+  const [BR3_IN, setBR3_IN] = useState("");
+  const [BR3_OUT, setBR3_OUT] = useState("");
+  const [BR4_IN, setBR4_IN] = useState("");
+  const [BR4_OUT, setBR4_OUT] = useState("");
+  const [PD_IN, setPD_IN] = useState("");
+  const [PD_OUT, setPD_OUT] = useState("");
+  const [OT_IN, setOT_IN] = useState("");
+  const [OT_OUT, setOT_OUT] = useState("");
+  const [PP, setPP] = useState("");
+  const [PD, setPD] = useState("");
+  const [CMA, setCMA] = useState("");
+  const [PDATE, setPDATE] = useState("");
 
-
-    
-
-    const submit = () => {
-      const data = {
-        SHIFT: SHIFT,
-        PT1_IN: PT1_IN,
-        PT1_OUT: PT1_OUT,
-        PT2_IN: PT2_IN,
-        PT2_OUT: PT2_OUT,
-        PT3_IN: PT3_IN,
-        PT3_OUT: PT3_OUT,
-        PT4_IN: PT4_IN,
-        PT4_OUT: PT4_OUT,
-        BR1_IN: BR1_IN,
-        BR1_OUT: BR1_OUT,
-        BR2_IN: BR2_IN,
-        BR2_OUT: BR2_OUT,
-        BR3_IN: BR3_IN,
-        BR3_OUT: BR3_OUT,
-        BR4_IN: BR4_IN,
-        BR4_OUT: BR4_OUT,
-        PD_IN: PD_IN,
-        PD_OUT: PD_OUT,
-        OT_IN: OT_IN,
-        OT_OUT: OT_OUT,
-        PP: PP,
-        PD: PD,
-        CMA: CMA,
-        PDATE: PDATE,
-      };
-  
-    
-  
-      fetch(`http://192.168.101.236:3001/api/post/Inputsche`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => {
-          if (response.status === 200) {
-            alert("success");
-            setIsOpen(false);
-            window.location.reload();
-          } else {
-            throw new Error("Error adding data");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  const submit = () => {
+    const data = {
+      SHIFT: SHIFT,
+      PT1_IN: PT1_IN,
+      PT1_OUT: PT1_OUT,
+      PT2_IN: PT2_IN,
+      PT2_OUT: PT2_OUT,
+      PT3_IN: PT3_IN,
+      PT3_OUT: PT3_OUT,
+      PT4_IN: PT4_IN,
+      PT4_OUT: PT4_OUT,
+      BR1_IN: BR1_IN,
+      BR1_OUT: BR1_OUT,
+      BR2_IN: BR2_IN,
+      BR2_OUT: BR2_OUT,
+      BR3_IN: BR3_IN,
+      BR3_OUT: BR3_OUT,
+      BR4_IN: BR4_IN,
+      BR4_OUT: BR4_OUT,
+      PD_IN: PD_IN,
+      PD_OUT: PD_OUT,
+      OT_IN: OT_IN,
+      OT_OUT: OT_OUT,
+      PP: PP,
+      PD: PD,
+      CMA: CMA,
+      PDATE: PDATE,
     };
 
-
-    function formatDate(dateString) {
-      const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
-      const formattedDate = new Date(dateString).toLocaleDateString('id-ID', options);
-      return formattedDate;
-    }
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('http://localhost:3001/api/get/Inputsche');
-          const jsonData = await response.json();
-          const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
-  
-          setData(latestData);
-        } catch (error) {
-          console.error('Error fetching data:', error);
+    fetch(`http://192.168.101.236:3001/api/post/Inputsche`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("success");
+          setIsOpen(false);
+          window.location.reload();
+        } else {
+          throw new Error("Error adding data");
         }
-      };
-  
-      fetchData();
-    }, []);
-  
-  
-    
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // RESET
+
+  const stop = (value) => {
+    const data = {
+      SHIFT: SHIFT,
+      PT1_IN: PT1_IN,
+      PT1_OUT: PT1_OUT,
+      PT2_IN: PT2_IN,
+      PT2_OUT: PT2_OUT,
+      PT3_IN: PT3_IN,
+      PT3_OUT: PT3_OUT,
+      PT4_IN: PT4_IN,
+      PT4_OUT: PT4_OUT,
+      BR1_IN: BR1_IN,
+      BR1_OUT: BR1_OUT,
+      BR2_IN: BR2_IN,
+      BR2_OUT: BR2_OUT,
+      BR3_IN: BR3_IN,
+      BR3_OUT: BR3_OUT,
+      BR4_IN: BR4_IN,
+      BR4_OUT: BR4_OUT,
+      PD_IN: PD_IN,
+      PD_OUT: PD_OUT,
+      OT_IN: OT_IN,
+      OT_OUT: OT_OUT,
+      PP: PP,
+      PD: PD,
+      CMA: CMA,
+      PDATE: PDATE,
+      VALUE: value,
+    };
+
+    fetch(`http://192.168.101.236:3001/api/post/Inputsche`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Production Berhasil Di Reset");
+          setIsOpen(false);
+          window.location.reload();
+        } else {
+          throw new Error("Error adding data");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  function formatDate(dateString) {
+    const options = { day: "numeric", month: "numeric", year: "numeric" };
+    const formattedDate = new Date(dateString).toLocaleDateString(
+      "id-ID",
+      options
+    );
+    return formattedDate;
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://192.168.101.236:3001/api/get/Inputsche"
+        );
+        const jsonData = await response.json();
+        const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
+
+        setData(latestData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
   };
 
-  
   function updateTime() {
     const interval = setInterval(() => {
       setTime(new Date().toLocaleString());
@@ -158,7 +205,6 @@ const SmtTop = () => {
   useEffect(() => {
     updateTime();
   }, []);
- 
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -170,8 +216,6 @@ const SmtTop = () => {
   const formattedTime = `${currentTime.getDate()}/${
     currentTime.getMonth() + 1
   }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
-
-  
 
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/l.jpg)`,
@@ -390,7 +434,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setPDATE(e.target.value);
-                      }}
+                  }}
                 />
               </div>
               <div className="flex  ">
@@ -409,7 +453,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setSHIFT(e.target.value);
-                      }}
+                  }}
                 />
               </div>
             </div>
@@ -431,7 +475,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setPT1_IN(e.target.value);
-                      }}
+                  }}
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
@@ -442,7 +486,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setPT1_OUT(e.target.value);
-                      }}
+                  }}
                 />
               </div>
             </div>
@@ -464,7 +508,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setPT2_IN(e.target.value);
-                      }}
+                  }}
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
@@ -475,7 +519,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setPT2_OUT(e.target.value);
-                      }}
+                  }}
                 />
               </div>
             </div>
@@ -496,7 +540,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setPT3_IN(e.target.value);
-                      }}
+                  }}
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
@@ -507,7 +551,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setPT3_OUT(e.target.value);
-                      }}
+                  }}
                 />
               </div>
             </div>
@@ -529,7 +573,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setPT4_IN(e.target.value);
-                      }}
+                  }}
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
@@ -540,7 +584,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setPT4_OUT(e.target.value);
-                      }}
+                  }}
                 />
               </div>
             </div>
@@ -562,7 +606,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setBR1_IN(e.target.value);
-                      }}
+                  }}
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
@@ -573,7 +617,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setBR1_OUT(e.target.value);
-                      }}
+                  }}
                 />
               </div>
             </div>
@@ -595,7 +639,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setBR2_IN(e.target.value);
-                      }}
+                  }}
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
@@ -606,7 +650,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setBR2_OUT(e.target.value);
-                      }}
+                  }}
                 />
               </div>
             </div>
@@ -628,7 +672,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setBR3_IN(e.target.value);
-                      }}
+                  }}
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
@@ -639,7 +683,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setBR3_OUT(e.target.value);
-                      }}
+                  }}
                 />
               </div>
             </div>
@@ -661,7 +705,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setBR4_IN(e.target.value);
-                      }}
+                  }}
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
@@ -672,7 +716,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setBR4_OUT(e.target.value);
-                      }}
+                  }}
                 />
               </div>
             </div>
@@ -684,17 +728,17 @@ const SmtTop = () => {
                   for="first_name"
                   class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
                 >
-                  Over Time Time 
+                  Over Time Time
                 </label>
                 <input
                   type="time"
                   id="first_name"
-                  class="ml-4 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  class="ml-7 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="John"
                   required
                   onChange={(e) => {
                     setOT_IN(e.target.value);
-                      }}
+                  }}
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
@@ -705,7 +749,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setOT_OUT(e.target.value);
-                      }}
+                  }}
                 />
               </div>
             </div>
@@ -727,7 +771,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setPD_IN(e.target.value);
-                      }}
+                  }}
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
@@ -738,7 +782,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setPD_OUT(e.target.value);
-                      }}
+                  }}
                 />
               </div>
             </div>
@@ -746,18 +790,18 @@ const SmtTop = () => {
             <div class=" gap-2 mb-6 flex py-2 px-1 ">
               <div className="flex ">
                 <h1>
-              ---------------------------------------------------------------------------------------------
+                  ---------------------------------------------------------------------------------------------
                 </h1>
               </div>
             </div>
-             {/*  Planned Production  */}
-             <div class=" gap-2 mb-4 flex py-2 px-3 ">
+            {/*  Planned Production  */}
+            <div class=" gap-2 mb-4 flex py-2 px-3 ">
               <div className="flex ">
                 <label
                   for="first_name"
                   class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
                 >
-                  Planned Production 
+                  Planned Production
                 </label>
                 <input
                   type="number"
@@ -767,7 +811,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setPP(e.target.value);
-                      }}
+                  }}
                 />
                 <h1 className="mt-3 ml-2">Minutes</h1>
               </div>
@@ -790,7 +834,7 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setPD(e.target.value);
-                      }}
+                  }}
                 />
                 <h1 className="mt-3 ml-2">Minutes</h1>
               </div>
@@ -813,13 +857,11 @@ const SmtTop = () => {
                   required
                   onChange={(e) => {
                     setCMA(e.target.value);
-                      }}
+                  }}
                 />
                 <h1 className="mt-3 ml-2">Minutes</h1>
               </div>
             </div>
-
-
 
             {/* submit */}
             <div class="flex justify-end">
@@ -827,6 +869,7 @@ const SmtTop = () => {
                 type="submit"
                 class=" mb-2 items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-auto"
                 onClick={submit}
+                required
               >
                 Submit
               </button>
@@ -848,80 +891,147 @@ const SmtTop = () => {
                     PRODUCTION TIME PLANNING
                   </h3>
                   {data ? (
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td className="font-bold text-xs">Date : {formatDate(data.PDATE)}</td>
-                        <td className="font-bold text-xs">Shift :  {data.SHIFT} </td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">Planned Production :</td>
-                        <td className="text-sm">{data.PT1_IN} - {data.PT1_OUT}</td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">Break 1:</td>
-                        <td  className="text-sm" >09.45 - 10.00</td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">Production Time 2:</td>
-                        <td  className="text-sm" >10.00 - 12.00</td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">Break 2:</td>
-                        <td  className="text-sm" >12.00 - 13.00</td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">Planned DT:</td>
-                        <td  className="text-sm" >13.00 - 14.00</td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">Production Time 3:</td>
-                        <td  className="text-sm" >14.00 - 15.45</td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">Break 3:</td>
-                        <td  className="text-sm" >15.45 - 16.00</td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">Production Time 4:</td>
-                        <td  className="text-sm" >16.00 - 16.30</td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">Break 4:</td>
-                        <td  className="text-sm" >16.30 - 16.40</td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">Over Time:</td>
-                        <td  className="text-sm" >16.40 - 18.00</td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">--------------------</td>
-                      </tr>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td className="font-bold text-xs">
+                            Date : {formatDate(data.PDATE)}
+                          </td>
+                          <td className="font-bold text-xs">
+                            Shift : {data.SHIFT}{" "}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold text-xs">
+                            Planned Production Time 1 :
+                          </td>
+                          <td className="text-sm">
+                            <span style={{ color: "green" }}>
+                              {data.PT1_IN}
+                            </span>{" "}
+                            -{" "}
+                            <span style={{ color: "red" }}>{data.PT1_OUT}</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold text-xs">Break 1:</td>
+                          <td className="text-sm bg-orange-500 rounded-lg">
+                            {data.BR1_IN} - {data.BR1_OUT}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold text-xs">
+                            Production Time 2:
+                          </td>
+                          <td className="text-sm">
+                          <span style={{ color: "green" }}>
+                              {data.PT2_IN}
+                            </span>{" "}
+                            -{" "}
+                            <span style={{ color: "red" }}>{data.PT2_OUT}</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold text-xs">Break 2:</td>
+                          <td className="text-sm bg-orange-500 rounded-lg">
+                            {data.BR2_IN} - {data.BR2_OUT}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold  text-xs">Planned DT:</td>
+                          <td className="text-sm ">
+                          <span style={{ color: "green" }}>
+                              {data.PD_IN}
+                            </span>{" "}
+                            -{" "}
+                            <span style={{ color: "red" }}>{data.PD_OUT}</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold text-xs">
+                            Production Time 3:
+                          </td>
+                          <td className="text-sm">
+                          <span style={{ color: "green" }}>
+                              {data.PT3_IN}
+                            </span>{" "}
+                            -{" "}
+                            <span style={{ color: "red" }}>{data.PT3_OUT}</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold text-xs">Break 3:</td>
+                          <td className="text-sm bg-orange-500 rounded-lg">
+                            {data.BR3_IN} - {data.BR3_OUT}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold text-xs">
+                            Production Time 4:
+                          </td>
+                          <td className="text-sm">
+                          <span style={{ color: "green" }}>
+                              {data.PT4_IN}
+                            </span>{" "}
+                            -{" "}
+                            <span style={{ color: "red" }}>{data.PT4_OUT}</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold text-xs">Break 4:</td>
+                          <td className="text-sm bg-orange-500 rounded-lg">
+                            {data.BR4_IN} - {data.BR4_OUT}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold text-xs">Over Time:</td>
+                          <td className="text-sm">
+                          <span style={{ color: "green" }}>
+                              {data.OT_IN}
+                            </span>{" "}
+                            -{" "}
+                            <span style={{ color: "red" }}>{data.OT_OUT}</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold text-xs">
+                            --------------------
+                          </td>
+                        </tr>
 
-                       <tr>
-                        <td className="font-bold text-xs">Planned Production :</td>
-                        <td  className="text-sm" >525 minutes</td>
-                      </tr>
+                        <tr>
+                          <td className="font-bold text-xs">
+                            Planned Production :
+                          </td>
+                          <td className="text-sm">{data.PP} Minutes</td>
+                        </tr>
 
-                      <tr>
-                        <td className="font-bold text-xs">Planned Downtime :</td>
-                        <td  className="text-sm" >: 60 minutes</td>
-                      </tr>
+                        <tr>
+                          <td className="font-bold text-xs">
+                            Planned Downtime :
+                          </td>
+                          <td className="text-sm">{data.PD} Minutes</td>
+                        </tr>
 
-                      <tr>
-                        <td className="font-bold text-xs">Change Model Allocation :</td>
-                        <td  className="text-sm" >15 minutes</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                        <tr>
+                          <td className="font-bold text-xs">
+                            Change Model Allocation :
+                          </td>
+                          <td className="text-sm">{data.CMA} Minutes</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   ) : (
                     <p>Loading...</p>
-                    )}
+                  )}
                   <div className="pt-3">
-                          <button className="bg-red-500 hover:bg-red-700 text-white text-xs font-bold py-2 px-4 rounded">
-                            STOP PRODUCTION TIME PLANNING
-                          </button>
-                        </div>
+                    <button
+                      className="bg-red-500 hover:bg-red-700 text-white text-xs font-bold py-2 px-4 rounded"
+                      onClick={() => stop("NULL")}
+                    >
+                      STOP PRODUCTION
+                    </button>
+                  </div>
                 </div>
               </div>
             </li>

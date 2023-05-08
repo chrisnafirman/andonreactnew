@@ -32,6 +32,10 @@ import SmtBot from "./components/Line1/SmtBot.jsx";
 import SmtBE from "./components/Line1/SmtBE.jsx";
 import Inputsche from "./components/Leader/Inputsche.jsx"
 
+import NETWORK from "./components/Network/Network.jsx"
+import RequestNetwork from "./components/Network/RequestNetwork.jsx"
+import ReturnNetwork from "./components/Network/ReturnNetwork.jsx"
+
 
 function App() {
   return (
@@ -68,6 +72,12 @@ function App() {
         <Route path="SmtBot" element={<SmtBot/>}/>
         <Route path="SmtBE" element={<SmtBE/>}/>
         <Route path="Inputsche" element={<Inputsche/>}/>
+
+
+        <Route path="Network" element={<NETWORK/>}/>
+        <Route path="RequestNetwork" element={<RequestNetwork/>}/>
+        <Route path="ReturnNetwork" element={<ReturnNetwork/>}/>
+        
       </Routes>
     </>
   );

@@ -13,7 +13,7 @@ const database = firebase.database();
 
 const Andonline1 = () => {
   const [mesin, setMesin] = useState("");
-  const [line, setLine] = useState("");
+  const [Line, setLine] = useState("SMT LINE 1");
   const [nama, setNama] = useState("");
   const [area, setArea] = useState("");
   const [station, setStation] = useState("");
@@ -22,15 +22,66 @@ const Andonline1 = () => {
   const [prevStatus, setPrevStatus] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [data, setData] = useState(null);
 
-  // popup 1
-
+  // popup form 1
   const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
+  const [isOpenNetwork, setIsOpenNetwork] = useState(false);
+
   const [selectedStatus, setSelectedStatus] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [NpkPIC, setNpkPIC] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
+
+  // schedule
+  const [SHIFT, setSHIFT] = useState("");
+  const [PT1_IN, setPT1_IN] = useState("");
+  const [PT1_OUT, setPT1_OUT] = useState("");
+  const [PT2_IN, setPT2_IN] = useState("");
+  const [PT2_OUT, setPT2_OUT] = useState("");
+  const [PT3_IN, setPT3_IN] = useState("");
+  const [PT3_OUT, setPT3_OUT] = useState("");
+  const [PT4_IN, setPT4_IN] = useState("");
+  const [PT4_OUT, setPT4_OUT] = useState("");
+  const [BR1_IN, setBR1_IN] = useState("");
+  const [BR1_OUT, setBR1_OUT] = useState("");
+  const [BR2_IN, setBR2_IN] = useState("");
+  const [BR2_OUT, setBR2_OUT] = useState("");
+  const [BR3_IN, setBR3_IN] = useState("");
+  const [BR3_OUT, setBR3_OUT] = useState("");
+  const [BR4_IN, setBR4_IN] = useState("");
+  const [BR4_OUT, setBR4_OUT] = useState("");
+  const [PD_IN, setPD_IN] = useState("");
+  const [PD_OUT, setPD_OUT] = useState("");
+  const [OT_IN, setOT_IN] = useState("");
+  const [OT_OUT, setOT_OUT] = useState("");
+  const [PP, setPP] = useState("");
+  const [PD, setPD] = useState("");
+  const [CMA, setCMA] = useState("");
+  const [PDATE, setPDATE] = useState("");
+
+  // Status
+  const [status, setStatus] = useState("");
+  const [network, setStatusNetwork] = useState("");
+  const [electricity, setStatusElectricity] = useState("");
+  const [aircomp, setStatusAircomp] = useState("");
+  const [shorcomp, setStatusShorcomp] = useState("");
+  const [shorbox, setStatusShorbox] = useState("");
+  const [overtrial, setStatusOvertrial] = useState("");
+  const [overchange, setStatusOverchange] = useState("");
+
+  //BACKGROUND / WARNA KOTAK
+  const [backgroundColor, setBackgroundColor] = useState("");
+  const [backgroundColorNetwork, setBackgroundColorNetwork] = useState("");
+  const [backgroundColorElectricity, setBackgroundColorElectricity] =
+    useState("");
+  const [backgroundColorAircomp, setBackgroundColorAircomp] = useState("");
+  const [backgroundColorShorcomp, setBackgroundColorShorcomp] = useState("");
+  const [backgroundColorShorbox, setBackgroundColorShorbox] = useState("");
+  const [backgroundColorOvertrial, setBackgroundColorOvertrial] = useState("");
+  const [backgroundColorOverchange, setBackgroundColorOverchange] =
+    useState("");
 
   /// Purchasing
   const namaList = [
@@ -44,14 +95,6 @@ const Andonline1 = () => {
 
   // Area Station
 
-  const [status, setStatus] = useState("");
-  const [desteckerTop, setStatusDesteckerTop] = useState("");
-
-  //
-  const [backgroundColorDesteckerTop, setBackgroundColorDesteckerTop] =
-    useState("");
-  const [backgroundColor, setBackgroundColor] = useState("");
-
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
@@ -62,79 +105,79 @@ const Andonline1 = () => {
     ref.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatus(data);
-      if (data === "Damage") {
-        const audio = new Audio("Sound.mp3");
-        audio.autoplay = true;
-        audio.play();
+      // if (data === "Damage") {
+      //   const audio = new Audio("Sound.mp3");
+      //   audio.autoplay = true;
+      //   audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
-              const text =
-                "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-              navigator.clipboard
-                .writeText(text)
-                .then(() => {
-                  const botToken =
-                    "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
-                  const chatIds = [1563609464, 6019720343, -692863121];
-                  const message =
-                    "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakukan Perbaikan";
-                  chatIds.forEach((chatId) => {
-                    fetch(
-                      `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
-                    )
-                      .then((response) => {
-                        if (!response.ok) {
-                          throw new Error("Error sending telegram message");
-                        }
-                      })
-                      .catch((error) => {
-                        console.error(error);
-                      });
-                  });
-                })
-                .catch((error) => {
-                  console.error(error);
-                });
-            } else if (permissionStatus.state === "prompt") {
-              permissionStatus.onchange = () => {
-                if (permissionStatus.state === "granted") {
-                  const text =
-                    "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-                  navigator.clipboard
-                    .writeText(text)
-                    .then(() => {
-                      const botToken =
-                        "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
-                      const chatIds = [1563609464, 6019720343, -692863121];
-                      const message =
-                        "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-                      chatIds.forEach((chatId) => {
-                        fetch(
-                          `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
-                        )
-                          .then((response) => {
-                            if (!response.ok) {
-                              throw new Error("Error sending telegram message");
-                            }
-                          })
-                          .catch((error) => {
-                            console.error(error);
-                          });
-                      });
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                }
-              };
-            } else {
-              // Izin ditolak
-            }
-          });
-      }
+      //   navigator.permissions
+      //     .query({ name: "clipboard-write" })
+      //     .then((permissionStatus) => {
+      //       if (permissionStatus.state === "granted") {
+      //         const text =
+      //           "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
+      //         navigator.clipboard
+      //           .writeText(text)
+      //           .then(() => {
+      //             const botToken =
+      //               "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
+      //             const chatIds = [1563609464, 6019720343, -692863121];
+      //             const message =
+      //               "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakukan Perbaikan";
+      //             chatIds.forEach((chatId) => {
+      //               fetch(
+      //                 `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
+      //               )
+      //                 .then((response) => {
+      //                   if (!response.ok) {
+      //                     throw new Error("Error sending telegram message");
+      //                   }
+      //                 })
+      //                 .catch((error) => {
+      //                   console.error(error);
+      //                 });
+      //             });
+      //           })
+      //           .catch((error) => {
+      //             console.error(error);
+      //           });
+      //       } else if (permissionStatus.state === "prompt") {
+      //         permissionStatus.onchange = () => {
+      //           if (permissionStatus.state === "granted") {
+      //             const text =
+      //               "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
+      //             navigator.clipboard
+      //               .writeText(text)
+      //               .then(() => {
+      //                 const botToken =
+      //                   "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
+      //                 const chatIds = [1563609464, 6019720343, -692863121];
+      //                 const message =
+      //                   "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
+      //                 chatIds.forEach((chatId) => {
+      //                   fetch(
+      //                     `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
+      //                   )
+      //                     .then((response) => {
+      //                       if (!response.ok) {
+      //                         throw new Error("Error sending telegram message");
+      //                       }
+      //                     })
+      //                     .catch((error) => {
+      //                       console.error(error);
+      //                     });
+      //                 });
+      //               })
+      //               .catch((error) => {
+      //                 console.error(error);
+      //               });
+      //           }
+      //         };
+      //       } else {
+      //         // Izin ditolak
+      //       }
+      //     });
+      // }
     });
 
     const ref2 = firebase.database().ref("Mesin/NamaMesin");
@@ -143,11 +186,11 @@ const Andonline1 = () => {
       setMesin(data);
     });
 
-    const ref3 = firebase.database().ref("Mesin/LineMesin");
-    ref3.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setLine(data);
-    });
+    // const ref3 = firebase.database().ref("Mesin/LineMesin");
+    // ref3.on("value", (snapshot) => {
+    //   const data = snapshot.val();
+    //   setLine(data);
+    // });
 
     const ref4 = firebase.database().ref("Mesin/Nama");
     ref4.on("value", (snapshot) => {
@@ -173,11 +216,46 @@ const Andonline1 = () => {
       setStation(data);
     });
 
-    // TOP
-    const ref8 = firebase.database().ref("AreaLine1TOP/Destecker");
+    const ref8 = firebase.database().ref("SMTLine1/Network");
     ref8.on("value", (snapshot) => {
       const data = snapshot.val();
-      updatedesteckerTop(data);
+      updateNetwork(data);
+    });
+
+    const ref9 = firebase.database().ref("SMTLine1/Electricity");
+    ref9.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateElectricity(data);
+    });
+
+    const ref10 = firebase.database().ref("SMTLine1/Aircomp");
+    ref10.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateAircomp(data);
+    });
+
+    const ref11 = firebase.database().ref("SMTLine1/Shorcomp");
+    ref11.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateShorcomp(data);
+    });
+
+    const ref12 = firebase.database().ref("SMTLine1/Shorbox");
+    ref12.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateShorbox(data);
+    });
+
+    const ref13 = firebase.database().ref("SMTLine1/Overtrial");
+    ref13.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateOvertrial(data);
+    });
+
+    const ref14 = firebase.database().ref("SMTLine1/Overchangemodel");
+    ref14.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateOverchange(data);
     });
 
     return () => {};
@@ -238,7 +316,7 @@ const Andonline1 = () => {
         body: JSON.stringify({
           status: prevStatus,
           mesin: mesin,
-          line: line,
+          Line: Line,
           timer: timer,
         }),
       })
@@ -247,7 +325,7 @@ const Andonline1 = () => {
         .catch((error) => console.error(error));
     }
     setPrevStatus(status);
-  }, [status, mesin, line, timer, prevStatus]);
+  }, [status, mesin, Line, timer, prevStatus]);
 
   // ------
 
@@ -274,9 +352,142 @@ const Andonline1 = () => {
     );
   };
 
-  const updatedesteckerTop = (data) => {
-    setStatusDesteckerTop(data);
-    setBackgroundColorDesteckerTop(
+  // Background Network
+  const updateNetwork = (data) => {
+    setStatusNetwork(data);
+    setBackgroundColorNetwork(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Down"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  // Background Electricity
+  const updateElectricity = (data) => {
+    setStatusElectricity(data);
+    setBackgroundColorElectricity(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  // Background Aircomp
+  const updateAircomp = (data) => {
+    setStatusAircomp(data);
+    setBackgroundColorAircomp(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  // Background Shorcomp
+  const updateShorcomp = (data) => {
+    setStatusShorcomp(data);
+    setBackgroundColorShorcomp(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  // Background Shorbox
+  const updateShorbox = (data) => {
+    setStatusShorbox(data);
+    setBackgroundColorShorbox(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  // Background OverTrial
+  const updateOvertrial = (data) => {
+    setStatusOvertrial(data);
+    setBackgroundColorOvertrial(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  // Background Overchangemodel
+  const updateOverchange = (data) => {
+    setStatusOverchange(data);
+    setBackgroundColorOverchange(
       data === "Go"
         ? "#31A207"
         : data === "Repair"
@@ -314,7 +525,7 @@ const Andonline1 = () => {
       NpkPIC: NpkPIC,
       MachineName: mesin,
       MachineArea: area,
-      MachineLine: line,
+      MachineLine: Line,
       MachineStation: station,
       Kerusakan: Kerusakan,
     };
@@ -343,6 +554,66 @@ const Andonline1 = () => {
           alert("success");
           setIsOpen(false);
           window.location.reload();
+        } else {
+          throw new Error("Error adding data");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // fungsi  schedule
+  function formatDate(dateString) {
+    const options = { day: "numeric", month: "numeric", year: "numeric" };
+    const formattedDate = new Date(dateString).toLocaleDateString(
+      "id-ID",
+      options
+    );
+    return formattedDate;
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://192.168.101.236:3001/api/get/Inputsche"
+        );
+        const jsonData = await response.json();
+        const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
+
+        setData(latestData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Submit Network
+
+  const SubmitNetwork = (event) => {
+    const data = {
+      NamaPIC: NamaPIC,
+      Line: Line,
+      Kerusakan: Kerusakan,
+    };
+
+    fetch(`http://192.168.101.236:3001/api/post/network`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Permintaan Bantuan Network Segera Di Proses");
+          firebase.database().ref("SMTLine1/Network").set("Down");
+          setIsOpenNetwork(false);
+          window.location.reload();
+          event.preventDefault();
         } else {
           throw new Error("Error adding data");
         }
@@ -534,7 +805,7 @@ const Andonline1 = () => {
           </li>
           <li class="w-60 sm:w-36 lg:w-32">
             <a
-              href="#"
+              href="Inputsche"
               class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
             >
               SMT LINE 2
@@ -631,8 +902,8 @@ const Andonline1 = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <div
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
+                    style={{ backgroundColor: backgroundColorElectricity }}
+                    value={electricity}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -648,17 +919,20 @@ const Andonline1 = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <div
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
+                  <button
+                    style={{ backgroundColor: backgroundColorNetwork }}
+                    value={network}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                    onClick={
+                      network === "Go" ? () => setIsOpenNetwork(true) : null
+                    }
                   >
                     <header class="px-5 py-4  ">
                       <div class="font-semibold text-center text-white">
                         NETWORK
                       </div>
                     </header>
-                  </div>
+                  </button>
                 </div>
               </div>
             </section>
@@ -667,8 +941,8 @@ const Andonline1 = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <div
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
+                    style={{ backgroundColor: backgroundColorAircomp }}
+                    value={aircomp}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -685,9 +959,9 @@ const Andonline1 = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <div
-                    style={{ backgroundColor: backgroundColor }}
+                    // style={{ backgroundColor: backgroundColor }}
                     value={status}
-                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                    class="w-full max-w-sm   bg-slate-700 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="font-semibold text-center text-white">
@@ -714,8 +988,8 @@ const Andonline1 = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <div
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
+                    style={{ backgroundColor: backgroundColorShorcomp }}
+                    value={shorcomp}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -732,8 +1006,8 @@ const Andonline1 = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <div
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
+                    style={{ backgroundColor: backgroundColorShorbox }}
+                    value={shorbox}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -750,8 +1024,8 @@ const Andonline1 = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <div
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
+                    style={{ backgroundColor: backgroundColorOvertrial }}
+                    value={overtrial}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -768,8 +1042,8 @@ const Andonline1 = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <div
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
+                    style={{ backgroundColor: backgroundColorOverchange }}
+                    value={overchange}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -958,7 +1232,7 @@ const Andonline1 = () => {
                             placeholder="ICT"
                             name="MachineName"
                           >
-                            {line}
+                            {Line}
                           </span>
                         </div>
                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -1123,57 +1397,111 @@ const Andonline1 = () => {
                     </div>
 
                     <div className="bg-white px-4 w-96 py-6 sm:p-6 ml-24 rounded-lg shadow-md">
-                      <h3 className="text-lg font-bold mb-4">
+                      <h3 className="text-lg font-bold mb-2">
                         PRODUCTION TIME PLANNING
                       </h3>
-                      <h3 className="text-lg font-bold mb-4">26-08-20</h3>
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td className="font-bold">Shift 2</td>
-                          </tr>
-                          <tr>
-                            <td className="font-bold">Prod time 1:</td>
-                            <td>07.00 - 09.45</td>
-                          </tr>
-                          <tr>
-                            <td className="font-bold">Break 1:</td>
-                            <td>09.45 - 10.00</td>
-                          </tr>
-                          <tr>
-                            <td className="font-bold">Prod time 2:</td>
-                            <td>10.00 - 12.00</td>
-                          </tr>
-                          <tr>
-                            <td className="font-bold">Break 2:</td>
-                            <td>12.00 - 13.00</td>
-                          </tr>
-                          <tr>
-                            <td className="font-bold">Planned DT:</td>
-                            <td>13.00 - 14.00</td>
-                          </tr>
-                          <tr>
-                            <td className="font-bold">Prod time 3:</td>
-                            <td>14.00 - 15.45</td>
-                          </tr>
-                          <tr>
-                            <td className="font-bold">Break 3:</td>
-                            <td>15.45 - 16.00</td>
-                          </tr>
-                          <tr>
-                            <td className="font-bold">Prod time 4:</td>
-                            <td>16.00 - 16.30</td>
-                          </tr>
-                          <tr>
-                            <td className="font-bold">Break 4:</td>
-                            <td>16.30 - 16.40</td>
-                          </tr>
-                          <tr>
-                            <td className="font-bold">Over Time:</td>
-                            <td>16.40 - 18.00</td>
-                          </tr>
-                        </tbody>
-                      </table>
+
+                      {data ? (
+                        <table>
+                          <h3 className="flex text-base font-bold mb-2">
+                            Date:{" "}
+                            <h1 className="ml-2 font-normal">
+                              {formatDate(data.PDATE)}
+                            </h1>
+                          </h3>
+                          <tbody>
+                            <tr>
+                              <td className="font-bold">Shift: {data.SHIFT}</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Prod time 1:</td>
+                              <span style={{ color: "green" }}>
+                                {data.PT1_IN}
+                              </span>{" "}
+                              -{" "}
+                              <span style={{ color: "red" }}>
+                                {data.PT1_OUT}
+                              </span>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Break 1:</td>
+                              <td className="bg-orange-500 rounded-lg">
+                                {data.BR1_IN} - {data.BR1_OUT}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Prod time 2:</td>
+                              <span style={{ color: "green" }}>
+                                {data.PT2_IN}
+                              </span>{" "}
+                              -{" "}
+                              <span style={{ color: "red" }}>
+                                {data.PT2_OUT}
+                              </span>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Break 2:</td>
+                              <td className="bg-orange-500 rounded-lg">
+                                {data.BR2_IN} - {data.BR2_OUT}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Planned DT:</td>
+                              <span style={{ color: "green" }}>
+                                {data.PD_IN}
+                              </span>{" "}
+                              -{" "}
+                              <span style={{ color: "red" }}>
+                                {data.PD_OUT}
+                              </span>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Prod time 3:</td>
+                              <span style={{ color: "green" }}>
+                                {data.PT3_IN}
+                              </span>{" "}
+                              -{" "}
+                              <span style={{ color: "red" }}>
+                                {data.PT3_OUT}
+                              </span>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Break 3:</td>
+                              <td className="bg-orange-500 rounded-lg">
+                                {data.BR3_IN} - {data.BR3_OUT}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Prod time 4:</td>
+                              <span style={{ color: "green" }}>
+                                {data.PT4_IN}
+                              </span>{" "}
+                              -{" "}
+                              <span style={{ color: "red" }}>
+                                {data.PT4_OUT}
+                              </span>
+                            </tr>
+                            <tr>
+                              <td className="font-bold ">Break 4:</td>
+                              <td className="bg-orange-500 rounded-lg">
+                                {data.BR4_IN} - {data.BR4_OUT}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Over Time:</td>
+                              <span style={{ color: "green" }}>
+                                {data.OT_IN}
+                              </span>{" "}
+                              -{" "}
+                              <span style={{ color: "red" }}>
+                                {data.OT_OUT}
+                              </span>
+                            </tr>
+                          </tbody>
+                        </table>
+                      ) : (
+                        <p>Loading...</p>
+                      )}
                     </div>
 
                     <div className="bg-white px-4 py-6 sm:p-6 ml-24 rounded-lg shadow-md">
@@ -1213,6 +1541,125 @@ const Andonline1 = () => {
           </>
         ) : null}
       </td>
+
+      {isOpenNetwork ? (
+        <>
+          <div className="fixed z-10 inset-0 overflow-y-auto">
+            <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+              <div className="fixed inset-0 transition-opacity">
+                <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+              </div>
+              <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+              <div
+                className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-headline"
+              >
+                <div className="sm:flex sm:items-start">
+                  <form>
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <div class="p-6 text-center">
+                        <svg
+                          aria-hidden="true"
+                          class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
+                        <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-normal text-gray-500 dark:text-gray-400">
+                          Apakah Anda Yakin Akan Meminta Bantuan Team Network?
+                        </h3>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-first-name"
+                            >
+                              Masukan Nama Anda
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              required
+                              onChange={(e) => {
+                                setNamaPIC(e.target.value);
+                              }}
+                            ></input>
+                          </div>
+                          <div class="w-full md:w-1/2 px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                              Line
+                            </label>
+                            <div
+                              type="text"
+                              class="appearance-none block w-full  font-bold bg-gray-200 text-orange-400 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              required
+                              value={Line}
+                            >
+                              {Line}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Problem
+                          </label>
+                          <input
+                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            id="grid-password"
+                            type="text"
+                            placeholder=""
+                            name="Kerusakan"
+                            onChange={(e) => {
+                              setKerusakan(e.target.value);
+                            }}
+                            required
+                          />
+                          <p class="text-gray-600 text-xs mb-2 italic">
+                            Problem
+                          </p>
+                        </div>
+                        <button
+                          data-modal-hide="popup-modal"
+                          type="button"
+                          onClick={SubmitNetwork}
+                          class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                        >
+                          Yes, I'm sure
+                        </button>
+                        <button
+                          data-modal-hide="popup-modal"
+                          type="button"
+                          onClick={() => setIsOpenNetwork(false)}
+                          class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                        >
+                          No, cancel
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+        </>
+      ) : null}
     </body>
   );
 };

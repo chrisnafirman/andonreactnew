@@ -267,6 +267,27 @@ app.post("/api/post/Inputsche", (req, res) => {
 
 
 
+// SMT LINE 1
+///post To network
+
+app.post("/api/post/network", (req, res) => {
+  const { NamaPIC, Line, Kerusakan } = req.body;
+  
+  db.query(
+    "INSERT INTO network (Nama, Line, Problem) VALUES (?, ?, ?)",
+    [NamaPIC, Line, Kerusakan ],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been added successfully' });
+    }
+  );
+});
+
+
+
 
 app.get("/api/get/Inputsche", (req, res) => {
   const sqlSelect = "SELECT * FROM scheprod";
