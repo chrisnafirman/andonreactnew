@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
-import Line1 from "./Line1";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
@@ -14,13 +13,10 @@ const database = firebase.database();
 
 const SmtTop= () => {
   const [mesin, setMesin] = useState("");
-    const [nama, setNama] = useState("");
-  const [Station, setStation] = useState("");
-
-  const [Line, setLine] = useState("SMT LINE 1");
-  const [Area, setArea] = useState("SMT TOP");
-  const[Destacker,setDestecker] = useState("Destacker");
-
+  const [line, setLine] = useState("");
+  const [nama, setNama] = useState("");
+  const [area, setArea] = useState("");
+  const [station, setStation] = useState("");
   const [timer, setTimer] = useState("");
   const [time, setTime] = useState(new Date().toLocaleString());
   const [prevStatus, setPrevStatus] = useState("");
@@ -29,7 +25,7 @@ const SmtTop= () => {
 
   // popup 1
 
-  const [isOpenDestacker, setIsOpenDestacker] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
@@ -147,7 +143,12 @@ const SmtTop= () => {
       setMesin(data);
     });
 
- 
+    const ref3 = firebase.database().ref("Mesin/LineMesin");
+    ref3.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setLine(data);
+    });
+
     const ref4 = firebase.database().ref("Mesin/Nama");
     ref4.on("value", (snapshot) => {
       const data = snapshot.val();
@@ -160,7 +161,18 @@ const SmtTop= () => {
       setTimer(data);
     });
 
- 
+    const ref6 = firebase.database().ref("Mesin/Area");
+    ref6.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setArea(data);
+    });
+
+    const ref7 = firebase.database().ref("Mesin/Station");
+    ref7.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setStation(data);
+    });
+
     // TOP
     const ref8 = firebase.database().ref("AreaLine1TOP/Destecker");
     ref8.on("value", (snapshot) => {
@@ -226,7 +238,7 @@ const SmtTop= () => {
         body: JSON.stringify({
           status: prevStatus,
           mesin: mesin,
-          Line: Line,
+          line: line,
           timer: timer,
         }),
       })
@@ -235,7 +247,7 @@ const SmtTop= () => {
         .catch((error) => console.error(error));
     }
     setPrevStatus(status);
-  }, [status, mesin, Line, timer, prevStatus]);
+  }, [status, mesin, line, timer, prevStatus]);
 
   // ------
 
@@ -301,9 +313,9 @@ const SmtTop= () => {
       NamaPIC: NamaPIC,
       NpkPIC: NpkPIC,
       MachineName: mesin,
-      MachineArea: Area,
-      MachineLine: Line,
-      MachineStation: Station,
+      MachineArea: area,
+      MachineLine: line,
+      MachineStation: station,
       Kerusakan: Kerusakan,
     };
 
@@ -329,7 +341,7 @@ const SmtTop= () => {
       .then((response) => {
         if (response.status === 200) {
           alert("success");
-          setIsOpenDestacker(false);
+          setIsOpen(false);
           window.location.reload();
         } else {
           throw new Error("Error adding data");
@@ -549,7 +561,7 @@ const SmtTop= () => {
                   <button
                        style={{ backgroundColor: backgroundColor }}
                        value={status}
-                       onClick={() => setIsOpenDestacker(true)}
+                       onClick={() => setIsOpen(true)}
                        disabled={status !== "Go"}
                        class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
@@ -569,7 +581,7 @@ const SmtTop= () => {
                   <button
                         style={{ backgroundColor: backgroundColor }}
                         value={status}
-                        onClick={() => setIsOpenDestacker(true)}
+                        onClick={() => setIsOpen(true)}
                         disabled={status !== "Go"}
                         class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
@@ -589,7 +601,7 @@ const SmtTop= () => {
                   <button
                        style={{ backgroundColor: backgroundColor }}
                        value={status}
-                       onClick={() => setIsOpenDestacker(true)}
+                       onClick={() => setIsOpen(true)}
                        disabled={status !== "Go"}
                        class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
@@ -609,7 +621,7 @@ const SmtTop= () => {
                   <button
                        style={{ backgroundColor: backgroundColor }}
                     value={status}
-                    onClick={() => setIsOpenDestacker(true)}
+                    onClick={() => setIsOpen(true)}
                     disabled={status !== "Go"}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
@@ -634,7 +646,7 @@ const SmtTop= () => {
                   <button
                         style={{ backgroundColor: backgroundColor }}
                         value={status}
-                        onClick={() => setIsOpenDestacker(true)}
+                        onClick={() => setIsOpen(true)}
                         disabled={status !== "Go"}
                         class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
@@ -654,7 +666,7 @@ const SmtTop= () => {
                   <button
                       style={{ backgroundColor: backgroundColor }}
                       value={status}
-                      onClick={() => setIsOpenDestacker(true)}
+                      onClick={() => setIsOpen(true)}
                       disabled={status !== "Go"}
                       class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
@@ -674,7 +686,7 @@ const SmtTop= () => {
                   <button
                     style={{ backgroundColor: backgroundColor }}
                     value={status}
-                    onClick={() => setIsOpenDestacker(true)}
+                    onClick={() => setIsOpen(true)}
                     disabled={status !== "Go"}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
@@ -694,7 +706,7 @@ const SmtTop= () => {
                   <button
                        style={{ backgroundColor: backgroundColor }}
                        value={status}
-                       onClick={() => setIsOpenDestacker(true)}
+                       onClick={() => setIsOpen(true)}
                        disabled={status !== "Go"}
                        class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
@@ -727,8 +739,8 @@ const SmtTop= () => {
                   </table>
                 </div> */}
 
-      {/* POP UP  DESTECKER*/}
-      {isOpenDestacker ? (
+      {/* POP UP  1*/}
+      {isOpen ? (
         <>
           <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -757,30 +769,102 @@ const SmtTop= () => {
                         <span>Request</span>
                       </div>
                       <div class="flex flex-wrap -mx-3 ">
-                        <div class="w-full px-1">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                           <label
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for="grid-first-name"
                           >
                             Masukan Nama Anda
                           </label>
-                          <input
-                          type="text"
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                          <select
+                            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                             name="NamaPIC"
                             required
                             onChange={(e) => {
                               setNamaPIC(e.target.value);
-                              
+                              setNpkPIC(
+                                npkList[namaList.indexOf(e.target.value)]
+                              );
                             }}
                           >
-                          </input>
+                            <option value="">- -Pilih Nama Anda- -</option>
+                            {namaList.map((nama, index) => (
+                              <option value={nama} key={index}>
+                                {nama}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            NPK
+                          </label>
+                          <input
+                            class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            type="number"
+                            placeholder="0000"
+                            name="NpkPIC"
+                            value={NpkPIC}
+                            readOnly
+                          />
                         </div>
                       </div>
 
                       {/*Status*/}
-        
+                      <div className="mb-4">
+                        <label
+                          className="block text-gray-700 font-bold mb-2"
+                          htmlFor="Depart To"
+                        >
+                          Depart To
+                        </label>
+                        <div className="relative">
+                          <select
+                            className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            id="Depart To"
+                            name="Depart To"
+                            value={selectedStatus}
+                            onChange={(e) => setSelectedStatus(e.target.value)}
+                            required
+                            defaultValue={""}
+                          >
+                            <option value="">-- Pilih Depart --</option>
+                            <option value="PPIC">PPIC</option>
+                            <option value="Purchasing">Purchasing</option>
+                            <option value="MP&L">MP&L</option>
+                            <option value="Accounting">Accounting</option>
+                            <option value="Engineering & RND">
+                              Engineering & RND
+                            </option>
+                            <option value="Maintenance & IT">
+                              Maintenance & IT
+                            </option>
+                            <option value="QA">QA</option>
+                            <option value="QC">QC</option>
+                            <option value="Opex">Opex</option>
+                            <option value="HRGA & EHS">HRGA & EHS</option>
+                          </select>
+                        </div>
+                      </div>
                       <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                          <label
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            for="grid-city"
+                          >
+                            Machine Name
+                          </label>
+                          <span
+                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            id="grid-city"
+                            type="text"
+                            placeholder="ICT"
+                            name="MachineName"
+                          >
+                            {mesin}
+                          </span>
+                        </div>
+
                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                           <label
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -795,7 +879,7 @@ const SmtTop= () => {
                             placeholder="ICT"
                             name="MachineName"
                           >
-                            {Area}
+                            {area}
                           </span>
                         </div>
                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -812,7 +896,7 @@ const SmtTop= () => {
                             placeholder="ICT"
                             name="MachineName"
                           >
-                           {Line}
+                            {line}
                           </span>
                         </div>
                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -829,12 +913,10 @@ const SmtTop= () => {
                             placeholder="ICT"
                             name="MachineName"
                           >
-                            {Destacker}
+                            {station}
                           </span>
                         </div>
                       </div>
-                    
-                  
                       <div class="flex flex-wrap -mx-3 ">
                         <div class="w-full px-1">
                           <label
@@ -862,7 +944,7 @@ const SmtTop= () => {
                       <div className="flex justify-end">
                         <button
                           className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                          onClick={() => setIsOpenDestacker(false)}
+                          onClick={() => setIsOpen(false)}
                         >
                           Batal
                         </button>
@@ -884,11 +966,6 @@ const SmtTop= () => {
           <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
         </>
       ) : null}
-
-
-
-
-      {/* ISA */}
       <td class="">
         {isOpen2 ? (
           <>

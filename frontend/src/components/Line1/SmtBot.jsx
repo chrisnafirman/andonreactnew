@@ -558,17 +558,19 @@ const SmtBot= () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <div
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
-                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                  <button
+                      style={{ backgroundColor: backgroundColor }}
+                      value={status}
+                      onClick={() => setIsOpen(true)}
+                      disabled={status !== "Go"}
+                      class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="font-semibold text-center text-white">
                       PRINTER BOT
                       </div>
                     </header>
-                  </div>
+                  </button>
                 </div>
               </div>
             </section>
@@ -576,17 +578,19 @@ const SmtBot= () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <div
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
-                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                  <button
+                      style={{ backgroundColor: backgroundColor }}
+                      value={status}
+                      onClick={() => setIsOpen(true)}
+                      disabled={status !== "Go"}
+                      class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="font-semibold text-center text-white">
                       SPI BOT
                       </div>
                     </header>
-                  </div>
+                  </button>
                 </div>
               </div>
             </section>
@@ -594,17 +598,19 @@ const SmtBot= () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <div
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
-                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                  <button
+                     style={{ backgroundColor: backgroundColor }}
+                     value={status}
+                     onClick={() => setIsOpen(true)}
+                     disabled={status !== "Go"}
+                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="font-semibold text-center text-white">
                       PICK & PLACE BOT
                       </div>
                     </header>
-                  </div>
+                  </button>
                 </div>
               </div>
             </section>
@@ -612,17 +618,19 @@ const SmtBot= () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <div
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
-                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                  <button
+                     style={{ backgroundColor: backgroundColor }}
+                     value={status}
+                     onClick={() => setIsOpen(true)}
+                     disabled={status !== "Go"}
+                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="font-semibold text-center text-white">
                       REFLOW BOT
                       </div>
                     </header>
-                  </div>
+                  </button>
                 </div>
               </div>
             </section>
@@ -635,9 +643,11 @@ const SmtBot= () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <div
+                  <button
                     style={{ backgroundColor: backgroundColor }}
                     value={status}
+                    onClick={() => setIsOpen(true)}
+                    disabled={status !== "Go"}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -645,7 +655,7 @@ const SmtBot= () => {
                       AOI BOT
                       </div>
                     </header>
-                  </div>
+                  </button>
                 </div>
               </div>
             </section>
@@ -653,17 +663,19 @@ const SmtBot= () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <div
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
-                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                  <button
+                     style={{ backgroundColor: backgroundColor }}
+                     value={status}
+                     onClick={() => setIsOpen(true)}
+                     disabled={status !== "Go"}
+                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="font-semibold text-center text-white">
                       RVS BOT
                       </div>
                     </header>
-                  </div>
+                  </button>
                 </div>
               </div>
             </section>

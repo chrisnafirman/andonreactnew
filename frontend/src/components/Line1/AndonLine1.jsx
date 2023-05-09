@@ -14,9 +14,12 @@ const database = firebase.database();
 const Andonline1 = () => {
   const [mesin, setMesin] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
+
+  const [Area, setArea] = useState("SMT TOP");
+  const[Destacker,setDestecker] = useState("Destacker");
+
   const [nama, setNama] = useState("");
-  const [area, setArea] = useState("");
-  const [station, setStation] = useState("");
+
   const [timer, setTimer] = useState("");
   const [time, setTime] = useState(new Date().toLocaleString());
   const [prevStatus, setPrevStatus] = useState("");
@@ -25,7 +28,7 @@ const Andonline1 = () => {
   const [data, setData] = useState(null);
 
   // popup form 1
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenOthers, setIsOpenOthers] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [isOpenNetwork, setIsOpenNetwork] = useState(false);
 
@@ -85,13 +88,9 @@ const Andonline1 = () => {
 
   /// Purchasing
   const namaList = [
-    "Agus Sofian Warsito",
-    "Allan Mulyana",
-    "Alwan Luchi",
-    "Ari Ramdani",
-    "Arif Setiawan",
+    "CHRISNA FIRMAN",
   ];
-  const npkList = ["0601", "0686", "0594", "0789", "0214"];
+  const npkList = ["0301"];
 
   // Area Station
 
@@ -204,17 +203,6 @@ const Andonline1 = () => {
       setTimer(data);
     });
 
-    const ref6 = firebase.database().ref("Mesin/Area");
-    ref6.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setArea(data);
-    });
-
-    const ref7 = firebase.database().ref("Mesin/Station");
-    ref7.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setStation(data);
-    });
 
     const ref8 = firebase.database().ref("SMTLine1/Network");
     ref8.on("value", (snapshot) => {
@@ -524,9 +512,9 @@ const Andonline1 = () => {
       NamaPIC: NamaPIC,
       NpkPIC: NpkPIC,
       MachineName: mesin,
-      MachineArea: area,
+      MachineArea: Area,
       MachineLine: Line,
-      MachineStation: station,
+      MachineStation: Destacker,
       Kerusakan: Kerusakan,
     };
 
@@ -552,7 +540,7 @@ const Andonline1 = () => {
       .then((response) => {
         if (response.status === 200) {
           alert("success");
-          setIsOpen(false);
+          setIsOpenOthers(false);
           window.location.reload();
         } else {
           throw new Error("Error adding data");
@@ -635,13 +623,16 @@ const Andonline1 = () => {
       <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
         <div class="flex h-14 items-center justify-between">
           <div class="flex items-center">
+            <a href="/RequestNetwork">
             <div class="flex-shrink-0">
               <img
                 src={process.env.PUBLIC_URL + "/smt.jpeg"}
                 alt="Logo"
                 class="h-6 ml-4 sm:h-9 bg-white rounded-md"
+               
               />
             </div>
+            </a>
           </div>
           <p class="text-gray-500 text-sm">{formattedTime}</p>
         </div>
@@ -649,17 +640,28 @@ const Andonline1 = () => {
 
       <header class="bg-white shadow mb-3">
         <div class="mx-auto max-w-7xl px-4 ">
-          <marquee behavior="scroll" direction="right">
+        <header class="bg-white shadow mb-3">
+        <div class="mx-auto max-w-7xl px-4">
+        <marquee behavior="scroll" direction="right">
             <div class="flex items-center">
               <h1 class="text-xl font-bold tracking-tight text-gray-900">
-                Andon SMT
+               | Andon SMT |
               </h1>
               <h1 class="text-xl font-bold tracking-tight ml-4">
-                <span class="text-black">STATUS:</span>
-                <span class="ml-4 text-green-500">RUNNING</span>
+                <span class="text-black">SMT LINE 1:</span>
+                <span class="ml-4 text-green-500">RUNNING </span>
+                |
               </h1>
+              <h1 class="text-xl font-bold tracking-tight ml-4">
+                <span class="text-black">SMT LINE 2:</span>
+                <span class="ml-4 text-green-500">RUNNING </span>
+                |
+              </h1>
+              
             </div>
           </marquee>
+        </div>
+      </header>
         </div>
       </header>
 
@@ -814,9 +816,11 @@ const Andonline1 = () => {
           <button onClick={() => setIsOpen2(true)} class="w-60 sm:w-36 lg:w-32">
             <a
               href="#"
-              class="inline-block w-full p-4 text-orange-700 bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="inline-block w-full  p-4 text-orange-700  bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
             >
-              ISA
+             <header  className="animate-bounce"><div>
+              ISA</div></header>
+              
             </a>
           </button>
         </ul>
@@ -957,19 +961,21 @@ const Andonline1 = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+              
+                <button onClick={()=> setIsOpenOthers(true)} className="animate-pulse w-72 pt-2 sm:w-48 lg:w-72">
                   <div
                     // style={{ backgroundColor: backgroundColor }}
                     value={status}
-                    class="w-full max-w-sm   bg-slate-700 shadow-lg rounded-xl "
+                    class="w-full max-w-sm  bg-teal-700 shadow-lg rounded-full "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="font-semibold text-center  text-white">
                         OTHERS
                       </div>
                     </header>
+                    
                   </div>
-                </div>
+                </button>
               </div>
             </section>
           </div>
@@ -1076,7 +1082,7 @@ const Andonline1 = () => {
                 </div> */}
 
       {/* POP UP  1*/}
-      {isOpen ? (
+      {isOpenOthers ? (
         <>
           <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -1188,41 +1194,6 @@ const Andonline1 = () => {
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for="grid-city"
                           >
-                            Machine Name
-                          </label>
-                          <span
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-city"
-                            type="text"
-                            placeholder="ICT"
-                            name="MachineName"
-                          >
-                            {mesin}
-                          </span>
-                        </div>
-
-                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                          <label
-                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            for="grid-city"
-                          >
-                            Machine Area
-                          </label>
-                          <span
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-city"
-                            type="text"
-                            placeholder="ICT"
-                            name="MachineName"
-                          >
-                            {area}
-                          </span>
-                        </div>
-                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                          <label
-                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            for="grid-city"
-                          >
                             Machine Line
                           </label>
                           <span
@@ -1235,23 +1206,7 @@ const Andonline1 = () => {
                             {Line}
                           </span>
                         </div>
-                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                          <label
-                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            for="grid-city"
-                          >
-                            Machine Station
-                          </label>
-                          <span
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-city"
-                            type="text"
-                            placeholder="ICT"
-                            name="MachineName"
-                          >
-                            {station}
-                          </span>
-                        </div>
+                       
                       </div>
                       <div class="flex flex-wrap -mx-3 ">
                         <div class="w-full px-1">
@@ -1280,7 +1235,7 @@ const Andonline1 = () => {
                       <div className="flex justify-end">
                         <button
                           className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                          onClick={() => setIsOpen(false)}
+                          onClick={() => setIsOpenOthers(false)}
                         >
                           Batal
                         </button>
@@ -1308,7 +1263,7 @@ const Andonline1 = () => {
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                  <div className="absolute bg-gray-500 opacity-75"></div>
                 </div>
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
                 <div
@@ -1336,11 +1291,11 @@ const Andonline1 = () => {
                       />
                     </svg>
                   </div>
-                  <h2 className="text-lg font-bold mb-4  text-center">
+                  <h2 className="text-lg font-bold   text-center">
                     Production Area: SMT
                   </h2>
                   <div className="bg-white px-4 pt-1 pb-4 flex sm:p-6 sm:pb-4">
-                    <div className="overflow-y-auto max-h-96 w-96">
+                    <div className="overflow-y-auto max-h-96 w-[400px]">
                       <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
                         <h3 className="text-lg font-bold mb-4">
                           Today's Login
@@ -1348,49 +1303,49 @@ const Andonline1 = () => {
                         <div className="ml-6">
                           <p className="mb-2 flex">
                             <span className="font-bold w-40">Leader:</span>
-                            <span className="font-bold ml-4">test</span>
+                            <span className="font-bold ml-4">Chrisna </span>
                           </p>
                           <p className="mb-2 flex">
                             <span className="font-bold w-40">
                               SMT Top Operator:
                             </span>
-                            <span className="font-bold ml-4">test</span>
+                            <span className="font-bold ml-4">Chrisna </span>
                           </p>
                           <p className="mb-2 flex">
                             <span className="font-bold w-40">
                               SMT Bot Operator:
                             </span>
-                            <span className="font-bold ml-4">test</span>
+                            <span className="font-bold ml-4">Chrisna</span>
                           </p>
                           <p className="mb-2 flex">
                             <span className="font-bold w-40">
                               Drop In Operator:
                             </span>
-                            <span className="font-bold ml-4">test</span>
+                            <span className="font-bold ml-4">Chrisna</span>
                           </p>
                           <p className="mb-2 flex">
                             <span className="font-bold w-40">
                               Touch Up Operator:
                             </span>
-                            <span className="font-bold ml-4">test</span>
+                            <span className="font-bold ml-4">Chrisna</span>
                           </p>
                           <p className="mb-2 flex">
                             <span className="font-bold w-40">
                               Router Operator:
                             </span>
-                            <span className="font-bold ml-4">test</span>
+                            <span className="font-bold ml-4">Chrisna</span>
                           </p>
                           <p className="mb-2 flex">
                             <span className="font-bold w-40">
                               FCT Operator:
                             </span>
-                            <span className="font-bold ml-4">test</span>
+                            <span className="font-bold ml-4">Chrisna</span>
                           </p>
                           <p className="mb-2 flex">
                             <span className="font-bold w-40">
                               Coating Operator:
                             </span>
-                            <span className="font-bold ml-4">test</span>
+                            <span className="font-bold ml-4">Chrisna</span>
                           </p>
                         </div>
                       </div>

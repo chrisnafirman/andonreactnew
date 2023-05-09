@@ -37,6 +37,8 @@ import RequestNetwork from "./components/Network/RequestNetwork.jsx"
 import ReturnNetwork from "./components/Network/ReturnNetwork.jsx"
 
 
+import EM from "./components/EMaintenance.jsx"
+
 function App() {
   return (
     <>
@@ -77,6 +79,9 @@ function App() {
         <Route path="Network" element={<NETWORK/>}/>
         <Route path="RequestNetwork" element={<RequestNetwork/>}/>
         <Route path="ReturnNetwork" element={<ReturnNetwork/>}/>
+        <Route path="E" element={<EM/>}/>
+
+
         
       </Routes>
     </>

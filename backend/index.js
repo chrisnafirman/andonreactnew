@@ -370,6 +370,13 @@ app.get("/api/get/ReturnPURCHASING", (req, res) => {
 });
 
 
+app.get("/api/get/Network", (req, res) => {
+  const sqlSelect = "SELECT * FROM network";
+  db.query(sqlSelect, (err, results) => {
+    res.send(results);
+  });
+});
+
 app.listen(3001, () => {
   console.log("Running on port 3001");
 });
