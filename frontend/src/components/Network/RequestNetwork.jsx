@@ -129,8 +129,15 @@ const formattedTime = `${currentTime.getDate()}/${
     setFilteredData(filteredData);
   };
 
+  const styles = {
+    backgroundImage: `url(${process.env.PUBLIC_URL}/Network.png)`,
+    backgroundSize: "1300px",
+    backgroundPosition: "500px",
+    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
+  };
+
   return (
-    <body className="h-full w-full bg-stone-700">
+    <body style={styles}>
       <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
         <div class="flex h-14 items-center justify-between">
           <div class="flex items-center">

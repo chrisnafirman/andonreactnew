@@ -11,6 +11,8 @@ const ReturnQA = () => {
 
   const [selectedItem, setSelectedItem] = useState(null);
 
+  const [showDatePicker, setShowDatePicker] = useState(true);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
 
   //  fungsi mengambil data dari firebase
@@ -25,7 +27,32 @@ const ReturnQA = () => {
     return () => clearInterval(interval);
   }
 
+  // waktu navbar
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formattedTime = `${currentTime.getDate()}/${
+    currentTime.getMonth() + 1
+  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+
   updateTime();
+
+
+  // button search
+  function handleToggleDatePicker() {
+    setShowDatePicker(!showDatePicker);
+  }
+  
+  
+  useEffect(() => {
+    // set showDatePicker ke false ketika halaman dimuat
+    setShowDatePicker(false);
+  }, []);
+
 
  
   useEffect(() => {
@@ -95,60 +122,51 @@ const ReturnQA = () => {
     setFilteredData(filteredData);
   };
   
-  
+  const styles = {
+    backgroundImage: `url(${process.env.PUBLIC_URL}/QA.jpg)`,
+    backgroundSize: "1300px",
+    backgroundPosition: "1px",
+    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
+  };
+
   return (
-    <body className="h-full w-full bg-[#93C2C4]">
-      <nav class="bg-gray-100 px-2 sm:px-4 py-2.5 dark:bg-gray-900  w-full sticky z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
-        <div class="container flex flex-wrap items-center justify-between mx-auto">
-          <a href="#" class="flex items-center">
-            <img
-              src={process.env.PUBLIC_URL + "/AVI.png"}
-              alt="Logo"
-              class="h-6 mr-3 sm:h-9"
-            />
-            <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              Quality A
-            </span>
-          </a>
-
-          <div class="flex md:order-2">
-            <a href="/QualityA">
-              <button
-                className="text-white md:inline-block hidden bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                type="button"
-                data-drawer-target="drawer-navigation"
-                aria-controls="drawer-navigation"
-              >
-                Back
-              </button>
+    <body style={styles}>
+     <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
+        <div class="flex h-14 items-center justify-between">
+          <div class="flex items-center">
+            <a href="/AndonLine1">
+              <div class="flex-shrink-0">
+                <img
+                  src={process.env.PUBLIC_URL + "/smt.jpeg"}
+                  alt="Logo"
+                  class="h-6 ml-4 sm:h-9 bg-white rounded-md"
+                />
+              </div>
             </a>
-
-            <button
-              data-collapse-toggle="navbar-sticky"
-              type="button"
-              onClick={toggleDrawer}
-              class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-              aria-controls="navbar-sticky"
-              aria-expanded="false"
-            >
-              <span class="sr-only">Open main menu</span>
-              <svg
-                class="w-6 h-6"
-                aria-hidden="true"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
-            </button>
           </div>
+          <p class="text-gray-500 text-sm">{formattedTime}</p>
         </div>
       </nav>
+
+      <header class="bg-white shadow mb-3">
+        <div class="mx-auto max-w-7xl px-4">
+          <marquee behavior="scroll" direction="right">
+            <div class="flex items-center">
+              <h1 class="text-xl font-bold tracking-tight text-gray-900">
+                | Quality A |
+              </h1>
+              <h1 class="text-xl font-bold tracking-tight ml-4">
+                <span class="text-black">SMT LINE 1:</span>
+                <span class="ml-4 text-green-500">RUNNING </span>|
+              </h1>
+              <h1 class="text-xl font-bold tracking-tight ml-4">
+                <span class="text-black">SMT LINE 2:</span>
+                <span class="ml-4 text-green-500">RUNNING </span>|
+              </h1>
+            </div>
+          </marquee>
+        </div>
+      </header>
 
       <sidebar>
         <div
@@ -191,7 +209,7 @@ const ReturnQA = () => {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="/QualityA"
+                  href="/PPIC"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
                 >
                   <svg
@@ -218,43 +236,53 @@ const ReturnQA = () => {
           x-data="app"
         >
           <div className="flex flex-col mt-1 h-full">
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="date" className="text-gray-300">
-                Pilih Tanggal :
-              </label>
-              <div className="flex flex-col w-40">
-                <div class="relative max-w-sm">
-                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg
-                      aria-hidden="true"
-                      class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
+          <div>
+              {showDatePicker && (
+                <form className="" onSubmit={handleSubmit}>
+                  <label htmlFor="date" className="text-gray-300">
+                    Pilih Tanggal :
+                  </label>
+                  <div className="flex flex-col w-40">
+                    <div class="relative max-w-sm">
+                      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg
+                          aria-hidden="true"
+                          class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </div>
+                      <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        class="bg-gray-50 border items-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        onChange={handleFilterByDate}
+                      />
+                    </div>
+                    <button
+                      class="bg-blue-500  hover:bg-blue-400 text-white w-20 font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-2 "
+                      type="submit"
                     >
-                      <path
-                        fill-rule="evenodd"
-                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
+                      Submit
+                    </button>
                   </div>
-                  <input
-                    type="date"
-                    id="date"
-                    name="date"
-                    class="bg-gray-50 border items-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    onChange={handleFilterByDate}
-                  />
-                </div>
-                <button
-                  class="bg-blue-500  hover:bg-blue-400 text-white w-20 font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-2 "
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
+                </form>
+              )}
+              <button
+                class="bg-blue-500 hover:bg-blue-400 text-white w-20 font-bold py-1 px-2 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-1 mb-3 "
+                onClick={handleToggleDatePicker}
+              >
+                {showDatePicker ? "Hide" : "Search"}
+              </button>
+            </div>
             {/* <!-- Table --> */}
             <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
               <header className="px-5 py-4 border-b border-gray-100">
@@ -271,15 +299,15 @@ const ReturnQA = () => {
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
                       <th className="p-1 w-40">
-                        <div className="font-semibold text-left">Mesin</div>
+                        <div className="font-semibold text-left">Nama</div>
                       </th>
-                      <th className="p-1 w-20">
+                      <th className="p-1 w-32">
                         <div className="font-semibold text-left">Line</div>
                       </th>
-                      <th className="p-1 w-10">
+                      <th className="p-1 w-24">
                         <div className="font-semibold text-center">AREA</div>
                       </th>
-                      <th className="p-1 w-10">
+                      <th className="p-1 w-28">
                         <div className="font-semibold text-center">Station</div>
                       </th>
                       <th className="p-1 w-10">
@@ -298,22 +326,22 @@ const ReturnQA = () => {
                       >
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
-                            {item.MachineName}
+                            {item.NamaPIC}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
-                            {item.MachineLine}
+                            {item.Line}
                           </div>
                         </td>
                         <td className="p-2 ">
                           <div className="font-medium text-gray-800">
-                            {item.MachineArea}
+                            {item.Area}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
-                            {item.MachineStation}
+                            {item.Station}
                           </div>
                         </td>
                         <td className="p-5 ">
@@ -391,35 +419,21 @@ const ReturnQA = () => {
                                         </div>
 
                                         <div class="flex flex-wrap -mx-3 mb-6">
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Machine Name
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.MachineName}{" "}
-                                            </div>
-                                          </div>
+                                        
 
                                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-city"
                                             >
-                                              Machine Area
+                                              Area
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}
-                                              {selectedItem.MachineArea}{" "}
+                                              {selectedItem.Area}{" "}
                                             </div>
                                           </div>
                                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -427,14 +441,14 @@ const ReturnQA = () => {
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-city"
                                             >
-                                              Machine Line
+                                               Line
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}
-                                              {selectedItem.MachineArea}{" "}
+                                              {selectedItem.Area}{" "}
                                             </div>
                                           </div>
                                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
@@ -442,14 +456,14 @@ const ReturnQA = () => {
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-city"
                                             >
-                                              Machine Station
+                                               Station
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}
-                                              {selectedItem.MachineStation}{" "}
+                                              {selectedItem.Station}{" "}
                                             </div>
                                           </div>
                                         </div>

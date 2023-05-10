@@ -13,10 +13,6 @@ const database = firebase.database();
 
 const Andonline1 = () => {
   const [mesin, setMesin] = useState("");
-  const [Line, setLine] = useState("SMT LINE 1");
-
-  const [Area, setArea] = useState("SMT TOP");
-  const[Destacker,setDestecker] = useState("Destacker");
 
   const [nama, setNama] = useState("");
 
@@ -26,6 +22,14 @@ const Andonline1 = () => {
   const [showDrawer, setShowDrawer] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [data, setData] = useState(null);
+
+
+
+  // 
+  const [Line, setLine] = useState("SMT LINE 1");
+  const [Area, setArea] = useState("SMT TOP");
+  const[Destacker,setDestecker] = useState("Destacker");
+
 
   // popup form 1
   const [isOpenOthers, setIsOpenOthers] = useState(false);

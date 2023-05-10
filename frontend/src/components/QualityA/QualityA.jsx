@@ -897,21 +897,6 @@ const QA = () => {
                     </td>
                     {/* POP UP */}
                     <td class="">
-                      {status === "QA" && (
-                        <div>
-                          <span className="text-xs uppercase text-black font-bold">
-                            Validation
-                          </span>
-                          <div id="timer" className="font-medium text-white">
-                            <button
-                              className="bg-blue-500 hover:bg-blue-700 text-white text-xs px-3 py-1 rounded"
-                              onClick={() => setIsOpen2(true)}
-                            >
-                              To
-                            </button>
-                          </div>
-                        </div>
-                      )}
                       {isOpen2 ? (
                         <>
                           <div className="fixed z-10 inset-0 overflow-y-auto">

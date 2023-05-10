@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
-
-const RequestQA = () => {
+const ReturnMaintenance = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
-
-  const [selectedItem, setSelectedItem] = useState(null);
-
   const [showDatePicker, setShowDatePicker] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [selectedItem, setSelectedItem] = useState(null);
 
+  // button search
+  function handleToggleDatePicker() {
+    setShowDatePicker(!showDatePicker);
+  }
 
-   // waktu navbar
-   useEffect(() => {
+  useEffect(() => {
+    // set showDatePicker ke false ketika halaman dimuat
+    setShowDatePicker(false);
+  }, []);
+
+  // waktu navbar
+  useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
@@ -40,20 +47,6 @@ const RequestQA = () => {
     setShowDrawer(!showDrawer);
   };
 
-
-   // button search
-   function handleToggleDatePicker() {
-    setShowDatePicker(!showDatePicker);
-  }
-  
-  
-  useEffect(() => {
-    // set showDatePicker ke false ketika halaman dimuat
-    setShowDatePicker(false);
-  }, []);
-
-
-
   function updateTime() {
     const interval = setInterval(() => {
       setTime(new Date().toLocaleString());
@@ -63,14 +56,13 @@ const RequestQA = () => {
 
   updateTime();
 
-  
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/get/QA")
+    fetch("http://192.168.101.236:3001/api/get/ReturnMaintenance")
       .then((response) => response.json())
       .then((json) => {
-        // mengubah properti timestamp menjadi tanggal dan waktu
+        // mengubah properti timestamp menjadi tanggal dan Date
         json.forEach((item) => {
-          const date = new Date(item.waktu);
+          const date = new Date(item.Date);
           const day = date.getDate();
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
@@ -78,42 +70,44 @@ const RequestQA = () => {
           const minutes = date.getMinutes();
           const formattedDate = `${day.toString().padStart(2, "0")}-${month
             .toString()
-            .padStart(2, "0")}-${year} / ${hours.toString().padStart(2, "0")}:${minutes
+            .padStart(2, "0")}-${year} / ${hours
             .toString()
-            .padStart(2, "0")}`;
-          item.waktu = formattedDate;
+            .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+          item.Date = formattedDate;
         });
-        json.sort((a, b) => Date.parse(a.waktu) - Date.parse(b.waktu));
+        json.sort((a, b) => Date.parse(a.Date) - Date.parse(b.Date));
         json.reverse();
         setData(json);
         setFilteredData(json);
       });
   }, []);
-  
+
   const handleFilterByDate = (e) => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://192.168.101.236:3001/api/get/QA?date=${selectedDate}`)
+    fetch(
+      `http://192.168.101.236:3001/api/get/ReturnMaintenance?date=${selectedDate}`
+    )
       .then((response) => response.json())
       .then((json) => {
-        // mengubah properti waktu menjadi tanggal saja
+        // mengubah properti Date menjadi tanggal saja
         json.forEach((item) => {
-          const date = new Date(item.waktu);
+          const date = new Date(item.Date);
           const day = date.getDate();
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
           const formattedDate = `${day.toString().padStart(2, "0")}-${month
             .toString()
             .padStart(2, "0")}-${year}`;
-          item.waktu = formattedDate;
+          item.Date = formattedDate;
         });
-        json.sort((a, b) => Date.parse(a.waktu) - Date.parse(b.waktu));
+        json.sort((a, b) => Date.parse(a.Date) - Date.parse(b.Date));
         json.reverse();
         setFilteredData(json);
       });
   };
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!selectedDate) {
@@ -126,21 +120,23 @@ const RequestQA = () => {
     )
       .toString()
       .padStart(2, "0")}-${date.getFullYear()}`;
-    const filteredData = data.filter((item) => item.waktu.includes(formattedDate));
-    filteredData.sort((a, b) => Date.parse(b.waktu) - Date.parse(a.waktu));
+    const filteredData = data.filter((item) =>
+      item.Date.includes(formattedDate)
+    );
+    filteredData.sort((a, b) => Date.parse(b.Date) - Date.parse(a.Date));
     setFilteredData(filteredData);
   };
-  
+
   const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/QA.jpg)`,
-    backgroundSize: "1300px",
-    backgroundPosition: "1px",
-    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
+    backgroundImage: `url(${process.env.PUBLIC_URL}/MTC.jpg)`,
+    backgroundSize: "1400px",
+    backgroundPosition: "1400px",
+    height: "640px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
-  
+
   return (
     <body style={styles}>
-        <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
+      <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
         <div class="flex h-14 items-center justify-between">
           <div class="flex items-center">
             <a href="/AndonLine1">
@@ -162,7 +158,7 @@ const RequestQA = () => {
           <marquee behavior="scroll" direction="right">
             <div class="flex items-center">
               <h1 class="text-xl font-bold tracking-tight text-gray-900">
-                | Quality A |
+                | Laporan Return Maintenance |
               </h1>
               <h1 class="text-xl font-bold tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
@@ -245,7 +241,7 @@ const RequestQA = () => {
           x-data="app"
         >
           <div className="flex flex-col mt-1 h-full">
-          <div>
+            <div>
               {showDatePicker && (
                 <form className="" onSubmit={handleSubmit}>
                   <label htmlFor="date" className="text-gray-300">
@@ -294,17 +290,17 @@ const RequestQA = () => {
             </div>
             {/* <!-- Table --> */}
             <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-              <button className="flex" onClick={exportToPDF}>
+              {/* <button className="flex" onClick={exportToPDF}>
                 Export To:
                 <img
                   className="w-[25px]"
                   src={process.env.PUBLIC_URL + "/pdf.png"}
                   alt=""
                 />
-              </button>
+              </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-              Request For Quality
+                  Return For Maintenance
                 </div>
               </header>
 
@@ -315,20 +311,20 @@ const RequestQA = () => {
                 <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
-                    <th className="p-1 w-40">
+                      <th className="p-1 w-40">
                         <div className="font-semibold text-left">Nama</div>
                       </th>
-                      <th className="p-1 w-40">
+                      <th className="p-1  w-32">
                         <div className="font-semibold text-left">Line</div>
                       </th>
-                      <th className="p-1 w-24">
-                        <div className="font-semibold text-center">AREA</div>
+                      <th className="p-1  w-32">
+                        <div className="font-semibold text-left">Area</div>
                       </th>
-                      <th className="p-1 w-28">
-                        <div className="font-semibold text-center">Station</div>
+                      <th className="p-1  w-32">
+                        <div className="font-semibold text-left">Station</div>
                       </th>
-                      <th className="p-1 w-28">
-                        <div className="font-semibold text-center">DETAILS</div>
+                      <th className="p-1 w-10">
+                        <div className="font-semibold text-center">Details</div>
                       </th>
                       <th className="p-1 w-26">
                         <div className="font-semibold text-center">Date</div>
@@ -341,9 +337,9 @@ const RequestQA = () => {
                         key={item.id}
                         className={index === 0 ? "bg-green-400" : ""}
                       >
-                         <td className="p-2">
+                        <td className="p-2">
                           <div className="font-medium text-gray-800">
-                            {item.NamaPIC}
+                            {item.Nama}
                           </div>
                         </td>
                         <td className="p-2">
@@ -351,7 +347,7 @@ const RequestQA = () => {
                             {item.Line}
                           </div>
                         </td>
-                        <td className="p-2 ">
+                        <td className="p-2">
                           <div className="font-medium text-gray-800">
                             {item.Area}
                           </div>
@@ -361,7 +357,7 @@ const RequestQA = () => {
                             {item.Station}
                           </div>
                         </td>
-                        <td className="p-2 ">
+                        <td className="p-5 ">
                           <button
                             onClick={() => setSelectedItem(item)}
                             className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
@@ -403,10 +399,10 @@ const RequestQA = () => {
                                     <div className="sm:flex sm:items-start">
                                       <div className="w-full max-w-lg">
                                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                          <span>REQUESTED BY</span>
+                                          <span>PROBLEM</span>
                                         </div>
                                         <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                        <div class="w-full px-1">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-first-name"
@@ -418,32 +414,33 @@ const RequestQA = () => {
                                               type="text"
                                             >
                                               {" "}
-                                              {selectedItem.NamaPIC}{" "}
-                                            </div>
-                                          </div>
-                                          <div class="w-full md:w-1/2 px-3">
-                                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                              NPK PIC
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.NpkPIC}{" "}
+                                              {selectedItem.Nama}{" "}
                                             </div>
                                           </div>
                                         </div>
 
-                                        <div class="flex flex-wrap -mx-3 mb-6">
-                                         
-
+                                        <div class="flex flex-wrap -mx-3 ">
                                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-city"
                                             >
-                                               Area
+                                              Line
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.Line}{" "}
+                                            </div>
+                                          </div>
+                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                              for="grid-city"
+                                            >
+                                              Area
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -458,22 +455,7 @@ const RequestQA = () => {
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-city"
                                             >
-                                               Line
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Area}{" "}
-                                            </div>
-                                          </div>
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                               Station
+                                              Station
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -484,20 +466,21 @@ const RequestQA = () => {
                                             </div>
                                           </div>
                                         </div>
+                                        <div class="flex flex-wrap -mx-3 mb-6"></div>
                                         <div class="flex flex-wrap -mx-3 ">
                                           <div class="w-full px-1">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                                               for="grid-password"
                                             >
-                                              Kerusakan
+                                              Problem
                                             </label>
                                             <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border text-red-600  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}
-                                              {selectedItem.Kerusakan}{" "}
+                                              {selectedItem.Problem}{" "}
                                             </div>
                                           </div>
                                         </div>
@@ -542,7 +525,7 @@ const RequestQA = () => {
 
                         <td className="p-2">
                           <div className="text-center h-6 text-black...">
-                            {item.waktu}
+                            {item.Date} WIB
                           </div>
                         </td>
                       </tr>
@@ -558,4 +541,4 @@ const RequestQA = () => {
   );
 };
 
-export default RequestQA;
+export default ReturnMaintenance;

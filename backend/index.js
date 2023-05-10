@@ -40,13 +40,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post("/api/post/validationqa", upload.single("validation"), (req, res) => {
-  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation } = req.body;
+  const { NamaPIC, NpkPIC, Area, Line, Station } = req.body;
   const Validation = req.file.path.replace(/\\/g, "/").substring(7); // mengubah backslash menjadi slash dan menghapus "./public"
 
   db.query(
     
-    "INSERT INTO validationqa(NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, validation) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Validation],
+    "INSERT INTO validationqa(NamaPIC, NpkPIC, Area, Line, Station, validation) VALUES (?, ?, ?, ?, ?, ?)",
+    [NamaPIC, NpkPIC, Area,Line,Station, Validation],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -212,11 +212,11 @@ app.post("/api/post/ReturnPURCHASING", (req, res) => {
 
 ///post To QA
 app.post("/api/post/QA", (req, res) => {
-  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan } = req.body;
+  const { NamaPIC, NpkPIC,  Area, Line, Station, Kerusakan } = req.body;
   
   db.query(
-    "INSERT INTO qualitya (NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan],
+    "INSERT INTO qualitya (NamaPIC, NpkPIC,  Area, Line, Station, Kerusakan) VALUES (?, ?, ?, ?, ?, ?)",
+    [NamaPIC, NpkPIC, Area, Line, Station, Kerusakan],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -285,6 +285,43 @@ app.post("/api/post/network", (req, res) => {
     }
   );
 });
+
+
+///post To network
+
+app.post("/api/post/Maintenance", (req, res) => {
+  const { NamaPIC, Area, Line, Station, Kerusakan } = req.body;
+  
+  db.query(
+    "INSERT INTO maintenance (Nama, Area, Line, Station, Problem) VALUES (?, ?, ?, ?, ?)",
+    [ NamaPIC, Area, Line, Station, Kerusakan],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been added successfully' });
+    }
+  );
+});
+
+
+app.post("/api/post/ReturnMaintenance", (req, res) => {
+  const { NamaPIC, Area, Line, Station, Kerusakan } = req.body;
+  
+  db.query(
+    "INSERT INTO returnmaintenance (Nama, Area, Line, Station, Problem) VALUES (?, ?, ?, ?, ?)",
+    [ NamaPIC, Area, Line, Station, Kerusakan],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been added successfully' });
+    }
+  );
+});
+
 
 
 
@@ -372,6 +409,22 @@ app.get("/api/get/ReturnPURCHASING", (req, res) => {
 
 app.get("/api/get/Network", (req, res) => {
   const sqlSelect = "SELECT * FROM network";
+  db.query(sqlSelect, (err, results) => {
+    res.send(results);
+  });
+});
+
+
+app.get("/api/get/Maintenance", (req, res) => {
+  const sqlSelect = "SELECT * FROM maintenance";
+  db.query(sqlSelect, (err, results) => {
+    res.send(results);
+  });
+});
+
+
+app.get("/api/get/ReturnMaintenance", (req, res) => {
+  const sqlSelect = "SELECT * FROM returnmaintenance";
   db.query(sqlSelect, (err, results) => {
     res.send(results);
   });
