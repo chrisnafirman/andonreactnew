@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  databaseURL:
+    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+};
+firebase.initializeApp(firebaseConfig);
+
+const database = firebase.database();
 
 const RepairReport = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
@@ -11,32 +22,38 @@ const RepairReport = () => {
   const [showDatePicker, setShowDatePicker] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState(null);
+  const [StatusLine, setStatusLine] = useState("");
 
- 
+  useEffect(() => {
+    const ref3 = firebase.database().ref("StatusLine/SMTLine1");
+    ref3.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setStatusLine(data);
+    });
+    return () => {};
+  }, []);
 
   // button search
-function handleToggleDatePicker() {
-  setShowDatePicker(!showDatePicker);
-}
+  function handleToggleDatePicker() {
+    setShowDatePicker(!showDatePicker);
+  }
 
-useEffect(() => {
-  // set showDatePicker ke false ketika halaman dimuat
-  setShowDatePicker(false);
-}, []);
+  useEffect(() => {
+    // set showDatePicker ke false ketika halaman dimuat
+    setShowDatePicker(false);
+  }, []);
 
+  // waktu navbar
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
-// waktu navbar
-useEffect(() => {
-  const interval = setInterval(() => {
-    setCurrentTime(new Date());
-  }, 1000);
-  return () => clearInterval(interval);
-}, []);
-
-const formattedTime = `${currentTime.getDate()}/${
-  currentTime.getMonth() + 1
-}/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
-
+  const formattedTime = `${currentTime.getDate()}/${
+    currentTime.getMonth() + 1
+  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
   //  fungsi export to pdf
   const exportToPDF = () => {
@@ -142,13 +159,13 @@ const formattedTime = `${currentTime.getDate()}/${
         <div class="flex h-14 items-center justify-between">
           <div class="flex items-center">
             <a href="/AndonLine1">
-            <div class="flex-shrink-0">
-              <img
-                src={process.env.PUBLIC_URL + "/smt.jpeg"}
-                alt="Logo"
-                class="h-6 ml-4 sm:h-9 bg-white rounded-md"
-              />
-            </div>
+              <div class="flex-shrink-0">
+                <img
+                  src={process.env.PUBLIC_URL + "/smt.jpeg"}
+                  alt="Logo"
+                  class="h-6 ml-4 sm:h-9 bg-white rounded-md"
+                />
+              </div>
             </a>
           </div>
           <p class="text-gray-500 text-sm">{formattedTime}</p>
@@ -157,22 +174,29 @@ const formattedTime = `${currentTime.getDate()}/${
 
       <header class="bg-white shadow mb-3">
         <div class="mx-auto max-w-7xl px-4">
-        <marquee behavior="scroll" direction="right">
+          <marquee behavior="scroll" direction="right">
             <div class="flex items-center">
               <h1 class="text-xl font-bold tracking-tight text-gray-900">
-               | Network |
+                | Network |
               </h1>
+
               <h1 class="text-xl font-bold tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
-                <span class="ml-4 text-green-500">RUNNING </span>
-                |
+                <span
+                  class="ml-4"
+                  style={{
+                    color: StatusLine === "Running" ? "green" : "red",
+                  }}
+                >
+                  {StatusLine}
+                </span>
+                <span className="ml-4">|</span>
               </h1>
+
               <h1 class="text-xl font-bold tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
-                <span class="ml-4 text-green-500">RUNNING </span>
-                |
+                <span class="ml-4 text-green-500">RUNNING </span>|
               </h1>
-              
             </div>
           </marquee>
         </div>
@@ -411,7 +435,7 @@ const formattedTime = `${currentTime.getDate()}/${
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-city"
                                             >
-                                             Line
+                                              Line
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -422,8 +446,7 @@ const formattedTime = `${currentTime.getDate()}/${
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="flex flex-wrap -mx-3 mb-6">
-                                        </div>
+                                        <div class="flex flex-wrap -mx-3 mb-6"></div>
                                         <div class="flex flex-wrap -mx-3 ">
                                           <div class="w-full px-1">
                                             <label

@@ -23,13 +23,11 @@ const Andonline1 = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [data, setData] = useState(null);
 
-
-
-  // 
+  //
+  const [StatusLine, setStatusLine] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT TOP");
-  const[Destacker,setDestecker] = useState("Destacker");
-
+  const [Destacker, setDestecker] = useState("Destacker");
 
   // popup form 1
   const [isOpenOthers, setIsOpenOthers] = useState(false);
@@ -91,9 +89,7 @@ const Andonline1 = () => {
     useState("");
 
   /// Purchasing
-  const namaList = [
-    "CHRISNA FIRMAN",
-  ];
+  const namaList = ["CHRISNA FIRMAN"];
   const npkList = ["0301"];
 
   // Area Station
@@ -189,11 +185,11 @@ const Andonline1 = () => {
       setMesin(data);
     });
 
-    // const ref3 = firebase.database().ref("Mesin/LineMesin");
-    // ref3.on("value", (snapshot) => {
-    //   const data = snapshot.val();
-    //   setLine(data);
-    // });
+    const ref3 = firebase.database().ref("StatusLine/SMTLine1");
+    ref3.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setStatusLine(data);
+    });
 
     const ref4 = firebase.database().ref("Mesin/Nama");
     ref4.on("value", (snapshot) => {
@@ -206,7 +202,6 @@ const Andonline1 = () => {
       const data = snapshot.val();
       setTimer(data);
     });
-
 
     const ref8 = firebase.database().ref("SMTLine1/Network");
     ref8.on("value", (snapshot) => {
@@ -584,7 +579,6 @@ const Andonline1 = () => {
   }, []);
 
   // Submit Network
-
   const SubmitNetwork = (event) => {
     const data = {
       NamaPIC: NamaPIC,
@@ -603,6 +597,7 @@ const Andonline1 = () => {
         if (response.status === 200) {
           alert("Permintaan Bantuan Network Segera Di Proses");
           firebase.database().ref("SMTLine1/Network").set("Down");
+          firebase.database().ref("StatusLine/SMTLine1").set("Down");
           setIsOpenNetwork(false);
           window.location.reload();
           event.preventDefault();
@@ -628,14 +623,13 @@ const Andonline1 = () => {
         <div class="flex h-14 items-center justify-between">
           <div class="flex items-center">
             <a href="/RequestNetwork">
-            <div class="flex-shrink-0">
-              <img
-                src={process.env.PUBLIC_URL + "/smt.jpeg"}
-                alt="Logo"
-                class="h-6 ml-4 sm:h-9 bg-white rounded-md"
-               
-              />
-            </div>
+              <div class="flex-shrink-0">
+                <img
+                  src={process.env.PUBLIC_URL + "/smt.jpeg"}
+                  alt="Logo"
+                  class="h-6 ml-4 sm:h-9 bg-white rounded-md"
+                />
+              </div>
             </a>
           </div>
           <p class="text-gray-500 text-sm">{formattedTime}</p>
@@ -644,28 +638,33 @@ const Andonline1 = () => {
 
       <header class="bg-white shadow mb-3">
         <div class="mx-auto max-w-7xl px-4 ">
-        <header class="bg-white shadow mb-3">
-        <div class="mx-auto max-w-7xl px-4">
-        <marquee behavior="scroll" direction="right">
-            <div class="flex items-center">
-              <h1 class="text-xl font-bold tracking-tight text-gray-900">
-               | Andon SMT |
-              </h1>
-              <h1 class="text-xl font-bold tracking-tight ml-4">
-                <span class="text-black">SMT LINE 1:</span>
-                <span class="ml-4 text-green-500">RUNNING </span>
-                |
-              </h1>
-              <h1 class="text-xl font-bold tracking-tight ml-4">
-                <span class="text-black">SMT LINE 2:</span>
-                <span class="ml-4 text-green-500">RUNNING </span>
-                |
-              </h1>
-              
+          <header class="bg-white shadow mb-3">
+            <div class="mx-auto max-w-7xl px-4">
+              <marquee behavior="scroll" direction="right">
+                <div class="flex items-center">
+                  <h1 class="text-xl font-bold tracking-tight text-gray-900">
+                    | Andon SMT |
+                  </h1>
+                  <h1 class="text-xl font-bold tracking-tight ml-4">
+                    <span class="text-black">SMT LINE 1:</span>
+                    <span
+                      class="ml-4"
+                      style={{
+                        color: StatusLine === "Running" ? "green" : "red",
+                      }}
+                    >
+                      {StatusLine}
+                    </span>
+                    <span className="ml-4">|</span>
+                  </h1>
+                  <h1 class="text-xl font-bold tracking-tight ml-4">
+                    <span class="text-black">SMT LINE 2:</span>
+                    <span class="ml-4 text-green-500">RUNNING </span>|
+                  </h1>
+                </div>
+              </marquee>
             </div>
-          </marquee>
-        </div>
-      </header>
+          </header>
         </div>
       </header>
 
@@ -822,9 +821,9 @@ const Andonline1 = () => {
               href="#"
               class="inline-block w-full  p-4 text-orange-700  bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
             >
-             <header  className="animate-bounce"><div>
-              ISA</div></header>
-              
+              <header className="animate-bounce">
+                <div>ISA</div>
+              </header>
             </a>
           </button>
         </ul>
@@ -965,8 +964,11 @@ const Andonline1 = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-              
-                <button onClick={()=> setIsOpenOthers(true)} className="animate-pulse w-72 pt-2 sm:w-48 lg:w-72">
+
+                <button
+                  onClick={() => setIsOpenOthers(true)}
+                  className="animate-pulse w-72 pt-2 sm:w-48 lg:w-72"
+                >
                   <div
                     // style={{ backgroundColor: backgroundColor }}
                     value={status}
@@ -977,7 +979,6 @@ const Andonline1 = () => {
                         OTHERS
                       </div>
                     </header>
-                    
                   </div>
                 </button>
               </div>
@@ -1210,7 +1211,6 @@ const Andonline1 = () => {
                             {Line}
                           </span>
                         </div>
-                       
                       </div>
                       <div class="flex flex-wrap -mx-3 ">
                         <div class="w-full px-1">

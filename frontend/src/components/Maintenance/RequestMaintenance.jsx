@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  databaseURL:
+    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+};
+firebase.initializeApp(firebaseConfig);
+
+const database = firebase.database();
 
 const RepairReport = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
@@ -11,6 +23,8 @@ const RepairReport = () => {
   const [showDatePicker, setShowDatePicker] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState(null);
+  
+  const [StatusLine, setStatusLine] = useState("");
 
   // button search
   function handleToggleDatePicker() {
@@ -21,6 +35,16 @@ const RepairReport = () => {
     // set showDatePicker ke false ketika halaman dimuat
     setShowDatePicker(false);
   }, []);
+
+  useEffect(() => {
+    const ref3 = firebase.database().ref("StatusLine/SMTLine1");
+    ref3.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setStatusLine(data);
+    });
+    return () => {};
+   }, []);
+
 
   // waktu navbar
   useEffect(() => {
@@ -161,9 +185,18 @@ const RepairReport = () => {
                 | Request Maintenance |
               </h1>
               <h1 class="text-xl font-bold tracking-tight ml-4">
-                <span class="text-black">SMT LINE 1:</span>
-                <span class="ml-4 text-green-500">RUNNING </span>|
-              </h1>
+                    <span class="text-black">SMT LINE 1:</span>
+                    <span
+                      class="ml-4"
+                      style={{
+                        color: StatusLine === "Running" ? "green" : "red",
+                      }}
+                    >
+                      {StatusLine}
+                    </span>
+                    <span className="ml-4">|</span>
+                  </h1>
+
               <h1 class="text-xl font-bold tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
                 <span class="ml-4 text-green-500">RUNNING </span>|

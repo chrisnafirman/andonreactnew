@@ -1,4 +1,18 @@
 import React, { useState, useEffect } from "react";
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  databaseURL:
+    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+};
+firebase.initializeApp(firebaseConfig);
+
+const database = firebase.database();
+
+
 
 
 
@@ -13,6 +27,18 @@ const ReturnQA = () => {
 
   const [showDatePicker, setShowDatePicker] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
+   //
+   const [StatusLine, setStatusLine] = useState("");
+
+
+  useEffect(() => {
+    const ref3 = firebase.database().ref("StatusLine/SMTLine1");
+    ref3.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setStatusLine(data);
+    });
+    return () => {};
+   }, []);
 
 
   //  fungsi mengambil data dari firebase
@@ -156,9 +182,17 @@ const ReturnQA = () => {
                 | Quality A |
               </h1>
               <h1 class="text-xl font-bold tracking-tight ml-4">
-                <span class="text-black">SMT LINE 1:</span>
-                <span class="ml-4 text-green-500">RUNNING </span>|
-              </h1>
+                    <span class="text-black">SMT LINE 1:</span>
+                    <span
+                      class="ml-4"
+                      style={{
+                        color: StatusLine === "Running" ? "green" : "red",
+                      }}
+                    >
+                      {StatusLine}
+                    </span>
+                    <span className="ml-4">|</span>
+                  </h1>
               <h1 class="text-xl font-bold tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
                 <span class="ml-4 text-green-500">RUNNING </span>|

@@ -28,6 +28,7 @@ const SmtTop = () => {
   const [prevStatus, setPrevStatus] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [StatusLine, setStatusLine] = useState("");
 
   const [file, setFile] = useState(null);
 
@@ -146,6 +147,12 @@ const SmtTop = () => {
     ref2.on("value", (snapshot) => {
       const data = snapshot.val();
       setMesin(data);
+    });
+
+    const ref3 = firebase.database().ref("StatusLine/SMTLine1");
+    ref3.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setStatusLine(data);
     });
 
     // const ref4 = firebase.database().ref("Mesin/Nama");
@@ -295,6 +302,7 @@ const SmtTop = () => {
     currentTime.getMonth() + 1
   }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
+  //  Submit Destacker
   const submitDestacker = () => {
     const data = {
       NamaPIC: NamaPIC,
@@ -316,6 +324,7 @@ const SmtTop = () => {
           alert("success report destecker smt top");
           setIsOpenDestacker(false);
           firebase.database().ref("SMTLine1TOP/Destacker").set("Maintenance");
+          firebase.database().ref("StatusLine/SMTLine1").set("Down");
           window.location.reload();
         } else {
           throw new Error("Error adding data");
@@ -358,7 +367,7 @@ const SmtTop = () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("success Report uality");
+          alert("success Report Quality");
           firebase.database().ref("SMTLine1TOP/Destacker").set(selectedStatus);
           setIsOpenQuality(false);
           window.location.reload();
@@ -403,7 +412,6 @@ const SmtTop = () => {
     setFile(e.target.files[0]);
   };
 
-
   const submitReturn = () => {
     const data = {
       NamaPIC: NamaPIC,
@@ -435,7 +443,6 @@ const SmtTop = () => {
       });
   };
 
-
   // Backgroun
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/S.jpg)`,
@@ -463,11 +470,29 @@ const SmtTop = () => {
 
       <header class="bg-white shadow mb-3">
         <div class="mx-auto max-w-7xl px-4">
-          <marquee behavior="scroll" direction="right">
-            <h1 class="text-xl font-bold tracking-tight text-gray-900">
-              SMT LINE 1 - SMT TOP
-            </h1>
-          </marquee>
+        <marquee behavior="scroll" direction="right">
+                <div class="flex items-center">
+                  <h1 class="text-xl font-bold tracking-tight text-gray-900">
+                    | SMT Line 1 - TOP |
+                  </h1>
+                  <h1 class="text-xl font-bold tracking-tight ml-4">
+                    <span class="text-black">SMT LINE 1:</span>
+                    <span
+                      class="ml-4"
+                      style={{
+                        color: StatusLine === "Running" ? "green" : "red",
+                      }}
+                    >
+                      {StatusLine}
+                    </span>
+                    <span className="ml-4">|</span>
+                  </h1>
+                  <h1 class="text-xl font-bold tracking-tight ml-4">
+                    <span class="text-black">SMT LINE 2:</span>
+                    <span class="ml-4 text-green-500">RUNNING </span>|
+                  </h1>
+                </div>
+              </marquee>
         </div>
       </header>
 
@@ -1198,9 +1223,7 @@ const SmtTop = () => {
                 >
                   <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
-                      <form
-                        className="w-full max-w-lg"
-                      >
+                      <form className="w-full max-w-lg">
                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
                           <span>Quality</span>
                         </div>
@@ -1463,7 +1486,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                               Line
+                              Line
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -1531,14 +1554,14 @@ const SmtTop = () => {
                           </button>
                         </div>
                         <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                            onClick={() => {
-                              setIsOpenReturn(true)
-                              setIsOpenValQA(false)
-                            }}
-                          >
-                            Return To Maintenance
-                          </button>
+                          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                          onClick={() => {
+                            setIsOpenReturn(true);
+                            setIsOpenValQA(false);
+                          }}
+                        >
+                          Return To Maintenance
+                        </button>
                       </form>
                     </div>
                   </div>
@@ -1547,14 +1570,12 @@ const SmtTop = () => {
             </div>
 
             <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
-            
           </>
         ) : null}
       </td>
 
-
-       {/* POP UP  RETURN*/}
-       <td class="">
+      {/* POP UP  RETURN*/}
+      <td class="">
         {isOpenReturn ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -1709,9 +1730,6 @@ const SmtTop = () => {
           </>
         ) : null}
       </td>
-
-
-
     </body>
   );
 };
