@@ -313,7 +313,7 @@ const RepairReport = () => {
               </div>
             </form>
             {/* <!-- Table --> */}
-            <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+             <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-2xl border border-gray-200">
               <button className="flex" onClick={exportToPDF}>
                 Export To:
                 <img

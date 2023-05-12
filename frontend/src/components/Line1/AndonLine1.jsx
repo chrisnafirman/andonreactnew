@@ -28,6 +28,9 @@ const Andonline1 = () => {
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT TOP");
   const [Destacker, setDestecker] = useState("Destacker");
+  const [CMATime, setCMATime] = useState({ hours: 0, minutes: 0, seconds: 0 });
+  const [CMARunning, setCMARunning] = useState();
+  const [OnGoingCMA, setOnGoingCMA] = useState();
 
   // popup form 1
   const [isOpenOthers, setIsOpenOthers] = useState(false);
@@ -245,6 +248,12 @@ const Andonline1 = () => {
       updateOverchange(data);
     });
 
+    const ref15 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
+    ref15.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setOnGoingCMA(data);
+    });
+
     return () => {};
   }, []);
   ////////////
@@ -276,6 +285,50 @@ const Andonline1 = () => {
   // });
 
   // ----
+  let CMAInterval;
+
+  useEffect(() => {
+    if (CMARunning) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      CMAInterval = setInterval(() => {
+        setCMATime((prevTime) => {
+          const newSeconds = prevTime.seconds + 1;
+          const newMinutes = prevTime.minutes + Math.floor(newSeconds / 60);
+          const newHours = prevTime.hours + Math.floor(newMinutes / 60);
+          const newTime = {
+            hours: newHours,
+            minutes: newMinutes % 60,
+            seconds: newSeconds % 60,
+          };
+          firebase
+            .database()
+            .ref("StatusLine/SMTLine1CMALastTime")
+            .set(newTime);
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1CMAOnGoing")
+            .set(
+              `${newTime.hours} H ${newTime.minutes} M ${newTime.seconds} S`
+            );
+          return newTime;
+        });
+      }, 1000); // 1 detik = 1000 ms
+    }
+
+    // Mengambil waktu terakhir yang dihitung dari Firebase saat halaman dimuat ulang
+    firebase
+      .database()
+      .ref("StatusLine/SMTLine1CMALastTime")
+      .once("value")
+      .then((snapshot) => {
+        const lastTime = snapshot.val();
+        if (lastTime) {
+          setCMATime(lastTime);
+        }
+      });
+
+    return () => clearInterval(CMAInterval);
+  }, [CMARunning]);
 
   // fungsi time di navbar
 
@@ -608,6 +661,22 @@ const Andonline1 = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const startCMA = () => {
+    setCMATime({ hours: 0, minutes: 0, seconds: 0 });
+    firebase
+      .database()
+      .ref("/StatusLine/SMTLine1CMAOnGoing")
+      .set("0 H 0 M 0 S");
+      firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set(0);
+firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set(0);
+firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
+    setCMARunning(true);
+  };
+
+  const stopCMA = () => {
+    setCMARunning(false);
   };
 
   const styles = {
@@ -1357,7 +1426,7 @@ const Andonline1 = () => {
 
                     <div className="bg-white px-4 w-96 py-6 sm:p-6 ml-24 rounded-lg shadow-md">
                       <h3 className="text-lg font-bold mb-2">
-                        PRODUCTION TIME PLANNING
+                        PRODUCTION TIME 
                       </h3>
 
                       {data ? (
@@ -1472,23 +1541,33 @@ const Andonline1 = () => {
                           </button>
                         </div>
                         <div className="pt-3">
-                          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                          <button
+                            onClick={startCMA}
+                            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                          >
                             START CHANGE MODEL (ROUTER)
                           </button>
                         </div>
                         <div className="pt-3">
-                          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                          <button
+                            onClick={stopCMA}
+                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                          >
                             END CHANGE MODEL (ROUTER)
                           </button>
                         </div>
                         <div className="mt-4">
-                          <p className="font-bold">Planned Production Time:</p>
-                          <p>500 minutes</p>
+                          <p className="font-bold text-sm">Planned Production Time:</p>
+                          <p>{data.PP} minutes</p>
                         </div>
                         <div className="mt-2">
-                          <p className="font-bold">Change Model Allocation:</p>
-                          <p>15 minutes</p>
+                          <p className="font-bold text-sm">Change Model Allocation:</p>
+                          <p>{data.CMA} minutes</p> 
+                            <p className="text-sm text-white bg-amber-700 text-center justify-center rounded-xl">
+                              ON GOING : {OnGoingCMA}{" "}
+                            </p>
                         </div>
+                  
                       </div>
                     </div>
                   </div>

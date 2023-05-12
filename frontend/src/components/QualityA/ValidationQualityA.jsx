@@ -318,7 +318,7 @@ const ReturnQA = () => {
               </button>
             </div>
             {/* <!-- Table --> */}
-            <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+             <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-2xl border border-gray-200">
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
                  Validation Quality
