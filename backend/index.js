@@ -266,6 +266,24 @@ app.post("/api/post/Inputsche", (req, res) => {
 });
 
 
+app.put("/api/put/ResultsCMA", (req, res) => {
+  const { ResultsCMA } = req.body;
+  
+  db.query(
+    "UPDATE scheprod SET ResultsCMA = ? ORDER BY No DESC LIMIT 1",
+    [ResultsCMA],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been updated successfully' });
+    }
+  );
+});
+
+
+
 
 // SMT LINE 1
 ///post To network

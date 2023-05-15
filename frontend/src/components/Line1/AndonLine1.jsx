@@ -30,7 +30,7 @@ const Andonline1 = () => {
   const [Destacker, setDestecker] = useState("Destacker");
   const [CMATime, setCMATime] = useState({ hours: 0, minutes: 0, seconds: 0 });
   const [CMARunning, setCMARunning] = useState();
-  const [OnGoingCMA, setOnGoingCMA] = useState();
+  const [ResultsCMA, setResultsCMA] = useState();
 
   // popup form 1
   const [isOpenOthers, setIsOpenOthers] = useState(false);
@@ -182,76 +182,62 @@ const Andonline1 = () => {
       // }
     });
 
-    const ref2 = firebase.database().ref("Mesin/NamaMesin");
+  
+    const ref2 = firebase.database().ref("StatusLine/SMTLine1");
     ref2.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setMesin(data);
-    });
-
-    const ref3 = firebase.database().ref("StatusLine/SMTLine1");
-    ref3.on("value", (snapshot) => {
       const data = snapshot.val();
       setStatusLine(data);
     });
 
-    const ref4 = firebase.database().ref("Mesin/Nama");
-    ref4.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setNama(data);
-    });
 
-    const ref5 = firebase.database().ref("Mesin/timer");
-    ref5.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setTimer(data);
-    });
 
-    const ref8 = firebase.database().ref("SMTLine1/Network");
-    ref8.on("value", (snapshot) => {
+
+    const ref3 = firebase.database().ref("SMTLine1/Network");
+    ref3.on("value", (snapshot) => {
       const data = snapshot.val();
       updateNetwork(data);
     });
 
-    const ref9 = firebase.database().ref("SMTLine1/Electricity");
-    ref9.on("value", (snapshot) => {
+    const ref4 = firebase.database().ref("SMTLine1/Electricity");
+    ref4.on("value", (snapshot) => {
       const data = snapshot.val();
       updateElectricity(data);
     });
 
-    const ref10 = firebase.database().ref("SMTLine1/Aircomp");
-    ref10.on("value", (snapshot) => {
+    const ref5 = firebase.database().ref("SMTLine1/Aircomp");
+    ref5.on("value", (snapshot) => {
       const data = snapshot.val();
       updateAircomp(data);
     });
 
-    const ref11 = firebase.database().ref("SMTLine1/Shorcomp");
-    ref11.on("value", (snapshot) => {
+    const ref6 = firebase.database().ref("SMTLine1/Shorcomp");
+    ref6.on("value", (snapshot) => {
       const data = snapshot.val();
       updateShorcomp(data);
     });
 
-    const ref12 = firebase.database().ref("SMTLine1/Shorbox");
-    ref12.on("value", (snapshot) => {
+    const ref7 = firebase.database().ref("SMTLine1/Shorbox");
+    ref7.on("value", (snapshot) => {
       const data = snapshot.val();
       updateShorbox(data);
     });
 
-    const ref13 = firebase.database().ref("SMTLine1/Overtrial");
-    ref13.on("value", (snapshot) => {
+    const ref8 = firebase.database().ref("SMTLine1/Overtrial");
+    ref8.on("value", (snapshot) => {
       const data = snapshot.val();
       updateOvertrial(data);
     });
 
-    const ref14 = firebase.database().ref("SMTLine1/Overchangemodel");
-    ref14.on("value", (snapshot) => {
+    const ref9 = firebase.database().ref("SMTLine1/Overchangemodel");
+    ref9.on("value", (snapshot) => {
       const data = snapshot.val();
       updateOverchange(data);
     });
 
-    const ref15 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
-    ref15.on("value", (snapshot) => {
+    const ref10 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
+    ref10.on("value", (snapshot) => {
       const data = snapshot.val();
-      setOnGoingCMA(data);
+      setResultsCMA(data);
     });
 
     return () => {};
@@ -613,6 +599,7 @@ const Andonline1 = () => {
     return formattedDate;
   }
 
+  // Fetching Data Schedule Planing
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -633,12 +620,17 @@ const Andonline1 = () => {
 
   // Submit Network
   const SubmitNetwork = (event) => {
+    if (!NamaPIC || !Line || !Kerusakan) {
+      alert("Harap isi semua kolom!");
+      return;
+    }
+  
     const data = {
       NamaPIC: NamaPIC,
       Line: Line,
       Kerusakan: Kerusakan,
     };
-
+  
     fetch(`http://192.168.101.236:3001/api/post/network`, {
       method: "POST",
       headers: {
@@ -648,7 +640,7 @@ const Andonline1 = () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("Permintaan Bantuan Network Segera Di Proses");
+          alert("Permintaan Bantuan Network Segera Diproses");
           firebase.database().ref("SMTLine1/Network").set("Down");
           firebase.database().ref("StatusLine/SMTLine1").set("Down");
           setIsOpenNetwork(false);
@@ -662,6 +654,7 @@ const Andonline1 = () => {
         console.log(err);
       });
   };
+  
 
   const startCMA = () => {
     setCMATime({ hours: 0, minutes: 0, seconds: 0 });
@@ -675,9 +668,32 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
     setCMARunning(true);
   };
 
-  const stopCMA = () => {
-    setCMARunning(false);
+  const stopCMA = (event) => {
+    const data = {
+      ResultsCMA:ResultsCMA
+    };
+    fetch(`http://192.168.101.236:3001/api/put/ResultsCMA`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Change Model Telah Selesai Data Sudah Terinput");
+          setCMARunning(false);
+          window.location.reload();
+          event.preventDefault();
+        } else {
+          throw new Error("Error updating data");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
 
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/S.jpg)`,
@@ -737,133 +753,7 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
         </div>
       </header>
 
-      <sidebar>
-        <div
-          id="drawer-navigation"
-          className={`fixed top-0 left-0 z-40 w-64  p-4 overflow-y-auto transition-transform ${
-            showDrawer ? "" : "-translate-x-full"
-          } bg-[#1b1c27] dark:bg-gray-800`}
-          tabIndex="-1"
-          aria-labelledby="drawer-navigation-label"
-        >
-          <h5
-            id="drawer-navigation-label"
-            className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"
-          >
-            Menu
-          </h5>
-          <button
-            type="button"
-            data-drawer-hide="drawer-navigation"
-            onClick={toggleDrawer}
-            aria-controls="drawer-navigation"
-            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-          >
-            <svg
-              aria-hidden="true"
-              className="w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-            <span className="sr-only">Close menu</span>
-          </button>
-          <div className="py-4 overflow-y-auto">
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="/Home"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    className="w-6  h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                  </svg>
-                  <span class="ml-3 text-white">Realtime Report</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/DamageReport"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span class="ml-3 text-white">Report Damage Machine</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/AllReport"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span class="ml-3 text-white">Report All </span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/LoginMaintenance"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span class="ml-3 text-red-700 ">Maintenance Page</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </sidebar>
+
 
       {/*  */}
       <main>
@@ -1041,7 +931,7 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
                   <div
                     // style={{ backgroundColor: backgroundColor }}
                     value={status}
-                    class="w-full max-w-sm  bg-teal-700 shadow-lg rounded-full "
+                    class="w-full max-w-sm  bg-neutral-500 shadow-lg rounded-full "
                   >
                     <header class="px-5 py-4  ">
                       <div class="font-semibold text-center  text-white">
@@ -1533,14 +1423,14 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
                     </div>
 
                     <div className="bg-white px-4 py-6 sm:p-6 ml-24 rounded-lg shadow-md">
-                      <h3 className="text-lg font-bold mb-4">Facturing</h3>
+                      <h3 className="text-lg font-bold mb-1">Facturing</h3>
                       <div className="flex flex-col justify-between">
                         <div>
                           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             CALL LEADER
                           </button>
                         </div>
-                        <div className="pt-3">
+                        <div className="pt-2">
                           <button
                             onClick={startCMA}
                             className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
@@ -1548,7 +1438,7 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
                             START CHANGE MODEL (ROUTER)
                           </button>
                         </div>
-                        <div className="pt-3">
+                        <div className="pt-2">
                           <button
                             onClick={stopCMA}
                             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
@@ -1556,18 +1446,27 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
                             END CHANGE MODEL (ROUTER)
                           </button>
                         </div>
-                        <div className="mt-4">
-                          <p className="font-bold text-sm">Planned Production Time:</p>
-                          <p>{data.PP} minutes</p>
-                        </div>
                         <div className="mt-2">
-                          <p className="font-bold text-sm">Change Model Allocation:</p>
-                          <p>{data.CMA} minutes</p> 
-                            <p className="text-sm text-white bg-amber-700 text-center justify-center rounded-xl">
-                              ON GOING : {OnGoingCMA}{" "}
+                          <p className="font-bold text-sm">Planned Production Time:</p>
+                          <p>{data.PP} </p>
+                          <p className="text-sm text-white bg-amber-700 text-center justify-center rounded-xl">
+                              ON GOING : {ResultsCMA}{" "}
                             </p>
                         </div>
-                  
+                         <div className="mt-2">
+                          <p className="font-bold text-sm">Change Model Allocation:</p>
+                          <p>{data.CMA} </p> 
+                            <p className="text-sm text-white bg-amber-700 text-center justify-center rounded-xl">
+                              ON GOING : {ResultsCMA}{" "}
+                            </p>
+                        </div>
+                        <div className="mt-2">
+                          <p className="font-bold text-sm">Planned Downtime :</p>
+                          <p>{data.PD} </p>
+                          <p className="text-sm text-white bg-amber-700 text-center justify-center rounded-xl">
+                              ON GOING : {ResultsCMA}{" "}
+                            </p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1638,15 +1537,14 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                               Line
                             </label>
-                            <div
+                            <input  
                               type="text"
-                              class="appearance-none block w-full  font-bold bg-gray-200 text-orange-400 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              class="appearance-none block w-full text-center  font-bold bg-gray-200 text-orange-400 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                               name="NamaPIC"
-                              required
+                              readOnly
                               value={Line}
-                            >
-                              {Line}
-                            </div>
+                            />
+                           
                           </div>
                         </div>
                         <div class="w-full px-1">
@@ -1671,6 +1569,7 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
                             Problem
                           </p>
                         </div>
+                        <div class="flex justify-center">
                         <button
                           data-modal-hide="popup-modal"
                           type="button"
@@ -1688,6 +1587,7 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
                           No, cancel
                         </button>
                       </div>
+                    </div>
                     </div>
                   </form>
                 </div>

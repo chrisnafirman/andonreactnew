@@ -304,6 +304,10 @@ const SmtTop = () => {
 
   //  Submit Destacker
   const submitDestacker = () => {
+    if (!NamaPIC || !Line || !Kerusakan || !Area) {
+      alert("Harap isi semua kolom!");
+      return;
+    }
     const data = {
       NamaPIC: NamaPIC,
       Area: Area,
@@ -337,6 +341,11 @@ const SmtTop = () => {
 
   //  Submit Quality
   const submitQuality = () => {
+    if (!NamaPIC || !Line || !Kerusakan || !Area) {
+      alert("Harap isi semua kolom!");
+      return;
+    }
+
     const data = {
       NamaPIC: NamaPIC,
       NpkPIC: NpkPIC,
@@ -382,6 +391,12 @@ const SmtTop = () => {
 
   //  Submit Validation Quality A
   const submitValQA = () => {
+
+    if (!NamaPIC || !Line || !Kerusakan || !Area || !file) {
+      alert("Harap isi semua kolom!");
+      return;
+    }
+
     const data = new FormData();
     data.append("NamaPIC", NamaPIC);
     data.append("NpkPIC", NpkPIC);

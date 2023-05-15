@@ -798,22 +798,22 @@ const SmtTop = () => {
             <div class=" gap-2 mb-4 flex py-2 px-3 ">
               <div className="flex ">
                 <label
-                  for="first_name"
+                 
                   class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
                 >
                   Planned Production
                 </label>
                 <input
-                  type="number"
-                  id="first_name"
-                  class="ml-14 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="0"
+                  type="text"
+            
+                  defaultValue="0 Hours : 0 Minutes"
+                  class="ml-12 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
                   onChange={(e) => {
                     setPP(e.target.value);
                   }}
                 />
-                <h1 className="mt-3 ml-2">Minutes</h1>
+                <h1 className="mt-3 text-xs text-red-500 ml-2">!Ganti Angka 0 Untuk Menentukan Waktu</h1>
               </div>
             </div>
 
@@ -821,22 +821,21 @@ const SmtTop = () => {
             <div class=" gap-2 mb-4 flex py-2 px-3 ">
               <div className="flex ">
                 <label
-                  for="first_name"
+                 
                   class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
                 >
                   Planned Downtime
                 </label>
                 <input
-                  type="number"
-                  id="first_name"
+                  type="text"
+                  defaultValue="0 Hours : 0 Minutes"
                   class="ml-14 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="0"
                   required
                   onChange={(e) => {
                     setPD(e.target.value);
                   }}
                 />
-                <h1 className="mt-3 ml-2">Minutes</h1>
+                <h1 className="mt-3 text-red-500 text-xs ml-2">!Ganti Angka 0 Untuk Menentukan Waktu</h1>
               </div>
             </div>
 
@@ -850,16 +849,18 @@ const SmtTop = () => {
                   Change Model Alocation
                 </label>
                 <input
-                  type="number"
-                  id="first_name"
+                  type="text"
+                  id="cma"
                   class="ml-5 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="0"
+                  defaultValue="0 Hours : 0 Minutes"
                   required
                   onChange={(e) => {
                     setCMA(e.target.value);
                   }}
                 />
-                <h1 className="mt-3 ml-2">Minutes</h1>
+                <h1 className="mt-3 text-red-500 text-xs ml-2">
+                !Ganti Angka 0 Untuk Menentukan Waktu{" "}
+                </h1>
               </div>
             </div>
 
@@ -924,7 +925,7 @@ const SmtTop = () => {
                             Production Time 2:
                           </td>
                           <td className="text-sm">
-                          <span style={{ color: "green" }}>
+                            <span style={{ color: "green" }}>
                               {data.PT2_IN}
                             </span>{" "}
                             -{" "}
@@ -940,9 +941,7 @@ const SmtTop = () => {
                         <tr>
                           <td className="font-bold  text-xs">Planned DT:</td>
                           <td className="text-sm ">
-                          <span style={{ color: "green" }}>
-                              {data.PD_IN}
-                            </span>{" "}
+                            <span style={{ color: "green" }}>{data.PD_IN}</span>{" "}
                             -{" "}
                             <span style={{ color: "red" }}>{data.PD_OUT}</span>
                           </td>
@@ -952,7 +951,7 @@ const SmtTop = () => {
                             Production Time 3:
                           </td>
                           <td className="text-sm">
-                          <span style={{ color: "green" }}>
+                            <span style={{ color: "green" }}>
                               {data.PT3_IN}
                             </span>{" "}
                             -{" "}
@@ -970,7 +969,7 @@ const SmtTop = () => {
                             Production Time 4:
                           </td>
                           <td className="text-sm">
-                          <span style={{ color: "green" }}>
+                            <span style={{ color: "green" }}>
                               {data.PT4_IN}
                             </span>{" "}
                             -{" "}
@@ -986,9 +985,7 @@ const SmtTop = () => {
                         <tr>
                           <td className="font-bold text-xs">Over Time:</td>
                           <td className="text-sm">
-                          <span style={{ color: "green" }}>
-                              {data.OT_IN}
-                            </span>{" "}
+                            <span style={{ color: "green" }}>{data.OT_IN}</span>{" "}
                             -{" "}
                             <span style={{ color: "red" }}>{data.OT_OUT}</span>
                           </td>
@@ -1003,21 +1000,21 @@ const SmtTop = () => {
                           <td className="font-bold text-xs">
                             Planned Production :
                           </td>
-                          <td className="text-sm">{data.PP} Minutes</td>
+                          <td className="text-sm">{data.PP} </td>
                         </tr>
 
                         <tr>
                           <td className="font-bold text-xs">
                             Planned Downtime :
                           </td>
-                          <td className="text-sm">{data.PD} Minutes</td>
+                          <td className="text-sm">{data.PD} </td>
                         </tr>
 
                         <tr>
                           <td className="font-bold text-xs">
                             Change Model Allocation :
                           </td>
-                          <td className="text-sm">{data.CMA} Minutes</td>
+                          <td className="text-sm">{data.CMA} </td>
                         </tr>
                       </tbody>
                     </table>
