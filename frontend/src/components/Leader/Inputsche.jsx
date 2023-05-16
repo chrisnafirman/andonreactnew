@@ -995,6 +995,12 @@ const SmtTop = () => {
                             --------------------
                           </td>
                         </tr>
+                        <tr>
+                          <td className="font-bold text-xs">
+                            Change Model Allocation :
+                          </td>
+                          <td className="text-sm">{data.CMA} </td>
+                        </tr>
 
                         <tr>
                           <td className="font-bold text-xs">
@@ -1010,13 +1016,40 @@ const SmtTop = () => {
                           <td className="text-sm">{data.PD} </td>
                         </tr>
 
+                        
+                      </tbody>
+                      <tr>
+                          <td className="font-bold text-xs">
+                            --------------------
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold text-xs">
+                            REAL PRODUCTION  TIME
+                          </td>
+                        </tr>
                         <tr>
                           <td className="font-bold text-xs">
                             Change Model Allocation :
                           </td>
-                          <td className="text-sm">{data.CMA} </td>
+                          <td className="text-sm">{data.ResultsCMA} </td>
                         </tr>
-                      </tbody>
+
+                        <tr>
+                          <td className="font-bold text-xs">
+                           Production : 
+                          </td>
+                          <td className="text-sm">Loading.... </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold text-xs">
+                           Downtime :
+                          </td>
+                          <td className="text-sm">Loading....</td>
+                        </tr>
+
+
+
                     </table>
                   ) : (
                     <p>Loading...</p>

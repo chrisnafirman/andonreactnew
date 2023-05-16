@@ -13,21 +13,44 @@ const database = firebase.database();
 
 const Andonline1 = () => {
   const [mesin, setMesin] = useState("");
-
   const [nama, setNama] = useState("");
-
   const [timer, setTimer] = useState("");
-  const [time, setTime] = useState(new Date().toLocaleString());
-  const [prevStatus, setPrevStatus] = useState("");
-  const [showDrawer, setShowDrawer] = useState(false);
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [data, setData] = useState(null);
 
-  //
+  const [prevStatus, setPrevStatus] = useState("");
+
+  // DATA  
+
+  const [NamaPIC, setNamaPIC] = useState("");
+  const [NpkPIC, setNpkPIC] = useState("");
+  const [Kerusakan, setKerusakan] = useState("");
+  
+  // OTHERS
+  const [selectedStatus, setSelectedStatus] = useState("");
+
+
+  // NAVBAR
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [time, setTime] = useState(new Date().toLocaleString());
+
+  // FIREBASE
+  const [showDrawer, setShowDrawer] = useState(false);
+
+
+  // SMT LINE 1
   const [StatusLine, setStatusLine] = useState("");
+  //STATION
+
+  // STATION DESTECKER
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT TOP");
   const [Destacker, setDestecker] = useState("Destacker");
+
+
+
+
+
+
+  // CMA
   const [CMATime, setCMATime] = useState({ hours: 0, minutes: 0, seconds: 0 });
   const [CMARunning, setCMARunning] = useState();
   const [ResultsCMA, setResultsCMA] = useState();
@@ -35,14 +58,12 @@ const Andonline1 = () => {
   // popup form 1
   const [isOpenOthers, setIsOpenOthers] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
+  const [isOpenOperator, setIsOpenOperator] = useState(false);
   const [isOpenNetwork, setIsOpenNetwork] = useState(false);
 
-  const [selectedStatus, setSelectedStatus] = useState("");
-  const [NamaPIC, setNamaPIC] = useState("");
-  const [NpkPIC, setNpkPIC] = useState("");
-  const [Kerusakan, setKerusakan] = useState("");
 
-  // schedule
+
+//  SCHEDULE
   const [SHIFT, setSHIFT] = useState("");
   const [PT1_IN, setPT1_IN] = useState("");
   const [PT1_OUT, setPT1_OUT] = useState("");
@@ -69,6 +90,11 @@ const Andonline1 = () => {
   const [CMA, setCMA] = useState("");
   const [PDATE, setPDATE] = useState("");
 
+  // DATA SCHEDULE PLANING
+  const [data, setData] = useState(null);
+
+  // ---------------------
+
   // Status
   const [status, setStatus] = useState("");
   const [network, setStatusNetwork] = useState("");
@@ -78,30 +104,33 @@ const Andonline1 = () => {
   const [shorbox, setStatusShorbox] = useState("");
   const [overtrial, setStatusOvertrial] = useState("");
   const [overchange, setStatusOverchange] = useState("");
+  // ------------------------
 
   //BACKGROUND / WARNA KOTAK
   const [backgroundColor, setBackgroundColor] = useState("");
   const [backgroundColorNetwork, setBackgroundColorNetwork] = useState("");
-  const [backgroundColorElectricity, setBackgroundColorElectricity] =
-    useState("");
+  const [backgroundColorElectricity, setBackgroundColorElectricity] =useState("");
   const [backgroundColorAircomp, setBackgroundColorAircomp] = useState("");
   const [backgroundColorShorcomp, setBackgroundColorShorcomp] = useState("");
   const [backgroundColorShorbox, setBackgroundColorShorbox] = useState("");
   const [backgroundColorOvertrial, setBackgroundColorOvertrial] = useState("");
-  const [backgroundColorOverchange, setBackgroundColorOverchange] =
-    useState("");
+  const [backgroundColorOverchange, setBackgroundColorOverchange] =useState("");
+  // ------------------
 
   /// Purchasing
   const namaList = ["CHRISNA FIRMAN"];
   const npkList = ["0301"];
 
-  // Area Station
+
+  
+   // FETCHING FIREBASE
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
   };
 
+  // Fetching FIrebase
   useEffect(() => {
     const ref = firebase.database().ref("Mesin/Mesin1");
     ref.on("value", (snapshot) => {
@@ -182,15 +211,11 @@ const Andonline1 = () => {
       // }
     });
 
-  
     const ref2 = firebase.database().ref("StatusLine/SMTLine1");
     ref2.on("value", (snapshot) => {
       const data = snapshot.val();
       setStatusLine(data);
     });
-
-
-
 
     const ref3 = firebase.database().ref("SMTLine1/Network");
     ref3.on("value", (snapshot) => {
@@ -242,37 +267,14 @@ const Andonline1 = () => {
 
     return () => {};
   }, []);
-  ////////////
 
-  // DATA2
-  ////////////
-  // const ref5 = database.ref("Mesin2/Status");
-  // ref5.on("value", (snapshot) => {
-  //   const data = snapshot.val();
-  //   updateStatus2(data);
-  // });
+  // ---------------------
+  
+  
+  
+  // CMA WAKTU / FIREBASE
 
-  // const ref6 = firebase.database().ref("Mesin2/NamaMesin");
-  // ref6.on("value", (snapshot) => {
-  //   const data = snapshot.val();
-  //   setMesin2(data);
-  // });
-
-  // const ref7 = firebase.database().ref("Mesin2/LineMesin");
-  // ref7.on("value", (snapshot) => {
-  //   const data = snapshot.val();
-  //   setLine2(data);
-  // });
-
-  // const ref8 = firebase.database().ref("Mesin2/Nama");
-  // ref8.on("value", (snapshot) => {
-  //   const data = snapshot.val();
-  //   setNama2(data);
-  // });
-
-  // ----
   let CMAInterval;
-
   useEffect(() => {
     if (CMARunning) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -316,19 +318,285 @@ const Andonline1 = () => {
     return () => clearInterval(CMAInterval);
   }, [CMARunning]);
 
-  // fungsi time di navbar
+// start stop CMA
+  const startCMA = () => {
+    setCMATime({ hours: 0, minutes: 0, seconds: 0 });
+    firebase
+      .database()
+      .ref("/StatusLine/SMTLine1CMAOnGoing")
+      .set("0 H 0 M 0 S");
+    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set(0);
+    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set(0);
+    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
+    setCMARunning(true);
+  };
+  const stopCMA = (event) => {
+    const data = {
+      ResultsCMA: ResultsCMA,
+    };
+    fetch(`http://192.168.101.236:3001/api/put/ResultsCMA`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Change Model Telah Selesai Data Sudah Terinput");
+          setCMARunning(false);
+          window.location.reload();
+          event.preventDefault();
+        } else {
+          throw new Error("Error updating data");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
+ // ----
+
+
+  // FETCHING SCHEDULE
+  // fungsi  schedule
+  function formatDate(dateString) {
+    const options = { day: "numeric", month: "numeric", year: "numeric" };
+    const formattedDate = new Date(dateString).toLocaleDateString(
+      "id-ID",
+      options
+    );
+    return formattedDate;
+  }
+  // Fetching Data Schedule Planing
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://192.168.101.236:3001/api/get/Inputsche"
+        );
+        const jsonData = await response.json();
+        const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
+
+        setData(latestData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+ // ----
+
+
+  //  FUNGSI WAKTU
+  const formattedTime = `${currentTime.getDate()}/${
+    currentTime.getMonth() + 1
+  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+
+  // fungsi time di navbar
   function updateTime() {
     const interval = setInterval(() => {
       setTime(new Date().toLocaleString());
     }, 1000);
     return () => clearInterval(interval);
   }
-
   useEffect(() => {
     updateTime();
   }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
   // ----
+
+
+
+  // FUNGSI UPDATE STATUS
+  // fungsi mengubah warna status
+  const updateStatus = (data) => {
+    setStatus(data);
+    setBackgroundColor(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+ // UPDATE Network
+  const updateNetwork = (data) => {
+    setStatusNetwork(data);
+    setBackgroundColorNetwork(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Down"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  // UPDATE Electricity
+  const updateElectricity = (data) => {
+    setStatusElectricity(data);
+    setBackgroundColorElectricity(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  // UPDATE Aircomp
+  const updateAircomp = (data) => {
+    setStatusAircomp(data);
+    setBackgroundColorAircomp(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  // UPDATE Shorcomp
+  const updateShorcomp = (data) => {
+    setStatusShorcomp(data);
+    setBackgroundColorShorcomp(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  // UPDATE Shorbox
+  const updateShorbox = (data) => {
+    setStatusShorbox(data);
+    setBackgroundColorShorbox(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  // UPDATE OverTrial
+  const updateOvertrial = (data) => {
+    setStatusOvertrial(data);
+    setBackgroundColorOvertrial(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  // UPDATE Overchangemodel
+  const updateOverchange = (data) => {
+    setStatusOverchange(data);
+    setBackgroundColorOverchange(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  // ----
+
+ 
+
 
   // fungsi post ke backend
 
@@ -353,198 +621,7 @@ const Andonline1 = () => {
     setPrevStatus(status);
   }, [status, mesin, Line, timer, prevStatus]);
 
-  // ------
-
-  // fungsi mengubah warna status
-
-  const updateStatus = (data) => {
-    setStatus(data);
-    setBackgroundColor(
-      data === "Go"
-        ? "#31A207"
-        : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
-    );
-  };
-
-  // Background Network
-  const updateNetwork = (data) => {
-    setStatusNetwork(data);
-    setBackgroundColorNetwork(
-      data === "Go"
-        ? "#31A207"
-        : data === "Repair"
-        ? "#E9CE08"
-        : data === "Down"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
-    );
-  };
-
-  // Background Electricity
-  const updateElectricity = (data) => {
-    setStatusElectricity(data);
-    setBackgroundColorElectricity(
-      data === "Go"
-        ? "#31A207"
-        : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
-    );
-  };
-
-  // Background Aircomp
-  const updateAircomp = (data) => {
-    setStatusAircomp(data);
-    setBackgroundColorAircomp(
-      data === "Go"
-        ? "#31A207"
-        : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
-    );
-  };
-
-  // Background Shorcomp
-  const updateShorcomp = (data) => {
-    setStatusShorcomp(data);
-    setBackgroundColorShorcomp(
-      data === "Go"
-        ? "#31A207"
-        : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
-    );
-  };
-
-  // Background Shorbox
-  const updateShorbox = (data) => {
-    setStatusShorbox(data);
-    setBackgroundColorShorbox(
-      data === "Go"
-        ? "#31A207"
-        : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
-    );
-  };
-
-  // Background OverTrial
-  const updateOvertrial = (data) => {
-    setStatusOvertrial(data);
-    setBackgroundColorOvertrial(
-      data === "Go"
-        ? "#31A207"
-        : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
-    );
-  };
-
-  // Background Overchangemodel
-  const updateOverchange = (data) => {
-    setStatusOverchange(data);
-    setBackgroundColorOverchange(
-      data === "Go"
-        ? "#31A207"
-        : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
-    );
-  };
-
-  // ----
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const formattedTime = `${currentTime.getDate()}/${
-    currentTime.getMonth() + 1
-  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
-
+ // Submit 
   const submit = () => {
     const data = {
       NamaPIC: NamaPIC,
@@ -589,48 +666,19 @@ const Andonline1 = () => {
       });
   };
 
-  // fungsi  schedule
-  function formatDate(dateString) {
-    const options = { day: "numeric", month: "numeric", year: "numeric" };
-    const formattedDate = new Date(dateString).toLocaleDateString(
-      "id-ID",
-      options
-    );
-    return formattedDate;
-  }
-
-  // Fetching Data Schedule Planing
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "http://192.168.101.236:3001/api/get/Inputsche"
-        );
-        const jsonData = await response.json();
-        const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
-
-        setData(latestData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   // Submit Network
   const SubmitNetwork = (event) => {
     if (!NamaPIC || !Line || !Kerusakan) {
       alert("Harap isi semua kolom!");
       return;
     }
-  
+
     const data = {
       NamaPIC: NamaPIC,
       Line: Line,
       Kerusakan: Kerusakan,
     };
-  
+
     fetch(`http://192.168.101.236:3001/api/post/network`, {
       method: "POST",
       headers: {
@@ -654,47 +702,12 @@ const Andonline1 = () => {
         console.log(err);
       });
   };
+  // ------
   
 
-  const startCMA = () => {
-    setCMATime({ hours: 0, minutes: 0, seconds: 0 });
-    firebase
-      .database()
-      .ref("/StatusLine/SMTLine1CMAOnGoing")
-      .set("0 H 0 M 0 S");
-      firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set(0);
-firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set(0);
-firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
-    setCMARunning(true);
-  };
+ 
 
-  const stopCMA = (event) => {
-    const data = {
-      ResultsCMA:ResultsCMA
-    };
-    fetch(`http://192.168.101.236:3001/api/put/ResultsCMA`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          alert("Change Model Telah Selesai Data Sudah Terinput");
-          setCMARunning(false);
-          window.location.reload();
-          event.preventDefault();
-        } else {
-          throw new Error("Error updating data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-
+ 
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/S.jpg)`,
     backgroundSize: "1300px",
@@ -752,8 +765,6 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
           </header>
         </div>
       </header>
-
-
 
       {/*  */}
       <main>
@@ -1220,6 +1231,9 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
           <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
         </>
       ) : null}
+
+
+      {/* ISA */}
       <td class="">
         {isOpen2 ? (
           <>
@@ -1259,64 +1273,47 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
                   </h2>
                   <div className="bg-white px-4 pt-1 pb-4 flex sm:p-6 sm:pb-4">
                     <div className="overflow-y-auto max-h-96 w-[400px]">
-                      <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
-                        <h3 className="text-lg font-bold mb-4">
-                          Today's Login
-                        </h3>
-                        <div className="ml-6">
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">Leader:</span>
-                            <span className="font-bold ml-4">Chrisna </span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              SMT Top Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna </span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              SMT Bot Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              Drop In Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              Touch Up Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              Router Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              FCT Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              Coating Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
+                      {data ? (
+                        <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
+                          <div className="mt-9">
+                            <h3 className="text-lg font-bold mb-2">
+                              Real Production Time
+                            </h3>
+                            <p className="font-bold text-sm">
+                               Production Time:
+                            </p>
+                            <p>{data.PP} </p>
+                            <p className="text-sm text-white bg-slate-700 text-center justify-center rounded-xl">
+                               Loading...{" "}
+                            </p>
+                          </div>
+                          <div className="mt-2">
+                            <p className="font-bold text-sm">
+                               Downtime :
+                            </p>
+                            <p>{data.PD} </p>
+                            <p className="text-sm text-white bg-slate-700 text-center justify-center rounded-xl">
+                               Loading...{" "}
+                            </p>
+                          </div>
+                          <div className="mt-2">
+                            <p className="font-bold text-sm">
+                              Change Model Allocation:
+                            </p>
+                            <p>{data.CMA} </p>
+                            <p className="text-sm text-white bg-amber-500 text-center justify-center rounded-xl">
+                              ON GOING : {ResultsCMA}{" "}
+                            </p>
+                          </div>
                         </div>
-                      </div>
+                      ) : (
+                        <p>Loading...</p>
+                      )}
                     </div>
 
                     <div className="bg-white px-4 w-96 py-6 sm:p-6 ml-24 rounded-lg shadow-md">
                       <h3 className="text-lg font-bold mb-2">
-                        PRODUCTION TIME 
+                        Production Time
                       </h3>
 
                       {data ? (
@@ -1446,26 +1443,28 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
                             END CHANGE MODEL (ROUTER)
                           </button>
                         </div>
-                        <div className="mt-2">
-                          <p className="font-bold text-sm">Planned Production Time:</p>
-                          <p>{data.PP} </p>
-                          <p className="text-sm text-white bg-amber-700 text-center justify-center rounded-xl">
-                              ON GOING : {ResultsCMA}{" "}
-                            </p>
-                        </div>
-                         <div className="mt-2">
-                          <p className="font-bold text-sm">Change Model Allocation:</p>
-                          <p>{data.CMA} </p> 
-                            <p className="text-sm text-white bg-amber-700 text-center justify-center rounded-xl">
-                              ON GOING : {ResultsCMA}{" "}
-                            </p>
-                        </div>
-                        <div className="mt-2">
-                          <p className="font-bold text-sm">Planned Downtime :</p>
-                          <p>{data.PD} </p>
-                          <p className="text-sm text-white bg-amber-700 text-center justify-center rounded-xl">
-                              ON GOING : {ResultsCMA}{" "}
-                            </p>
+                        <div className="pt-2">
+                          <button
+                            onClick={() => {
+                              setIsOpenOperator(true);
+                              setIsOpen2(false);
+                            }}
+                            className="bg-blue-500 hover:bg-blue-700 flex w-40 text-white font-bold py-2 px-4 rounded"
+                          >
+                            <svg
+                              fill="#000000"
+                              width="30px"
+                              className="flex "
+                              height="30px"
+                              viewBox="0 0 32 32"
+                              version="1.1"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <title>contacts</title>
+                              <path d="M2.016 28v2.016q0 0.832 0.576 1.408t1.408 0.576v-4h-1.984zM2.016 25.024q0 0.384 0.288 0.704t0.704 0.288h1.984q0.416 0 0.704-0.288t0.32-0.704-0.32-0.704-0.704-0.32h-1.984q-0.416 0-0.704 0.32t-0.288 0.704zM2.016 22.016h1.984v-12h-1.984v12zM2.016 7.008q0 0.416 0.288 0.704t0.704 0.288h1.984q0.416 0 0.704-0.288t0.32-0.704-0.32-0.704-0.704-0.288h-1.984q-0.416 0-0.704 0.288t-0.288 0.704zM2.016 4h1.984v-4q-0.832 0-1.408 0.608t-0.576 1.408v1.984zM6.016 28v2.016q0 0.832 0.576 1.408t1.408 0.576h20q0.832 0 1.408-0.576t0.608-1.408v-28q0-0.832-0.608-1.408t-1.408-0.608h-20q-0.832 0-1.408 0.608t-0.576 1.408v1.984q0.8 0 1.408 0.608t0.576 1.408v1.984q0 0.832-0.576 1.44t-1.408 0.576v12q0.8 0 1.408 0.576t0.576 1.408v2.016q0 0.832-0.576 1.408t-1.408 0.576zM12 21.024q0.224-1.344 1.056-2.464t2.048-1.792q-1.088-1.152-1.088-2.752v-2.016q0-1.632 1.152-2.816t2.848-1.184 2.816 1.184 1.184 2.816v2.016q0 1.6-1.12 2.752 1.184 0.672 2.048 1.792t1.056 2.464q0 1.248-0.864 2.112t-2.144 0.864h-5.984q-1.248 0-2.144-0.864t-0.864-2.112z"></path>
+                            </svg>
+                            <span className="ml-3">Operator</span>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -1479,6 +1478,119 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
         ) : null}
       </td>
 
+      {/* isOpenOperator */}
+      <td class="">
+        {isOpenOperator ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 transition-opacity">
+                  <div className="absolute bg-gray-500 opacity-75"></div>
+                </div>
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                <div
+                  className="inline-block  align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div
+                     onClick={() => {
+                      setIsOpenOperator(false);
+                      setIsOpen2(true);
+                    }}
+                    className="flex justify-end p-2"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 cursor-pointer"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </div>
+                  <h2 className="text-lg font-bold   text-center">
+                    Operator Area: SMT
+                  </h2>
+                  <div className="bg-white px-4 pt-1 pb-4 flex sm:p-6 sm:pb-4">
+                    <div className="bg-white px-4 w-96 py-6 sm:p-6 ml-10 rounded-lg shadow-md">
+                    <div className="overflow-y-auto max-h-96 w-[400px]">
+                      <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
+                        <h3 className="text-lg font-bold mb-4">
+                          Today's Login
+                        </h3>
+                        <div className="ml-6">
+                          <p className="mb-2 flex">
+                            <span className="font-bold w-40">Leader:</span>
+                            <span className="font-bold ml-4">Chrisna </span>
+                          </p>
+                          <p className="mb-2 flex">
+                            <span className="font-bold w-40">
+                              SMT Top Operator:
+                            </span>
+                            <span className="font-bold ml-4">Chrisna </span>
+                          </p>
+                          <p className="mb-2 flex">
+                            <span className="font-bold w-40">
+                              SMT Bot Operator:
+                            </span>
+                            <span className="font-bold ml-4">Chrisna</span>
+                          </p>
+                          <p className="mb-2 flex">
+                            <span className="font-bold w-40">
+                              Drop In Operator:
+                            </span>
+                            <span className="font-bold ml-4">Chrisna</span>
+                          </p>
+                          <p className="mb-2 flex">
+                            <span className="font-bold w-40">
+                              Touch Up Operator:
+                            </span>
+                            <span className="font-bold ml-4">Chrisna</span>
+                          </p>
+                          <p className="mb-2 flex">
+                            <span className="font-bold w-40">
+                              Router Operator:
+                            </span>
+                            <span className="font-bold ml-4">Chrisna</span>
+                          </p>
+                          <p className="mb-2 flex">
+                            <span className="font-bold w-40">
+                              FCT Operator:
+                            </span>
+                            <span className="font-bold ml-4">Chrisna</span>
+                          </p>
+                          <p className="mb-2 flex">
+                            <span className="font-bold w-40">
+                              Coating Operator:
+                            </span>
+                            <span className="font-bold ml-4">Chrisna</span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+
+                    
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
+     <td>
       {isOpenNetwork ? (
         <>
           <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -1537,14 +1649,13 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                               Line
                             </label>
-                            <input  
+                            <input
                               type="text"
                               class="appearance-none block w-full text-center  font-bold bg-gray-200 text-orange-400 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                               name="NamaPIC"
                               readOnly
                               value={Line}
                             />
-                           
                           </div>
                         </div>
                         <div class="w-full px-1">
@@ -1570,24 +1681,24 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
                           </p>
                         </div>
                         <div class="flex justify-center">
-                        <button
-                          data-modal-hide="popup-modal"
-                          type="button"
-                          onClick={SubmitNetwork}
-                          class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                        >
-                          Yes, I'm sure
-                        </button>
-                        <button
-                          data-modal-hide="popup-modal"
-                          type="button"
-                          onClick={() => setIsOpenNetwork(false)}
-                          class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                        >
-                          No, cancel
-                        </button>
+                          <button
+                            data-modal-hide="popup-modal"
+                            type="button"
+                            onClick={SubmitNetwork}
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                          >
+                            Yes, I'm sure
+                          </button>
+                          <button
+                            data-modal-hide="popup-modal"
+                            type="button"
+                            onClick={() => setIsOpenNetwork(false)}
+                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                          >
+                            No, cancel
+                          </button>
+                        </div>
                       </div>
-                    </div>
                     </div>
                   </form>
                 </div>
@@ -1598,6 +1709,7 @@ firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
           <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
         </>
       ) : null}
+      </td>
     </body>
   );
 };
