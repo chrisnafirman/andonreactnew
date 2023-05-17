@@ -84,6 +84,7 @@ const RepairReport = () => {
     fetch("http://192.168.101.236:3001/api/get/Maintenance")
       .then((response) => response.json())
       .then((json) => {
+        console.log(json);
         // mengubah properti timestamp menjadi tanggal dan Date
         json.forEach((item) => {
           const date = new Date(item.Date);
@@ -115,6 +116,7 @@ const RepairReport = () => {
     )
       .then((response) => response.json())
       .then((json) => {
+        console.log(json);
         // mengubah properti Date menjadi tanggal saja
         json.forEach((item) => {
           const date = new Date(item.Date);

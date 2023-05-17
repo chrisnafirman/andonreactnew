@@ -153,6 +153,8 @@ const RequestQA = () => {
     const filteredData = data.filter((item) => item.waktu.includes(formattedDate));
     filteredData.sort((a, b) => Date.parse(b.waktu) - Date.parse(a.waktu));
     setFilteredData(filteredData);
+    console.log(selectedDate); // Periksa nilai selectedDate
+    console.log(formattedDate);
   };
   
   const styles = {

@@ -23,8 +23,7 @@ const SmtTop = () => {
   const [showDrawer, setShowDrawer] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
 
-  const [filteredData, setFilteredData] = useState([]);
-  const [selectedDate, setSelectedDate] = useState("");
+
   const [showDatePicker, setShowDatePicker] = useState(true);
 
   // popup 1
@@ -35,7 +34,13 @@ const SmtTop = () => {
   const [NamaPIC, setNamaPIC] = useState("");
   const [NpkPIC, setNpkPIC] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
-  const [data, setData] = useState(null);
+
+
+  
+  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedItem, setSelectedItem] = useState(null);
 
   // SCHE PRODUCTION
   const [SHIFT, setSHIFT] = useState("");
@@ -125,26 +130,26 @@ const SmtTop = () => {
     fetch("http://192.168.101.236:3001/api/get/Inputsche")
       .then((response) => response.json())
       .then((json) => {
-        // mengubah properti timestamp menjadi tanggal dan waktu
-        json.forEach((item) => {
+        // mengubah properti timestamp menjadi tanggal dan PDATE
+        const newData = json.map((item) => {
           const date = new Date(item.PDATE);
           const day = date.getDate();
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
-          const hours = date.getHours();
-          const minutes = date.getMinutes();
           const formattedDate = `${day.toString().padStart(2, "0")}-${month
             .toString()
-            .padStart(2, "0")}-${year}`; 
-          item.PDATE = formattedDate;
+            .padStart(2, "0")}-${year} `;
+          return { ...item, PDATE: formattedDate };
         });
-        json.sort((a, b) => Date.parse(a.PDATE) - Date.parse(b.PDATE));
-        json.reverse();
-        setData(json);
-        setFilteredData(json);
-      });
+
+        newData.sort((a, b) => Date.parse(a.PDATE) - Date.parse(b.PDATE));
+        newData.reverse();
+        setData(newData);
+        setFilteredData(newData);
+      })
+      .catch((error) => console.error(error));
   }, []);
-  
+
   const handleFilterByDate = (e) => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
@@ -153,7 +158,7 @@ const SmtTop = () => {
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti PDATE menjadi tanggal saja
-        json.forEach((item) => {
+        const newFilteredData = json.map((item) => {
           const date = new Date(item.PDATE);
           const day = date.getDate();
           const month = date.getMonth() + 1;
@@ -161,14 +166,16 @@ const SmtTop = () => {
           const formattedDate = `${day.toString().padStart(2, "0")}-${month
             .toString()
             .padStart(2, "0")}-${year}`;
-          item.PDATE = formattedDate;
+          return { ...item, PDATE: formattedDate };
         });
-        json.sort((a, b) => Date.parse(a.PDATE) - Date.parse(b.PDATE));
-        json.reverse();
-        setFilteredData(json);
-      });
+
+        newFilteredData.sort((a, b) => Date.parse(a.PDATE) - Date.parse(b.PDATE));
+        newFilteredData.reverse();
+        setFilteredData(newFilteredData);
+      })
+      .catch((error) => console.error(error));
   };
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!selectedDate) {
@@ -181,10 +188,17 @@ const SmtTop = () => {
     )
       .toString()
       .padStart(2, "0")}-${date.getFullYear()}`;
-    const filteredData = data.filter((item) => item.PDATE.includes(formattedDate));
-    filteredData.sort((a, b) => Date.parse(b.PDATE) - Date.parse(a.PDATE));
-    setFilteredData(filteredData);
+      
+    const filteredDataResult = filteredData.filter((item) =>
+      item.PDATE.includes(formattedDate)
+    );
+    filteredDataResult.sort((a, b) => Date.parse(b.PDATE) - Date.parse(a.PDATE));
+    setFilteredData(filteredDataResult);
+    console.log(selectedDate); // Periksa nilai selectedDate
+    console.log(formattedDate);
   };
+
+  
   
 
   const stop = (value) => {
@@ -238,16 +252,14 @@ const SmtTop = () => {
       });
   };
 
-  function formatDate(dateString) {
-    const options = { day: "numeric", month: "numeric", year: "numeric" };
-    const formattedDate = new Date(dateString).toLocaleDateString(
-      "id-ID",
-      options
-    );
-    return formattedDate;
-  }
-
-
+  // function formatDate(dateString) {
+  //   const options = { day: "numeric", month: "numeric", year: "numeric" };
+  //   const formattedDate = new Date(dateString).toLocaleDateString(
+  //     "id-ID",
+  //     options
+  //   );
+  //   return formattedDate;
+  // }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -290,14 +302,10 @@ const SmtTop = () => {
     return () => clearInterval(interval);
   }, []);
 
-
   const formattedTime = `${currentTime.getDate()}/${
     currentTime.getMonth() + 1
   }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
-
-
-  
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/l.jpg)`,
     backgroundSize: "1300px",
@@ -326,7 +334,7 @@ const SmtTop = () => {
         <div class="mx-auto max-w-7xl px-4">
           <marquee behavior="scroll" direction="right">
             <h1 class="text-xl font-bold tracking-tight text-gray-900">
-              SMT LINE 1 - LEADER - Input Schedule Production
+              Schedule Production
             </h1>
           </marquee>
         </div>
@@ -462,54 +470,49 @@ const SmtTop = () => {
 
       {/*  */}
       <main className="flex">
-        <div className="ml-4">
-          {showDatePicker && (
-            <form className="" onSubmit={handleSubmit}>
-              <label htmlFor="date" className="text-gray-300">
-                Pilih Tanggal :
-              </label>
-              <div className="flex flex-col w-40">
-                <div class="relative max-w-sm">
-                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg
-                      aria-hidden="true"
-                      class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
+      {showDatePicker && (
+                <form className="" onSubmit={handleSubmit}>
+                  <label htmlFor="date" className="text-gray-300">
+                    Pilih Tanggal :
+                  </label>
+                  <div className="flex flex-col w-40">
+                    <div class="relative max-w-sm">
+                      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg
+                          aria-hidden="true"
+                          class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </div>
+                      <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        class="bg-gray-50 border items-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        onChange={handleFilterByDate}
+                      />
+                    </div>
+                    <button
+                      class="bg-blue-500  hover:bg-blue-400 text-white w-20 font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-2 "
+                      type="submit"
                     >
-                      <path
-                        fill-rule="evenodd"
-                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
+                      Submit
+                    </button>
                   </div>
-                  <input
-                    type="date"
-                    id="date"
-                    name="date"
-                    class="bg-gray-50 border items-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    onChange={handleFilterByDate}
-                  />
-                </div>
-                <button
-                  class="bg-blue-500  hover:bg-blue-400 text-white w-20 font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-2 "
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          )}
-          <button
-            class="bg-blue-500 hover:bg-blue-400 text-white w-20 font-bold py-1 px-2 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-1 mb-3 "
-            onClick={handleToggleDatePicker}
-          >
-            {showDatePicker ? "Hide" : "Search"}
-          </button>
+                </form>
+              )}
+
+        <div className="ml-4">
         </div>
-        <div className="flex ">
+        <div class="flex ">
           <ol class="relative border-l border-gray-200 ml-7 dark:border-gray-700">
             <div class="mb-10 ml-6 w-[1000px] md:w-[700px] sm:w-[500px] lg:w-[1000px]">
               <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
@@ -534,258 +537,339 @@ const SmtTop = () => {
                   <table id="data-table" className="table-auto w-full">
                     <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                       <tr>
-                        <th className="p-1 w-40">
+                        <th className="p-1 w-20">
                           <div className="font-semibold text-left">LINE</div>
                         </th>
                         <th className="p-1 w-20">
-                          <div className="font-semibold text-left">Line</div>
-                        </th>
-                        <th className="p-1 w-10">
-                          <div className="font-semibold text-center">AREA</div>
+                          <div className="font-semibold text-left">SHIFT</div>
                         </th>
                         <th className="p-1 w-10">
                           <div className="font-semibold text-center">
-                            Station
+                            Prodcution Time
                           </div>
                         </th>
                         <th className="p-1 w-10">
+                          <div className="font-semibold text-center">
+                            Downtime
+                          </div>
+                        </th>
+                        <th className="p-1 w-10">
+                          <div className="font-semibold text-center">
+                            Change Model
+                          </div>
+                        </th>
+
+                        <th className="p-1 w-24">
+                          <div className="font-semibold text-center">Date</div>
+                        </th>
+                        <th className="p-1 w-5">
                           <div className="font-semibold text-center">
                             DETAILS
                           </div>
                         </th>
-                        <th className="p-1 w-26">
-                          <div className="font-semibold text-center">Date</div>
-                        </th>
                       </tr>
                     </thead>
                     <tbody className="text-sm divide-y divide-gray-100">
-                      {filteredData.map((item, index) => (
-                        <tr
-                          key={item.SHIFT}
-                          className={index === 0 ? "bg-green-400" : ""}
-                        >
-                          <td className="p-2">
-                            <div className="font-medium text-gray-800">
-                              SMT LINE 1
-                            </div>
-                          </td>
-                          <td className="p-2">
-                            <div className="font-medium text-gray-800">
-                              {item.SHIFT}
-                            </div>
-                          </td>
-                          <td className="p-2 ">
-                            <div className="font-medium text-gray-800">
-                              {item.SHIFT}
-                            </div>
-                          </td>
-                          <td className="p-2">
-                            <div className="font-medium text-gray-800">
-                              {item.SHIFT}
-                            </div>
-                          </td>
-                          <td className="p-5 ">
-                            <button
-                              // onClick={() => setSelectedItem(item)}
-                              className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                      {filteredData.map(
+                        (item, index) =>
+                          item.PDATE && // Check if selectedDate matches the item's PDATE value
+                          item.CMA &&
+                          item.PD &&
+                          item.PP &&
+                          item.SHIFT && (
+                            <tr key={index}>
+                              <td className="p-2">
+                                <div className="font-medium text-gray-800">
+                                  SMT LINE 1
+                                </div>
+                              </td>
+                              <td className="p-2">
+                                <div className="font-medium text-gray-800">
+                                  {item.SHIFT}
+                                </div>
+                              </td>
+                              <td className="p-2">
+                                <div className="font-medium text-gray-800">
+                                  {item.PP}
+                                </div>
+                              </td>
+                              <td className="p-2 ">
+                                <div className="font-medium text-gray-800">
+                                  {item.PD}
+                                </div>
+                              </td>
+                              <td className="p-2">
+                                <div className="font-medium text-gray-800">
+                                  {item.CMA}
+                                </div>
+                              </td>
+                              <td className="p-2 w-12">
+                                <div className="text-center text-white rounded-md bg-lime-800 h-6 text-black...">
+                                  {item.PDATE}
+                                </div>
+                              </td>
+                              <td className="p-4 ">
+                                <button
+                                  onClick={() => setSelectedItem(item)}
+                                  className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    className="w-6 h-6 mr-2"
+                                  >
+                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M10 18a8 8 0 110-16 8 8 0 010 16zm0-2a6 6 0 100-12 6 6 0 000 12z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                  <span>DETAIL</span>
+                                </button>
+                              </td>
+                            </tr>
+                          )
+                      )}
+                    </tbody>
+                  </table>
+                  {selectedItem && (
+                    <>
+                      <div className="fixed z-10 inset-0 overflow-y-auto">
+                        <div className="flex  min-h-screen pt-4 pb-20 text-center sm:block sm:p-0">
+                          <div className="fixed inset-0 transition-opacity">
+                            <div className="absolute bg-gray-500 opacity-75"></div>
+                          </div>
+                          <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                          <div
+                            className="inline-block  align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full"
+                            role="dialog"
+                            aria-modal="true"
+                            aria-labelledby="modal-headline"
+                          >
+                            <div
+                              onClick={() => setSelectedItem(false)}
+                              className="flex justify-end p-2"
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                className="w-6 h-6 mr-2"
+                                className="h-6 w-6 cursor-pointer"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
                               >
-                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                                 <path
-                                  fillRule="evenodd"
-                                  d="M10 18a8 8 0 110-16 8 8 0 010 16zm0-2a6 6 0 100-12 6 6 0 000 12z"
-                                  clipRule="evenodd"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M6 18L18 6M6 6l12 12"
                                 />
                               </svg>
-                              <span>DETAIL</span>
-                            </button>
-                          </td>
+                            </div>
+                            <div class="items-center  p-4  bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
+                              <div className="bg-white px-4 h-auto w-96 sm:w-72 lg:w-[400px]   sm:p-6 ml-3 sm:ml-3 lg:ml-3 rounded-lg shadow-md">
+                                <h3 className="text-lg font-bold mb-4">
+                                  PRODUCTION TIME PLANNING
+                                </h3>
+                                <table>
+                                  <tbody>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        Date : {selectedItem.PDATE}
+                                      </td>
+                                      <td className="font-bold text-xs">
+                                        Shift : {selectedItem.SHIFT}{" "}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        Planned Production Time 1 :
+                                      </td>
+                                      <td className="text-sm">
+                                        <span style={{ color: "green" }}>
+                                          {selectedItem.PT1_IN}
+                                        </span>{" "}
+                                        -{" "}
+                                        <span style={{ color: "red" }}>
+                                          {selectedItem.PT1_OUT}
+                                        </span>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        Break 1:
+                                      </td>
+                                      <td className="text-sm bg-orange-500 rounded-lg">
+                                        {selectedItem.BR1_IN} -{" "}
+                                        {selectedItem.BR1_OUT}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        Production Time 2:
+                                      </td>
+                                      <td className="text-sm">
+                                        <span style={{ color: "green" }}>
+                                          {selectedItem.PT2_IN}
+                                        </span>{" "}
+                                        -{" "}
+                                        <span style={{ color: "red" }}>
+                                          {selectedItem.PT2_OUT}
+                                        </span>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        Break 2:
+                                      </td>
+                                      <td className="text-sm bg-orange-500 rounded-lg">
+                                        {selectedItem.BR2_IN} -{" "}
+                                        {selectedItem.BR2_OUT}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className="font-bold  text-xs">
+                                        Planned DT:
+                                      </td>
+                                      <td className="text-sm ">
+                                        <span style={{ color: "green" }}>
+                                          {selectedItem.PD_IN}
+                                        </span>{" "}
+                                        -{" "}
+                                        <span style={{ color: "red" }}>
+                                          {selectedItem.PD_OUT}
+                                        </span>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        Production Time 3:
+                                      </td>
+                                      <td className="text-sm">
+                                        <span style={{ color: "green" }}>
+                                          {selectedItem.PT3_IN}
+                                        </span>{" "}
+                                        -{" "}
+                                        <span style={{ color: "red" }}>
+                                          {selectedItem.PT3_OUT}
+                                        </span>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        Break 3:
+                                      </td>
+                                      <td className="text-sm bg-orange-500 rounded-lg">
+                                        {selectedItem.BR3_IN} -{" "}
+                                        {selectedItem.BR3_OUT}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        Production Time 4:
+                                      </td>
+                                      <td className="text-sm">
+                                        <span style={{ color: "green" }}>
+                                          {selectedItem.PT4_IN}
+                                        </span>{" "}
+                                        -{" "}
+                                        <span style={{ color: "red" }}>
+                                          {selectedItem.PT4_OUT}
+                                        </span>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        Break 4:
+                                      </td>
+                                      <td className="text-sm bg-orange-500 rounded-lg">
+                                        {selectedItem.BR4_IN} -{" "}
+                                        {selectedItem.BR4_OUT}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        Over Time:
+                                      </td>
+                                      <td className="text-sm">
+                                        <span style={{ color: "green" }}>
+                                          {selectedItem.OT_IN}
+                                        </span>{" "}
+                                        -{" "}
+                                        <span style={{ color: "red" }}>
+                                          {selectedItem.OT_OUT}
+                                        </span>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        --------------------
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        Change Model Allocation :
+                                      </td>
+                                      <td className="text-sm">
+                                        {selectedItem.CMA}{" "}
+                                      </td>
+                                    </tr>
 
-                          {/* {selectedItem && (
-                          <>
-                            <div className="fixed z-10 inset-0 overflow-y-auto">
-                              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                                <div className="fixed inset-0 transition-opacity">
-                                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                                </div>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        Planned Production :
+                                      </td>
+                                      <td className="text-sm">
+                                        {selectedItem.PP}{" "}
+                                      </td>
+                                    </tr>
 
-                                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                                    <tr>
+                                      <td className="font-bold text-xs">
+                                        Planned Downtime :
+                                      </td>
+                                      <td className="text-sm">
+                                        {selectedItem.PD}{" "}
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
 
-                                <div
-                                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                                  role="dialog"
-                                  aria-modal="true"
-                                  aria-labelledby="modal-headline"
-                                >
-                                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                                    <div className="sm:flex sm:items-start">
-                                      <div className="w-full max-w-lg">
-                                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                          <span>REQUESTED BY</span>
-                                        </div>
-                                        <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-first-name"
-                                            >
-                                              Nama PIC
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.NamaPIC}{" "}
-                                            </div>
-                                          </div>
-                                          <div class="w-full md:w-1/2 px-3">
-                                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                              NPK PIC
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.NpkPIC}{" "}
-                                            </div>
-                                          </div>
-                                        </div>
+                              <div className="bg-white h-auto ml-28 w-96 sm:w-72 lg:w-[400px] py-6 sm:p-6 rounded-lg shadow-md">
+                                <tr>
+                                  <td className="font-bold text-xs">
+                                    REAL PRODUCTION TIME
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="font-bold text-xs">
+                                    Change Model Allocation :
+                                  </td>
+                                  <td className="text-sm"> </td>
+                                </tr>
 
-                                        <div class="flex flex-wrap -mx-3 mb-6">
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Machine Name
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.MachineName}{" "}
-                                            </div>
-                                          </div>
-
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Machine Area
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.MachineArea}{" "}
-                                            </div>
-                                          </div>
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Machine Line
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.MachineArea}{" "}
-                                            </div>
-                                          </div>
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Machine Station
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.MachineStation}{" "}
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full px-1">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                                              for="grid-password"
-                                            >
-                                              Kerusakan
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Kerusakan}{" "}
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="flex justify-end">
-                                          <button
-                                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                            onClick={() =>
-                                              setSelectedItem(false)
-                                            }
-                                          >
-                                            CLOSE
-                                          </button>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                                <tr>
+                                  <td className="font-bold text-xs">
+                                    Planned Production :
+                                  </td>
+                                  <td className="text-sm">Loading.... </td>
+                                </tr>
+                                <tr>
+                                  <td className="font-bold text-xs">
+                                    Planned Downtime :
+                                  </td>
+                                  <td className="text-sm">Loading....</td>
+                                </tr>
                               </div>
                             </div>
-
-                            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
-                          </>
-                        )} */}
-
-                          {/* <td className="p-5 w-40">
-                          <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="w-6 h-6 mr-2"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 110-16 8 8 0 010 16zm0-2a6 6 0 100-12 6 6 0 000 12zM8 9a1 1 0 011-1h2a1 1 0 010 2H9a1 1 0 01-1-1zm5.293 5.293a1 1 0 00-1.414 0L11 14.586l-1.879-1.88a1 1 0 00-1.414 1.414l2.586 2.586a1 1 0 001.414 0l4.586-4.586a1 1 0 000-1.414z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <span>QUALITY</span>
-                          </button>
-                        </td> */}
-
-                          <td className="p-2">
-                            <div className="text-center h-6 text-black...">
-                              {item.PDATE}
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -793,178 +877,6 @@ const SmtTop = () => {
         </div>
       </main>
     </body>
-
-    // <div class="items-center justify-between p-4  bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:bg-gray-700 dark:border-gray-600">
-    //                 <div className="bg-white px-4 h-auto w-96 sm:w-72 lg:w-[400px]  py-6 sm:p-6 ml-3 sm:ml-3 lg:ml-3 rounded-lg shadow-md">
-    //                   <h3 className="text-lg font-bold mb-4">
-    //                     PRODUCTION TIME PLANNING
-    //                   </h3>
-    //                   {filteredData ? (
-    //                     <table>
-    //                       <tbody>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">
-    //                             Date : {formatDate(filteredData.PDATE)}
-    //                           </td>
-    //                           <td className="font-bold text-xs">
-    //                             Shift : {filteredData.SHIFT}{" "}
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">
-    //                             Planned Production Time 1 :
-    //                           </td>
-    //                           <td className="text-sm">
-    //                             <span style={{ color: "green" }}>
-    //                               {filteredData.PT1_IN}
-    //                             </span>{" "}
-    //                             -{" "}
-    //                             <span style={{ color: "red" }}>{filteredData.PT1_OUT}</span>
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">Break 1:</td>
-    //                           <td className="text-sm bg-orange-500 rounded-lg">
-    //                             {filteredData.BR1_IN} - {filteredData.BR1_OUT}
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">
-    //                             Production Time 2:
-    //                           </td>
-    //                           <td className="text-sm">
-    //                             <span style={{ color: "green" }}>
-    //                               {filteredData.PT2_IN}
-    //                             </span>{" "}
-    //                             -{" "}
-    //                             <span style={{ color: "red" }}>{filteredData.PT2_OUT}</span>
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">Break 2:</td>
-    //                           <td className="text-sm bg-orange-500 rounded-lg">
-    //                             {filteredData.BR2_IN} - {filteredData.BR2_OUT}
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold  text-xs">Planned DT:</td>
-    //                           <td className="text-sm ">
-    //                             <span style={{ color: "green" }}>{filteredData.PD_IN}</span>{" "}
-    //                             -{" "}
-    //                             <span style={{ color: "red" }}>{filteredData.PD_OUT}</span>
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">
-    //                             Production Time 3:
-    //                           </td>
-    //                           <td className="text-sm">
-    //                             <span style={{ color: "green" }}>
-    //                               {filteredData.PT3_IN}
-    //                             </span>{" "}
-    //                             -{" "}
-    //                             <span style={{ color: "red" }}>{filteredData.PT3_OUT}</span>
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">Break 3:</td>
-    //                           <td className="text-sm bg-orange-500 rounded-lg">
-    //                             {filteredData.BR3_IN} - {filteredData.BR3_OUT}
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">
-    //                             Production Time 4:
-    //                           </td>
-    //                           <td className="text-sm">
-    //                             <span style={{ color: "green" }}>
-    //                               {filteredData.PT4_IN}
-    //                             </span>{" "}
-    //                             -{" "}
-    //                             <span style={{ color: "red" }}>{filteredData.PT4_OUT}</span>
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">Break 4:</td>
-    //                           <td className="text-sm bg-orange-500 rounded-lg">
-    //                             {filteredData.BR4_IN} - {filteredData.BR4_OUT}
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">Over Time:</td>
-    //                           <td className="text-sm">
-    //                             <span style={{ color: "green" }}>{filteredData.OT_IN}</span>{" "}
-    //                             -{" "}
-    //                             <span style={{ color: "red" }}>{filteredData.OT_OUT}</span>
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">
-    //                             --------------------
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">
-    //                             Change Model Allocation :
-    //                           </td>
-    //                           <td className="text-sm">{filteredData.CMA} </td>
-    //                         </tr>
-
-    //                         <tr>
-    //                           <td className="font-bold text-xs">
-    //                             Planned Production :
-    //                           </td>
-    //                           <td className="text-sm">{filteredData.PP} </td>
-    //                         </tr>
-
-    //                         <tr>
-    //                           <td className="font-bold text-xs">
-    //                             Planned Downtime :
-    //                           </td>
-    //                           <td className="text-sm">{filteredData.PD} </td>
-    //                         </tr>
-
-    //                       </tbody>
-    //                     </table>
-
-    //                   ) : (
-    //                     <p>No data available</p>
-    //                   )}
-    //                   <div className="pt-3">
-    //                   </div>
-    //                 </div>
-    //                 <div className="bg-white px-4 h-auto w-96 sm:w-72 lg:w-[400px]  py-6 sm:p-6 ml-3 sm:ml-3 lg:ml-3 rounded-lg shadow-md">
-    //                      <tr>
-    //                           <td className="font-bold text-xs">
-    //                             --------------------
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">
-    //                             REAL PRODUCTION  TIME
-    //                           </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">
-    //                             Change Model Allocation :
-    //                           </td>
-    //                           <td className="text-sm"> </td>
-    //                         </tr>
-
-    //                         <tr>
-    //                           <td className="font-bold text-xs">
-    //                           Planned Production :
-    //                           </td>
-    //                           <td className="text-sm">Loading.... </td>
-    //                         </tr>
-    //                         <tr>
-    //                           <td className="font-bold text-xs">
-    //                           Planned Downtime :
-    //                           </td>
-    //                           <td className="text-sm">Loading....</td>
-    //                         </tr>
-    //                 </div>
-    //               </div>
   );
 };
 

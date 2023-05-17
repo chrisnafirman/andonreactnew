@@ -56,6 +56,8 @@ const SmtTop = () => {
   const [isOpenReturn, setIsOpenReturn] = useState(false);
   const [isOpenOperator, setIsOpenOperator] = useState(false);
 
+
+
   // OTHER
   const [selectedStatus, setSelectedStatus] = useState("");
   // ----------------------
@@ -196,6 +198,13 @@ const SmtTop = () => {
     ref9.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatuslabel(data);
+    });
+
+    
+    const ref10 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
+    ref10.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setResultsCMA(data);
     });
 
     return () => {};
@@ -2074,7 +2083,7 @@ const SmtTop = () => {
                           </button>
                         </div>
                         <button
-                          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                          className="bg-red-900 animate-bounce  hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
                           onClick={() => {
                             setIsOpenReturn(true);
                             setIsOpenValQA(false);

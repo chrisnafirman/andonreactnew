@@ -309,7 +309,7 @@ const QA = () => {
   };
 
   return (
-    <body className="h-full w-full bg-[#93C2C4]">
+    <body className="h-full w-full bg-[#93C2C4]"style={{height: "200vh"}}>
       <button
         data-drawer-target="logo-sidebar"
         data-drawer-toggle="logo-sidebar"
@@ -336,7 +336,7 @@ const QA = () => {
 
       <aside
         id="logo-sidebar"
-        class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        class="fixed top-0 left-0 z-40 w-44 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
@@ -347,28 +347,10 @@ const QA = () => {
               alt="Flowbite Logo"
             />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              QA Line 1
+              QA
             </span>
           </a>
           <ul class="space-y-2">
-            <li>
-              <a
-                href="/QualityA"
-                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                  <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                </svg>
-                <span class="ml-3">Realtime Dashboard</span>
-              </a>
-            </li>
             <li>
               <a
                 href="/RequestQA"
@@ -383,7 +365,7 @@ const QA = () => {
                 >
                   <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                 </svg>
-                <span class="flex-1 ml-3 whitespace-nowrap">Request QA</span>
+                <span class="flex-1 ml-3 whitespace-nowrap">Input</span>
               </a>
             </li>
             <li>
@@ -565,806 +547,156 @@ const QA = () => {
       </nav> */}
 
       {/*  */}
-      <main class="pt-3 flex justify-center items-center flex-col md:flex-row p-4 sm:ml-64">
-        <section class="antialiased  text-gray-600 h-screen px-2" x-data="app">
-          <div class="flex flex-col ">
-            {/* <!-- Table --> */}
-            <div className="w-72">
-              <div
-                style={{ backgroundColor: backgroundColor }}
-                value={status}
-                class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
-              >
-                <header class="px-5 py-4 border-b ">
-                  <div class="font-semibold text-center text-white">
-                    {mesin}
+      <main >
+        <section class="py-1 bg-blueGray-50">
+          <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
+            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
+              <div class="rounded-t mb-0 px-4 py-3 border-0">
+                <div class="flex flex-wrap items-center">
+                  <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+                    <h3 class="font-semibold text-base text-blueGray-700">
+                      Page Visits
+                    </h3>
                   </div>
-                </header>
-
-                <div class="overflow-x-auto p-3">
-                  <table class="table-auto w-full">
-                    <thead class="text-sm uppercase text-black font-extrabold">
-                      <tr>
-                        <th class="p-1">
-                          <div class="font-semibold text-left">Line</div>
-                        </th>
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-left ">
-                            Area
-                          </div>
-                        </th>
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-left ">
-                            Station
-                          </div>
-                        </th>
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-left ">
-                            PIC
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-sm">
-                      <tr>
-                        <td class="p-1">
-                          <div class="font-medium text-white">{line}</div>
-                        </td>
-                        <td class="p-1">
-                          <div class="font-medium text-white">{area}</div>
-                        </td>
-                        <td class="p-1">
-                          <div class="font-medium text-white">{station}</div>
-                        </td>
-                        <td class="p-1">
-                          <div class="font-medium text-white"> {nama}</div>
-                        </td>
-                      </tr>
-                    </tbody>
-
-                    {/* POP UP */}
-                    <td class="">
-                      {status === "QA" ? (
-                        <div>
-                          <span className="text-xs uppercase text-black font-bold">
-                            Return
-                          </span>
-                          <div id="timer" className="font-medium text-white">
-                            <button
-                              className="bg-blue-500 hover:bg-blue-700 text-white text-xs px-3 py-1 rounded"
-                              onClick={() => setIsOpen(true)}
-                            >
-                              To
-                            </button>
-                          </div>
-                        </div>
-                      ) : (
-                        <div>
-                          <span className="text-xs uppercase text-gray-500 font-bold">
-                            Return
-                          </span>
-                          <div id="timer" className="font-medium text-gray-500">
-                            <button
-                              className="bg-gray-300 text-white text-xs px-3 py-1 rounded"
-                              disabled
-                            >
-                              To
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                      {isOpen ? (
-                        <>
-                          <div className="fixed z-10 inset-0 overflow-y-auto">
-                            <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                              <div className="fixed inset-0 transition-opacity">
-                                <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                              </div>
-
-                              <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                              <div
-                                className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                                role="dialog"
-                                aria-modal="true"
-                                aria-labelledby="modal-headline"
-                              >
-                                <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                                  <div className="sm:flex sm:items-start">
-                                    <form
-                                      className="w-full max-w-lg"
-                                      onSubmit={(e) => {
-                                        e.preventDefault();
-                                        database
-                                          .ref("Mesin/Mesin1")
-                                          .set(selectedStatus);
-                                      }}
-                                    >
-                                      <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                        <span>Return</span>
-                                      </div>
-                                      <div class="flex flex-wrap -mx-3 ">
-                                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="grid-first-name"
-                                          >
-                                             Masukan Nama Anda
-                                          </label>
-                                          <select
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                            name="NamaPIC"
-                                            required
-                                            onChange={(e) => {
-                                              setNamaPIC(e.target.value);
-                                              setNpkPIC(
-                                                npkList[
-                                                  namaList.indexOf(
-                                                    e.target.value
-                                                  )
-                                                ]
-                                              );
-                                            }}
-                                          >
-                                            <option value="">
-                                              - -Pilih Nama Anda- -
-                                            </option>
-                                            {namaList.map((nama, index) => (
-                                              <option value={nama} key={index}>
-                                                {nama}
-                                              </option>
-                                            ))}
-                                          </select>
-                                        </div>
-                                        <div class="w-full md:w-1/2 px-3">
-                                          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                            NPK 
-                                          </label>
-                                          <input
-                                            class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            type="number"
-                                            placeholder="0000"
-                                            name="NpkPIC"
-                                            value={NpkPIC}
-                                            readOnly
-                                          />
-                                        </div>
-                                      </div>
-                                      {/*Status*/}
-                                      <div className="mb-4">
-                                        <label
-                                          className="block text-gray-700 font-bold mb-2"
-                                          htmlFor="Depart To"
-                                        >
-                                          Depart To
-                                        </label>
-                                        <div className="relative">
-                                          <select
-                                            className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            id="Depart To"
-                                            name="Depart To"
-                                            value={selectedStatus}
-                                            onChange={(e) =>
-                                              setSelectedStatus(e.target.value)
-                                            }
-                                            required
-                                            defaultValue={""}
-                                          >
-                                            <option value="">
-                                              -- Pilih Depart --
-                                            </option>
-                                            <option value="PPIC">PPIC</option>
-                                            <option value="Purchasing">
-                                              Purchasing
-                                            </option>
-                                            <option value="MP&L">MP&L</option>
-                                            <option value="Accounting">
-                                              Accounting
-                                            </option>
-                                            <option value="Engineering & RND">
-                                              Engineering & RND
-                                            </option>
-                                            <option value="Maintenance & IT">
-                                              Maintenance & IT
-                                            </option>
-                                            <option value="Opex">Opex</option>
-                                            <option value="HRGA & EHS">
-                                              HRGA & EHS
-                                            </option>
-                                          </select>
-                                        </div>
-                                      </div>
-                                      <div class="flex flex-wrap -mx-3 mb-6">
-                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="grid-city"
-                                          >
-                                            Machine Name
-                                          </label>
-                                          <span
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            id="grid-city"
-                                            type="text"
-                                            placeholder="ICT"
-                                            name="MachineName"
-                                          >
-                                            {mesin}
-                                          </span>
-                                        </div>
-
-                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="grid-city"
-                                          >
-                                            Machine Area
-                                          </label>
-                                          <span
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            id="grid-city"
-                                            type="text"
-                                            placeholder="ICT"
-                                            name="MachineName"
-                                          >
-                                            {area}
-                                          </span>
-                                        </div>
-                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="grid-city"
-                                          >
-                                            Machine Line
-                                          </label>
-                                          <span
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            id="grid-city"
-                                            type="text"
-                                            placeholder="ICT"
-                                            name="MachineName"
-                                          >
-                                            {line}
-                                          </span>
-                                        </div>
-                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="grid-city"
-                                          >
-                                            Machine Station
-                                          </label>
-                                          <span
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            id="grid-city"
-                                            type="text"
-                                            placeholder="ICT"
-                                            name="MachineName"
-                                          >
-                                            {station}
-                                          </span>
-                                        </div>
-                                      </div>
-                                      <div class="flex flex-wrap -mx-3 ">
-                                        <div class="w-full px-1">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                                            for="grid-password"
-                                          >
-                                            Tindakan
-                                          </label>
-                                          <input
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            id="grid-password"
-                                            type="text"
-                                            placeholder=""
-                                            name="Kerusakan"
-                                            onChange={(e) => {
-                                              setKerusakan(e.target.value);
-                                            }}
-                                            required
-                                          />
-                                          <p class="text-gray-600 text-xs italic">
-                                            Tindakan Yang Di Lakukan
-                                          </p>
-                                        </div>
-                                      </div>
-                                      <div className="flex justify-end">
-                                        <button
-                                          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                          onClick={() => setIsOpen(false)}
-                                        >
-                                          Batal
-                                        </button>
-                                        <button
-                                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                          type="submit"
-                                          onClick={submit}
-                                        >
-                                          Simpan
-                                        </button>
-                                      </div>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
-                        </>
-                      ) : null}
-                    </td>
-                    {/* POP UP */}
-                    <td class="">
-                      {isOpen2 ? (
-                        <>
-                          <div className="fixed z-10 inset-0 overflow-y-auto">
-                            <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                              <div className="fixed inset-0 transition-opacity">
-                                <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                              </div>
-
-                              <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                              <div
-                                className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                                role="dialog"
-                                aria-modal="true"
-                                aria-labelledby="modal-headline"
-                              >
-                                <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                                  <div className="sm:flex sm:items-start">
-                                    <form className="w-full max-w-lg">
-                                      <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                        <span>Validation Quality</span>
-                                      </div>
-                                      <div class="flex flex-wrap -mx-3 ">
-                                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="grid-first-name"
-                                          >
-                                             Masukan Nama Anda
-                                          </label>
-                                          <select
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                            name="NamaPIC"
-                                            required
-                                            onChange={(e) => {
-                                              setNamaPIC(e.target.value);
-                                              setNpkPIC(
-                                                npkList[
-                                                  namaList.indexOf(
-                                                    e.target.value
-                                                  )
-                                                ]
-                                              );
-                                            }}
-                                          >
-                                            <option value="">
-                                              - -Pilih Nama Anda- -
-                                            </option>
-                                            {namaList.map((nama, index) => (
-                                              <option value={nama} key={index}>
-                                                {nama}
-                                              </option>
-                                            ))}
-                                          </select>
-                                        </div>
-                                        <div class="w-full md:w-1/2 px-3">
-                                          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                            NPK
-                                          </label>
-                                          <input
-                                            class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            type="number"
-                                            placeholder="0000"
-                                            name="NpkPIC"
-                                            value={NpkPIC}
-                                            readOnly
-                                          />
-                                        </div>
-                                      </div>
-                                      <div class="flex flex-wrap -mx-3 mb-6">
-                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="grid-city"
-                                          >
-                                            Machine Name
-                                          </label>
-                                          <span
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            id="grid-city"
-                                            type="text"
-                                            placeholder="ICT"
-                                            name="MachineName"
-                                          >
-                                            {mesin}
-                                          </span>
-                                        </div>
-
-                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="grid-city"
-                                          >
-                                            Machine Area
-                                          </label>
-                                          <span
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            id="grid-city"
-                                            type="text"
-                                            placeholder="ICT"
-                                            name="MachineArea"
-                                          >
-                                            {area}
-                                          </span>
-                                        </div>
-                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="grid-city"
-                                          >
-                                            Machine Line
-                                          </label>
-                                          <span
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            id="grid-city"
-                                            type="text"
-                                            placeholder="ICT"
-                                            name="MachineLine"
-                                          >
-                                            {line}
-                                          </span>
-                                        </div>
-                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="grid-city"
-                                          >
-                                            Machine Station
-                                          </label>
-                                          <span
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            id="grid-city"
-                                            type="text"
-                                            placeholder="ICT"
-                                            name="MachineStation"
-                                          >
-                                            {station}
-                                          </span>
-                                        </div>
-                                      </div>
-                                      <div class="flex flex-wrap -mx-3 ">
-                                        <div class="w-full px-1">
-                                          <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                                            for="grid-password"
-                                          >
-                                            Input
-                                          </label>
-                                          <input
-                                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            id="grid-password"
-                                            type="file"
-                                            placeholder=""
-                                            name="validation"
-                                            onChange={handleFileChange}
-                                            required
-                                          />
-                                          <p class="text-gray-600 text-xs italic">
-                                            Tindakan Yang Di Lakukan
-                                          </p>
-                                        </div>
-                                      </div>
-                                      <div className="flex justify-end">
-                                        <button
-                                          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                          onClick={() => setIsOpen2(false)}
-                                        >
-                                          Batal
-                                        </button>
-                                        <button
-                                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                          type="submit"
-                                          onClick={submit2}
-                                        >
-                                          Simpan
-                                        </button>
-                                      </div>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
-                        </>
-                      ) : null}
-                    </td>
-
-                    {/* <td class="p-1   ">
-                      {status === "Go" ||
-                      status === "Leader" ||
-                      status === "Maintenance" ? (
-                        <>
-                          <span className="text-xs uppercase text-black font-bold">
-                            TIME
-                          </span>
-                          <div id="timer" class="font-medium  text-white">
-                            {timer}
-                          </div>
-                        </>
-                      ) : null}
-                    </td> */}
-                  </table>
+                  <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                    <button
+                      class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                    >
+                      See all
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-            {/*  */}
-            {/* <!-- Table --> */}
-            <div className="w-72 pt-2">
-              <div class="w-full max-w-sm  bg-gray-500 shadow-lg rounded-xl border border-gray-200">
-                <header class="px-6 py-4 border-b border-gray-100">
-                  <div class="font-semibold text-center text-gray-800">
-                    Unknown
-                  </div>
-                </header>
 
-                <div class="overflow-x-auto p-3">
-                  <table class="table-auto w-full">
-                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                      <tr>
-                        <th class="p-1">
-                          <div class="font-semibold text-left">Line</div>
-                        </th>
+              <div class="block w-full overflow-x-auto">
+                <table class="items-center bg-transparent w-full border-collapse ">
+                  <thead>
+                    <tr>
+                      <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        Page name
+                      </th>
+                      <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        Visitors
+                      </th>
+                      <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        Unique users
+                      </th>
+                      <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                        Bounce rate
+                      </th>
+                    </tr>
+                  </thead>
 
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-center">
-                            PIC
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-sm divide-y divide-gray-100">
-                      {/* <!-- record 1 --> */}
-                      <tr>
-                        <td class="p-1">
-                          <div class="font-medium text-gray-800">Unknown</div>
-                        </td>
-                        <td class="p-1 w-36">
-                          <div
-                            id="data"
-                            class="text-center h-6 bg-black text-black font-medium w-full rounded-lg"
-                          >
-                            Unknown
-                          </div>
-                        </td>
-                      </tr>
-                      <td class="p-1 w-56 ">
-                        <span>Time:</span>
-                        <div id="timer" class="font-medium text-gray-800">
-                          Unknown
-                        </div>
+                  <tbody>
+                    <tr>
+                      <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
+                        /argon/
+                      </th>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                        4,569
                       </td>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            {/*  */}
-            {/* <!-- Table --> */}
-            <div className="w-72 pt-2">
-              <div class="w-full max-w-sm  bg-gray-500 shadow-lg rounded-xl border border-gray-200">
-                <header class="px-6 py-4 border-b border-gray-100">
-                  <div class="font-semibold text-center text-gray-800">
-                    Unknown
-                  </div>
-                </header>
-
-                <div class="overflow-x-auto p-3">
-                  <table class="table-auto w-full">
-                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                      <tr>
-                        <th class="p-1">
-                          <div class="font-semibold text-left">Line</div>
-                        </th>
-
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-center">
-                            PIC
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-sm divide-y divide-gray-100">
-                      {/* <!-- record 1 --> */}
-                      <tr>
-                        <td class="p-1">
-                          <div class="font-medium text-gray-800">Unknown</div>
-                        </td>
-                        <td class="p-1 w-36">
-                          <div
-                            id="data"
-                            class="text-center h-6 bg-black text-black font-medium w-full rounded-lg"
-                          >
-                            Unknown
-                          </div>
-                        </td>
-                      </tr>
-                      <td class="p-1 w-56 ">
-                        <span>Time:</span>
-                        <div id="timer" class="font-medium text-gray-800">
-                          Unknown
-                        </div>
+                      <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        340
                       </td>
-                    </tbody>
-                  </table>
-                </div>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
+                        46,53%
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
+                        /argon/index.html
+                      </th>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        3,985
+                      </td>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        319
+                      </td>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
+                        46,53%
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
+                        /argon/charts.html
+                      </th>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        3,513
+                      </td>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        294
+                      </td>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
+                        36,49%
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
+                        /argon/tables.html
+                      </th>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        2,050
+                      </td>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        147
+                      </td>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
+                        50,87%
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
+                        /argon/profile.html
+                      </th>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        1,795
+                      </td>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        190
+                      </td>
+                      <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                        <i class="fas fa-arrow-down text-red-500 mr-4"></i>
+                        46,53%
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-            {/*  */}
           </div>
-        </section>
-        <section class="antialiased  text-gray-600 h-screen px-2" x-data="app">
-          <div class="flex flex-col ">
-            {/* <!-- Table --> */}
-            <div className="w-72">
-              <div class="w-full max-w-sm  bg-gray-500 shadow-lg rounded-xl border border-gray-200">
-                <header class="px-5 py-4 border-b border-gray-100">
-                  <div class="font-semibold text-center text-gray-800">
-                    Unknown
+          <footer class="relative pt-8 pb-6 mt-16">
+            <div class="container mx-auto px-4">
+              <div class="flex flex-wrap items-center md:justify-between justify-center">
+                <div class="w-full md:w-6/12 px-4 mx-auto text-center">
+                  <div class="text-sm text-blueGray-500 font-semibold py-1">
+                    Made with{" "}
+                    <a
+                      href="https://www.creative-tim.com/product/notus-js"
+                      class="text-blueGray-500 hover:text-gray-800"
+                      target="_blank"
+                    >
+                      Notus JS
+                    </a>{" "}
+                    by{" "}
+                    <a
+                      href="https://www.creative-tim.com"
+                      class="text-blueGray-500 hover:text-blueGray-800"
+                      target="_blank"
+                    >
+                      {" "}
+                      Creative Tim
+                    </a>
+                    .
                   </div>
-                </header>
-
-                <div class="overflow-x-auto p-3">
-                  <table class="table-auto w-full">
-                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                      <tr>
-                        <th class="p-1">
-                          <div class="font-semibold text-left">Line</div>
-                        </th>
-
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-center">
-                            PIC
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-sm divide-y divide-gray-100">
-                      {/* <!-- record 1 --> */}
-                      <tr>
-                        <td class="p-1">
-                          <div class="font-medium text-gray-800">Unknown</div>
-                        </td>
-                        <td class="p-1 w-36">
-                          <div
-                            id="data"
-                            class="text-center bg-black h-6 text-black font-medium w-full rounded-lg"
-                          >
-                            Unknown
-                          </div>
-                        </td>
-                      </tr>
-                      <td class="p-1 w-56 ">
-                        <span>Time:</span>
-                        <div id="timer" class="font-medium text-gray-800">
-                          Unknown
-                        </div>
-                      </td>
-                    </tbody>
-                  </table>
                 </div>
               </div>
             </div>
-            {/*  */}
-            {/* <!-- Table 3 --> */}
-            <div className="w-72 pt-2">
-              <div class="w-full max-w-sm  bg-gray-500 shadow-lg rounded-xl border border-gray-200">
-                <header class="px-5 py-4 border-b border-gray-100">
-                  <div class="font-semibold text-center text-gray-800">
-                    Unknown
-                  </div>
-                </header>
-
-                <div class="overflow-x-auto p-3">
-                  <table class="table-auto w-full">
-                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                      <tr>
-                        <th class="p-1">
-                          <div class="font-semibold text-left">Line</div>
-                        </th>
-
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-center">
-                            PIC
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-sm divide-y divide-gray-100">
-                      {/* <!-- record 3 --> */}
-                      <tr>
-                        <td class="p-1">
-                          <div class="font-medium text-gray-800">Unknown</div>
-                        </td>
-                        <td class="p-1 w-36">
-                          <div
-                            id="data"
-                            class="text-center h-6 bg-black text-black font-medium w-full rounded-lg"
-                          >
-                            Unknown
-                          </div>
-                        </td>
-                      </tr>
-                      <td class="p-1 w-56 ">
-                        <span>Time:</span>
-                        <div id="timer" class="font-medium text-gray-800">
-                          Unknown
-                        </div>
-                      </td>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            {/*  */}
-            {/* <!-- Table 3 --> */}
-            <div className="w-72 pt-2">
-              <div class="w-full max-w-sm  bg-gray-500 shadow-lg rounded-xl border border-gray-200">
-                <header class="px-5 py-4 border-b border-gray-100">
-                  <div class="font-semibold text-center text-gray-800">
-                    Unknown
-                  </div>
-                </header>
-
-                <div class="overflow-x-auto p-3">
-                  <table class="table-auto w-full">
-                    <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                      <tr>
-                        <th class="p-1">
-                          <div class="font-semibold text-left">Line</div>
-                        </th>
-
-                        <th class="p-1">
-                          <div id="request" class="font-semibold text-center">
-                            PIC
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="text-sm divide-y divide-gray-100">
-                      {/* <!-- record 3 --> */}
-                      <tr>
-                        <td class="p-1">
-                          <div class="font-medium text-gray-800">Unknown</div>
-                        </td>
-                        <td class="p-1 w-36">
-                          <div
-                            id="data"
-                            class="text-center h-6 bg-black text-black font-medium w-full rounded-lg"
-                          >
-                            Unknown
-                          </div>
-                        </td>
-                      </tr>
-                      <td class="p-1 w-56 ">
-                        <span>Time:</span>
-                        <div id="timer" class="font-medium text-gray-800">
-                          6h37m
-                        </div>
-                      </td>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            {/*  */}
-          </div>
+          </footer>
         </section>
       </main>
     </body>
