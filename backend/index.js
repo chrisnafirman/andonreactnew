@@ -344,6 +344,59 @@ app.post("/api/post/ReturnMaintenance", (req, res) => {
 
 
 
+
+
+// SMT LINE 1
+///post To network
+
+app.post("/api/post/PPIC&QC", (req, res) => {
+  const { Model, Pnc, Week, Stock, Wip, Occ, SE, QC } = req.body;
+  
+  db.query(
+    "INSERT INTO qc (Model, Pnc, Week, Stock, Wip, Occ, Stokend, QC) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+    [Model, Pnc, Week, Stock, Wip, Occ, SE, QC ],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been added successfully' });
+    }
+  );
+});
+
+
+
+
+app.put("/api/put/PPIC-QC/:No", (req, res) => {
+  const { Stock, Wip, Occ, SE, QC } = req.body;
+  const { No } = req.params;
+  
+  db.query(
+    "UPDATE qc SET Stock = ?, Wip = ?, Occ = ?, Stokend = ?, QC = ? WHERE No = ?",
+    [Stock, Wip, Occ, SE, QC, No],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been updated successfully' });
+    }
+  );
+});
+
+
+
+
+
+app.get("/api/get/PPIC&QC", (req, res) => {
+  const sqlSelect = "SELECT * FROM qc";
+  db.query(sqlSelect, (err, results) => {
+    res.send(results);
+  });
+});
+
+
 app.get("/api/get/Inputsche", (req, res) => {
   const sqlSelect = "SELECT * FROM scheprod";
   db.query(sqlSelect, (err, results) => {

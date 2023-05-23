@@ -47,6 +47,7 @@ const Line = () => {
           </div>
         </div>
         <div class="w-full md:w-1/2 p-2">
+          <a href="/QCProd">
           <div class="bg-gray-800 rounded-md overflow-hidden hover:bg-gray-700 transition duration-300">
             <img
              src={process.env.PUBLIC_URL + "/Line.jpg"}
@@ -58,8 +59,10 @@ const Line = () => {
               <p class="text-gray-300">Terdiri Dari Machine FCT,ICT,NXT</p>
             </div>
           </div>
+          </a>
         </div>
         <div class="w-full md:w-1/2 p-2">
+        <a href="/PPICProd">
           <div class="bg-gray-800 rounded-md overflow-hidden hover:bg-gray-700 transition duration-300">
             <img
               src={process.env.PUBLIC_URL + "/Line.jpg"}
@@ -71,7 +74,8 @@ const Line = () => {
               <p class="text-gray-300">Terdiri Dari Machine FCT,ICT,NXT</p>
             </div>
           </div>
-        </div>
+          </a>
+        </div>  
       </div>
     </body>
   );
