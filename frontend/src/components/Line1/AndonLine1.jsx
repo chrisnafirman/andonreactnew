@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 
@@ -12,21 +12,26 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const Andonline1 = () => {
+
+
+  // Tindakan / Kehadiran
+  const [NetworkPressed, setNetworkPressed] = useState(false);
+  const timeoutRefNetwork = useRef(null);
+  // ----
+
   const [mesin, setMesin] = useState("");
   const [nama, setNama] = useState("");
   const [timer, setTimer] = useState("");
 
   const [prevStatus, setPrevStatus] = useState("");
 
-  // DATA  
-
+  // DATA
   const [NamaPIC, setNamaPIC] = useState("");
   const [NpkPIC, setNpkPIC] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
-  
+
   // OTHERS
   const [selectedStatus, setSelectedStatus] = useState("");
-
 
   // NAVBAR
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -34,7 +39,6 @@ const Andonline1 = () => {
 
   // FIREBASE
   const [showDrawer, setShowDrawer] = useState(false);
-
 
   // SMT LINE 1
   const [StatusLine, setStatusLine] = useState("");
@@ -44,11 +48,6 @@ const Andonline1 = () => {
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT TOP");
   const [Destacker, setDestecker] = useState("Destacker");
-
-
-
-
-
 
   // CMA
   const [CMATime, setCMATime] = useState({ hours: 0, minutes: 0, seconds: 0 });
@@ -61,9 +60,7 @@ const Andonline1 = () => {
   const [isOpenOperator, setIsOpenOperator] = useState(false);
   const [isOpenNetwork, setIsOpenNetwork] = useState(false);
 
-
-
-//  SCHEDULE
+  //  SCHEDULE
   const [SHIFT, setSHIFT] = useState("");
   const [PT1_IN, setPT1_IN] = useState("");
   const [PT1_OUT, setPT1_OUT] = useState("");
@@ -106,10 +103,12 @@ const Andonline1 = () => {
   const [overchange, setStatusOverchange] = useState("");
   // ------------------------
 
+
   //BACKGROUND / WARNA KOTAK
   const [backgroundColor, setBackgroundColor] = useState("");
   const [backgroundColorNetwork, setBackgroundColorNetwork] = useState("");
-  const [backgroundColorElectricity, setBackgroundColorElectricity] =useState("");
+  const [backgroundColorElectricity, setBackgroundColorElectricity] =
+    useState("");
   const [backgroundColorAircomp, setBackgroundColorAircomp] = useState("");
   const [backgroundColorShorcomp, setBackgroundColorShorcomp] = useState("");
   const [backgroundColorShorbox, setBackgroundColorShorbox] = useState("");
@@ -117,13 +116,20 @@ const Andonline1 = () => {
   const [backgroundColorOverchange, setBackgroundColorOverchange] =useState("");
   // ------------------
 
+  // REAL PRODUCTION TIME
+
+ const [RealPT1, setRealPT1] = useState("");
+
+
+  // ====
+
+
+
   /// Purchasing
   const namaList = ["CHRISNA FIRMAN"];
   const npkList = ["0301"];
 
-
-  
-   // FETCHING FIREBASE
+  // FETCHING FIREBASE
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
@@ -265,13 +271,17 @@ const Andonline1 = () => {
       setResultsCMA(data);
     });
 
+    const ref11 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1");
+    ref11.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT1(data);
+    });
+
     return () => {};
   }, []);
 
   // ---------------------
-  
-  
-  
+
   // CMA WAKTU / FIREBASE
 
   let CMAInterval;
@@ -318,7 +328,7 @@ const Andonline1 = () => {
     return () => clearInterval(CMAInterval);
   }, [CMARunning]);
 
-// start stop CMA
+  // start stop CMA
   const startCMA = () => {
     setCMATime({ hours: 0, minutes: 0, seconds: 0 });
     firebase
@@ -330,6 +340,7 @@ const Andonline1 = () => {
     firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
     setCMARunning(true);
   };
+
   const stopCMA = (event) => {
     const data = {
       ResultsCMA: ResultsCMA,
@@ -356,8 +367,7 @@ const Andonline1 = () => {
       });
   };
 
- // ----
-
+  // ----
 
   // FETCHING SCHEDULE
   // fungsi  schedule
@@ -388,8 +398,7 @@ const Andonline1 = () => {
     fetchData();
   }, []);
 
- // ----
-
+  // ----
 
   //  FUNGSI WAKTU
   const formattedTime = `${currentTime.getDate()}/${
@@ -414,8 +423,6 @@ const Andonline1 = () => {
   }, []);
   // ----
 
-
-
   // FUNGSI UPDATE STATUS
   // fungsi mengubah warna status
   const updateStatus = (data) => {
@@ -439,7 +446,7 @@ const Andonline1 = () => {
     );
   };
 
- // UPDATE Network
+  // UPDATE Network
   const updateNetwork = (data) => {
     setStatusNetwork(data);
     setBackgroundColorNetwork(
@@ -595,9 +602,6 @@ const Andonline1 = () => {
 
   // ----
 
- 
-
-
   // fungsi post ke backend
 
   useEffect(() => {
@@ -621,7 +625,7 @@ const Andonline1 = () => {
     setPrevStatus(status);
   }, [status, mesin, Line, timer, prevStatus]);
 
- // Submit 
+  // Submit
   const submit = () => {
     const data = {
       NamaPIC: NamaPIC,
@@ -703,11 +707,30 @@ const Andonline1 = () => {
       });
   };
   // ------
+
+
+
   
+  // Tindakan / Kehadiran
 
- 
+  const handleNetworkPress = () => {
+    if (network === "Down") {
+      setNetworkPressed(true);
+      timeoutRefNetwork.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        firebase.database().ref("SMTLine1/Network").set("Go");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleNetworkRelease = () => {
+    setNetworkPressed(false);
+    clearTimeout(timeoutRefNetwork.current);
+  };
 
- 
+  // ------
+
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/S.jpg)`,
     backgroundSize: "1300px",
@@ -903,6 +926,11 @@ const Andonline1 = () => {
                     onClick={
                       network === "Go" ? () => setIsOpenNetwork(true) : null
                     }
+                    onMouseDown={handleNetworkPress}
+                    onMouseUp={handleNetworkRelease}
+                    onMouseLeave={handleNetworkRelease}
+                    onTouchStart={handleNetworkPress}
+                    onTouchEnd={handleNetworkRelease}
                   >
                     <header class="px-5 py-4  ">
                       <div class="font-semibold text-center text-white">
@@ -1232,7 +1260,6 @@ const Andonline1 = () => {
         </>
       ) : null}
 
-
       {/* ISA */}
       <td class="">
         {isOpen2 ? (
@@ -1272,30 +1299,54 @@ const Andonline1 = () => {
                     Production Area: SMT
                   </h2>
                   <div className="bg-white px-4 pt-1 pb-4 flex sm:p-6 sm:pb-4">
-                    <div className="overflow-y-auto max-h-96 w-[400px]">
+                    <div className="overflow-y-auto max-h-96 w-[700px]">
                       {data ? (
                         <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
-                          <div className="mt-9">
-                            <h3 className="text-lg font-bold mb-2">
-                              Real Production Time
-                            </h3>
-                            <p className="font-bold text-sm">
-                               Production Time:
-                            </p>
-                            <p>{data.PP} </p>
-                            <p className="text-sm text-white bg-slate-700 text-center justify-center rounded-xl">
-                               Loading...{" "}
-                            </p>
-                          </div>
-                          <div className="mt-2">
-                            <p className="font-bold text-sm">
-                               Downtime :
-                            </p>
-                            <p>{data.PD} </p>
-                            <p className="text-sm text-white bg-slate-700 text-center justify-center rounded-xl">
-                               Loading...{" "}
-                            </p>
-                          </div>
+                           <h3 className="text-lg font-bold mb-2">
+                        Production Time
+                      </h3>
+                          <table>
+                          <tr>
+                              <td className="font-bold">Production time 1:</td>
+                              <span className="px-4 text-lime-800" >
+                               {RealPT1}
+                              </span>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Production time 2:</td>
+                              <span className="px-4" >
+                                Loading..
+                              </span>
+                            </tr>
+                          
+                            <tr>
+                              <td className="font-bold">Planned DT:</td>
+                              <span className="px-4" >
+                                {data.PD_IN}
+                              </span>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Production time 3:</td>
+                              <span className="px-4" >
+                                {data.PT3_IN}
+                              </span>
+                            </tr>
+                           
+                            <tr>
+                              <td className="font-bold">Production time 4:</td>
+                              <span className="px-4" >
+                                {data.PT4_IN}
+                              </span>
+                       
+                          
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Over Time:</td>
+                              <span className="px-4" >
+                                {data.OT_IN}
+                              </span>
+                            </tr>
+                          </table>
                           <div className="mt-2">
                             <p className="font-bold text-sm">
                               Change Model Allocation:
@@ -1311,7 +1362,7 @@ const Andonline1 = () => {
                       )}
                     </div>
 
-                    <div className="bg-white px-4 w-96 py-6 sm:p-6 ml-24 rounded-lg shadow-md">
+                    <div className="bg-white px-4 w-[700px] ml-3  rounded-lg shadow-md">
                       <h3 className="text-lg font-bold mb-2">
                         Production Time
                       </h3>
@@ -1419,7 +1470,7 @@ const Andonline1 = () => {
                       )}
                     </div>
 
-                    <div className="bg-white px-4 py-6 sm:p-6 ml-24 rounded-lg shadow-md">
+                    <div className="bg-white px-4 py-6 sm:p-6 ml-3 rounded-lg shadow-md">
                       <h3 className="text-lg font-bold mb-1">Facturing</h3>
                       <div className="flex flex-col justify-between">
                         <div>
@@ -1495,7 +1546,7 @@ const Andonline1 = () => {
                   aria-labelledby="modal-headline"
                 >
                   <div
-                     onClick={() => {
+                    onClick={() => {
                       setIsOpenOperator(false);
                       setIsOpen2(true);
                     }}
@@ -1521,65 +1572,62 @@ const Andonline1 = () => {
                   </h2>
                   <div className="bg-white px-4 pt-1 pb-4 flex sm:p-6 sm:pb-4">
                     <div className="bg-white px-4 w-96 py-6 sm:p-6 ml-10 rounded-lg shadow-md">
-                    <div className="overflow-y-auto max-h-96 w-[400px]">
-                      <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
-                        <h3 className="text-lg font-bold mb-4">
-                          Today's Login
-                        </h3>
-                        <div className="ml-6">
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">Leader:</span>
-                            <span className="font-bold ml-4">Chrisna </span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              SMT Top Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna </span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              SMT Bot Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              Drop In Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              Touch Up Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              Router Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              FCT Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              Coating Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
+                      <div className="overflow-y-auto max-h-96 w-[400px]">
+                        <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
+                          <h3 className="text-lg font-bold mb-4">
+                            Today's Login
+                          </h3>
+                          <div className="ml-6">
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">Leader:</span>
+                              <span className="font-bold ml-4">Chrisna </span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                SMT Top Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna </span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                SMT Bot Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna</span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                Drop In Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna</span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                Touch Up Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna</span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                Router Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna</span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                FCT Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna</span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                Coating Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna</span>
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    </div>
-
-                    
-                 
                   </div>
                 </div>
               </div>
@@ -1590,125 +1638,125 @@ const Andonline1 = () => {
         ) : null}
       </td>
 
-     <td>
-      {isOpenNetwork ? (
-        <>
-          <div className="fixed z-10 inset-0 overflow-y-auto">
-            <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-              <div className="fixed inset-0 transition-opacity">
-                <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-              </div>
-              <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-              <div
-                className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="modal-headline"
-              >
-                <div className="sm:flex sm:items-start">
-                  <form>
-                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                      <div class="p-6 text-center">
-                        <svg
-                          aria-hidden="true"
-                          class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          ></path>
-                        </svg>
-                        <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-normal text-gray-500 dark:text-gray-400">
-                          Apakah Anda Yakin Akan Meminta Bantuan Team Network?
-                        </h3>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <td>
+        {isOpenNetwork ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 transition-opacity">
+                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                </div>
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <form>
+                      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <div class="p-6 text-center">
+                          <svg
+                            aria-hidden="true"
+                            class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            ></path>
+                          </svg>
+                          <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-normal text-gray-500 dark:text-gray-400">
+                            Apakah Anda Yakin Akan Meminta Bantuan Team Network?
+                          </h3>
+                          <div class="flex flex-wrap -mx-3 ">
+                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                              <label
+                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                for="grid-first-name"
+                              >
+                                Masukan Nama Anda
+                              </label>
+                              <input
+                                type="text"
+                                class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                name="NamaPIC"
+                                required
+                                onChange={(e) => {
+                                  setNamaPIC(e.target.value);
+                                }}
+                              ></input>
+                            </div>
+                            <div class="w-full md:w-1/2 px-3">
+                              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                Line
+                              </label>
+                              <input
+                                type="text"
+                                class="appearance-none block w-full text-center  font-bold bg-gray-200 text-orange-400 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                name="NamaPIC"
+                                readOnly
+                                value={Line}
+                              />
+                            </div>
+                          </div>
+                          <div class="w-full px-1">
                             <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-first-name"
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                              for="grid-password"
                             >
-                              Masukan Nama Anda
+                              Problem
                             </label>
                             <input
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-password"
                               type="text"
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                              name="NamaPIC"
-                              required
+                              placeholder=""
+                              name="Kerusakan"
                               onChange={(e) => {
-                                setNamaPIC(e.target.value);
+                                setKerusakan(e.target.value);
                               }}
-                            ></input>
-                          </div>
-                          <div class="w-full md:w-1/2 px-3">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                              Line
-                            </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full text-center  font-bold bg-gray-200 text-orange-400 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                              name="NamaPIC"
-                              readOnly
-                              value={Line}
+                              required
                             />
+                            <p class="text-gray-600 text-xs mb-2 italic">
+                              Problem
+                            </p>
                           </div>
-                        </div>
-                        <div class="w-full px-1">
-                          <label
-                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                            for="grid-password"
-                          >
-                            Problem
-                          </label>
-                          <input
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-password"
-                            type="text"
-                            placeholder=""
-                            name="Kerusakan"
-                            onChange={(e) => {
-                              setKerusakan(e.target.value);
-                            }}
-                            required
-                          />
-                          <p class="text-gray-600 text-xs mb-2 italic">
-                            Problem
-                          </p>
-                        </div>
-                        <div class="flex justify-center">
-                          <button
-                            data-modal-hide="popup-modal"
-                            type="button"
-                            onClick={SubmitNetwork}
-                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                          >
-                            Yes, I'm sure
-                          </button>
-                          <button
-                            data-modal-hide="popup-modal"
-                            type="button"
-                            onClick={() => setIsOpenNetwork(false)}
-                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                          >
-                            No, cancel
-                          </button>
+                          <div class="flex justify-center">
+                            <button
+                              data-modal-hide="popup-modal"
+                              type="button"
+                              onClick={SubmitNetwork}
+                              class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                            >
+                              Yes, I'm sure
+                            </button>
+                            <button
+                              data-modal-hide="popup-modal"
+                              type="button"
+                              onClick={() => setIsOpenNetwork(false)}
+                              class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                            >
+                              No, cancel
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
-        </>
-      ) : null}
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
       </td>
     </body>
   );

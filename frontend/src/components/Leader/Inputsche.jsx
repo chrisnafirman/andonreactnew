@@ -202,9 +202,16 @@ const SmtTop = () => {
     return () => clearInterval(interval);
   }
 
-  useEffect(() => {
-    updateTime();
-  }, []);
+  const styles = {
+    backgroundImage: `url(${process.env.PUBLIC_URL}/l.jpg)`,
+    backgroundSize: "1300px",
+    backgroundPosition: "500px",
+    height: "8000px", // Ubah tinggi (height) sesuai kebutuhan Anda
+  };
+
+  const formattedTime = `${currentTime.getDate()}/${
+    currentTime.getMonth() + 1
+  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -213,16 +220,115 @@ const SmtTop = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const formattedTime = `${currentTime.getDate()}/${
-    currentTime.getMonth() + 1
-  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+  useEffect(() => {
+    let interval;
 
-  const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/l.jpg)`,
-    backgroundSize: "1300px",
-    backgroundPosition: "500px",
-    height: "8000px", // Ubah tinggi (height) sesuai kebutuhan Anda
+    const startCountdown = (startTime, endTime) => {
+      const targetTime = new Date();
+      const [hours, minutes] = startTime.split(":");
+      targetTime.setHours(parseInt(hours, 10));
+      targetTime.setMinutes(parseInt(minutes, 10));
+      targetTime.setSeconds(0);
+
+      const outTime = new Date();
+      const [outHours, outMinutes] = endTime.split(":");
+      outTime.setHours(parseInt(outHours, 10));
+      outTime.setMinutes(parseInt(outMinutes, 10));
+      outTime.setSeconds(0);
+
+      const interval = setInterval(() => {
+        const currentTime = new Date();
+        let remainingTime = 0;
+
+        if (currentTime >= targetTime && currentTime < outTime) {
+          // Start counting only when the current time is within the range
+          remainingTime = targetTime.getTime() - currentTime.getTime();
+
+          // Start counting from 0 seconds after the target time is reached
+          if (remainingTime <= 0) {
+            remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
+          }
+
+          // Send the countdown value to Firebase
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1")
+            .set(formatTime(remainingTime));
+        } else if (currentTime >= outTime) {
+          // Stop the countdown if the current time exceeds the end time
+          clearInterval(interval);
+        }
+      }, 1000); // Update every second
+
+      return interval; // Return the interval ID for cleanup
+    };
+
+    const formatTime = (time) => {
+      const totalSeconds = Math.floor(time / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const remainingMinutes = minutes % 60;
+
+      if (hours >= 1) {
+        if (remainingMinutes >= 1) {
+          return `${hours} jam ${remainingMinutes} menit`;
+        } else {
+          return `${hours} jam`;
+        }
+      } else if (minutes >= 1) {
+        return `${minutes} menit`;
+      } else {
+        return `${totalSeconds} detik`;
+      }
+    };
+
+    if (data && data.PT1_IN && data.PT1_OUT) {
+      interval = startCountdown(data.PT1_IN, data.PT1_OUT);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [data]);
+
+
+
+  const defaultshift1 = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+    month = month < 10 ? `0${month}` : month;
+    day = day < 10 ? `0${day}` : day;
+    const formattedDate = `${year}-${month}-${day}`;
+    setPDATE(formattedDate);
+    
+    setSHIFT("1");
+    setPT1_IN("07:00");
+    setPT1_OUT("07:00");
+    setPT2_IN("07:00");
+    setPT2_OUT("07:00");
+    setPT3_IN("07:00");
+    setPT3_OUT("07:00");
+    setPT4_IN("07:00");
+    setPT4_OUT("07:00");
+    setBR1_IN("07:00");
+    setBR1_OUT("07:00");
+    setBR2_IN("07:00");
+    setBR2_OUT("07:22");
+    setBR3_IN("07:00");
+    setBR3_OUT("07:32");
+    setBR4_IN("07:00");
+    setBR4_OUT("07:43");
+    setPD_IN("07:22");
+    setPD_OUT("07:00");
+    setOT_IN("Null");
+    setOT_OUT("Null");
+    setPD_IN("Null");
+    setPD_OUT("Null");
+    setPP("9 Hours : 0 Minutes");
   };
+  
 
   return (
     <body style={styles}>
@@ -383,20 +489,20 @@ const SmtTop = () => {
       <main>
         <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
           <li class="w-60 sm:w-36 lg:w-32">
-            <a
-              href="/Andonline1"
-              class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white"
+            <button
+              className="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white"
               aria-current="page"
+              onClick={defaultshift1}
             >
-              SMT LINE 1
-            </a>
+              Default Shift 1
+            </button>
           </li>
           <button onClick={() => setIsOpen2(true)} class="w-60 sm:w-36 lg:w-32">
             <a
               href="#"
-              class="inline-block w-full p-4 text-orange-500 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="inline-block w-full p-4 text-red-900 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
             >
-              ISA
+              Default Shift 2
             </a>
           </button>
 
@@ -432,6 +538,7 @@ const SmtTop = () => {
                   class="ml-5  g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder=""
                   required
+                  value={PDATE}
                   onChange={(e) => {
                     setPDATE(e.target.value);
                   }}
@@ -447,6 +554,7 @@ const SmtTop = () => {
                 <input
                   type="number"
                   max="5"
+                  value={SHIFT}
                   id="Shift"
                   class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="1-5"
@@ -468,6 +576,7 @@ const SmtTop = () => {
                   Production Time 1
                 </label>
                 <input
+                 value={PT1_IN}
                   type="time"
                   id="first_name"
                   class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -479,6 +588,7 @@ const SmtTop = () => {
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
+                  value={PT1_OUT}
                   type="time"
                   id="first_name"
                   class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -501,6 +611,7 @@ const SmtTop = () => {
                   Production Time 2
                 </label>
                 <input
+                value={PT2_IN}
                   type="time"
                   id="first_name"
                   class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -512,6 +623,7 @@ const SmtTop = () => {
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
+                value={PT2_OUT}
                   type="time"
                   id="first_name"
                   class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -533,6 +645,7 @@ const SmtTop = () => {
                   Production Time 3
                 </label>
                 <input
+                value={PT3_IN}
                   type="time"
                   id="first_name"
                   class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -544,6 +657,7 @@ const SmtTop = () => {
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
+                value={PT3_OUT}
                   type="time"
                   id="first_name"
                   class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -566,6 +680,7 @@ const SmtTop = () => {
                   Production Time 4
                 </label>
                 <input
+                value={PT4_IN}
                   type="time"
                   id="first_name"
                   class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -577,6 +692,7 @@ const SmtTop = () => {
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
+                value={PT4_OUT}
                   type="time"
                   id="first_name"
                   class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -589,7 +705,7 @@ const SmtTop = () => {
               </div>
             </div>
 
-            {/* break1 */}
+            {/* Break1 */}
             <div class=" gap-2 mb-6 flex py-2 px-3 ">
               <div className="flex ">
                 <label
@@ -599,6 +715,7 @@ const SmtTop = () => {
                   Break Time 1
                 </label>
                 <input
+                value={BR1_IN}
                   type="time"
                   id="first_name"
                   class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -610,6 +727,7 @@ const SmtTop = () => {
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
+                value={BR1_OUT}
                   type="time"
                   id="first_name"
                   class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -632,6 +750,7 @@ const SmtTop = () => {
                   Break Time 2
                 </label>
                 <input
+                value={BR2_IN}
                   type="time"
                   id="first_name"
                   class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -643,6 +762,7 @@ const SmtTop = () => {
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
+                value={BR2_OUT}
                   type="time"
                   id="first_name"
                   class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -665,6 +785,7 @@ const SmtTop = () => {
                   Break Time 3
                 </label>
                 <input
+                value={BR3_IN}
                   type="time"
                   id="first_name"
                   class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -676,6 +797,7 @@ const SmtTop = () => {
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
+                value={BR3_OUT}
                   type="time"
                   id="first_name"
                   class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -698,6 +820,7 @@ const SmtTop = () => {
                   Break Time 4
                 </label>
                 <input
+                value={BR4_IN}
                   type="time"
                   id="first_name"
                   class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -709,6 +832,7 @@ const SmtTop = () => {
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
+                value={BR4_OUT}
                   type="time"
                   id="first_name"
                   class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -731,6 +855,7 @@ const SmtTop = () => {
                   Over Time Time
                 </label>
                 <input
+                value={OT_IN}
                   type="time"
                   id="first_name"
                   class="ml-7 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -742,6 +867,7 @@ const SmtTop = () => {
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
+                value={OT_OUT}
                   type="time"
                   id="first_name"
                   class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -764,6 +890,7 @@ const SmtTop = () => {
                   Planned DownTime
                 </label>
                 <input
+                value={PD_IN}
                   type="time"
                   id="first_name"
                   class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -775,6 +902,7 @@ const SmtTop = () => {
                 />
                 <h1 className="mt-3 ml-2">To</h1>
                 <input
+                value={PD_OUT}
                   type="time"
                   id="first_name"
                   class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -797,15 +925,12 @@ const SmtTop = () => {
             {/*  Planned Production  */}
             <div class=" gap-2 mb-4 flex py-2 px-3 ">
               <div className="flex ">
-                <label
-                 
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
+                <label class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">
                   Planned Production
                 </label>
                 <input
+                value={PP}
                   type="text"
-            
                   defaultValue="0 Hours : 0 Minutes"
                   class="ml-12 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
@@ -813,17 +938,16 @@ const SmtTop = () => {
                     setPP(e.target.value);
                   }}
                 />
-                <h1 className="mt-3 text-xs text-red-500 ml-2">!Ganti Angka 0 Untuk Menentukan Waktu</h1>
+                <h1 className="mt-3 text-xs text-red-500 ml-2">
+                  !Ganti Angka 0 Untuk Menentukan Waktu
+                </h1>
               </div>
             </div>
 
             {/* Planned Downtime */}
             <div class=" gap-2 mb-4 flex py-2 px-3 ">
               <div className="flex ">
-                <label
-                 
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
+                <label class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">
                   Planned Downtime
                 </label>
                 <input
@@ -835,7 +959,9 @@ const SmtTop = () => {
                     setPD(e.target.value);
                   }}
                 />
-                <h1 className="mt-3 text-red-500 text-xs ml-2">!Ganti Angka 0 Untuk Menentukan Waktu</h1>
+                <h1 className="mt-3 text-red-500 text-xs ml-2">
+                  !Ganti Angka 0 Untuk Menentukan Waktu
+                </h1>
               </div>
             </div>
 
@@ -859,7 +985,7 @@ const SmtTop = () => {
                   }}
                 />
                 <h1 className="mt-3 text-red-500 text-xs ml-2">
-                !Ganti Angka 0 Untuk Menentukan Waktu{" "}
+                  !Ganti Angka 0 Untuk Menentukan Waktu{" "}
                 </h1>
               </div>
             </div>
@@ -939,14 +1065,6 @@ const SmtTop = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="font-bold  text-xs">Planned DT:</td>
-                          <td className="text-sm ">
-                            <span style={{ color: "green" }}>{data.PD_IN}</span>{" "}
-                            -{" "}
-                            <span style={{ color: "red" }}>{data.PD_OUT}</span>
-                          </td>
-                        </tr>
-                        <tr>
                           <td className="font-bold text-xs">
                             Production Time 3:
                           </td>
@@ -983,11 +1101,24 @@ const SmtTop = () => {
                           </td>
                         </tr>
                         <tr>
+                          <td className="font-bold text-xs">
+                            --------------------
+                          </td>
+                        </tr>
+                        <tr>
                           <td className="font-bold text-xs">Over Time:</td>
                           <td className="text-sm">
                             <span style={{ color: "green" }}>{data.OT_IN}</span>{" "}
                             -{" "}
                             <span style={{ color: "red" }}>{data.OT_OUT}</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold  text-xs">Planned DT:</td>
+                          <td className="text-sm ">
+                            <span style={{ color: "green" }}>{data.PD_IN}</span>{" "}
+                            -{" "}
+                            <span style={{ color: "red" }}>{data.PD_OUT}</span>
                           </td>
                         </tr>
                         <tr>
@@ -1015,41 +1146,32 @@ const SmtTop = () => {
                           </td>
                           <td className="text-sm">{data.PD} </td>
                         </tr>
-
-                        
                       </tbody>
                       <tr>
-                          <td className="font-bold text-xs">
-                            --------------------
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="font-bold text-xs">
-                            REAL PRODUCTION  TIME
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="font-bold text-xs">
-                            Change Model Allocation :
-                          </td>
-                          <td className="text-sm">{data.ResultsCMA} </td>
-                        </tr>
+                        <td className="font-bold text-xs">
+                          --------------------
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">
+                          REAL PRODUCTION TIME
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">
+                          Change Model Allocation :
+                        </td>
+                        <td className="text-sm">{data.ResultsCMA} </td>
+                      </tr>
 
-                        <tr>
-                          <td className="font-bold text-xs">
-                           Production : 
-                          </td>
-                          <td className="text-sm">Loading.... </td>
-                        </tr>
-                        <tr>
-                          <td className="font-bold text-xs">
-                           Downtime :
-                          </td>
-                          <td className="text-sm">Loading....</td>
-                        </tr>
-
-
-
+                      <tr>
+                        <td className="font-bold text-xs">Production :</td>
+                        <td className="text-sm">Loading.... </td>
+                      </tr>
+                      <tr>
+                        <td className="font-bold text-xs">Downtime :</td>
+                        <td className="text-sm">Loading....</td>
+                      </tr>
                     </table>
                   ) : (
                     <p>Loading...</p>

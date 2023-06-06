@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import Line1 from "./Line1";
@@ -13,6 +13,11 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const SmtTop = () => {
+  // Tindakan / Kehadiran
+  const [DestackerPressed, setDestackerPressed] = useState(false);
+  const timeoutRefDestacker = useRef(null);
+  // ----
+
   const [mesin, setMesin] = useState("");
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
@@ -56,8 +61,6 @@ const SmtTop = () => {
   const [isOpenReturn, setIsOpenReturn] = useState(false);
   const [isOpenOperator, setIsOpenOperator] = useState(false);
 
-
-
   // OTHER
   const [selectedStatus, setSelectedStatus] = useState("");
   // ----------------------
@@ -73,7 +76,7 @@ const SmtTop = () => {
   //BACKGROUND / WARNA KOTAK
   const [backgroundColorStatusdestacker, setBackgroundColorStatusdestacker] =
     useState("");
-    const [backgroundColorStatuslabel, setBackgroundColorStatuslabel] =
+  const [backgroundColorStatuslabel, setBackgroundColorStatuslabel] =
     useState("");
   const [backgroundColor, setBackgroundColor] = useState("");
   // ---------------------------
@@ -200,7 +203,6 @@ const SmtTop = () => {
       updateStatuslabel(data);
     });
 
-    
     const ref10 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
     ref10.on("value", (snapshot) => {
       const data = snapshot.val();
@@ -339,8 +341,6 @@ const SmtTop = () => {
 
   // ----
 
-
-
   // FUNGSI UPDATE STATUS
   // fungsi mengubah warna status
   const updateStatus = (data) => {
@@ -384,7 +384,6 @@ const SmtTop = () => {
         : "#565454"
     );
   };
-
 
   const updateStatuslabel = (data) => {
     setStatuslabel(data);
@@ -443,6 +442,10 @@ const SmtTop = () => {
     setPrevStatus(status);
   }, [status, mesin, Line, timer, prevStatus]);
 
+
+
+
+
   //  Submit Destacker
   const submitDestacker = () => {
     if (!NamaPIC || !Line || !Kerusakan || !Area) {
@@ -480,8 +483,8 @@ const SmtTop = () => {
       });
   };
 
-   //  Submit Destacker
-   const submitLabel = () => {
+  //  Submit Label
+  const submitLabel = () => {
     if (!NamaPIC || !Line || !Kerusakan || !Area) {
       alert("Harap isi semua kolom!");
       return;
@@ -505,7 +508,7 @@ const SmtTop = () => {
         if (response.status === 200) {
           alert("success report destecker smt top");
           setIsOpenDestacker(false);
-          firebase.database().ref("SMTLine1TOP/Labe;").set("Maintenance");
+          firebase.database().ref("SMTLine1TOP/Label").set("Maintenance");
           firebase.database().ref("StatusLine/SMTLine1").set("Down");
           window.location.reload();
         } else {
@@ -516,6 +519,11 @@ const SmtTop = () => {
         console.log(err);
       });
   };
+
+
+
+
+  
 
   //  Submit Quality
   const submitQuality = () => {
@@ -569,7 +577,6 @@ const SmtTop = () => {
 
   //  Submit Validation Quality A
   const submitValQA = () => {
-
     const data = new FormData();
     data.append("NamaPIC", NamaPIC);
     data.append("NpkPIC", NpkPIC);
@@ -629,12 +636,38 @@ const SmtTop = () => {
 
   // ------
 
-  // SUBMIT FIL
+  // SUBMIT FILE
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
 
-  // Backgroun
+  // Tindakan / Kehadiran
+
+  const handleDestackerPress = () => {
+    if (Statusdestacker === "Maintenance") {
+      setDestackerPressed(true);
+      timeoutRefDestacker.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/Destacker").set("Repair");
+        window.location.reload();
+      }, 3000);
+    } else if (Statusdestacker === "QA") {
+      setDestackerPressed(true);
+      timeoutRefDestacker.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/Destacker").set("Go");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleDestackerRelease = () => {
+    setDestackerPressed(false);
+    clearTimeout(timeoutRefDestacker.current);
+  };
+
+  // ------
+
+  // Background
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/S.jpg)`,
     backgroundSize: "1300px",
@@ -859,6 +892,11 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
+                    onMouseDown={handleDestackerPress}
+                    onMouseUp={handleDestackerRelease}
+                    onMouseLeave={handleDestackerRelease}
+                    onTouchStart={handleDestackerPress}
+                    onTouchEnd={handleDestackerRelease}
                     style={{ backgroundColor: backgroundColorStatusdestacker }}
                     value={Statusdestacker}
                     onClick={() => {
@@ -890,22 +928,22 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                     style={{ backgroundColor: backgroundColorStatuslabel }}
-                     value={Statuslabel}
-                     onClick={() => {
-                       if (Statuslabel === "Go") {
-                         // set isOpenDestacker state to true if Statuslabel is "Go"
-                         setIsOpenLabel(true);
-                       } else if (Statuslabel === "Repair") {
-                         // set isOpenQuality state to true if Statuslabel is "Repair"
-                         setIsOpenQuality(true);
-                       } else if (Statuslabel === "QA") {
-                         // set isOpenQuality state to true if Statuslabel is "Repair"
-                         setIsOpenValQA(true);
-                       }
-                       setStation(Label);
-                     }}
-                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                    style={{ backgroundColor: backgroundColorStatuslabel }}
+                    value={Statuslabel}
+                    onClick={() => {
+                      if (Statuslabel === "Go") {
+                        // set isOpenDestacker state to true if Statuslabel is "Go"
+                        setIsOpenLabel(true);
+                      } else if (Statuslabel === "Repair") {
+                        // set isOpenQuality state to true if Statuslabel is "Repair"
+                        setIsOpenQuality(true);
+                      } else if (Statuslabel === "QA") {
+                        // set isOpenQuality state to true if Statuslabel is "Repair"
+                        setIsOpenValQA(true);
+                      }
+                      setStation(Label);
+                    }}
+                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="font-semibold text-center text-white">
@@ -1063,9 +1101,8 @@ const SmtTop = () => {
 
       {/* POPPP UPPPP */}
 
-
-   {/* POP UP  OPEN OPERATOR*/}
-   <td class="">
+      {/* POP UP  OPEN OPERATOR*/}
+      <td class="">
         {isOpenOperator ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -1081,7 +1118,7 @@ const SmtTop = () => {
                   aria-labelledby="modal-headline"
                 >
                   <div
-                     onClick={() => {
+                    onClick={() => {
                       setIsOpenOperator(false);
                       setIsOpen2(true);
                     }}
@@ -1107,65 +1144,62 @@ const SmtTop = () => {
                   </h2>
                   <div className="bg-white px-4 pt-1 pb-4 flex sm:p-6 sm:pb-4">
                     <div className="bg-white px-4 w-96 py-6 sm:p-6 ml-10 rounded-lg shadow-md">
-                    <div className="overflow-y-auto max-h-96 w-[400px]">
-                      <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
-                        <h3 className="text-lg font-bold mb-4">
-                          Today's Login
-                        </h3>
-                        <div className="ml-6">
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">Leader:</span>
-                            <span className="font-bold ml-4">Chrisna </span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              SMT Top Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna </span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              SMT Bot Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              Drop In Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              Touch Up Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              Router Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              FCT Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
-                          <p className="mb-2 flex">
-                            <span className="font-bold w-40">
-                              Coating Operator:
-                            </span>
-                            <span className="font-bold ml-4">Chrisna</span>
-                          </p>
+                      <div className="overflow-y-auto max-h-96 w-[400px]">
+                        <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
+                          <h3 className="text-lg font-bold mb-4">
+                            Today's Login
+                          </h3>
+                          <div className="ml-6">
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">Leader:</span>
+                              <span className="font-bold ml-4">Chrisna </span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                SMT Top Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna </span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                SMT Bot Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna</span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                Drop In Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna</span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                Touch Up Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna</span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                Router Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna</span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                FCT Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna</span>
+                            </p>
+                            <p className="mb-2 flex">
+                              <span className="font-bold w-40">
+                                Coating Operator:
+                              </span>
+                              <span className="font-bold ml-4">Chrisna</span>
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    </div>
-
-                    
-                 
                   </div>
                 </div>
               </div>
@@ -1331,8 +1365,8 @@ const SmtTop = () => {
         ) : null}
       </td>
 
-       {/* POP UP  Label*/}
-       <td class="">
+      {/* POP UP  Label*/}
+      <td class="">
         {isOpenLabel ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">

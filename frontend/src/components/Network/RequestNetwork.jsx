@@ -395,15 +395,10 @@ const RepairReport = () => {
                         {selectedItem && (
                           <>
                             <div className="fixed z-10 inset-0 overflow-y-auto">
-                              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                                <div className="fixed inset-0 transition-opacity">
-                                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                                </div>
-
-                                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
+                              <div class="flex items-end justify-center min-h-screen bg-slate-400 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
                                 <div
-                                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                                  class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                                   role="dialog"
                                   aria-modal="true"
                                   aria-labelledby="modal-headline"
@@ -415,7 +410,7 @@ const RepairReport = () => {
                                           <span>PROBLEM</span>
                                         </div>
                                         <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                          <div class="w-full px-1">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-first-name"
@@ -430,7 +425,10 @@ const RepairReport = () => {
                                               {selectedItem.Nama}{" "}
                                             </div>
                                           </div>
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                        </div>
+
+                                        <div class="flex flex-wrap -mx-3 ">
+                                          <div class="w-full md:w-1/3 px-2 mb-6 md:mb-0">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-city"
@@ -446,7 +444,6 @@ const RepairReport = () => {
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="flex flex-wrap -mx-3 mb-6"></div>
                                         <div class="flex flex-wrap -mx-3 ">
                                           <div class="w-full px-1">
                                             <label
@@ -480,8 +477,6 @@ const RepairReport = () => {
                                 </div>
                               </div>
                             </div>
-
-                            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
                           </>
                         )}
 

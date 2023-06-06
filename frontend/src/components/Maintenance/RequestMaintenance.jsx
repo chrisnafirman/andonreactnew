@@ -417,19 +417,9 @@ const RepairReport = () => {
                         {selectedItem && (
                           <>
                             <div className="fixed z-10 inset-0 overflow-y-auto">
-                              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                                <div className="fixed inset-0 transition-opacity">
-                                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                                </div>
-
-                                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                                <div
-                                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                                  role="dialog"
-                                  aria-modal="true"
-                                  aria-labelledby="modal-headline"
-                                >
+                            <div class="flex items-end justify-center min-h-screen bg-slate-400 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+  <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+  <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                                   <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                                     <div className="sm:flex sm:items-start">
                                       <div className="w-full max-w-lg">
@@ -536,7 +526,7 @@ const RepairReport = () => {
                               </div>
                             </div>
 
-                            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+                      
                           </>
                         )}
 

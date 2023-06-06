@@ -34,14 +34,11 @@ import Inputsche from "./components/Leader/Inputsche.jsx"
 import ScheProd from "./components/Leader/ScheProd.jsx"
 
 import RequestNetwork from "./components/Network/RequestNetwork.jsx"
-import ReturnNetwork from "./components/Network/ReturnNetwork.jsx"
+
 
 import RequestMaintenance from "./components/Maintenance/RequestMaintenance.jsx"
 import ReturnMaintenance from "./components/Maintenance/ReturnMaintenance.jsx"
 
-import PPICProd from "./components/PPIC&QC/PPIC.jsx"
-
-import QCProd from "./components/PPIC&QC/QC.jsx"
 
 import EM from "./components/EMaintenance.jsx"
 
@@ -83,14 +80,11 @@ function App() {
         <Route path="ScheProd" element={<ScheProd/>}/>
   
         <Route path="RequestNetwork" element={<RequestNetwork/>}/>
-        <Route path="ReturnNetwork" element={<ReturnNetwork/>}/>
 
         <Route path="RequestMaintenance" element={<RequestMaintenance/>}/>
         <Route path="ReturnMaintenance" element={<ReturnMaintenance/>}/>
 
-        <Route path="PPICProd" element={<PPICProd/>}/>
-
-        <Route path="QCProd" element={<QCProd/>}/>
+   
 
 
         <Route path="E" element={<EM/>}/>
