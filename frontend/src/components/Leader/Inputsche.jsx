@@ -12,25 +12,18 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const SmtTop = () => {
-  const [mesin, setMesin] = useState("");
-  const [line, setLine] = useState("");
-  const [nama, setNama] = useState("");
-  const [area, setArea] = useState("");
-  const [station, setStation] = useState("");
-  const [timer, setTimer] = useState("");
+
+  const [InputSchedule, setInputSchedule] = useState(false);
+  const [RealProduction, setRealProduction] = useState(true);
+
   const [time, setTime] = useState(new Date().toLocaleString());
   const [prevStatus, setPrevStatus] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
 
-  // popup 1
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpen2, setIsOpen2] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState("");
-  const [NamaPIC, setNamaPIC] = useState("");
-  const [NpkPIC, setNpkPIC] = useState("");
-  const [Kerusakan, setKerusakan] = useState("");
+
+
   const [data, setData] = useState(null);
 
   // SCHE PRODUCTION
@@ -59,6 +52,39 @@ const SmtTop = () => {
   const [PD, setPD] = useState("");
   const [CMA, setCMA] = useState("");
   const [PDATE, setPDATE] = useState("");
+
+
+  const [ResultsCMA,setResultsCMA] = useState("");
+  const [RealPT1,setRealPT1] = useState("");
+  const [RealPT2,setRealPT2] = useState("");
+  
+
+  useEffect(() => {
+
+    
+    const ref1 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
+    ref1.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setResultsCMA(data);
+    });
+
+  const ref2 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1");
+  ref2.on("value", (snapshot) => {
+    const data = snapshot.val();
+    setRealPT1(data);
+  });
+
+  const ref3 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2");
+  ref3.on("value", (snapshot) => {
+    const data = snapshot.val();
+    setRealPT2(data);
+  });
+
+
+  return () => {};
+}, []);
+
+
 
   const submit = () => {
     const data = {
@@ -99,7 +125,6 @@ const SmtTop = () => {
       .then((response) => {
         if (response.status === 200) {
           alert("success");
-          setIsOpen(false);
           window.location.reload();
         } else {
           throw new Error("Error adding data");
@@ -152,7 +177,8 @@ const SmtTop = () => {
       .then((response) => {
         if (response.status === 200) {
           alert("Production Berhasil Di Reset");
-          setIsOpen(false);
+          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1").set("waiting...");
+          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2").set("waiting...");
           window.location.reload();
         } else {
           throw new Error("Error adding data");
@@ -162,6 +188,13 @@ const SmtTop = () => {
         console.log(err);
       });
   };
+
+
+  const Input = () => {
+    setRealProduction(false);
+    setInputSchedule(true);
+  };
+  
 
   function formatDate(dateString) {
     const options = { day: "numeric", month: "numeric", year: "numeric" };
@@ -219,6 +252,9 @@ const SmtTop = () => {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
+
+  //  Real Prod Time PT1
 
   useEffect(() => {
     let interval;
@@ -291,9 +327,82 @@ const SmtTop = () => {
     };
   }, [data]);
 
+  //  Real Prod Time PT2
+
+  useEffect(() => {
+    let interval;
+
+    const startCountdown2 = (startTime, endTime) => {
+      const targetTime = new Date();
+      const [hours, minutes] = startTime.split(":");
+      targetTime.setHours(parseInt(hours, 10));
+      targetTime.setMinutes(parseInt(minutes, 10));
+      targetTime.setSeconds(0);
+
+      const outTime = new Date();
+      const [outHours, outMinutes] = endTime.split(":");
+      outTime.setHours(parseInt(outHours, 10));
+      outTime.setMinutes(parseInt(outMinutes, 10));
+      outTime.setSeconds(0);
+
+      const interval = setInterval(() => {
+        const currentTime = new Date();
+        let remainingTime = 0;
+
+        if (currentTime >= targetTime && currentTime < outTime) {
+          // Start counting only when the current time is within the range
+          remainingTime = targetTime.getTime() - currentTime.getTime();
+
+          // Start counting from 0 seconds after the target time is reached
+          if (remainingTime <= 0) {
+            remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
+          }
+
+          // Send the countdown value to Firebase
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2")
+            .set(formatTime(remainingTime));
+        } else if (currentTime >= outTime) {
+          // Stop the countdown if the current time exceeds the end time
+          clearInterval(interval);
+        }
+      }, 1000); // Update every second
+
+      return interval; // Return the interval ID for cleanup
+    };
+
+    const formatTime = (time) => {
+      const totalSeconds = Math.floor(time / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const remainingMinutes = minutes % 60;
+
+      if (hours >= 1) {
+        if (remainingMinutes >= 1) {
+          return `${hours} jam ${remainingMinutes} menit`;
+        } else {
+          return `${hours} jam`;
+        }
+      } else if (minutes >= 1) {
+        return `${minutes} menit`;
+      } else {
+        return `${totalSeconds} detik`;
+      }
+    };
+
+    if (data && data.PT2_IN && data.PT2_OUT) {
+      interval = startCountdown2(data.PT2_IN, data.PT2_OUT);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [data]);
 
 
-  const defaultshift1 = () => {
+
+  const defaultshift2 = () => {
     const today = new Date();
     const year = today.getFullYear();
     let month = today.getMonth() + 1;
@@ -303,25 +412,25 @@ const SmtTop = () => {
     const formattedDate = `${year}-${month}-${day}`;
     setPDATE(formattedDate);
     
-    setSHIFT("1");
+    setSHIFT("2");
     setPT1_IN("07:00");
-    setPT1_OUT("07:00");
-    setPT2_IN("07:00");
-    setPT2_OUT("07:00");
-    setPT3_IN("07:00");
-    setPT3_OUT("07:00");
-    setPT4_IN("07:00");
-    setPT4_OUT("07:00");
-    setBR1_IN("07:00");
-    setBR1_OUT("07:00");
-    setBR2_IN("07:00");
-    setBR2_OUT("07:22");
-    setBR3_IN("07:00");
-    setBR3_OUT("07:32");
-    setBR4_IN("07:00");
-    setBR4_OUT("07:43");
-    setPD_IN("07:22");
-    setPD_OUT("07:00");
+    setPT1_OUT("09:45");
+    setPT2_IN("10:00");
+    setPT2_OUT("12:00");
+    setPT3_IN("14:00");
+    setPT3_OUT("15:45");
+    setPT4_IN("16:00");
+    setPT4_OUT("16:30");
+    setBR1_IN("09:45");
+    setBR1_OUT("10:00");
+    setBR2_IN("12:00");
+    setBR2_OUT("13:00");
+    setBR3_IN("15:45");
+    setBR3_OUT("16:00");
+    setBR4_IN("16:30");
+    setBR4_OUT("16:40");
+    setPD_IN("Null");
+    setPD_OUT("Null");
     setOT_IN("Null");
     setOT_OUT("Null");
     setPD_IN("Null");
@@ -347,15 +456,7 @@ const SmtTop = () => {
         </div>
       </nav>
 
-      <header class="bg-white shadow mb-3">
-        <div class="mx-auto max-w-7xl px-4">
-          <marquee behavior="scroll" direction="right">
-            <h1 class="text-xl font-bold tracking-tight text-gray-900">
-              SMT LINE 1 - LEADER - Input Schedule Production
-            </h1>
-          </marquee>
-        </div>
-      </header>
+    
 
       <sidebar>
         <div
@@ -487,23 +588,23 @@ const SmtTop = () => {
 
       {/*  */}
       <main>
-        <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
+        <ul class="hidden mt-2 text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
           <li class="w-60 sm:w-36 lg:w-32">
             <button
               className="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white"
               aria-current="page"
-              onClick={defaultshift1}
+              
             >
               Default Shift 1
             </button>
           </li>
-          <button onClick={() => setIsOpen2(true)} class="w-60 sm:w-36 lg:w-32">
-            <a
-              href="#"
+          <button onClick={() => setInputSchedule(true)} class="w-60 sm:w-36 lg:w-32">
+            <button
+            onClick={defaultshift2}
               class="inline-block w-full p-4 text-red-900 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
             >
               Default Shift 2
-            </a>
+            </button>
           </button>
 
           <button class="w-60 sm:w-36 lg:w-32">
@@ -516,13 +617,86 @@ const SmtTop = () => {
           </button>
         </ul>
 
-        <div className=" pt-3">
-          <span className=" pt-4 sm:ml-5 text-2xl text-white font-normal px-2">
-            Input Schedule Production
+
+        <div className=" ">
+          <span className=" pt-2 sm:ml-5 text-2xl text-white font-normal px-2">
+           
           </span>
         </div>
 
+
+
         <div className="flex">
+
+        {RealProduction ? (
+          <>
+        <div className="overflow-y-auto max-h-96 sm:ml-0 lg:ml-28  w-[500px]">
+                      {data ? (
+                        <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
+                           <h3 className="text-lg font-bold mb-2">
+                        Real Production Time
+                      </h3>
+                          <table>
+                          <tr>
+                              <td className="font-bold">Production time 1:</td>
+                              <span className="px-4 text-lime-800" >
+                              {RealPT1}
+                              </span>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Production time 2:</td>
+                              <span className="px-4 text-lime-800" >
+                              {RealPT2}
+                              </span>
+                            </tr>
+                          
+                            <tr>
+                              <td className="font-bold">Planned DT:</td>
+                              <span className="px-4" >
+                                
+                              </span>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Production time 3:</td>
+                              <span className="px-4" >
+                                
+                              </span>
+                            </tr>
+                           
+                            <tr>
+                              <td className="font-bold">Production time 4:</td>
+                              <span className="px-4" >
+                              
+                              </span>
+                       
+                          
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Over Time:</td>
+                              <span className="px-4" >
+                              
+                              </span>
+                            </tr>
+                          </table>
+                          <div className="mt-2">
+                            <p className="font-bold text-sm">
+                              Change Model Allocation:
+                            </p>
+                            
+                            <p className="text-sm text-white bg-amber-500 text-center justify-center rounded-xl">
+                              ON GOING : {ResultsCMA}
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        <p>Loading...</p>
+                      )}
+                    </div>
+          </>
+        ) : null}
+          
+        {InputSchedule ? (
+          <>
           <form className="bg-slate-50 w-[900px] sm:w-[600px] lg:w-[650px] px-3 ml-5 rounded-lg ">
             <div class=" gap-2 mb-6 flex py-2 px-3 ">
               <div className="flex ">
@@ -1002,6 +1176,8 @@ const SmtTop = () => {
               </button>
             </div>
           </form>
+          </>
+        ) : null}
 
           <ol class="relative border-l border-gray-200 ml-7 dark:border-gray-700">
             <li class="mb-10 ml-6">
@@ -1147,41 +1323,23 @@ const SmtTop = () => {
                           <td className="text-sm">{data.PD} </td>
                         </tr>
                       </tbody>
-                      <tr>
-                        <td className="font-bold text-xs">
-                          --------------------
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">
-                          REAL PRODUCTION TIME
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">
-                          Change Model Allocation :
-                        </td>
-                        <td className="text-sm">{data.ResultsCMA} </td>
-                      </tr>
-
-                      <tr>
-                        <td className="font-bold text-xs">Production :</td>
-                        <td className="text-sm">Loading.... </td>
-                      </tr>
-                      <tr>
-                        <td className="font-bold text-xs">Downtime :</td>
-                        <td className="text-sm">Loading....</td>
-                      </tr>
+                      
                     </table>
                   ) : (
                     <p>Loading...</p>
                   )}
-                  <div className="pt-3">
+                  <div className="pt-3 flex">
                     <button
                       className="bg-red-500 hover:bg-red-700 text-white text-xs font-bold py-2 px-4 rounded"
                       onClick={() => stop("NULL")}
                     >
                       STOP PRODUCTION
+                    </button>
+                    <button
+                      className="bg-lime-900 ml-3 hover:bg-red-700 text-white text-xs font-bold py-2 px-4 rounded"
+                      onClick={Input}
+                    >
+                      INPUT SCHEDULE
                     </button>
                   </div>
                 </div>
