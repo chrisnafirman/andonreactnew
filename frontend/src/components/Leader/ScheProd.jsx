@@ -23,7 +23,6 @@ const SmtTop = () => {
   const [showDrawer, setShowDrawer] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
 
-
   const [showDatePicker, setShowDatePicker] = useState(true);
 
   // popup 1
@@ -35,8 +34,6 @@ const SmtTop = () => {
   const [NpkPIC, setNpkPIC] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
 
-
-  
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
@@ -169,7 +166,9 @@ const SmtTop = () => {
           return { ...item, PDATE: formattedDate };
         });
 
-        newFilteredData.sort((a, b) => Date.parse(a.PDATE) - Date.parse(b.PDATE));
+        newFilteredData.sort(
+          (a, b) => Date.parse(a.PDATE) - Date.parse(b.PDATE)
+        );
         newFilteredData.reverse();
         setFilteredData(newFilteredData);
       })
@@ -188,18 +187,17 @@ const SmtTop = () => {
     )
       .toString()
       .padStart(2, "0")}-${date.getFullYear()}`;
-      
+
     const filteredDataResult = filteredData.filter((item) =>
       item.PDATE.includes(formattedDate)
     );
-    filteredDataResult.sort((a, b) => Date.parse(b.PDATE) - Date.parse(a.PDATE));
+    filteredDataResult.sort(
+      (a, b) => Date.parse(b.PDATE) - Date.parse(a.PDATE)
+    );
     setFilteredData(filteredDataResult);
     console.log(selectedDate); // Periksa nilai selectedDate
     console.log(formattedDate);
   };
-
-  
-  
 
   const stop = (value) => {
     const data = {
@@ -470,48 +468,47 @@ const SmtTop = () => {
 
       {/*  */}
       <main className="flex">
-      {showDatePicker && (
-                <form className="" onSubmit={handleSubmit}>
-                  <label htmlFor="date" className="text-gray-300">
-                    Pilih Tanggal :
-                  </label>
-                  <div className="flex flex-col w-40">
-                    <div class="relative max-w-sm">
-                      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg
-                          aria-hidden="true"
-                          class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                            clip-rule="evenodd"
-                          ></path>
-                        </svg>
-                      </div>
-                      <input
-                        type="date"
-                        id="date"
-                        name="date"
-                        class="bg-gray-50 border items-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        onChange={handleFilterByDate}
-                      />
-                    </div>
-                    <button
-                      class="bg-blue-500  hover:bg-blue-400 text-white w-20 font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-2 "
-                      type="submit"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </form>
-              )}
+        {showDatePicker && (
+          <form className="" onSubmit={handleSubmit}>
+            <label htmlFor="date" className="text-gray-300">
+              Pilih Tanggal :
+            </label>
+            <div className="flex flex-col w-40">
+              <div class="relative max-w-sm">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <svg
+                    aria-hidden="true"
+                    class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+                <input
+                  type="date"
+                  id="date"
+                  name="date"
+                  class="bg-gray-50 border items-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  onChange={handleFilterByDate}
+                />
+              </div>
+              <button
+                class="bg-blue-500  hover:bg-blue-400 text-white w-20 font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-2 "
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        )}
 
-        <div className="ml-4">
-        </div>
+        <div className="ml-4"></div>
         <div class="flex ">
           <ol class="relative border-l border-gray-200 ml-7 dark:border-gray-700">
             <div class="mb-10 ml-6 w-[1000px] md:w-[700px] sm:w-[500px] lg:w-[1000px]">
@@ -570,68 +567,75 @@ const SmtTop = () => {
                       </tr>
                     </thead>
                     <tbody className="text-sm divide-y divide-gray-100">
-                      {filteredData.map(
-                        (item, index) =>
-                          item.PDATE && // Check if selectedDate matches the item's PDATE value
-                          item.CMA &&
-                          item.PD &&
-                          item.PP &&
-                          item.SHIFT && (
-                            <tr key={index}>
-                              <td className="p-2">
-                                <div className="font-medium text-gray-800">
-                                  SMT LINE 1
-                                </div>
-                              </td>
-                              <td className="p-2">
-                                <div className="font-medium text-gray-800">
-                                  {item.SHIFT}
-                                </div>
-                              </td>
-                              <td className="p-2">
-                                <div className="font-medium text-gray-800">
-                                  {item.PP}
-                                </div>
-                              </td>
-                              <td className="p-2 ">
-                                <div className="font-medium text-gray-800">
-                                  {item.PD}
-                                </div>
-                              </td>
-                              <td className="p-2">
-                                <div className="font-medium text-gray-800">
-                                  {item.CMA}
-                                </div>
-                              </td>
-                              <td className="p-2 w-12">
-                                <div className="text-center text-white rounded-md bg-lime-800 h-6 text-black...">
-                                  {item.PDATE}
-                                </div>
-                              </td>
-                              <td className="p-4 ">
-                                <button
-                                  onClick={() => setSelectedItem(item)}
-                                  className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                      {filteredData.map((item, index) => {
+                        // Cek jika data kosong, lewati item ini
+                        if (
+                          item.SHIFT === "" &&
+                          item.PT1_IN === "" &&
+                          item.PT1_OUT === "" &&
+                          // Tambahkan pengecekan untuk kolom lainnya di sini
+                          item.PD === "" &&
+                          item.CMA === ""
+                        ) {
+                          return null; // Lewati item ini
+                        }
+
+                        return (
+                          <tr key={item.id}>
+                            <td className="p-2">
+                              <div className="font-medium text-gray-800">
+                                SMT LINE 1
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-gray-800">
+                                {item.SHIFT}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-gray-800">
+                                {item.PP}
+                              </div>
+                            </td>
+                            <td className="p-2 ">
+                              <div className="font-medium text-gray-800">
+                                {item.PD}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-gray-800">
+                                {item.CMA}
+                              </div>
+                            </td>
+                            <td className="p-2 w-12">
+                              <div className="text-center text-white rounded-md bg-lime-800 h-6 text-black...">
+                                {item.PDATE}
+                              </div>
+                            </td>
+                            <td className="p-4">
+                              <button
+                                onClick={() => setSelectedItem(item)}
+                                className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                  className="w-6 h-6 mr-2"
                                 >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    className="w-6 h-6 mr-2"
-                                  >
-                                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                    <path
-                                      fillRule="evenodd"
-                                      d="M10 18a8 8 0 110-16 8 8 0 010 16zm0-2a6 6 0 100-12 6 6 0 000 12z"
-                                      clipRule="evenodd"
-                                    />
-                                  </svg>
-                                  <span>DETAIL</span>
-                                </button>
-                              </td>
-                            </tr>
-                          )
-                      )}
+                                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M10 18a8 8 0 110-16 8 8 0 010 16zm0-2a6 6 0 100-12 6 6 0 000 12z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                                <span>DETAIL</span>
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                   {selectedItem && (

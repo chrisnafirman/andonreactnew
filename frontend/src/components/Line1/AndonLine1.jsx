@@ -1322,20 +1322,20 @@ const Andonline1 = () => {
                             <tr>
                               <td className="font-bold">Planned DT:</td>
                               <span className="px-4" >
-                                {data.PD_IN}
+                              Loading..
                               </span>
                             </tr>
                             <tr>
                               <td className="font-bold">Production time 3:</td>
                               <span className="px-4" >
-                                {data.PT3_IN}
+                              Loading..
                               </span>
                             </tr>
                            
                             <tr>
                               <td className="font-bold">Production time 4:</td>
                               <span className="px-4" >
-                                {data.PT4_IN}
+                              Loading..
                               </span>
                        
                           
@@ -1343,7 +1343,7 @@ const Andonline1 = () => {
                             <tr>
                               <td className="font-bold">Over Time:</td>
                               <span className="px-4" >
-                                {data.OT_IN}
+                              Loading..
                               </span>
                             </tr>
                           </table>
@@ -1481,7 +1481,7 @@ const Andonline1 = () => {
                         <div className="pt-2">
                           <button
                             onClick={startCMA}
-                            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                            className="bg-green-500 text-xs hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                           >
                             START CHANGE MODEL (ROUTER)
                           </button>
@@ -1489,7 +1489,7 @@ const Andonline1 = () => {
                         <div className="pt-2">
                           <button
                             onClick={stopCMA}
-                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                            className="bg-red-500 hover:bg-red-700 text-xs  text-white font-bold py-2 px-4 rounded"
                           >
                             END CHANGE MODEL (ROUTER)
                           </button>

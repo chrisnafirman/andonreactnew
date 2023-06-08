@@ -57,6 +57,98 @@ const SmtTop = () => {
   const [ResultsCMA,setResultsCMA] = useState("");
   const [RealPT1,setRealPT1] = useState("");
   const [RealPT2,setRealPT2] = useState("");
+  const [RealPT3,setRealPT3] = useState("");
+  const [RealPT4,setRealPT4] = useState("");
+  const [RealPD,setRealPD] = useState("");
+  const [RealOT,setRealOT] = useState("");
+  const [Total, setTotal] = useState("");
+  
+
+  const calculateTotalTime = () => {
+    let totalJam = 0;
+    let totalMenit = 0;
+
+    // Mengambil nilai dari state
+    const waktuPT1 = RealPT1.split(" ");
+    const waktuPT2 = RealPT2.split(" ");
+    const waktuPT3 = RealPT3.split(" ");
+    const waktuPT4 = RealPT4.split(" ");
+    const waktuPD = RealPD.split(" ");
+    const waktuOT = RealOT.split(" ");
+
+    // Menambahkan waktu PT1
+    if (waktuPT1.length === 4) {
+      totalJam += parseInt(waktuPT1[0]);
+      totalMenit += parseInt(waktuPT1[2]);
+    } else {
+      totalMenit += parseInt(waktuPT1[0]);
+    }
+
+    // Menambahkan waktu PT2
+    if (waktuPT2.length === 4) {
+      totalJam += parseInt(waktuPT2[0]);
+      totalMenit += parseInt(waktuPT2[2]);
+    } else {
+      totalMenit += parseInt(waktuPT2[0]);
+    }
+
+    // Menambahkan waktu PT3
+    if (waktuPT3.length === 4) {
+      totalJam += parseInt(waktuPT3[0]);
+      totalMenit += parseInt(waktuPT3[2]);
+    } else {
+      totalMenit += parseInt(waktuPT3[0]);
+    }
+
+    // Menambahkan waktu PT4
+    if (waktuPT4.length === 4) {
+      totalJam += parseInt(waktuPT4[0]);
+      totalMenit += parseInt(waktuPT4[2]);
+    } else {
+      totalMenit += parseInt(waktuPT4[0]);
+    }
+
+    // Menambahkan waktu PD
+    if (waktuPD.length === 4) {
+      totalJam += parseInt(waktuPD[0]);
+      totalMenit += parseInt(waktuPD[2]);
+    } else {
+      totalMenit += parseInt(waktuPD[0]);
+    }
+
+    // Menambahkan waktu OT
+    if (waktuOT.length === 4) {
+      totalJam += parseInt(waktuOT[0]);
+      totalMenit += parseInt(waktuOT[2]);
+    } else {
+      totalMenit += parseInt(waktuOT[0]);
+    }
+
+    // Mengubah menit menjadi jam jika lebih dari 60
+    if (totalMenit >= 60) {
+      const tambahanJam = Math.floor(totalMenit / 60);
+      totalJam += tambahanJam;
+      totalMenit -= tambahanJam * 60;
+    }
+
+    // Mengatur nilai hasil penjumlahan ke state Total
+    const output = `${totalJam} jam ${totalMenit} menit`;
+    setTotal(output);
+  };
+
+  useEffect(() => {
+    calculateTotalTime();
+  }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
+
+  
+
+
+  
+  
+  
+  
+  
+  
   
 
   useEffect(() => {
@@ -80,6 +172,31 @@ const SmtTop = () => {
     setRealPT2(data);
   });
 
+  const ref4 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3");
+  ref4.on("value", (snapshot) => {
+    const data = snapshot.val();
+    setRealPT3(data);
+  });
+
+
+  const ref5 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4");
+  ref5.on("value", (snapshot) => {
+    const data = snapshot.val();
+    setRealPT4(data);
+  });
+
+  const ref6 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/DownTime");
+  ref6.on("value", (snapshot) => {
+    const data = snapshot.val();
+    setRealPD(data);
+  });
+
+  
+  const ref7 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/OverTime");
+  ref7.on("value", (snapshot) => {
+    const data = snapshot.val();
+    setRealOT(data);
+  });
 
   return () => {};
 }, []);
@@ -136,7 +253,6 @@ const SmtTop = () => {
   };
 
   // RESET
-
   const stop = (value) => {
     const data = {
       SHIFT: SHIFT,
@@ -165,8 +281,37 @@ const SmtTop = () => {
       CMA: CMA,
       PDATE: PDATE,
       VALUE: value,
-    };
+      RealPT1: RealPT1,
+      RealPT2: RealPT2,
+      RealPT3: RealPT3,
+      RealPT4: RealPT4,
+      RealPD: RealPD,
+      RealOT: RealOT,
 
+    };
+  
+    const UpdateReal = (event) => {
+      fetch(`http://192.168.101.236:3001/api/put/RealProductionTime`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (response.status === 200) {
+        
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+  
+   UpdateReal(); // Jalankan fungsi UpdateReal terlebih dahulu
+  
     fetch(`http://192.168.101.236:3001/api/post/Inputsche`, {
       method: "POST",
       headers: {
@@ -176,9 +321,13 @@ const SmtTop = () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("Production Berhasil Di Reset");
-          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1").set("waiting...");
           firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2").set("waiting...");
+          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1").set("waiting...");
+          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3").set("waiting...");
+          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4").set("waiting...");
+          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/DownTime").set("waiting...");
+          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/OverTime").set("waiting...");
+          alert("Production Berhasil Di Reset");
           window.location.reload();
         } else {
           throw new Error("Error adding data");
@@ -188,7 +337,8 @@ const SmtTop = () => {
         console.log(err);
       });
   };
-
+  
+  
 
   const Input = () => {
     setRealProduction(false);
@@ -327,8 +477,9 @@ const SmtTop = () => {
     };
   }, [data]);
 
-  //  Real Prod Time PT2
 
+
+  //  Real Prod Time PT2
   useEffect(() => {
     let interval;
 
@@ -400,7 +551,294 @@ const SmtTop = () => {
     };
   }, [data]);
 
+//  Real Prod Time PT3
+  useEffect(() => {
+    let interval;
 
+    const startCountdown3 = (startTime, endTime) => {
+      const targetTime = new Date();
+      const [hours, minutes] = startTime.split(":");
+      targetTime.setHours(parseInt(hours, 10));
+      targetTime.setMinutes(parseInt(minutes, 10));
+      targetTime.setSeconds(0);
+
+      const outTime = new Date();
+      const [outHours, outMinutes] = endTime.split(":");
+      outTime.setHours(parseInt(outHours, 10));
+      outTime.setMinutes(parseInt(outMinutes, 10));
+      outTime.setSeconds(0);
+
+      const interval = setInterval(() => {
+        const currentTime = new Date();
+        let remainingTime = 0;
+
+        if (currentTime >= targetTime && currentTime < outTime) {
+          // Start counting only when the current time is within the range
+          remainingTime = targetTime.getTime() - currentTime.getTime();
+
+          // Start counting from 0 seconds after the target time is reached
+          if (remainingTime <= 0) {
+            remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
+          }
+
+          // Send the countdown value to Firebase
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3")
+            .set(formatTime(remainingTime));
+        } else if (currentTime >= outTime) {
+          // Stop the countdown if the current time exceeds the end time
+          clearInterval(interval);
+        }
+      }, 1000); // Update every second
+
+      return interval; // Return the interval ID for cleanup
+    };
+
+    const formatTime = (time) => {
+      const totalSeconds = Math.floor(time / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const remainingMinutes = minutes % 60;
+
+      if (hours >= 1) {
+        if (remainingMinutes >= 1) {
+          return `${hours} jam ${remainingMinutes} menit`;
+        } else {
+          return `${hours} jam`;
+        }
+      } else if (minutes >= 1) {
+        return `${minutes} menit`;
+      } else {
+        return `${totalSeconds} detik`;
+      }
+    };
+
+    if (data && data.PT3_IN && data.PT3_OUT) {
+      interval = startCountdown3(data.PT3_IN, data.PT3_OUT);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [data]);
+
+  //  Real Prod Time PT4
+  useEffect(() => {
+    let interval;
+
+    const startCountdown4 = (startTime, endTime) => {
+      const targetTime = new Date();
+      const [hours, minutes] = startTime.split(":");
+      targetTime.setHours(parseInt(hours, 10));
+      targetTime.setMinutes(parseInt(minutes, 10));
+      targetTime.setSeconds(0);
+
+      const outTime = new Date();
+      const [outHours, outMinutes] = endTime.split(":");
+      outTime.setHours(parseInt(outHours, 10));
+      outTime.setMinutes(parseInt(outMinutes, 10));
+      outTime.setSeconds(0);
+
+      const interval = setInterval(() => {
+        const currentTime = new Date();
+        let remainingTime = 0;
+
+        if (currentTime >= targetTime && currentTime < outTime) {
+          // Start counting only when the current time is within the range
+          remainingTime = targetTime.getTime() - currentTime.getTime();
+
+          // Start counting from 0 seconds after the target time is reached
+          if (remainingTime <= 0) {
+            remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
+          }
+
+          // Send the countdown value to Firebase
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4")
+            .set(formatTime(remainingTime));
+        } else if (currentTime >= outTime) {
+          // Stop the countdown if the current time exceeds the end time
+          clearInterval(interval);
+        }
+      }, 1000); // Update every second
+
+      return interval; // Return the interval ID for cleanup
+    };
+
+    const formatTime = (time) => {
+      const totalSeconds = Math.floor(time / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const remainingMinutes = minutes % 60;
+
+      if (hours >= 1) {
+        if (remainingMinutes >= 1) {
+          return `${hours} jam ${remainingMinutes} menit`;
+        } else {
+          return `${hours} jam`;
+        }
+      } else if (minutes >= 1) {
+        return `${minutes} menit`;
+      } else {
+        return `${totalSeconds} detik`;
+      }
+    };
+
+    if (data && data.PT4_IN && data.PT4_OUT) {
+      interval = startCountdown4(data.PT4_IN, data.PT4_OUT);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [data]);
+
+
+    //  Real Prod Time PD
+    useEffect(() => {
+      let interval;
+  
+      const startCountdown5 = (startTime, endTime) => {
+        const targetTime = new Date();
+        const [hours, minutes] = startTime.split(":");
+        targetTime.setHours(parseInt(hours, 10));
+        targetTime.setMinutes(parseInt(minutes, 10));
+        targetTime.setSeconds(0);
+  
+        const outTime = new Date();
+        const [outHours, outMinutes] = endTime.split(":");
+        outTime.setHours(parseInt(outHours, 10));
+        outTime.setMinutes(parseInt(outMinutes, 10));
+        outTime.setSeconds(0);
+  
+        const interval = setInterval(() => {
+          const currentTime = new Date();
+          let remainingTime = 0;
+  
+          if (currentTime >= targetTime && currentTime < outTime) {
+            // Start counting only when the current time is within the range
+            remainingTime = targetTime.getTime() - currentTime.getTime();
+  
+            // Start counting from 0 seconds after the target time is reached
+            if (remainingTime <= 0) {
+              remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
+            }
+  
+            // Send the countdown value to Firebase
+            firebase
+              .database()
+              .ref("/StatusLine/SMTLine1ProductionTime/DownTime")
+              .set(formatTime(remainingTime));
+          } else if (currentTime >= outTime) {
+            // Stop the countdown if the current time exceeds the end time
+            clearInterval(interval);
+          }
+        }, 1000); // Update every second
+  
+        return interval; // Return the interval ID for cleanup
+      };
+  
+      const formatTime = (time) => {
+        const totalSeconds = Math.floor(time / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const remainingMinutes = minutes % 60;
+  
+        if (hours >= 1) {
+          if (remainingMinutes >= 1) {
+            return `${hours} jam ${remainingMinutes} menit`;
+          } else {
+            return `${hours} jam`;
+          }
+        } else if (minutes >= 1) {
+          return `${minutes} menit`;
+        } else {
+          return `${totalSeconds} detik`;
+        }
+      };
+  
+      if (data && data.PD_IN && data.PD_OUT) {
+        interval = startCountdown5(data.PD_IN, data.PD_OUT);
+      }
+  
+      return () => {
+        clearInterval(interval);
+      };
+    }, [data]);
+
+ //  Real Prod Time PD
+ useEffect(() => {
+  let interval;
+
+  const startCountdown6 = (startTime, endTime) => {
+    const targetTime = new Date();
+    const [hours, minutes] = startTime.split(":");
+    targetTime.setHours(parseInt(hours, 10));
+    targetTime.setMinutes(parseInt(minutes, 10));
+    targetTime.setSeconds(0);
+
+    const outTime = new Date();
+    const [outHours, outMinutes] = endTime.split(":");
+    outTime.setHours(parseInt(outHours, 10));
+    outTime.setMinutes(parseInt(outMinutes, 10));
+    outTime.setSeconds(0);
+
+    const interval = setInterval(() => {
+      const currentTime = new Date();
+      let remainingTime = 0;
+
+      if (currentTime >= targetTime && currentTime < outTime) {
+        // Start counting only when the current time is within the range
+        remainingTime = targetTime.getTime() - currentTime.getTime();
+
+        // Start counting from 0 seconds after the target time is reached
+        if (remainingTime <= 0) {
+          remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
+        }
+
+        // Send the countdown value to Firebase
+        firebase
+          .database()
+          .ref("/StatusLine/SMTLine1ProductionTime/OverTime")
+          .set(formatTime(remainingTime));
+      } else if (currentTime >= outTime) {
+        // Stop the countdown if the current time exceeds the end time
+        clearInterval(interval);
+      }
+    }, 1000); // Update every second
+
+    return interval; // Return the interval ID for cleanup
+  };
+
+  const formatTime = (time) => {
+    const totalSeconds = Math.floor(time / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    if (hours >= 1) {
+      if (remainingMinutes >= 1) {
+        return `${hours} jam ${remainingMinutes} menit`;
+      } else {
+        return `${hours} jam`;
+      }
+    } else if (minutes >= 1) {
+      return `${minutes} menit`;
+    } else {
+      return `${totalSeconds} detik`;
+    }
+  };
+
+  if (data && data.OT_IN && data.OT_OUT) {
+    interval = startCountdown6(data.OT_IN, data.OT_OUT);
+  }
+
+  return () => {
+    clearInterval(interval);
+  };
+}, [data]);
 
   const defaultshift2 = () => {
     const today = new Date();
@@ -653,20 +1091,20 @@ const SmtTop = () => {
                             <tr>
                               <td className="font-bold">Planned DT:</td>
                               <span className="px-4" >
-                                
+                              {RealPD}
                               </span>
                             </tr>
                             <tr>
                               <td className="font-bold">Production time 3:</td>
                               <span className="px-4" >
-                                
+                              {RealPT3}
                               </span>
                             </tr>
                            
                             <tr>
                               <td className="font-bold">Production time 4:</td>
                               <span className="px-4" >
-                              
+                              {RealPT4}
                               </span>
                        
                           
@@ -674,10 +1112,17 @@ const SmtTop = () => {
                             <tr>
                               <td className="font-bold">Over Time:</td>
                               <span className="px-4" >
-                              
+                              {RealOT}
                               </span>
                             </tr>
+                            
                           </table>
+                          <div className="flex mt-2">
+                              <td className="font-bold">Total:</td>
+                              <span className="ml-10 w-44 text-center text-white rounded-md bg-lime-700" >
+                              {Total}
+                              </span>
+                            </div>
                           <div className="mt-2">
                             <p className="font-bold text-sm">
                               Change Model Allocation:
@@ -1306,7 +1751,7 @@ const SmtTop = () => {
                           <td className="font-bold text-xs">
                             Change Model Allocation :
                           </td>
-                          <td className="text-sm">{data.CMA} </td>
+                          <td className="text-sm">{data.PP} </td>
                         </tr>
 
                         <tr>
@@ -1320,7 +1765,7 @@ const SmtTop = () => {
                           <td className="font-bold text-xs">
                             Planned Downtime :
                           </td>
-                          <td className="text-sm">{data.PD} </td>
+                          <td className="text-sm">{data.PP} </td>
                         </tr>
                       </tbody>
                       
