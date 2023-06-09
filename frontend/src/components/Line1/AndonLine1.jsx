@@ -118,7 +118,14 @@ const Andonline1 = () => {
 
   // REAL PRODUCTION TIME
 
- const [RealPT1, setRealPT1] = useState("");
+ const [RealPT1,setRealPT1] = useState("");
+ const [RealPT2,setRealPT2] = useState("");
+ const [RealPT3,setRealPT3] = useState("");
+ const [RealPT4,setRealPT4] = useState("");
+ const [RealPD,setRealPD] = useState("");
+ const [RealOT,setRealOT] = useState("");
+ const [Total, setTotal] = useState("");
+ 
 
 
   // ====
@@ -128,6 +135,96 @@ const Andonline1 = () => {
   /// Purchasing
   const namaList = ["CHRISNA FIRMAN"];
   const npkList = ["0301"];
+
+  
+
+  const calculateTotalTime = () => {
+    let totalJam = 0;
+    let totalMenit = 0;
+  
+    // Mengambil nilai dari state
+    const waktuPT1 = RealPT1.split(" ");
+    const waktuPT2 = RealPT2.split(" ");
+    const waktuPT3 = RealPT3.split(" ");
+    const waktuPT4 = RealPT4.split(" ");
+    const waktuPD = RealPD.split(" ");
+    const waktuOT = RealOT.split(" ");
+  
+    // Menambahkan waktu PT1
+    if (waktuPT1[0] !== "waiting...") {
+      if (waktuPT1.length === 4) {
+        totalJam += parseInt(waktuPT1[0]);
+        totalMenit += parseInt(waktuPT1[2]);
+      } else if (waktuPT1.length === 2) {
+        totalMenit += parseInt(waktuPT1[0]);
+      }
+    }
+  
+    // Menambahkan waktu PT2
+    if (waktuPT2[0] !== "waiting...") {
+      if (waktuPT2.length === 4) {
+        totalJam += parseInt(waktuPT2[0]);
+        totalMenit += parseInt(waktuPT2[2]);
+      } else if (waktuPT2.length === 2) {
+        totalMenit += parseInt(waktuPT2[0]);
+      }
+    }
+  
+    // Menambahkan waktu PT3
+    if (waktuPT3[0] !== "waiting...") {
+      if (waktuPT3.length === 4) {
+        totalJam += parseInt(waktuPT3[0]);
+        totalMenit += parseInt(waktuPT3[2]);
+      } else if (waktuPT3.length === 2) {
+        totalMenit += parseInt(waktuPT3[0]);
+      }
+    }
+  
+    // Menambahkan waktu PT4
+    if (waktuPT4[0] !== "waiting...") {
+      if (waktuPT4.length === 4) {
+        totalJam += parseInt(waktuPT4[0]);
+        totalMenit += parseInt(waktuPT4[2]);
+      } else if (waktuPT4.length === 2) {
+        totalMenit += parseInt(waktuPT4[0]);
+      }
+    }
+  
+    // Menambahkan waktu PD jika bukan "waiting..."
+    if (waktuPD[0] !== "waiting...") {
+      if (waktuPD.length === 4) {
+        totalJam += parseInt(waktuPD[0]);
+        totalMenit += parseInt(waktuPD[2]);
+      } else if (waktuPD.length === 2) {
+        totalMenit += parseInt(waktuPD[0]);
+      }
+    }
+  
+    // Menambahkan waktu OT jika bukan "waiting..."
+    if (waktuOT[0] !== "waiting...") {
+      if (waktuOT.length === 4) {
+        totalJam += parseInt(waktuOT[0]);
+        totalMenit += parseInt(waktuOT[2]);
+      } else if (waktuOT.length === 2) {
+        totalMenit += parseInt(waktuOT[0]);
+      }
+    }
+  
+    // Mengubah menit menjadi jam jika lebih dari 60
+    if (totalMenit >= 60) {
+      const tambahanJam = Math.floor(totalMenit / 60);
+      totalJam += tambahanJam;
+      totalMenit -= tambahanJam * 60;
+    }
+  
+    // Mengatur nilai hasil penjumlahan ke state Total
+    const output = `${totalJam} jam ${totalMenit} menit`;
+    setTotal(output);
+  };
+  
+  useEffect(() => {
+    calculateTotalTime();
+  }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
 
   // FETCHING FIREBASE
 
@@ -276,6 +373,40 @@ const Andonline1 = () => {
       const data = snapshot.val();
       setRealPT1(data);
     });
+
+
+    
+  const ref12 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2");
+  ref12.on("value", (snapshot) => {
+    const data = snapshot.val();
+    setRealPT2(data);
+  });
+
+  const ref13 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3");
+  ref13.on("value", (snapshot) => {
+    const data = snapshot.val();
+    setRealPT3(data);
+  });
+
+
+  const ref14 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4");
+  ref14.on("value", (snapshot) => {
+    const data = snapshot.val();
+    setRealPT4(data);
+  });
+
+  const ref15 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/DownTime");
+  ref15.on("value", (snapshot) => {
+    const data = snapshot.val();
+    setRealPD(data);
+  });
+
+  
+  const ref16 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/OverTime");
+  ref16.on("value", (snapshot) => {
+    const data = snapshot.val();
+    setRealOT(data);
+  });
 
     return () => {};
   }, []);
@@ -1314,39 +1445,45 @@ const Andonline1 = () => {
                             </tr>
                             <tr>
                               <td className="font-bold">Production time 2:</td>
-                              <span className="px-4" >
-                                Loading..
+                              <span className="px-4 text-lime-800">
+                              {RealPT2}
                               </span>
                             </tr>
                           
                             <tr>
                               <td className="font-bold">Planned DT:</td>
-                              <span className="px-4" >
-                              Loading..
+                              <span className="px-4 text-lime-800">
+                              {RealPD}
                               </span>
                             </tr>
                             <tr>
                               <td className="font-bold">Production time 3:</td>
-                              <span className="px-4" >
-                              Loading..
+                              <span className="px-4 text-lime-800">
+                              {RealPT3}
                               </span>
                             </tr>
                            
                             <tr>
                               <td className="font-bold">Production time 4:</td>
-                              <span className="px-4" >
-                              Loading..
+                              <span className="px-4 text-lime-800">
+                              {RealPT4}
                               </span>
                        
                           
                             </tr>
                             <tr>
                               <td className="font-bold">Over Time:</td>
-                              <span className="px-4" >
-                              Loading..
+                              <span className="px-4 text-lime-800">
+                              {RealOT}
                               </span>
                             </tr>
                           </table>
+                          <div className="flex mt-2">
+                              <td className="font-bold">Total:</td>
+                              <span className="ml-10 w-44 text-center text-white rounded-md bg-lime-700" >
+                              {Total}
+                              </span>
+                            </div>
                           <div className="mt-2">
                             <p className="font-bold text-sm">
                               Change Model Allocation:

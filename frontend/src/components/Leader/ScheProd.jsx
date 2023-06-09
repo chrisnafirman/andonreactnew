@@ -547,12 +547,7 @@ const SmtTop = () => {
                         </th>
                         <th className="p-1 w-10">
                           <div className="font-semibold text-center">
-                            Downtime
-                          </div>
-                        </th>
-                        <th className="p-1 w-10">
-                          <div className="font-semibold text-center">
-                            Change Model
+                            Real Production
                           </div>
                         </th>
 
@@ -561,7 +556,7 @@ const SmtTop = () => {
                         </th>
                         <th className="p-1 w-5">
                           <div className="font-semibold text-center">
-                            DETAILS
+                           
                           </div>
                         </th>
                       </tr>
@@ -597,14 +592,9 @@ const SmtTop = () => {
                                 {item.PP}
                               </div>
                             </td>
-                            <td className="p-2 ">
-                              <div className="font-medium text-gray-800">
-                                {item.PD}
-                              </div>
-                            </td>
                             <td className="p-2">
                               <div className="font-medium text-gray-800">
-                                {item.CMA}
+                                {item.Total}
                               </div>
                             </td>
                             <td className="p-2 w-12">
@@ -841,31 +831,59 @@ const SmtTop = () => {
                                 </table>
                               </div>
 
-                              <div className="bg-white h-auto ml-28 w-96 sm:w-72 lg:w-[400px] py-6 sm:p-6 rounded-lg shadow-md">
-                                <tr>
-                                  <td className="font-bold text-xs">
-                                    REAL PRODUCTION TIME
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className="font-bold text-xs">
-                                    Change Model Allocation :
-                                  </td>
-                                  <td className="text-sm"> </td>
-                                </tr>
+                              <div className="bg-white ml-36 px-4 py-6 sm:p-6 rounded-lg shadow-md">
+                                <h3 className="text-lg font-bold mb-2">
+                                  Production Time
+                                </h3>
+                                <table>
+                                  <tr>
+                                    <td className="font-bold">
+                                      Production time 1:
+                                    </td>
+                                    <span className="px-4 text-lime-800">{selectedItem.RealPT1}</span>
+                                  </tr>
+                                  <tr>
+                                    <td className="font-bold">
+                                      Production time 2:
+                                    </td>
+                                    <span className="px-4">{selectedItem.RealPT2}</span>
+                                  </tr>
 
-                                <tr>
-                                  <td className="font-bold text-xs">
-                                    Planned Production :
-                                  </td>
-                                  <td className="text-sm">Loading.... </td>
-                                </tr>
-                                <tr>
-                                  <td className="font-bold text-xs">
-                                    Planned Downtime :
-                                  </td>
-                                  <td className="text-sm">Loading....</td>
-                                </tr>
+                                  <tr>
+                                    <td className="font-bold">Planned DT:</td>
+                                    <span className="px-4">{selectedItem.RealPD}</span>
+                                  </tr>
+                                  <tr>
+                                    <td className="font-bold">
+                                      Production time 3:
+                                    </td>
+                                    <span className="px-4">{selectedItem.RealPT3}</span>
+                                  </tr>
+
+                                  <tr>
+                                    <td className="font-bold">
+                                      Production time 4:
+                                    </td>
+                                    <span className="px-4">{selectedItem.RealPT4}</span>
+                                  </tr>
+                                  <tr>
+                                    <td className="font-bold">Over Time:</td>
+                                    <span className="px-4">{selectedItem.RealOT}</span>
+                                  </tr>
+                                </table>
+                                <div className="flex mt-2">
+                                  <td className="font-bold">Total:</td>
+                                  <span className="ml-10 w-44 text-center text-white rounded-md bg-lime-700">{selectedItem.Total}</span>
+                                </div>
+                                <div className="mt-2">
+                                  <p className="font-bold text-sm">
+                                    Change Model Allocation:
+                                  </p>
+                                  <p></p>
+                                  <p className="text-sm text-white bg-amber-500 text-center justify-center rounded-xl">
+                                    ON GOING : {selectedItem.ResultsCMA}
+                                  </p>
+                                </div>
                               </div>
                             </div>
                           </div>

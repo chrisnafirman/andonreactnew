@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
-import Line1 from "./Line1";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
@@ -16,6 +16,8 @@ const SmtTop = () => {
   // Tindakan / Kehadiran
   const [DestackerPressed, setDestackerPressed] = useState(false);
   const timeoutRefDestacker = useRef(null);
+  const [LabelPressed, setLabelPressed] = useState(false);
+  const timeoutRefLabel = useRef(null);
   // ----
 
   const [mesin, setMesin] = useState("");
@@ -55,10 +57,12 @@ const SmtTop = () => {
   // POPUP
   const [isOpenDestacker, setIsOpenDestacker] = useState(false);
   const [isOpenLabel, setIsOpenLabel] = useState(false);
-  const [isOpenQuality, setIsOpenQuality] = useState(false);
+  const [isOpenQualityDestacker, setIsOpenQualityDestacker] = useState(false);
+  const [isOpenQualityLabel, setIsOpenQualityLabel] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [isOpenValQA, setIsOpenValQA] = useState(false);
-  const [isOpenReturn, setIsOpenReturn] = useState(false);
+  const [isOpenReturnDestacker, setIsOpenReturnDestacker] = useState(false);
+  const [isOpenReturnLabel, setIsOpenReturnLabel] = useState(false);
   const [isOpenOperator, setIsOpenOperator] = useState(false);
 
   // OTHER
@@ -87,6 +91,14 @@ const SmtTop = () => {
 
   const [NpkPIC, setNpkPIC] = useState("");
 
+  const [RealPT1, setRealPT1] = useState("");
+  const [RealPT2, setRealPT2] = useState("");
+  const [RealPT3, setRealPT3] = useState("");
+  const [RealPT4, setRealPT4] = useState("");
+  const [RealPD, setRealPD] = useState("");
+  const [RealOT, setRealOT] = useState("");
+  const [Total, setTotal] = useState("");
+
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
@@ -97,79 +109,7 @@ const SmtTop = () => {
     ref.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatus(data);
-      if (data === "Damage") {
-        const audio = new Audio("Sound.mp3");
-        audio.autoplay = true;
-        audio.play();
-
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
-              const text =
-                "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-              navigator.clipboard
-                .writeText(text)
-                .then(() => {
-                  const botToken =
-                    "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
-                  const chatIds = [1563609464, 6019720343, -692863121];
-                  const message =
-                    "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakukan Perbaikan";
-                  chatIds.forEach((chatId) => {
-                    fetch(
-                      `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
-                    )
-                      .then((response) => {
-                        if (!response.ok) {
-                          throw new Error("Error sending telegram message");
-                        }
-                      })
-                      .catch((error) => {
-                        console.error(error);
-                      });
-                  });
-                })
-                .catch((error) => {
-                  console.error(error);
-                });
-            } else if (permissionStatus.state === "prompt") {
-              permissionStatus.onchange = () => {
-                if (permissionStatus.state === "granted") {
-                  const text =
-                    "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-                  navigator.clipboard
-                    .writeText(text)
-                    .then(() => {
-                      const botToken =
-                        "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
-                      const chatIds = [1563609464, 6019720343, -692863121];
-                      const message =
-                        "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-                      chatIds.forEach((chatId) => {
-                        fetch(
-                          `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
-                        )
-                          .then((response) => {
-                            if (!response.ok) {
-                              throw new Error("Error sending telegram message");
-                            }
-                          })
-                          .catch((error) => {
-                            console.error(error);
-                          });
-                      });
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                }
-              };
-            } else {
-              // Izin ditolak
-            }
-          });
-      }
+      
     });
 
     const ref2 = firebase.database().ref("Mesin/NamaMesin");
@@ -195,6 +135,79 @@ const SmtTop = () => {
     ref8.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusdestacker(data);
+      // if (data === "Maintenance") {
+      //   const audio = new Audio("Sound.mp3");
+      //   audio.autoplay = true;
+      //   audio.play();
+
+      //   navigator.permissions
+      //     .query({ name: "clipboard-write" })
+      //     .then((permissionStatus) => {
+      //       if (permissionStatus.state === "granted") {
+      //         const text =
+      //           "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
+      //         navigator.clipboard
+      //           .writeText(text)
+      //           .then(() => {
+      //             const botToken =
+      //               "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
+      //             const chatIds = [-993707437];
+      //             const message =
+      //               "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakukan Perbaikan";
+      //             chatIds.forEach((chatId) => {
+      //               fetch(
+      //                 `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
+      //               )
+      //                 .then((response) => {
+      //                   if (!response.ok) {
+      //                     throw new Error("Error sending telegram message");
+      //                   }
+      //                 })
+      //                 .catch((error) => {
+      //                   console.error(error);
+      //                 });
+      //             });
+      //           })
+      //           .catch((error) => {
+      //             console.error(error);
+      //           });
+      //       } else if (permissionStatus.state === "prompt") {
+      //         permissionStatus.onchange = () => {
+      //           if (permissionStatus.state === "granted") {
+      //             const text =
+      //               "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
+      //             navigator.clipboard
+      //               .writeText(text)
+      //               .then(() => {
+      //                 const botToken =
+      //                   "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
+      //                 const chatIds = [-993707437];
+      //                 const message =
+      //                   "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
+      //                 chatIds.forEach((chatId) => {
+      //                   fetch(
+      //                     `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
+      //                   )
+      //                     .then((response) => {
+      //                       if (!response.ok) {
+      //                         throw new Error("Error sending telegram message");
+      //                       }
+      //                     })
+      //                     .catch((error) => {
+      //                       console.error(error);
+      //                     });
+      //                 });
+      //               })
+      //               .catch((error) => {
+      //                 console.error(error);
+      //               });
+      //           }
+      //         };
+      //       } else {
+      //         // Izin ditolak
+      //       }
+      //     });
+      // }
     });
 
     const ref9 = firebase.database().ref("SMTLine1TOP/Label");
@@ -207,6 +220,54 @@ const SmtTop = () => {
     ref10.on("value", (snapshot) => {
       const data = snapshot.val();
       setResultsCMA(data);
+    });
+
+    const ref11 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1");
+    ref11.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT1(data);
+    });
+
+    const ref12 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2");
+    ref12.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT2(data);
+    });
+
+    const ref13 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3");
+    ref13.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT3(data);
+    });
+
+    const ref14 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4");
+    ref14.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT4(data);
+    });
+
+    const ref15 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/DownTime");
+    ref15.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPD(data);
+    });
+
+    const ref16 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/OverTime");
+    ref16.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealOT(data);
     });
 
     return () => {};
@@ -442,10 +503,6 @@ const SmtTop = () => {
     setPrevStatus(status);
   }, [status, mesin, Line, timer, prevStatus]);
 
-
-
-
-
   //  Submit Destacker
   const submitDestacker = () => {
     if (!NamaPIC || !Line || !Kerusakan || !Area) {
@@ -506,7 +563,7 @@ const SmtTop = () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("success report destecker smt top");
+          alert("success report Label smt top");
           setIsOpenDestacker(false);
           firebase.database().ref("SMTLine1TOP/Label").set("Maintenance");
           firebase.database().ref("StatusLine/SMTLine1").set("Down");
@@ -520,14 +577,9 @@ const SmtTop = () => {
       });
   };
 
-
-
-
-  
-
   //  Submit Quality
-  const submitQuality = () => {
-    if (!NamaPIC || !Line || !Kerusakan || !Area) {
+  const submitQualityDestacker = () => {
+    if (!NamaPIC || !Kerusakan ) {
       alert("Harap isi semua kolom!");
       return;
     }
@@ -563,8 +615,58 @@ const SmtTop = () => {
       .then((response) => {
         if (response.status === 200) {
           alert("success Report Quality");
+          setIsOpenQualityDestacker(false);
           firebase.database().ref("SMTLine1TOP/Destacker").set(selectedStatus);
-          setIsOpenQuality(false);
+          window.location.reload();
+        } else {
+          throw new Error("Error adding data");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //  Submit Quality
+  const submitQualityLabel = () => {
+    if (!NamaPIC || !Kerusakan ) {
+      alert("Harap isi semua kolom!");
+      return;
+    }
+
+    const data = {
+      NamaPIC: NamaPIC,
+      NpkPIC: NpkPIC,
+      Area: Area,
+      Line: Line,
+      Station: Station,
+      Kerusakan: Kerusakan,
+    };
+
+    let department;
+    switch (selectedStatus) {
+      case "QC":
+        department = "QC";
+        break;
+      case "QA":
+        department = "QA";
+        break;
+      default:
+        department = "";
+    }
+
+    fetch(`http://192.168.101.236:3001/api/post/${department}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("success Report Quality");
+          setIsOpenQualityLabel(false);
+          firebase.database().ref("SMTLine1TOP/Label").set(selectedStatus);
           window.location.reload();
         } else {
           throw new Error("Error adding data");
@@ -591,7 +693,7 @@ const SmtTop = () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("success");
+          alert("Data Telah Berhasil Di Submit");
           setIsOpen2(false);
           window.location.reload();
         } else {
@@ -603,7 +705,7 @@ const SmtTop = () => {
       });
   };
 
-  const submitReturn = () => {
+  const submitReturnDestacker = () => {
     const data = {
       NamaPIC: NamaPIC,
       Area: Area,
@@ -634,6 +736,36 @@ const SmtTop = () => {
       });
   };
 
+  const submitReturnLabel = () => {
+    const data = {
+      NamaPIC: NamaPIC,
+      Area: Area,
+      Line: Line,
+      Station: Station,
+      Kerusakan: Kerusakan,
+    };
+
+    fetch(`http://192.168.101.236:3001/api/post/ReturnMaintenance`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("success report di kembalikan ke maintenance");
+          setIsOpenLabel(false);
+          firebase.database().ref("SMTLine1TOP/Label").set("Maintenance");
+          window.location.reload();
+        } else {
+          throw new Error("Error adding data");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   // ------
 
   // SUBMIT FILE
@@ -656,6 +788,7 @@ const SmtTop = () => {
       timeoutRefDestacker.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
         firebase.database().ref("SMTLine1TOP/Destacker").set("Go");
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
         window.location.reload();
       }, 3000);
     }
@@ -663,6 +796,29 @@ const SmtTop = () => {
   const handleDestackerRelease = () => {
     setDestackerPressed(false);
     clearTimeout(timeoutRefDestacker.current);
+  };
+
+  const handleLabelPress = () => {
+    if (Statuslabel === "Maintenance") {
+      setLabelPressed(true);
+      timeoutRefLabel.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/Label").set("Repair");
+        window.location.reload();
+      }, 3000);
+    } else if (Statuslabel === "QA") {
+      setLabelPressed(true);
+      timeoutRefLabel.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/Label").set("Go");
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleLabelRelease = () => {
+    setLabelPressed(false);
+    clearTimeout(timeoutRefLabel.current);
   };
 
   // ------
@@ -905,7 +1061,7 @@ const SmtTop = () => {
                         setIsOpenDestacker(true);
                       } else if (Statusdestacker === "Repair") {
                         // set isOpenQuality state to true if Statusdestacker is "Repair"
-                        setIsOpenQuality(true);
+                        setIsOpenQualityDestacker(true);
                       } else if (Statusdestacker === "QA") {
                         // set isOpenQuality state to true if Statusdestacker is "Repair"
                         setIsOpenValQA(true);
@@ -928,6 +1084,11 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
+                    onMouseDown={handleLabelPress}
+                    onMouseUp={handleLabelRelease}
+                    onMouseLeave={handleLabelRelease}
+                    onTouchStart={handleLabelPress}
+                    onTouchEnd={handleLabelRelease}
                     style={{ backgroundColor: backgroundColorStatuslabel }}
                     value={Statuslabel}
                     onClick={() => {
@@ -936,7 +1097,7 @@ const SmtTop = () => {
                         setIsOpenLabel(true);
                       } else if (Statuslabel === "Repair") {
                         // set isOpenQuality state to true if Statuslabel is "Repair"
-                        setIsOpenQuality(true);
+                        setIsOpenQualityLabel(true);
                       } else if (Statuslabel === "QA") {
                         // set isOpenQuality state to true if Statuslabel is "Repair"
                         setIsOpenValQA(true);
@@ -1560,36 +1721,64 @@ const SmtTop = () => {
                     Production Area: SMT
                   </h2>
                   <div className="bg-white px-4 pt-1 pb-4 flex sm:p-6 sm:pb-4">
-                    <div className="overflow-y-auto max-h-96 w-[400px]">
+                    <div className="overflow-y-auto max-h-96 w-[700px]">
                       {data ? (
                         <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
-                          <div className="mt-9">
-                            <h3 className="text-lg font-bold mb-2">
-                              Real Production Time
-                            </h3>
-                            <p className="font-bold text-sm">
-                              Planned Production Time:
-                            </p>
-                            <p>{data.PP} </p>
-                            <p className="text-sm text-white bg-amber-700 text-center justify-center rounded-xl">
-                              ON GOING : {ResultsCMA}{" "}
-                            </p>
+                          <h3 className="text-lg font-bold mb-2">
+                            Production Time
+                          </h3>
+                          <table>
+                            <tr>
+                              <td className="font-bold">Production time 1:</td>
+                              <span className="px-4 text-lime-800">
+                                {RealPT1}
+                              </span>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Production time 2:</td>
+                              <span className="px-4 text-lime-800">
+                                {RealPT2}
+                              </span>
+                            </tr>
+
+                            <tr>
+                              <td className="font-bold">Planned DT:</td>
+                              <span className="px-4 text-lime-800">
+                                {RealPD}
+                              </span>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Production time 3:</td>
+                              <span className="px-4 text-lime-800">
+                                {RealPT3}
+                              </span>
+                            </tr>
+
+                            <tr>
+                              <td className="font-bold">Production time 4:</td>
+                              <span className="px-4 text-lime-800">
+                                {RealPT4}
+                              </span>
+                            </tr>
+                            <tr>
+                              <td className="font-bold">Over Time:</td>
+                              <span className="px-4 text-lime-800">
+                                {RealOT}
+                              </span>
+                            </tr>
+                          </table>
+                          <div className="flex mt-2">
+                            <td className="font-bold">Total:</td>
+                            <span className="ml-10 w-44 text-center text-white rounded-md bg-lime-700">
+                              {Total}
+                            </span>
                           </div>
                           <div className="mt-2">
                             <p className="font-bold text-sm">
                               Change Model Allocation:
                             </p>
                             <p>{data.CMA} </p>
-                            <p className="text-sm text-white bg-amber-700 text-center justify-center rounded-xl">
-                              ON GOING : {ResultsCMA}{" "}
-                            </p>
-                          </div>
-                          <div className="mt-2">
-                            <p className="font-bold text-sm">
-                              Planned Downtime :
-                            </p>
-                            <p>{data.PD} </p>
-                            <p className="text-sm text-white bg-amber-700 text-center justify-center rounded-xl">
+                            <p className="text-sm text-white bg-amber-500 text-center justify-center rounded-xl">
                               ON GOING : {ResultsCMA}{" "}
                             </p>
                           </div>
@@ -1599,7 +1788,7 @@ const SmtTop = () => {
                       )}
                     </div>
 
-                    <div className="bg-white px-4 w-96 py-6 sm:p-6 ml-24 rounded-lg shadow-md">
+                    <div className="bg-white px-4 w-[700px] ml-3  rounded-lg shadow-md">
                       <h3 className="text-lg font-bold mb-2">
                         Production Time
                       </h3>
@@ -1707,7 +1896,7 @@ const SmtTop = () => {
                       )}
                     </div>
 
-                    <div className="bg-white px-4 py-6 sm:p-6 ml-24 rounded-lg shadow-md">
+                    <div className="bg-white px-4 py-6 sm:p-6 ml-3 rounded-lg shadow-md">
                       <h3 className="text-lg font-bold mb-1">Facturing</h3>
                       <div className="flex flex-col justify-between">
                         <div>
@@ -1718,7 +1907,7 @@ const SmtTop = () => {
                         <div className="pt-2">
                           <button
                             onClick={startCMA}
-                            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                            className="bg-green-500 text-xs hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                           >
                             START CHANGE MODEL (ROUTER)
                           </button>
@@ -1726,7 +1915,7 @@ const SmtTop = () => {
                         <div className="pt-2">
                           <button
                             onClick={stopCMA}
-                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                            className="bg-red-500 hover:bg-red-700 text-xs  text-white font-bold py-2 px-4 rounded"
                           >
                             END CHANGE MODEL (ROUTER)
                           </button>
@@ -1768,7 +1957,7 @@ const SmtTop = () => {
 
       {/* Request Quality */}
       <td class="">
-        {isOpenQuality ? (
+        {isOpenQualityDestacker ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -1937,14 +2126,208 @@ const SmtTop = () => {
                         <div className="flex justify-end">
                           <button
                             className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                            onClick={() => setIsOpenQuality(false)}
+                            onClick={() => setIsOpenQualityDestacker(false)}
                           >
                             Batal
                           </button>
                           <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             type="submit"
-                            onClick={submitQuality}
+                            onClick={submitQualityDestacker}
+                          >
+                            Simpan
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
+      <td class="">
+        {isOpenQualityLabel ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 transition-opacity">
+                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                </div>
+
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+
+                <div
+                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                    <div className="sm:flex sm:items-start">
+                      <form className="w-full max-w-lg">
+                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
+                          <span>Quality</span>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-first-name"
+                            >
+                              Masukan Nama Anda
+                            </label>
+                            <select
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              required
+                              onChange={(e) => {
+                                setNamaPIC(e.target.value);
+                                setNpkPIC(
+                                  npkList[namaList.indexOf(e.target.value)]
+                                );
+                              }}
+                            >
+                              <option value="">- -Pilih Nama Anda- -</option>
+                              {namaList.map((nama, index) => (
+                                <option value={nama} key={index}>
+                                  {nama}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                          <div class="w-full md:w-1/2 px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                              NPK
+                            </label>
+                            <input
+                              class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              type="number"
+                              placeholder="0000"
+                              name="NpkPIC"
+                              value={NpkPIC}
+                              readOnly
+                            />
+                          </div>
+                        </div>
+                        {/*Status*/}
+                        <div className="mb-4">
+                          <label
+                            className="block text-gray-700 font-bold mb-2"
+                            htmlFor="Depart To"
+                          >
+                            Depart To
+                          </label>
+                          <div className="relative">
+                            <select
+                              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="Depart To"
+                              name="Depart To"
+                              value={selectedStatus}
+                              onChange={(e) =>
+                                setSelectedStatus(e.target.value)
+                              }
+                              required
+                              defaultValue={""}
+                            >
+                              <option value="">-- Pilih Depart --</option>
+                              <option value="QA">QA</option>
+                              <option value="QC">QC</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Machine Area
+                            </label>
+                            <span
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-city"
+                              type="text"
+                              placeholder="ICT"
+                              name="MachineName"
+                            >
+                              {Area}
+                            </span>
+                          </div>
+                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Machine Line
+                            </label>
+                            <span
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-city"
+                              type="text"
+                              placeholder="ICT"
+                              name="MachineName"
+                            >
+                              {Line}
+                            </span>
+                          </div>
+                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Machine Station
+                            </label>
+                            <span
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-city"
+                              type="text"
+                              placeholder="ICT"
+                              name="MachineName"
+                            >
+                              {Station}
+                            </span>
+                          </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full px-1">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                              for="grid-password"
+                            >
+                              Tindakan
+                            </label>
+                            <input
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-password"
+                              type="text"
+                              placeholder=""
+                              name="Kerusakan"
+                              onChange={(e) => {
+                                setKerusakan(e.target.value);
+                              }}
+                              required
+                            />
+                            <p class="text-gray-600 text-xs italic">
+                              Tindakan Yang Di Lakukan
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex justify-end">
+                          <button
+                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            onClick={() => setIsOpenQualityLabel(false)}
+                          >
+                            Batal
+                          </button>
+                          <button
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            type="submit"
+                            onClick={submitQualityLabel}
                           >
                             Simpan
                           </button>
@@ -2117,10 +2500,15 @@ const SmtTop = () => {
                           </button>
                         </div>
                         <button
-                          className="bg-red-900 animate-bounce  hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                          className="bg-red-900 animate-bounce hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
                           onClick={() => {
-                            setIsOpenReturn(true);
                             setIsOpenValQA(false);
+
+                            if ( Station  === "Destacker") {
+                              setIsOpenReturnDestacker(true);
+                            } else if ( Station  === "Label") {
+                              setIsOpenReturnLabel(true);
+                            }
                           }}
                         >
                           Return To Maintenance
@@ -2139,7 +2527,7 @@ const SmtTop = () => {
 
       {/* POP UP  RETURN*/}
       <td class="">
-        {isOpenReturn ? (
+        {isOpenReturnDestacker ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -2270,14 +2658,171 @@ const SmtTop = () => {
                         <div className="flex justify-end">
                           <button
                             className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                            onClick={() => setIsOpenReturn(false)}
+                            onClick={() => setIsOpenReturnDestacker(false)}
                           >
                             Batal
                           </button>
                           <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             type="submit"
-                            onClick={submitReturn}
+                            onClick={submitReturnDestacker}
+                          >
+                            Simpan
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
+      {/* POP UP  RETURN*/}
+      <td class="">
+        {isOpenReturnLabel ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 transition-opacity">
+                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                </div>
+
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+
+                <div
+                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                    <div className="sm:flex sm:items-start">
+                      <form
+                        className="w-full max-w-lg"
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          database.ref("Mesin/Mesin1").set(selectedStatus);
+                        }}
+                      >
+                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
+                          <span>Return To Maintenance</span>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full px-1">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-first-name"
+                            >
+                              Masukan Nama Anda
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              name="NamaPIC"
+                              required
+                              onChange={(e) => {
+                                setNamaPIC(e.target.value);
+                              }}
+                            ></input>
+                          </div>
+                        </div>
+
+                        {/*Status*/}
+
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Machine Area
+                            </label>
+                            <span
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-city"
+                              type="text"
+                              placeholder="ICT"
+                              name="MachineName"
+                            >
+                              {Area}
+                            </span>
+                          </div>
+                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Machine Line
+                            </label>
+                            <span
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-city"
+                              type="text"
+                              placeholder="ICT"
+                              name="MachineName"
+                            >
+                              {Line}
+                            </span>
+                          </div>
+                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Machine Station
+                            </label>
+                            <span
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-city"
+                              type="text"
+                              placeholder="ICT"
+                              name="MachineName"
+                            >
+                              {Station}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full px-1">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                              for="grid-password"
+                            >
+                              Kendala
+                            </label>
+                            <input
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-password"
+                              type="text"
+                              placeholder=""
+                              name="Kerusakan"
+                              onChange={(e) => {
+                                setKerusakan(e.target.value);
+                              }}
+                              required
+                            />
+                            <p class="text-gray-600 text-xs italic">
+                              Laporkan Kendala Yang Di temukan
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex justify-end">
+                          <button
+                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            onClick={() => setIsOpenReturnLabel(false)}
+                          >
+                            Batal
+                          </button>
+                          <button
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            type="submit"
+                            onClick={submitReturnLabel}
                           >
                             Simpan
                           </button>
