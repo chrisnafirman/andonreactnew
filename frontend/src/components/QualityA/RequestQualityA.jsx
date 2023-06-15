@@ -378,7 +378,7 @@ const RequestQA = () => {
                       >
                          <td className="p-2">
                           <div className="font-medium text-gray-800">
-                            {item.NamaPIC}
+                            {item.Nama}
                           </div>
                         </td>
                         <td className="p-2">
@@ -441,7 +441,7 @@ const RequestQA = () => {
                                           <span>REQUESTED BY</span>
                                         </div>
                                         <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                          <div class="w-full  px-3 mb-6 md:mb-0">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-first-name"
@@ -453,21 +453,10 @@ const RequestQA = () => {
                                               type="text"
                                             >
                                               {" "}
-                                              {selectedItem.NamaPIC}{" "}
+                                              {selectedItem.Nama}{" "}
                                             </div>
                                           </div>
-                                          <div class="w-full md:w-1/2 px-3">
-                                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                              NPK PIC
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.NpkPIC}{" "}
-                                            </div>
-                                          </div>
+                                        
                                         </div>
 
                                         <div class="flex flex-wrap -mx-3 mb-6">
@@ -532,7 +521,7 @@ const RequestQA = () => {
                                               type="text"
                                             >
                                               {" "}
-                                              {selectedItem.Kerusakan}{" "}
+                                              {selectedItem.Problem}{" "}
                                             </div>
                                           </div>
                                         </div>
@@ -577,7 +566,7 @@ const RequestQA = () => {
 
                         <td className="p-2">
                           <div className="text-center h-6 text-black...">
-                            {item.waktu}
+                            {item.Date}
                           </div>
                         </td>
                       </tr>

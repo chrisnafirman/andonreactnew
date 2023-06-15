@@ -62,79 +62,7 @@ const SmtBot= () => {
     ref.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatus(data);
-      // if (data === "Damage") {
-      //   const audio = new Audio("Sound.mp3");
-      //   audio.autoplay = true;
-      //   audio.play();
-
-      //   navigator.permissions
-      //     .query({ name: "clipboard-write" })
-      //     .then((permissionStatus) => {
-      //       if (permissionStatus.state === "granted") {
-      //         const text =
-      //           "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-      //         navigator.clipboard
-      //           .writeText(text)
-      //           .then(() => {
-      //             const botToken =
-      //               "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
-      //             const chatIds = [1563609464, 6019720343, -692863121];
-      //             const message =
-      //               "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakukan Perbaikan";
-      //             chatIds.forEach((chatId) => {
-      //               fetch(
-      //                 `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
-      //               )
-      //                 .then((response) => {
-      //                   if (!response.ok) {
-      //                     throw new Error("Error sending telegram message");
-      //                   }
-      //                 })
-      //                 .catch((error) => {
-      //                   console.error(error);
-      //                 });
-      //             });
-      //           })
-      //           .catch((error) => {
-      //             console.error(error);
-      //           });
-      //       } else if (permissionStatus.state === "prompt") {
-      //         permissionStatus.onchange = () => {
-      //           if (permissionStatus.state === "granted") {
-      //             const text =
-      //               "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-      //             navigator.clipboard
-      //               .writeText(text)
-      //               .then(() => {
-      //                 const botToken =
-      //                   "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
-      //                 const chatIds = [1563609464, 6019720343, -692863121];
-      //                 const message =
-      //                   "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-      //                 chatIds.forEach((chatId) => {
-      //                   fetch(
-      //                     `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
-      //                   )
-      //                     .then((response) => {
-      //                       if (!response.ok) {
-      //                         throw new Error("Error sending telegram message");
-      //                       }
-      //                     })
-      //                     .catch((error) => {
-      //                       console.error(error);
-      //                     });
-      //                 });
-      //               })
-      //               .catch((error) => {
-      //                 console.error(error);
-      //               });
-      //           }
-      //         };
-      //       } else {
-      //         // Izin ditolak
-      //       }
-      //     });
-      // }
+     
     });
 
     const ref2 = firebase.database().ref("Mesin/NamaMesin");
@@ -226,28 +154,7 @@ const SmtBot= () => {
   }, []);
   // ----
 
-  // fungsi post ke backend
-
-  useEffect(() => {
-    if (status !== "" && prevStatus !== status) {
-      fetch("http://192.168.101.236:3001/api/post/data", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          status: prevStatus,
-          mesin: mesin,
-          line: line,
-          timer: timer,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error(error));
-    }
-    setPrevStatus(status);
-  }, [status, mesin, line, timer, prevStatus]);
+  
 
   // ------
 

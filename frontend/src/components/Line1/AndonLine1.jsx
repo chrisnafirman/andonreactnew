@@ -324,6 +324,40 @@ const Andonline1 = () => {
     ref3.on("value", (snapshot) => {
       const data = snapshot.val();
       updateNetwork(data);
+      if (data === "Down") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestNetwork";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [1563609464];
+              const message = `Notification Network SMT LINE 1 Network (TOP) DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
     });
 
     const ref4 = firebase.database().ref("SMTLine1/Electricity");
@@ -733,28 +767,7 @@ const Andonline1 = () => {
 
   // ----
 
-  // fungsi post ke backend
 
-  useEffect(() => {
-    if (status !== "" && prevStatus !== status) {
-      fetch("http://192.168.101.236:3001/api/post/data", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          status: prevStatus,
-          mesin: mesin,
-          Line: Line,
-          timer: timer,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error(error));
-    }
-    setPrevStatus(status);
-  }, [status, mesin, Line, timer, prevStatus]);
 
   // Submit
   const submit = () => {
@@ -1377,7 +1390,7 @@ const Andonline1 = () => {
                           type="submit"
                           onClick={submit}
                         >
-                          Simpan
+                          Submit
                         </button>
                       </div>
                     </form>

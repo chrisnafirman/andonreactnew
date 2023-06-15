@@ -226,30 +226,7 @@ const SmtBE= () => {
   }, []);
   // ----
 
-  // fungsi post ke backend
 
-  useEffect(() => {
-    if (status !== "" && prevStatus !== status) {
-      fetch("http://192.168.101.236:3001/api/post/data", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          status: prevStatus,
-          mesin: mesin,
-          line: line,
-          timer: timer,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error(error));
-    }
-    setPrevStatus(status);
-  }, [status, mesin, line, timer, prevStatus]);
-
-  // ------
 
   // fungsi mengubah warna status
 

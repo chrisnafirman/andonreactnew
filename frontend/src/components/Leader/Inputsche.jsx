@@ -64,94 +64,6 @@ const SmtTop = () => {
   const [Total, setTotal] = useState("");
   
 
-  const calculateTotalTime = () => {
-    let totalJam = 0;
-    let totalMenit = 0;
-  
-    // Mengambil nilai dari state
-    const waktuPT1 = RealPT1.split(" ");
-    const waktuPT2 = RealPT2.split(" ");
-    const waktuPT3 = RealPT3.split(" ");
-    const waktuPT4 = RealPT4.split(" ");
-    const waktuPD = RealPD.split(" ");
-    const waktuOT = RealOT.split(" ");
-  
-    // Menambahkan waktu PT1
-    if (waktuPT1[0] !== "waiting...") {
-      if (waktuPT1.length === 4) {
-        totalJam += parseInt(waktuPT1[0]);
-        totalMenit += parseInt(waktuPT1[2]);
-      } else if (waktuPT1.length === 2) {
-        totalMenit += parseInt(waktuPT1[0]);
-      }
-    }
-  
-    // Menambahkan waktu PT2
-    if (waktuPT2[0] !== "waiting...") {
-      if (waktuPT2.length === 4) {
-        totalJam += parseInt(waktuPT2[0]);
-        totalMenit += parseInt(waktuPT2[2]);
-      } else if (waktuPT2.length === 2) {
-        totalMenit += parseInt(waktuPT2[0]);
-      }
-    }
-  
-    // Menambahkan waktu PT3
-    if (waktuPT3[0] !== "waiting...") {
-      if (waktuPT3.length === 4) {
-        totalJam += parseInt(waktuPT3[0]);
-        totalMenit += parseInt(waktuPT3[2]);
-      } else if (waktuPT3.length === 2) {
-        totalMenit += parseInt(waktuPT3[0]);
-      }
-    }
-  
-    // Menambahkan waktu PT4
-    if (waktuPT4[0] !== "waiting...") {
-      if (waktuPT4.length === 4) {
-        totalJam += parseInt(waktuPT4[0]);
-        totalMenit += parseInt(waktuPT4[2]);
-      } else if (waktuPT4.length === 2) {
-        totalMenit += parseInt(waktuPT4[0]);
-      }
-    }
-  
-    // Menambahkan waktu PD jika bukan "waiting..."
-    if (waktuPD[0] !== "waiting...") {
-      if (waktuPD.length === 4) {
-        totalJam += parseInt(waktuPD[0]);
-        totalMenit += parseInt(waktuPD[2]);
-      } else if (waktuPD.length === 2) {
-        totalMenit += parseInt(waktuPD[0]);
-      }
-    }
-  
-    // Menambahkan waktu OT jika bukan "waiting..."
-    if (waktuOT[0] !== "waiting...") {
-      if (waktuOT.length === 4) {
-        totalJam += parseInt(waktuOT[0]);
-        totalMenit += parseInt(waktuOT[2]);
-      } else if (waktuOT.length === 2) {
-        totalMenit += parseInt(waktuOT[0]);
-      }
-    }
-  
-    // Mengubah menit menjadi jam jika lebih dari 60
-    if (totalMenit >= 60) {
-      const tambahanJam = Math.floor(totalMenit / 60);
-      totalJam += tambahanJam;
-      totalMenit -= tambahanJam * 60;
-    }
-  
-    // Mengatur nilai hasil penjumlahan ke state Total
-    const output = `${totalJam} jam ${totalMenit} menit`;
-    setTotal(output);
-  };
-  
-  useEffect(() => {
-    calculateTotalTime();
-  }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
-  
   
   
   
@@ -161,9 +73,7 @@ const SmtTop = () => {
 
   
   
-  
-  
-  
+
   
 
   useEffect(() => {
@@ -218,6 +128,96 @@ const SmtTop = () => {
 
 
 
+const calculateTotalTime = () => {
+  let totalJam = 0;
+  let totalMenit = 0;
+
+  // Mengambil nilai dari state
+  const waktuPT1 = RealPT1.split(" ");
+  const waktuPT2 = RealPT2.split(" ");
+  const waktuPT3 = RealPT3.split(" ");
+  const waktuPT4 = RealPT4.split(" ");
+  const waktuPD = RealPD.split(" ");
+  const waktuOT = RealOT.split(" ");
+
+  // Menambahkan waktu PT1
+  if (waktuPT1[0] !== "Waiting...") {
+    if (waktuPT1.length === 4) {
+      totalJam += parseInt(waktuPT1[0]);
+      totalMenit += parseInt(waktuPT1[2]);
+    } else if (waktuPT1.length === 2) {
+      totalMenit += parseInt(waktuPT1[0]);
+    }
+  }
+
+  // Menambahkan waktu PT2
+  if (waktuPT2[0] !== "Waiting...") {
+    if (waktuPT2.length === 4) {
+      totalJam += parseInt(waktuPT2[0]);
+      totalMenit += parseInt(waktuPT2[2]);
+    } else if (waktuPT2.length === 2) {
+      totalMenit += parseInt(waktuPT2[0]);
+    }
+  }
+
+  // Menambahkan waktu PT3
+  if (waktuPT3[0] !== "Waiting...") {
+    if (waktuPT3.length === 4) {
+      totalJam += parseInt(waktuPT3[0]);
+      totalMenit += parseInt(waktuPT3[2]);
+    } else if (waktuPT3.length === 2) {
+      totalMenit += parseInt(waktuPT3[0]);
+    }
+  }
+
+  // Menambahkan waktu PT4
+  if (waktuPT4[0] !== "Waiting...") {
+    if (waktuPT4.length === 4) {
+      totalJam += parseInt(waktuPT4[0]);
+      totalMenit += parseInt(waktuPT4[2]);
+    } else if (waktuPT4.length === 2) {
+      totalMenit += parseInt(waktuPT4[0]);
+    }
+  }
+
+  // Menambahkan waktu PD jika bukan "Waiting..."
+  if (waktuPD[0] !== "Waiting...") {
+    if (waktuPD.length === 4) {
+      totalJam += parseInt(waktuPD[0]);
+      totalMenit += parseInt(waktuPD[2]);
+    } else if (waktuPD.length === 2) {
+      totalMenit += parseInt(waktuPD[0]);
+    }
+  }
+
+  // Menambahkan waktu OT jika bukan "Waiting..."
+  if (waktuOT[0] !== "Waiting...") {
+    if (waktuOT.length === 4) {
+      totalJam += parseInt(waktuOT[0]);
+      totalMenit += parseInt(waktuOT[2]);
+    } else if (waktuOT.length === 2) {
+      totalMenit += parseInt(waktuOT[0]);
+    }
+  }
+
+  // Mengubah menit menjadi jam jika lebih dari 60
+  if (totalMenit >= 60) {
+    const tambahanJam = Math.floor(totalMenit / 60);
+    totalJam += tambahanJam;
+    totalMenit -= tambahanJam * 60;
+  }
+
+  // Mengatur nilai hasil penjumlahan ke state Total
+  const output = `${totalJam} jam ${totalMenit} menit`;
+  setTotal(output);
+};
+
+useEffect(() => {
+  calculateTotalTime();
+}, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
+
+
+
   const submit = () => {
     const data = {
       SHIFT: SHIFT,
@@ -267,7 +267,7 @@ const SmtTop = () => {
       });
   };
 
-  // RESET
+  // 
   const stop = (value) => {
     const data = {
       SHIFT: SHIFT,
@@ -303,7 +303,6 @@ const SmtTop = () => {
       RealOT: RealOT,
       Total: Total,
       VALUE: value,
-
     };
   
     const UpdateReal = (event) => {
@@ -316,19 +315,7 @@ const SmtTop = () => {
       })
         .then((response) => {
           if (response.status === 200) {
-        
-          } else {
-            throw new Error("Error updating data");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-  
-   UpdateReal(); // Jalankan fungsi UpdateReal terlebih dahulu
-  
-    fetch(`http://192.168.101.236:3001/api/post/Inputsche`, {
+             fetch(`http://192.168.101.236:3001/api/post/Inputsche`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -337,12 +324,30 @@ const SmtTop = () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2").set("waiting...");
-          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1").set("waiting...");
-          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3").set("waiting...");
-          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4").set("waiting...");
-          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/DownTime").set("waiting...");
-          firebase.database().ref("/StatusLine/SMTLine1ProductionTime/OverTime").set("waiting...");
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1")
+            .set("Waiting...");
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2")
+            .set("Waiting...");
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3")
+            .set("Waiting...");
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4")
+            .set("Waiting...");
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1ProductionTime/DownTime")
+            .set("Waiting...");
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1ProductionTime/OverTime")
+            .set("Waiting...");
           alert("Production Berhasil Di Reset");
           window.location.reload();
         } else {
@@ -352,7 +357,20 @@ const SmtTop = () => {
       .catch((err) => {
         console.log(err);
       });
+
+            // Berhasil mengirim data
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+  
+    UpdateReal();
   };
+   
   
   
 
@@ -420,57 +438,54 @@ const SmtTop = () => {
   }, []);
 
 
-  //  Real Prod Time PT1
-
+  // Realtime Production
   useEffect(() => {
-    let interval;
-
-    const startCountdown = (startTime, endTime) => {
+    const startCountdown = (startTime, endTime, productionTimeKey) => {
       const targetTime = new Date();
       const [hours, minutes] = startTime.split(":");
       targetTime.setHours(parseInt(hours, 10));
       targetTime.setMinutes(parseInt(minutes, 10));
       targetTime.setSeconds(0);
-
+  
       const outTime = new Date();
       const [outHours, outMinutes] = endTime.split(":");
       outTime.setHours(parseInt(outHours, 10));
       outTime.setMinutes(parseInt(outMinutes, 10));
       outTime.setSeconds(0);
-
+  
       const interval = setInterval(() => {
         const currentTime = new Date();
         let remainingTime = 0;
-
+  
         if (currentTime >= targetTime && currentTime < outTime) {
           // Start counting only when the current time is within the range
           remainingTime = targetTime.getTime() - currentTime.getTime();
-
+  
           // Start counting from 0 seconds after the target time is reached
           if (remainingTime <= 0) {
             remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
           }
-
+  
           // Send the countdown value to Firebase
           firebase
             .database()
-            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1")
+            .ref(`/StatusLine/SMTLine1ProductionTime/${productionTimeKey}`)
             .set(formatTime(remainingTime));
         } else if (currentTime >= outTime) {
           // Stop the countdown if the current time exceeds the end time
           clearInterval(interval);
         }
       }, 1000); // Update every second
-
+  
       return interval; // Return the interval ID for cleanup
     };
-
+  
     const formatTime = (time) => {
       const totalSeconds = Math.floor(time / 1000);
       const minutes = Math.floor(totalSeconds / 60);
       const hours = Math.floor(minutes / 60);
       const remainingMinutes = minutes % 60;
-
+  
       if (hours >= 1) {
         if (remainingMinutes >= 1) {
           return `${hours} jam ${remainingMinutes} menit`;
@@ -483,378 +498,35 @@ const SmtTop = () => {
         return `${totalSeconds} detik`;
       }
     };
-
-    if (data && data.PT1_IN && data.PT1_OUT) {
-      interval = startCountdown(data.PT1_IN, data.PT1_OUT);
-    }
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [data]);
-
-
-
-  //  Real Prod Time PT2
-  useEffect(() => {
-    let interval;
-
-    const startCountdown2 = (startTime, endTime) => {
-      const targetTime = new Date();
-      const [hours, minutes] = startTime.split(":");
-      targetTime.setHours(parseInt(hours, 10));
-      targetTime.setMinutes(parseInt(minutes, 10));
-      targetTime.setSeconds(0);
-
-      const outTime = new Date();
-      const [outHours, outMinutes] = endTime.split(":");
-      outTime.setHours(parseInt(outHours, 10));
-      outTime.setMinutes(parseInt(outMinutes, 10));
-      outTime.setSeconds(0);
-
-      const interval = setInterval(() => {
-        const currentTime = new Date();
-        let remainingTime = 0;
-
-        if (currentTime >= targetTime && currentTime < outTime) {
-          // Start counting only when the current time is within the range
-          remainingTime = targetTime.getTime() - currentTime.getTime();
-
-          // Start counting from 0 seconds after the target time is reached
-          if (remainingTime <= 0) {
-            remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
-          }
-
-          // Send the countdown value to Firebase
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2")
-            .set(formatTime(remainingTime));
-        } else if (currentTime >= outTime) {
-          // Stop the countdown if the current time exceeds the end time
-          clearInterval(interval);
-        }
-      }, 1000); // Update every second
-
-      return interval; // Return the interval ID for cleanup
-    };
-
-    const formatTime = (time) => {
-      const totalSeconds = Math.floor(time / 1000);
-      const minutes = Math.floor(totalSeconds / 60);
-      const hours = Math.floor(minutes / 60);
-      const remainingMinutes = minutes % 60;
-
-      if (hours >= 1) {
-        if (remainingMinutes >= 1) {
-          return `${hours} jam ${remainingMinutes} menit`;
-        } else {
-          return `${hours} jam`;
-        }
-      } else if (minutes >= 1) {
-        return `${minutes} menit`;
-      } else {
-        return `${totalSeconds} detik`;
+  
+    let intervals = [];
+  
+    const startCountdownForData = (startTimeKey, endTimeKey, productionTimeKey) => {
+      if (data && data[startTimeKey] && data[endTimeKey]) {
+        const interval = startCountdown(
+          data[startTimeKey],
+          data[endTimeKey],
+          productionTimeKey
+        );
+        intervals.push(interval);
       }
     };
-
-    if (data && data.PT2_IN && data.PT2_OUT) {
-      interval = startCountdown2(data.PT2_IN, data.PT2_OUT);
-    }
-
+  
+    startCountdownForData("PT1_IN", "PT1_OUT", "ProductionTime1");
+    startCountdownForData("PT2_IN", "PT2_OUT", "ProductionTime2");
+    startCountdownForData("PT3_IN", "PT3_OUT", "ProductionTime3");
+    startCountdownForData("PT4_IN", "PT4_OUT", "ProductionTime4");
+    startCountdownForData("PD_IN", "PD_OUT", "DownTime");
+    startCountdownForData("OT_IN", "OT_OUT", "OverTime");
+  
     return () => {
-      clearInterval(interval);
-    };
-  }, [data]);
-
-//  Real Prod Time PT3
-  useEffect(() => {
-    let interval;
-
-    const startCountdown3 = (startTime, endTime) => {
-      const targetTime = new Date();
-      const [hours, minutes] = startTime.split(":");
-      targetTime.setHours(parseInt(hours, 10));
-      targetTime.setMinutes(parseInt(minutes, 10));
-      targetTime.setSeconds(0);
-
-      const outTime = new Date();
-      const [outHours, outMinutes] = endTime.split(":");
-      outTime.setHours(parseInt(outHours, 10));
-      outTime.setMinutes(parseInt(outMinutes, 10));
-      outTime.setSeconds(0);
-
-      const interval = setInterval(() => {
-        const currentTime = new Date();
-        let remainingTime = 0;
-
-        if (currentTime >= targetTime && currentTime < outTime) {
-          // Start counting only when the current time is within the range
-          remainingTime = targetTime.getTime() - currentTime.getTime();
-
-          // Start counting from 0 seconds after the target time is reached
-          if (remainingTime <= 0) {
-            remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
-          }
-
-          // Send the countdown value to Firebase
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3")
-            .set(formatTime(remainingTime));
-        } else if (currentTime >= outTime) {
-          // Stop the countdown if the current time exceeds the end time
-          clearInterval(interval);
-        }
-      }, 1000); // Update every second
-
-      return interval; // Return the interval ID for cleanup
-    };
-
-    const formatTime = (time) => {
-      const totalSeconds = Math.floor(time / 1000);
-      const minutes = Math.floor(totalSeconds / 60);
-      const hours = Math.floor(minutes / 60);
-      const remainingMinutes = minutes % 60;
-
-      if (hours >= 1) {
-        if (remainingMinutes >= 1) {
-          return `${hours} jam ${remainingMinutes} menit`;
-        } else {
-          return `${hours} jam`;
-        }
-      } else if (minutes >= 1) {
-        return `${minutes} menit`;
-      } else {
-        return `${totalSeconds} detik`;
-      }
-    };
-
-    if (data && data.PT3_IN && data.PT3_OUT) {
-      interval = startCountdown3(data.PT3_IN, data.PT3_OUT);
-    }
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [data]);
-
-  //  Real Prod Time PT4
-  useEffect(() => {
-    let interval;
-
-    const startCountdown4 = (startTime, endTime) => {
-      const targetTime = new Date();
-      const [hours, minutes] = startTime.split(":");
-      targetTime.setHours(parseInt(hours, 10));
-      targetTime.setMinutes(parseInt(minutes, 10));
-      targetTime.setSeconds(0);
-
-      const outTime = new Date();
-      const [outHours, outMinutes] = endTime.split(":");
-      outTime.setHours(parseInt(outHours, 10));
-      outTime.setMinutes(parseInt(outMinutes, 10));
-      outTime.setSeconds(0);
-
-      const interval = setInterval(() => {
-        const currentTime = new Date();
-        let remainingTime = 0;
-
-        if (currentTime >= targetTime && currentTime < outTime) {
-          // Start counting only when the current time is within the range
-          remainingTime = targetTime.getTime() - currentTime.getTime();
-
-          // Start counting from 0 seconds after the target time is reached
-          if (remainingTime <= 0) {
-            remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
-          }
-
-          // Send the countdown value to Firebase
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4")
-            .set(formatTime(remainingTime));
-        } else if (currentTime >= outTime) {
-          // Stop the countdown if the current time exceeds the end time
-          clearInterval(interval);
-        }
-      }, 1000); // Update every second
-
-      return interval; // Return the interval ID for cleanup
-    };
-
-    const formatTime = (time) => {
-      const totalSeconds = Math.floor(time / 1000);
-      const minutes = Math.floor(totalSeconds / 60);
-      const hours = Math.floor(minutes / 60);
-      const remainingMinutes = minutes % 60;
-
-      if (hours >= 1) {
-        if (remainingMinutes >= 1) {
-          return `${hours} jam ${remainingMinutes} menit`;
-        } else {
-          return `${hours} jam`;
-        }
-      } else if (minutes >= 1) {
-        return `${minutes} menit`;
-      } else {
-        return `${totalSeconds} detik`;
-      }
-    };
-
-    if (data && data.PT4_IN && data.PT4_OUT) {
-      interval = startCountdown4(data.PT4_IN, data.PT4_OUT);
-    }
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [data]);
-
-
-    //  Real Prod Time PD
-    useEffect(() => {
-      let interval;
-  
-      const startCountdown5 = (startTime, endTime) => {
-        const targetTime = new Date();
-        const [hours, minutes] = startTime.split(":");
-        targetTime.setHours(parseInt(hours, 10));
-        targetTime.setMinutes(parseInt(minutes, 10));
-        targetTime.setSeconds(0);
-  
-        const outTime = new Date();
-        const [outHours, outMinutes] = endTime.split(":");
-        outTime.setHours(parseInt(outHours, 10));
-        outTime.setMinutes(parseInt(outMinutes, 10));
-        outTime.setSeconds(0);
-  
-        const interval = setInterval(() => {
-          const currentTime = new Date();
-          let remainingTime = 0;
-  
-          if (currentTime >= targetTime && currentTime < outTime) {
-            // Start counting only when the current time is within the range
-            remainingTime = targetTime.getTime() - currentTime.getTime();
-  
-            // Start counting from 0 seconds after the target time is reached
-            if (remainingTime <= 0) {
-              remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
-            }
-  
-            // Send the countdown value to Firebase
-            firebase
-              .database()
-              .ref("/StatusLine/SMTLine1ProductionTime/DownTime")
-              .set(formatTime(remainingTime));
-          } else if (currentTime >= outTime) {
-            // Stop the countdown if the current time exceeds the end time
-            clearInterval(interval);
-          }
-        }, 1000); // Update every second
-  
-        return interval; // Return the interval ID for cleanup
-      };
-  
-      const formatTime = (time) => {
-        const totalSeconds = Math.floor(time / 1000);
-        const minutes = Math.floor(totalSeconds / 60);
-        const hours = Math.floor(minutes / 60);
-        const remainingMinutes = minutes % 60;
-  
-        if (hours >= 1) {
-          if (remainingMinutes >= 1) {
-            return `${hours} jam ${remainingMinutes} menit`;
-          } else {
-            return `${hours} jam`;
-          }
-        } else if (minutes >= 1) {
-          return `${minutes} menit`;
-        } else {
-          return `${totalSeconds} detik`;
-        }
-      };
-  
-      if (data && data.PD_IN && data.PD_OUT) {
-        interval = startCountdown5(data.PD_IN, data.PD_OUT);
-      }
-  
-      return () => {
+      intervals.forEach((interval) => {
         clearInterval(interval);
-      };
-    }, [data]);
-
- //  Real Prod Time PD
- useEffect(() => {
-  let interval;
-
-  const startCountdown6 = (startTime, endTime) => {
-    const targetTime = new Date();
-    const [hours, minutes] = startTime.split(":");
-    targetTime.setHours(parseInt(hours, 10));
-    targetTime.setMinutes(parseInt(minutes, 10));
-    targetTime.setSeconds(0);
-
-    const outTime = new Date();
-    const [outHours, outMinutes] = endTime.split(":");
-    outTime.setHours(parseInt(outHours, 10));
-    outTime.setMinutes(parseInt(outMinutes, 10));
-    outTime.setSeconds(0);
-
-    const interval = setInterval(() => {
-      const currentTime = new Date();
-      let remainingTime = 0;
-
-      if (currentTime >= targetTime && currentTime < outTime) {
-        // Start counting only when the current time is within the range
-        remainingTime = targetTime.getTime() - currentTime.getTime();
-
-        // Start counting from 0 seconds after the target time is reached
-        if (remainingTime <= 0) {
-          remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
-        }
-
-        // Send the countdown value to Firebase
-        firebase
-          .database()
-          .ref("/StatusLine/SMTLine1ProductionTime/OverTime")
-          .set(formatTime(remainingTime));
-      } else if (currentTime >= outTime) {
-        // Stop the countdown if the current time exceeds the end time
-        clearInterval(interval);
-      }
-    }, 1000); // Update every second
-
-    return interval; // Return the interval ID for cleanup
-  };
-
-  const formatTime = (time) => {
-    const totalSeconds = Math.floor(time / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
-
-    if (hours >= 1) {
-      if (remainingMinutes >= 1) {
-        return `${hours} jam ${remainingMinutes} menit`;
-      } else {
-        return `${hours} jam`;
-      }
-    } else if (minutes >= 1) {
-      return `${minutes} menit`;
-    } else {
-      return `${totalSeconds} detik`;
-    }
-  };
-
-  if (data && data.OT_IN && data.OT_OUT) {
-    interval = startCountdown6(data.OT_IN, data.OT_OUT);
-  }
-
-  return () => {
-    clearInterval(interval);
-  };
-}, [data]);
+      });
+    };
+  }, [data]);
+  
+  
 
   const defaultshift2 = () => {
     const today = new Date();
@@ -865,6 +537,8 @@ const SmtTop = () => {
     day = day < 10 ? `0${day}` : day;
     const formattedDate = `${year}-${month}-${day}`;
     setPDATE(formattedDate);
+    setRealProduction(false);
+
     
     setSHIFT("2");
     setPT1_IN("07:00");
@@ -889,7 +563,7 @@ const SmtTop = () => {
     setOT_OUT("Null");
     setPD_IN("Null");
     setPD_OUT("Null");
-    setPP("9 Hours : 0 Minutes");
+    setPP("8 Hours : 0 Minutes");
   };
   
 

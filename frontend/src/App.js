@@ -1,11 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import DamageReport from "./components/Report/DamageReport.jsx"
-import AllReport from "./components/Report/AllReport.jsx"
 import Login from "./components/Maintenance/Login.jsx"
 import Home from "./components/Home.jsx"
 import BP from "./components/Broken/BrokenPage.jsx"
-import Mobile from "./components/Mobile/Mobile.jsx"
 import Line from "./components/Line.jsx"
 import Line1 from "./components/Line1/Line1.jsx"
 import PPIC from "./components/Ppic/Ppic.jsx"
@@ -15,8 +12,7 @@ import RequestPurchasing from "./components/Purchasing/RequestPurchasing.jsx"
 import ReturnPurchasing from "./components/Purchasing/ReturnPurchasing.jsx"
 import RequestQualityA from "./components/QualityA/RequestQualityA.jsx"
 import ValidationQualityA from "./components/QualityA/ValidationQualityA.jsx"
-import RequestQualityC from "./components/QualityC/RequestQualityC.jsx"
-import ValidationQualityC from "./components/QualityC/ValidationQualityC.jsx"
+
 
 import AndonLine1 from "./components/Line1/AndonLine1.jsx";
 import SmtTop from "./components/Line1/SmtTop.jsx";
@@ -40,10 +36,7 @@ function App() {
       <Routes>
       <Route path="/" element={<Home/>}/>
         <Route path="/AndonLine1" element={<AndonLine1/>}/>
-        <Route path="/DamageReport" element={<DamageReport/>}/>
-        <Route path="AllReport" element={<AllReport/>}/>
         <Route path="/LoginMaintenance" element={<Login/>}/>
-        <Route path="/Mobile" element={<Mobile/>}/>
         <Route path="/--" element={<BP/>}/>
 
         <Route path="Line" element={<Line/>}/>
@@ -60,8 +53,6 @@ function App() {
         <Route path="RequestQA" element={<RequestQualityA/>}/>
         <Route path="ValidationQA" element={<ValidationQualityA/>}/>
 
-        <Route path="RequestQC" element={<RequestQualityC/>}/>
-        <Route path="ValidationQC" element={<ValidationQualityC/>}/>
 
                 
         <Route path="RequestNetwork" element={<RequestNetwork/>}/>
