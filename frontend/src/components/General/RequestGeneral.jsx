@@ -13,7 +13,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const ReturnMaintenance = () => {
+const RepairReport = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -22,13 +22,7 @@ const ReturnMaintenance = () => {
   const [showDatePicker, setShowDatePicker] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState(null);
-
   const [StatusLine, setStatusLine] = useState("");
-
-  // button search
-  function handleToggleDatePicker() {
-    setShowDatePicker(!showDatePicker);
-  }
 
   useEffect(() => {
     const ref3 = firebase.database().ref("StatusLine/SMTLine1");
@@ -38,6 +32,11 @@ const ReturnMaintenance = () => {
     });
     return () => {};
   }, []);
+
+  // button search
+  function handleToggleDatePicker() {
+    setShowDatePicker(!showDatePicker);
+  }
 
   useEffect(() => {
     // set showDatePicker ke false ketika halaman dimuat
@@ -79,7 +78,7 @@ const ReturnMaintenance = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/get/ReturnMaintenance")
+    fetch("http://192.168.101.236:3001/api/get/Network")
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti timestamp menjadi tanggal dan Date
@@ -108,9 +107,7 @@ const ReturnMaintenance = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(
-      `http://192.168.101.236:3001/api/get/ReturnMaintenance?date=${selectedDate}`
-    )
+    fetch(`http://192.168.101.236:3001/api/get/Network?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti Date menjadi tanggal saja
@@ -150,10 +147,10 @@ const ReturnMaintenance = () => {
   };
 
   const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/MTC.jpg)`,
-    backgroundSize: "1400px",
-    backgroundPosition: "1400px",
-    height: "640px", // Ubah tinggi (height) sesuai kebutuhan Anda
+    backgroundImage: `url(${process.env.PUBLIC_URL}/Network.png)`,
+    backgroundSize: "1300px",
+    backgroundPosition: "500px",
+    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
 
   return (
@@ -180,8 +177,9 @@ const ReturnMaintenance = () => {
           <marquee behavior="scroll" direction="right">
             <div class="flex items-center">
               <h1 class="text-xl font-bold tracking-tight text-gray-900">
-                | Laporan Return Maintenance |
+                | General |
               </h1>
+
               <h1 class="text-xl font-bold tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
                 <span
@@ -194,6 +192,7 @@ const ReturnMaintenance = () => {
                 </span>
                 <span className="ml-4">|</span>
               </h1>
+
               <h1 class="text-xl font-bold tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
                 <span class="ml-4 text-green-500">RUNNING </span>|
@@ -203,7 +202,7 @@ const ReturnMaintenance = () => {
         </div>
       </header>
 
-    
+   
 
       <main>
         <section
@@ -259,7 +258,7 @@ const ReturnMaintenance = () => {
               </button>
             </div>
             {/* <!-- Table --> */}
-             <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-2xl border border-gray-200">
+            <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-2xl border border-gray-200">
               {/* <button className="flex" onClick={exportToPDF}>
                 Export To:
                 <img
@@ -270,7 +269,7 @@ const ReturnMaintenance = () => {
               </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Return For Maintenance
+                  Request For General
                 </div>
               </header>
 
@@ -288,10 +287,7 @@ const ReturnMaintenance = () => {
                         <div className="font-semibold text-left">Line</div>
                       </th>
                       <th className="p-1  w-32">
-                        <div className="font-semibold text-left">Area</div>
-                      </th>
-                      <th className="p-1  w-32">
-                        <div className="font-semibold text-left">Station</div>
+                        <div className="font-semibold text-left">Problem</div>
                       </th>
                       <th className="p-1 w-10">
                         <div className="font-semibold text-center">Details</div>
@@ -315,11 +311,6 @@ const ReturnMaintenance = () => {
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
                             {item.Line}
-                          </div>
-                        </td>
-                        <td className="p-2">
-                          <div className="font-medium text-gray-800">
-                            {item.Area}
                           </div>
                         </td>
                         <td className="p-2">
@@ -351,7 +342,7 @@ const ReturnMaintenance = () => {
 
                         {selectedItem && (
                           <>
-                              <div className="fixed z-10 inset-0 overflow-y-auto">
+                            <div className="fixed z-10 inset-0 overflow-y-auto">
                               <div class="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
                                 <div
@@ -364,7 +355,7 @@ const ReturnMaintenance = () => {
                                     <div className="sm:flex sm:items-start">
                                       <div className="w-full max-w-lg">
                                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                          <span>Retrun BY</span>
+                                          <span>PROBLEM</span>
                                         </div>
                                         <div class="flex flex-wrap -mx-3 ">
                                           <div class="w-full px-1">
@@ -372,7 +363,7 @@ const ReturnMaintenance = () => {
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-first-name"
                                             >
-                                              Nama PIC Quality
+                                              Nama PIC
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -385,53 +376,22 @@ const ReturnMaintenance = () => {
                                         </div>
 
                                         <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                          <div class="w-full px-1">
                                             <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                                              for="grid-password"
                                             >
                                               Line
                                             </label>
                                             <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              class="appearance-none block w-full bg-gray-200 font-semibold border text-lime-600  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}
                                               {selectedItem.Line}{" "}
                                             </div>
                                           </div>
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Area
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Area}{" "}
-                                            </div>
-                                          </div>
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Station
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Station}{" "}
-                                            </div>
-                                          </div>
                                         </div>
-                              
                                         <div class="flex flex-wrap -mx-3 ">
                                           <div class="w-full px-1">
                                             <label
@@ -442,6 +402,23 @@ const ReturnMaintenance = () => {
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border text-red-600  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.Station}{" "}
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="flex flex-wrap -mx-3 ">
+                                          <div class="w-full px-1">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                                              for="grid-password"
+                                            >
+                                              Detail Problem
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border   rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}
@@ -465,8 +442,6 @@ const ReturnMaintenance = () => {
                                 </div>
                               </div>
                             </div>
-
-                            
                           </>
                         )}
 
@@ -506,4 +481,4 @@ const ReturnMaintenance = () => {
   );
 };
 
-export default ReturnMaintenance;
+export default RepairReport;

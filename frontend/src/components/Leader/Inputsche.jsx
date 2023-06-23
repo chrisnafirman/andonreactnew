@@ -12,17 +12,13 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const SmtTop = () => {
-
   const [InputSchedule, setInputSchedule] = useState(false);
   const [RealProduction, setRealProduction] = useState(true);
 
   const [time, setTime] = useState(new Date().toLocaleString());
-  const [prevStatus, setPrevStatus] = useState("");
+
   const [showDrawer, setShowDrawer] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
-
-
-
 
   const [data, setData] = useState(null);
 
@@ -53,170 +49,172 @@ const SmtTop = () => {
   const [CMA, setCMA] = useState("");
   const [PDATE, setPDATE] = useState("");
 
-
-  const [ResultsCMA,setResultsCMA] = useState("");
-  const [RealPT1,setRealPT1] = useState("");
-  const [RealPT2,setRealPT2] = useState("");
-  const [RealPT3,setRealPT3] = useState("");
-  const [RealPT4,setRealPT4] = useState("");
-  const [RealPD,setRealPD] = useState("");
-  const [RealOT,setRealOT] = useState("");
+  const [ResultsCMA, setResultsCMA] = useState("");
+  const [RealPT1, setRealPT1] = useState("");
+  const [RealPT2, setRealPT2] = useState("");
+  const [RealPT3, setRealPT3] = useState("");
+  const [RealPT4, setRealPT4] = useState("");
+  const [RealPD, setRealPD] = useState("");
+  const [RealOT, setRealOT] = useState("");
   const [Total, setTotal] = useState("");
-  
-
-  
-  
-  
-  
-
-
-
-  
-  
-
-  
 
   useEffect(() => {
-
-    
     const ref1 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
     ref1.on("value", (snapshot) => {
       const data = snapshot.val();
       setResultsCMA(data);
     });
 
-  const ref2 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1");
-  ref2.on("value", (snapshot) => {
-    const data = snapshot.val();
-    setRealPT1(data);
-  });
+    const ref2 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1");
+    ref2.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT1(data);
+    });
 
-  const ref3 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2");
-  ref3.on("value", (snapshot) => {
-    const data = snapshot.val();
-    setRealPT2(data);
-  });
+    const ref3 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2");
+    ref3.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT2(data);
+    });
 
-  const ref4 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3");
-  ref4.on("value", (snapshot) => {
-    const data = snapshot.val();
-    setRealPT3(data);
-  });
+    const ref4 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3");
+    ref4.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT3(data);
+    });
 
+    const ref5 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4");
+    ref5.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT4(data);
+    });
 
-  const ref5 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4");
-  ref5.on("value", (snapshot) => {
-    const data = snapshot.val();
-    setRealPT4(data);
-  });
+    const ref6 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/DownTime");
+    ref6.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPD(data);
+    });
 
-  const ref6 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/DownTime");
-  ref6.on("value", (snapshot) => {
-    const data = snapshot.val();
-    setRealPD(data);
-  });
+    const ref7 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/OverTime");
+    ref7.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealOT(data);
+    });
 
-  
-  const ref7 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/OverTime");
-  ref7.on("value", (snapshot) => {
-    const data = snapshot.val();
-    setRealOT(data);
-  });
+    return () => {};
+  }, []);
 
-  return () => {};
-}, []);
+  const calculateTotalTime = () => {
+    let totalJam = 0;
+    let totalMenit = 0;
 
+    // Mengambil nilai dari state
+    const waktuPT1 = RealPT1.split(" ");
+    const waktuPT2 = RealPT2.split(" ");
+    const waktuPT3 = RealPT3.split(" ");
+    const waktuPT4 = RealPT4.split(" ");
+    const waktuPD = RealPD.split(" ");
+    const waktuOT = RealOT.split(" ");
 
-
-const calculateTotalTime = () => {
-  let totalJam = 0;
-  let totalMenit = 0;
-
-  // Mengambil nilai dari state
-  const waktuPT1 = RealPT1.split(" ");
-  const waktuPT2 = RealPT2.split(" ");
-  const waktuPT3 = RealPT3.split(" ");
-  const waktuPT4 = RealPT4.split(" ");
-  const waktuPD = RealPD.split(" ");
-  const waktuOT = RealOT.split(" ");
-
-  // Menambahkan waktu PT1
-  if (waktuPT1[0] !== "Waiting...") {
-    if (waktuPT1.length === 4) {
-      totalJam += parseInt(waktuPT1[0]);
-      totalMenit += parseInt(waktuPT1[2]);
-    } else if (waktuPT1.length === 2) {
-      totalMenit += parseInt(waktuPT1[0]);
+    // Menambahkan waktu PT1
+    if (waktuPT1[0] !== "Waiting...") {
+      if (waktuPT1.length === 4) {
+        totalJam += parseInt(waktuPT1[0]);
+        totalMenit += parseInt(waktuPT1[2]);
+      } else if (waktuPT1.length === 2) {
+        totalMenit += parseInt(waktuPT1[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PT2
-  if (waktuPT2[0] !== "Waiting...") {
-    if (waktuPT2.length === 4) {
-      totalJam += parseInt(waktuPT2[0]);
-      totalMenit += parseInt(waktuPT2[2]);
-    } else if (waktuPT2.length === 2) {
-      totalMenit += parseInt(waktuPT2[0]);
+    // Menambahkan waktu PT2
+    if (waktuPT2[0] !== "Waiting...") {
+      if (waktuPT2.length === 4) {
+        totalJam += parseInt(waktuPT2[0]);
+        totalMenit += parseInt(waktuPT2[2]);
+      } else if (waktuPT2.length === 2) {
+        totalMenit += parseInt(waktuPT2[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PT3
-  if (waktuPT3[0] !== "Waiting...") {
-    if (waktuPT3.length === 4) {
-      totalJam += parseInt(waktuPT3[0]);
-      totalMenit += parseInt(waktuPT3[2]);
-    } else if (waktuPT3.length === 2) {
-      totalMenit += parseInt(waktuPT3[0]);
+    // Menambahkan waktu PT3
+    if (waktuPT3[0] !== "Waiting...") {
+      if (waktuPT3.length === 4) {
+        totalJam += parseInt(waktuPT3[0]);
+        totalMenit += parseInt(waktuPT3[2]);
+      } else if (waktuPT3.length === 2) {
+        totalMenit += parseInt(waktuPT3[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PT4
-  if (waktuPT4[0] !== "Waiting...") {
-    if (waktuPT4.length === 4) {
-      totalJam += parseInt(waktuPT4[0]);
-      totalMenit += parseInt(waktuPT4[2]);
-    } else if (waktuPT4.length === 2) {
-      totalMenit += parseInt(waktuPT4[0]);
+    // Menambahkan waktu PT4
+    if (waktuPT4[0] !== "Waiting...") {
+      if (waktuPT4.length === 4) {
+        totalJam += parseInt(waktuPT4[0]);
+        totalMenit += parseInt(waktuPT4[2]);
+      } else if (waktuPT4.length === 2) {
+        totalMenit += parseInt(waktuPT4[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PD jika bukan "Waiting..."
-  if (waktuPD[0] !== "Waiting...") {
-    if (waktuPD.length === 4) {
-      totalJam += parseInt(waktuPD[0]);
-      totalMenit += parseInt(waktuPD[2]);
-    } else if (waktuPD.length === 2) {
-      totalMenit += parseInt(waktuPD[0]);
+    // Menambahkan waktu PD jika bukan "Waiting..."
+    if (waktuPD[0] !== "Waiting...") {
+      if (waktuPD.length === 4) {
+        totalJam += parseInt(waktuPD[0]);
+        totalMenit += parseInt(waktuPD[2]);
+      } else if (waktuPD.length === 2) {
+        totalMenit += parseInt(waktuPD[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu OT jika bukan "Waiting..."
-  if (waktuOT[0] !== "Waiting...") {
-    if (waktuOT.length === 4) {
-      totalJam += parseInt(waktuOT[0]);
-      totalMenit += parseInt(waktuOT[2]);
-    } else if (waktuOT.length === 2) {
-      totalMenit += parseInt(waktuOT[0]);
+    // Menambahkan waktu OT jika bukan "Waiting..."
+    if (waktuOT[0] !== "Waiting...") {
+      if (waktuOT.length === 4) {
+        totalJam += parseInt(waktuOT[0]);
+        totalMenit += parseInt(waktuOT[2]);
+      } else if (waktuOT.length === 2) {
+        totalMenit += parseInt(waktuOT[0]);
+      }
     }
-  }
 
-  // Mengubah menit menjadi jam jika lebih dari 60
-  if (totalMenit >= 60) {
-    const tambahanJam = Math.floor(totalMenit / 60);
-    totalJam += tambahanJam;
-    totalMenit -= tambahanJam * 60;
-  }
+    // Mengubah menit menjadi jam jika lebih dari 60
+    if (totalMenit >= 60) {
+      const tambahanJam = Math.floor(totalMenit / 60);
+      totalJam += tambahanJam;
+      totalMenit -= tambahanJam * 60;
+    }
 
-  // Mengatur nilai hasil penjumlahan ke state Total
-  const output = `${totalJam} jam ${totalMenit} menit`;
-  setTotal(output);
-};
+    // Mengatur nilai hasil penjumlahan ke state Total
+    const output = `${totalJam} jam ${totalMenit} menit`;
+    setTotal(output);
 
-useEffect(() => {
-  calculateTotalTime();
-}, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
+    // Mengirim hasil total ke Firebase
+    firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/Total")
+      .set(output)
+      .then(() => {
+        console.log("Total waktu berhasil dikirim ke Firebase.");
+      })
+      .catch((error) => {
+        console.error("Error mengirim total waktu ke Firebase:", error);
+      });
+  };
 
-
+  useEffect(() => {
+    calculateTotalTime();
+  }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
 
   const submit = () => {
     const data = {
@@ -246,8 +244,8 @@ useEffect(() => {
       CMA: CMA,
       PDATE: PDATE,
     };
-
-    fetch(`http://192.168.101.236:3001/api/post/Inputsche`, {
+  
+    fetch("http://192.168.101.236:3001/api/post/Inputsche", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -256,8 +254,8 @@ useEffect(() => {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("success");
-          window.location.reload();
+          alert("Sucsess");
+            window.location.reload();
         } else {
           throw new Error("Error adding data");
         }
@@ -266,8 +264,10 @@ useEffect(() => {
         console.log(err);
       });
   };
+  
 
-  // 
+
+  //
   const stop = (value) => {
     const data = {
       SHIFT: SHIFT,
@@ -304,7 +304,7 @@ useEffect(() => {
       Total: Total,
       VALUE: value,
     };
-  
+
     const UpdateReal = (event) => {
       fetch(`http://192.168.101.236:3001/api/put/RealProductionTime`, {
         method: "PUT",
@@ -315,48 +315,48 @@ useEffect(() => {
       })
         .then((response) => {
           if (response.status === 200) {
-             fetch(`http://192.168.101.236:3001/api/post/Inputsche`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1")
-            .set("Waiting...");
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2")
-            .set("Waiting...");
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3")
-            .set("Waiting...");
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4")
-            .set("Waiting...");
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1ProductionTime/DownTime")
-            .set("Waiting...");
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1ProductionTime/OverTime")
-            .set("Waiting...");
-          alert("Production Berhasil Di Reset");
-          window.location.reload();
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+            fetch(`http://192.168.101.236:3001/api/post/Inputsche`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            })
+              .then((response) => {
+                if (response.status === 200) {
+                  firebase
+                    .database()
+                    .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1")
+                    .set("Waiting...");
+                  firebase
+                    .database()
+                    .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2")
+                    .set("Waiting...");
+                  firebase
+                    .database()
+                    .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3")
+                    .set("Waiting...");
+                  firebase
+                    .database()
+                    .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4")
+                    .set("Waiting...");
+                  firebase
+                    .database()
+                    .ref("/StatusLine/SMTLine1ProductionTime/DownTime")
+                    .set("Waiting...");
+                  firebase
+                    .database()
+                    .ref("/StatusLine/SMTLine1ProductionTime/OverTime")
+                    .set("Waiting...");
+                  alert("Production Berhasil Di Reset");
+                  window.location.reload();
+                } else {
+                  throw new Error("Error adding data");
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
 
             // Berhasil mengirim data
           } else {
@@ -367,18 +367,14 @@ useEffect(() => {
           console.log(err);
         });
     };
-  
+
     UpdateReal();
   };
-   
-  
-  
 
   const Input = () => {
     setRealProduction(false);
     setInputSchedule(true);
   };
-  
 
   function formatDate(dateString) {
     const options = { day: "numeric", month: "numeric", year: "numeric" };
@@ -437,7 +433,6 @@ useEffect(() => {
     return () => clearInterval(interval);
   }, []);
 
-
   // Realtime Production
   useEffect(() => {
     const startCountdown = (startTime, endTime, productionTimeKey) => {
@@ -446,26 +441,26 @@ useEffect(() => {
       targetTime.setHours(parseInt(hours, 10));
       targetTime.setMinutes(parseInt(minutes, 10));
       targetTime.setSeconds(0);
-  
+
       const outTime = new Date();
       const [outHours, outMinutes] = endTime.split(":");
       outTime.setHours(parseInt(outHours, 10));
       outTime.setMinutes(parseInt(outMinutes, 10));
       outTime.setSeconds(0);
-  
+
       const interval = setInterval(() => {
         const currentTime = new Date();
         let remainingTime = 0;
-  
+
         if (currentTime >= targetTime && currentTime < outTime) {
           // Start counting only when the current time is within the range
           remainingTime = targetTime.getTime() - currentTime.getTime();
-  
+
           // Start counting from 0 seconds after the target time is reached
           if (remainingTime <= 0) {
             remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
           }
-  
+
           // Send the countdown value to Firebase
           firebase
             .database()
@@ -476,16 +471,16 @@ useEffect(() => {
           clearInterval(interval);
         }
       }, 1000); // Update every second
-  
+
       return interval; // Return the interval ID for cleanup
     };
-  
+
     const formatTime = (time) => {
       const totalSeconds = Math.floor(time / 1000);
       const minutes = Math.floor(totalSeconds / 60);
       const hours = Math.floor(minutes / 60);
       const remainingMinutes = minutes % 60;
-  
+
       if (hours >= 1) {
         if (remainingMinutes >= 1) {
           return `${hours} jam ${remainingMinutes} menit`;
@@ -498,10 +493,14 @@ useEffect(() => {
         return `${totalSeconds} detik`;
       }
     };
-  
+
     let intervals = [];
-  
-    const startCountdownForData = (startTimeKey, endTimeKey, productionTimeKey) => {
+
+    const startCountdownForData = (
+      startTimeKey,
+      endTimeKey,
+      productionTimeKey
+    ) => {
       if (data && data[startTimeKey] && data[endTimeKey]) {
         const interval = startCountdown(
           data[startTimeKey],
@@ -511,22 +510,20 @@ useEffect(() => {
         intervals.push(interval);
       }
     };
-  
+
     startCountdownForData("PT1_IN", "PT1_OUT", "ProductionTime1");
     startCountdownForData("PT2_IN", "PT2_OUT", "ProductionTime2");
     startCountdownForData("PT3_IN", "PT3_OUT", "ProductionTime3");
     startCountdownForData("PT4_IN", "PT4_OUT", "ProductionTime4");
     startCountdownForData("PD_IN", "PD_OUT", "DownTime");
     startCountdownForData("OT_IN", "OT_OUT", "OverTime");
-  
+
     return () => {
       intervals.forEach((interval) => {
         clearInterval(interval);
       });
     };
   }, [data]);
-  
-  
 
   const defaultshift2 = () => {
     const today = new Date();
@@ -539,7 +536,6 @@ useEffect(() => {
     setPDATE(formattedDate);
     setRealProduction(false);
 
-    
     setSHIFT("2");
     setPT1_IN("07:00");
     setPT1_OUT("09:45");
@@ -565,10 +561,47 @@ useEffect(() => {
     setPD_OUT("Null");
     setPP("8 Hours : 0 Minutes");
   };
-  
+
+  const defaultshift1 = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+    month = month < 10 ? `0${month}` : month;
+    day = day < 10 ? `0${day}` : day;
+    const formattedDate = `${year}-${month}-${day}`;
+    setPDATE(formattedDate);
+    setRealProduction(false);
+
+    setSHIFT("1");
+    setPT1_IN("21:00");
+    setPT1_OUT("00:00");
+    setPT2_IN("00:40");
+    setPT2_OUT("03:00");
+    setPT3_IN("03:15");
+    setPT3_OUT("04:40");
+    setPT4_IN("05:00");
+    setPT4_OUT("06:15");
+    setBR1_IN("00:00");
+    setBR1_OUT("00:40");
+    setBR2_IN("03:00");
+    setBR2_OUT("03:15");
+    setBR3_IN("04:00");
+    setBR3_OUT("05:00");
+    setBR4_IN("Null");
+    setBR4_OUT("Null");
+    setPD_IN("NULL");
+    setPD_OUT("Null");
+    setOT_IN("Null");
+    setOT_OUT("Null");
+    setPD_IN("Null");
+    setPD_OUT("Null");
+    setPP("8 Hours : 0 Minutes");
+  };
 
   return (
     <body style={styles}>
+
       <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
         <div class="flex h-14 items-center justify-between">
           <div class="flex items-center">
@@ -583,8 +616,6 @@ useEffect(() => {
           <p class="text-gray-500 text-sm">{formattedTime}</p>
         </div>
       </nav>
-
-    
 
       <sidebar>
         <div
@@ -716,19 +747,25 @@ useEffect(() => {
 
       {/*  */}
       <main>
-        <ul class="hidden mt-2 text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
-          <li class="w-60 sm:w-36 lg:w-32">
+        <ul class="hidden mb-4 mt-2 text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
+          <button 
+           onClick={() => setInputSchedule(true)}
+           class="w-60 sm:w-36 lg:w-32">
+          
             <button
-              className="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white"
+                onClick={defaultshift1}
+              className="inline-block w-full p-4 text-gray-900 bg-white rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white"
               aria-current="page"
-              
             >
               Default Shift 1
             </button>
-          </li>
-          <button onClick={() => setInputSchedule(true)} class="w-60 sm:w-36 lg:w-32">
+          </button>
+          <button
+            onClick={() => setInputSchedule(true)}
+            class="w-60 sm:w-36 lg:w-32"
+          >
             <button
-            onClick={defaultshift2}
+              onClick={defaultshift2}
               class="inline-block w-full p-4 text-red-900 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
             >
               Default Shift 2
@@ -745,573 +782,554 @@ useEffect(() => {
           </button>
         </ul>
 
-
-        <div className=" ">
-          <span className=" pt-2 sm:ml-5 text-2xl text-white font-normal px-2">
-           
-          </span>
-        </div>
-
-
+ 
 
         <div className="flex">
+          {RealProduction ? (
+            <>
+              <div className="overflow-y-auto max-h-96 sm:ml-0 lg:ml-28  w-[500px]">
+                {data ? (
+                  <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
+                    <h3 className="text-lg font-bold mb-2">
+                      Real Production Time
+                    </h3>
+                    <table>
+                      <tr>
+                        <td className="font-bold">Production time 1:</td>
+                        <span className="px-4 text-lime-800">{RealPT1}</span>
+                      </tr>
+                      <tr>
+                        <td className="font-bold">Production time 2:</td>
+                        <span className="px-4 text-lime-800">{RealPT2}</span>
+                      </tr>
 
-        {RealProduction ? (
-          <>
-        <div className="overflow-y-auto max-h-96 sm:ml-0 lg:ml-28  w-[500px]">
-                      {data ? (
-                        <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
-                           <h3 className="text-lg font-bold mb-2">
-                        Real Production Time
-                      </h3>
-                          <table>
-                          <tr>
-                              <td className="font-bold">Production time 1:</td>
-                              <span className="px-4 text-lime-800" >
-                              {RealPT1}
-                              </span>
-                            </tr>
-                            <tr>
-                              <td className="font-bold">Production time 2:</td>
-                              <span className="px-4 text-lime-800" >
-                              {RealPT2}
-                              </span>
-                            </tr>
-                          
-                            <tr>
-                              <td className="font-bold">Planned DT:</td>
-                              <span className="px-4 text-lime-800">
-                              {RealPD}
-                              </span>
-                            </tr>
-                            <tr>
-                              <td className="font-bold">Production time 3:</td>
-                              <span className="px-4 text-lime-800">
-                              {RealPT3}
-                              </span>
-                            </tr>
-                           
-                            <tr>
-                              <td className="font-bold">Production time 4:</td>
-                              <span className="px-4 text-lime-800">
-                              {RealPT4}
-                              </span>
-                       
-                            </tr>
-                            <tr>
-                              <td className="font-bold">Over Time:</td>
-                              <span className="px-4 text-lime-800">
-                              {RealOT}
-                              </span>
-                            </tr>
-                            
-                          </table>
-                          <div className="flex mt-2">
-                              <td className="font-bold">Total:</td>
-                              <span className="ml-10 w-44 text-center text-white rounded-md bg-lime-700" >
-                              {Total}
-                              </span>
-                            </div>
-                          <div className="mt-2">
-                            <p className="font-bold text-sm">
-                              Change Model Allocation:
-                            </p>
-                            
-                            <p className="text-sm text-white bg-amber-500 text-center justify-center rounded-xl">
-                              ON GOING : {ResultsCMA}
-                            </p>
-                          </div>
-                        </div>
-                      ) : (
-                        <p>Loading...</p>
-                      )}
+                      <tr>
+                        <td className="font-bold">Planned DT:</td>
+                        <span className="px-4 text-lime-800">{RealPD}</span>
+                      </tr>
+                      <tr>
+                        <td className="font-bold">Production time 3:</td>
+                        <span className="px-4 text-lime-800">{RealPT3}</span>
+                      </tr>
+
+                      <tr>
+                        <td className="font-bold">Production time 4:</td>
+                        <span className="px-4 text-lime-800">{RealPT4}</span>
+                      </tr>
+                      <tr>
+                        <td className="font-bold">Over Time:</td>
+                        <span className="px-4 text-lime-800">{RealOT}</span>
+                      </tr>
+                    </table>
+                    <div className="flex mt-2">
+                      <td className="font-bold">Total:</td>
+                      <span className="ml-10 w-44 text-center text-white rounded-md bg-lime-700">
+                        {Total}
+                      </span>
                     </div>
-          </>
-        ) : null}
-          
-        {InputSchedule ? (
-          <>
-          <form className="bg-slate-50 w-[900px] sm:w-[600px] lg:w-[650px] px-3 ml-5 rounded-lg ">
-            <div class=" gap-2 mb-6 flex py-2 px-3 ">
-              <div className="flex ">
-                <label
-                  for="first_name"
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
-                  Production Date
-                </label>
-                <input
-                  type="Date"
-                  id="Production_Date"
-                  class="ml-5  g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder=""
-                  required
-                  value={PDATE}
-                  onChange={(e) => {
-                    setPDATE(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="flex  ">
-                <label
-                  for="first_name"
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
-                  Shift
-                </label>
-                <input
-                  type="number"
-                  max="5"
-                  value={SHIFT}
-                  id="Shift"
-                  class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="1-5"
-                  required
-                  onChange={(e) => {
-                    setSHIFT(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
+                    <div className="mt-2">
+                      <p className="font-bold text-sm">
+                        Change Model Allocation:
+                      </p>
 
-            {/* production time 1 */}
-            <div class=" gap-2 mb-6 flex py-2 px-3 ">
-              <div className="flex ">
-                <label
-                  for="first_name"
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
-                  Production Time 1
-                </label>
-                <input
-                 value={PT1_IN}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setPT1_IN(e.target.value);
-                  }}
-                />
-                <h1 className="mt-3 ml-2">To</h1>
-                <input
-                  value={PT1_OUT}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setPT1_OUT(e.target.value);
-                  }}
-                />
+                      <p className="text-sm text-white bg-amber-500 text-center justify-center rounded-xl">
+                        ON GOING : {ResultsCMA}
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <p>Loading...</p>
+                )}
               </div>
-            </div>
+            </>
+          ) : null}
 
-            {/* production time 2 */}
-            <div class=" gap-2 mb-6 flex py-2 px-3 ">
-              <div className="flex ">
-                <label
-                  for="first_name"
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
-                  Production Time 2
-                </label>
-                <input
-                value={PT2_IN}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setPT2_IN(e.target.value);
-                  }}
-                />
-                <h1 className="mt-3 ml-2">To</h1>
-                <input
-                value={PT2_OUT}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setPT2_OUT(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
-            {/* production time 3 */}
-            <div class=" gap-2 mb-6 flex py-2 px-3 ">
-              <div className="flex ">
-                <label
-                  for="first_name"
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
-                  Production Time 3
-                </label>
-                <input
-                value={PT3_IN}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setPT3_IN(e.target.value);
-                  }}
-                />
-                <h1 className="mt-3 ml-2">To</h1>
-                <input
-                value={PT3_OUT}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setPT3_OUT(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
+          {InputSchedule ? (
+            <>
+              <form className="bg-slate-50 w-[900px] sm:w-[600px] lg:w-[650px] px-3 ml-5 rounded-lg ">
+                <div class=" gap-2 mb-6 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label
+                      for="first_name"
+                      class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                    >
+                      Production Date
+                    </label>
+                    <input
+                      type="Date"
+                      id="Production_Date"
+                      class="ml-5  g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder=""
+                      required
+                      value={PDATE}
+                      onChange={(e) => {
+                        setPDATE(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="flex  ">
+                    <label
+                      for="first_name"
+                      class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                    >
+                      Shift
+                    </label>
+                    <input
+                      type="number"
+                      max="5"
+                      value={SHIFT}
+                      id="Shift"
+                      class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="1-5"
+                      required
+                      onChange={(e) => {
+                        setSHIFT(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
 
-            {/* production time 4 */}
-            <div class=" gap-2 mb-6 flex py-2 px-3 ">
-              <div className="flex ">
-                <label
-                  for="first_name"
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
-                  Production Time 4
-                </label>
-                <input
-                value={PT4_IN}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setPT4_IN(e.target.value);
-                  }}
-                />
-                <h1 className="mt-3 ml-2">To</h1>
-                <input
-                value={PT4_OUT}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setPT4_OUT(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
+                {/* production time 1 */}
+                <div class=" gap-2 mb-6 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label
+                      for="first_name"
+                      class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                    >
+                      Production Time 1
+                    </label>
+                    <input
+                      value={PT1_IN}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setPT1_IN(e.target.value);
+                      }}
+                    />
+                    <h1 className="mt-3 ml-2">To</h1>
+                    <input
+                      value={PT1_OUT}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setPT1_OUT(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
 
-            {/* Break1 */}
-            <div class=" gap-2 mb-6 flex py-2 px-3 ">
-              <div className="flex ">
-                <label
-                  for="first_name"
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
-                  Break Time 1
-                </label>
-                <input
-                value={BR1_IN}
-                  type="time"
-                  id="first_name"
-                  class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setBR1_IN(e.target.value);
-                  }}
-                />
-                <h1 className="mt-3 ml-2">To</h1>
-                <input
-                value={BR1_OUT}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setBR1_OUT(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
+                
+                {/* Break1 */}
+                <div class=" gap-2 mb-6 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label
+                      for="first_name"
+                      class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                    >
+                      Break Time 1
+                    </label>
+                    <input
+                      value={BR1_IN}
+                      type="time"
+                      id="first_name"
+                      class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setBR1_IN(e.target.value);
+                      }}
+                    />
+                    <h1 className="mt-3 ml-2">To</h1>
+                    <input
+                      value={BR1_OUT}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setBR1_OUT(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
 
-            {/* break 2 */}
-            <div class=" gap-2 mb-6 flex py-2 px-3 ">
-              <div className="flex ">
-                <label
-                  for="first_name"
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
-                  Break Time 2
-                </label>
-                <input
-                value={BR2_IN}
-                  type="time"
-                  id="first_name"
-                  class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setBR2_IN(e.target.value);
-                  }}
-                />
-                <h1 className="mt-3 ml-2">To</h1>
-                <input
-                value={BR2_OUT}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setBR2_OUT(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
+                {/* production time 2 */}
+                <div class=" gap-2 mb-6 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label
+                      for="first_name"
+                      class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                    >
+                      Production Time 2
+                    </label>
+                    <input
+                      value={PT2_IN}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setPT2_IN(e.target.value);
+                      }}
+                    />
+                    <h1 className="mt-3 ml-2">To</h1>
+                    <input
+                      value={PT2_OUT}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setPT2_OUT(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
 
-            {/* break 3 */}
-            <div class=" gap-2 mb-6 flex py-2 px-3 ">
-              <div className="flex ">
-                <label
-                  for="first_name"
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
-                  Break Time 3
-                </label>
-                <input
-                value={BR3_IN}
-                  type="time"
-                  id="first_name"
-                  class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setBR3_IN(e.target.value);
-                  }}
-                />
-                <h1 className="mt-3 ml-2">To</h1>
-                <input
-                value={BR3_OUT}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setBR3_OUT(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
+                {/* break 2 */}
+                <div class=" gap-2 mb-6 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label
+                      for="first_name"
+                      class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                    >
+                      Break Time 2
+                    </label>
+                    <input
+                      value={BR2_IN}
+                      type="time"
+                      id="first_name"
+                      class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setBR2_IN(e.target.value);
+                      }}
+                    />
+                    <h1 className="mt-3 ml-2">To</h1>
+                    <input
+                      value={BR2_OUT}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setBR2_OUT(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
 
-            {/* break 4 */}
-            <div class=" gap-2 mb-6 flex py-2 px-3 ">
-              <div className="flex ">
-                <label
-                  for="first_name"
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
-                  Break Time 4
-                </label>
-                <input
-                value={BR4_IN}
-                  type="time"
-                  id="first_name"
-                  class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setBR4_IN(e.target.value);
-                  }}
-                />
-                <h1 className="mt-3 ml-2">To</h1>
-                <input
-                value={BR4_OUT}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setBR4_OUT(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
+                {/* production time 3 */}
+                <div class=" gap-2 mb-6 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label
+                      for="first_name"
+                      class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                    >
+                      Production Time 3
+                    </label>
+                    <input
+                      value={PT3_IN}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setPT3_IN(e.target.value);
+                      }}
+                    />
+                    <h1 className="mt-3 ml-2">To</h1>
+                    <input
+                      value={PT3_OUT}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setPT3_OUT(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
 
-            {/* Over Time */}
-            <div class=" gap-2 mb-6 flex py-2 px-3 ">
-              <div className="flex ">
-                <label
-                  for="first_name"
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
-                  Over Time Time
-                </label>
-                <input
-                value={OT_IN}
-                  type="time"
-                  id="first_name"
-                  class="ml-7 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setOT_IN(e.target.value);
-                  }}
-                />
-                <h1 className="mt-3 ml-2">To</h1>
-                <input
-                value={OT_OUT}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setOT_OUT(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
+                 {/* break 3 */}
+                 <div class=" gap-2 mb-6 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label
+                      for="first_name"
+                      class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                    >
+                      Break Time 3
+                    </label>
+                    <input
+                      value={BR3_IN}
+                      type="time"
+                      id="first_name"
+                      class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setBR3_IN(e.target.value);
+                      }}
+                    />
+                    <h1 className="mt-3 ml-2">To</h1>
+                    <input
+                      value={BR3_OUT}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setBR3_OUT(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
 
-            {/* PLANNED DOWN TIME */}
-            <div class=" gap-2 mb-4 flex py-2 px-3 ">
-              <div className="flex ">
-                <label
-                  for="first_name"
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
-                  Planned DownTime
-                </label>
-                <input
-                value={PD_IN}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setPD_IN(e.target.value);
-                  }}
-                />
-                <h1 className="mt-3 ml-2">To</h1>
-                <input
-                value={PD_OUT}
-                  type="time"
-                  id="first_name"
-                  class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                  onChange={(e) => {
-                    setPD_OUT(e.target.value);
-                  }}
-                />
-              </div>
-            </div>
+                {/* production time 4 */}
+                <div class=" gap-2 mb-6 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label
+                      for="first_name"
+                      class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                    >
+                      Production Time 4
+                    </label>
+                    <input
+                      value={PT4_IN}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setPT4_IN(e.target.value);
+                      }}
+                    />
+                    <h1 className="mt-3 ml-2">To</h1>
+                    <input
+                      value={PT4_OUT}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      required
+                      onChange={(e) => {
+                        setPT4_OUT(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
 
-            <div class=" gap-2 mb-6 flex py-2 px-1 ">
-              <div className="flex ">
-                <h1>
-                  ---------------------------------------------------------------------------------------------
-                </h1>
-              </div>
-            </div>
-            {/*  Planned Production  */}
-            <div class=" gap-2 mb-4 flex py-2 px-3 ">
-              <div className="flex ">
-                <label class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">
-                  Planned Production
-                </label>
-                <input
-                value={PP}
-                  type="text"
-                  defaultValue="0 Hours : 0 Minutes"
-                  class="ml-12 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required
-                  onChange={(e) => {
-                    setPP(e.target.value);
-                  }}
-                />
-                <h1 className="mt-3 text-xs text-red-500 ml-2">
-                  !Ganti Angka 0 Untuk Menentukan Waktu
-                </h1>
-              </div>
-            </div>
 
-            {/* Planned Downtime */}
-            <div class=" gap-2 mb-4 flex py-2 px-3 ">
-              <div className="flex ">
-                <label class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">
-                  Planned Downtime
-                </label>
-                <input
-                  type="text"
-                  defaultValue="0 Hours : 0 Minutes"
-                  class="ml-14 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required
-                  onChange={(e) => {
-                    setPD(e.target.value);
-                  }}
-                />
-                <h1 className="mt-3 text-red-500 text-xs ml-2">
-                  !Ganti Angka 0 Untuk Menentukan Waktu
-                </h1>
-              </div>
-            </div>
+                {/* break 4 */}
+                <div class=" gap-2 mb-6 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label
+                      for="first_name"
+                      class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                    >
+                      Break Time 4
+                    </label>
+                    <input
+                      value={BR4_IN}
+                      type="time"
+                      id="first_name"
+                      class="ml-11 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      onChange={(e) => {
+                        setBR4_IN(e.target.value);
+                      }}
+                    />
+                    <h1 className="mt-3 ml-2">To</h1>
+                    <input
+                      value={BR4_OUT}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      onChange={(e) => {
+                        setBR4_OUT(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
 
-            {/* change model */}
-            <div class=" gap-2 mb-4 flex py-2 px-3 ">
-              <div className="flex ">
-                <label
-                  for="first_name"
-                  class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
-                >
-                  Change Model Alocation
-                </label>
-                <input
-                  type="text"
-                  id="cma"
-                  class="ml-5 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  defaultValue="0 Hours : 0 Minutes"
-                  required
-                  onChange={(e) => {
-                    setCMA(e.target.value);
-                  }}
-                />
-                <h1 className="mt-3 text-red-500 text-xs ml-2">
-                  !Ganti Angka 0 Untuk Menentukan Waktu{" "}
-                </h1>
-              </div>
-            </div>
+               
 
-            {/* submit */}
-            <div class="flex justify-end">
-              <button
-                type="submit"
-                class=" mb-2 items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-auto"
-                onClick={submit}
-                required
-              >
-                Submit
-              </button>
-            </div>
-          </form>
-          </>
-        ) : null}
+                {/* Over Time */}
+                <div class=" gap-2 mb-6 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label
+                      for="first_name"
+                      class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                    >
+                      Over Time Time
+                    </label>
+                    <input
+                      value={OT_IN}
+                      type="time"
+                      id="first_name"
+                      class="ml-7 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      
+                      onChange={(e) => {
+                        setOT_IN(e.target.value);
+                      }}
+                    />
+                    <h1 className="mt-3 ml-2">To</h1>
+                    <input
+                      value={OT_OUT}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      
+                      onChange={(e) => {
+                        setOT_OUT(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* PLANNED DOWN TIME */}
+                <div class=" gap-2 mb-4 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label
+                      for="first_name"
+                      class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                    >
+                      Planned DownTime
+                    </label>
+                    <input
+                      value={PD_IN}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      
+                      onChange={(e) => {
+                        setPD_IN(e.target.value);
+                      }}
+                    />
+                    <h1 className="mt-3 ml-2">To</h1>
+                    <input
+                      value={PD_OUT}
+                      type="time"
+                      id="first_name"
+                      class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="John"
+                      
+                      onChange={(e) => {
+                        setPD_OUT(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div class=" gap-2 mb-6 flex py-2 px-1 ">
+                  <div className="flex ">
+                    <h1>
+                      ---------------------------------------------------------------------------------------------
+                    </h1>
+                  </div>
+                </div>
+                {/*  Planned Production  */}
+                <div class=" gap-2 mb-4 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">
+                      Planned Production
+                    </label>
+                    <input
+                      value={PP}
+                      type="text"
+                      defaultValue="0 Hours : 0 Minutes"
+                      class="ml-12 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      
+                      onChange={(e) => {
+                        setPP(e.target.value);
+                      }}
+                    />
+                    <h1 className="mt-3 text-xs text-red-500 ml-2">
+                      !Ganti Angka 0 Untuk Menentukan Waktu
+                    </h1>
+                  </div>
+                </div>
+
+                {/* Planned Downtime */}
+                <div class=" gap-2 mb-4 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">
+                      Planned Downtime
+                    </label>
+                    <input
+                      type="text"
+                      defaultValue="0 Hours : 0 Minutes"
+                      class="ml-14 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      
+                      onChange={(e) => {
+                        setPD(e.target.value);
+                      }}
+                    />
+                    <h1 className="mt-3 text-red-500 text-xs ml-2">
+                      !Ganti Angka 0 Untuk Menentukan Waktu
+                    </h1>
+                  </div>
+                </div>
+
+                {/* change model */}
+                <div class=" gap-2 mb-4 flex py-2 px-3 ">
+                  <div className="flex ">
+                    <label
+                      for="first_name"
+                      class=" mt-3  block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                    >
+                      Change Model Alocation
+                    </label>
+                    <input
+                      type="text"
+                      id="cma"
+                      class="ml-5 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      defaultValue="0 Hours : 0 Minutes"
+                      
+                      onChange={(e) => {
+                        setCMA(e.target.value);
+                      }}
+                    />
+                    <h1 className="mt-3 text-red-500 text-xs ml-2">
+                      !Ganti Angka 0 Untuk Menentukan Waktu{" "}
+                    </h1>
+                  </div>
+                </div>
+
+                {/* submit */}
+                <div class="flex justify-end">
+                  <button
+                    type="submit"
+                    class=" mb-2 items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-auto"
+                    onClick={submit}
+                    
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </>
+          ) : null}
 
           <ol class="relative border-l border-gray-200 ml-7 dark:border-gray-700">
             <li class="mb-10 ml-6">
@@ -1440,7 +1458,7 @@ useEffect(() => {
                           <td className="font-bold text-xs">
                             Change Model Allocation :
                           </td>
-                          <td className="text-sm">{data.PP} </td>
+                          <td className="text-sm">{data.CMA} </td>
                         </tr>
 
                         <tr>
@@ -1454,10 +1472,9 @@ useEffect(() => {
                           <td className="font-bold text-xs">
                             Planned Downtime :
                           </td>
-                          <td className="text-sm">{data.PP} </td>
+                          <td className="text-sm">{data.PD} </td>
                         </tr>
                       </tbody>
-                      
                     </table>
                   ) : (
                     <p>Loading...</p>

@@ -13,6 +13,8 @@ import ReturnPurchasing from "./components/Purchasing/ReturnPurchasing.jsx"
 import RequestQualityA from "./components/QualityA/RequestQualityA.jsx"
 import ValidationQualityA from "./components/QualityA/ValidationQualityA.jsx"
 
+import RequestQualityC from "./components/QualityC/RequestQualityC.jsx"
+import ValidationQualityC from "./components/QualityC/ValidationQualityC.jsx"
 
 import AndonLine1 from "./components/Line1/AndonLine1.jsx";
 import SmtTop from "./components/Line1/SmtTop.jsx";
@@ -21,7 +23,7 @@ import SmtBE from "./components/Line1/SmtBE.jsx";
 import Inputsche from "./components/Leader/Inputsche.jsx"
 import ScheProd from "./components/Leader/ScheProd.jsx"
 
-import RequestNetwork from "./components/Network/RequestNetwork.jsx"
+import RequestGeneral from "./components/General/RequestGeneral.jsx"
 
 
 import RequestMaintenance from "./components/Maintenance/RequestMaintenance.jsx"
@@ -53,9 +55,10 @@ function App() {
         <Route path="RequestQA" element={<RequestQualityA/>}/>
         <Route path="ValidationQA" element={<ValidationQualityA/>}/>
 
-
+        <Route path="RequestQC" element={<RequestQualityC/>}/>
+        <Route path="ValidationQC" element={<ValidationQualityC/>}/>
                 
-        <Route path="RequestNetwork" element={<RequestNetwork/>}/>
+        <Route path="RequestGeneral" element={<RequestGeneral/>}/>
         <Route path="RequestMaintenance" element={<RequestMaintenance/>}/>
         <Route path="ReturnMaintenance" element={<ReturnMaintenance/>}/>
       

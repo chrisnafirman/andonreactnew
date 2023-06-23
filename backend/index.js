@@ -59,12 +59,13 @@ app.post("/api/post/validationqa", upload.single("validation"), (req, res) => {
 
 
 app.post("/api/post/validationqc", upload.single("validation"), (req, res) => {
-  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation } = req.body;
+  const { NamaPIC, NpkPIC, Area, Line, Station } = req.body;
   const Validation = req.file.path.replace(/\\/g, "/").substring(7); // mengubah backslash menjadi slash dan menghapus "./public"
 
   db.query(
-    "INSERT INTO validationqc(NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, validation) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Validation],
+    
+    "INSERT INTO validationqc(NamaPIC, NpkPIC, Area, Line, Station, validation) VALUES (?, ?, ?, ?, ?, ?)",
+    [NamaPIC, NpkPIC, Area,Line,Station, Validation],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -74,6 +75,7 @@ app.post("/api/post/validationqc", upload.single("validation"), (req, res) => {
     }
   );
 });
+
 
 
 // Define a global variable to store the previous status
@@ -212,11 +214,11 @@ app.post("/api/post/ReturnPURCHASING", (req, res) => {
 
 ///post To QA
 app.post("/api/post/QA", (req, res) => {
-  const { NamaPIC, NpkPIC,  Area, Line, Station, Kerusakan } = req.body;
+  const { NamaPIC, Area, Line, Station, Kerusakan } = req.body;
   
   db.query(
-    "INSERT INTO qualitya (NamaPIC, NpkPIC,  Area, Line, Station, Kerusakan) VALUES (?, ?, ?, ?, ?, ?)",
-    [NamaPIC, NpkPIC, Area, Line, Station, Kerusakan],
+    "INSERT INTO qualitya (Nama, Area, Line, Station, Problem) VALUES (?, ?, ?, ?, ?)",
+    [ NamaPIC, Area, Line, Station, Kerusakan],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -231,11 +233,11 @@ app.post("/api/post/QA", (req, res) => {
 
 ///post To QC
 app.post("/api/post/QC", (req, res) => {
-  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan } = req.body;
+  const { NamaPIC, Area, Line, Station, Kerusakan } = req.body;
   
   db.query(
-    "INSERT INTO qualityc (NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan],
+    "INSERT INTO qualityc (Nama, Area, Line, Station, Problem) VALUES (?, ?, ?, ?, ?)",
+    [ NamaPIC, Area, Line, Station, Kerusakan],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -305,14 +307,14 @@ app.put("/api/put/RealProductionTime", (req, res) => {
 
 
 // SMT LINE 1
-///post To network
+///post To general
 
-app.post("/api/post/network", (req, res) => {
-  const { NamaPIC, Line, Kerusakan } = req.body;
+app.post("/api/post/general", (req, res) => {
+  const { NamaPIC, Line, Station, Kerusakan } = req.body;
   
   db.query(
-    "INSERT INTO network (Nama, Line, Problem) VALUES (?, ?, ?)",
-    [NamaPIC, Line, Kerusakan ],
+    "INSERT INTO general (Nama, Line, Station, Problem) VALUES (?, ?, ?, ?)",
+    [NamaPIC, Line, Station, Kerusakan ],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -324,7 +326,7 @@ app.post("/api/post/network", (req, res) => {
 });
 
 
-///post To network
+///post To Maintenance
 
 app.post("/api/post/Maintenance", (req, res) => {
   const { NamaPIC, Area, Line, Station, Kerusakan } = req.body;
@@ -445,7 +447,7 @@ app.get("/api/get/ReturnPURCHASING", (req, res) => {
 
 
 app.get("/api/get/Network", (req, res) => {
-  const sqlSelect = "SELECT * FROM network";
+  const sqlSelect = "SELECT * FROM general";
   db.query(sqlSelect, (err, results) => {
     res.send(results);
   });

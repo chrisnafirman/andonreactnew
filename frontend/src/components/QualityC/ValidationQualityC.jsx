@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 
@@ -13,22 +11,19 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const ReturnMaintenance = () => {
+const ReturnQA = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
-  const [showDatePicker, setShowDatePicker] = useState(true);
-  const [currentTime, setCurrentTime] = useState(new Date());
+
   const [selectedItem, setSelectedItem] = useState(null);
 
+  const [showDatePicker, setShowDatePicker] = useState(true);
+  const [currentTime, setCurrentTime] = useState(new Date());
+  //
   const [StatusLine, setStatusLine] = useState("");
-
-  // button search
-  function handleToggleDatePicker() {
-    setShowDatePicker(!showDatePicker);
-  }
 
   useEffect(() => {
     const ref3 = firebase.database().ref("StatusLine/SMTLine1");
@@ -38,31 +33,6 @@ const ReturnMaintenance = () => {
     });
     return () => {};
   }, []);
-
-  useEffect(() => {
-    // set showDatePicker ke false ketika halaman dimuat
-    setShowDatePicker(false);
-  }, []);
-
-  // waktu navbar
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const formattedTime = `${currentTime.getDate()}/${
-    currentTime.getMonth() + 1
-  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
-
-  //  fungsi export to pdf
-  const exportToPDF = () => {
-    const doc = new jsPDF();
-    const table = document.getElementById("data-table");
-    doc.autoTable({ html: table });
-    doc.save(`Report Repair Status.pdf`);
-  };
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
@@ -76,15 +46,37 @@ const ReturnMaintenance = () => {
     return () => clearInterval(interval);
   }
 
+  // waktu navbar
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formattedTime = `${currentTime.getDate()}/${
+    currentTime.getMonth() + 1
+  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+
   updateTime();
 
+  // button search
+  function handleToggleDatePicker() {
+    setShowDatePicker(!showDatePicker);
+  }
+
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/get/ReturnMaintenance")
+    // set showDatePicker ke false ketika halaman dimuat
+    setShowDatePicker(false);
+  }, []);
+
+  useEffect(() => {
+    fetch("http://192.168.101.236:3001/api/get/validationqc")
       .then((response) => response.json())
       .then((json) => {
-        // mengubah properti timestamp menjadi tanggal dan Date
+        // mengubah properti timestamp menjadi tanggal dan waktu
         json.forEach((item) => {
-          const date = new Date(item.Date);
+          const date = new Date(item.waktu);
           const day = date.getDate();
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
@@ -95,9 +87,9 @@ const ReturnMaintenance = () => {
             .padStart(2, "0")}-${year} / ${hours
             .toString()
             .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
-          item.Date = formattedDate;
+          item.waktu = formattedDate;
         });
-        json.sort((a, b) => Date.parse(a.Date) - Date.parse(b.Date));
+        json.sort((a, b) => Date.parse(a.waktu) - Date.parse(b.waktu));
         json.reverse();
         setData(json);
         setFilteredData(json);
@@ -109,22 +101,22 @@ const ReturnMaintenance = () => {
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
     fetch(
-      `http://192.168.101.236:3001/api/get/ReturnMaintenance?date=${selectedDate}`
+      `http://192.168.101.236:3001/api/get/validationqc?date=${selectedDate}`
     )
       .then((response) => response.json())
       .then((json) => {
-        // mengubah properti Date menjadi tanggal saja
+        // mengubah properti waktu menjadi tanggal saja
         json.forEach((item) => {
-          const date = new Date(item.Date);
+          const date = new Date(item.waktu);
           const day = date.getDate();
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
           const formattedDate = `${day.toString().padStart(2, "0")}-${month
             .toString()
             .padStart(2, "0")}-${year}`;
-          item.Date = formattedDate;
+          item.waktu = formattedDate;
         });
-        json.sort((a, b) => Date.parse(a.Date) - Date.parse(b.Date));
+        json.sort((a, b) => Date.parse(a.waktu) - Date.parse(b.waktu));
         json.reverse();
         setFilteredData(json);
       });
@@ -143,17 +135,17 @@ const ReturnMaintenance = () => {
       .toString()
       .padStart(2, "0")}-${date.getFullYear()}`;
     const filteredData = data.filter((item) =>
-      item.Date.includes(formattedDate)
+      item.waktu.includes(formattedDate)
     );
-    filteredData.sort((a, b) => Date.parse(b.Date) - Date.parse(a.Date));
+    filteredData.sort((a, b) => Date.parse(b.waktu) - Date.parse(a.waktu));
     setFilteredData(filteredData);
   };
 
   const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/MTC.jpg)`,
-    backgroundSize: "1400px",
-    backgroundPosition: "1400px",
-    height: "640px", // Ubah tinggi (height) sesuai kebutuhan Anda
+    backgroundImage: `url(${process.env.PUBLIC_URL}/QC.jpg)`,
+    backgroundSize: "1300px",
+    backgroundPosition: "1px",
+    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
 
   return (
@@ -180,7 +172,7 @@ const ReturnMaintenance = () => {
           <marquee behavior="scroll" direction="right">
             <div class="flex items-center">
               <h1 class="text-xl font-bold tracking-tight text-gray-900">
-                | Laporan Return Maintenance |
+                | Quality Control |
               </h1>
               <h1 class="text-xl font-bold tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
@@ -202,8 +194,6 @@ const ReturnMaintenance = () => {
           </marquee>
         </div>
       </header>
-
-    
 
       <main>
         <section
@@ -259,18 +249,10 @@ const ReturnMaintenance = () => {
               </button>
             </div>
             {/* <!-- Table --> */}
-             <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-2xl border border-gray-200">
-              {/* <button className="flex" onClick={exportToPDF}>
-                Export To:
-                <img
-                  className="w-[25px]"
-                  src={process.env.PUBLIC_URL + "/pdf.png"}
-                  alt=""
-                />
-              </button> */}
+            <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-2xl border border-gray-200">
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Return For Maintenance
+                  Validation Quality Control
                 </div>
               </header>
 
@@ -284,17 +266,17 @@ const ReturnMaintenance = () => {
                       <th className="p-1 w-40">
                         <div className="font-semibold text-left">Nama</div>
                       </th>
-                      <th className="p-1  w-32">
+                      <th className="p-1 w-32">
                         <div className="font-semibold text-left">Line</div>
                       </th>
-                      <th className="p-1  w-32">
-                        <div className="font-semibold text-left">Area</div>
+                      <th className="p-1 w-24">
+                        <div className="font-semibold text-center">AREA</div>
                       </th>
-                      <th className="p-1  w-32">
-                        <div className="font-semibold text-left">Station</div>
+                      <th className="p-1 w-28">
+                        <div className="font-semibold text-center">Station</div>
                       </th>
                       <th className="p-1 w-10">
-                        <div className="font-semibold text-center">Details</div>
+                        <div className="font-semibold text-center">File</div>
                       </th>
                       <th className="p-1 w-26">
                         <div className="font-semibold text-center">Date</div>
@@ -303,13 +285,10 @@ const ReturnMaintenance = () => {
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
                     {filteredData.map((item, index) => (
-                      <tr
-                        key={item.id}
-                        className={index === 0 ? "bg-green-400" : ""}
-                      >
+                      <tr key={item.id}>
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
-                            {item.Nama}
+                            {item.NamaPIC}
                           </div>
                         </td>
                         <td className="p-2">
@@ -317,7 +296,7 @@ const ReturnMaintenance = () => {
                             {item.Line}
                           </div>
                         </td>
-                        <td className="p-2">
+                        <td className="p-2 ">
                           <div className="font-medium text-gray-800">
                             {item.Area}
                           </div>
@@ -345,13 +324,13 @@ const ReturnMaintenance = () => {
                                 clipRule="evenodd"
                               />
                             </svg>
-                            <span>DETAIL</span>
+                            <span>FILE</span>
                           </button>
                         </td>
 
                         {selectedItem && (
                           <>
-                              <div className="fixed z-10 inset-0 overflow-y-auto">
+                            <div className="fixed z-10 inset-0 overflow-y-auto">
                               <div class="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
                                 <div
@@ -364,10 +343,10 @@ const ReturnMaintenance = () => {
                                     <div className="sm:flex sm:items-start">
                                       <div className="w-full max-w-lg">
                                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                          <span>Retrun BY</span>
+                                          <span>Validation By</span>
                                         </div>
                                         <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full px-1">
+                                          <div class="w-full  px-3 mb-6 md:mb-0">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-first-name"
@@ -379,33 +358,33 @@ const ReturnMaintenance = () => {
                                               type="text"
                                             >
                                               {" "}
-                                              {selectedItem.Nama}{" "}
+                                              {selectedItem.NamaPIC}{" "}
                                             </div>
                                           </div>
                                         </div>
 
-                                        <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Line
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Line}{" "}
-                                            </div>
-                                          </div>
+                                        <div class="flex flex-wrap -mx-3 mb-6">
                                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-city"
                                             >
                                               Area
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.Area}{" "}
+                                            </div>
+                                          </div>
+                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                              for="grid-city"
+                                            >
+                                              Line
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -431,21 +410,24 @@ const ReturnMaintenance = () => {
                                             </div>
                                           </div>
                                         </div>
-                              
                                         <div class="flex flex-wrap -mx-3 ">
                                           <div class="w-full px-1">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                                               for="grid-password"
                                             >
-                                              Problem
+                                              Validation
                                             </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border text-red-600  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Problem}{" "}
+                                            <div class="flex items-center">
+                                              <a
+                                                href={`http://192.168.101.236:3001/${selectedItem.Validation}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="text-blue-600 hover:text-blue-800"
+                                              >
+                                                <i class="far fa-file-pdf mr-2"></i>
+                                                View PDF
+                                              </a>
                                             </div>
                                           </div>
                                         </div>
@@ -466,7 +448,7 @@ const ReturnMaintenance = () => {
                               </div>
                             </div>
 
-                            
+                            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
                           </>
                         )}
 
@@ -490,7 +472,7 @@ const ReturnMaintenance = () => {
 
                         <td className="p-2">
                           <div className="text-center h-6 text-black...">
-                            {item.Date} WIB
+                            {item.waktu}
                           </div>
                         </td>
                       </tr>
@@ -506,4 +488,4 @@ const ReturnMaintenance = () => {
   );
 };
 
-export default ReturnMaintenance;
+export default ReturnQA;

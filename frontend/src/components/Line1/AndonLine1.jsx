@@ -12,8 +12,6 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const Andonline1 = () => {
-
-
   // Tindakan / Kehadiran
   const [NetworkPressed, setNetworkPressed] = useState(false);
   const timeoutRefNetwork = useRef(null);
@@ -47,7 +45,7 @@ const Andonline1 = () => {
   // STATION DESTECKER
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT TOP");
-  const [Destacker, setDestecker] = useState("Destacker");
+  const [Station, setStation] = useState("");
 
   // CMA
   const [CMATime, setCMATime] = useState({ hours: 0, minutes: 0, seconds: 0 });
@@ -58,7 +56,7 @@ const Andonline1 = () => {
   const [isOpenOthers, setIsOpenOthers] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [isOpenOperator, setIsOpenOperator] = useState(false);
-  const [isOpenNetwork, setIsOpenNetwork] = useState(false);
+  const [isOpenGeneral, setIsOpenGeneral] = useState(false);
 
   //  SCHEDULE
   const [SHIFT, setSHIFT] = useState("");
@@ -103,7 +101,6 @@ const Andonline1 = () => {
   const [overchange, setStatusOverchange] = useState("");
   // ------------------------
 
-
   //BACKGROUND / WARNA KOTAK
   const [backgroundColor, setBackgroundColor] = useState("");
   const [backgroundColorNetwork, setBackgroundColorNetwork] = useState("");
@@ -113,118 +110,27 @@ const Andonline1 = () => {
   const [backgroundColorShorcomp, setBackgroundColorShorcomp] = useState("");
   const [backgroundColorShorbox, setBackgroundColorShorbox] = useState("");
   const [backgroundColorOvertrial, setBackgroundColorOvertrial] = useState("");
-  const [backgroundColorOverchange, setBackgroundColorOverchange] =useState("");
+  const [backgroundColorOverchange, setBackgroundColorOverchange] =
+    useState("");
   // ------------------
 
   // REAL PRODUCTION TIME
 
- const [RealPT1,setRealPT1] = useState("");
- const [RealPT2,setRealPT2] = useState("");
- const [RealPT3,setRealPT3] = useState("");
- const [RealPT4,setRealPT4] = useState("");
- const [RealPD,setRealPD] = useState("");
- const [RealOT,setRealOT] = useState("");
- const [Total, setTotal] = useState("");
- 
-
+  const [RealPT1, setRealPT1] = useState("");
+  const [RealPT2, setRealPT2] = useState("");
+  const [RealPT3, setRealPT3] = useState("");
+  const [RealPT4, setRealPT4] = useState("");
+  const [RealPD, setRealPD] = useState("");
+  const [RealOT, setRealOT] = useState("");
+  const [Total, setTotal] = useState("");
 
   // ====
-
-
 
   /// Purchasing
   const namaList = ["CHRISNA FIRMAN"];
   const npkList = ["0301"];
 
-  
 
-  const calculateTotalTime = () => {
-    let totalJam = 0;
-    let totalMenit = 0;
-  
-    // Mengambil nilai dari state
-    const waktuPT1 = RealPT1.split(" ");
-    const waktuPT2 = RealPT2.split(" ");
-    const waktuPT3 = RealPT3.split(" ");
-    const waktuPT4 = RealPT4.split(" ");
-    const waktuPD = RealPD.split(" ");
-    const waktuOT = RealOT.split(" ");
-  
-    // Menambahkan waktu PT1
-    if (waktuPT1[0] !== "waiting...") {
-      if (waktuPT1.length === 4) {
-        totalJam += parseInt(waktuPT1[0]);
-        totalMenit += parseInt(waktuPT1[2]);
-      } else if (waktuPT1.length === 2) {
-        totalMenit += parseInt(waktuPT1[0]);
-      }
-    }
-  
-    // Menambahkan waktu PT2
-    if (waktuPT2[0] !== "waiting...") {
-      if (waktuPT2.length === 4) {
-        totalJam += parseInt(waktuPT2[0]);
-        totalMenit += parseInt(waktuPT2[2]);
-      } else if (waktuPT2.length === 2) {
-        totalMenit += parseInt(waktuPT2[0]);
-      }
-    }
-  
-    // Menambahkan waktu PT3
-    if (waktuPT3[0] !== "waiting...") {
-      if (waktuPT3.length === 4) {
-        totalJam += parseInt(waktuPT3[0]);
-        totalMenit += parseInt(waktuPT3[2]);
-      } else if (waktuPT3.length === 2) {
-        totalMenit += parseInt(waktuPT3[0]);
-      }
-    }
-  
-    // Menambahkan waktu PT4
-    if (waktuPT4[0] !== "waiting...") {
-      if (waktuPT4.length === 4) {
-        totalJam += parseInt(waktuPT4[0]);
-        totalMenit += parseInt(waktuPT4[2]);
-      } else if (waktuPT4.length === 2) {
-        totalMenit += parseInt(waktuPT4[0]);
-      }
-    }
-  
-    // Menambahkan waktu PD jika bukan "waiting..."
-    if (waktuPD[0] !== "waiting...") {
-      if (waktuPD.length === 4) {
-        totalJam += parseInt(waktuPD[0]);
-        totalMenit += parseInt(waktuPD[2]);
-      } else if (waktuPD.length === 2) {
-        totalMenit += parseInt(waktuPD[0]);
-      }
-    }
-  
-    // Menambahkan waktu OT jika bukan "waiting..."
-    if (waktuOT[0] !== "waiting...") {
-      if (waktuOT.length === 4) {
-        totalJam += parseInt(waktuOT[0]);
-        totalMenit += parseInt(waktuOT[2]);
-      } else if (waktuOT.length === 2) {
-        totalMenit += parseInt(waktuOT[0]);
-      }
-    }
-  
-    // Mengubah menit menjadi jam jika lebih dari 60
-    if (totalMenit >= 60) {
-      const tambahanJam = Math.floor(totalMenit / 60);
-      totalJam += tambahanJam;
-      totalMenit -= tambahanJam * 60;
-    }
-  
-    // Mengatur nilai hasil penjumlahan ke state Total
-    const output = `${totalJam} jam ${totalMenit} menit`;
-    setTotal(output);
-  };
-  
-  useEffect(() => {
-    calculateTotalTime();
-  }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
 
   // FETCHING FIREBASE
 
@@ -333,10 +239,10 @@ const Andonline1 = () => {
           .query({ name: "clipboard-write" })
           .then((permissionStatus) => {
             if (permissionStatus.state === "granted") {
-              const link = "http://10.14.81.43:3003/RequestNetwork";
+              const link = "http://10.14.81.43:3003/RequestGeneral";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [1563609464];
-              const message = `Notification Network SMT LINE 1 Network (TOP) DOWN - Please Click The Link:\n\n ${link}`;
+              const message = `Notification General SMT LINE 1 ${Station} (TOP) Status = DOWN - Please Click The Link:\n\n ${link}`;
 
               chatIds.forEach((chatId) => {
                 fetch(
@@ -402,44 +308,61 @@ const Andonline1 = () => {
       setResultsCMA(data);
     });
 
-    const ref11 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1");
+    const ref11 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1");
     ref11.on("value", (snapshot) => {
       const data = snapshot.val();
       setRealPT1(data);
     });
 
+    const ref12 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2");
+    ref12.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT2(data);
+    });
 
-    
-  const ref12 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2");
-  ref12.on("value", (snapshot) => {
+    const ref13 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3");
+    ref13.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT3(data);
+    });
+
+    const ref14 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4");
+    ref14.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT4(data);
+    });
+
+    const ref15 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/DownTime");
+    ref15.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPD(data);
+    });
+
+    const ref16 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/OverTime");
+    ref16.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealOT(data);
+    });
+
+
+    const ref17 = firebase
+    .database()
+    .ref("/StatusLine/SMTLine1ProductionTime/Total")
+  ref17.on("value", (snapshot) => {
     const data = snapshot.val();
-    setRealPT2(data);
-  });
-
-  const ref13 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3");
-  ref13.on("value", (snapshot) => {
-    const data = snapshot.val();
-    setRealPT3(data);
-  });
-
-
-  const ref14 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4");
-  ref14.on("value", (snapshot) => {
-    const data = snapshot.val();
-    setRealPT4(data);
-  });
-
-  const ref15 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/DownTime");
-  ref15.on("value", (snapshot) => {
-    const data = snapshot.val();
-    setRealPD(data);
-  });
-
-  
-  const ref16 = firebase.database().ref("/StatusLine/SMTLine1ProductionTime/OverTime");
-  ref16.on("value", (snapshot) => {
-    const data = snapshot.val();
-    setRealOT(data);
+    setTotal(data);
   });
 
     return () => {};
@@ -447,38 +370,115 @@ const Andonline1 = () => {
 
   // ---------------------
 
-  // CMA WAKTU / FIREBASE
+
+  // Realtime Production
+  useEffect(() => {
+    const startCountdown = (startTime, endTime, productionTimeKey) => {
+      const targetTime = new Date();
+      const [hours, minutes] = startTime.split(":");
+      targetTime.setHours(parseInt(hours, 10));
+      targetTime.setMinutes(parseInt(minutes, 10));
+      targetTime.setSeconds(0);
+
+      const outTime = new Date();
+      const [outHours, outMinutes] = endTime.split(":");
+      outTime.setHours(parseInt(outHours, 10));
+      outTime.setMinutes(parseInt(outMinutes, 10));
+      outTime.setSeconds(0);
+
+      const interval = setInterval(() => {
+        const currentTime = new Date();
+        let remainingTime = 0;
+
+        if (currentTime >= targetTime && currentTime < outTime) {
+          // Start counting only when the current time is within the range
+          remainingTime = targetTime.getTime() - currentTime.getTime();
+
+          // Start counting from 0 seconds after the target time is reached
+          if (remainingTime <= 0) {
+            remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
+          }
+
+          // Send the countdown value to Firebase
+          firebase
+            .database()
+            .ref(`/StatusLine/SMTLine1ProductionTime/${productionTimeKey}`)
+            .set(formatTime(remainingTime));
+        } else if (currentTime >= outTime) {
+          // Stop the countdown if the current time exceeds the end time
+          clearInterval(interval);
+        }
+      }, 1000); // Update every second
+
+      return interval; // Return the interval ID for cleanup
+    };
+
+    const formatTime = (time) => {
+      const totalSeconds = Math.floor(time / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const remainingMinutes = minutes % 60;
+
+      if (hours >= 1) {
+        if (remainingMinutes >= 1) {
+          return `${hours} jam ${remainingMinutes} menit`;
+        } else {
+          return `${hours} jam`;
+        }
+      } else if (minutes >= 1) {
+        return `${minutes} menit`;
+      } else {
+        return `${totalSeconds} detik`;
+      }
+    };
+
+    let intervals = [];
+
+    const startCountdownForData = (
+      startTimeKey,
+      endTimeKey,
+      productionTimeKey
+    ) => {
+      if (data && data[startTimeKey] && data[endTimeKey]) {
+        const interval = startCountdown(
+          data[startTimeKey],
+          data[endTimeKey],
+          productionTimeKey
+        );
+        intervals.push(interval);
+      }
+    };
+
+    startCountdownForData("PT1_IN", "PT1_OUT", "ProductionTime1");
+    startCountdownForData("PT2_IN", "PT2_OUT", "ProductionTime2");
+    startCountdownForData("PT3_IN", "PT3_OUT", "ProductionTime3");
+    startCountdownForData("PT4_IN", "PT4_OUT", "ProductionTime4");
+    startCountdownForData("PD_IN", "PD_OUT", "DownTime");
+    startCountdownForData("OT_IN", "OT_OUT", "OverTime");
+
+    return () => {
+      intervals.forEach((interval) => {
+        clearInterval(interval);
+      });
+    };
+  }, [data]);
+
+  // Change Model Allocation Function
 
   let CMAInterval;
+
   useEffect(() => {
-    if (CMARunning) {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      CMAInterval = setInterval(() => {
-        setCMATime((prevTime) => {
-          const newSeconds = prevTime.seconds + 1;
-          const newMinutes = prevTime.minutes + Math.floor(newSeconds / 60);
-          const newHours = prevTime.hours + Math.floor(newMinutes / 60);
-          const newTime = {
-            hours: newHours,
-            minutes: newMinutes % 60,
-            seconds: newSeconds % 60,
-          };
-          firebase
-            .database()
-            .ref("StatusLine/SMTLine1CMALastTime")
-            .set(newTime);
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1CMAOnGoing")
-            .set(
-              `${newTime.hours} H ${newTime.minutes} M ${newTime.seconds} S`
-            );
-          return newTime;
-        });
-      }, 1000); // 1 detik = 1000 ms
+    const loadCMARunningStatus = localStorage.getItem("CMARunning");
+    if (loadCMARunningStatus) {
+      setCMARunning(JSON.parse(loadCMARunningStatus));
     }
 
-    // Mengambil waktu terakhir yang dihitung dari Firebase saat halaman dimuat ulang
+    const loadCMATime = localStorage.getItem("CMATime");
+    if (loadCMATime) {
+      setCMATime(JSON.parse(loadCMATime));
+    }
+
+    // Load data dari Firebase saat komponen pertama kali dirender
     firebase
       .database()
       .ref("StatusLine/SMTLine1CMALastTime")
@@ -491,18 +491,29 @@ const Andonline1 = () => {
       });
 
     return () => clearInterval(CMAInterval);
+  }, []);
+
+  useEffect(() => {
+    // Simpan status CMARunning pada local storage setiap kali berubah
+    localStorage.setItem("CMARunning", JSON.stringify(CMARunning));
   }, [CMARunning]);
 
-  // start stop CMA
+  useEffect(() => {
+    // Simpan CMATime pada local storage setiap kali berubah
+    localStorage.setItem("CMATime", JSON.stringify(CMATime));
+  }, [CMATime]);
+
   const startCMA = () => {
     setCMATime({ hours: 0, minutes: 0, seconds: 0 });
     firebase
       .database()
       .ref("/StatusLine/SMTLine1CMAOnGoing")
-      .set("0 H 0 M 0 S");
-    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set(0);
-    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set(0);
-    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
+      .set("0 detik");
+    firebase.database().ref("/StatusLine/SMTLine1CMALastTime").set({
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    });
     setCMARunning(true);
   };
 
@@ -510,7 +521,7 @@ const Andonline1 = () => {
     const data = {
       ResultsCMA: ResultsCMA,
     };
-    fetch(`http://192.168.101.236:3001/api/put/ResultsCMA`, {
+    fetch("http://192.168.101.236:3001/api/put/ResultsCMA", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -520,6 +531,10 @@ const Andonline1 = () => {
       .then((response) => {
         if (response.status === 200) {
           alert("Change Model Telah Selesai Data Sudah Terinput");
+          firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing").set("Waiting...");
+          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set("0");
+          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set("0");
+          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set("0");
           setCMARunning(false);
           window.location.reload();
           event.preventDefault();
@@ -531,6 +546,54 @@ const Andonline1 = () => {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    if (CMARunning) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      CMAInterval = setInterval(() => {
+        setCMATime((prevTime) => {
+          const newSeconds = prevTime.seconds + 1;
+          const newMinutes = prevTime.minutes + Math.floor(newSeconds / 60);
+          const newHours = prevTime.hours + Math.floor(newMinutes / 60);
+          const seconds = newSeconds % 60;
+          const minutes = newMinutes % 60;
+          const hours = newHours;
+
+          const newTime = {
+            hours,
+            minutes,
+            seconds,
+          };
+
+          // Simpan newTime ke Firebase
+          firebase
+            .database()
+            .ref("StatusLine/SMTLine1CMALastTime")
+            .set(newTime);
+
+          let formattedTime = "";
+          if (hours > 0) {
+            formattedTime += `${hours} jam ${minutes} menit`;
+          } else if (minutes > 0) {
+            formattedTime += `${minutes} menit`;
+          } else {
+            formattedTime += `${seconds} detik`;
+          }
+
+          // Simpan formattedTime ke Firebase
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1CMAOnGoing")
+            .set(formattedTime.trim());
+
+          return newTime;
+        });
+      }, 1000); // 1 detik = 1000 ms
+    }
+
+    return () => clearInterval(CMAInterval);
+  }, [CMARunning]);
+  
 
   // ----
 
@@ -767,8 +830,6 @@ const Andonline1 = () => {
 
   // ----
 
-
-
   // Submit
   const submit = () => {
     const data = {
@@ -777,7 +838,7 @@ const Andonline1 = () => {
       MachineName: mesin,
       MachineArea: Area,
       MachineLine: Line,
-      MachineStation: Destacker,
+      MachineStation: Station,
       Kerusakan: Kerusakan,
     };
 
@@ -814,20 +875,21 @@ const Andonline1 = () => {
       });
   };
 
-  // Submit Network
-  const SubmitNetwork = (event) => {
+  // Submit General
+  const SubmitGeneral = (event) => {
     if (!NamaPIC || !Line || !Kerusakan) {
       alert("Harap isi semua kolom!");
       return;
     }
-
+  
     const data = {
       NamaPIC: NamaPIC,
       Line: Line,
+      Station: Station,
       Kerusakan: Kerusakan,
     };
-
-    fetch(`http://192.168.101.236:3001/api/post/network`, {
+  
+    fetch(`http://192.168.101.236:3001/api/post/general`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -836,10 +898,10 @@ const Andonline1 = () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("Permintaan Bantuan Network Segera Diproses");
-          firebase.database().ref("SMTLine1/Network").set("Down");
+          alert("Permintaan Bantuan Segera Diproses");
+          firebase.database().ref(`SMTLine1/${Station}`).set("Down");
           firebase.database().ref("StatusLine/SMTLine1").set("Down");
-          setIsOpenNetwork(false);
+          setIsOpenGeneral(false);
           window.location.reload();
           event.preventDefault();
         } else {
@@ -850,11 +912,9 @@ const Andonline1 = () => {
         console.log(err);
       });
   };
+  
   // ------
 
-
-
-  
   // Tindakan / Kehadiran
 
   const handleNetworkPress = () => {
@@ -874,6 +934,15 @@ const Andonline1 = () => {
   };
 
   // ------
+
+  const handleCall = () => {
+    window.location.href = "https://api.whatsapp.com/send?phone=6281380996094";
+  };
+
+  const handleCall2 = () => {
+    window.location.href = "https://api.whatsapp.com/send?phone=6281929749600";
+  };
+
 
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/S.jpg)`,
@@ -938,30 +1007,29 @@ const Andonline1 = () => {
         <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
           <li class="w-60 sm:w-36 lg:w-32">
             <a
-              href="#"
+              href="/Andonline1"
               class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white"
               aria-current="page"
             >
-              SMT LINE 1
+              SMT Line 1
             </a>
           </li>
           <li class="w-60 sm:w-36 lg:w-32">
             <a
               href="Inputsche"
-              class="inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="inline-block  w-full p-1.5 text-gray-900 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
             >
-              SMT LINE 2
+              Schedule Production
             </a>
           </li>
           <button onClick={() => setIsOpen2(true)} class="w-60 sm:w-36 lg:w-32">
-            <a
-              href="#"
+            <span
               class="inline-block w-full  p-4 text-orange-700  bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
             >
               <header className="animate-bounce">
                 <div>ISA</div>
               </header>
-            </a>
+            </span>
           </button>
         </ul>
 
@@ -1067,9 +1135,12 @@ const Andonline1 = () => {
                     style={{ backgroundColor: backgroundColorNetwork }}
                     value={network}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
-                    onClick={
-                      network === "Go" ? () => setIsOpenNetwork(true) : null
-                    }
+                    onClick={() => {
+                      setStation("Network");
+                      if (network === "Go") {
+                        setIsOpenGeneral(true);
+                      }
+                    }}
                     onMouseDown={handleNetworkPress}
                     onMouseUp={handleNetworkRelease}
                     onMouseLeave={handleNetworkRelease}
@@ -1114,7 +1185,7 @@ const Andonline1 = () => {
                   <div
                     // style={{ backgroundColor: backgroundColor }}
                     value={status}
-                    class="w-full max-w-sm  bg-neutral-500 shadow-lg rounded-full "
+                    class="w-full max-w-sm  bg-lime-900 shadow-lg rounded-full "
                   >
                     <header class="px-5 py-4  ">
                       <div class="font-semibold text-center  text-white">
@@ -1408,12 +1479,14 @@ const Andonline1 = () => {
       <td class="">
         {isOpen2 ? (
           <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
+             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute bg-gray-500 opacity-75"></div>
+                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
                 </div>
+
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+
                 <div
                   className="inline-block  align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full"
                   role="dialog"
@@ -1446,57 +1519,55 @@ const Andonline1 = () => {
                     <div className="overflow-y-auto max-h-96 w-[700px]">
                       {data ? (
                         <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
-                           <h3 className="text-lg font-bold mb-2">
-                        Production Time
-                      </h3>
+                          <h3 className="text-lg font-bold mb-2">
+                            Production Time
+                          </h3>
                           <table>
-                          <tr>
+                            <tr>
                               <td className="font-bold">Production time 1:</td>
-                              <span className="px-4 text-lime-800" >
-                               {RealPT1}
+                              <span className="px-4 text-lime-800">
+                                {RealPT1}
                               </span>
                             </tr>
                             <tr>
                               <td className="font-bold">Production time 2:</td>
                               <span className="px-4 text-lime-800">
-                              {RealPT2}
+                                {RealPT2}
                               </span>
                             </tr>
-                          
+
                             <tr>
                               <td className="font-bold">Planned DT:</td>
                               <span className="px-4 text-lime-800">
-                              {RealPD}
+                                {RealPD}
                               </span>
                             </tr>
                             <tr>
                               <td className="font-bold">Production time 3:</td>
                               <span className="px-4 text-lime-800">
-                              {RealPT3}
+                                {RealPT3}
                               </span>
                             </tr>
-                           
+
                             <tr>
                               <td className="font-bold">Production time 4:</td>
                               <span className="px-4 text-lime-800">
-                              {RealPT4}
+                                {RealPT4}
                               </span>
-                       
-                          
                             </tr>
                             <tr>
                               <td className="font-bold">Over Time:</td>
                               <span className="px-4 text-lime-800">
-                              {RealOT}
+                                {RealOT}
                               </span>
                             </tr>
                           </table>
                           <div className="flex mt-2">
-                              <td className="font-bold">Total:</td>
-                              <span className="ml-10 w-44 text-center text-white rounded-md bg-lime-700" >
+                            <td className="font-bold">Total:</td>
+                            <span className="ml-10 w-44 text-center text-white rounded-md bg-lime-700">
                               {Total}
-                              </span>
-                            </div>
+                            </span>
+                          </div>
                           <div className="mt-2">
                             <p className="font-bold text-sm">
                               Change Model Allocation:
@@ -1623,11 +1694,25 @@ const Andonline1 = () => {
                     <div className="bg-white px-4 py-6 sm:p-6 ml-3 rounded-lg shadow-md">
                       <h3 className="text-lg font-bold mb-1">Facturing</h3>
                       <div className="flex flex-col justify-between">
-                        <div>
-                          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            CALL LEADER
-                          </button>
-                        </div>
+                        {data.SHIFT == 1 ? (
+                          <div>
+                            <button
+                              onClick={handleCall}
+                              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            >
+                              CALL LEADER
+                            </button>
+                          </div>
+                        ) : (
+                          <div>
+                            <button
+                              onClick={handleCall2}
+                              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            >
+                              CALL LEADER 
+                            </button>
+                          </div>
+                        )}
                         <div className="pt-2">
                           <button
                             onClick={startCMA}
@@ -1789,7 +1874,7 @@ const Andonline1 = () => {
       </td>
 
       <td>
-        {isOpenNetwork ? (
+        {isOpenGeneral ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -1823,7 +1908,7 @@ const Andonline1 = () => {
                             ></path>
                           </svg>
                           <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-normal text-gray-500 dark:text-gray-400">
-                            Apakah Anda Yakin Akan Meminta Bantuan Team Network?
+                            Apakah Anda Yakin Akan Meminta Bantuan Team {Station}?
                           </h3>
                           <div class="flex flex-wrap -mx-3 ">
                             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -1882,7 +1967,7 @@ const Andonline1 = () => {
                             <button
                               data-modal-hide="popup-modal"
                               type="button"
-                              onClick={SubmitNetwork}
+                              onClick={SubmitGeneral}
                               class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             >
                               Yes, I'm sure
@@ -1890,7 +1975,7 @@ const Andonline1 = () => {
                             <button
                               data-modal-hide="popup-modal"
                               type="button"
-                              onClick={() => setIsOpenNetwork(false)}
+                              onClick={() => setIsOpenGeneral(false)}
                               class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                             >
                               No, cancel

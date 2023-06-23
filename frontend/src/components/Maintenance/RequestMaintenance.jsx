@@ -4,7 +4,6 @@ import autoTable from "jspdf-autotable";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
   databaseURL:
@@ -23,7 +22,7 @@ const RepairReport = () => {
   const [showDatePicker, setShowDatePicker] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState(null);
-  
+
   const [StatusLine, setStatusLine] = useState("");
 
   // button search
@@ -43,8 +42,7 @@ const RepairReport = () => {
       setStatusLine(data);
     });
     return () => {};
-   }, []);
-
+  }, []);
 
   // waktu navbar
   useEffect(() => {
@@ -187,17 +185,17 @@ const RepairReport = () => {
                 | Request Maintenance |
               </h1>
               <h1 class="text-xl font-bold tracking-tight ml-4">
-                    <span class="text-black">SMT LINE 1:</span>
-                    <span
-                      class="ml-4"
-                      style={{
-                        color: StatusLine === "Running" ? "green" : "red",
-                      }}
-                    >
-                      {StatusLine}
-                    </span>
-                    <span className="ml-4">|</span>
-                  </h1>
+                <span class="text-black">SMT LINE 1:</span>
+                <span
+                  class="ml-4"
+                  style={{
+                    color: StatusLine === "Running" ? "green" : "red",
+                  }}
+                >
+                  {StatusLine}
+                </span>
+                <span className="ml-4">|</span>
+              </h1>
 
               <h1 class="text-xl font-bold tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
@@ -324,7 +322,7 @@ const RepairReport = () => {
               </button>
             </div>
             {/* <!-- Table --> */}
-             <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-2xl border border-gray-200">
+            <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-2xl border border-gray-200">
               {/* <button className="flex" onClick={exportToPDF}>
                 Export To:
                 <img
@@ -417,22 +415,27 @@ const RepairReport = () => {
                         {selectedItem && (
                           <>
                             <div className="fixed z-10 inset-0 overflow-y-auto">
-                            <div class="flex items-end justify-center min-h-screen bg-slate-400 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-  <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-  <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                              <div class="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                                <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                                <div
+                                  class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                                  role="dialog"
+                                  aria-modal="true"
+                                  aria-labelledby="modal-headline"
+                                >
                                   <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                                     <div className="sm:flex sm:items-start">
                                       <div className="w-full max-w-lg">
                                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                          <span>PROBLEM</span>
+                                          <span>Request BY</span>
                                         </div>
                                         <div class="flex flex-wrap -mx-3 ">
-                                        <div class="w-full px-1">
+                                          <div class="w-full px-1">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-first-name"
                                             >
-                                              Nama PIC
+                                              Nama PIC Operator
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -491,7 +494,7 @@ const RepairReport = () => {
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="flex flex-wrap -mx-3 mb-6"></div>
+                                    
                                         <div class="flex flex-wrap -mx-3 ">
                                           <div class="w-full px-1">
                                             <label
@@ -525,8 +528,6 @@ const RepairReport = () => {
                                 </div>
                               </div>
                             </div>
-
-                      
                           </>
                         )}
 

@@ -53,22 +53,16 @@ const SmtTop = () => {
   const [Label, setLabel] = useState("Label");
 
   // POPUP
-  const [isOpenDestacker, setIsOpenDestacker] = useState(false);
-  const [QualityADestacker, setQualityADestacker] = useState(false);
-  const [QualityCDestacker, setQualityCDestacker] = useState(false);
-  const [QualityDestackerOption, setQualityDestackerOption] = useState(false);
-
-
-  const [isOpenLabel, setIsOpenLabel] = useState(false);
-  const [QualityALabel, setQualityALabel] = useState(false);
-  const [QualityCLabel, setQualityCLabel] = useState(false);
-  const [QualityLabelOption, setQualityLabelOption] = useState(false);
+  const [isOpenMaintenance, setIsOpenMaintenance] = useState(false);
+  const [QualityA, setQualityA] = useState(false);
+  const [QualityC, setQualityC] = useState(false);
+  const [QualityOption, setQualityOption] = useState(false);
 
 
   const [isOpen2, setIsOpen2] = useState(false);
   const [isOpenValQA, setIsOpenValQA] = useState(false);
-  const [isOpenReturnDestacker, setIsOpenReturnDestacker] = useState(false);
-  const [isOpenReturnLabel, setIsOpenReturnLabel] = useState(false);
+  const [isOpenValQC, setIsOpenValQC] = useState(false);
+  const [isOpenReturnMaintenance, setIsOpenReturnMaintenance] = useState(false);
   const [isOpenOperator, setIsOpenOperator] = useState(false);
 
   // OTHER
@@ -79,8 +73,7 @@ const SmtTop = () => {
   const [data, setData] = useState(null);
 
   // CMA
-  const [CMATime, setCMATime] = useState({ hours: 0, minutes: 0, seconds: 0 });
-  const [CMARunning, setCMARunning] = useState();
+
   const [ResultsCMA, setResultsCMA] = useState();
 
   //BACKGROUND / WARNA KOTAK
@@ -111,8 +104,6 @@ const SmtTop = () => {
   };
 
   useEffect(() => {
-
-
     const ref3 = firebase.database().ref("StatusLine/SMTLine1");
     ref3.on("value", (snapshot) => {
       const data = snapshot.val();
@@ -133,7 +124,7 @@ const SmtTop = () => {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
-    
+
         navigator.permissions
           .query({ name: "clipboard-write" })
           .then((permissionStatus) => {
@@ -141,8 +132,8 @@ const SmtTop = () => {
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
-              const message = `Notification Maintenance SMT LINE 1 Destacker (TOP) DOWN - Please Click The Link:\n\n ${link}`;
-    
+              const message = `Notification Maintenance SMT LINE 1 Destacker (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
               chatIds.forEach((chatId) => {
                 fetch(
                   `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
@@ -162,20 +153,20 @@ const SmtTop = () => {
               // Izin ditolak
             }
           });
-      } else if (data === "QA" || data === "QC") {
+      } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
-    
+
         navigator.permissions
           .query({ name: "clipboard-write" })
           .then((permissionStatus) => {
             if (permissionStatus.state === "granted") {
-              const link = data === "QA" ? "http://10.14.81.43:3003/RequestQA" : "http://10.14.81.43:3003/RequestQC";
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-912913885];
-              const message = `Notification ${data} Check SMT LINE 1 Label (TOP) - Please Click The Link:\n\n ${link}`;
-    
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 Destacker (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
               chatIds.forEach((chatId) => {
                 fetch(
                   `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
@@ -197,8 +188,6 @@ const SmtTop = () => {
           });
       }
     });
-    
-    
 
     const ref9 = firebase.database().ref("SMTLine1TOP/Label");
     ref9.on("value", (snapshot) => {
@@ -208,7 +197,7 @@ const SmtTop = () => {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
-    
+
         navigator.permissions
           .query({ name: "clipboard-write" })
           .then((permissionStatus) => {
@@ -216,8 +205,8 @@ const SmtTop = () => {
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
-              const message = `Notification Maintenance SMT LINE 1 Destacker (TOP) DOWN - Please Click The Link:\n\n ${link}`;
-    
+              const message = `Notification Maintenance SMT LINE 1 Label (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
               chatIds.forEach((chatId) => {
                 fetch(
                   `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
@@ -237,20 +226,20 @@ const SmtTop = () => {
               // Izin ditolak
             }
           });
-      } else if (data === "QA" || data === "QC") {
+      } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
-    
+
         navigator.permissions
           .query({ name: "clipboard-write" })
           .then((permissionStatus) => {
             if (permissionStatus.state === "granted") {
-              const link = data === "QA" ? "http://10.14.81.43:3003/RequestQA" : "http://10.14.81.43:3003/RequestQC";
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-912913885];
-              const message = `Notification ${data} Check SMT LINE 1 Label (TOP) - Please Click The Link:\n\n ${link}`;
-    
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 Label (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
               chatIds.forEach((chatId) => {
                 fetch(
                   `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
@@ -327,93 +316,112 @@ const SmtTop = () => {
       setRealOT(data);
     });
 
+    const ref17 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/Total");
+    ref17.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setTotal(data);
+    });
+
     return () => {};
   }, []);
 
-  // FUNGSI CMA
-  // CMA WAKTU
-  let CMAInterval;
+  // ------------------------
+
+  // Realtime Production
   useEffect(() => {
-    if (CMARunning) {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      CMAInterval = setInterval(() => {
-        setCMATime((prevTime) => {
-          const newSeconds = prevTime.seconds + 1;
-          const newMinutes = prevTime.minutes + Math.floor(newSeconds / 60);
-          const newHours = prevTime.hours + Math.floor(newMinutes / 60);
-          const newTime = {
-            hours: newHours,
-            minutes: newMinutes % 60,
-            seconds: newSeconds % 60,
-          };
-          firebase
-            .database()
-            .ref("StatusLine/SMTLine1CMALastTime")
-            .set(newTime);
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1CMAOnGoing")
-            .set(
-              `${newTime.hours} H ${newTime.minutes} M ${newTime.seconds} S`
-            );
-          return newTime;
-        });
-      }, 1000); // 1 detik = 1000 ms
-    }
+    const startCountdown = (startTime, endTime, productionTimeKey) => {
+      const targetTime = new Date();
+      const [hours, minutes] = startTime.split(":");
+      targetTime.setHours(parseInt(hours, 10));
+      targetTime.setMinutes(parseInt(minutes, 10));
+      targetTime.setSeconds(0);
 
-    // Mengambil waktu terakhir yang dihitung dari Firebase saat halaman dimuat ulang
-    firebase
-      .database()
-      .ref("StatusLine/SMTLine1CMALastTime")
-      .once("value")
-      .then((snapshot) => {
-        const lastTime = snapshot.val();
-        if (lastTime) {
-          setCMATime(lastTime);
+      const outTime = new Date();
+      const [outHours, outMinutes] = endTime.split(":");
+      outTime.setHours(parseInt(outHours, 10));
+      outTime.setMinutes(parseInt(outMinutes, 10));
+      outTime.setSeconds(0);
+
+      const interval = setInterval(() => {
+        const currentTime = new Date();
+        let remainingTime = 0;
+
+        if (currentTime >= targetTime && currentTime < outTime) {
+          // Start counting only when the current time is within the range
+          remainingTime = targetTime.getTime() - currentTime.getTime();
+
+          // Start counting from 0 seconds after the target time is reached
+          if (remainingTime <= 0) {
+            remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
+          }
+
+          // Send the countdown value to Firebase
+          firebase
+            .database()
+            .ref(`/StatusLine/SMTLine1ProductionTime/${productionTimeKey}`)
+            .set(formatTime(remainingTime));
+        } else if (currentTime >= outTime) {
+          // Stop the countdown if the current time exceeds the end time
+          clearInterval(interval);
         }
-      });
+      }, 1000); // Update every second
 
-    return () => clearInterval(CMAInterval);
-  }, [CMARunning]);
-
-  // CMA START AND STOP
-  const startCMA = () => {
-    setCMATime({ hours: 0, minutes: 0, seconds: 0 });
-    firebase
-      .database()
-      .ref("/StatusLine/SMTLine1CMAOnGoing")
-      .set("0 H 0 M 0 S");
-    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set(0);
-    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set(0);
-    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
-    setCMARunning(true);
-  };
-  const stopCMA = (event) => {
-    const data = {
-      ResultsCMA: ResultsCMA,
+      return interval; // Return the interval ID for cleanup
     };
-    fetch(`http://192.168.101.236:3001/api/put/ResultsCMA`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          alert("Change Model Telah Selesai Data Sudah Terinput");
-          setCMARunning(false);
-          window.location.reload();
-          event.preventDefault();
+
+    const formatTime = (time) => {
+      const totalSeconds = Math.floor(time / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const remainingMinutes = minutes % 60;
+
+      if (hours >= 1) {
+        if (remainingMinutes >= 1) {
+          return `${hours} jam ${remainingMinutes} menit`;
         } else {
-          throw new Error("Error updating data");
+          return `${hours} jam`;
         }
-      })
-      .catch((err) => {
-        console.log(err);
+      } else if (minutes >= 1) {
+        return `${minutes} menit`;
+      } else {
+        return `${totalSeconds} detik`;
+      }
+    };
+
+    let intervals = [];
+
+    const startCountdownForData = (
+      startTimeKey,
+      endTimeKey,
+      productionTimeKey
+    ) => {
+      if (data && data[startTimeKey] && data[endTimeKey]) {
+        const interval = startCountdown(
+          data[startTimeKey],
+          data[endTimeKey],
+          productionTimeKey
+        );
+        intervals.push(interval);
+      }
+    };
+
+    startCountdownForData("PT1_IN", "PT1_OUT", "ProductionTime1");
+    startCountdownForData("PT2_IN", "PT2_OUT", "ProductionTime2");
+    startCountdownForData("PT3_IN", "PT3_OUT", "ProductionTime3");
+    startCountdownForData("PT4_IN", "PT4_OUT", "ProductionTime4");
+    startCountdownForData("PD_IN", "PD_OUT", "DownTime");
+    startCountdownForData("OT_IN", "OT_OUT", "OverTime");
+
+    return () => {
+      intervals.forEach((interval) => {
+        clearInterval(interval);
       });
-  };
-  // --------------------------------
+    };
+  }, [data]);
+
+  // --------------------
 
   // FUNGSI FETCHING SCHEDULE
 
@@ -462,7 +470,6 @@ const SmtTop = () => {
   // FUNGSI UPDATE STATUS
   // fungsi mengubah warna status
 
-
   const updateStatusdestacker = (data) => {
     setStatusdestacker(data);
     setBackgroundColorStatusdestacker(
@@ -473,6 +480,8 @@ const SmtTop = () => {
         : data === "Leader"
         ? "#C00000"
         : data === "Maintenance"
+        ? "#be4f62"
+        : data === "Return Maintenance"
         ? "#be4f62"
         : data === "PPIC"
         ? "#7A6544"
@@ -494,6 +503,8 @@ const SmtTop = () => {
         : data === "Leader"
         ? "#C00000"
         : data === "Maintenance"
+        ? "#be4f62"
+        : data === "Return Maintenance"
         ? "#be4f62"
         : data === "PPIC"
         ? "#7A6544"
@@ -519,14 +530,7 @@ const SmtTop = () => {
   }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
   // -------
 
-  
-
-
-
-  // Destacker
-
-  //  Submit Destacker
-  const submitDestacker = () => {
+  const submitMaintenance = () => {
     if (!NamaPIC || !Line || !Kerusakan || !Area) {
       alert("Harap isi semua kolom!");
       return;
@@ -548,9 +552,9 @@ const SmtTop = () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("success report destecker smt top");
-          setIsOpenDestacker(false);
-          firebase.database().ref("SMTLine1TOP/Destacker").set("Maintenance");
+          alert("Laporan Telah Berhasil Di Kirim Ke Team Maintenance ");
+          setIsOpenMaintenance(false);
+          firebase.database().ref(`SMTLine1TOP/${Station}`).set("Maintenance");
           firebase.database().ref("StatusLine/SMTLine1").set("Down");
           window.location.reload();
         } else {
@@ -561,9 +565,8 @@ const SmtTop = () => {
         console.log(err);
       });
   };
-  //  Submit Quality Destacker
 
-  const submitQualityADestacker = () => {
+  const submitQualityA = () => {
     if (!NamaPIC || !Line || !Kerusakan || !Area) {
       alert("Harap isi semua kolom!");
       return;
@@ -574,13 +577,12 @@ const SmtTop = () => {
       Line: Line,
       Station: Station,
       Kerusakan: Kerusakan,
-    };        
+    };
 
-    alert("success Report Quality Assurance");
-    setQualityADestacker(false);
-    firebase.database().ref("SMTLine1TOP/Destacker").set("QA");
+    alert("Laporan Telah Berhasil Di Kirim Ke Quality Assurance");
+    setQualityA(false);
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set("QA");
     window.location.reload();
-
 
     fetch(`http://192.168.101.236:3001/api/post/QA`, {
       method: "POST",
@@ -600,7 +602,7 @@ const SmtTop = () => {
       });
   };
 
-  const submitQualityCDestacker = () => {
+  const submitQualityC = () => {
     if (!NamaPIC || !Line || !Kerusakan || !Area) {
       alert("Harap isi semua kolom!");
       return;
@@ -613,155 +615,9 @@ const SmtTop = () => {
       Kerusakan: Kerusakan,
     };
 
-    alert("success Report Quality Control");
-    setQualityCDestacker(false);
-    firebase.database().ref("SMTLine1TOP/Destacker").set("QC");
-    window.location.reload();
-
-    fetch(`http://192.168.101.236:3001/api/post/QC`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-         
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const submitReturnDestacker = () => {
-    const data = {
-      NamaPIC: NamaPIC,
-      Area: Area,
-      Line: Line,
-      Station: Station,
-      Kerusakan: Kerusakan,
-    };
-
-    fetch(`http://192.168.101.236:3001/api/post/ReturnMaintenance`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          alert("success report di kembalikan ke maintenance");
-          setIsOpenDestacker(false);
-          firebase.database().ref("SMTLine1TOP/Destacker").set("Maintenance");
-          window.location.reload();
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-// --------------------------------------------
-
-
-  // Label
-
-  //  Submit Label
-  const submitLabel = () => {
-    if (!NamaPIC || !Line || !Kerusakan || !Area) {
-      alert("Harap isi semua kolom!");
-      return;
-    }
-    const data = {
-      NamaPIC: NamaPIC,
-      Area: Area,
-      Line: Line,
-      Station: Station,
-      Kerusakan: Kerusakan,
-    };
-
-    fetch(`http://192.168.101.236:3001/api/post/Maintenance`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          alert("success report Label smt top");
-          setIsOpenDestacker(false);
-          firebase.database().ref("SMTLine1TOP/Label").set("Maintenance");
-          firebase.database().ref("StatusLine/SMTLine1").set("Down");
-          window.location.reload();
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const submitQualityALabel = () => {
-    if (!NamaPIC || !Line || !Kerusakan || !Area) {
-      alert("Harap isi semua kolom!");
-      return;
-    }
-    const data = {
-      NamaPIC: NamaPIC,
-      Area: Area,
-      Line: Line,
-      Station: Station,
-      Kerusakan: Kerusakan,
-    };
-
-    alert("success Report Quality Assurance");
-          setQualityALabel(false);
-          firebase.database().ref("SMTLine1TOP/Label").set("QA");
-          window.location.reload();
-
-    fetch(`http://192.168.101.236:3001/api/post/QA`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const submitQualityCLabel = () => {
-    if (!NamaPIC || !Line || !Kerusakan || !Area) {
-      alert("Harap isi semua kolom!");
-      return;
-    }
-    const data = {
-      NamaPIC: NamaPIC,
-      Area: Area,
-      Line: Line,
-      Station: Station,
-      Kerusakan: Kerusakan,
-    };
-
-    alert("success Report Quality Control");
-    setQualityCLabel(false);
-    firebase.database().ref("SMTLine1TOP/Label").set("QC");
+    alert("Laporan Telah Berhasil Di Kirim Ke Quality Control");
+    setQualityC(false);
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set("QC");
     window.location.reload();
 
     fetch(`http://192.168.101.236:3001/api/post/QC`, {
@@ -782,7 +638,7 @@ const SmtTop = () => {
       });
   };
 
-  const submitReturnLabel = () => {
+  const submitReturnMaintenance = () => {
     const data = {
       NamaPIC: NamaPIC,
       Area: Area,
@@ -800,9 +656,12 @@ const SmtTop = () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("success report di kembalikan ke maintenance");
-          setIsOpenLabel(false);
-          firebase.database().ref("SMTLine1TOP/Label").set("Maintenance");
+          alert("Laporan Terkait Pengembalian Ke Maintenance Sudah Berhasil");
+          setIsOpenMaintenance(false);
+          firebase
+            .database()
+            .ref(`SMTLine1TOP/${Station}`)
+            .set("Return Maintenance");
           window.location.reload();
         } else {
           throw new Error("Error adding data");
@@ -812,54 +671,77 @@ const SmtTop = () => {
         console.log(err);
       });
   };
-  // ------
+  // --------------------------------------------
 
+  //  Submit Validation Quality A
+  const submitValQA = () => {
+    const data = new FormData();
+    data.append("NamaPIC", NamaPIC);
+    data.append("NpkPIC", NpkPIC);
+    data.append("Area", Area);
+    data.append("Line", Line);
+    data.append("Station", Station);
+    data.append("validation", file);
 
+    alert("File Validation Telah Berhasil Di Input");
+    setIsOpen2(false);
+    window.location.reload();
 
-    //  Submit Validation Quality A
-    const submitValQA = () => {
-      const data = new FormData();
-      data.append("NamaPIC", NamaPIC);
-      data.append("NpkPIC", NpkPIC);
-      data.append("Area", Area);
-      data.append("Line", Line);
-      data.append("Station", Station);
-      data.append("validation", file);
-  
-      fetch("http://192.168.101.236:3001/api/post/validationqa", {
-        method: "POST",
-        body: data,
+    fetch("http://192.168.101.236:3001/api/post/validationqa", {
+      method: "POST",
+      body: data,
+    })
+      .then((response) => {
+        if (response.status === 200) {
+        } else {
+          throw new Error("Error adding data");
+        }
       })
-        .then((response) => {
-          if (response.status === 200) {
-            alert("Data Telah Berhasil Di Submit");
-            setIsOpen2(false);
-            window.location.reload();
-          } else {
-            throw new Error("Error adding data");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-  
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
+  const submitValQC = () => {
+    const data = new FormData();
+    data.append("NamaPIC", NamaPIC);
+    data.append("NpkPIC", NpkPIC);
+    data.append("Area", Area);
+    data.append("Line", Line);
+    data.append("Station", Station);
+    data.append("validation", file);
 
+    alert("File Validation Telah Berhasil Di Input");
+    setIsOpen2(false);
+    window.location.reload();
+
+    fetch("http://192.168.101.236:3001/api/post/validationqc", {
+      method: "POST",
+      body: data,
+    })
+      .then((response) => {
+        if (response.status === 200) {
+        } else {
+          throw new Error("Error adding data");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   // SUBMIT FILE
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
 
-
-
-
-
   // Tindakan / Kehadiran
 
   const handleDestackerPress = () => {
-    if (Statusdestacker === "Maintenance") {
+    if (
+      Statusdestacker === "Maintenance" ||
+      Statusdestacker === "Return Maintenance"
+    ) {
       setDestackerPressed(true);
       timeoutRefDestacker.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
@@ -881,9 +763,8 @@ const SmtTop = () => {
     clearTimeout(timeoutRefDestacker.current);
   };
 
-
   const handleLabelPress = () => {
-    if (Statuslabel === "Maintenance") {
+    if (Statuslabel === "Maintenance" || Statuslabel === "Return Maintenance") {
       setLabelPressed(true);
       timeoutRefLabel.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
@@ -906,6 +787,14 @@ const SmtTop = () => {
   };
 
   // ------
+
+  const handleCall = () => {
+    window.location.href = "https://api.whatsapp.com/send?phone=6281380996094";
+  };
+
+  const handleCall2 = () => {
+    window.location.href = "https://api.whatsapp.com/send?phone=6281929749600";
+  };
 
   // Background
   const styles = {
@@ -959,134 +848,6 @@ const SmtTop = () => {
           </marquee>
         </div>
       </header>
-
-      <sidebar>
-        <div
-          id="drawer-navigation"
-          className={`fixed top-0 left-0 z-40 w-64  p-4 overflow-y-auto transition-transform ${
-            showDrawer ? "" : "-translate-x-full"
-          } bg-[#1b1c27] dark:bg-gray-800`}
-          tabIndex="-1"
-          aria-labelledby="drawer-navigation-label"
-        >
-          <h5
-            id="drawer-navigation-label"
-            className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"
-          >
-            Menu
-          </h5>
-          <button
-            type="button"
-            data-drawer-hide="drawer-navigation"
-            onClick={toggleDrawer}
-            aria-controls="drawer-navigation"
-            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-          >
-            <svg
-              aria-hidden="true"
-              className="w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-            <span className="sr-only">Close menu</span>
-          </button>
-          <div className="py-4 overflow-y-auto">
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="/Home"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    className="w-6  h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                  </svg>
-                  <span class="ml-3 text-white">Realtime Report</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/DamageReport"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span class="ml-3 text-white">Report Damage Machine</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/AllReport"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span class="ml-3 text-white">Report All </span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/LoginMaintenance"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                    <path
-                      fill-rule="evenodd"
-                      d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span class="ml-3 text-red-700 ">Maintenance Page</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </sidebar>
 
       {/*  */}
       <main>
@@ -1142,13 +903,16 @@ const SmtTop = () => {
                     onClick={() => {
                       if (Statusdestacker === "Go") {
                         // set isOpenDestacker state to true if Statusdestacker is "Go"
-                        setIsOpenDestacker(true);
+                        setIsOpenMaintenance(true);
                       } else if (Statusdestacker === "Repair") {
                         // set Quality state to true if Statusdestacker is "Repair"
-                        setQualityDestackerOption(true);
+                        setQualityOption(true);
                       } else if (Statusdestacker === "QA") {
                         // set Quality state to true if Statusdestacker is "Repair"
                         setIsOpenValQA(true);
+                      } else if (Statusdestacker === "QC") {
+                        // set Quality state to true if Statusdestacker is "Repair"
+                        setIsOpenValQC(true);
                       }
                       setStation(Destacker);
                     }}
@@ -1178,13 +942,16 @@ const SmtTop = () => {
                     onClick={() => {
                       if (Statuslabel === "Go") {
                         // set isOpenDestacker state to true if Statuslabel is "Go"
-                        setIsOpenLabel(true);
+                        setIsOpenMaintenance(true);
                       } else if (Statuslabel === "Repair") {
                         // set Quality state to true if Statuslabel is "Repair"
-                        setQualityLabelOption(true);
+                        setQualityOption(true);
                       } else if (Statuslabel === "QA") {
                         // set Quality state to true if Statuslabel is "Repair"
                         setIsOpenValQA(true);
+                      } else if (Statuslabel === "QC") {
+                        // set Quality state to true if Statusdestacker is "Repair"
+                        setIsOpenValQC(true);
                       }
                       setStation(Label);
                     }}
@@ -1206,7 +973,7 @@ const SmtTop = () => {
                   <button
                     style={{ backgroundColor: backgroundColor }}
                     value={status}
-                    onClick={() => setIsOpenDestacker(true)}
+                    onClick={() => setIsOpenMaintenance(true)}
                     disabled={status !== "Go"}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
@@ -1226,7 +993,7 @@ const SmtTop = () => {
                   <button
                     style={{ backgroundColor: backgroundColor }}
                     value={status}
-                    onClick={() => setIsOpenDestacker(true)}
+                    onClick={() => setIsOpenMaintenance(true)}
                     disabled={status !== "Go"}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
@@ -1251,7 +1018,7 @@ const SmtTop = () => {
                   <button
                     style={{ backgroundColor: backgroundColor }}
                     value={status}
-                    onClick={() => setIsOpenDestacker(true)}
+                    onClick={() => setIsOpenMaintenance(true)}
                     disabled={status !== "Go"}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
@@ -1271,7 +1038,7 @@ const SmtTop = () => {
                   <button
                     style={{ backgroundColor: backgroundColor }}
                     value={status}
-                    onClick={() => setIsOpenDestacker(true)}
+                    onClick={() => setIsOpenMaintenance(true)}
                     disabled={status !== "Go"}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
@@ -1291,7 +1058,7 @@ const SmtTop = () => {
                   <button
                     style={{ backgroundColor: backgroundColor }}
                     value={status}
-                    onClick={() => setIsOpenDestacker(true)}
+                    onClick={() => setIsOpenMaintenance(true)}
                     disabled={status !== "Go"}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
@@ -1311,7 +1078,7 @@ const SmtTop = () => {
                   <button
                     style={{ backgroundColor: backgroundColor }}
                     value={status}
-                    onClick={() => setIsOpenDestacker(true)}
+                    onClick={() => setIsOpenMaintenance(true)}
                     disabled={status !== "Go"}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
@@ -1348,7 +1115,7 @@ const SmtTop = () => {
 
       {/* POP UP */}
       <td class="">
-      {isOpenOperator ? (
+        {isOpenOperator ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -1385,7 +1152,7 @@ const SmtTop = () => {
                     </svg>
                   </div>
                   <h2 className="text-lg font-bold   text-center">
-                    Operator Area: SMT
+                    Operator Area: SMT Line 1
                   </h2>
                   <div className="bg-white px-4 pt-1 pb-4 flex sm:p-6 sm:pb-4">
                     <div className="bg-white px-4 w-96 py-6 sm:p-6 ml-10 rounded-lg shadow-md">
@@ -1403,43 +1170,43 @@ const SmtTop = () => {
                               <span className="font-bold w-40">
                                 SMT Top Operator:
                               </span>
-                              <span className="font-bold ml-4">Chrisna </span>
+                              <span className="font-bold ml-4">Adi </span>
                             </p>
                             <p className="mb-2 flex">
                               <span className="font-bold w-40">
                                 SMT Bot Operator:
                               </span>
-                              <span className="font-bold ml-4">Chrisna</span>
+                              <span className="font-bold ml-4">Rudi</span>
                             </p>
                             <p className="mb-2 flex">
                               <span className="font-bold w-40">
                                 Drop In Operator:
                               </span>
-                              <span className="font-bold ml-4">Chrisna</span>
+                              <span className="font-bold ml-4">Budi</span>
                             </p>
                             <p className="mb-2 flex">
                               <span className="font-bold w-40">
                                 Touch Up Operator:
                               </span>
-                              <span className="font-bold ml-4">Chrisna</span>
+                              <span className="font-bold ml-4">Angga</span>
                             </p>
                             <p className="mb-2 flex">
                               <span className="font-bold w-40">
                                 Router Operator:
                               </span>
-                              <span className="font-bold ml-4">Chrisna</span>
+                              <span className="font-bold ml-4">Nando</span>
                             </p>
                             <p className="mb-2 flex">
                               <span className="font-bold w-40">
                                 FCT Operator:
                               </span>
-                              <span className="font-bold ml-4">Chrisna</span>
+                              <span className="font-bold ml-4">Supardi</span>
                             </p>
                             <p className="mb-2 flex">
                               <span className="font-bold w-40">
                                 Coating Operator:
                               </span>
-                              <span className="font-bold ml-4">Chrisna</span>
+                              <span className="font-bold ml-4">Yusuf</span>
                             </p>
                           </div>
                         </div>
@@ -1449,12 +1216,9 @@ const SmtTop = () => {
                 </div>
               </div>
             </div>
-
-            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
           </>
         ) : null}
       </td>
-
 
       {/* ISA */}
       <td class="">
@@ -1463,9 +1227,11 @@ const SmtTop = () => {
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute bg-gray-500 opacity-75"></div>
+                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
                 </div>
+
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+
                 <div
                   className="inline-block  align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full"
                   role="dialog"
@@ -1673,24 +1439,32 @@ const SmtTop = () => {
                     <div className="bg-white px-4 py-6 sm:p-6 ml-3 rounded-lg shadow-md">
                       <h3 className="text-lg font-bold mb-1">Facturing</h3>
                       <div className="flex flex-col justify-between">
-                        <div>
-                          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            CALL LEADER
-                          </button>
-                        </div>
+                        {data.SHIFT == 1 ? (
+                          <div>
+                            <button
+                              onClick={handleCall}
+                              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            >
+                              CALL LEADER
+                            </button>
+                          </div>
+                        ) : (
+                          <div>
+                            <button
+                              onClick={handleCall2}
+                              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            >
+                              CALL LEADER
+                            </button>
+                          </div>
+                        )}
                         <div className="pt-2">
-                          <button
-                            onClick={startCMA}
-                            className="bg-green-500 text-xs hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                          >
+                          <button className="bg-green-500 text-xs hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                             START CHANGE MODEL (ROUTER)
                           </button>
                         </div>
                         <div className="pt-2">
-                          <button
-                            onClick={stopCMA}
-                            className="bg-red-500 hover:bg-red-700 text-xs  text-white font-bold py-2 px-4 rounded"
-                          >
+                          <button className="bg-red-500 hover:bg-red-700 text-xs  text-white font-bold py-2 px-4 rounded">
                             END CHANGE MODEL (ROUTER)
                           </button>
                         </div>
@@ -1723,22 +1497,19 @@ const SmtTop = () => {
                 </div>
               </div>
             </div>
-
-            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
           </>
         ) : null}
       </td>
-    
 
-{/* Destacker */}
+      {/* Destacker */}
       {/* POP UP  DESTECKER*/}
       <td class="">
-        {isOpenDestacker ? (
+        {isOpenMaintenance ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
                 </div>
 
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
@@ -1758,7 +1529,7 @@ const SmtTop = () => {
                         }}
                       >
                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Request</span>
+                          <span>Request Maintenance</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full px-1">
@@ -1863,14 +1634,14 @@ const SmtTop = () => {
                         <div className="flex justify-end">
                           <button
                             className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                            onClick={() => setIsOpenDestacker(false)}
+                            onClick={() => setIsOpenMaintenance(false)}
                           >
                             Batal
                           </button>
                           <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             type="submit"
-                            onClick={submitDestacker}
+                            onClick={submitMaintenance}
                           >
                             Submit
                           </button>
@@ -1881,21 +1652,18 @@ const SmtTop = () => {
                 </div>
               </div>
             </div>
-
-            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
           </>
         ) : null}
       </td>
 
-
       {/* QualityDestackerOption */}
       <td class="">
-        {QualityDestackerOption ? (
+        {QualityOption ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
                 </div>
 
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
@@ -1909,7 +1677,10 @@ const SmtTop = () => {
                   <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
                       <div className="flex justify-end">
-                        <button onClick={()=> setQualityDestackerOption (false) } className="absolute top-0 right-0 mt-2 mr-2">
+                        <button
+                          onClick={() => setQualityOption(false)}
+                          className="absolute top-0 right-0 mt-2 mr-2"
+                        >
                           <svg
                             className="h-6 w-6 text-gray-500"
                             xmlns="http://www.w3.org/2000/svg"
@@ -1933,15 +1704,22 @@ const SmtTop = () => {
                         </div>
 
                         <div className="flex justify-center">
-                          <button onClick={()=> {
-                            setQualityCDestacker (true)
-                            setQualityDestackerOption (false)} } className="bg-lime-700 w-28 h-16 hover:bg-lime-400 text-white font-bold py-2 px-4  rounded">
+                          <button
+                            onClick={() => {
+                              setQualityC(true);
+                              setQualityOption(false);
+                            }}
+                            className="bg-lime-700 w-28 h-16 hover:bg-lime-400 text-white font-bold py-2 px-4  rounded"
+                          >
                             QC
                           </button>
                           <button
-                           onClick={()=> {
-                            setQualityADestacker (true)
-                            setQualityDestackerOption (false)} } className="bg-blue-900 w-28 h-16 hover:bg-blue-700  text-white font-bold py-2 px-4 ml-16 rounded mr-2">
+                            onClick={() => {
+                              setQualityA(true);
+                              setQualityOption(false);
+                            }}
+                            className="bg-blue-900 w-28 h-16 hover:bg-blue-700  text-white font-bold py-2 px-4 ml-16 rounded mr-2"
+                          >
                             QA
                           </button>
                         </div>
@@ -1951,20 +1729,18 @@ const SmtTop = () => {
                 </div>
               </div>
             </div>
-
-            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
           </>
         ) : null}
       </td>
 
       {/* QualityADestacker */}
       <td class="">
-        {QualityADestacker ? (
+        {QualityA ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
                 </div>
 
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
@@ -1979,9 +1755,9 @@ const SmtTop = () => {
                     <div className="sm:flex sm:items-start">
                       <form className="w-full max-w-lg">
                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Quality</span>
+                          <span>Depart To Quality Assurance</span>
                         </div>
-                       
+
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full px-1">
                             <label
@@ -2004,20 +1780,20 @@ const SmtTop = () => {
                         {/*Status*/}
                         <div className="mb-4">
                           <label
-                            className="block text-gray-700 font-bold mb-2"
+                            className="block text-gray-700 font-semibold mb-2"
                             htmlFor="Depart To"
                           >
                             Depart To
                           </label>
                           <div className="relative">
-                          <span
+                            <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               id="grid-city"
                               type="text"
                               placeholder="ICT"
                               name="MachineName"
                             >
-                              Quality Assurance
+                             Quality Assurance
                             </span>
                           </div>
                         </div>
@@ -2080,7 +1856,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                               for="grid-password"
                             >
-                              Perbaikan
+                              Problem
                             </label>
                             <input
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -2094,21 +1870,21 @@ const SmtTop = () => {
                               required
                             />
                             <p class="text-gray-600 text-xs italic">
-                              Jenis Perbaikan Yang Di Lakukan
+                              Jenis Problem Yang DI Temukan
                             </p>
                           </div>
                         </div>
                         <div className="flex justify-end">
                           <button
                             className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                            onClick={() => setQualityADestacker(false)}
+                            onClick={() => setQualityA(false)}
                           >
                             Batal
                           </button>
                           <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             type="submit"
-                            onClick={submitQualityADestacker}
+                            onClick={submitQualityA}
                           >
                             Submit
                           </button>
@@ -2119,20 +1895,18 @@ const SmtTop = () => {
                 </div>
               </div>
             </div>
-
-            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
           </>
         ) : null}
       </td>
 
-       {/* QualityCDestacker */}
-       <td class="">
-        {QualityCDestacker ? (
+      {/* QualityCDestacker */}
+      <td class="">
+        {QualityC ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
                 </div>
 
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
@@ -2147,59 +1921,37 @@ const SmtTop = () => {
                     <div className="sm:flex sm:items-start">
                       <form className="w-full max-w-lg">
                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Quality</span>
+                          <span>Depart To Quality Control</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <div class="w-full px-1">
                             <label
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-first-name"
                             >
                               Masukan Nama Anda
                             </label>
-                            <select
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            <input
+                              type="text"
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               name="NamaPIC"
                               required
                               onChange={(e) => {
                                 setNamaPIC(e.target.value);
-                                setNpkPIC(
-                                  npkList[namaList.indexOf(e.target.value)]
-                                );
                               }}
-                            >
-                              <option value="">- -Pilih Nama Anda- -</option>
-                              {namaList.map((nama, index) => (
-                                <option value={nama} key={index}>
-                                  {nama}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                          <div class="w-full md:w-1/2 px-3">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                              NPK
-                            </label>
-                            <input
-                              class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              type="number"
-                              placeholder="0000"
-                              name="NpkPIC"
-                              value={NpkPIC}
-                              readOnly
-                            />
+                            ></input>
                           </div>
                         </div>
                         {/*Status*/}
                         <div className="mb-4">
                           <label
-                            className="block text-gray-700 font-bold mb-2"
+                            className="block text-gray-700 font-semibold mb-2"
                             htmlFor="Depart To"
                           >
                             Depart To
                           </label>
                           <div className="relative">
-                          <span
+                            <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               id="grid-city"
                               type="text"
@@ -2269,7 +2021,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                               for="grid-password"
                             >
-                              Perbaikan
+                              Problem
                             </label>
                             <input
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -2283,21 +2035,21 @@ const SmtTop = () => {
                               required
                             />
                             <p class="text-gray-600 text-xs italic">
-                              Jenis Perbaikan Yang Di Lakukan
+                              Jenis Problem Yang Di Temukan
                             </p>
                           </div>
                         </div>
                         <div className="flex justify-end">
                           <button
                             className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                            onClick={() => setQualityCDestacker(false)}
+                            onClick={() => setQualityC(false)}
                           >
                             Batal
                           </button>
                           <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             type="submit"
-                            onClick={submitQualityCDestacker}
+                            onClick={submitQualityC}
                           >
                             Submit
                           </button>
@@ -2308,21 +2060,18 @@ const SmtTop = () => {
                 </div>
               </div>
             </div>
-
-            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
           </>
         ) : null}
       </td>
 
-
-        {/* POP UP  RETURN Destacker*/}
-         <td class="">
-        {isOpenReturnDestacker ? (
+      {/* POP UP  RETURN Destacker*/}
+      <td class="">
+        {isOpenReturnMaintenance ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
                 </div>
 
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
@@ -2416,168 +2165,6 @@ const SmtTop = () => {
                               placeholder="ICT"
                               name="MachineName"
                             >
-                              {Destacker}
-                            </span>
-                          </div>
-                        </div>
-
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                              for="grid-password"
-                            >
-                              Kendala
-                            </label>
-                            <input
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-password"
-                              type="text"
-                              placeholder=""
-                              name="Kerusakan"
-                              onChange={(e) => {
-                                setKerusakan(e.target.value);
-                              }}
-                              required
-                            />
-                            <p class="text-gray-600 text-xs italic">
-                              Laporkan Kendala Yang Di temukan
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex justify-end">
-                          <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                            onClick={() => setIsOpenReturnDestacker(false)}
-                          >
-                            Batal
-                          </button>
-                          <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                            type="submit"
-                            onClick={submitReturnDestacker}
-                          >
-                            Submit
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
-          </>
-        ) : null}
-        </td>
-
-   {/* ------------- */}
-
-
-
- {/* Label */}
-
-     {/* POP UP  Label*/}
-      <td class="">
-        {isOpenLabel ? (
-          <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                </div>
-
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                <div
-                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
-                >
-                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <form
-                        className="w-full max-w-lg"
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                        }}
-                      >
-                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Request</span>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-first-name"
-                            >
-                              Masukan Nama Anda
-                            </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
-                          </div>
-                        </div>
-
-                        {/*Status*/}
-
-                        <div class="flex flex-wrap -mx-3 mb-6">
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Machine Area
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Area}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Machine Line
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Line}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Machine Station
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
                               {Station}
                             </span>
                           </div>
@@ -2589,7 +2176,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                               for="grid-password"
                             >
-                              Kerusakan
+                              Problem
                             </label>
                             <input
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -2603,21 +2190,21 @@ const SmtTop = () => {
                               required
                             />
                             <p class="text-gray-600 text-xs italic">
-                              Laporkan Permasalahan Yang Ditemukan
+                              Laporkan Problem Yang Di temukan
                             </p>
                           </div>
                         </div>
                         <div className="flex justify-end">
                           <button
                             className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                            onClick={() => setIsOpenLabel(false)}
+                            onClick={() => setIsOpenReturnMaintenance(false)}
                           >
                             Batal
                           </button>
                           <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             type="submit"
-                            onClick={submitLabel}
+                            onClick={submitReturnMaintenance}
                           >
                             Submit
                           </button>
@@ -2628,608 +2215,13 @@ const SmtTop = () => {
                 </div>
               </div>
             </div>
-
-            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
           </>
         ) : null}
       </td>
 
+      {/* ------------- */}
 
-      {/* QualityLabelOption */}
-      <td class="">
-        {QualityLabelOption ? (
-          <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                </div>
-
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                <div
-                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
-                >
-                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <div className="flex justify-end">
-                        <button onClick={()=> setQualityLabelOption (false) } className="absolute top-0 right-0 mt-2 mr-2">
-                          <svg
-                            className="h-6 w-6 text-gray-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M6 18L18 6M6 6l12 12"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-
-                      <div className="w-full h-60 max-w-lg">
-                        <div className="justify-center mb-20 items-center flex font-bold uppercase text-black">
-                          <span>Quality</span>
-                        </div>
-
-                        <div className="flex justify-center">
-                          <button onClick={()=> {
-                            setQualityCLabel (true)
-                            setQualityLabelOption (false)} } className="bg-lime-700 w-28 h-16 hover:bg-lime-400 text-white font-bold py-2 px-4  rounded">
-                            QC
-                          </button>
-                          <button
-                           onClick={()=> {
-                            setQualityALabel (true)
-                            setQualityLabelOption (false)} } className="bg-blue-900 w-28 h-16 hover:bg-blue-700  text-white font-bold py-2 px-4 ml-16 rounded mr-2">
-                            QA
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
-          </>
-        ) : null}
-      </td>
-
-
-       {/* QualityALabel */}
-      <td class="">
-        {QualityALabel ? (
-          <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                </div>
-
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                <div
-                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
-                >
-                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <form className="w-full max-w-lg">
-                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Quality</span>
-                        </div>
-                       
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-first-name"
-                            >
-                              Masukan Nama Anda
-                            </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
-                          </div>
-                        </div>
-                        {/*Status*/}
-                        <div className="mb-4">
-                          <label
-                            className="block text-gray-700 font-bold mb-2"
-                            htmlFor="Depart To"
-                          >
-                            Depart To
-                          </label>
-                          <div className="relative">
-                          <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              Quality Assurance
-                            </span>
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 mb-6">
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Machine Area
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Area}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Machine Line
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Line}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Machine Station
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Station}
-                            </span>
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                              for="grid-password"
-                            >
-                              Perbaikan
-                            </label>
-                            <input
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-password"
-                              type="text"
-                              placeholder=""
-                              name="Kerusakan"
-                              onChange={(e) => {
-                                setKerusakan(e.target.value);
-                              }}
-                              required
-                            />
-                            <p class="text-gray-600 text-xs italic">
-                              Jenis Perbaikan Yang Di Lakukan
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex justify-end">
-                          <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                            onClick={() => setQualityALabel(false)}
-                          >
-                            Batal
-                          </button>
-                          <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                            type="submit"
-                            onClick={submitQualityALabel}
-                          >
-                            Submit
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
-          </>
-        ) : null}
-      </td>
-
-
-     {/* QualityCLabel */}
-     <td class="">
-        {QualityCLabel ? (
-          <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                </div>
-
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                <div
-                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
-                >
-                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <form className="w-full max-w-lg">
-                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Quality</span>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-first-name"
-                            >
-                              Masukan Nama Anda
-                            </label>
-                            <select
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                                setNpkPIC(
-                                  npkList[namaList.indexOf(e.target.value)]
-                                );
-                              }}
-                            >
-                              <option value="">- -Pilih Nama Anda- -</option>
-                              {namaList.map((nama, index) => (
-                                <option value={nama} key={index}>
-                                  {nama}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                          <div class="w-full md:w-1/2 px-3">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                              NPK
-                            </label>
-                            <input
-                              class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              type="number"
-                              placeholder="0000"
-                              name="NpkPIC"
-                              value={NpkPIC}
-                              readOnly
-                            />
-                          </div>
-                        </div>
-                        {/*Status*/}
-                        <div className="mb-4">
-                          <label
-                            className="block text-gray-700 font-bold mb-2"
-                            htmlFor="Depart To"
-                          >
-                            Depart To
-                          </label>
-                          <div className="relative">
-                          <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              Quality Control
-                            </span>
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 mb-6">
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Machine Area
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Area}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Machine Line
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Line}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Machine Station
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Station}
-                            </span>
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                              for="grid-password"
-                            >
-                              Perbaikan
-                            </label>
-                            <input
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-password"
-                              type="text"
-                              placeholder=""
-                              name="Kerusakan"
-                              onChange={(e) => {
-                                setKerusakan(e.target.value);
-                              }}
-                              required
-                            />
-                            <p class="text-gray-600 text-xs italic">
-                              Jenis Perbaikan Yang Di Lakukan
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex justify-end">
-                          <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                            onClick={() => setQualityCLabel(false)}
-                          >
-                            Batal
-                          </button>
-                          <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                            type="submit"
-                            onClick={submitQualityCLabel}
-                          >
-                            Submit
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
-          </>
-        ) : null}
-      </td>
-
-    {/* POP UP  RETURN*/}
-        <td class="">
-        {isOpenReturnLabel ? (
-          <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                </div>
-
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                <div
-                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
-                >
-                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <form
-                        className="w-full max-w-lg"
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                          database.ref("Mesin/Mesin1").set(selectedStatus);
-                        }}
-                      >
-                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Return To Maintenance</span>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-first-name"
-                            >
-                              Masukan Nama Anda
-                            </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
-                          </div>
-                        </div>
-
-                        {/*Status*/}
-
-                        <div class="flex flex-wrap -mx-3 mb-6">
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Machine Area
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Area}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Machine Line
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Line}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Machine Station
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Label}
-                            </span>
-                          </div>
-                        </div>
-
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                              for="grid-password"
-                            >
-                              Kendala
-                            </label>
-                            <input
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-password"
-                              type="text"
-                              placeholder=""
-                              name="Kerusakan"
-                              onChange={(e) => {
-                                setKerusakan(e.target.value);
-                              }}
-                              required
-                            />
-                            <p class="text-gray-600 text-xs italic">
-                              Laporkan Kendala Yang Di temukan
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex justify-end">
-                          <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                            onClick={() => setIsOpenReturnLabel(false)}
-                          >
-                            Batal
-                          </button>
-                          <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                            type="submit"
-                            onClick={submitReturnLabel}
-                          >
-                            Submit
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
-          </>
-        ) : null}
-      </td>
-
-{/* ----- */}
-
-
-
-
-
-
-
-
-
+      {/* ----- */}
 
       {/* Val QA */}
       <td class="">
@@ -3238,7 +2230,7 @@ const SmtTop = () => {
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
                 </div>
 
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
@@ -3253,47 +2245,25 @@ const SmtTop = () => {
                     <div className="sm:flex sm:items-start">
                       <form className="w-full max-w-lg">
                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Validation Quality</span>
+                          <span>Validation Quality Assurance</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <div class="w-full px-1">
                             <label
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-first-name"
                             >
                               Masukan Nama Anda
                             </label>
-                            <select
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            <input
+                              type="text"
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               name="NamaPIC"
                               required
                               onChange={(e) => {
                                 setNamaPIC(e.target.value);
-                                setNpkPIC(
-                                  npkList[namaList.indexOf(e.target.value)]
-                                );
                               }}
-                            >
-                              <option value="">- -Pilih Nama Anda- -</option>
-                              {namaList.map((nama, index) => (
-                                <option value={nama} key={index}>
-                                  {nama}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                          <div class="w-full md:w-1/2 px-3">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                              NPK
-                            </label>
-                            <input
-                              class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              type="number"
-                              placeholder="0000"
-                              name="NpkPIC"
-                              value={NpkPIC}
-                              readOnly
-                            />
+                            ></input>
                           </div>
                         </div>
                         <div class="flex flex-wrap -mx-3 mb-6">
@@ -3355,7 +2325,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                               for="grid-password"
                             >
-                              Input
+                              Input File Validation
                             </label>
                             <input
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -3367,7 +2337,7 @@ const SmtTop = () => {
                               required
                             />
                             <p class="text-gray-600 text-xs italic">
-                              Tindakan Yang Di Lakukan
+                              Input File Validation
                             </p>
                           </div>
                         </div>
@@ -3390,12 +2360,7 @@ const SmtTop = () => {
                           className="bg-red-900 animate-bounce hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
                           onClick={() => {
                             setIsOpenValQA(false);
-
-                            if (Station === "Destacker") {
-                              setIsOpenReturnDestacker(true);
-                            } else if (Station === "Label") {
-                              setIsOpenReturnLabel(true);
-                            }
+                            setIsOpenReturnMaintenance(true);
                           }}
                         >
                           Return To Maintenance
@@ -3406,15 +2371,161 @@ const SmtTop = () => {
                 </div>
               </div>
             </div>
-
-            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
           </>
         ) : null}
       </td>
 
+      {/* Val QC */}
+      <td class="">
+        {isOpenValQC ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 transition-opacity">
+                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
+                </div>
 
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
 
-   
+                <div
+                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                    <div className="sm:flex sm:items-start">
+                      <form className="w-full max-w-lg">
+                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
+                          <span>Validation Quality Control</span>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full px-1">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-first-name"
+                            >
+                              Masukan Nama Anda
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              name="NamaPIC"
+                              required
+                              onChange={(e) => {
+                                setNamaPIC(e.target.value);
+                              }}
+                            ></input>
+                          </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Area
+                            </label>
+                            <span
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-city"
+                              type="text"
+                              placeholder="ICT"
+                              name="Area"
+                            >
+                              {Area}
+                            </span>
+                          </div>
+                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Line
+                            </label>
+                            <span
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-city"
+                              type="text"
+                              placeholder="ICT"
+                              name="Line"
+                            >
+                              {Line}
+                            </span>
+                          </div>
+                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Station
+                            </label>
+                            <span
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-city"
+                              type="text"
+                              placeholder="ICT"
+                              name="Station"
+                            >
+                              {Station}
+                            </span>
+                          </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full px-1">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                              for="grid-password"
+                            >
+                              Validation File
+                            </label>
+                            <input
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-password"
+                              type="file"
+                              placeholder=""
+                              name="validation"
+                              onChange={handleFileChange}
+                              required
+                            />
+                            <p class="text-gray-600 text-xs italic">
+                              Input File Validation
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex justify-end">
+                          <button
+                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            onClick={() => setIsOpenValQC(false)}
+                          >
+                            Batal
+                          </button>
+                          <button
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            type="submit"
+                            onClick={submitValQC}
+                          >
+                            Submit
+                          </button>
+                        </div>
+                        <button
+                          className="bg-red-900 animate-bounce hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                          onClick={() => {
+                            setIsOpenValQC(false);
+                            setIsOpenReturnMaintenance(true);
+                          }}
+                        >
+                          Return To Maintenance
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : null}
+      </td>
     </body>
   );
 };

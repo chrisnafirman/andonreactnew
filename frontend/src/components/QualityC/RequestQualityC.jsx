@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 
@@ -13,15 +12,18 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const RepairReport = () => {
+const RequestQA = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
+
+  const [selectedItem, setSelectedItem] = useState(null);
+
   const [showDatePicker, setShowDatePicker] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [selectedItem, setSelectedItem] = useState(null);
+
   const [StatusLine, setStatusLine] = useState("");
 
   useEffect(() => {
@@ -31,16 +33,6 @@ const RepairReport = () => {
       setStatusLine(data);
     });
     return () => {};
-  }, []);
-
-  // button search
-  function handleToggleDatePicker() {
-    setShowDatePicker(!showDatePicker);
-  }
-
-  useEffect(() => {
-    // set showDatePicker ke false ketika halaman dimuat
-    setShowDatePicker(false);
   }, []);
 
   // waktu navbar
@@ -68,6 +60,16 @@ const RepairReport = () => {
     setShowDrawer(!showDrawer);
   };
 
+  // button search
+  function handleToggleDatePicker() {
+    setShowDatePicker(!showDatePicker);
+  }
+
+  useEffect(() => {
+    // set showDatePicker ke false ketika halaman dimuat
+    setShowDatePicker(false);
+  }, []);
+
   function updateTime() {
     const interval = setInterval(() => {
       setTime(new Date().toLocaleString());
@@ -78,9 +80,10 @@ const RepairReport = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/get/Network")
+    fetch("http://192.168.101.236:3001/api/get/QC")
       .then((response) => response.json())
       .then((json) => {
+        console.log(json);
         // mengubah properti timestamp menjadi tanggal dan Date
         json.forEach((item) => {
           const date = new Date(item.Date);
@@ -107,9 +110,10 @@ const RepairReport = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://192.168.101.236:3001/api/get/Network?date=${selectedDate}`)
+    fetch(`http://192.168.101.236:3001/api/get/QC?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
+        console.log(json);
         // mengubah properti Date menjadi tanggal saja
         json.forEach((item) => {
           const date = new Date(item.Date);
@@ -147,9 +151,9 @@ const RepairReport = () => {
   };
 
   const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/Network.png)`,
+    backgroundImage: `url(${process.env.PUBLIC_URL}/QC.jpg)`,
     backgroundSize: "1300px",
-    backgroundPosition: "500px",
+    backgroundPosition: "1px",
     height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
 
@@ -177,9 +181,8 @@ const RepairReport = () => {
           <marquee behavior="scroll" direction="right">
             <div class="flex items-center">
               <h1 class="text-xl font-bold tracking-tight text-gray-900">
-                | Network |
+                | Quality Control |
               </h1>
-
               <h1 class="text-xl font-bold tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
                 <span
@@ -329,7 +332,7 @@ const RepairReport = () => {
               </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Request For Network
+                  Request For Quality Control
                 </div>
               </header>
 
@@ -343,11 +346,17 @@ const RepairReport = () => {
                       <th className="p-1 w-40">
                         <div className="font-semibold text-left">Nama</div>
                       </th>
-                      <th className="p-1  w-32">
+                      <th className="p-1 w-40">
                         <div className="font-semibold text-left">Line</div>
                       </th>
-                      <th className="p-1 w-10">
-                        <div className="font-semibold text-center">Details</div>
+                      <th className="p-1 w-24">
+                        <div className="font-semibold text-center">AREA</div>
+                      </th>
+                      <th className="p-1 w-28">
+                        <div className="font-semibold text-center">Station</div>
+                      </th>
+                      <th className="p-1 w-28">
+                        <div className="font-semibold text-center">DETAILS</div>
                       </th>
                       <th className="p-1 w-26">
                         <div className="font-semibold text-center">Date</div>
@@ -365,12 +374,22 @@ const RepairReport = () => {
                             {item.Nama}
                           </div>
                         </td>
-                        <td className="p-2">
+                        <td className="p-1">
                           <div className="font-medium text-gray-800">
                             {item.Line}
                           </div>
                         </td>
-                        <td className="p-5 ">
+                        <td className="p-4 ">
+                          <div className="font-medium text-gray-800">
+                            {item.Area}
+                          </div>
+                        </td>
+                        <td className="p-5">
+                          <div className="font-medium text-gray-800">
+                            {item.Station}
+                          </div>
+                        </td>
+                        <td className="p-2 ">
                           <button
                             onClick={() => setSelectedItem(item)}
                             className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
@@ -395,7 +414,7 @@ const RepairReport = () => {
                         {selectedItem && (
                           <>
                             <div className="fixed z-10 inset-0 overflow-y-auto">
-                              <div class="flex items-end justify-center min-h-screen bg-slate-400 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                              <div class="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                                 <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
                                 <div
                                   class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
@@ -405,17 +424,17 @@ const RepairReport = () => {
                                 >
                                   <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                                     <div className="sm:flex sm:items-start">
-                                      <div className="w-full max-w-lg">
+                                    <div className="w-full max-w-lg">
                                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                          <span>PROBLEM</span>
+                                          <span>REQUESTED BY</span>
                                         </div>
                                         <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full px-1">
+                                          <div class="w-full  px-3 mb-6 md:mb-0">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-first-name"
                                             >
-                                              Nama PIC
+                                              Nama PIC Maintenance
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -427,8 +446,23 @@ const RepairReport = () => {
                                           </div>
                                         </div>
 
-                                        <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full md:w-1/3 px-2 mb-6 md:mb-0">
+                                        <div class="flex flex-wrap -mx-3 mb-1">
+                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                              for="grid-city"
+                                            >
+                                              Area
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.Area}{" "}
+                                            </div>
+                                          </div>
+                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-city"
@@ -440,20 +474,33 @@ const RepairReport = () => {
                                               type="text"
                                             >
                                               {" "}
-                                              {selectedItem.Line}{" "}
+                                              {selectedItem.Area}{" "}
                                             </div>
                                           </div>
-                                        </div>
-                                        <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full px-1">
+                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                              for="grid-city"
+                                            >
+                                              Station
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.Station}{" "}
+                                            </div>
+                                          </div>
+                                           <div class="w-full px-1">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                                               for="grid-password"
                                             >
-                                              Problem
+                                              Kerusakan
                                             </label>
                                             <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border text-red-600  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              class="appearance-none block w-full bg-gray-200 text-red-900 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}
@@ -461,6 +508,7 @@ const RepairReport = () => {
                                             </div>
                                           </div>
                                         </div>
+                                      
                                         <div className="flex justify-end">
                                           <button
                                             className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
@@ -477,6 +525,8 @@ const RepairReport = () => {
                                 </div>
                               </div>
                             </div>
+
+                            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
                           </>
                         )}
 
@@ -516,4 +566,4 @@ const RepairReport = () => {
   );
 };
 
-export default RepairReport;
+export default RequestQA;
