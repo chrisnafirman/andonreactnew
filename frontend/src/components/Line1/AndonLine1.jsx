@@ -45,6 +45,7 @@ const Andonline1 = () => {
   // STATION DESTECKER
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT TOP");
+  const [Destacker, setDestecker] = useState("Destacker");
   const [Station, setStation] = useState("");
 
   // CMA
@@ -52,6 +53,7 @@ const Andonline1 = () => {
   const [CMARunning, setCMARunning] = useState();
   const [ResultsCMA, setResultsCMA] = useState();
 
+  // popup form 1
   // popup form 1
   const [isOpenOthers, setIsOpenOthers] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
@@ -130,7 +132,93 @@ const Andonline1 = () => {
   const namaList = ["CHRISNA FIRMAN"];
   const npkList = ["0301"];
 
+  const calculateTotalTime = () => {
+    let totalJam = 0;
+    let totalMenit = 0;
 
+    // Mengambil nilai dari state
+    const waktuPT1 = RealPT1.split(" ");
+    const waktuPT2 = RealPT2.split(" ");
+    const waktuPT3 = RealPT3.split(" ");
+    const waktuPT4 = RealPT4.split(" ");
+    const waktuPD = RealPD.split(" ");
+    const waktuOT = RealOT.split(" ");
+
+    // Menambahkan waktu PT1
+    if (waktuPT1[0] !== "waiting...") {
+      if (waktuPT1.length === 4) {
+        totalJam += parseInt(waktuPT1[0]);
+        totalMenit += parseInt(waktuPT1[2]);
+      } else if (waktuPT1.length === 2) {
+        totalMenit += parseInt(waktuPT1[0]);
+      }
+    }
+
+    // Menambahkan waktu PT2
+    if (waktuPT2[0] !== "waiting...") {
+      if (waktuPT2.length === 4) {
+        totalJam += parseInt(waktuPT2[0]);
+        totalMenit += parseInt(waktuPT2[2]);
+      } else if (waktuPT2.length === 2) {
+        totalMenit += parseInt(waktuPT2[0]);
+      }
+    }
+
+    // Menambahkan waktu PT3
+    if (waktuPT3[0] !== "waiting...") {
+      if (waktuPT3.length === 4) {
+        totalJam += parseInt(waktuPT3[0]);
+        totalMenit += parseInt(waktuPT3[2]);
+      } else if (waktuPT3.length === 2) {
+        totalMenit += parseInt(waktuPT3[0]);
+      }
+    }
+
+    // Menambahkan waktu PT4
+    if (waktuPT4[0] !== "waiting...") {
+      if (waktuPT4.length === 4) {
+        totalJam += parseInt(waktuPT4[0]);
+        totalMenit += parseInt(waktuPT4[2]);
+      } else if (waktuPT4.length === 2) {
+        totalMenit += parseInt(waktuPT4[0]);
+      }
+    }
+
+    // Menambahkan waktu PD jika bukan "waiting..."
+    if (waktuPD[0] !== "waiting...") {
+      if (waktuPD.length === 4) {
+        totalJam += parseInt(waktuPD[0]);
+        totalMenit += parseInt(waktuPD[2]);
+      } else if (waktuPD.length === 2) {
+        totalMenit += parseInt(waktuPD[0]);
+      }
+    }
+
+    // Menambahkan waktu OT jika bukan "waiting..."
+    if (waktuOT[0] !== "waiting...") {
+      if (waktuOT.length === 4) {
+        totalJam += parseInt(waktuOT[0]);
+        totalMenit += parseInt(waktuOT[2]);
+      } else if (waktuOT.length === 2) {
+        totalMenit += parseInt(waktuOT[0]);
+      }
+    }
+
+    // Mengubah menit menjadi jam jika lebih dari 60
+    if (totalMenit >= 60) {
+      const tambahanJam = Math.floor(totalMenit / 60);
+      totalJam += tambahanJam;
+      totalMenit -= tambahanJam * 60;
+    }
+
+    // Mengatur nilai hasil penjumlahan ke state Total
+    const output = `${totalJam} jam ${totalMenit} menit`;
+    setTotal(output);
+  };
+
+  useEffect(() => {
+    calculateTotalTime();
+  }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
 
   // FETCHING FIREBASE
 
@@ -356,114 +444,11 @@ const Andonline1 = () => {
       setRealOT(data);
     });
 
-
-    const ref17 = firebase
-    .database()
-    .ref("/StatusLine/SMTLine1ProductionTime/Total")
-  ref17.on("value", (snapshot) => {
-    const data = snapshot.val();
-    setTotal(data);
-  });
-
     return () => {};
   }, []);
 
   // ---------------------
 
-
-  // Realtime Production
-  useEffect(() => {
-    const startCountdown = (startTime, endTime, productionTimeKey) => {
-      const targetTime = new Date();
-      const [hours, minutes] = startTime.split(":");
-      targetTime.setHours(parseInt(hours, 10));
-      targetTime.setMinutes(parseInt(minutes, 10));
-      targetTime.setSeconds(0);
-
-      const outTime = new Date();
-      const [outHours, outMinutes] = endTime.split(":");
-      outTime.setHours(parseInt(outHours, 10));
-      outTime.setMinutes(parseInt(outMinutes, 10));
-      outTime.setSeconds(0);
-
-      const interval = setInterval(() => {
-        const currentTime = new Date();
-        let remainingTime = 0;
-
-        if (currentTime >= targetTime && currentTime < outTime) {
-          // Start counting only when the current time is within the range
-          remainingTime = targetTime.getTime() - currentTime.getTime();
-
-          // Start counting from 0 seconds after the target time is reached
-          if (remainingTime <= 0) {
-            remainingTime = Math.abs(remainingTime) + 1000; // Add 1 second
-          }
-
-          // Send the countdown value to Firebase
-          firebase
-            .database()
-            .ref(`/StatusLine/SMTLine1ProductionTime/${productionTimeKey}`)
-            .set(formatTime(remainingTime));
-        } else if (currentTime >= outTime) {
-          // Stop the countdown if the current time exceeds the end time
-          clearInterval(interval);
-        }
-      }, 1000); // Update every second
-
-      return interval; // Return the interval ID for cleanup
-    };
-
-    const formatTime = (time) => {
-      const totalSeconds = Math.floor(time / 1000);
-      const minutes = Math.floor(totalSeconds / 60);
-      const hours = Math.floor(minutes / 60);
-      const remainingMinutes = minutes % 60;
-
-      if (hours >= 1) {
-        if (remainingMinutes >= 1) {
-          return `${hours} jam ${remainingMinutes} menit`;
-        } else {
-          return `${hours} jam`;
-        }
-      } else if (minutes >= 1) {
-        return `${minutes} menit`;
-      } else {
-        return `${totalSeconds} detik`;
-      }
-    };
-
-    let intervals = [];
-
-    const startCountdownForData = (
-      startTimeKey,
-      endTimeKey,
-      productionTimeKey
-    ) => {
-      if (data && data[startTimeKey] && data[endTimeKey]) {
-        const interval = startCountdown(
-          data[startTimeKey],
-          data[endTimeKey],
-          productionTimeKey
-        );
-        intervals.push(interval);
-      }
-    };
-
-    startCountdownForData("PT1_IN", "PT1_OUT", "ProductionTime1");
-    startCountdownForData("PT2_IN", "PT2_OUT", "ProductionTime2");
-    startCountdownForData("PT3_IN", "PT3_OUT", "ProductionTime3");
-    startCountdownForData("PT4_IN", "PT4_OUT", "ProductionTime4");
-    startCountdownForData("PD_IN", "PD_OUT", "DownTime");
-    startCountdownForData("OT_IN", "OT_OUT", "OverTime");
-
-    return () => {
-      intervals.forEach((interval) => {
-        clearInterval(interval);
-      });
-    };
-  }, [data]);
-
-  // Change Model Allocation Function
 
   let CMAInterval;
 
@@ -596,6 +581,7 @@ const Andonline1 = () => {
   
 
   // ----
+
 
   // FETCHING SCHEDULE
   // fungsi  schedule
@@ -838,7 +824,7 @@ const Andonline1 = () => {
       MachineName: mesin,
       MachineArea: Area,
       MachineLine: Line,
-      MachineStation: Station,
+      MachineStation: Destacker,
       Kerusakan: Kerusakan,
     };
 
@@ -881,14 +867,14 @@ const Andonline1 = () => {
       alert("Harap isi semua kolom!");
       return;
     }
-  
+
     const data = {
       NamaPIC: NamaPIC,
       Line: Line,
       Station: Station,
       Kerusakan: Kerusakan,
     };
-  
+
     fetch(`http://192.168.101.236:3001/api/post/general`, {
       method: "POST",
       headers: {
@@ -898,8 +884,8 @@ const Andonline1 = () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("Permintaan Bantuan Segera Diproses");
-          firebase.database().ref(`SMTLine1/${Station}`).set("Down");
+          alert("Permintaan Bantuan Network Segera Diproses");
+          firebase.database().ref("SMTLine1/Network").set("Down");
           firebase.database().ref("StatusLine/SMTLine1").set("Down");
           setIsOpenGeneral(false);
           window.location.reload();
@@ -912,7 +898,6 @@ const Andonline1 = () => {
         console.log(err);
       });
   };
-  
   // ------
 
   // Tindakan / Kehadiran
@@ -942,7 +927,6 @@ const Andonline1 = () => {
   const handleCall2 = () => {
     window.location.href = "https://api.whatsapp.com/send?phone=6281929749600";
   };
-
 
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/S.jpg)`,
@@ -1023,9 +1007,7 @@ const Andonline1 = () => {
             </a>
           </li>
           <button onClick={() => setIsOpen2(true)} class="w-60 sm:w-36 lg:w-32">
-            <span
-              class="inline-block w-full  p-4 text-orange-700  bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-            >
+            <span class="inline-block w-full  p-4 text-orange-700  bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
               <header className="animate-bounce">
                 <div>ISA</div>
               </header>
@@ -1479,7 +1461,7 @@ const Andonline1 = () => {
       <td class="">
         {isOpen2 ? (
           <>
-             <div className="fixed z-10 inset-0 overflow-y-auto">
+            <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
                   <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
@@ -1709,7 +1691,7 @@ const Andonline1 = () => {
                               onClick={handleCall2}
                               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             >
-                              CALL LEADER 
+                              CALL LEADER
                             </button>
                           </div>
                         )}
@@ -1908,7 +1890,8 @@ const Andonline1 = () => {
                             ></path>
                           </svg>
                           <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-normal text-gray-500 dark:text-gray-400">
-                            Apakah Anda Yakin Akan Meminta Bantuan Team {Station}?
+                            Apakah Anda Yakin Akan Meminta Bantuan Team{" "}
+                            {Station}?
                           </h3>
                           <div class="flex flex-wrap -mx-3 ">
                             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">

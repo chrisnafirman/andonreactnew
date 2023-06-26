@@ -12,18 +12,10 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const SmtTop = () => {
-  // Tindakan / Kehadiran
-  const [DestackerPressed, setDestackerPressed] = useState(false);
-  const timeoutRefDestacker = useRef(null);
-  const [LabelPressed, setLabelPressed] = useState(false);
-  const timeoutRefLabel = useRef(null);
-  // ----
-
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
   const [timer, setTimer] = useState("");
-  const [prevStatus, setPrevStatus] = useState("");
   const [status, setStatus] = useState("");
 
   // NAVBAR
@@ -46,18 +38,73 @@ const SmtTop = () => {
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT TOP");
 
-  // DESTACKER STATION
+  // //////
+
+  //  STATION
   const [Destacker, setDestacker] = useState("Destacker");
   const [Statusdestacker, setStatusdestacker] = useState("");
   const [Statuslabel, setStatuslabel] = useState("");
   const [Label, setLabel] = useState("Label");
+  const [StatusPrinterTop, setStatusPrinterTop] = useState("");
+  const [PrinterTop, setPrinterTop] = useState("Printer (TOP)");
+  const [StatusSpiTop, setStatusSpiTop] = useState("");
+  const [SpiTop, setSpiTop] = useState("Spi (TOP)");
+  const [StatusPickNPlace, setStatusPickNPlace] = useState("");
+  const [PickNPlace, setPickNPlace] = useState("Pick&Place (TOP)");
+  const [StatusReflowTop, setStatusReflowTop] = useState("");
+  const [ReflowTop, setReflowTop] = useState("Reflow (TOP)");
+  const [StatusAOITop, setStatusAOITop] = useState("");
+  const [AOITop, setAOITop] = useState("AOI (TOP)");
+  const [StatusRVSTop, setStatusRVSTop] = useState("");
+  const [RVSTop, setRVSTop] = useState("RVS (TOP)");
+
+  // Tindakan / Kehadiran
+  const [DestackerPressed, setDestackerPressed] = useState(false);
+  const timeoutRefDestacker = useRef(null);
+  const [LabelPressed, setLabelPressed] = useState(false);
+  const timeoutRefLabel = useRef(null);
+  const [PrinterTopPressed, setPrinterTopPressed] = useState(false);
+  const timeoutRefPrinterTop = useRef(null);
+  const [SpiTopPressed, setSpiTopPressed] = useState(false);
+  const timeoutRefSpiTop = useRef(null);
+  const [PickNPlacePressed, setPickNPlacePressed] = useState(false);
+  const timeoutRefPickNPlace = useRef(null);
+  const [ReflowTopPressed, setReflowTopPressed] = useState(false);
+  const timeoutRefReflowTop = useRef(null);
+  const [AOITopPressed, setAOITopPressed] = useState(false);
+  const timeoutRefAOITop = useRef(null);
+  const [RVSTopPressed, setRVSTopPressed] = useState(false);
+  const timeoutRefRVSTop = useRef(null);
+  // ----
+
+  //BACKGROUND / WARNA KOTAK
+  const [backgroundColor, setBackgroundColor] = useState("");
+  const [backgroundColorStatusdestacker, setBackgroundColorStatusdestacker] =
+    useState("");
+  const [backgroundColorStatuslabel, setBackgroundColorStatuslabel] =
+    useState("");
+    const [backgroundColorStatusPrinterTop, setBackgroundColorStatusPrinterTop] =
+    useState("");
+    const [backgroundColorStatusSpiTop, setBackgroundColorStatusSpiTop] =
+    useState("");
+    const [backgroundColorStatusPickNPlace, setBackgroundColorStatusPickNPlace] =
+    useState("");
+    const [backgroundColorStatusReflowTop, setBackgroundColorStatusReflowTop] =
+    useState("");
+    const [backgroundColorStatusAOITop, setBackgroundColorStatusAOITop] =
+    useState("");
+    const [backgroundColorStatusRVSTop, setBackgroundColorStatusRVSTop] =
+    useState("");
+ 
+  // ---------------------------
+
+  // //////
 
   // POPUP
   const [isOpenMaintenance, setIsOpenMaintenance] = useState(false);
   const [QualityA, setQualityA] = useState(false);
   const [QualityC, setQualityC] = useState(false);
   const [QualityOption, setQualityOption] = useState(false);
-
 
   const [isOpen2, setIsOpen2] = useState(false);
   const [isOpenValQA, setIsOpenValQA] = useState(false);
@@ -75,14 +122,6 @@ const SmtTop = () => {
   // CMA
 
   const [ResultsCMA, setResultsCMA] = useState();
-
-  //BACKGROUND / WARNA KOTAK
-  const [backgroundColorStatusdestacker, setBackgroundColorStatusdestacker] =
-    useState("");
-  const [backgroundColorStatuslabel, setBackgroundColorStatuslabel] =
-    useState("");
-  const [backgroundColor, setBackgroundColor] = useState("");
-  // ---------------------------
 
   /// DROPDOWN
   const namaList = ["CHRISNA"];
@@ -324,6 +363,451 @@ const SmtTop = () => {
       setTotal(data);
     });
 
+    const ref18 = firebase.database().ref("/SMTLine1TOP/Printer (TOP)");
+    ref18.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusPrinterTop(data);
+      if (data === "Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Maintenance SMT LINE 1 Printer (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      } else if (data === "Return Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 Printer (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
+    });
+
+
+    const ref19 = firebase.database().ref("/SMTLine1TOP/Spi (TOP)");
+    ref19.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusSpiTop(data);
+      if (data === "Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Maintenance SMT LINE 1 Spi (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      } else if (data === "Return Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 Spi (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
+    });
+
+
+
+    const ref20 = firebase.database().ref("/SMTLine1TOP/Pick&Place (TOP)");
+    ref20.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusPickNPlace(data);
+      if (data === "Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Maintenance SMT LINE 1 Pick&Place (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      } else if (data === "Return Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 Pick&Place (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
+    });
+
+
+
+    const ref21 = firebase.database().ref("/SMTLine1TOP/Reflow (TOP)");
+    ref21.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusReflowTop(data);
+      if (data === "Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Maintenance SMT LINE 1 Reflow (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      } else if (data === "Return Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 Reflow (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
+    });
+
+
+    const ref22 = firebase.database().ref("/SMTLine1TOP/AOI (TOP)");
+    ref22.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusAOITop(data);
+      if (data === "Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Maintenance SMT LINE 1 AOI (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      } else if (data === "Return Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 AOI (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
+    });
+
+    const ref23 = firebase.database().ref("/SMTLine1TOP/RVS (TOP)");
+    ref23.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusRVSTop(data);
+      if (data === "Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Maintenance SMT LINE 1 RVS (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      } else if (data === "Return Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 RVS (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
+    });
+
+
     return () => {};
   }, []);
 
@@ -423,7 +907,7 @@ const SmtTop = () => {
 
   // --------------------
 
-  // FUNGSI FETCHING SCHEDULE
+
 
   // fungsi  schedule
   function formatDate(dateString) {
@@ -446,6 +930,10 @@ const SmtTop = () => {
     updateTime();
   }, []);
 
+
+
+
+
   // Fetching Data Schedule Planing
   useEffect(() => {
     const fetchData = async () => {
@@ -466,6 +954,8 @@ const SmtTop = () => {
   }, []);
 
   // ----
+
+
 
   // FUNGSI UPDATE STATUS
   // fungsi mengubah warna status
@@ -516,6 +1006,147 @@ const SmtTop = () => {
     );
   };
 
+  const updateStatusPrinterTop = (data) => {
+    setStatusPrinterTop(data);
+    setBackgroundColorStatusPrinterTop(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "Return Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+   const updateStatusSpiTop = (data) => {
+    setStatusSpiTop(data);
+    setBackgroundColorStatusSpiTop(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "Return Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+
+  const updateStatusPickNPlace = (data) => {
+    setStatusPickNPlace(data);
+    setBackgroundColorStatusPickNPlace(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "Return Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+
+
+  const updateStatusReflowTop = (data) => {
+    setStatusReflowTop(data);
+    setBackgroundColorStatusReflowTop(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "Return Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+
+  const updateStatusAOITop = (data) => {
+    setStatusAOITop(data);
+    setBackgroundColorStatusAOITop(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "Return Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
+
+  const updateStatusRVSTop = (data) => {
+    setStatusRVSTop(data);
+    setBackgroundColorStatusRVSTop(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "Leader"
+        ? "#C00000"
+        : data === "Maintenance"
+        ? "#be4f62"
+        : data === "Return Maintenance"
+        ? "#be4f62"
+        : data === "PPIC"
+        ? "#7A6544"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : "#565454"
+    );
+  };
   // ----
 
   // FUNGSI WAKTU
@@ -786,6 +1417,155 @@ const SmtTop = () => {
     clearTimeout(timeoutRefLabel.current);
   };
 
+
+  const handlePrinterTopPress = () => {
+    if (StatusPrinterTop === "Maintenance" || StatusPrinterTop === "Return Maintenance") {
+      setPrinterTopPressed(true);
+      timeoutRefPrinterTop.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/Printer (TOP)").set("Repair");
+        window.location.reload();
+      }, 3000);
+    } else if (StatusPrinterTop === "QA" || StatusPrinterTop === "QC") {
+      setPrinterTopPressed(true);
+      timeoutRefPrinterTop.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/Printer (TOP)").set("Go");
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handlePrinterTopRelease = () => {
+    setPrinterTopPressed(false);
+    clearTimeout(timeoutRefPrinterTop.current);
+  };
+
+
+
+  const handleSpiTopPress = () => {
+    if (StatusSpiTop === "Maintenance" || StatusSpiTop === "Return Maintenance") {
+      setSpiTopPressed(true);
+      timeoutRefSpiTop.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/Spi (TOP)").set("Repair");
+        window.location.reload();
+      }, 3000);
+    } else if (StatusSpiTop  === "QA" || StatusSpiTop === "QC") {
+      setSpiTopPressed(true);
+      timeoutRefSpiTop.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/Spi (TOP)").set("Go");
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleSpiTopRelease = () => {
+    setSpiTopPressed(false);
+    clearTimeout(timeoutRefSpiTop.current);
+  };
+
+
+  const handlePickNPlacePress = () => {
+    if (StatusPickNPlace === "Maintenance" || StatusPickNPlace === "Return Maintenance") {
+      setPickNPlacePressed(true);
+      timeoutRefPickNPlace.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/Pick&Place (TOP)").set("Repair");
+        window.location.reload();
+      }, 3000);
+    } else if (StatusPickNPlace  === "QA" || StatusPickNPlace === "QC") {
+      setPickNPlacePressed(true);
+      timeoutRefPickNPlace.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/Pick&Place (TOP)").set("Go");
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handlePickNPlaceRelease = () => {
+    setPickNPlacePressed(false);
+    clearTimeout(timeoutRefPickNPlace.current);
+  };
+
+
+  const handleReflowTopPress = () => {
+    if (StatusReflowTop === "Maintenance" || StatusReflowTop === "Return Maintenance") {
+      setReflowTopPressed(true);
+      timeoutRefReflowTop.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/Reflow (TOP)").set("Repair");
+        window.location.reload();
+      }, 3000);
+    } else if (StatusReflowTop  === "QA" || StatusReflowTop === "QC") {
+      setReflowTopPressed(true);
+      timeoutRefReflowTop.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/Reflow (TOP)").set("Go");
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleReflowTopRelease = () => {
+    setReflowTopPressed(false);
+    clearTimeout(timeoutRefReflowTop.current);
+  };
+
+
+
+
+  const handleAOITopPress = () => {
+    if (StatusAOITop === "Maintenance" || StatusAOITop === "Return Maintenance") {
+      setAOITopPressed(true);
+      timeoutRefAOITop.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/AOI (TOP)").set("Repair");
+        window.location.reload();
+      }, 3000);
+    } else if (StatusAOITop  === "QA" || StatusAOITop === "QC") {
+      setAOITopPressed(true);
+      timeoutRefAOITop.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/AOI (TOP)").set("Go");
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleAOITopRelease = () => {
+    setAOITopPressed(false);
+    clearTimeout(timeoutRefAOITop.current);
+  };
+  
+
+  
+  const handleRVSTopPress = () => {
+    if (StatusRVSTop === "Maintenance" || StatusRVSTop === "Return Maintenance") {
+      setRVSTopPressed(true);
+      timeoutRefRVSTop.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/RVS (TOP)").set("Repair");
+        window.location.reload();
+      }, 3000);
+    } else if (StatusRVSTop  === "QA" || StatusRVSTop === "QC") {
+      setRVSTopPressed(true);
+      timeoutRefRVSTop.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("SMTLine1TOP/RVS (TOP)").set("Go");
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleRVSTopRelease = () => {
+    setRVSTopPressed(false);
+    clearTimeout(timeoutRefRVSTop.current);
+  };
+
+
   // ------
 
   const handleCall = () => {
@@ -971,10 +1751,29 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
-                    onClick={() => setIsOpenMaintenance(true)}
-                    disabled={status !== "Go"}
+                    onMouseDown={handlePrinterTopPress}
+                    onMouseUp={handlePrinterTopRelease}
+                    onMouseLeave={handlePrinterTopRelease}
+                    onTouchStart={handlePrinterTopPress}
+                    onTouchEnd={handlePrinterTopRelease}
+                    style={{ backgroundColor: backgroundColorStatusPrinterTop }}
+                    value={StatusPrinterTop}
+                    onClick={() => {
+                      if (StatusPrinterTop === "Go") {
+                        // set isOpenDestacker state to true if StatusPrinterTop is "Go"
+                        setIsOpenMaintenance(true);
+                      } else if (StatusPrinterTop === "Repair") {
+                        // set Quality state to true if StatusPrinterTop is "Repair"
+                        setQualityOption(true);
+                      } else if (StatusPrinterTop === "QA") {
+                        // set Quality state to true if StatusPrinterTop is "Repair"
+                        setIsOpenValQA(true);
+                      } else if (StatusPrinterTop === "QC") {
+                        // set Quality state to true if Statusdestacker is "Repair"
+                        setIsOpenValQC(true);
+                      }
+                      setStation(PrinterTop);
+                    }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -991,10 +1790,29 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
-                    onClick={() => setIsOpenMaintenance(true)}
-                    disabled={status !== "Go"}
+                    onMouseDown={handleSpiTopPress}
+                    onMouseUp={handleSpiTopRelease}
+                    onMouseLeave={handleSpiTopRelease}
+                    onTouchStart={handleSpiTopPress}
+                    onTouchEnd={handleSpiTopRelease}
+                    style={{ backgroundColor: backgroundColorStatusSpiTop }}
+                    value={StatusSpiTop}
+                    onClick={() => {
+                      if (StatusSpiTop === "Go") {
+                        // set isOpenDestacker state to true if StatusSpiTop is "Go"
+                        setIsOpenMaintenance(true);
+                      } else if (StatusSpiTop === "Repair") {
+                        // set Quality state to true if StatusSpiTop is "Repair"
+                        setQualityOption(true);
+                      } else if (StatusSpiTop === "QA") {
+                        // set Quality state to true if StatusSpiTop is "Repair"
+                        setIsOpenValQA(true);
+                      } else if (StatusSpiTop === "QC") {
+                        // set Quality state to true if Statusdestacker is "Repair"
+                        setIsOpenValQC(true);
+                      }
+                      setStation(SpiTop);
+                    }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -1016,10 +1834,29 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
-                    onClick={() => setIsOpenMaintenance(true)}
-                    disabled={status !== "Go"}
+                    onMouseDown={handlePickNPlacePress}
+                    onMouseUp={handlePickNPlaceRelease}
+                    onMouseLeave={handlePickNPlaceRelease}
+                    onTouchStart={handlePickNPlacePress}
+                    onTouchEnd={handlePickNPlaceRelease}
+                    style={{ backgroundColor: backgroundColorStatusPickNPlace }}
+                    value={StatusPickNPlace}
+                    onClick={() => {
+                      if (StatusPickNPlace === "Go") {
+                        // set isOpenDestacker state to true if StatusPickNPlace is "Go"
+                        setIsOpenMaintenance(true);
+                      } else if (StatusPickNPlace === "Repair") {
+                        // set Quality state to true if StatusPickNPlace is "Repair"
+                        setQualityOption(true);
+                      } else if (StatusPickNPlace === "QA") {
+                        // set Quality state to true if StatusPickNPlace is "Repair"
+                        setIsOpenValQA(true);
+                      } else if (StatusPickNPlace === "QC") {
+                        // set Quality state to true if Statusdestacker is "Repair"
+                        setIsOpenValQC(true);
+                      }
+                      setStation(PickNPlace);
+                    }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -1036,11 +1873,30 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
-                    onClick={() => setIsOpenMaintenance(true)}
-                    disabled={status !== "Go"}
-                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                   onMouseDown={handleReflowTopPress}
+                   onMouseUp={handleReflowTopRelease}
+                   onMouseLeave={handleReflowTopRelease}
+                   onTouchStart={handleReflowTopPress}
+                   onTouchEnd={handleReflowTopRelease}
+                   style={{ backgroundColor: backgroundColorStatusReflowTop }}
+                   value={StatusReflowTop}
+                   onClick={() => {
+                     if (StatusReflowTop === "Go") {
+                       // set isOpenDestacker state to true if StatusReflowTop is "Go"
+                       setIsOpenMaintenance(true);
+                     } else if (StatusReflowTop === "Repair") {
+                       // set Quality state to true if StatusReflowTop is "Repair"
+                       setQualityOption(true);
+                     } else if (StatusReflowTop === "QA") {
+                       // set Quality state to true if StatusReflowTop is "Repair"
+                       setIsOpenValQA(true);
+                     } else if (StatusReflowTop === "QC") {
+                       // set Quality state to true if Statusdestacker is "Repair"
+                       setIsOpenValQC(true);
+                     }
+                     setStation(ReflowTop);
+                   }}
+                   class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="font-semibold text-center text-white">
@@ -1056,11 +1912,30 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
-                    onClick={() => setIsOpenMaintenance(true)}
-                    disabled={status !== "Go"}
-                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                     onMouseDown={handleAOITopPress}
+                     onMouseUp={handleAOITopRelease}
+                     onMouseLeave={handleAOITopRelease}
+                     onTouchStart={handleAOITopPress}
+                     onTouchEnd={handleAOITopRelease}
+                     style={{ backgroundColor: backgroundColorStatusAOITop }}
+                     value={StatusAOITop}
+                     onClick={() => {
+                       if (StatusAOITop === "Go") {
+                         // set isOpenDestacker state to true if StatusAOITop is "Go"
+                         setIsOpenMaintenance(true);
+                       } else if (StatusAOITop === "Repair") {
+                         // set Quality state to true if StatusAOITop is "Repair"
+                         setQualityOption(true);
+                       } else if (StatusAOITop === "QA") {
+                         // set Quality state to true if StatusAOITop is "Repair"
+                         setIsOpenValQA(true);
+                       } else if (StatusAOITop === "QC") {
+                         // set Quality state to true if Statusdestacker is "Repair"
+                         setIsOpenValQC(true);
+                       }
+                       setStation(AOITop);
+                     }}
+                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="font-semibold text-center text-white">
@@ -1076,10 +1951,29 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    style={{ backgroundColor: backgroundColor }}
-                    value={status}
-                    onClick={() => setIsOpenMaintenance(true)}
-                    disabled={status !== "Go"}
+                    onMouseDown={handleRVSTopPress}
+                    onMouseUp={handleRVSTopRelease}
+                    onMouseLeave={handleRVSTopRelease}
+                    onTouchStart={handleRVSTopPress}
+                    onTouchEnd={handleRVSTopRelease}
+                    style={{ backgroundColor: backgroundColorStatusRVSTop }}
+                    value={StatusRVSTop}
+                    onClick={() => {
+                      if (StatusRVSTop === "Go") {
+                        // set isOpenDestacker state to true if StatusRVSTop is "Go"
+                        setIsOpenMaintenance(true);
+                      } else if (StatusRVSTop === "Repair") {
+                        // set Quality state to true if StatusRVSTop is "Repair"
+                        setQualityOption(true);
+                      } else if (StatusRVSTop === "QA") {
+                        // set Quality state to true if StatusRVSTop is "Repair"
+                        setIsOpenValQA(true);
+                      } else if (StatusRVSTop === "QC") {
+                        // set Quality state to true if Statusdestacker is "Repair"
+                        setIsOpenValQC(true);
+                      }
+                      setStation(RVSTop);
+                    }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -1111,9 +2005,9 @@ const SmtTop = () => {
                   </table>
                 </div> */}
 
-      {/* POPPP UPPPP */}
+ 
 
-      {/* POP UP */}
+      {/* POP UP  Operator To Maintenance*/}
       <td class="">
         {isOpenOperator ? (
           <>
@@ -1501,8 +2395,8 @@ const SmtTop = () => {
         ) : null}
       </td>
 
-      {/* Destacker */}
-      {/* POP UP  DESTECKER*/}
+      {/*  */}
+      {/* POP UP Maintenance to QC  */}
       <td class="">
         {isOpenMaintenance ? (
           <>
@@ -1656,7 +2550,7 @@ const SmtTop = () => {
         ) : null}
       </td>
 
-      {/* QualityDestackerOption */}
+      {/* QualityOption */}
       <td class="">
         {QualityOption ? (
           <>
@@ -1733,7 +2627,7 @@ const SmtTop = () => {
         ) : null}
       </td>
 
-      {/* QualityADestacker */}
+      {/* QualityA */}
       <td class="">
         {QualityA ? (
           <>
@@ -1793,7 +2687,7 @@ const SmtTop = () => {
                               placeholder="ICT"
                               name="MachineName"
                             >
-                             Quality Assurance
+                              Quality Assurance
                             </span>
                           </div>
                         </div>
@@ -1899,7 +2793,7 @@ const SmtTop = () => {
         ) : null}
       </td>
 
-      {/* QualityCDestacker */}
+      {/* QualityC*/}
       <td class="">
         {QualityC ? (
           <>
@@ -2064,7 +2958,7 @@ const SmtTop = () => {
         ) : null}
       </td>
 
-      {/* POP UP  RETURN Destacker*/}
+      {/* POP UP  RETURN Maintenance*/}
       <td class="">
         {isOpenReturnMaintenance ? (
           <>
