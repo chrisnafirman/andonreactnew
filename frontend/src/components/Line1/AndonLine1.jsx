@@ -18,8 +18,7 @@ const Andonline1 = () => {
   // ----
 
   const [mesin, setMesin] = useState("");
-  const [nama, setNama] = useState("");
-  const [timer, setTimer] = useState("");
+
 
   const [prevStatus, setPrevStatus] = useState("");
 
@@ -229,84 +228,6 @@ const Andonline1 = () => {
 
   // Fetching FIrebase
   useEffect(() => {
-    const ref = firebase.database().ref("Mesin/Mesin1");
-    ref.on("value", (snapshot) => {
-      const data = snapshot.val();
-      updateStatus(data);
-      // if (data === "Damage") {
-      //   const audio = new Audio("Sound.mp3");
-      //   audio.autoplay = true;
-      //   audio.play();
-
-      //   navigator.permissions
-      //     .query({ name: "clipboard-write" })
-      //     .then((permissionStatus) => {
-      //       if (permissionStatus.state === "granted") {
-      //         const text =
-      //           "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-      //         navigator.clipboard
-      //           .writeText(text)
-      //           .then(() => {
-      //             const botToken =
-      //               "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
-      //             const chatIds = [1563609464, 6019720343, -692863121];
-      //             const message =
-      //               "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakukan Perbaikan";
-      //             chatIds.forEach((chatId) => {
-      //               fetch(
-      //                 `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
-      //               )
-      //                 .then((response) => {
-      //                   if (!response.ok) {
-      //                     throw new Error("Error sending telegram message");
-      //                   }
-      //                 })
-      //                 .catch((error) => {
-      //                   console.error(error);
-      //                 });
-      //             });
-      //           })
-      //           .catch((error) => {
-      //             console.error(error);
-      //           });
-      //       } else if (permissionStatus.state === "prompt") {
-      //         permissionStatus.onchange = () => {
-      //           if (permissionStatus.state === "granted") {
-      //             const text =
-      //               "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-      //             navigator.clipboard
-      //               .writeText(text)
-      //               .then(() => {
-      //                 const botToken =
-      //                   "6165170138:AAHGjjgGP88vnuGyDZ-6JTCkEPaZ_aGJLvc";
-      //                 const chatIds = [1563609464, 6019720343, -692863121];
-      //                 const message =
-      //                   "Mesin1 Sedang Rusak, Di Mohon Untuk Segera Di Lakuka Perbaikan";
-      //                 chatIds.forEach((chatId) => {
-      //                   fetch(
-      //                     `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`
-      //                   )
-      //                     .then((response) => {
-      //                       if (!response.ok) {
-      //                         throw new Error("Error sending telegram message");
-      //                       }
-      //                     })
-      //                     .catch((error) => {
-      //                       console.error(error);
-      //                     });
-      //                 });
-      //               })
-      //               .catch((error) => {
-      //                 console.error(error);
-      //               });
-      //           }
-      //         };
-      //       } else {
-      //         // Izin ditolak
-      //       }
-      //     });
-      // }
-    });
 
     const ref2 = firebase.database().ref("StatusLine/SMTLine1");
     ref2.on("value", (snapshot) => {

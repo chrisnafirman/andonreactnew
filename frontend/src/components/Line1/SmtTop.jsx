@@ -15,8 +15,7 @@ const SmtTop = () => {
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
-  const [timer, setTimer] = useState("");
-  const [status, setStatus] = useState("");
+
 
   // NAVBAR
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -149,12 +148,73 @@ const SmtTop = () => {
       setStatusLine(data);
     });
 
-    const ref5 = firebase.database().ref("Mesin/timer");
-    ref5.on("value", (snapshot) => {
+
+
+
+    const ref10 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
+    ref10.on("value", (snapshot) => {
       const data = snapshot.val();
-      setTimer(data);
+      setResultsCMA(data);
     });
 
+    const ref11 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1");
+    ref11.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT1(data);
+    });
+
+    const ref12 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2");
+    ref12.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT2(data);
+    });
+
+    const ref13 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3");
+    ref13.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT3(data);
+    });
+
+    const ref14 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4");
+    ref14.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPT4(data);
+    });
+
+    const ref15 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/DownTime");
+    ref15.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealPD(data);
+    });
+
+    const ref16 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/OverTime");
+    ref16.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRealOT(data);
+    });
+
+    const ref17 = firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/Total");
+    ref17.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setTotal(data);
+    });
+
+
+    
     const ref8 = firebase.database().ref("SMTLine1TOP/Destacker");
     ref8.on("value", (snapshot) => {
       const data = snapshot.val();
@@ -299,68 +359,6 @@ const SmtTop = () => {
             }
           });
       }
-    });
-
-    const ref10 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
-    ref10.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setResultsCMA(data);
-    });
-
-    const ref11 = firebase
-      .database()
-      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1");
-    ref11.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setRealPT1(data);
-    });
-
-    const ref12 = firebase
-      .database()
-      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2");
-    ref12.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setRealPT2(data);
-    });
-
-    const ref13 = firebase
-      .database()
-      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3");
-    ref13.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setRealPT3(data);
-    });
-
-    const ref14 = firebase
-      .database()
-      .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4");
-    ref14.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setRealPT4(data);
-    });
-
-    const ref15 = firebase
-      .database()
-      .ref("/StatusLine/SMTLine1ProductionTime/DownTime");
-    ref15.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setRealPD(data);
-    });
-
-    const ref16 = firebase
-      .database()
-      .ref("/StatusLine/SMTLine1ProductionTime/OverTime");
-    ref16.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setRealOT(data);
-    });
-
-    const ref17 = firebase
-      .database()
-      .ref("/StatusLine/SMTLine1ProductionTime/Total");
-    ref17.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setTotal(data);
     });
 
     const ref18 = firebase.database().ref("/SMTLine1TOP/Printer (TOP)");
@@ -2453,7 +2451,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                              Machine Area
+                               Area
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -2470,7 +2468,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                              Machine Line
+                              Line
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -2487,7 +2485,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                              Machine Station
+                              Station
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -2697,14 +2695,14 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                              Machine Area
+                               Area
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               id="grid-city"
                               type="text"
                               placeholder="ICT"
-                              name="MachineName"
+                              name="Name"
                             >
                               {Area}
                             </span>
@@ -2714,14 +2712,14 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                              Machine Line
+                               Line
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               id="grid-city"
                               type="text"
                               placeholder="ICT"
-                              name="MachineName"
+                              name="Name"
                             >
                               {Line}
                             </span>
@@ -2731,14 +2729,14 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                              Machine Station
+                               Station
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               id="grid-city"
                               type="text"
                               placeholder="ICT"
-                              name="MachineName"
+                              name="Name"
                             >
                               {Station}
                             </span>
@@ -2862,7 +2860,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                              Machine Area
+                              Area
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -2879,7 +2877,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                              Machine Line
+                              Line
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -2896,7 +2894,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                              Machine Station
+                              Station
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -2980,10 +2978,6 @@ const SmtTop = () => {
                     <div className="sm:flex sm:items-start">
                       <form
                         className="w-full max-w-lg"
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                          database.ref("Mesin/Mesin1").set(selectedStatus);
-                        }}
                       >
                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
                           <span>Return To Maintenance</span>
@@ -3016,7 +3010,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                              Machine Area
+                              Area
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -3033,7 +3027,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                              Machine Line
+                              Line
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -3050,7 +3044,7 @@ const SmtTop = () => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                              Machine Station
+                              Station
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
