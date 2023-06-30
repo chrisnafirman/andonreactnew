@@ -446,7 +446,7 @@ app.get("/api/get/ReturnPURCHASING", (req, res) => {
 });
 
 
-app.get("/api/get/Network", (req, res) => {
+app.get("/api/get/General", (req, res) => {
   const sqlSelect = "SELECT * FROM general";
   db.query(sqlSelect, (err, results) => {
     res.send(results);
