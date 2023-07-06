@@ -116,106 +116,6 @@ const SmtTop = () => {
     return () => {};
   }, []);
 
-  const calculateTotalTime = () => {
-    let totalJam = 0;
-    let totalMenit = 0;
-
-    // Mengambil nilai dari state
-    const waktuPT1 = RealPT1.split(" ");
-    const waktuPT2 = RealPT2.split(" ");
-    const waktuPT3 = RealPT3.split(" ");
-    const waktuPT4 = RealPT4.split(" ");
-    const waktuPD = RealPD.split(" ");
-    const waktuOT = RealOT.split(" ");
-
-    // Menambahkan waktu PT1
-    if (waktuPT1[0] !== "Waiting...") {
-      if (waktuPT1.length === 4) {
-        totalJam += parseInt(waktuPT1[0]);
-        totalMenit += parseInt(waktuPT1[2]);
-      } else if (waktuPT1.length === 2) {
-        totalMenit += parseInt(waktuPT1[0]);
-      }
-    }
-
-    // Menambahkan waktu PT2
-    if (waktuPT2[0] !== "Waiting...") {
-      if (waktuPT2.length === 4) {
-        totalJam += parseInt(waktuPT2[0]);
-        totalMenit += parseInt(waktuPT2[2]);
-      } else if (waktuPT2.length === 2) {
-        totalMenit += parseInt(waktuPT2[0]);
-      }
-    }
-
-    // Menambahkan waktu PT3
-    if (waktuPT3[0] !== "Waiting...") {
-      if (waktuPT3.length === 4) {
-        totalJam += parseInt(waktuPT3[0]);
-        totalMenit += parseInt(waktuPT3[2]);
-      } else if (waktuPT3.length === 2) {
-        totalMenit += parseInt(waktuPT3[0]);
-      }
-    }
-
-    // Menambahkan waktu PT4
-    if (waktuPT4[0] !== "Waiting...") {
-      if (waktuPT4.length === 4) {
-        totalJam += parseInt(waktuPT4[0]);
-        totalMenit += parseInt(waktuPT4[2]);
-      } else if (waktuPT4.length === 2) {
-        totalMenit += parseInt(waktuPT4[0]);
-      }
-    }
-
-    // Menambahkan waktu PD jika bukan "Waiting..."
-    if (waktuPD[0] !== "Waiting...") {
-      if (waktuPD.length === 4) {
-        totalJam += parseInt(waktuPD[0]);
-        totalMenit += parseInt(waktuPD[2]);
-      } else if (waktuPD.length === 2) {
-        totalMenit += parseInt(waktuPD[0]);
-      }
-    }
-
-    // Menambahkan waktu OT jika bukan "Waiting..."
-    if (waktuOT[0] !== "Waiting...") {
-      if (waktuOT.length === 4) {
-        totalJam += parseInt(waktuOT[0]);
-        totalMenit += parseInt(waktuOT[2]);
-      } else if (waktuOT.length === 2) {
-        totalMenit += parseInt(waktuOT[0]);
-      }
-    }
-
-    // Mengubah menit menjadi jam jika lebih dari 60
-    if (totalMenit >= 60) {
-      const tambahanJam = Math.floor(totalMenit / 60);
-      totalJam += tambahanJam;
-      totalMenit -= tambahanJam * 60;
-    }
-
-    // Mengatur nilai hasil penjumlahan ke state Total
-    const output = `${totalJam} jam ${totalMenit} menit`;
-    setTotal(output);
-
-    // Mengirim hasil total ke Firebase
-    firebase
-      .database()
-      .ref("/StatusLine/SMTLine1ProductionTime/Total")
-      .set(output)
-      .then(() => {
-        console.log("Total waktu berhasil dikirim ke Firebase.");
-      })
-      .catch((error) => {
-        console.error("Error mengirim total waktu ke Firebase:", error);
-      });
-  };
-
-  useEffect(() => {
-    calculateTotalTime();
-  }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
-
   const submit = () => {
     const data = {
       SHIFT: SHIFT,
@@ -244,7 +144,7 @@ const SmtTop = () => {
       CMA: CMA,
       PDATE: PDATE,
     };
-  
+
     fetch("http://192.168.101.236:3001/api/post/Inputsche", {
       method: "POST",
       headers: {
@@ -255,7 +155,7 @@ const SmtTop = () => {
       .then((response) => {
         if (response.status === 200) {
           alert("Sucsess");
-            window.location.reload();
+          window.location.reload();
         } else {
           throw new Error("Error adding data");
         }
@@ -264,8 +164,6 @@ const SmtTop = () => {
         console.log(err);
       });
   };
-  
-
 
   //
   const stop = (value) => {
@@ -490,7 +388,7 @@ const SmtTop = () => {
       } else if (minutes >= 1) {
         return `${minutes} menit`;
       } else {
-        return `${totalSeconds} detik`;
+        return "Running";
       }
     };
 
@@ -524,6 +422,110 @@ const SmtTop = () => {
       });
     };
   }, [data]);
+
+  // realtime prod send firebase
+
+  const calculateTotalTime = () => {
+    let totalJam = 0;
+    let totalMenit = 0;
+
+    // Mengambil nilai dari state
+    const waktuPT1 = RealPT1.split(" ");
+    const waktuPT2 = RealPT2.split(" ");
+    const waktuPT3 = RealPT3.split(" ");
+    const waktuPT4 = RealPT4.split(" ");
+    const waktuPD = RealPD.split(" ");
+    const waktuOT = RealOT.split(" ");
+
+    // Menambahkan waktu PT1
+    if (waktuPT1[0] !== "Waiting...") {
+      if (waktuPT1.length === 4) {
+        totalJam += parseInt(waktuPT1[0]);
+        totalMenit += parseInt(waktuPT1[2]);
+      } else if (waktuPT1.length === 2) {
+        totalMenit += parseInt(waktuPT1[0]);
+      }
+    }
+
+    // Menambahkan waktu PT2
+    if (waktuPT2[0] !== "Waiting...") {
+      if (waktuPT2.length === 4) {
+        totalJam += parseInt(waktuPT2[0]);
+        totalMenit += parseInt(waktuPT2[2]);
+      } else if (waktuPT2.length === 2) {
+        totalMenit += parseInt(waktuPT2[0]);
+      }
+    }
+
+    // Menambahkan waktu PT3
+    if (waktuPT3[0] !== "Waiting...") {
+      if (waktuPT3.length === 4) {
+        totalJam += parseInt(waktuPT3[0]);
+        totalMenit += parseInt(waktuPT3[2]);
+      } else if (waktuPT3.length === 2) {
+        totalMenit += parseInt(waktuPT3[0]);
+      }
+    }
+
+    // Menambahkan waktu PT4
+    if (waktuPT4[0] !== "Waiting...") {
+      if (waktuPT4.length === 4) {
+        totalJam += parseInt(waktuPT4[0]);
+        totalMenit += parseInt(waktuPT4[2]);
+      } else if (waktuPT4.length === 2) {
+        totalMenit += parseInt(waktuPT4[0]);
+      }
+    }
+
+    // Menambahkan waktu PD jika bukan "Waiting..."
+    if (waktuPD[0] !== "Waiting...") {
+      if (waktuPD.length === 4) {
+        totalJam += parseInt(waktuPD[0]);
+        totalMenit += parseInt(waktuPD[2]);
+      } else if (waktuPD.length === 2) {
+        totalMenit += parseInt(waktuPD[0]);
+      }
+    }
+
+    // Menambahkan waktu OT jika bukan "Waiting..."
+    if (waktuOT[0] !== "Waiting...") {
+      if (waktuOT.length === 4) {
+        totalJam += parseInt(waktuOT[0]);
+        totalMenit += parseInt(waktuOT[2]);
+      } else if (waktuOT.length === 2) {
+        totalMenit += parseInt(waktuOT[0]);
+      }
+    }
+
+    // Mengubah menit menjadi jam jika lebih dari 60
+    if (totalMenit >= 60) {
+      const tambahanJam = Math.floor(totalMenit / 60);
+      totalJam += tambahanJam;
+      totalMenit -= tambahanJam * 60;
+    }
+
+    // Mengatur nilai hasil penjumlahan ke state Total
+    const output = `${totalJam} jam ${totalMenit} menit`;
+    setTotal(output);
+
+    // Mengirim hasil total ke Firebase
+    firebase
+      .database()
+      .ref("/StatusLine/SMTLine1ProductionTime/Total")
+      .set(output)
+      .then(() => {
+        console.log("Total waktu berhasil dikirim ke Firebase.");
+      })
+      .catch((error) => {
+        console.error("Error mengirim total waktu ke Firebase:", error);
+      });
+  };
+
+  useEffect(() => {
+    calculateTotalTime();
+  }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
+
+  //
 
   const defaultshift2 = () => {
     const today = new Date();
@@ -601,7 +603,6 @@ const SmtTop = () => {
 
   return (
     <body style={styles}>
-
       <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
         <div class="flex h-14 items-center justify-between">
           <div class="flex items-center">
@@ -748,12 +749,12 @@ const SmtTop = () => {
       {/*  */}
       <main>
         <ul class="hidden mb-4 mt-2 text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
-          <button 
-           onClick={() => setInputSchedule(true)}
-           class="w-60 sm:w-36 lg:w-32">
-          
+          <button
+            onClick={() => setInputSchedule(true)}
+            class="w-60 sm:w-36 lg:w-32"
+          >
             <button
-                onClick={defaultshift1}
+              onClick={defaultshift1}
               className="inline-block w-full p-4 text-gray-900 bg-white rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white"
               aria-current="page"
             >
@@ -781,8 +782,6 @@ const SmtTop = () => {
             </a>
           </button>
         </ul>
-
- 
 
         <div className="flex">
           {RealProduction ? (
@@ -924,7 +923,6 @@ const SmtTop = () => {
                   </div>
                 </div>
 
-                
                 {/* Break1 */}
                 <div class=" gap-2 mb-6 flex py-2 px-3 ">
                   <div className="flex ">
@@ -1065,8 +1063,8 @@ const SmtTop = () => {
                   </div>
                 </div>
 
-                 {/* break 3 */}
-                 <div class=" gap-2 mb-6 flex py-2 px-3 ">
+                {/* break 3 */}
+                <div class=" gap-2 mb-6 flex py-2 px-3 ">
                   <div className="flex ">
                     <label
                       for="first_name"
@@ -1135,7 +1133,6 @@ const SmtTop = () => {
                   </div>
                 </div>
 
-
                 {/* break 4 */}
                 <div class=" gap-2 mb-6 flex py-2 px-3 ">
                   <div className="flex ">
@@ -1169,8 +1166,6 @@ const SmtTop = () => {
                   </div>
                 </div>
 
-               
-
                 {/* Over Time */}
                 <div class=" gap-2 mb-6 flex py-2 px-3 ">
                   <div className="flex ">
@@ -1186,7 +1181,6 @@ const SmtTop = () => {
                       id="first_name"
                       class="ml-7 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="John"
-                      
                       onChange={(e) => {
                         setOT_IN(e.target.value);
                       }}
@@ -1198,7 +1192,6 @@ const SmtTop = () => {
                       id="first_name"
                       class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="John"
-                      
                       onChange={(e) => {
                         setOT_OUT(e.target.value);
                       }}
@@ -1221,7 +1214,6 @@ const SmtTop = () => {
                       id="first_name"
                       class="ml-2 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="John"
-                      
                       onChange={(e) => {
                         setPD_IN(e.target.value);
                       }}
@@ -1233,7 +1225,6 @@ const SmtTop = () => {
                       id="first_name"
                       class="ml-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="John"
-                      
                       onChange={(e) => {
                         setPD_OUT(e.target.value);
                       }}
@@ -1259,7 +1250,6 @@ const SmtTop = () => {
                       type="text"
                       defaultValue="0 Hours : 0 Minutes"
                       class="ml-12 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      
                       onChange={(e) => {
                         setPP(e.target.value);
                       }}
@@ -1280,7 +1270,6 @@ const SmtTop = () => {
                       type="text"
                       defaultValue="0 Hours : 0 Minutes"
                       class="ml-14 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      
                       onChange={(e) => {
                         setPD(e.target.value);
                       }}
@@ -1305,7 +1294,6 @@ const SmtTop = () => {
                       id="cma"
                       class="ml-5 g-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       defaultValue="0 Hours : 0 Minutes"
-                      
                       onChange={(e) => {
                         setCMA(e.target.value);
                       }}
@@ -1322,7 +1310,6 @@ const SmtTop = () => {
                     type="submit"
                     class=" mb-2 items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-auto"
                     onClick={submit}
-                    
                   >
                     Submit
                   </button>

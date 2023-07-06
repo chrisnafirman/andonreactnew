@@ -2047,6 +2047,96 @@ const SmtTop = () => {
     window.location.href = "https://api.whatsapp.com/send?phone=6281929749600";
   };
 
+  // Realtime production 
+const calculateTotalTime = () => {
+  let totalJam = 0;
+  let totalMenit = 0;
+
+  // Mengambil nilai dari state
+  const waktuPT1 = RealPT1.split(" ");
+  const waktuPT2 = RealPT2.split(" ");
+  const waktuPT3 = RealPT3.split(" ");
+  const waktuPT4 = RealPT4.split(" ");
+  const waktuPD = RealPD.split(" ");
+  const waktuOT = RealOT.split(" ");
+
+  // Menambahkan waktu PT1
+  if (waktuPT1[0] !== "waiting...") {
+    if (waktuPT1.length === 4) {
+      totalJam += parseInt(waktuPT1[0]);
+      totalMenit += parseInt(waktuPT1[2]);
+    } else if (waktuPT1.length === 2) {
+      totalMenit += parseInt(waktuPT1[0]);
+    }
+  }
+
+  // Menambahkan waktu PT2
+  if (waktuPT2[0] !== "waiting...") {
+    if (waktuPT2.length === 4) {
+      totalJam += parseInt(waktuPT2[0]);
+      totalMenit += parseInt(waktuPT2[2]);
+    } else if (waktuPT2.length === 2) {
+      totalMenit += parseInt(waktuPT2[0]);
+    }
+  }
+
+  // Menambahkan waktu PT3
+  if (waktuPT3[0] !== "waiting...") {
+    if (waktuPT3.length === 4) {
+      totalJam += parseInt(waktuPT3[0]);
+      totalMenit += parseInt(waktuPT3[2]);
+    } else if (waktuPT3.length === 2) {
+      totalMenit += parseInt(waktuPT3[0]);
+    }
+  }
+
+  // Menambahkan waktu PT4
+  if (waktuPT4[0] !== "waiting...") {
+    if (waktuPT4.length === 4) {
+      totalJam += parseInt(waktuPT4[0]);
+      totalMenit += parseInt(waktuPT4[2]);
+    } else if (waktuPT4.length === 2) {
+      totalMenit += parseInt(waktuPT4[0]);
+    }
+  }
+
+  // Menambahkan waktu PD jika bukan "waiting..."
+  if (waktuPD[0] !== "waiting...") {
+    if (waktuPD.length === 4) {
+      totalJam += parseInt(waktuPD[0]);
+      totalMenit += parseInt(waktuPD[2]);
+    } else if (waktuPD.length === 2) {
+      totalMenit += parseInt(waktuPD[0]);
+    }
+  }
+
+  // Menambahkan waktu OT jika bukan "waiting..."
+  if (waktuOT[0] !== "waiting...") {
+    if (waktuOT.length === 4) {
+      totalJam += parseInt(waktuOT[0]);
+      totalMenit += parseInt(waktuOT[2]);
+    } else if (waktuOT.length === 2) {
+      totalMenit += parseInt(waktuOT[0]);
+    }
+  }
+
+  // Mengubah menit menjadi jam jika lebih dari 60
+  if (totalMenit >= 60) {
+    const tambahanJam = Math.floor(totalMenit / 60);
+    totalJam += tambahanJam;
+    totalMenit -= tambahanJam * 60;
+  }
+
+  // Mengatur nilai hasil penjumlahan ke state Total
+  const output = `${totalJam} jam ${totalMenit} menit`;
+  setTotal(output);
+};
+
+useEffect(() => {
+  calculateTotalTime();
+}, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
+
+
   // Background
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/S.jpg)`,

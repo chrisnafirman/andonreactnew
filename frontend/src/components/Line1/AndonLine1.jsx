@@ -132,93 +132,6 @@ const Andonline1 = () => {
   const namaList = ["CHRISNA FIRMAN"];
   const npkList = ["0301"];
 
-  const calculateTotalTime = () => {
-    let totalJam = 0;
-    let totalMenit = 0;
-
-    // Mengambil nilai dari state
-    const waktuPT1 = RealPT1.split(" ");
-    const waktuPT2 = RealPT2.split(" ");
-    const waktuPT3 = RealPT3.split(" ");
-    const waktuPT4 = RealPT4.split(" ");
-    const waktuPD = RealPD.split(" ");
-    const waktuOT = RealOT.split(" ");
-
-    // Menambahkan waktu PT1
-    if (waktuPT1[0] !== "waiting...") {
-      if (waktuPT1.length === 4) {
-        totalJam += parseInt(waktuPT1[0]);
-        totalMenit += parseInt(waktuPT1[2]);
-      } else if (waktuPT1.length === 2) {
-        totalMenit += parseInt(waktuPT1[0]);
-      }
-    }
-
-    // Menambahkan waktu PT2
-    if (waktuPT2[0] !== "waiting...") {
-      if (waktuPT2.length === 4) {
-        totalJam += parseInt(waktuPT2[0]);
-        totalMenit += parseInt(waktuPT2[2]);
-      } else if (waktuPT2.length === 2) {
-        totalMenit += parseInt(waktuPT2[0]);
-      }
-    }
-
-    // Menambahkan waktu PT3
-    if (waktuPT3[0] !== "waiting...") {
-      if (waktuPT3.length === 4) {
-        totalJam += parseInt(waktuPT3[0]);
-        totalMenit += parseInt(waktuPT3[2]);
-      } else if (waktuPT3.length === 2) {
-        totalMenit += parseInt(waktuPT3[0]);
-      }
-    }
-
-    // Menambahkan waktu PT4
-    if (waktuPT4[0] !== "waiting...") {
-      if (waktuPT4.length === 4) {
-        totalJam += parseInt(waktuPT4[0]);
-        totalMenit += parseInt(waktuPT4[2]);
-      } else if (waktuPT4.length === 2) {
-        totalMenit += parseInt(waktuPT4[0]);
-      }
-    }
-
-    // Menambahkan waktu PD jika bukan "waiting..."
-    if (waktuPD[0] !== "waiting...") {
-      if (waktuPD.length === 4) {
-        totalJam += parseInt(waktuPD[0]);
-        totalMenit += parseInt(waktuPD[2]);
-      } else if (waktuPD.length === 2) {
-        totalMenit += parseInt(waktuPD[0]);
-      }
-    }
-
-    // Menambahkan waktu OT jika bukan "waiting..."
-    if (waktuOT[0] !== "waiting...") {
-      if (waktuOT.length === 4) {
-        totalJam += parseInt(waktuOT[0]);
-        totalMenit += parseInt(waktuOT[2]);
-      } else if (waktuOT.length === 2) {
-        totalMenit += parseInt(waktuOT[0]);
-      }
-    }
-
-    // Mengubah menit menjadi jam jika lebih dari 60
-    if (totalMenit >= 60) {
-      const tambahanJam = Math.floor(totalMenit / 60);
-      totalJam += tambahanJam;
-      totalMenit -= tambahanJam * 60;
-    }
-
-    // Mengatur nilai hasil penjumlahan ke state Total
-    const output = `${totalJam} jam ${totalMenit} menit`;
-    setTotal(output);
-  };
-
-  useEffect(() => {
-    calculateTotalTime();
-  }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
 
   // FETCHING FIREBASE
 
@@ -370,6 +283,98 @@ const Andonline1 = () => {
   }, []);
 
   // ---------------------
+
+// Realtime production 
+const calculateTotalTime = () => {
+  let totalJam = 0;
+  let totalMenit = 0;
+
+  // Mengambil nilai dari state
+  const waktuPT1 = RealPT1.split(" ");
+  const waktuPT2 = RealPT2.split(" ");
+  const waktuPT3 = RealPT3.split(" ");
+  const waktuPT4 = RealPT4.split(" ");
+  const waktuPD = RealPD.split(" ");
+  const waktuOT = RealOT.split(" ");
+
+  // Menambahkan waktu PT1
+  if (waktuPT1[0] !== "waiting...") {
+    if (waktuPT1.length === 4) {
+      totalJam += parseInt(waktuPT1[0]);
+      totalMenit += parseInt(waktuPT1[2]);
+    } else if (waktuPT1.length === 2) {
+      totalMenit += parseInt(waktuPT1[0]);
+    }
+  }
+
+  // Menambahkan waktu PT2
+  if (waktuPT2[0] !== "waiting...") {
+    if (waktuPT2.length === 4) {
+      totalJam += parseInt(waktuPT2[0]);
+      totalMenit += parseInt(waktuPT2[2]);
+    } else if (waktuPT2.length === 2) {
+      totalMenit += parseInt(waktuPT2[0]);
+    }
+  }
+
+  // Menambahkan waktu PT3
+  if (waktuPT3[0] !== "waiting...") {
+    if (waktuPT3.length === 4) {
+      totalJam += parseInt(waktuPT3[0]);
+      totalMenit += parseInt(waktuPT3[2]);
+    } else if (waktuPT3.length === 2) {
+      totalMenit += parseInt(waktuPT3[0]);
+    }
+  }
+
+  // Menambahkan waktu PT4
+  if (waktuPT4[0] !== "waiting...") {
+    if (waktuPT4.length === 4) {
+      totalJam += parseInt(waktuPT4[0]);
+      totalMenit += parseInt(waktuPT4[2]);
+    } else if (waktuPT4.length === 2) {
+      totalMenit += parseInt(waktuPT4[0]);
+    }
+  }
+
+  // Menambahkan waktu PD jika bukan "waiting..."
+  if (waktuPD[0] !== "waiting...") {
+    if (waktuPD.length === 4) {
+      totalJam += parseInt(waktuPD[0]);
+      totalMenit += parseInt(waktuPD[2]);
+    } else if (waktuPD.length === 2) {
+      totalMenit += parseInt(waktuPD[0]);
+    }
+  }
+
+  // Menambahkan waktu OT jika bukan "waiting..."
+  if (waktuOT[0] !== "waiting...") {
+    if (waktuOT.length === 4) {
+      totalJam += parseInt(waktuOT[0]);
+      totalMenit += parseInt(waktuOT[2]);
+    } else if (waktuOT.length === 2) {
+      totalMenit += parseInt(waktuOT[0]);
+    }
+  }
+
+  // Mengubah menit menjadi jam jika lebih dari 60
+  if (totalMenit >= 60) {
+    const tambahanJam = Math.floor(totalMenit / 60);
+    totalJam += tambahanJam;
+    totalMenit -= tambahanJam * 60;
+  }
+
+  // Mengatur nilai hasil penjumlahan ke state Total
+  const output = `${totalJam} jam ${totalMenit} menit`;
+  setTotal(output);
+};
+
+useEffect(() => {
+  calculateTotalTime();
+}, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
+
+
+
 
 
   let CMAInterval;
@@ -920,14 +925,14 @@ const Andonline1 = () => {
               SMT Line 1
             </a>
           </li>
-          <li class="w-60 sm:w-36 lg:w-32">
+          <button  class="w-60 sm:w-36 lg:w-32">
             <a
               href="Inputsche"
-              class="inline-block  w-full p-1.5 text-gray-900 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="inline-block w-full p-4 text-black bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
             >
-              Schedule Production
+              input schedule
             </a>
-          </li>
+          </button>
           <button onClick={() => setIsOpen2(true)} class="w-60 sm:w-36 lg:w-32">
             <span class="inline-block w-full  p-4 text-orange-700  bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
               <header className="animate-bounce">
