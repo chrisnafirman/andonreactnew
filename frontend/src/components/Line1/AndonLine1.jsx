@@ -12,53 +12,51 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const Andonline1 = () => {
-  // Tindakan / Kehadiran
-  const [NetworkPressed, setNetworkPressed] = useState(false);
-  const timeoutRefNetwork = useRef(null);
-  // ----
-
-  const [mesin, setMesin] = useState("");
-
-
-  const [prevStatus, setPrevStatus] = useState("");
-
-  // DATA
-  const [NamaPIC, setNamaPIC] = useState("");
-  const [NpkPIC, setNpkPIC] = useState("");
-  const [Kerusakan, setKerusakan] = useState("");
-
-  // OTHERS
-  const [selectedStatus, setSelectedStatus] = useState("");
+  // FIREBASE
+  const [showDrawer, setShowDrawer] = useState(false);
+  //---------------
 
   // NAVBAR
   const [currentTime, setCurrentTime] = useState(new Date());
   const [time, setTime] = useState(new Date().toLocaleString());
+  // -------------------
 
-  // FIREBASE
-  const [showDrawer, setShowDrawer] = useState(false);
-
-  // SMT LINE 1
-  const [StatusLine, setStatusLine] = useState("");
-  //STATION
-
-  // STATION DESTECKER
-  const [Line, setLine] = useState("SMT LINE 1");
-  const [Area, setArea] = useState("SMT TOP");
-  const [Destacker, setDestecker] = useState("Destacker");
-  const [Station, setStation] = useState("");
-
-  // CMA
-  const [CMATime, setCMATime] = useState({ hours: 0, minutes: 0, seconds: 0 });
-  const [CMARunning, setCMARunning] = useState();
-  const [ResultsCMA, setResultsCMA] = useState();
-
-  // popup form 1
   // popup form 1
   const [isOpenOthers, setIsOpenOthers] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [isOpenOperator, setIsOpenOperator] = useState(false);
   const [isOpenGeneral, setIsOpenGeneral] = useState(false);
   const [isOpenGeneral2, setIsOpenGeneral2] = useState(false);
+
+  // Data lama
+  const [mesin, setMesin] = useState("");
+  const [prevStatus, setPrevStatus] = useState("");
+  // -------------
+
+  // OTHERS
+  const [selectedStatus, setSelectedStatus] = useState("");
+  // -------------
+
+  // DATA
+  const [NamaPIC, setNamaPIC] = useState("");
+  const [NpkPIC, setNpkPIC] = useState("");
+  const [Kerusakan, setKerusakan] = useState("");
+  // -------------
+  // Data STATION
+  const [Line, setLine] = useState("SMT LINE 1");
+  const [Area, setArea] = useState("SMT TOP");
+  const [Destacker, setDestecker] = useState("Destacker");
+  const [Station, setStation] = useState("");
+  const [Department, setDepartment] = useState("");
+  // -------------
+  // SMT LINE 1
+  const [StatusLine, setStatusLine] = useState("");
+  // -------------
+
+  /// Dropdown
+  const namaList = ["CHRISNA FIRMAN"];
+  const npkList = ["0301"];
+  // -------------
 
   //  SCHEDULE
   const [SHIFT, setSHIFT] = useState("");
@@ -92,19 +90,40 @@ const Andonline1 = () => {
 
   // ---------------------
 
+  // REAL PRODUCTION TIME
+
+  const [RealPT1, setRealPT1] = useState("");
+  const [RealPT2, setRealPT2] = useState("");
+  const [RealPT3, setRealPT3] = useState("");
+  const [RealPT4, setRealPT4] = useState("");
+  const [RealPD, setRealPD] = useState("");
+  const [RealOT, setRealOT] = useState("");
+  const [Total, setTotal] = useState("");
+
+  // -------------
+
+  // CMA
+  const [CMATime, setCMATime] = useState({ hours: 0, minutes: 0, seconds: 0 });
+  const [CMARunning, setCMARunning] = useState();
+  const [ResultsCMA, setResultsCMA] = useState();
+
+  // -------------
+
   // Status
+  const [Others, setStatusOthers] = useState("");
   const [status, setStatus] = useState("");
-  const [network, setStatusNetwork] = useState("");
-  const [electricity, setStatusElectricity] = useState("");
-  const [aircomp, setStatusAircomp] = useState("");
-  const [shorcomp, setStatusShorcomp] = useState("");
-  const [shorbox, setStatusShorbox] = useState("");
-  const [overtrial, setStatusOvertrial] = useState("");
-  const [overchange, setStatusOverchange] = useState("");
+  const [Network, setStatusNetwork] = useState("");
+  const [Electricity, setStatusElectricity] = useState("");
+  const [Aircomp, setStatusAircomp] = useState("");
+  const [Shorcomp, setStatusShorcomp] = useState("");
+  const [Shorbox, setStatusShorbox] = useState("");
+  const [Overtrial, setStatusOvertrial] = useState("");
+  const [Overchange, setStatusOverchange] = useState("");
   // ------------------------
 
   //BACKGROUND / WARNA KOTAK
   const [backgroundColor, setBackgroundColor] = useState("");
+  const [backgroundColorOthers, setBackgroundColorOthers] = useState("");
   const [backgroundColorNetwork, setBackgroundColorNetwork] = useState("");
   const [backgroundColorElectricity, setBackgroundColorElectricity] =
     useState("");
@@ -116,24 +135,33 @@ const Andonline1 = () => {
     useState("");
   // ------------------
 
-  // REAL PRODUCTION TIME
+  // Tindakan / Kehadiran
+  const [OthersPressed, setOthersPressed] = useState(false);
+  const timeoutRefOthers = useRef(null);
 
-  const [RealPT1, setRealPT1] = useState("");
-  const [RealPT2, setRealPT2] = useState("");
-  const [RealPT3, setRealPT3] = useState("");
-  const [RealPT4, setRealPT4] = useState("");
-  const [RealPD, setRealPD] = useState("");
-  const [RealOT, setRealOT] = useState("");
-  const [Total, setTotal] = useState("");
+  const [NetworkPressed, setNetworkPressed] = useState(false);
+  const timeoutRefNetwork = useRef(null);
 
-  // ====
+  const [ElectricityPressed, setElectricityPressed] = useState(false);
+  const timeoutRefElectricity = useRef(null);
 
-  /// Purchasing
-  const namaList = ["CHRISNA FIRMAN"];
-  const npkList = ["0301"];
+  const [AircompPressed, setAircompPressed] = useState(false);
+  const timeoutRefAircomp = useRef(null);
 
+  const [ShorcompPressed, setShorcompPressed] = useState(false);
+  const timeoutRefShorcomp = useRef(null);
 
-  // FETCHING FIREBASE
+  const [ShorboxPressed, setShorboxPressed] = useState(false);
+  const timeoutRefShorbox = useRef(null);
+
+  const [OvertrialPressed, setOvertrialPressed] = useState(false);
+  const timeoutRefOvertrial = useRef(null);
+
+  const [OverchangePressed, setOverchangePressed] = useState(false);
+  const timeoutRefOverchange = useRef(null);
+  // ----
+
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
@@ -142,7 +170,6 @@ const Andonline1 = () => {
 
   // Fetching FIrebase
   useEffect(() => {
-
     const ref2 = firebase.database().ref("StatusLine/SMTLine1");
     ref2.on("value", (snapshot) => {
       const data = snapshot.val();
@@ -165,7 +192,7 @@ const Andonline1 = () => {
               const link = "http://10.14.81.43:3003/RequestGeneral";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [1563609464];
-              const message = `Notification Network SMT LINE 1 ${Station} (TOP) Status = DOWN - Please Click The Link:\n\n ${link}`;
+              const message = `Notification SMT LINE 1 Status = DOWN - Please Click The Link:\n\n ${link}`;
 
               chatIds.forEach((chatId) => {
                 fetch(
@@ -195,35 +222,138 @@ const Andonline1 = () => {
       updateElectricity(data);
     });
 
-    const ref5 = firebase.database().ref("SMTLine1/Aircomp");
+    const ref5 = firebase.database().ref("SMTLine1/Air Compressor");
     ref5.on("value", (snapshot) => {
       const data = snapshot.val();
       updateAircomp(data);
     });
 
-    const ref6 = firebase.database().ref("SMTLine1/Shorcomp");
+    const ref6 = firebase.database().ref("SMTLine1/Shortage Comp");
     ref6.on("value", (snapshot) => {
       const data = snapshot.val();
       updateShorcomp(data);
     });
 
-    const ref7 = firebase.database().ref("SMTLine1/Shorbox");
+    const ref7 = firebase.database().ref("SMTLine1/Shortage Box FG");
     ref7.on("value", (snapshot) => {
       const data = snapshot.val();
       updateShorbox(data);
     });
 
-    const ref8 = firebase.database().ref("SMTLine1/Overtrial");
+    const ref8 = firebase.database().ref("SMTLine1/Over Trial");
     ref8.on("value", (snapshot) => {
       const data = snapshot.val();
       updateOvertrial(data);
     });
 
-    const ref9 = firebase.database().ref("SMTLine1/Overchangemodel");
+    const ref9 = firebase.database().ref("SMTLine1/Over Change Model");
     ref9.on("value", (snapshot) => {
       const data = snapshot.val();
       updateOverchange(data);
     });
+
+    const ref17 = firebase.database().ref("SMTLine1/Others");
+ref17.on("value", (snapshot) => {
+  const data = snapshot.val();
+  updateOthers(data);
+  if (data === "Down") {
+    const audio = new Audio("Sound.mp3");
+    audio.autoplay = true;
+    audio.play();
+
+    navigator.permissions
+      .query({ name: "clipboard-write" })
+      .then((permissionStatus) => {
+        if (permissionStatus.state === "granted") {
+          const link = "http://10.14.81.43:3003/RequestGeneral";
+          const botToken =
+            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+          const chatIds = [1563609464];
+          const message = `Notification SMT LINE 1 Status = DOWN - Please Click The Link:\n\n ${link}`;
+
+          chatIds.forEach((chatId) => {
+            fetch(
+              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                message
+              )}`
+            )
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Error sending telegram message");
+                }
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          });
+        }
+      });
+  } else if (data === "Maintenance & IT") {
+    const audio = new Audio("Sound.mp3");
+    audio.autoplay = true;
+    audio.play();
+
+    navigator.permissions
+      .query({ name: "clipboard-write" })
+      .then((permissionStatus) => {
+        if (permissionStatus.state === "granted") {
+          const link = "http://10.14.81.43:3003/RequestGeneral";
+          const botToken =
+            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+          const chatIds = [1563609464];
+          const message = `Notification SMT LINE 1 For  Maintenance & IT - Please Click The Link:\n\n ${link}`;
+          chatIds.forEach((chatId) => {
+            fetch(
+              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                message
+              )}`
+            )
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Error sending telegram message");
+                }
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          });
+        }
+      });
+  } else if (data === "Maintenance") {
+    const audio = new Audio("Sound.mp3");
+    audio.autoplay = true;
+    audio.play();
+
+    navigator.permissions
+      .query({ name: "clipboard-write" })
+      .then((permissionStatus) => {
+        if (permissionStatus.state === "granted") {
+          const link = "http://10.14.81.43:3003/RequestGeneral";
+          const botToken =
+            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+          const chatIds = [1563609464];
+          const message = `Notification SMT LINE 1 Status = MAINTENANCE - Please Click The Link:\n\n ${link}`;
+
+          chatIds.forEach((chatId) => {
+            fetch(
+              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                message
+              )}`
+            )
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Error sending telegram message");
+                }
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          });
+        }
+      });
+  }
+});
+
 
     const ref10 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
     ref10.on("value", (snapshot) => {
@@ -284,113 +414,127 @@ const Andonline1 = () => {
 
   // ---------------------
 
-// Realtime production 
-const calculateTotalTime = () => {
-  let totalJam = 0;
-  let totalMenit = 0;
+  // Realtime production
+  const calculateTotalTime = () => {
+    let totalJam = 0;
+    let totalMenit = 0;
 
-  // Mengambil nilai dari state
-  const waktuPT1 = RealPT1.split(" ");
-  const waktuPT2 = RealPT2.split(" ");
-  const waktuPT3 = RealPT3.split(" ");
-  const waktuPT4 = RealPT4.split(" ");
-  const waktuPD = RealPD.split(" ");
-  const waktuOT = RealOT.split(" ");
+    // Mengambil nilai dari state
+    const waktuPT1 = RealPT1.split(" ");
+    const waktuPT2 = RealPT2.split(" ");
+    const waktuPT3 = RealPT3.split(" ");
+    const waktuPT4 = RealPT4.split(" ");
+    const waktuPD = RealPD.split(" ");
+    const waktuOT = RealOT.split(" ");
 
-  // Menambahkan waktu PT1
-  if (waktuPT1[0] !== "waiting...") {
-    if (waktuPT1.length === 4) {
-      totalJam += parseInt(waktuPT1[0]);
-      totalMenit += parseInt(waktuPT1[2]);
-    } else if (waktuPT1.length === 2) {
-      totalMenit += parseInt(waktuPT1[0]);
+    // Menambahkan waktu PT1
+    if (waktuPT1[0] !== "waiting...") {
+      if (waktuPT1.length === 4) {
+        totalJam += parseInt(waktuPT1[0]);
+        totalMenit += parseInt(waktuPT1[2]);
+      } else if (waktuPT1.length === 2) {
+        totalMenit += parseInt(waktuPT1[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PT2
-  if (waktuPT2[0] !== "waiting...") {
-    if (waktuPT2.length === 4) {
-      totalJam += parseInt(waktuPT2[0]);
-      totalMenit += parseInt(waktuPT2[2]);
-    } else if (waktuPT2.length === 2) {
-      totalMenit += parseInt(waktuPT2[0]);
+    // Menambahkan waktu PT2
+    if (waktuPT2[0] !== "waiting...") {
+      if (waktuPT2.length === 4) {
+        totalJam += parseInt(waktuPT2[0]);
+        totalMenit += parseInt(waktuPT2[2]);
+      } else if (waktuPT2.length === 2) {
+        totalMenit += parseInt(waktuPT2[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PT3
-  if (waktuPT3[0] !== "waiting...") {
-    if (waktuPT3.length === 4) {
-      totalJam += parseInt(waktuPT3[0]);
-      totalMenit += parseInt(waktuPT3[2]);
-    } else if (waktuPT3.length === 2) {
-      totalMenit += parseInt(waktuPT3[0]);
+    // Menambahkan waktu PT3
+    if (waktuPT3[0] !== "waiting...") {
+      if (waktuPT3.length === 4) {
+        totalJam += parseInt(waktuPT3[0]);
+        totalMenit += parseInt(waktuPT3[2]);
+      } else if (waktuPT3.length === 2) {
+        totalMenit += parseInt(waktuPT3[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PT4
-  if (waktuPT4[0] !== "waiting...") {
-    if (waktuPT4.length === 4) {
-      totalJam += parseInt(waktuPT4[0]);
-      totalMenit += parseInt(waktuPT4[2]);
-    } else if (waktuPT4.length === 2) {
-      totalMenit += parseInt(waktuPT4[0]);
+    // Menambahkan waktu PT4
+    if (waktuPT4[0] !== "waiting...") {
+      if (waktuPT4.length === 4) {
+        totalJam += parseInt(waktuPT4[0]);
+        totalMenit += parseInt(waktuPT4[2]);
+      } else if (waktuPT4.length === 2) {
+        totalMenit += parseInt(waktuPT4[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PD jika bukan "waiting..."
-  if (waktuPD[0] !== "waiting...") {
-    if (waktuPD.length === 4) {
-      totalJam += parseInt(waktuPD[0]);
-      totalMenit += parseInt(waktuPD[2]);
-    } else if (waktuPD.length === 2) {
-      totalMenit += parseInt(waktuPD[0]);
+    // Menambahkan waktu PD jika bukan "waiting..."
+    if (waktuPD[0] !== "waiting...") {
+      if (waktuPD.length === 4) {
+        totalJam += parseInt(waktuPD[0]);
+        totalMenit += parseInt(waktuPD[2]);
+      } else if (waktuPD.length === 2) {
+        totalMenit += parseInt(waktuPD[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu OT jika bukan "waiting..."
-  if (waktuOT[0] !== "waiting...") {
-    if (waktuOT.length === 4) {
-      totalJam += parseInt(waktuOT[0]);
-      totalMenit += parseInt(waktuOT[2]);
-    } else if (waktuOT.length === 2) {
-      totalMenit += parseInt(waktuOT[0]);
+    // Menambahkan waktu OT jika bukan "waiting..."
+    if (waktuOT[0] !== "waiting...") {
+      if (waktuOT.length === 4) {
+        totalJam += parseInt(waktuOT[0]);
+        totalMenit += parseInt(waktuOT[2]);
+      } else if (waktuOT.length === 2) {
+        totalMenit += parseInt(waktuOT[0]);
+      }
     }
-  }
 
-  // Mengubah menit menjadi jam jika lebih dari 60
-  if (totalMenit >= 60) {
-    const tambahanJam = Math.floor(totalMenit / 60);
-    totalJam += tambahanJam;
-    totalMenit -= tambahanJam * 60;
-  }
+    // Mengubah menit menjadi jam jika lebih dari 60
+    if (totalMenit >= 60) {
+      const tambahanJam = Math.floor(totalMenit / 60);
+      totalJam += tambahanJam;
+      totalMenit -= tambahanJam * 60;
+    }
 
-  // Mengatur nilai hasil penjumlahan ke state Total
-  const output = `${totalJam} jam ${totalMenit} menit`;
-  setTotal(output);
-};
-
-useEffect(() => {
-  calculateTotalTime();
-}, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
-
-
-
-
-
-  let CMAInterval;
+    // Mengatur nilai hasil penjumlahan ke state Total
+    const output = `${totalJam} jam ${totalMenit} menit`;
+    setTotal(output);
+  };
 
   useEffect(() => {
-    const loadCMARunningStatus = localStorage.getItem("CMARunning");
-    if (loadCMARunningStatus) {
-      setCMARunning(JSON.parse(loadCMARunningStatus));
+    calculateTotalTime();
+  }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
+
+  // CMA WAKTU / FIREBASE
+
+  let CMAInterval;
+  useEffect(() => {
+    if (CMARunning) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      CMAInterval = setInterval(() => {
+        setCMATime((prevTime) => {
+          const newSeconds = prevTime.seconds + 1;
+          const newMinutes = prevTime.minutes + Math.floor(newSeconds / 60);
+          const newHours = prevTime.hours + Math.floor(newMinutes / 60);
+          const newTime = {
+            hours: newHours,
+            minutes: newMinutes % 60,
+            seconds: newSeconds % 60,
+          };
+          firebase
+            .database()
+            .ref("StatusLine/SMTLine1CMALastTime")
+            .set(newTime);
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1CMAOnGoing")
+            .set(
+              `${newTime.hours} H ${newTime.minutes} M ${newTime.seconds} S`
+            );
+          return newTime;
+        });
+      }, 1000); // 1 detik = 1000 ms
     }
 
-    const loadCMATime = localStorage.getItem("CMATime");
-    if (loadCMATime) {
-      setCMATime(JSON.parse(loadCMATime));
-    }
-
-    // Load data dari Firebase saat komponen pertama kali dirender
+    // Mengambil waktu terakhir yang dihitung dari Firebase saat halaman dimuat ulang
     firebase
       .database()
       .ref("StatusLine/SMTLine1CMALastTime")
@@ -403,29 +547,18 @@ useEffect(() => {
       });
 
     return () => clearInterval(CMAInterval);
-  }, []);
-
-  useEffect(() => {
-    // Simpan status CMARunning pada local storage setiap kali berubah
-    localStorage.setItem("CMARunning", JSON.stringify(CMARunning));
   }, [CMARunning]);
 
-  useEffect(() => {
-    // Simpan CMATime pada local storage setiap kali berubah
-    localStorage.setItem("CMATime", JSON.stringify(CMATime));
-  }, [CMATime]);
-
+  // start stop CMA
   const startCMA = () => {
     setCMATime({ hours: 0, minutes: 0, seconds: 0 });
     firebase
       .database()
       .ref("/StatusLine/SMTLine1CMAOnGoing")
-      .set("0 detik");
-    firebase.database().ref("/StatusLine/SMTLine1CMALastTime").set({
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-    });
+      .set("0 H 0 M 0 S");
+    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set(0);
+    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set(0);
+    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
     setCMARunning(true);
   };
 
@@ -433,7 +566,7 @@ useEffect(() => {
     const data = {
       ResultsCMA: ResultsCMA,
     };
-    fetch("http://192.168.101.236:3001/api/put/ResultsCMA", {
+    fetch(`http://10.14.81.43:3002/api/put/ResultsCMA`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -443,10 +576,22 @@ useEffect(() => {
       .then((response) => {
         if (response.status === 200) {
           alert("Change Model Telah Selesai Data Sudah Terinput");
-          firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing").set("Waiting...");
-          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set("0");
-          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set("0");
-          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set("0");
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1CMAOnGoing")
+            .set("Waiting...");
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1CMALastTime/hours")
+            .set("0");
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1CMALastTime/minutes")
+            .set("0");
+          firebase
+            .database()
+            .ref("/StatusLine/SMTLine1CMALastTime/seconds")
+            .set("0");
           setCMARunning(false);
           window.location.reload();
           event.preventDefault();
@@ -459,59 +604,9 @@ useEffect(() => {
       });
   };
 
-  useEffect(() => {
-    if (CMARunning) {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      CMAInterval = setInterval(() => {
-        setCMATime((prevTime) => {
-          const newSeconds = prevTime.seconds + 1;
-          const newMinutes = prevTime.minutes + Math.floor(newSeconds / 60);
-          const newHours = prevTime.hours + Math.floor(newMinutes / 60);
-          const seconds = newSeconds % 60;
-          const minutes = newMinutes % 60;
-          const hours = newHours;
-
-          const newTime = {
-            hours,
-            minutes,
-            seconds,
-          };
-
-          // Simpan newTime ke Firebase
-          firebase
-            .database()
-            .ref("StatusLine/SMTLine1CMALastTime")
-            .set(newTime);
-
-          let formattedTime = "";
-          if (hours > 0) {
-            formattedTime += `${hours} jam ${minutes} menit`;
-          } else if (minutes > 0) {
-            formattedTime += `${minutes} menit`;
-          } else {
-            formattedTime += `${seconds} detik`;
-          }
-
-          // Simpan formattedTime ke Firebase
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1CMAOnGoing")
-            .set(formattedTime.trim());
-
-          return newTime;
-        });
-      }, 1000); // 1 detik = 1000 ms
-    }
-
-    return () => clearInterval(CMAInterval);
-  }, [CMARunning]);
-  
-
   // ----
 
-
   // FETCHING SCHEDULE
-  // fungsi  schedule
   function formatDate(dateString) {
     const options = { day: "numeric", month: "numeric", year: "numeric" };
     const formattedDate = new Date(dateString).toLocaleDateString(
@@ -565,7 +660,6 @@ useEffect(() => {
   // ----
 
   // FUNGSI UPDATE STATUS
-  // fungsi mengubah warna status
   const updateStatus = (data) => {
     setStatus(data);
     setBackgroundColor(
@@ -587,6 +681,38 @@ useEffect(() => {
     );
   };
 
+  // UPDATE Others
+  const updateOthers = (data) => {
+    setStatusOthers(data);
+    setBackgroundColorOthers(
+      data === "Go"
+        ? "rgb(54, 83, 20)"
+        : data === "Repair"
+        ? "#E9CE08"
+        : data === "HRGA & EHS"
+        ? "#A61D00"
+        : data === "PPIC"
+        ? "#873e23"
+        : data === "Engineering & RND"
+        ? "#1e81b0"
+        : data === "Purchasing"
+        ? "#dc6539"
+        : data === "MP&L"
+        ? "#233087"
+        : data === "Accounting"
+        ? "#b78b7b"
+        : data === "Opex"
+        ? "#1b0c07"
+        : data === "QA"
+        ? "#93C2C4"
+        : data === "QC"
+        ? "#BDD0D1"
+        : data === "Maintenance & IT"
+        ? "#be4f62"
+        : "#565454"
+    );
+  };
+
   // UPDATE Network
   const updateNetwork = (data) => {
     setStatusNetwork(data);
@@ -597,14 +723,6 @@ useEffect(() => {
         ? "#E9CE08"
         : data === "Down"
         ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
         : "#565454"
     );
   };
@@ -617,16 +735,8 @@ useEffect(() => {
         ? "#31A207"
         : data === "Repair"
         ? "#E9CE08"
-        : data === "Leader"
+        : data === "Down"
         ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
         : "#565454"
     );
   };
@@ -639,16 +749,8 @@ useEffect(() => {
         ? "#31A207"
         : data === "Repair"
         ? "#E9CE08"
-        : data === "Leader"
+        : data === "Down"
         ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
         : "#565454"
     );
   };
@@ -661,16 +763,8 @@ useEffect(() => {
         ? "#31A207"
         : data === "Repair"
         ? "#E9CE08"
-        : data === "Leader"
+        : data === "Down"
         ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
         : "#565454"
     );
   };
@@ -683,16 +777,8 @@ useEffect(() => {
         ? "#31A207"
         : data === "Repair"
         ? "#E9CE08"
-        : data === "Leader"
+        : data === "Down"
         ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
         : "#565454"
     );
   };
@@ -705,16 +791,8 @@ useEffect(() => {
         ? "#31A207"
         : data === "Repair"
         ? "#E9CE08"
-        : data === "Leader"
+        : data === "Down"
         ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
         : "#565454"
     );
   };
@@ -727,16 +805,8 @@ useEffect(() => {
         ? "#31A207"
         : data === "Repair"
         ? "#E9CE08"
-        : data === "Leader"
+        : data === "Down"
         ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
         : "#565454"
     );
   };
@@ -811,8 +881,8 @@ useEffect(() => {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("Permintaan Bantuan Network Segera Diproses");
-          firebase.database().ref("SMTLine1/Network").set("Down");
+          alert(`Permintaan Bantuan ${Station} Segera Diproses`);
+          firebase.database().ref(`SMTLine1/${Station}`).set("Down");
           firebase.database().ref("StatusLine/SMTLine1").set("Down");
           setIsOpenGeneral(false);
           window.location.reload();
@@ -827,10 +897,48 @@ useEffect(() => {
   };
   // ------
 
-  // Tindakan / Kehadiran
+  // Submit Others
+  const SubmitOthers = (event) => {
+    if (!NamaPIC || !Line || !Kerusakan || !Department) {
+      alert("Harap isi semua kolom!");
+      return;
+    }
 
+    const data = {
+      NamaPIC: NamaPIC,
+      Line: Line,
+      Department: Department,
+      Kerusakan: Kerusakan,
+    };
+
+    fetch(`http://192.168.101.236:3001/api/post/Others`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Permintaan Bantuan Department Terkait Segera Di Proses");
+          firebase.database().ref("SMTLine1/Others").set(`${Department}`);
+          firebase.database().ref("StatusLine/SMTLine1").set("Down");
+          setIsOpenOthers(false);
+          window.location.reload();
+          event.preventDefault();
+        } else {
+          throw new Error("Error adding data");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // ------
+
+  // Tindakan / Kehadiran
   const handleNetworkPress = () => {
-    if (network === "Down") {
+    if (Network === "Down") {
       setNetworkPressed(true);
       timeoutRefNetwork.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
@@ -845,8 +953,121 @@ useEffect(() => {
     clearTimeout(timeoutRefNetwork.current);
   };
 
+  const handleElectricityPress = () => {
+    if (Electricity === "Down") {
+      setElectricityPressed(true);
+      timeoutRefElectricity.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        firebase.database().ref("SMTLine1/Electricity").set("Go");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleElectricityRelease = () => {
+    setElectricityPressed(false);
+    clearTimeout(timeoutRefElectricity.current);
+  };
+
+  const handleOthersPress = () => {
+    if (Others === "Down" || Others === "Engineering & RND" || Others === "PPIC" || Others === "Purchasing" || Others === "MP&L" || Others === "Accounting" || Others === "Maintenance & IT" || Others === "QA"  || Others === "QC" || Others === "Opex" || Others === "HRGA & EHS"   )  {
+      setOthersPressed(true);
+      timeoutRefOthers.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        firebase.database().ref("SMTLine1/Others").set("Go");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleOthersRelease = () => {
+    setOthersPressed(false);
+    clearTimeout(timeoutRefOthers.current);
+  };
+
+  const handleAircompPress = () => {
+    if (Aircomp === "Down") {
+      setAircompPressed(true);
+      timeoutRefAircomp.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        firebase.database().ref("SMTLine1/Air Compressor").set("Go");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleAircompRelease = () => {
+    setAircompPressed(false);
+    clearTimeout(timeoutRefAircomp.current);
+  };
+
+  const handleShorcompPress = () => {
+    if (Shorcomp === "Down") {
+      setShorcompPressed(true);
+      timeoutRefShorcomp.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        firebase.database().ref("SMTLine1/Shortage Comp").set("Go");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleShorcompRelease = () => {
+    setShorcompPressed(false);
+    clearTimeout(timeoutRefShorcomp.current);
+  };
+
+  const handleShorboxPress = () => {
+    if (Shorbox === "Down") {
+      setShorboxPressed(true);
+      timeoutRefShorbox.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        firebase.database().ref("SMTLine1/Shortage Box FG").set("Go");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleShorboxRelease = () => {
+    setShorboxPressed(false);
+    clearTimeout(timeoutRefShorbox.current);
+  };
+
+  const handleOvertrialPress = () => {
+    if (Overtrial === "Down") {
+      setOvertrialPressed(true);
+      timeoutRefOvertrial.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        firebase.database().ref("SMTLine1/Over Trial").set("Go");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleOvertrialRelease = () => {
+    setOvertrialPressed(false);
+    clearTimeout(timeoutRefOvertrial.current);
+  };
+
+  const handleOverchangePress = () => {
+    if (Overchange === "Down") {
+      setOverchangePressed(true);
+      timeoutRefOverchange.current = setTimeout(() => {
+        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
+        firebase.database().ref("StatusLine/SMTLine1").set("Running");
+        firebase.database().ref("SMTLine1/Over Change Model").set("Go");
+        window.location.reload();
+      }, 3000);
+    }
+  };
+  const handleOverchangeRelease = () => {
+    setOverchangePressed(false);
+    clearTimeout(timeoutRefOverchange.current);
+  };
+
   // ------
 
+  // Function Call Leader
   const handleCall = () => {
     window.location.href = "https://api.whatsapp.com/send?phone=6281380996094";
   };
@@ -854,6 +1075,7 @@ useEffect(() => {
   const handleCall2 = () => {
     window.location.href = "https://api.whatsapp.com/send?phone=6281929749600";
   };
+  // ------
 
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/S.jpg)`,
@@ -877,7 +1099,9 @@ useEffect(() => {
               </div>
             </a>
           </div>
-          <p class="text-gray-500 text-sm">{formattedTime}</p>
+          <div className="flex">
+            <p class="text-gray-500 text-sm">{formattedTime}</p>
+          </div>
         </div>
       </nav>
 
@@ -905,7 +1129,40 @@ useEffect(() => {
                   <h1 class="text-xl font-bold tracking-tight ml-4">
                     <span class="text-black">SMT LINE 2:</span>
                     <span class="ml-4 text-green-500">RUNNING </span>|
-                  </h1>
+                    {/* <a href="Tickets">
+                    <span class="ml-4 mr-2 text-slate-900">Tickets </span>
+                    </a> */}
+                  </h1>{" "}
+                  {/* <a href="Tickets">
+                    <svg
+                      width="26px"
+                      viewBox="0 0 24 24"
+                      className="mt-1"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9 15L15 9"
+                        stroke="#1C274C"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                      />
+                      <path
+                        d="M15.5 14.5C15.5 15.0523 15.0523 15.5 14.5 15.5C13.9477 15.5 13.5 15.0523 13.5 14.5C13.5 13.9477 13.9477 13.5 14.5 13.5C15.0523 13.5 15.5 13.9477 15.5 14.5Z"
+                        fill="#1C274C"
+                      />
+                      <path
+                        d="M10.5 9.5C10.5 10.0523 10.0523 10.5 9.5 10.5C8.94772 10.5 8.5 10.0523 8.5 9.5C8.5 8.94772 8.94772 8.5 9.5 8.5C10.0523 8.5 10.5 8.94772 10.5 9.5Z"
+                        fill="#1C274C"
+                      />
+                      <path
+                        d="M14.0037 4H9.9963C6.21809 4 4.32899 4 3.15525 5.17157C2.27661 6.04858 2.0557 7.32572 2.00016 9.49444C1.99304 9.77248 2.22121 9.99467 2.49076 10.0652C3.35074 10.2901 3.98521 11.0711 3.98521 12C3.98521 12.9289 3.35074 13.7099 2.49076 13.9348C2.22121 14.0053 1.99304 14.2275 2.00016 14.5056C2.0557 16.6743 2.27661 17.9514 3.15525 18.8284M18 4.10041C19.3086 4.22774 20.1885 4.51654 20.8448 5.17157C21.7234 6.04858 21.9443 7.32572 21.9998 9.49444C22.007 9.77248 21.7788 9.99467 21.5092 10.0652C20.6493 10.2901 20.0148 11.0711 20.0148 12C20.0148 12.9289 20.6493 13.7099 21.5092 13.9348C21.7788 14.0053 22.007 14.2275 21.9998 14.5056C21.9443 16.6743 21.7234 17.9514 20.8448 18.8284C19.671 20 17.7819 20 14.0037 20H9.9963C8.82865 20 7.84143 20 7 19.9654"
+                        stroke="#1C274C"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                      />
+                    </svg>{" "}
+                  </a> */}
                 </div>
               </marquee>
             </div>
@@ -916,7 +1173,7 @@ useEffect(() => {
       {/*  */}
       <main>
         <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
-          <li class="w-60 sm:w-36 lg:w-32">
+          <button class="w-60 sm:w-36 lg:w-32">
             <a
               href="/Andonline1"
               class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white"
@@ -924,21 +1181,110 @@ useEffect(() => {
             >
               SMT Line 1
             </a>
-          </li>
-          <button  class="w-60 sm:w-36 lg:w-32">
-            <a
-              href="Inputsche"
-              class="inline-block w-full p-4 text-black bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-            >
-              input schedule
+          </button>
+
+          <button class="w-60 sm:w-36 lg:w-32 bg-white">
+            <a href="Inputsche">
+              <svg
+                width="20px"
+                className="justify-center items-center mx-auto"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 20H6C3.79086 20 2 18.2091 2 16V7C2 4.79086 3.79086 3 6 3H17C19.2091 3 21 4.79086 21 7V10"
+                  stroke="#000000"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M8 2V4"
+                  stroke="#000000"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M15 2V4"
+                  stroke="#000000"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M2 8H21"
+                  stroke="#000000"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M18.5 15.6429L17 17.1429"
+                  stroke="#000000"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <circle
+                  cx="17"
+                  cy="17"
+                  r="5"
+                  stroke="#000000"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </a>
           </button>
-          <button onClick={() => setIsOpen2(true)} class="w-60 sm:w-36 lg:w-32">
-            <span class="inline-block w-full  p-4 text-orange-700  bg-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700">
-              <header className="animate-bounce">
-                <div>ISA</div>
-              </header>
-            </span>
+          <button
+            onClick={() => setIsOpen2(true)}
+            class="w-60 sm:w-36 lg:w-32 bg-white rounded-r-lg"
+          >
+            <svg
+              fill="#ff7f50"
+              width="23px"
+              version="1.1"
+              className="justify-center items-center mx-auto animate-bounce"
+              id="Layer_1"
+              viewBox="0 0 512 512"
+            >
+              <g>
+                <g>
+                  <path
+                    d="M256,0C120.477,0,10.224,110.255,10.224,245.778c0,62.171,23.12,121.186,65.206,166.725l-13.707,88.342
+			c-0.558,3.601,0.953,7.208,3.91,9.336c1.677,1.207,3.657,1.82,5.647,1.82c1.52,0,3.046-0.357,4.447-1.083l79.241-41.036
+			c31.825,14.386,65.788,21.675,101.032,21.675c135.521,0,245.778-110.255,245.778-245.778C501.778,110.255,391.523,0,256,0z
+			 M256,472.211c-33.973,0-66.646-7.347-97.114-21.835c-2.731-1.3-5.914-1.245-8.601,0.146l-66.524,34.45l11.51-74.177
+			c0.463-2.982-0.493-6.007-2.582-8.184c-40.704-42.373-63.121-98.072-63.121-156.835C29.568,120.922,131.145,19.344,256,19.344
+			s226.433,101.577,226.433,226.433S380.856,472.211,256,472.211z"
+                  />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M256,70.708c-28.236,0-51.208,22.972-51.208,51.208c0,28.236,22.972,51.208,51.208,51.208
+			c28.238,0,51.208-22.972,51.208-51.208C307.208,93.678,284.236,70.708,256,70.708z M256,153.78
+			c-17.57,0-31.864-14.294-31.864-31.864S238.43,90.052,256,90.052c17.571,0,31.864,14.294,31.864,31.864S273.57,153.78,256,153.78z
+			"
+                  />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M312.758,357.74h-11.013V199.148c0-5.342-4.331-9.672-9.672-9.672h-92.828c-5.342,0-9.672,4.331-9.672,9.672v32.143
+			c0,5.342,4.331,9.672,9.672,9.672h11.013v116.777h-11.013c-5.342,0-9.672,4.331-9.672,9.672v32.143
+			c0,5.343,4.331,9.673,9.672,9.673h113.514c5.342,0,9.672-4.331,9.672-9.672v-32.143C322.43,362.071,318.099,357.74,312.758,357.74
+			z M303.085,389.884h-94.17v-12.8h11.013c5.342,0,9.672-4.331,9.672-9.672V231.291c0-5.342-4.331-9.672-9.672-9.672h-11.013
+			v-12.798H282.4v158.593c0,5.342,4.331,9.672,9.672,9.672h11.013V389.884z"
+                  />
+                </g>
+              </g>
+            </svg>
           </button>
         </ul>
 
@@ -1022,14 +1368,20 @@ useEffect(() => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <div
-                  onClick={() => {
-                    if (electricity === "Go") {
-                      setIsOpenGeneral2(true);
-                    }
-                  }}
+                  <button
+                    onClick={() => {
+                      setStation("Electricity");
+                      if (Electricity === "Go") {
+                        setIsOpenGeneral(true);
+                      }
+                    }}
+                    onMouseDown={handleElectricityPress}
+                    onMouseUp={handleElectricityRelease}
+                    onMouseLeave={handleElectricityRelease}
+                    onTouchStart={handleElectricityPress}
+                    onTouchEnd={handleElectricityRelease}
                     style={{ backgroundColor: backgroundColorElectricity }}
-                    value={electricity}
+                    value={Electricity}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -1037,7 +1389,7 @@ useEffect(() => {
                         ELECTRICITY
                       </div>
                     </header>
-                  </div>
+                  </button>
                 </div>
               </div>
             </section>
@@ -1047,11 +1399,11 @@ useEffect(() => {
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
                     style={{ backgroundColor: backgroundColorNetwork }}
-                    value={network}
+                    value={Network}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                     onClick={() => {
                       setStation("Network");
-                      if (network === "Go") {
+                      if (Network === "Go") {
                         setIsOpenGeneral(true);
                       }
                     }}
@@ -1075,13 +1427,19 @@ useEffect(() => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <div
-                  onClick={() => {
-                    if (aircomp === "Go") {
-                      setIsOpenGeneral2(true);
-                    }
-                  }}
+                    onClick={() => {
+                      setStation("Air Compressor");
+                      if (Aircomp === "Go") {
+                        setIsOpenGeneral(true);
+                      }
+                    }}
+                    onMouseDown={handleAircompPress}
+                    onMouseUp={handleAircompRelease}
+                    onMouseLeave={handleAircompRelease}
+                    onTouchStart={handleAircompPress}
+                    onTouchEnd={handleAircompRelease}
                     style={{ backgroundColor: backgroundColorAircomp }}
-                    value={aircomp}
+                    value={Aircomp}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -1097,14 +1455,20 @@ useEffect(() => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
 
-                <button
-                  onClick={() => setIsOpenOthers(true)}
-                  className="animate-pulse w-72 pt-2 sm:w-48 lg:w-72"
-                >
+                <button className="animate-pulse w-72 pt-2 sm:w-48 lg:w-72">
                   <button
                     onClick={() => {
-                        setIsOpenGeneral2(true);
+                      if (Others === "Go") {
+                        setIsOpenOthers(true);
+                      }
                     }}
+                    style={{ backgroundColor: backgroundColorOthers }}
+                    value={Others}
+                    onMouseDown={handleOthersPress}
+                    onMouseUp={handleOthersRelease}
+                    onMouseLeave={handleOthersRelease}
+                    onTouchStart={handleOthersPress}
+                    onTouchEnd={handleOthersRelease}
                     class="w-full max-w-sm  bg-lime-900 shadow-lg rounded-full "
                   >
                     <header class="px-5 py-4  ">
@@ -1132,13 +1496,19 @@ useEffect(() => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                  onClick={() => {
-                    if (shorcomp === "Go") {
-                      setIsOpenGeneral2(true);
-                    }
-                  }}
+                    onClick={() => {
+                      setStation("Shortage Comp");
+                      if (Shorcomp === "Go") {
+                        setIsOpenGeneral(true);
+                      }
+                    }}
+                    onMouseDown={handleShorcompPress}
+                    onMouseUp={handleShorcompRelease}
+                    onMouseLeave={handleShorcompRelease}
+                    onTouchStart={handleShorcompPress}
+                    onTouchEnd={handleShorcompRelease}
                     style={{ backgroundColor: backgroundColorShorcomp }}
-                    value={shorcomp}
+                    value={Shorcomp}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -1153,15 +1523,21 @@ useEffect(() => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <button className="w-72 pt-2 sm:w-48 lg:w-72">
                   <div
-                  onClick={() => {
-                    if (shorbox === "Go") {
-                      setIsOpenGeneral2(true);
-                    }
-                  }}
+                    onClick={() => {
+                      setStation("Shortage Box FG");
+                      if (Shorbox === "Go") {
+                        setIsOpenGeneral(true);
+                      }
+                    }}
+                    onMouseDown={handleShorboxPress}
+                    onMouseUp={handleShorboxRelease}
+                    onMouseLeave={handleShorboxRelease}
+                    onTouchStart={handleShorboxPress}
+                    onTouchEnd={handleShorboxRelease}
                     style={{ backgroundColor: backgroundColorShorbox }}
-                    value={shorbox}
+                    value={Shorbox}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -1170,21 +1546,27 @@ useEffect(() => {
                       </div>
                     </header>
                   </div>
-                </div>
+                </button>
               </div>
             </section>
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <button className="w-72 pt-2 sm:w-48 lg:w-72">
                   <div
-                  onClick={() => {
-                    if (overtrial === "Go") {
-                      setIsOpenGeneral2(true);
-                    }
-                  }}
+                    onClick={() => {
+                      setStation("Over Trial");
+                      if (Overtrial === "Go") {
+                        setIsOpenGeneral(true);
+                      }
+                    }}
+                    onMouseDown={handleOvertrialPress}
+                    onMouseUp={handleOvertrialRelease}
+                    onMouseLeave={handleOvertrialRelease}
+                    onTouchStart={handleOvertrialPress}
+                    onTouchEnd={handleOvertrialRelease}
                     style={{ backgroundColor: backgroundColorOvertrial }}
-                    value={overtrial}
+                    value={Overtrial}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -1193,21 +1575,27 @@ useEffect(() => {
                       </div>
                     </header>
                   </div>
-                </div>
+                </button>
               </div>
             </section>
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <button className="w-72 pt-2 sm:w-48 lg:w-72">
                   <div
-                  onClick={() => {
-                    if (overchange === "Go") {
-                      setIsOpenGeneral2(true);
-                    }
-                  }}
+                    onClick={() => {
+                      setStation("Over Change Model");
+                      if (Overchange === "Go") {
+                        setIsOpenGeneral(true);
+                      }
+                    }}
+                    onMouseDown={handleOverchangePress}
+                    onMouseUp={handleOverchangeRelease}
+                    onMouseLeave={handleOverchangeRelease}
+                    onTouchStart={handleOverchangePress}
+                    onTouchEnd={handleOverchangeRelease}
                     style={{ backgroundColor: backgroundColorOverchange }}
-                    value={overchange}
+                    value={Overchange}
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -1216,7 +1604,7 @@ useEffect(() => {
                       </div>
                     </header>
                   </div>
-                </div>
+                </button>
               </div>
             </section>
           </div>
@@ -1269,62 +1657,39 @@ useEffect(() => {
                         <span>Request</span>
                       </div>
                       <div class="flex flex-wrap -mx-3 ">
-                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <div class="w-full px-1">
                           <label
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for="grid-first-name"
                           >
                             Masukan Nama Anda
                           </label>
-                          <select
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                          <input
+                            type="text"
+                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             name="NamaPIC"
                             required
                             onChange={(e) => {
                               setNamaPIC(e.target.value);
-                              setNpkPIC(
-                                npkList[namaList.indexOf(e.target.value)]
-                              );
                             }}
-                          >
-                            <option value="">- -Pilih Nama Anda- -</option>
-                            {namaList.map((nama, index) => (
-                              <option value={nama} key={index}>
-                                {nama}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                        <div class="w-full md:w-1/2 px-3">
-                          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                            NPK
-                          </label>
-                          <input
-                            class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            type="number"
-                            placeholder="0000"
-                            name="NpkPIC"
-                            value={NpkPIC}
-                            readOnly
-                          />
+                          ></input>
                         </div>
                       </div>
 
                       {/*Status*/}
                       <div className="mb-4">
                         <label
-                          className="block text-gray-700 font-bold mb-2"
-                          htmlFor="Depart To"
+                          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                          for="grid-city"
                         >
                           Depart To
                         </label>
-                        <div className="relative">
+                        <div className="relative -mx-2">
                           <select
-                            className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="Depart To"
                             name="Depart To"
-                            value={selectedStatus}
-                            onChange={(e) => setSelectedStatus(e.target.value)}
+                            onChange={(e) => setDepartment(e.target.value)}
                             required
                             defaultValue={""}
                           >
@@ -1346,8 +1711,8 @@ useEffect(() => {
                           </select>
                         </div>
                       </div>
-                      <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                      <div class="flex flex-wrap -mx-3 ">
+                        <div class="w-full px-1 mb-2">
                           <label
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for="grid-city"
@@ -1399,7 +1764,7 @@ useEffect(() => {
                         <button
                           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                           type="submit"
-                          onClick={submit}
+                          onClick={SubmitOthers}
                         >
                           Submit
                         </button>
@@ -1848,8 +2213,7 @@ useEffect(() => {
                             ></path>
                           </svg>
                           <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-normal text-gray-500 dark:text-gray-400">
-                            Apakah Anda Yakin Akan Meminta Bantuan Team{" "}
-                            {Station}?
+                            Apakah Anda Yakin Akan Meminta Bantuan {Station}?
                           </h3>
                           <div class="flex flex-wrap -mx-3 ">
                             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -1935,8 +2299,6 @@ useEffect(() => {
         ) : null}
       </td>
 
-
-
       <td>
         {isOpenGeneral2 ? (
           <>
@@ -1956,16 +2318,21 @@ useEffect(() => {
                     <form>
                       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                         <div class="p-6 text-center">
-                        <svg fill="#808080"  class="mx-auto mb-4 text-gray-400 w-32 h-14 dark:text-gray-200" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
-<title>repair</title>
-<path d="M27.472 25.67l3.511 2.664c0.764-1.983 0.2-4.311-1.579-5.661-1.368-1.038-3.108-1.248-4.61-0.713l-0.532-0.403-0.070-0.132c0.37-0.526 0.691-1.076 0.961-1.644l2.417-0.067 0.495-1.58-1.953-1.438c0.095-0.591 0.142-1.189 0.143-1.786l2.167-1.1-0.229-1.64-2.392-0.468c-0.2-0.688-0.466-1.362-0.798-2.011l1.426-1.973-0.954-1.354-2.347 0.682c-0.029-0.031-0.058-0.062-0.088-0.093-0.375-0.388-0.771-0.743-1.184-1.066l0.451-2.321-1.435-0.827-1.781 1.551c-0.577-0.232-1.169-0.415-1.769-0.549l-0.584-2.291-1.651-0.135-0.951 2.172c-0.492 0.030-0.982 0.091-1.468 0.185l-1.454-1.877-1.568 0.533-0.008 2.39c-0.664 0.342-1.303 0.753-1.904 1.236l-2.215-0.998-1.134 1.207 1.134 2.151c-0.366 0.521-0.683 1.067-0.951 1.63l-2.433 0.067-0.495 1.58 1.966 1.448c-0.094 0.586-0.142 1.179-0.144 1.772l-2.18 1.106 0.229 1.64 2.394 0.468c0.143 0.498 0.319 0.989 0.531 1.468l-1.58 1.959 0.881 1.402 2.453-0.573c0.154 0.181 0.315 0.359 0.482 0.532 0.353 0.365 0.723 0.701 1.107 1.008l-0.477 2.459 1.435 0.827 1.873-1.632c0.538 0.216 1.089 0.389 1.649 0.519l0.612 2.401 1.651 0.135 0.991-2.263c0.686-0.041 1.369-0.144 2.041-0.308l1.576 1.825 1.538-0.616-0.083-1.685 0.974 0.739c-0.115 1.597 0.543 3.233 1.909 4.271 1.778 1.349 4.172 1.266 5.877-0.004l-3.51-2.663c-0.619-0.469-0.762-1.358-0.312-1.952s1.328-0.672 1.946-0.202zM13.845 23.736c-1.985-0.224-3.892-1.12-5.388-2.669-3.421-3.538-3.323-9.167 0.216-12.587s9.17-3.36 12.59 0.178c3.012 3.115 3.293 7.878 0.903 11.308l-5.822-4.417c0.11-1.589-0.561-3.21-1.928-4.247-1.778-1.349-4.172-1.266-5.877 0.004l3.51 2.663c0.618 0.469 0.78 1.334 0.33 1.929s-1.346 0.696-1.964 0.226l-3.51-2.663c-0.763 1.983-0.2 4.311 1.579 5.661 1.367 1.036 3.121 1.229 4.628 0.688l4.617 3.503c-1.254 0.428-2.582 0.569-3.883 0.422z"></path>
-</svg>
+                          <svg
+                            fill="#808080"
+                            class="mx-auto mb-4 text-gray-400 w-32 h-14 dark:text-gray-200"
+                            viewBox="0 0 32 32"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <title>repair</title>
+                            <path d="M27.472 25.67l3.511 2.664c0.764-1.983 0.2-4.311-1.579-5.661-1.368-1.038-3.108-1.248-4.61-0.713l-0.532-0.403-0.070-0.132c0.37-0.526 0.691-1.076 0.961-1.644l2.417-0.067 0.495-1.58-1.953-1.438c0.095-0.591 0.142-1.189 0.143-1.786l2.167-1.1-0.229-1.64-2.392-0.468c-0.2-0.688-0.466-1.362-0.798-2.011l1.426-1.973-0.954-1.354-2.347 0.682c-0.029-0.031-0.058-0.062-0.088-0.093-0.375-0.388-0.771-0.743-1.184-1.066l0.451-2.321-1.435-0.827-1.781 1.551c-0.577-0.232-1.169-0.415-1.769-0.549l-0.584-2.291-1.651-0.135-0.951 2.172c-0.492 0.030-0.982 0.091-1.468 0.185l-1.454-1.877-1.568 0.533-0.008 2.39c-0.664 0.342-1.303 0.753-1.904 1.236l-2.215-0.998-1.134 1.207 1.134 2.151c-0.366 0.521-0.683 1.067-0.951 1.63l-2.433 0.067-0.495 1.58 1.966 1.448c-0.094 0.586-0.142 1.179-0.144 1.772l-2.18 1.106 0.229 1.64 2.394 0.468c0.143 0.498 0.319 0.989 0.531 1.468l-1.58 1.959 0.881 1.402 2.453-0.573c0.154 0.181 0.315 0.359 0.482 0.532 0.353 0.365 0.723 0.701 1.107 1.008l-0.477 2.459 1.435 0.827 1.873-1.632c0.538 0.216 1.089 0.389 1.649 0.519l0.612 2.401 1.651 0.135 0.991-2.263c0.686-0.041 1.369-0.144 2.041-0.308l1.576 1.825 1.538-0.616-0.083-1.685 0.974 0.739c-0.115 1.597 0.543 3.233 1.909 4.271 1.778 1.349 4.172 1.266 5.877-0.004l-3.51-2.663c-0.619-0.469-0.762-1.358-0.312-1.952s1.328-0.672 1.946-0.202zM13.845 23.736c-1.985-0.224-3.892-1.12-5.388-2.669-3.421-3.538-3.323-9.167 0.216-12.587s9.17-3.36 12.59 0.178c3.012 3.115 3.293 7.878 0.903 11.308l-5.822-4.417c0.11-1.589-0.561-3.21-1.928-4.247-1.778-1.349-4.172-1.266-5.877 0.004l3.51 2.663c0.618 0.469 0.78 1.334 0.33 1.929s-1.346 0.696-1.964 0.226l-3.51-2.663c-0.763 1.983-0.2 4.311 1.579 5.661 1.367 1.036 3.121 1.229 4.628 0.688l4.617 3.503c-1.254 0.428-2.582 0.569-3.883 0.422z"></path>
+                          </svg>
                           <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-normal text-gray-500 dark:text-gray-400">
-                          Fitur Ini Sedang Di Kembangkan Silakhan Kembali Lagi Nanti !!{" "}
-                            
+                            Fitur Ini Sedang Di Kembangkan Silakhan Kembali Lagi
+                            Nanti !!{" "}
                           </h3>
-                          
-                        
+
                           <div class="flex justify-center">
                             <button
                               data-modal-hide="popup-modal"
@@ -1988,8 +2355,6 @@ useEffect(() => {
           </>
         ) : null}
       </td>
-
-
     </body>
   );
 };

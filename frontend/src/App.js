@@ -5,11 +5,9 @@ import Home from "./components/Home.jsx"
 import BP from "./components/Broken/BrokenPage.jsx"
 import Line from "./components/Line.jsx"
 import Line1 from "./components/Line1/Line1.jsx"
-import PPIC from "./components/Ppic/Ppic.jsx"
-import RequestPpic from "./components/Ppic/RequestPpic.jsx"
-import ReturnPpic from "./components/Ppic/ReturnPpic.jsx"
-import RequestPurchasing from "./components/Purchasing/RequestPurchasing.jsx"
-import ReturnPurchasing from "./components/Purchasing/ReturnPurchasing.jsx"
+
+
+
 import RequestQualityA from "./components/QualityA/RequestQualityA.jsx"
 import ValidationQualityA from "./components/QualityA/ValidationQualityA.jsx"
 
@@ -26,11 +24,16 @@ import ScheProd from "./components/Leader/ScheProd.jsx"
 import RequestGeneral from "./components/General/RequestGeneral.jsx"
 
 
+import RequestOthers from "./components/Others/RequestOthers.jsx"
+
 import RequestMaintenance from "./components/Maintenance/RequestMaintenance.jsx"
 import ReturnMaintenance from "./components/Maintenance/ReturnMaintenance.jsx"
 
 
 import EM from "./components/EMaintenance.jsx"
+
+
+import Tickets from "./components/Tickets.jsx"
 
 function App() {
   return (
@@ -44,12 +47,7 @@ function App() {
         <Route path="Line" element={<Line/>}/>
         <Route path="Line1" element={<Line1/>}/>
 
-        <Route path="PPIC" element={<PPIC/>}/>
-        <Route path="RequestPPIC" element={<RequestPpic/>}/>
-        <Route path="ReturnPPIC" element={<ReturnPpic/>}/>
 
-        <Route path="RequestPurchasing" element={<RequestPurchasing/>}/>
-        <Route path="ReturnPurchasing" element={<ReturnPurchasing/>}/>
 
 
         <Route path="RequestQA" element={<RequestQualityA/>}/>
@@ -59,6 +57,10 @@ function App() {
         <Route path="ValidationQC" element={<ValidationQualityC/>}/>
                 
         <Route path="RequestGeneral" element={<RequestGeneral/>}/>
+
+        <Route path="RequestOthers" element={<RequestOthers/>}/>
+
+
         <Route path="RequestMaintenance" element={<RequestMaintenance/>}/>
         <Route path="ReturnMaintenance" element={<ReturnMaintenance/>}/>
       
@@ -72,7 +74,7 @@ function App() {
 
         <Route path="E" element={<EM/>}/>
 
-
+        <Route path="Tickets" element={<Tickets/>}/>
         
       </Routes>
     </>

@@ -384,7 +384,7 @@ const RepairReport = () => {
                                               Line
                                             </label>
                                             <div
-                                              class="appearance-none block w-full bg-gray-200 font-semibold border text-lime-600  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              class="appearance-none block w-full bg-gray-200 font-semibold border   rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}
@@ -401,7 +401,7 @@ const RepairReport = () => {
                                               Problem
                                             </label>
                                             <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border text-red-600  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              class="appearance-none block w-full bg-gray-200  border text-red-600  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}

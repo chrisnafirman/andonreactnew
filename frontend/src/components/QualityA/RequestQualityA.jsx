@@ -437,10 +437,10 @@ const RequestQA = () => {
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                                               for="grid-password"
                                             >
-                                              Kerusakan
+                                              Problem
                                             </label>
                                             <div
-                                              class="appearance-none block w-full bg-gray-200 text-red-900  border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              class="appearance-none block w-full bg-gray-200 text-red-600  border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}

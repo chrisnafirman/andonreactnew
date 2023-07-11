@@ -326,6 +326,27 @@ app.post("/api/post/general", (req, res) => {
 });
 
 
+
+///post To Others
+
+app.post("/api/post/Others", (req, res) => {
+  const { NamaPIC, Line, Department, Kerusakan } = req.body;
+  
+  db.query(
+    "INSERT INTO others (Nama, Line, Department, Problem) VALUES (?, ?, ?, ?)",
+    [NamaPIC, Line, Department, Kerusakan ],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been added successfully' });
+    }
+  );
+});
+
+
+
 ///post To Maintenance
 
 app.post("/api/post/Maintenance", (req, res) => {
@@ -448,6 +469,14 @@ app.get("/api/get/ReturnPURCHASING", (req, res) => {
 
 app.get("/api/get/General", (req, res) => {
   const sqlSelect = "SELECT * FROM general";
+  db.query(sqlSelect, (err, results) => {
+    res.send(results);
+  });
+});
+
+
+app.get("/api/get/Others", (req, res) => {
+  const sqlSelect = "SELECT * FROM others";
   db.query(sqlSelect, (err, results) => {
     res.send(results);
   });

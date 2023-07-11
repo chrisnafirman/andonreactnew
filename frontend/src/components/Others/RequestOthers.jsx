@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 
@@ -11,18 +13,15 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const ReturnQA = () => {
+const RepairReport = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
-
-  const [selectedItem, setSelectedItem] = useState(null);
-
   const [showDatePicker, setShowDatePicker] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
-  //
+  const [selectedItem, setSelectedItem] = useState(null);
   const [StatusLine, setStatusLine] = useState("");
 
   useEffect(() => {
@@ -34,17 +33,15 @@ const ReturnQA = () => {
     return () => {};
   }, []);
 
-  //  fungsi mengambil data dari firebase
-  const toggleDrawer = () => {
-    setShowDrawer(!showDrawer);
-  };
-
-  function updateTime() {
-    const interval = setInterval(() => {
-      setTime(new Date().toLocaleString());
-    }, 1000);
-    return () => clearInterval(interval);
+  // button search
+  function handleToggleDatePicker() {
+    setShowDatePicker(!showDatePicker);
   }
+
+  useEffect(() => {
+    // set showDatePicker ke false ketika halaman dimuat
+    setShowDatePicker(false);
+  }, []);
 
   // waktu navbar
   useEffect(() => {
@@ -58,25 +55,35 @@ const ReturnQA = () => {
     currentTime.getMonth() + 1
   }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
-  updateTime();
+  //  fungsi export to pdf
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+    const table = document.getElementById("data-table");
+    doc.autoTable({ html: table });
+    doc.save(`Report Repair Status.pdf`);
+  };
 
-  // button search
-  function handleToggleDatePicker() {
-    setShowDatePicker(!showDatePicker);
+  //  fungsi mengambil data dari firebase
+  const toggleDrawer = () => {
+    setShowDrawer(!showDrawer);
+  };
+
+  function updateTime() {
+    const interval = setInterval(() => {
+      setTime(new Date().toLocaleString());
+    }, 1000);
+    return () => clearInterval(interval);
   }
 
-  useEffect(() => {
-    // set showDatePicker ke false ketika halaman dimuat
-    setShowDatePicker(false);
-  }, []);
+  updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/get/validationqc")
+    fetch("http://192.168.101.236:3001/api/get/Others")
       .then((response) => response.json())
       .then((json) => {
-        // mengubah properti timestamp menjadi tanggal dan waktu
+        // mengubah properti timestamp menjadi tanggal dan Date
         json.forEach((item) => {
-          const date = new Date(item.waktu);
+          const date = new Date(item.Date);
           const day = date.getDate();
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
@@ -87,9 +94,9 @@ const ReturnQA = () => {
             .padStart(2, "0")}-${year} / ${hours
             .toString()
             .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
-          item.waktu = formattedDate;
+          item.Date = formattedDate;
         });
-        json.sort((a, b) => Date.parse(a.waktu) - Date.parse(b.waktu));
+        json.sort((a, b) => Date.parse(a.Date) - Date.parse(b.Date));
         json.reverse();
         setData(json);
         setFilteredData(json);
@@ -100,23 +107,21 @@ const ReturnQA = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(
-      `http://192.168.101.236:3001/api/get/validationqc?date=${selectedDate}`
-    )
+    fetch(`http://192.168.101.236:3001/api/get/Others?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
-        // mengubah properti waktu menjadi tanggal saja
+        // mengubah properti Date menjadi tanggal saja
         json.forEach((item) => {
-          const date = new Date(item.waktu);
+          const date = new Date(item.Date);
           const day = date.getDate();
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
           const formattedDate = `${day.toString().padStart(2, "0")}-${month
             .toString()
             .padStart(2, "0")}-${year}`;
-          item.waktu = formattedDate;
+          item.Date = formattedDate;
         });
-        json.sort((a, b) => Date.parse(a.waktu) - Date.parse(b.waktu));
+        json.sort((a, b) => Date.parse(a.Date) - Date.parse(b.Date));
         json.reverse();
         setFilteredData(json);
       });
@@ -135,16 +140,16 @@ const ReturnQA = () => {
       .toString()
       .padStart(2, "0")}-${date.getFullYear()}`;
     const filteredData = data.filter((item) =>
-      item.waktu.includes(formattedDate)
+      item.Date.includes(formattedDate)
     );
-    filteredData.sort((a, b) => Date.parse(b.waktu) - Date.parse(a.waktu));
+    filteredData.sort((a, b) => Date.parse(b.Date) - Date.parse(a.Date));
     setFilteredData(filteredData);
   };
 
   const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/QC.jpg)`,
+    backgroundImage: `url(${process.env.PUBLIC_URL}/OFFICE.jpg)`,
     backgroundSize: "1300px",
-    backgroundPosition: "1px",
+    backgroundPosition: "0px",
     height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
 
@@ -172,8 +177,9 @@ const ReturnQA = () => {
           <marquee behavior="scroll" direction="right">
             <div class="flex items-center">
               <h1 class="text-xl font-bold tracking-tight text-gray-900">
-                | Quality Control |
+                | Department |
               </h1>
+
               <h1 class="text-xl font-bold tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
                 <span
@@ -186,6 +192,7 @@ const ReturnQA = () => {
                 </span>
                 <span className="ml-4">|</span>
               </h1>
+
               <h1 class="text-xl font-bold tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
                 <span class="ml-4 text-green-500">RUNNING </span>|
@@ -194,6 +201,8 @@ const ReturnQA = () => {
           </marquee>
         </div>
       </header>
+
+   
 
       <main>
         <section
@@ -250,9 +259,17 @@ const ReturnQA = () => {
             </div>
             {/* <!-- Table --> */}
             <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-2xl border border-gray-200">
+              {/* <button className="flex" onClick={exportToPDF}>
+                Export To:
+                <img
+                  className="w-[25px]"
+                  src={process.env.PUBLIC_URL + "/pdf.png"}
+                  alt=""
+                />
+              </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Validation Quality Control
+                  Request For Others Department
                 </div>
               </header>
 
@@ -266,17 +283,14 @@ const ReturnQA = () => {
                       <th className="p-1 w-40">
                         <div className="font-semibold text-left">Nama</div>
                       </th>
-                      <th className="p-1 w-32">
+                      <th className="p-1  w-32">
                         <div className="font-semibold text-left">Line</div>
                       </th>
-                      <th className="p-1 w-24">
-                        <div className="font-semibold text-center">AREA</div>
-                      </th>
-                      <th className="p-1 w-28">
-                        <div className="font-semibold text-center">Station</div>
+                      <th className="p-1  w-32">
+                        <div className="font-semibold text-left">Department</div>
                       </th>
                       <th className="p-1 w-10">
-                        <div className="font-semibold text-center">File</div>
+                        <div className="font-semibold text-center">Details</div>
                       </th>
                       <th className="p-1 w-26">
                         <div className="font-semibold text-center">Date</div>
@@ -285,10 +299,13 @@ const ReturnQA = () => {
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
                     {filteredData.map((item, index) => (
-                      <tr key={item.id}>
+                      <tr
+                        key={item.id}
+                        className={index === 0 ? "bg-green-400" : ""}
+                      >
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
-                            {item.NamaPIC}
+                            {item.Nama}
                           </div>
                         </td>
                         <td className="p-2">
@@ -296,14 +313,9 @@ const ReturnQA = () => {
                             {item.Line}
                           </div>
                         </td>
-                        <td className="p-2 ">
-                          <div className="font-medium text-gray-800">
-                            {item.Area}
-                          </div>
-                        </td>
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
-                            {item.Station}
+                            {item.Department}
                           </div>
                         </td>
                         <td className="p-5 ">
@@ -324,7 +336,7 @@ const ReturnQA = () => {
                                 clipRule="evenodd"
                               />
                             </svg>
-                            <span>FILE</span>
+                            <span>DETAIL</span>
                           </button>
                         </td>
 
@@ -343,70 +355,40 @@ const ReturnQA = () => {
                                     <div className="sm:flex sm:items-start">
                                       <div className="w-full max-w-lg">
                                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                          <span>Validation By</span>
+                                          <span>Problem</span>
                                         </div>
                                         <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full  px-3 mb-6 md:mb-0">
+                                          <div class="w-full px-1">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-first-name"
                                             >
-                                              Nama PIC Quality
+                                              Nama PIC
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}
-                                              {selectedItem.NamaPIC}{" "}
+                                              {selectedItem.Nama}{" "}
                                             </div>
                                           </div>
                                         </div>
 
-                                        <div class="flex flex-wrap -mx-3 mb-6">
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                        <div class="flex flex-wrap -mx-3 ">
+                                          <div class="w-full px-1">
                                             <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Area
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Line}{" "}
-                                            </div>
-                                          </div>
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                                              for="grid-password"
                                             >
                                               Line
                                             </label>
                                             <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              class="appearance-none block w-full bg-gray-200 font-semibold border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}
-                                              {selectedItem.Area}{" "}
-                                            </div>
-                                          </div>
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Station
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Station}{" "}
+                                              {selectedItem.Line}{" "}
                                             </div>
                                           </div>
                                         </div>
@@ -416,18 +398,31 @@ const ReturnQA = () => {
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                                               for="grid-password"
                                             >
-                                              Validation
+                                              Department
                                             </label>
-                                            <div class="flex items-center">
-                                              <a
-                                                href={`http://192.168.101.236:3001/${selectedItem.Validation}`}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                class="text-blue-600 hover:text-blue-800"
-                                              >
-                                                <i class="far fa-file-pdf mr-2"></i>
-                                                View PDF
-                                              </a>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.Department}{" "}
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="flex flex-wrap -mx-3 ">
+                                          <div class="w-full px-1">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                                              for="grid-password"
+                                            >
+                                              Detail Problem
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200  border  text-red-600   rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.Problem}{" "}
                                             </div>
                                           </div>
                                         </div>
@@ -447,8 +442,6 @@ const ReturnQA = () => {
                                 </div>
                               </div>
                             </div>
-
-                          
                           </>
                         )}
 
@@ -472,7 +465,7 @@ const ReturnQA = () => {
 
                         <td className="p-2">
                           <div className="text-center h-6 text-black...">
-                            {item.waktu}
+                            {item.Date} WIB
                           </div>
                         </td>
                       </tr>
@@ -488,4 +481,4 @@ const ReturnQA = () => {
   );
 };
 
-export default ReturnQA;
+export default RepairReport;
