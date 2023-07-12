@@ -171,10 +171,10 @@ const ReturnQA = () => {
         <div class="mx-auto max-w-7xl px-4">
           <marquee behavior="scroll" direction="right">
             <div class="flex items-center">
-              <h1 class="text-xl font-bold tracking-tight text-gray-900">
-                | Quality Control |
+              <h1 class="text-xl font-sans tracking-tight text-gray-900">
+                | Validation Quality Control |
               </h1>
-              <h1 class="text-xl font-bold tracking-tight ml-4">
+              <h1 class="text-xl font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
                 <span
                   class="ml-4"
@@ -186,7 +186,7 @@ const ReturnQA = () => {
                 </span>
                 <span className="ml-4">|</span>
               </h1>
-              <h1 class="text-xl font-bold tracking-tight ml-4">
+              <h1 class="text-xl font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
                 <span class="ml-4 text-green-500">RUNNING </span>|
               </h1>
@@ -201,7 +201,7 @@ const ReturnQA = () => {
           x-data="app"
         >
           <div className="flex flex-col mt-1 h-full">
-            <div>
+          <div>
               {showDatePicker && (
                 <form className="" onSubmit={handleSubmit}>
                   <label htmlFor="date" className="text-gray-300">
@@ -233,7 +233,7 @@ const ReturnQA = () => {
                       />
                     </div>
                     <button
-                      class="bg-blue-500  hover:bg-blue-400 text-white w-20 font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-2 "
+                      class="bg-blue-500  hover:bg-blue-400 text-white w-20 font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500  rounded-3xl  rounded mt-2 "
                       type="submit"
                     >
                       Submit
@@ -242,7 +242,7 @@ const ReturnQA = () => {
                 </form>
               )}
               <button
-                class="bg-blue-500 hover:bg-blue-400 text-white w-20 font-bold py-1 px-2 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-1 mb-3 "
+                class="bg-blue-500 hover:bg-blue-400 text-white w-20 font-bold py-1 px-2 border-b-4 border-blue-700 hover:border-blue-500 rounded-3xl mt-1 mb-3 "
                 onClick={handleToggleDatePicker}
               >
                 {showDatePicker ? "Hide" : "Search"}
@@ -309,22 +309,71 @@ const ReturnQA = () => {
                         <td className="p-5 ">
                           <button
                             onClick={() => setSelectedItem(item)}
-                            className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                            className="flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                           >
                             <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
+                              width="800px"
+                              height="800px"
+                              viewBox="0 0 24 24"
                               className="w-6 h-6 mr-2"
+                              xmlns="http://www.w3.org/2000/svg"
                             >
-                              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 110-16 8 8 0 010 16zm0-2a6 6 0 100-12 6 6 0 000 12z"
-                                clipRule="evenodd"
-                              />
+                              <title />
+
+                              <g id="Complete">
+                                <g id="F-File">
+                                  <g id="Text">
+                                    <g>
+                                      <path
+                                        d="M18,22H6a2,2,0,0,1-2-2V4A2,2,0,0,1,6,2h7.1a2,2,0,0,1,1.5.6l4.9,5.2A2,2,0,0,1,20,9.2V20A2,2,0,0,1,18,22Z"
+                                        fill="none"
+                                        id="File"
+                                        stroke="#000000"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                      />
+
+                                      <line
+                                        fill="none"
+                                        stroke="#000000"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        x1="7.9"
+                                        x2="16.1"
+                                        y1="17.5"
+                                        y2="17.5"
+                                      />
+
+                                      <line
+                                        fill="none"
+                                        stroke="#000000"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        x1="7.9"
+                                        x2="16.1"
+                                        y1="13.5"
+                                        y2="13.5"
+                                      />
+
+                                      <line
+                                        fill="none"
+                                        stroke="#000000"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        x1="8"
+                                        x2="13"
+                                        y1="9.5"
+                                        y2="9.5"
+                                      />
+                                    </g>
+                                  </g>
+                                </g>
+                              </g>
                             </svg>
-                            <span>FILE</span>
                           </button>
                         </td>
 

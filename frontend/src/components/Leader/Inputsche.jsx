@@ -314,10 +314,10 @@ const SmtTop = () => {
   }
 
   const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/l.jpg)`,
+    backgroundImage: `url(${process.env.PUBLIC_URL}/Background.jpg)`,
     backgroundSize: "1300px",
     backgroundPosition: "500px",
-    height: "8000px", // Ubah tinggi (height) sesuai kebutuhan Anda
+    height: "2000px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
 
   const formattedTime = `${currentTime.getDate()}/${

@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Login from "./components/Maintenance/Login.jsx"
+
 import Home from "./components/Home.jsx"
 import BP from "./components/Broken/BrokenPage.jsx"
 import Line from "./components/Line.jsx"
@@ -41,7 +41,7 @@ function App() {
       <Routes>
       <Route path="/" element={<Home/>}/>
         <Route path="/AndonLine1" element={<AndonLine1/>}/>
-        <Route path="/LoginMaintenance" element={<Login/>}/>
+  
         <Route path="/--" element={<BP/>}/>
 
         <Route path="Line" element={<Line/>}/>

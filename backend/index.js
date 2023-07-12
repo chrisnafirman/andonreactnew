@@ -138,40 +138,7 @@ app.post("/api/post/datakerusakan", (req, res) => {
 
 
 
-///post PPIC
-app.post("/api/post/PPIC", (req, res) => {
-  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan } = req.body;
-  
-  db.query(
-    "INSERT INTO ppic (NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan],
-    (error, results) => {
-      if (error) {
-        console.log(error);
-        return res.status(500).json({ message: 'Internal server error' });
-      }
-      res.status(200).json({ message: 'Data has been added successfully' });
-    }
-  );
-});
 
-
-/// Purchasing
-app.post("/api/post/PURCHASING", (req, res) => {
-  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan } = req.body;
-  
-  db.query(
-    "INSERT INTO purchasing (NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan],
-    (error, results) => {
-      if (error) {
-        console.log(error);
-        return res.status(500).json({ message: 'Internal server error' });
-      }
-      res.status(200).json({ message: 'Data has been added successfully' });
-    }
-  );
-});
 
 
 
@@ -191,24 +158,6 @@ app.post("/api/post/ReturnPPIC", (req, res) => {
     }
   );
 });
-
-///post PPIC
-app.post("/api/post/ReturnPURCHASING", (req, res) => {
-  const { NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan } = req.body;
-  
-  db.query(
-    "INSERT INTO returnpurchasing (NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [NamaPIC, NpkPIC, MachineName, MachineArea, MachineLine, MachineStation, Kerusakan],
-    (error, results) => {
-      if (error) {
-        console.log(error);
-        return res.status(500).json({ message: 'Internal server error' });
-      }
-      res.status(200).json({ message: 'Data has been added successfully' });
-    }
-  );
-});
-
 
 
 
@@ -402,19 +351,7 @@ app.get("/api/get/data", (req, res) => {
 });
 
 
-app.get("/api/get/PPIC", (req, res) => {
-  const sqlSelect = "SELECT * FROM ppic";
-  db.query(sqlSelect, (err, results) => {
-    res.send(results);
-  });
-});
 
-app.get("/api/get/PURCHASING", (req, res) => {
-  const sqlSelect = "SELECT * FROM purchasing";
-  db.query(sqlSelect, (err, results) => {
-    res.send(results);
-  });
-});
 
 
 app.get("/api/get/QA",(req,res) => {
@@ -452,19 +389,6 @@ app.get("/api/get/validationqc", (req, res) => {
   });
 });
 
-app.get("/api/get/ReturnPPIC", (req, res) => {
-  const sqlSelect = "SELECT * FROM returnppic";
-  db.query(sqlSelect, (err, results) => {
-    res.send(results);
-  });
-});
-
-app.get("/api/get/ReturnPURCHASING", (req, res) => {
-  const sqlSelect = "SELECT * FROM returnpurchasing";
-  db.query(sqlSelect, (err, results) => {
-    res.send(results);
-  });
-});
 
 
 app.get("/api/get/General", (req, res) => {

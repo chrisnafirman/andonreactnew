@@ -147,7 +147,7 @@ const RepairReport = () => {
   };
 
   const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/OFFICE.jpg)`,
+    backgroundImage: `url(${process.env.PUBLIC_URL}/Others.jpg)`,
     backgroundSize: "1300px",
     backgroundPosition: "0px",
     height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
@@ -176,11 +176,11 @@ const RepairReport = () => {
         <div class="mx-auto max-w-7xl px-4">
           <marquee behavior="scroll" direction="right">
             <div class="flex items-center">
-              <h1 class="text-xl font-bold tracking-tight text-gray-900">
-                | Department |
+              <h1 class="text-xl font-sans tracking-tight text-gray-900">
+                | Request Department |
               </h1>
 
-              <h1 class="text-xl font-bold tracking-tight ml-4">
+              <h1 class="text-xl font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
                 <span
                   class="ml-4"
@@ -193,7 +193,7 @@ const RepairReport = () => {
                 <span className="ml-4">|</span>
               </h1>
 
-              <h1 class="text-xl font-bold tracking-tight ml-4">
+              <h1 class="text-xl font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
                 <span class="ml-4 text-green-500">RUNNING </span>|
               </h1>
@@ -210,7 +210,7 @@ const RepairReport = () => {
           x-data="app"
         >
           <div className="flex flex-col mt-1 h-full">
-            <div>
+          <div>
               {showDatePicker && (
                 <form className="" onSubmit={handleSubmit}>
                   <label htmlFor="date" className="text-gray-300">
@@ -242,7 +242,7 @@ const RepairReport = () => {
                       />
                     </div>
                     <button
-                      class="bg-blue-500  hover:bg-blue-400 text-white w-20 font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-2 "
+                      class="bg-blue-500  hover:bg-blue-400 text-white w-20 font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500  rounded-3xl  rounded mt-2 "
                       type="submit"
                     >
                       Submit
@@ -251,7 +251,7 @@ const RepairReport = () => {
                 </form>
               )}
               <button
-                class="bg-blue-500 hover:bg-blue-400 text-white w-20 font-bold py-1 px-2 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-1 mb-3 "
+                class="bg-blue-500 hover:bg-blue-400 text-white w-20 font-bold py-1 px-2 border-b-4 border-blue-700 hover:border-blue-500 rounded-3xl mt-1 mb-3 "
                 onClick={handleToggleDatePicker}
               >
                 {showDatePicker ? "Hide" : "Search"}
@@ -321,7 +321,7 @@ const RepairReport = () => {
                         <td className="p-5 ">
                           <button
                             onClick={() => setSelectedItem(item)}
-                            className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                            className="bg-blue-900 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -336,7 +336,7 @@ const RepairReport = () => {
                                 clipRule="evenodd"
                               />
                             </svg>
-                            <span>DETAIL</span>
+                            <span>Details</span>
                           </button>
                         </td>
 
@@ -384,7 +384,7 @@ const RepairReport = () => {
                                               Line
                                             </label>
                                             <div
-                                              class="appearance-none block w-full bg-gray-200 font-semibold border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              class="appearance-none block w-full bg-gray-200 font-semibold border text-black rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}

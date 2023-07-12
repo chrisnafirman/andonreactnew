@@ -263,8 +263,6 @@ const SmtTop = () => {
                     console.error(error);
                   });
               });
-            } else {
-              // Izin ditolak
             }
           });
       } else if (data === "Return Maintenance") {
@@ -296,8 +294,7 @@ const SmtTop = () => {
                     console.error(error);
                   });
               });
-            } else {
-              // Izin ditolak
+         
             }
           });
         } else if (data === "QC") {
@@ -396,8 +393,7 @@ const SmtTop = () => {
                     console.error(error);
                   });
               });
-            } else {
-              // Izin ditolak
+         
             }
           });
       } else if (data === "Return Maintenance") {
@@ -429,8 +425,7 @@ const SmtTop = () => {
                     console.error(error);
                   });
               });
-            } else {
-              // Izin ditolak
+         
             }
           });
         } else if (data === "QC") {
@@ -529,8 +524,7 @@ const SmtTop = () => {
                     console.error(error);
                   });
               });
-            } else {
-              // Izin ditolak
+         
             }
           });
       } else if (data === "Return Maintenance") {
@@ -562,8 +556,7 @@ const SmtTop = () => {
                     console.error(error);
                   });
               });
-            } else {
-              // Izin ditolak
+         
             }
           });
         } else if (data === "QC") {
@@ -2351,9 +2344,9 @@ useEffect(() => {
 
   // Background
   const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/S.jpg)`,
+    backgroundImage: `url(${process.env.PUBLIC_URL}/Background.jpg)`,
     backgroundSize: "1300px",
-    backgroundPosition: "500px",
+    backgroundPosition: "0px",
     height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
 
@@ -2378,10 +2371,10 @@ useEffect(() => {
         <div class="mx-auto max-w-7xl px-4">
           <marquee behavior="scroll" direction="right">
             <div class="flex items-center">
-              <h1 class="text-xl font-bold tracking-tight text-gray-900">
+              <h1 class="text-xl font-sans tracking-tight text-gray-900">
                 | SMT Line 1 - BE|
               </h1>
-              <h1 class="text-xl font-bold tracking-tight ml-4">
+              <h1 class="text-xl font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
                 <span
                   class="ml-4"
@@ -2393,7 +2386,7 @@ useEffect(() => {
                 </span>
                 <span className="ml-4">|</span>
               </h1>
-              <h1 class="text-xl font-bold tracking-tight ml-4">
+              <h1 class="text-xl font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
                 <span class="ml-4 text-green-500">RUNNING </span>|
               </h1>
@@ -2408,7 +2401,7 @@ useEffect(() => {
           <button class="w-60 sm:w-36 lg:w-32">
             <a
               href="/Andonline1"
-              class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white"
+              class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4  active focus:outline-none dark:bg-gray-700 dark:text-white"
               aria-current="page"
             >
               SMT LINE 1
@@ -2463,7 +2456,7 @@ useEffect(() => {
           <button class="w-60 sm:w-36 lg:w-32">
             <a
               href="/Andonline1"
-              class="inline-block w-full p-4 400 bg-blue-700 text-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="inline-block w-full p-4 400 bg-slate-800 text-white rounded-r-lg hover:text-gray-700 hover:bg-slate-800 focus:ring-4 focus:outline-none  dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
             >
               BACK
             </a>
@@ -2509,7 +2502,7 @@ useEffect(() => {
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="italic  text-center text-white">
                         DROP IN (BE)
                       </div>
                     </header>
@@ -2548,7 +2541,7 @@ useEffect(() => {
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="italic  text-center text-white">
                        FLUXER (BE)
                       </div>
                     </header>
@@ -2587,7 +2580,7 @@ useEffect(() => {
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="italic  text-center text-white">
                         PREHEAT (BE)
                       </div>
                     </header>
@@ -2626,7 +2619,7 @@ useEffect(() => {
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="italic  text-center text-white">
                         SEHO 1 (BE)
                       </div>
                     </header>
@@ -2670,7 +2663,7 @@ useEffect(() => {
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="italic  text-center text-white">
                        SEHO2 (BE)
                       </div>
                     </header>
@@ -2709,7 +2702,7 @@ useEffect(() => {
                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="italic  text-center text-white">
                         TOUCH UP (BE)
                       </div>
                     </header>
@@ -2748,7 +2741,7 @@ useEffect(() => {
                      class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="italic  text-center text-white">
                        ICT (BE)
                       </div>
                     </header>
@@ -2787,7 +2780,7 @@ useEffect(() => {
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-sm text-center text-white">
+                      <div class="italic  text-sm text-center text-white">
                         FLASH (BE)
                       </div>
                     </header>
@@ -2830,7 +2823,7 @@ useEffect(() => {
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-sm text-center text-white">
+                      <div class="italic  text-sm text-center text-white">
                         ROUTER (BE)
                       </div>
                     </header>
@@ -3005,69 +2998,69 @@ useEffect(() => {
                       />
                     </svg>
                   </div>
-                  <h2 className="text-lg font-bold   text-center">
+                  <h2 className="text-lg italic font-bold  text-center">
                     Production Area: SMT
                   </h2>
                   <div className="bg-white px-4 pt-1 pb-4 flex sm:p-6 sm:pb-4">
                     <div className="overflow-y-auto max-h-96 w-[700px]">
                       {data ? (
                         <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
-                          <h3 className="text-lg font-bold mb-2">
-                            Production Time
+                          <h3 className="text-lg italic mb-2">
+                            Real Production Time
                           </h3>
                           <table>
                             <tr>
-                              <td className="font-bold">Production time 1:</td>
+                              <td className="font-semibold">Production time 1:</td>
                               <span className="px-4 text-lime-800">
                                 {RealPT1}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Production time 2:</td>
+                              <td className="font-semibold">Production time 2:</td>
                               <span className="px-4 text-lime-800">
                                 {RealPT2}
                               </span>
                             </tr>
 
                             <tr>
-                              <td className="font-bold">Planned DT:</td>
+                              <td className="font-semibold">Planned DT:</td>
                               <span className="px-4 text-lime-800">
                                 {RealPD}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Production time 3:</td>
+                              <td className="font-semibold">Production time 3:</td>
                               <span className="px-4 text-lime-800">
                                 {RealPT3}
                               </span>
                             </tr>
 
                             <tr>
-                              <td className="font-bold">Production time 4:</td>
+                              <td className="font-semibold">Production time 4:</td>
                               <span className="px-4 text-lime-800">
                                 {RealPT4}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Over Time:</td>
+                              <td className="font-semibold">Over Time:</td>
                               <span className="px-4 text-lime-800">
                                 {RealOT}
                               </span>
                             </tr>
                           </table>
                           <div className="flex mt-2">
-                            <td className="font-bold">Total:</td>
+                            <td className="font-semibold">Total:</td>
                             <span className="ml-10 w-44 text-center text-white rounded-md bg-lime-700">
                               {Total}
                             </span>
                           </div>
-                          <div className="mt-2">
-                            <p className="font-bold text-sm">
+                          <div className="mt-5 bg-green-400 rounded-md ">
+                            <p className="font-semibold text-sm">
                               Change Model Allocation:
                             </p>
                             <p>{data.CMA} </p>
-                            <p className="text-sm text-white bg-amber-500 text-center justify-center rounded-xl">
-                              ON GOING : {ResultsCMA}{" "}
+                            <p className="text-sm text-black font-mono text-center mt-3 justify-center rounded-xl">
+                              {ResultsCMA}{" "}
                             </p>
                           </div>
                         </div>
@@ -3077,13 +3070,13 @@ useEffect(() => {
                     </div>
 
                     <div className="bg-white px-4 w-[700px] ml-3  rounded-lg shadow-md">
-                      <h3 className="text-lg font-bold mb-2">
+                      <h3 className="text-lg italic  mb-2">
                         Production Time
                       </h3>
 
                       {data ? (
                         <table>
-                          <h3 className="flex text-base font-bold mb-2">
+                          <h3 className="flex text-base font-semibold mb-2">
                             Date:{" "}
                             <h1 className="ml-2 font-normal">
                               {formatDate(data.PDATE)}
@@ -3091,84 +3084,84 @@ useEffect(() => {
                           </h3>
                           <tbody>
                             <tr>
-                              <td className="font-bold">Shift: {data.SHIFT}</td>
+                              <td className="font-semibold">Shift: {data.SHIFT}</td>
                             </tr>
                             <tr>
-                              <td className="font-bold">Prod time 1:</td>
+                              <td className="font-semibold">Production Time 1:</td>
                               <span style={{ color: "green" }}>
                                 {data.PT1_IN}
-                              </span>{" "}
-                              -{" "}
+                              </span>
+                              -
                               <span style={{ color: "red" }}>
                                 {data.PT1_OUT}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Break 1:</td>
-                              <td className="bg-orange-500 rounded-lg">
-                                {data.BR1_IN} - {data.BR1_OUT}
+                              <td className="font-semibold">Break 1:</td>
+                              <td className="bg-orange-300 rounded-lg">
+                                {data.BR1_IN}-{data.BR1_OUT}
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-bold">Prod time 2:</td>
+                              <td className="font-semibold">Production Time 2:</td>
                               <span style={{ color: "green" }}>
                                 {data.PT2_IN}
-                              </span>{" "}
-                              -{" "}
+                              </span>
+                              -
                               <span style={{ color: "red" }}>
                                 {data.PT2_OUT}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Break 2:</td>
-                              <td className="bg-orange-500 rounded-lg">
-                                {data.BR2_IN} - {data.BR2_OUT}
+                              <td className="font-semibold">Break 2:</td>
+                              <td className="bg-orange-300 rounded-lg">
+                                {data.BR2_IN}-{data.BR2_OUT}
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-bold">Planned DT:</td>
+                              <td className="font-semibold">Planned DT:</td>
                               <span style={{ color: "green" }}>
                                 {data.PD_IN}
-                              </span>{" "}
-                              -{" "}
+                              </span>
+                              -
                               <span style={{ color: "red" }}>
                                 {data.PD_OUT}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Prod time 3:</td>
+                              <td className="font-semibold">Production Time 3:</td>
                               <span style={{ color: "green" }}>
                                 {data.PT3_IN}
-                              </span>{" "}
-                              -{" "}
+                              </span>
+                              -
                               <span style={{ color: "red" }}>
                                 {data.PT3_OUT}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Break 3:</td>
-                              <td className="bg-orange-500 rounded-lg">
-                                {data.BR3_IN} - {data.BR3_OUT}
+                              <td className="font-semibold">Break 3:</td>
+                              <td className="bg-orange-300 rounded-lg">
+                                {data.BR3_IN}-{data.BR3_OUT}
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-bold">Prod time 4:</td>
+                              <td className="font-semibold">Production time 4:</td>
                               <span style={{ color: "green" }}>
                                 {data.PT4_IN}
-                              </span>{" "}
-                              -{" "}
+                              </span>
+                              -
                               <span style={{ color: "red" }}>
                                 {data.PT4_OUT}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold ">Break 4:</td>
-                              <td className="bg-orange-500 rounded-lg">
-                                {data.BR4_IN} - {data.BR4_OUT}
+                              <td className="font-semibold ">Break 4:</td>
+                              <td className="bg-orange-300 rounded-lg">
+                                {data.BR4_IN}-{data.BR4_OUT}
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-bold">Over Time:</td>
+                              <td className="font-semibold">Over Time:</td>
                               <span style={{ color: "green" }}>
                                 {data.OT_IN}
                               </span>{" "}
@@ -3185,7 +3178,7 @@ useEffect(() => {
                     </div>
 
                     <div className="bg-white px-4 py-6 sm:p-6 ml-3 rounded-lg shadow-md">
-                      <h3 className="text-lg font-bold mb-1">Facturing</h3>
+                      <h3 className="text-lg  italic mb-1">Action Button</h3>
                       <div className="flex flex-col justify-between">
                         {data.SHIFT == 1 ? (
                           <div>
@@ -3289,7 +3282,7 @@ useEffect(() => {
                             </label>
                             <input
                               type="text"
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               name="NamaPIC"
                               required
                               onChange={(e) => {
@@ -3361,10 +3354,10 @@ useEffect(() => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                               for="grid-password"
                             >
-                              Kerusakan
+                              Problem
                             </label>
                             <input
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               id="grid-password"
                               type="text"
                               placeholder=""
@@ -3516,7 +3509,7 @@ useEffect(() => {
                             </label>
                             <input
                               type="text"
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               name="NamaPIC"
                               required
                               onChange={(e) => {
@@ -3607,7 +3600,7 @@ useEffect(() => {
                               Problem
                             </label>
                             <input
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               id="grid-password"
                               type="text"
                               placeholder=""
@@ -3681,7 +3674,7 @@ useEffect(() => {
                             </label>
                             <input
                               type="text"
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               name="NamaPIC"
                               required
                               onChange={(e) => {
@@ -3772,7 +3765,7 @@ useEffect(() => {
                               Problem
                             </label>
                             <input
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               id="grid-password"
                               type="text"
                               placeholder=""
@@ -3848,7 +3841,7 @@ useEffect(() => {
                             </label>
                             <input
                               type="text"
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               name="NamaPIC"
                               required
                               onChange={(e) => {
@@ -3923,7 +3916,7 @@ useEffect(() => {
                               Problem
                             </label>
                             <input
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               id="grid-password"
                               type="text"
                               placeholder=""
@@ -4001,7 +3994,7 @@ useEffect(() => {
                             </label>
                             <input
                               type="text"
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               name="NamaPIC"
                               required
                               onChange={(e) => {
@@ -4153,7 +4146,7 @@ useEffect(() => {
                             </label>
                             <input
                               type="text"
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full bg-white border-b-slate-900 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               name="NamaPIC"
                               required
                               onChange={(e) => {

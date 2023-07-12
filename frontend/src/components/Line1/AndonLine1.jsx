@@ -191,8 +191,8 @@ const Andonline1 = () => {
             if (permissionStatus.state === "granted") {
               const link = "http://10.14.81.43:3003/RequestGeneral";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [1563609464];
-              const message = `Notification SMT LINE 1 Status = DOWN - Please Click The Link:\n\n ${link}`;
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  (Problem : Network) - Please Click The Link To See The Poblem:\n\n ${link}`;
 
               chatIds.forEach((chatId) => {
                 fetch(
@@ -220,43 +220,248 @@ const Andonline1 = () => {
     ref4.on("value", (snapshot) => {
       const data = snapshot.val();
       updateElectricity(data);
+      if (data === "Down") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestGeneral";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  (Problem : Electricity) - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
     });
 
     const ref5 = firebase.database().ref("SMTLine1/Air Compressor");
     ref5.on("value", (snapshot) => {
       const data = snapshot.val();
       updateAircomp(data);
+      if (data === "Down") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestGeneral";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  (Problem : Air Compressor) - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
     });
 
     const ref6 = firebase.database().ref("SMTLine1/Shortage Comp");
     ref6.on("value", (snapshot) => {
       const data = snapshot.val();
       updateShorcomp(data);
+      if (data === "Down") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestGeneral";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  (Problem : Shortage Comp) - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
     });
+
 
     const ref7 = firebase.database().ref("SMTLine1/Shortage Box FG");
     ref7.on("value", (snapshot) => {
       const data = snapshot.val();
       updateShorbox(data);
+      if (data === "Down") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestGeneral";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  (Problem : Shortage Box FG) - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
     });
 
     const ref8 = firebase.database().ref("SMTLine1/Over Trial");
     ref8.on("value", (snapshot) => {
       const data = snapshot.val();
       updateOvertrial(data);
+      if (data === "Down") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestGeneral";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  (Problem : Over Trial) - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
     });
 
     const ref9 = firebase.database().ref("SMTLine1/Over Change Model");
     ref9.on("value", (snapshot) => {
       const data = snapshot.val();
       updateOverchange(data);
+     if (data === "Down") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestGeneral";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  (Problem : Over Change Model) - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
     });
 
     const ref17 = firebase.database().ref("SMTLine1/Others");
 ref17.on("value", (snapshot) => {
   const data = snapshot.val();
   updateOthers(data);
-  if (data === "Down") {
+  if (data === "HRGA & EHS") {
     const audio = new Audio("Sound.mp3");
     audio.autoplay = true;
     audio.play();
@@ -265,11 +470,11 @@ ref17.on("value", (snapshot) => {
       .query({ name: "clipboard-write" })
       .then((permissionStatus) => {
         if (permissionStatus.state === "granted") {
-          const link = "http://10.14.81.43:3003/RequestGeneral";
+          const link = "http://10.14.81.43:3003/RequestOthers";
           const botToken =
             "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-          const chatIds = [1563609464];
-          const message = `Notification SMT LINE 1 Status = DOWN - Please Click The Link:\n\n ${link}`;
+          const chatIds = [-921205810];
+          const message = `Notification SMT LINE 1 Down  [Department Call : HRGA & EHS] - Please Click The Link To See The Poblem:\n\n ${link}`;
 
           chatIds.forEach((chatId) => {
             fetch(
@@ -288,7 +493,7 @@ ref17.on("value", (snapshot) => {
           });
         }
       });
-  } else if (data === "Maintenance & IT") {
+  } else if (data === "MAINTENANCE & IT") {
     const audio = new Audio("Sound.mp3");
     audio.autoplay = true;
     audio.play();
@@ -297,11 +502,11 @@ ref17.on("value", (snapshot) => {
       .query({ name: "clipboard-write" })
       .then((permissionStatus) => {
         if (permissionStatus.state === "granted") {
-          const link = "http://10.14.81.43:3003/RequestGeneral";
+          const link = "http://10.14.81.43:3003/RequestOthers";
           const botToken =
             "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-          const chatIds = [1563609464];
-          const message = `Notification SMT LINE 1 For  Maintenance & IT - Please Click The Link:\n\n ${link}`;
+          const chatIds = [-921205810];
+          const message = `Notification SMT LINE 1 Down  [Department Call : MAINTENANCE & IT] - Please Click The Link To See The Poblem:\n\n ${link}`;
           chatIds.forEach((chatId) => {
             fetch(
               `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
@@ -319,7 +524,38 @@ ref17.on("value", (snapshot) => {
           });
         }
       });
-  } else if (data === "Maintenance") {
+  } else if (data === "PURCHASING,PPIC,MP&L") {
+    const audio = new Audio("Sound.mp3");
+    audio.autoplay = true;
+    audio.play();
+    navigator.permissions
+      .query({ name: "clipboard-write" })
+      .then((permissionStatus) => {
+        if (permissionStatus.state === "granted") {
+          const link = "http://10.14.81.43:3003/RequestOthers";
+          const botToken =
+            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+          const chatIds = [-921205810];
+          const message = `Notification SMT LINE 1 Down  [Department Call : PURCHASING,PPIC,MP&L] - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+          chatIds.forEach((chatId) => {
+            fetch(
+              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                message
+              )}`
+            )
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Error sending telegram message");
+                }
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          });
+        }
+      });
+  }else if (data === "PROCESS ENGINEERING") {
     const audio = new Audio("Sound.mp3");
     audio.autoplay = true;
     audio.play();
@@ -328,11 +564,139 @@ ref17.on("value", (snapshot) => {
       .query({ name: "clipboard-write" })
       .then((permissionStatus) => {
         if (permissionStatus.state === "granted") {
-          const link = "http://10.14.81.43:3003/RequestGeneral";
+          const link = "http://10.14.81.43:3003/RequestOthers";
           const botToken =
             "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-          const chatIds = [1563609464];
-          const message = `Notification SMT LINE 1 Status = MAINTENANCE - Please Click The Link:\n\n ${link}`;
+          const chatIds = [-921205810];
+          const message = `Notification SMT LINE 1 Down  [Department Call : PROCESS ENGINEERING] - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+          chatIds.forEach((chatId) => {
+            fetch(
+              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                message
+              )}`
+            )
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Error sending telegram message");
+                }
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          });
+        }
+      });
+  } else if (data === "ADVANCED MANUFACTURING ENGINEERING") {
+    const audio = new Audio("Sound.mp3");
+    audio.autoplay = true;
+    audio.play();
+
+    navigator.permissions
+      .query({ name: "clipboard-write" })
+      .then((permissionStatus) => {
+        if (permissionStatus.state === "granted") {
+          const link = "http://10.14.81.43:3003/RequestOthers";
+          const botToken =
+            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+          const chatIds = [-921205810];
+          const message = `Notification SMT LINE 1 Down  [Department Call : ADVANCED MANUFACTURING ENGINEERING] - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+          chatIds.forEach((chatId) => {
+            fetch(
+              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                message
+              )}`
+            )
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Error sending telegram message");
+                }
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          });
+        }
+      });
+  }else if (data === "PRODUCT DEVELOPMENT") {
+    const audio = new Audio("Sound.mp3");
+    audio.autoplay = true;
+    audio.play();
+
+    navigator.permissions
+      .query({ name: "clipboard-write" })
+      .then((permissionStatus) => {
+        if (permissionStatus.state === "granted") {
+          const link = "http://10.14.81.43:3003/RequestOthers";
+          const botToken =
+            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+          const chatIds = [-921205810];
+          const message = `Notification SMT LINE 1 Down  [Department Call : PRODUCT DEVELOPMENT] - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+          chatIds.forEach((chatId) => {
+            fetch(
+              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                message
+              )}`
+            )
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Error sending telegram message");
+                }
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          });
+        }
+      });
+  }else if (data === "QA") {
+    const audio = new Audio("Sound.mp3");
+    audio.autoplay = true;
+    audio.play();
+
+    navigator.permissions
+      .query({ name: "clipboard-write" })
+      .then((permissionStatus) => {
+        if (permissionStatus.state === "granted") {
+          const link = "http://10.14.81.43:3003/RequestOthers";
+          const botToken =
+            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+          const chatIds = [-921205810];
+          const message = `Notification SMT LINE 1 Down  [Department Call : QA] - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+          chatIds.forEach((chatId) => {
+            fetch(
+              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                message
+              )}`
+            )
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Error sending telegram message");
+                }
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          });
+        }
+      });
+  }else if (data === "QC") {
+    const audio = new Audio("Sound.mp3");
+    audio.autoplay = true;
+    audio.play();
+
+    navigator.permissions
+      .query({ name: "clipboard-write" })
+      .then((permissionStatus) => {
+        if (permissionStatus.state === "granted") {
+          const link = "http://10.14.81.43:3003/RequestOthers";
+          const botToken =
+            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+          const chatIds = [-921205810];
+          const message = `Notification SMT LINE 1 Down  [Department Call : QC] - Please Click The Link To See The Poblem:\n\n ${link}`;
 
           chatIds.forEach((chatId) => {
             fetch(
@@ -527,7 +891,7 @@ ref17.on("value", (snapshot) => {
             .database()
             .ref("/StatusLine/SMTLine1CMAOnGoing")
             .set(
-              `${newTime.hours} H ${newTime.minutes} M ${newTime.seconds} S`
+              `${newTime.hours} Jam ${newTime.minutes} Menit ${newTime.seconds} Detik`
             );
           return newTime;
         });
@@ -555,7 +919,7 @@ ref17.on("value", (snapshot) => {
     firebase
       .database()
       .ref("/StatusLine/SMTLine1CMAOnGoing")
-      .set("0 H 0 M 0 S");
+      .set("0 Jam 0 Menit 0 Detik");
     firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set(0);
     firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set(0);
     firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set(0);
@@ -566,7 +930,7 @@ ref17.on("value", (snapshot) => {
     const data = {
       ResultsCMA: ResultsCMA,
     };
-    fetch(`http://10.14.81.43:3002/api/put/ResultsCMA`, {
+    fetch("http://192.168.101.236:3001/api/put/ResultsCMA", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -576,22 +940,10 @@ ref17.on("value", (snapshot) => {
       .then((response) => {
         if (response.status === 200) {
           alert("Change Model Telah Selesai Data Sudah Terinput");
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1CMAOnGoing")
-            .set("Waiting...");
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1CMALastTime/hours")
-            .set("0");
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1CMALastTime/minutes")
-            .set("0");
-          firebase
-            .database()
-            .ref("/StatusLine/SMTLine1CMALastTime/seconds")
-            .set("0");
+          firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing").set("Waiting...");
+          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set("0");
+          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set("0");
+          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set("0");
           setCMARunning(false);
           window.location.reload();
           event.preventDefault();
@@ -691,24 +1043,21 @@ ref17.on("value", (snapshot) => {
         ? "#E9CE08"
         : data === "HRGA & EHS"
         ? "#A61D00"
-        : data === "PPIC"
+        : data === "PURCHASING,PPIC,MP&L"
         ? "#873e23"
-        : data === "Engineering & RND"
+        : data === "PROCESS ENGINEERING"
         ? "#1e81b0"
-        : data === "Purchasing"
-        ? "#dc6539"
-        : data === "MP&L"
+        : data === "PRODUCT DEVELOPMENT"
         ? "#233087"
-        : data === "Accounting"
-        ? "#b78b7b"
-        : data === "Opex"
-        ? "#1b0c07"
+        : data === "ADVANCED MANUFACTURING ENGINEERING"
+        ? "#C5B602"
         : data === "QA"
         ? "#93C2C4"
         : data === "QC"
         ? "#BDD0D1"
-        : data === "Maintenance & IT"
+        : data === "MAINTENANCE & IT"
         ? "#be4f62"
+  
         : "#565454"
     );
   };
@@ -911,6 +1260,8 @@ ref17.on("value", (snapshot) => {
       Kerusakan: Kerusakan,
     };
 
+
+
     fetch(`http://192.168.101.236:3001/api/post/Others`, {
       method: "POST",
       headers: {
@@ -921,6 +1272,7 @@ ref17.on("value", (snapshot) => {
       .then((response) => {
         if (response.status === 200) {
           alert("Permintaan Bantuan Department Terkait Segera Di Proses");
+          console.log();
           firebase.database().ref("SMTLine1/Others").set(`${Department}`);
           firebase.database().ref("StatusLine/SMTLine1").set("Down");
           setIsOpenOthers(false);
@@ -970,7 +1322,7 @@ ref17.on("value", (snapshot) => {
   };
 
   const handleOthersPress = () => {
-    if (Others === "Down" || Others === "Engineering & RND" || Others === "PPIC" || Others === "Purchasing" || Others === "MP&L" || Others === "Accounting" || Others === "Maintenance & IT" || Others === "QA"  || Others === "QC" || Others === "Opex" || Others === "HRGA & EHS"   )  {
+    if (Others === "HRGA & EHS" || Others === "PURCHASING,PPIC,MP&L" || Others === "PROCESS ENGINEERING" || Others === "PRODUCT DEVELOPMENT"  || Others === "ADVANCED MANUFACTURING ENGINEERING" || Others === "QA"  || Others === "QC" || Others === "MAINTENANCE & IT"  )  {
       setOthersPressed(true);
       timeoutRefOthers.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
@@ -1078,9 +1430,9 @@ ref17.on("value", (snapshot) => {
   // ------
 
   const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/S.jpg)`,
+    backgroundImage: `url(${process.env.PUBLIC_URL}/Background.jpg)`,
     backgroundSize: "1300px",
-    backgroundPosition: "500px",
+    backgroundPosition: "0px",
     height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
 
@@ -1111,10 +1463,10 @@ ref17.on("value", (snapshot) => {
             <div class="mx-auto max-w-7xl px-4">
               <marquee behavior="scroll" direction="right">
                 <div class="flex items-center">
-                  <h1 class="text-xl font-bold tracking-tight text-gray-900">
-                    | Andon SMT |
+                  <h1 class="text-xl font-sans tracking-tight text-gray-900">
+                    | Andon 2.0 |
                   </h1>
-                  <h1 class="text-xl font-bold tracking-tight ml-4">
+                  <h1 class="text-xl font-sans tracking-tight ml-4">
                     <span class="text-black">SMT LINE 1:</span>
                     <span
                       class="ml-4"
@@ -1126,9 +1478,9 @@ ref17.on("value", (snapshot) => {
                     </span>
                     <span className="ml-4">|</span>
                   </h1>
-                  <h1 class="text-xl font-bold tracking-tight ml-4">
+                  <h1 class="text-xl font-sans tracking-tight ml-4">
                     <span class="text-black">SMT LINE 2:</span>
-                    <span class="ml-4 text-green-500">RUNNING </span>|
+                    <span class="ml-4 text-green-500">Running </span>|
                     {/* <a href="Tickets">
                     <span class="ml-4 mr-2 text-slate-900">Tickets </span>
                     </a> */}
@@ -1176,7 +1528,7 @@ ref17.on("value", (snapshot) => {
           <button class="w-60 sm:w-36 lg:w-32">
             <a
               href="/Andonline1"
-              class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white"
+              class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4  active focus:outline-none dark:bg-gray-700 dark:text-white"
               aria-current="page"
             >
               SMT Line 1
@@ -1304,7 +1656,7 @@ ref17.on("value", (snapshot) => {
                       // }
                     >
                       <header class="px-5 py-4  ">
-                        <div class="font-semibold text-center text-white">
+                        <div class="italic  text-center text-white">
                           SMT TOP
                         </div>
                       </header>
@@ -1324,7 +1676,7 @@ ref17.on("value", (snapshot) => {
                       class="w-full max-w-sm  bg-slate-800 border border-white shadow-lg rounded-xl  "
                     >
                       <header class="px-5 py-4  ">
-                        <div class="font-semibold text-center text-white">
+                        <div class="italic  text-center text-white">
                           SMT BOT
                         </div>
                       </header>
@@ -1344,7 +1696,7 @@ ref17.on("value", (snapshot) => {
                       class="w-full max-w-sm  bg-slate-800 border border-white shadow-lg rounded-xl  "
                     >
                       <header class="px-5 py-4  ">
-                        <div class="font-semibold text-center text-white">
+                        <div class="italic  text-center text-white">
                           SMT BACKEND
                         </div>
                       </header>
@@ -1385,7 +1737,7 @@ ref17.on("value", (snapshot) => {
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="italic  text-center text-white">
                         ELECTRICITY
                       </div>
                     </header>
@@ -1414,7 +1766,7 @@ ref17.on("value", (snapshot) => {
                     onTouchEnd={handleNetworkRelease}
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="italic  text-center text-white">
                         NETWORK
                       </div>
                     </header>
@@ -1443,7 +1795,7 @@ ref17.on("value", (snapshot) => {
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="italic  text-center text-white">
                         AIR COMPRESSOR
                       </div>
                     </header>
@@ -1472,7 +1824,7 @@ ref17.on("value", (snapshot) => {
                     class="w-full max-w-sm  bg-lime-900 shadow-lg rounded-full "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center  text-white">
+                      <div class="italic  text-center  text-white">
                         OTHERS
                       </div>
                     </header>
@@ -1512,7 +1864,7 @@ ref17.on("value", (snapshot) => {
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="italic  text-center text-white">
                         SHORTAGE COMP.
                       </div>
                     </header>
@@ -1541,7 +1893,7 @@ ref17.on("value", (snapshot) => {
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="italic  text-center text-white">
                         SHORTAGE BOX FG
                       </div>
                     </header>
@@ -1570,7 +1922,7 @@ ref17.on("value", (snapshot) => {
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-center text-white">
+                      <div class="italic  text-center text-white">
                         OVER TRIAL
                       </div>
                     </header>
@@ -1599,7 +1951,7 @@ ref17.on("value", (snapshot) => {
                     class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="font-semibold text-sm text-center text-white">
+                      <div class="italic  text-sm text-center text-white">
                         OVER CHANGE MODEL
                       </div>
                     </header>
@@ -1666,7 +2018,7 @@ ref17.on("value", (snapshot) => {
                           </label>
                           <input
                             type="text"
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            class="appearance-none block w-full bg-white border-b-slate-900 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             name="NamaPIC"
                             required
                             onChange={(e) => {
@@ -1686,7 +2038,7 @@ ref17.on("value", (snapshot) => {
                         </label>
                         <div className="relative -mx-2">
                           <select
-                            className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            className="block appearance-none w-full bg-white border-b-slate-900  text-gray-700 py-3 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="Depart To"
                             name="Depart To"
                             onChange={(e) => setDepartment(e.target.value)}
@@ -1694,20 +2046,17 @@ ref17.on("value", (snapshot) => {
                             defaultValue={""}
                           >
                             <option value="">-- Pilih Depart --</option>
-                            <option value="PPIC">PPIC</option>
-                            <option value="Purchasing">Purchasing</option>
-                            <option value="MP&L">MP&L</option>
-                            <option value="Accounting">Accounting</option>
-                            <option value="Engineering & RND">
-                              Engineering & RND
-                            </option>
-                            <option value="Maintenance & IT">
-                              Maintenance & IT
+                            <option value="PURCHASING,PPIC,MP&L">PURCHASING,PPIC,MP&L</option>
+                            <option value="PROCESS ENGINEERING">PROCESS ENGINEERING</option>
+                            <option value="PRODUCT DEVELOPMENT">PRODUCT DEVELOPMENT</option>
+                            <option value="ADVANCED MANUFACTURING ENGINEERING">
+                            ADVANCED MANUFACTURING ENGINEERING
                             </option>
                             <option value="QA">QA</option>
                             <option value="QC">QC</option>
-                            <option value="Opex">Opex</option>
-                            <option value="HRGA & EHS">HRGA & EHS</option>
+                            <option value="MAINTENANCE & IT">
+                              MAINTENANCE & IT
+                            </option>
                           </select>
                         </div>
                       </div>
@@ -1720,7 +2069,7 @@ ref17.on("value", (snapshot) => {
                             Machine Line
                           </label>
                           <span
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            class="appearance-none block w-full bg-gray-200  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-city"
                             type="text"
                             placeholder="ICT"
@@ -1736,10 +2085,10 @@ ref17.on("value", (snapshot) => {
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                             for="grid-password"
                           >
-                            Kerusakan
+                            Problem
                           </label>
                           <input
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            class="appearance-none block w-full bg-white border-b-slate-900 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-password"
                             type="text"
                             placeholder=""
@@ -1817,69 +2166,69 @@ ref17.on("value", (snapshot) => {
                       />
                     </svg>
                   </div>
-                  <h2 className="text-lg font-bold   text-center">
+                  <h2 className="text-lg italic font-bold  text-center">
                     Production Area: SMT
                   </h2>
                   <div className="bg-white px-4 pt-1 pb-4 flex sm:p-6 sm:pb-4">
                     <div className="overflow-y-auto max-h-96 w-[700px]">
                       {data ? (
                         <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
-                          <h3 className="text-lg font-bold mb-2">
-                            Production Time
+                          <h3 className="text-lg italic mb-2">
+                            Real Production Time
                           </h3>
                           <table>
                             <tr>
-                              <td className="font-bold">Production time 1:</td>
+                              <td className="font-semibold">Production time 1:</td>
                               <span className="px-4 text-lime-800">
                                 {RealPT1}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Production time 2:</td>
+                              <td className="font-semibold">Production time 2:</td>
                               <span className="px-4 text-lime-800">
                                 {RealPT2}
                               </span>
                             </tr>
 
                             <tr>
-                              <td className="font-bold">Planned DT:</td>
+                              <td className="font-semibold">Planned DT:</td>
                               <span className="px-4 text-lime-800">
                                 {RealPD}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Production time 3:</td>
+                              <td className="font-semibold">Production time 3:</td>
                               <span className="px-4 text-lime-800">
                                 {RealPT3}
                               </span>
                             </tr>
 
                             <tr>
-                              <td className="font-bold">Production time 4:</td>
+                              <td className="font-semibold">Production time 4:</td>
                               <span className="px-4 text-lime-800">
                                 {RealPT4}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Over Time:</td>
+                              <td className="font-semibold">Over Time:</td>
                               <span className="px-4 text-lime-800">
                                 {RealOT}
                               </span>
                             </tr>
                           </table>
                           <div className="flex mt-2">
-                            <td className="font-bold">Total:</td>
+                            <td className="font-semibold">Total:</td>
                             <span className="ml-10 w-44 text-center text-white rounded-md bg-lime-700">
                               {Total}
                             </span>
                           </div>
-                          <div className="mt-2">
-                            <p className="font-bold text-sm">
+                          <div className="mt-5 bg-green-400 rounded-md ">
+                            <p className="font-semibold text-sm">
                               Change Model Allocation:
                             </p>
                             <p>{data.CMA} </p>
-                            <p className="text-sm text-white bg-amber-500 text-center justify-center rounded-xl">
-                              ON GOING : {ResultsCMA}{" "}
+                            <p className="text-sm text-black font-mono text-center mt-3 justify-center rounded-xl">
+                              {ResultsCMA}{" "}
                             </p>
                           </div>
                         </div>
@@ -1889,13 +2238,13 @@ ref17.on("value", (snapshot) => {
                     </div>
 
                     <div className="bg-white px-4 w-[700px] ml-3  rounded-lg shadow-md">
-                      <h3 className="text-lg font-bold mb-2">
+                      <h3 className="text-lg italic  mb-2">
                         Production Time
                       </h3>
 
                       {data ? (
                         <table>
-                          <h3 className="flex text-base font-bold mb-2">
+                          <h3 className="flex text-base font-semibold mb-2">
                             Date:{" "}
                             <h1 className="ml-2 font-normal">
                               {formatDate(data.PDATE)}
@@ -1903,84 +2252,84 @@ ref17.on("value", (snapshot) => {
                           </h3>
                           <tbody>
                             <tr>
-                              <td className="font-bold">Shift: {data.SHIFT}</td>
+                              <td className="font-semibold">Shift: {data.SHIFT}</td>
                             </tr>
                             <tr>
-                              <td className="font-bold">Prod time 1:</td>
+                              <td className="font-semibold">Production Time 1:</td>
                               <span style={{ color: "green" }}>
                                 {data.PT1_IN}
-                              </span>{" "}
-                              -{" "}
+                              </span>
+                              -
                               <span style={{ color: "red" }}>
                                 {data.PT1_OUT}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Break 1:</td>
-                              <td className="bg-orange-500 rounded-lg">
-                                {data.BR1_IN} - {data.BR1_OUT}
+                              <td className="font-semibold">Break 1:</td>
+                              <td className="bg-orange-300 rounded-lg">
+                                {data.BR1_IN}-{data.BR1_OUT}
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-bold">Prod time 2:</td>
+                              <td className="font-semibold">Production Time 2:</td>
                               <span style={{ color: "green" }}>
                                 {data.PT2_IN}
-                              </span>{" "}
-                              -{" "}
+                              </span>
+                              -
                               <span style={{ color: "red" }}>
                                 {data.PT2_OUT}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Break 2:</td>
-                              <td className="bg-orange-500 rounded-lg">
-                                {data.BR2_IN} - {data.BR2_OUT}
+                              <td className="font-semibold">Break 2:</td>
+                              <td className="bg-orange-300 rounded-lg">
+                                {data.BR2_IN}-{data.BR2_OUT}
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-bold">Planned DT:</td>
+                              <td className="font-semibold">Planned DT:</td>
                               <span style={{ color: "green" }}>
                                 {data.PD_IN}
-                              </span>{" "}
-                              -{" "}
+                              </span>
+                              -
                               <span style={{ color: "red" }}>
                                 {data.PD_OUT}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Prod time 3:</td>
+                              <td className="font-semibold">Production Time 3:</td>
                               <span style={{ color: "green" }}>
                                 {data.PT3_IN}
-                              </span>{" "}
-                              -{" "}
+                              </span>
+                              -
                               <span style={{ color: "red" }}>
                                 {data.PT3_OUT}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold">Break 3:</td>
-                              <td className="bg-orange-500 rounded-lg">
-                                {data.BR3_IN} - {data.BR3_OUT}
+                              <td className="font-semibold">Break 3:</td>
+                              <td className="bg-orange-300 rounded-lg">
+                                {data.BR3_IN}-{data.BR3_OUT}
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-bold">Prod time 4:</td>
+                              <td className="font-semibold">Production time 4:</td>
                               <span style={{ color: "green" }}>
                                 {data.PT4_IN}
-                              </span>{" "}
-                              -{" "}
+                              </span>
+                              -
                               <span style={{ color: "red" }}>
                                 {data.PT4_OUT}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-bold ">Break 4:</td>
-                              <td className="bg-orange-500 rounded-lg">
-                                {data.BR4_IN} - {data.BR4_OUT}
+                              <td className="font-semibold ">Break 4:</td>
+                              <td className="bg-orange-300 rounded-lg">
+                                {data.BR4_IN}-{data.BR4_OUT}
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-bold">Over Time:</td>
+                              <td className="font-semibold">Over Time:</td>
                               <span style={{ color: "green" }}>
                                 {data.OT_IN}
                               </span>{" "}
@@ -1997,7 +2346,7 @@ ref17.on("value", (snapshot) => {
                     </div>
 
                     <div className="bg-white px-4 py-6 sm:p-6 ml-3 rounded-lg shadow-md">
-                      <h3 className="text-lg font-bold mb-1">Facturing</h3>
+                      <h3 className="text-lg  italic mb-1">Action Button</h3>
                       <div className="flex flex-col justify-between">
                         {data.SHIFT == 1 ? (
                           <div>
@@ -2225,7 +2574,7 @@ ref17.on("value", (snapshot) => {
                               </label>
                               <input
                                 type="text"
-                                class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                class="appearance-none block w-full bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                 name="NamaPIC"
                                 required
                                 onChange={(e) => {
@@ -2239,7 +2588,7 @@ ref17.on("value", (snapshot) => {
                               </label>
                               <input
                                 type="text"
-                                class="appearance-none block w-full text-center  font-bold bg-gray-200 text-orange-400 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                class="appearance-none block w-full text-center  font-bold bg-gray-200 text-black border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                 name="NamaPIC"
                                 readOnly
                                 value={Line}
@@ -2254,7 +2603,7 @@ ref17.on("value", (snapshot) => {
                               Problem
                             </label>
                             <input
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full  text-gray-700 border  border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               id="grid-password"
                               type="text"
                               placeholder=""
@@ -2265,7 +2614,7 @@ ref17.on("value", (snapshot) => {
                               required
                             />
                             <p class="text-gray-600 text-xs mb-2 italic">
-                              Problem
+                            Laporkan Permasalahan Yang Ditemukan
                             </p>
                           </div>
                           <div class="flex justify-center">

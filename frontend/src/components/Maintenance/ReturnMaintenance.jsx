@@ -153,7 +153,7 @@ const ReturnMaintenance = () => {
     backgroundImage: `url(${process.env.PUBLIC_URL}/MTC.jpg)`,
     backgroundSize: "1400px",
     backgroundPosition: "1400px",
-    height: "640px", // Ubah tinggi (height) sesuai kebutuhan Anda
+    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
 
   return (
@@ -179,10 +179,10 @@ const ReturnMaintenance = () => {
         <div class="mx-auto max-w-7xl px-4">
           <marquee behavior="scroll" direction="right">
             <div class="flex items-center">
-              <h1 class="text-xl font-bold tracking-tight text-gray-900">
-                | Laporan Return Maintenance |
+              <h1 class="text-xl font-sans tracking-tight text-gray-900">
+                | Return Request Maintenance |
               </h1>
-              <h1 class="text-xl font-bold tracking-tight ml-4">
+              <h1 class="text-xl font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
                 <span
                   class="ml-4"
@@ -194,7 +194,7 @@ const ReturnMaintenance = () => {
                 </span>
                 <span className="ml-4">|</span>
               </h1>
-              <h1 class="text-xl font-bold tracking-tight ml-4">
+              <h1 class="text-xl font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
                 <span class="ml-4 text-green-500">RUNNING </span>|
               </h1>
@@ -211,7 +211,7 @@ const ReturnMaintenance = () => {
           x-data="app"
         >
           <div className="flex flex-col mt-1 h-full">
-            <div>
+          <div>
               {showDatePicker && (
                 <form className="" onSubmit={handleSubmit}>
                   <label htmlFor="date" className="text-gray-300">
@@ -243,7 +243,7 @@ const ReturnMaintenance = () => {
                       />
                     </div>
                     <button
-                      class="bg-blue-500  hover:bg-blue-400 text-white w-20 font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-2 "
+                      class="bg-blue-500  hover:bg-blue-400 text-white w-20 font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500  rounded-3xl  rounded mt-2 "
                       type="submit"
                     >
                       Submit
@@ -252,7 +252,7 @@ const ReturnMaintenance = () => {
                 </form>
               )}
               <button
-                class="bg-blue-500 hover:bg-blue-400 text-white w-20 font-bold py-1 px-2 border-b-4 border-blue-700 hover:border-blue-500 rounded mt-1 mb-3 "
+                class="bg-blue-500 hover:bg-blue-400 text-white w-20 font-bold py-1 px-2 border-b-4 border-blue-700 hover:border-blue-500 rounded-3xl mt-1 mb-3 "
                 onClick={handleToggleDatePicker}
               >
                 {showDatePicker ? "Hide" : "Search"}
@@ -270,7 +270,7 @@ const ReturnMaintenance = () => {
               </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Return For Maintenance
+                  Return Request Maintenance
                 </div>
               </header>
 
@@ -328,9 +328,9 @@ const ReturnMaintenance = () => {
                           </div>
                         </td>
                         <td className="p-5 ">
-                          <button
+                        <button
                             onClick={() => setSelectedItem(item)}
-                            className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                            className="bg-blue-900 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -345,7 +345,7 @@ const ReturnMaintenance = () => {
                                 clipRule="evenodd"
                               />
                             </svg>
-                            <span>DETAIL</span>
+                            <span>Details</span>
                           </button>
                         </td>
 
