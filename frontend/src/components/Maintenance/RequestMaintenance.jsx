@@ -79,7 +79,7 @@ const RepairReport = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/get/Maintenance")
+    fetch("http://192.168.101.236:3001/api/Maintenance")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -110,7 +110,7 @@ const RepairReport = () => {
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
     fetch(
-      `http://192.168.101.236:3001/api/get/Maintenance?date=${selectedDate}`
+      `http://192.168.101.236:3001/api/Maintenance?date=${selectedDate}`
     )
       .then((response) => response.json())
       .then((json) => {

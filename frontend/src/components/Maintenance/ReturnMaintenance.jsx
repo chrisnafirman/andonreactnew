@@ -79,7 +79,7 @@ const ReturnMaintenance = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/get/ReturnMaintenance")
+    fetch("http://192.168.101.236:3001/api/ReturnMaintenance")
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti timestamp menjadi tanggal dan Date
@@ -109,7 +109,7 @@ const ReturnMaintenance = () => {
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
     fetch(
-      `http://192.168.101.236:3001/api/get/ReturnMaintenance?date=${selectedDate}`
+      `http://192.168.101.236:3001/api/ReturnMaintenance?date=${selectedDate}`
     )
       .then((response) => response.json())
       .then((json) => {

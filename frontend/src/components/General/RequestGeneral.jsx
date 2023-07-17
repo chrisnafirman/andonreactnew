@@ -78,7 +78,7 @@ const RepairReport = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/get/General")
+    fetch("http://192.168.101.236:3001/api/General")
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti timestamp menjadi tanggal dan Date
@@ -107,7 +107,7 @@ const RepairReport = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://192.168.101.236:3001/api/get/General?date=${selectedDate}`)
+    fetch(`http://192.168.101.236:3001/api/General?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti Date menjadi tanggal saja

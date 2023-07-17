@@ -1369,7 +1369,7 @@ const SmtTop = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.236:3001/api/get/Inputsche"
+          "http://192.168.101.236:3001/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -1598,7 +1598,7 @@ const SmtTop = () => {
       Kerusakan: Kerusakan,
     };
 
-    fetch(`http://192.168.101.236:3001/api/post/Maintenance`, {
+    fetch(`http://192.168.101.236:3001/api/Maintenance`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1639,7 +1639,7 @@ const SmtTop = () => {
     firebase.database().ref(`SMTLine1TOP/${Station}`).set("QA");
     window.location.reload();
 
-    fetch(`http://192.168.101.236:3001/api/post/QA`, {
+    fetch(`http://192.168.101.236:3001/api/QA`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1675,7 +1675,7 @@ const SmtTop = () => {
     firebase.database().ref(`SMTLine1TOP/${Station}`).set("QC");
     window.location.reload();
 
-    fetch(`http://192.168.101.236:3001/api/post/QC`, {
+    fetch(`http://192.168.101.236:3001/api/QC`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1702,7 +1702,7 @@ const SmtTop = () => {
       Kerusakan: Kerusakan,
     };
 
-    fetch(`http://192.168.101.236:3001/api/post/ReturnMaintenance`, {
+    fetch(`http://192.168.101.236:3001/api/ReturnMaintenance`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1742,7 +1742,7 @@ const SmtTop = () => {
     setIsOpen2(false);
     window.location.reload();
 
-    fetch("http://192.168.101.236:3001/api/post/validationqa", {
+    fetch("http://192.168.101.236:3001/api/ValidationQA", {
       method: "POST",
       body: data,
     })
@@ -1770,7 +1770,7 @@ const SmtTop = () => {
     setIsOpen2(false);
     window.location.reload();
 
-    fetch("http://192.168.101.236:3001/api/post/validationqc", {
+    fetch("http://192.168.101.236:3001/api/ValidationQC", {
       method: "POST",
       body: data,
     })

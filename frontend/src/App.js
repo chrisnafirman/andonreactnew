@@ -18,8 +18,8 @@ import AndonLine1 from "./components/Line1/AndonLine1.jsx";
 import SmtTop from "./components/Line1/SmtTop.jsx";
 import SmtBot from "./components/Line1/SmtBot.jsx";
 import SmtBE from "./components/Line1/SmtBE.jsx";
-import Inputsche from "./components/Leader/Inputsche.jsx"
-import ScheProd from "./components/Leader/ScheProd.jsx"
+import Inputsche from "./components/Production/Inputsche.jsx"
+import ScheProd from "./components/Production/ScheProd.jsx"
 
 import RequestGeneral from "./components/General/RequestGeneral.jsx"
 

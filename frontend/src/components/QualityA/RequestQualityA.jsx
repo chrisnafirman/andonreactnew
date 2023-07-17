@@ -80,7 +80,7 @@ const RequestQA = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/get/QA")
+    fetch("http://192.168.101.236:3001/api/QA")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -110,7 +110,7 @@ const RequestQA = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://192.168.101.236:3001/api/get/QA?date=${selectedDate}`)
+    fetch(`http://192.168.101.236:3001/api/QA?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
         console.log(json);

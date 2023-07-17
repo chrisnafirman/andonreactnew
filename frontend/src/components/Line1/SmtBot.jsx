@@ -1134,7 +1134,7 @@ const SmtBot= () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.236:3001/api/get/Inputsche"
+          "http://192.168.101.236:3001/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -1325,7 +1325,7 @@ const SmtBot= () => {
       Kerusakan: Kerusakan,
     };
 
-    fetch(`http://192.168.101.236:3001/api/post/Maintenance`, {
+    fetch(`http://192.168.101.236:3001/api/Maintenance`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1366,7 +1366,7 @@ const SmtBot= () => {
     firebase.database().ref(`SMTLine1BOT/${Station}`).set("QA");
     window.location.reload();
 
-    fetch(`http://192.168.101.236:3001/api/post/QA`, {
+    fetch(`http://192.168.101.236:3001/api/QA`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1402,7 +1402,7 @@ const SmtBot= () => {
     firebase.database().ref(`SMTLine1BOT/${Station}`).set("QC");
     window.location.reload();
 
-    fetch(`http://192.168.101.236:3001/api/post/QC`, {
+    fetch(`http://192.168.101.236:3001/api/QC`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1429,7 +1429,7 @@ const SmtBot= () => {
       Kerusakan: Kerusakan,
     };
 
-    fetch(`http://192.168.101.236:3001/api/post/ReturnMaintenance`, {
+    fetch(`http://192.168.101.236:3001/api/ReturnMaintenance`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1469,7 +1469,7 @@ const SmtBot= () => {
     setIsOpen2(false);
     window.location.reload();
 
-    fetch("http://192.168.101.236:3001/api/post/validationqa", {
+    fetch("http://192.168.101.236:3001/api/ValidationQA", {
       method: "POST",
       body: data,
     })
@@ -1497,7 +1497,7 @@ const SmtBot= () => {
     setIsOpen2(false);
     window.location.reload();
 
-    fetch("http://192.168.101.236:3001/api/post/validationqc", {
+    fetch("http://192.168.101.236:3001/api/ValidationQC", {
       method: "POST",
       body: data,
     })
@@ -1799,10 +1799,10 @@ useEffect(() => {
         <div class="mx-auto max-w-7xl px-4">
           <marquee behavior="scroll" direction="right">
             <div class="flex items-center">
-              <h1 class="text-xl font-bold tracking-tight text-gray-900">
+              <h1 class="text-xl font-sans tracking-tight text-gray-900">
                 | SMT Line 1 - BOT |
               </h1>
-              <h1 class="text-xl font-bold tracking-tight ml-4">
+              <h1 class="text-xl font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
                 <span
                   class="ml-4"
@@ -1814,7 +1814,7 @@ useEffect(() => {
                 </span>
                 <span className="ml-4">|</span>
               </h1>
-              <h1 class="text-xl font-bold tracking-tight ml-4">
+              <h1 class="text-xl font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
                 <span class="ml-4 text-green-500">RUNNING </span>|
               </h1>
@@ -2147,7 +2147,7 @@ useEffect(() => {
                     <td class="p-1   ">
                       {status === "Go" || status === "Leader" || status === "Maintenance" ? (
                         <>
-                          <span className="text-xs uppercase text-black font-bold">
+                          <span className="text-xs uppercase text-black ffont-sans">
                             TIME
                           </span>
                           <div id="timer" class="font-medium  text-white">

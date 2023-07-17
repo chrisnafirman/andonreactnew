@@ -71,7 +71,7 @@ const ReturnQA = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/get/validationqa")
+    fetch("http://192.168.101.236:3001/api/validationqa")
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti timestamp menjadi tanggal dan waktu
@@ -101,7 +101,7 @@ const ReturnQA = () => {
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
     fetch(
-      `http://192.168.101.236:3001/api/get/validationqa?date=${selectedDate}`
+      `http://192.168.101.236:3001/api/validationqa?date=${selectedDate}`
     )
       .then((response) => response.json())
       .then((json) => {

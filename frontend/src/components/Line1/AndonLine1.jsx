@@ -930,7 +930,15 @@ ref17.on("value", (snapshot) => {
     const data = {
       ResultsCMA: ResultsCMA,
     };
-    fetch("http://192.168.101.236:3001/api/put/ResultsCMA", {
+
+          firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing").set("Waiting...");
+          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set("0");
+          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set("0");
+          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set("0");
+          setCMARunning(false);
+          window.location.reload();
+
+    fetch("http://192.168.101.236:3001/api/UpdateCMA", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -940,13 +948,7 @@ ref17.on("value", (snapshot) => {
       .then((response) => {
         if (response.status === 200) {
           alert("Change Model Telah Selesai Data Sudah Terinput");
-          firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing").set("Waiting...");
-          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set("0");
-          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set("0");
-          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set("0");
-          setCMARunning(false);
-          window.location.reload();
-          event.preventDefault();
+          
         } else {
           throw new Error("Error updating data");
         }
@@ -972,7 +974,7 @@ ref17.on("value", (snapshot) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.236:3001/api/get/Inputsche"
+          "http://192.168.101.236:3001/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -1186,7 +1188,7 @@ ref17.on("value", (snapshot) => {
         department = "";
     }
 
-    fetch(`http://192.168.101.236:3001/api/post/${department}`, {
+    fetch(`http://192.168.101.236:3001/api/${department}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1221,7 +1223,7 @@ ref17.on("value", (snapshot) => {
       Kerusakan: Kerusakan,
     };
 
-    fetch(`http://192.168.101.236:3001/api/post/general`, {
+    fetch(`http://192.168.101.236:3001/api/General`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1262,7 +1264,7 @@ ref17.on("value", (snapshot) => {
 
 
 
-    fetch(`http://192.168.101.236:3001/api/post/Others`, {
+    fetch(`http://192.168.101.236:3001/api/Others`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
