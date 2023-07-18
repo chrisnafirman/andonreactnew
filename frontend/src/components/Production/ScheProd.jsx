@@ -12,14 +12,9 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const SmtTop = () => {
-  const [mesin, setMesin] = useState("");
-  const [line, setLine] = useState("");
-  const [nama, setNama] = useState("");
-  const [area, setArea] = useState("");
-  const [station, setStation] = useState("");
-  const [timer, setTimer] = useState("");
+ 
   const [time, setTime] = useState(new Date().toLocaleString());
-  const [prevStatus, setPrevStatus] = useState("");
+
   const [showDrawer, setShowDrawer] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -27,12 +22,7 @@ const SmtTop = () => {
 
   // popup 1
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpen2, setIsOpen2] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState("");
-  const [NamaPIC, setNamaPIC] = useState("");
-  const [NpkPIC, setNpkPIC] = useState("");
-  const [Kerusakan, setKerusakan] = useState("");
+ 
 
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -40,82 +30,9 @@ const SmtTop = () => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   // SCHE PRODUCTION
-  const [SHIFT, setSHIFT] = useState("");
-  const [PT1_IN, setPT1_IN] = useState("");
-  const [PT1_OUT, setPT1_OUT] = useState("");
-  const [PT2_IN, setPT2_IN] = useState("");
-  const [PT2_OUT, setPT2_OUT] = useState("");
-  const [PT3_IN, setPT3_IN] = useState("");
-  const [PT3_OUT, setPT3_OUT] = useState("");
-  const [PT4_IN, setPT4_IN] = useState("");
-  const [PT4_OUT, setPT4_OUT] = useState("");
-  const [BR1_IN, setBR1_IN] = useState("");
-  const [BR1_OUT, setBR1_OUT] = useState("");
-  const [BR2_IN, setBR2_IN] = useState("");
-  const [BR2_OUT, setBR2_OUT] = useState("");
-  const [BR3_IN, setBR3_IN] = useState("");
-  const [BR3_OUT, setBR3_OUT] = useState("");
-  const [BR4_IN, setBR4_IN] = useState("");
-  const [BR4_OUT, setBR4_OUT] = useState("");
-  const [PD_IN, setPD_IN] = useState("");
-  const [PD_OUT, setPD_OUT] = useState("");
-  const [OT_IN, setOT_IN] = useState("");
-  const [OT_OUT, setOT_OUT] = useState("");
-  const [PP, setPP] = useState("");
-  const [PD, setPD] = useState("");
-  const [CMA, setCMA] = useState("");
-  const [PDATE, setPDATE] = useState("");
+ 
 
-  const submit = () => {
-    const data = {
-      SHIFT: SHIFT,
-      PT1_IN: PT1_IN,
-      PT1_OUT: PT1_OUT,
-      PT2_IN: PT2_IN,
-      PT2_OUT: PT2_OUT,
-      PT3_IN: PT3_IN,
-      PT3_OUT: PT3_OUT,
-      PT4_IN: PT4_IN,
-      PT4_OUT: PT4_OUT,
-      BR1_IN: BR1_IN,
-      BR1_OUT: BR1_OUT,
-      BR2_IN: BR2_IN,
-      BR2_OUT: BR2_OUT,
-      BR3_IN: BR3_IN,
-      BR3_OUT: BR3_OUT,
-      BR4_IN: BR4_IN,
-      BR4_OUT: BR4_OUT,
-      PD_IN: PD_IN,
-      PD_OUT: PD_OUT,
-      OT_IN: OT_IN,
-      OT_OUT: OT_OUT,
-      PP: PP,
-      PD: PD,
-      CMA: CMA,
-      PDATE: PDATE,
-    };
-
-    fetch(`http://192.168.101.236:3001/api/ScheduleProduction`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          alert("success");
-          setIsOpen(false);
-          window.location.reload();
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
+  
   // RESET
 
   // button search
@@ -199,56 +116,7 @@ const SmtTop = () => {
     console.log(formattedDate);
   };
 
-  const stop = (value) => {
-    const data = {
-      SHIFT: SHIFT,
-      PT1_IN: PT1_IN,
-      PT1_OUT: PT1_OUT,
-      PT2_IN: PT2_IN,
-      PT2_OUT: PT2_OUT,
-      PT3_IN: PT3_IN,
-      PT3_OUT: PT3_OUT,
-      PT4_IN: PT4_IN,
-      PT4_OUT: PT4_OUT,
-      BR1_IN: BR1_IN,
-      BR1_OUT: BR1_OUT,
-      BR2_IN: BR2_IN,
-      BR2_OUT: BR2_OUT,
-      BR3_IN: BR3_IN,
-      BR3_OUT: BR3_OUT,
-      BR4_IN: BR4_IN,
-      BR4_OUT: BR4_OUT,
-      PD_IN: PD_IN,
-      PD_OUT: PD_OUT,
-      OT_IN: OT_IN,
-      OT_OUT: OT_OUT,
-      PP: PP,
-      PD: PD,
-      CMA: CMA,
-      PDATE: PDATE,
-      VALUE: value,
-    };
-
-    fetch(`http://192.168.101.236:3001/api/ScheduleProduction`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          alert("Production Berhasil Di Reset");
-          setIsOpen(false);
-          window.location.reload();
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  
 
   // function formatDate(dateString) {
   //   const options = { day: "numeric", month: "numeric", year: "numeric" };

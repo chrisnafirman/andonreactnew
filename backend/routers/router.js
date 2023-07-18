@@ -5,6 +5,7 @@ const QAcontrollers = require("../controller/QA");
 const QCcontrollers = require("../controller/QC");
 const TimeProductioncontrollers = require("../controller/TimeProduction")
 const Generalcontrollers = require("../controller/General")
+const Employeecontrollers = require("../controller/Employee")
 
 // MTC
 router.post("/Maintenance", MTCcontrollers.postRequestMaintenance);
@@ -53,6 +54,10 @@ router.post("/Others", Generalcontrollers.postRequestOthers);
 router.get("/General", Generalcontrollers.getRequestGeneral);
 
 router.get("/Others", Generalcontrollers.getRequestOthers);
+
+// Employee
+
+router.get("/Employee_Operator", Employeecontrollers.getRequestEmployee);
 
 
 module.exports = router;

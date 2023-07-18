@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
+import Select from "react-select";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
@@ -58,32 +59,9 @@ const Andonline1 = () => {
   const npkList = ["0301"];
   // -------------
 
-  //  SCHEDULE
-  const [SHIFT, setSHIFT] = useState("");
-  const [PT1_IN, setPT1_IN] = useState("");
-  const [PT1_OUT, setPT1_OUT] = useState("");
-  const [PT2_IN, setPT2_IN] = useState("");
-  const [PT2_OUT, setPT2_OUT] = useState("");
-  const [PT3_IN, setPT3_IN] = useState("");
-  const [PT3_OUT, setPT3_OUT] = useState("");
-  const [PT4_IN, setPT4_IN] = useState("");
-  const [PT4_OUT, setPT4_OUT] = useState("");
-  const [BR1_IN, setBR1_IN] = useState("");
-  const [BR1_OUT, setBR1_OUT] = useState("");
-  const [BR2_IN, setBR2_IN] = useState("");
-  const [BR2_OUT, setBR2_OUT] = useState("");
-  const [BR3_IN, setBR3_IN] = useState("");
-  const [BR3_OUT, setBR3_OUT] = useState("");
-  const [BR4_IN, setBR4_IN] = useState("");
-  const [BR4_OUT, setBR4_OUT] = useState("");
-  const [PD_IN, setPD_IN] = useState("");
-  const [PD_OUT, setPD_OUT] = useState("");
-  const [OT_IN, setOT_IN] = useState("");
-  const [OT_OUT, setOT_OUT] = useState("");
-  const [PP, setPP] = useState("");
-  const [PD, setPD] = useState("");
-  const [CMA, setCMA] = useState("");
-  const [PDATE, setPDATE] = useState("");
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptionDepartment, setSelectedOptionDepartment] =
+    useState(null);
 
   // DATA SCHEDULE PLANING
   const [data, setData] = useState(null);
@@ -185,34 +163,26 @@ const Andonline1 = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
-              const link = "http://10.14.81.43:3003/RequestGeneral";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-921205810];
-              const message = `Notification SMT LINE 1 Down  (Problem : Network) - Please Click The Link To See The Poblem:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestGeneral";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-921205810];
+        const message = `Notification SMT LINE 1 Down  (Problem : Network) - Please Click The Link To See The Poblem:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-              });
-            } else {
-              // Izin ditolak
-            }
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       }
     });
 
@@ -225,34 +195,26 @@ const Andonline1 = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
-              const link = "http://10.14.81.43:3003/RequestGeneral";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-921205810];
-              const message = `Notification SMT LINE 1 Down  (Problem : Electricity) - Please Click The Link To See The Poblem:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestGeneral";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-921205810];
+        const message = `Notification SMT LINE 1 Down  (Problem : Electricity) - Please Click The Link To See The Poblem:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-              });
-            } else {
-              // Izin ditolak
-            }
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       }
     });
 
@@ -265,34 +227,26 @@ const Andonline1 = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
-              const link = "http://10.14.81.43:3003/RequestGeneral";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-921205810];
-              const message = `Notification SMT LINE 1 Down  (Problem : Air Compressor) - Please Click The Link To See The Poblem:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestGeneral";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-921205810];
+        const message = `Notification SMT LINE 1 Down  (Problem : Air Compressor) - Please Click The Link To See The Poblem:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-              });
-            } else {
-              // Izin ditolak
-            }
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       }
     });
 
@@ -305,37 +259,28 @@ const Andonline1 = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
-              const link = "http://10.14.81.43:3003/RequestGeneral";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-921205810];
-              const message = `Notification SMT LINE 1 Down  (Problem : Shortage Comp) - Please Click The Link To See The Poblem:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestGeneral";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-921205810];
+        const message = `Notification SMT LINE 1 Down  (Problem : Shortage Comp) - Please Click The Link To See The Poblem:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-              });
-            } else {
-              // Izin ditolak
-            }
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       }
     });
-
 
     const ref7 = firebase.database().ref("SMTLine1/Shortage Box FG");
     ref7.on("value", (snapshot) => {
@@ -346,34 +291,26 @@ const Andonline1 = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
-              const link = "http://10.14.81.43:3003/RequestGeneral";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-921205810];
-              const message = `Notification SMT LINE 1 Down  (Problem : Shortage Box FG) - Please Click The Link To See The Poblem:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestGeneral";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-921205810];
+        const message = `Notification SMT LINE 1 Down  (Problem : Shortage Box FG) - Please Click The Link To See The Poblem:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-              });
-            } else {
-              // Izin ditolak
-            }
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       }
     });
 
@@ -386,34 +323,26 @@ const Andonline1 = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
-              const link = "http://10.14.81.43:3003/RequestGeneral";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-921205810];
-              const message = `Notification SMT LINE 1 Down  (Problem : Over Trial) - Please Click The Link To See The Poblem:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestGeneral";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-921205810];
+        const message = `Notification SMT LINE 1 Down  (Problem : Over Trial) - Please Click The Link To See The Poblem:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-              });
-            } else {
-              // Izin ditolak
-            }
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       }
     });
 
@@ -421,7 +350,38 @@ const Andonline1 = () => {
     ref9.on("value", (snapshot) => {
       const data = snapshot.val();
       updateOverchange(data);
-     if (data === "Down") {
+      if (data === "Down") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+        const link = "http://10.14.81.43:3003/RequestGeneral";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-921205810];
+        const message = `Notification SMT LINE 1 Down  (Problem : Over Change Model) - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      }
+    });
+
+    const ref17 = firebase.database().ref("SMTLine1/Others");
+    ref17.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateOthers(data);
+      if (data === "HRGA & EHS") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
@@ -430,10 +390,10 @@ const Andonline1 = () => {
           .query({ name: "clipboard-write" })
           .then((permissionStatus) => {
             if (permissionStatus.state === "granted") {
-              const link = "http://10.14.81.43:3003/RequestGeneral";
+              const link = "http://10.14.81.43:3003/RequestOthers";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-921205810];
-              const message = `Notification SMT LINE 1 Down  (Problem : Over Change Model) - Please Click The Link To See The Poblem:\n\n ${link}`;
+              const message = `Notification SMT LINE 1 Down  [Department Call : HRGA & EHS] - Please Click The Link To See The Poblem:\n\n ${link}`;
 
               chatIds.forEach((chatId) => {
                 fetch(
@@ -450,274 +410,225 @@ const Andonline1 = () => {
                     console.error(error);
                   });
               });
-            } else {
-              // Izin ditolak
+            }
+          });
+      } else if (data === "MAINTENANCE & IT") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestOthers";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  [Department Call : MAINTENANCE & IT] - Please Click The Link To See The Poblem:\n\n ${link}`;
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            }
+          });
+      } else if (data === "PURCHASING,PPIC,MP&L") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestOthers";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  [Department Call : PURCHASING,PPIC,MP&L] - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            }
+          });
+      } else if (data === "PROCESS ENGINEERING") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestOthers";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  [Department Call : PROCESS ENGINEERING] - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            }
+          });
+      } else if (data === "ADVANCED MANUFACTURING ENGINEERING") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestOthers";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  [Department Call : ADVANCED MANUFACTURING ENGINEERING] - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            }
+          });
+      } else if (data === "PRODUCT DEVELOPMENT") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestOthers";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  [Department Call : PRODUCT DEVELOPMENT] - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            }
+          });
+      } else if (data === "QA") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestOthers";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  [Department Call : QA] - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            }
+          });
+      } else if (data === "QC") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestOthers";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-921205810];
+              const message = `Notification SMT LINE 1 Down  [Department Call : QC] - Please Click The Link To See The Poblem:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
             }
           });
       }
     });
-
-    const ref17 = firebase.database().ref("SMTLine1/Others");
-ref17.on("value", (snapshot) => {
-  const data = snapshot.val();
-  updateOthers(data);
-  if (data === "HRGA & EHS") {
-    const audio = new Audio("Sound.mp3");
-    audio.autoplay = true;
-    audio.play();
-
-    navigator.permissions
-      .query({ name: "clipboard-write" })
-      .then((permissionStatus) => {
-        if (permissionStatus.state === "granted") {
-          const link = "http://10.14.81.43:3003/RequestOthers";
-          const botToken =
-            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-          const chatIds = [-921205810];
-          const message = `Notification SMT LINE 1 Down  [Department Call : HRGA & EHS] - Please Click The Link To See The Poblem:\n\n ${link}`;
-
-          chatIds.forEach((chatId) => {
-            fetch(
-              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                message
-              )}`
-            )
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error("Error sending telegram message");
-                }
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-          });
-        }
-      });
-  } else if (data === "MAINTENANCE & IT") {
-    const audio = new Audio("Sound.mp3");
-    audio.autoplay = true;
-    audio.play();
-
-    navigator.permissions
-      .query({ name: "clipboard-write" })
-      .then((permissionStatus) => {
-        if (permissionStatus.state === "granted") {
-          const link = "http://10.14.81.43:3003/RequestOthers";
-          const botToken =
-            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-          const chatIds = [-921205810];
-          const message = `Notification SMT LINE 1 Down  [Department Call : MAINTENANCE & IT] - Please Click The Link To See The Poblem:\n\n ${link}`;
-          chatIds.forEach((chatId) => {
-            fetch(
-              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                message
-              )}`
-            )
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error("Error sending telegram message");
-                }
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-          });
-        }
-      });
-  } else if (data === "PURCHASING,PPIC,MP&L") {
-    const audio = new Audio("Sound.mp3");
-    audio.autoplay = true;
-    audio.play();
-    navigator.permissions
-      .query({ name: "clipboard-write" })
-      .then((permissionStatus) => {
-        if (permissionStatus.state === "granted") {
-          const link = "http://10.14.81.43:3003/RequestOthers";
-          const botToken =
-            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-          const chatIds = [-921205810];
-          const message = `Notification SMT LINE 1 Down  [Department Call : PURCHASING,PPIC,MP&L] - Please Click The Link To See The Poblem:\n\n ${link}`;
-
-          chatIds.forEach((chatId) => {
-            fetch(
-              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                message
-              )}`
-            )
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error("Error sending telegram message");
-                }
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-          });
-        }
-      });
-  }else if (data === "PROCESS ENGINEERING") {
-    const audio = new Audio("Sound.mp3");
-    audio.autoplay = true;
-    audio.play();
-
-    navigator.permissions
-      .query({ name: "clipboard-write" })
-      .then((permissionStatus) => {
-        if (permissionStatus.state === "granted") {
-          const link = "http://10.14.81.43:3003/RequestOthers";
-          const botToken =
-            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-          const chatIds = [-921205810];
-          const message = `Notification SMT LINE 1 Down  [Department Call : PROCESS ENGINEERING] - Please Click The Link To See The Poblem:\n\n ${link}`;
-
-          chatIds.forEach((chatId) => {
-            fetch(
-              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                message
-              )}`
-            )
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error("Error sending telegram message");
-                }
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-          });
-        }
-      });
-  } else if (data === "ADVANCED MANUFACTURING ENGINEERING") {
-    const audio = new Audio("Sound.mp3");
-    audio.autoplay = true;
-    audio.play();
-
-    navigator.permissions
-      .query({ name: "clipboard-write" })
-      .then((permissionStatus) => {
-        if (permissionStatus.state === "granted") {
-          const link = "http://10.14.81.43:3003/RequestOthers";
-          const botToken =
-            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-          const chatIds = [-921205810];
-          const message = `Notification SMT LINE 1 Down  [Department Call : ADVANCED MANUFACTURING ENGINEERING] - Please Click The Link To See The Poblem:\n\n ${link}`;
-
-          chatIds.forEach((chatId) => {
-            fetch(
-              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                message
-              )}`
-            )
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error("Error sending telegram message");
-                }
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-          });
-        }
-      });
-  }else if (data === "PRODUCT DEVELOPMENT") {
-    const audio = new Audio("Sound.mp3");
-    audio.autoplay = true;
-    audio.play();
-
-    navigator.permissions
-      .query({ name: "clipboard-write" })
-      .then((permissionStatus) => {
-        if (permissionStatus.state === "granted") {
-          const link = "http://10.14.81.43:3003/RequestOthers";
-          const botToken =
-            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-          const chatIds = [-921205810];
-          const message = `Notification SMT LINE 1 Down  [Department Call : PRODUCT DEVELOPMENT] - Please Click The Link To See The Poblem:\n\n ${link}`;
-
-          chatIds.forEach((chatId) => {
-            fetch(
-              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                message
-              )}`
-            )
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error("Error sending telegram message");
-                }
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-          });
-        }
-      });
-  }else if (data === "QA") {
-    const audio = new Audio("Sound.mp3");
-    audio.autoplay = true;
-    audio.play();
-
-    navigator.permissions
-      .query({ name: "clipboard-write" })
-      .then((permissionStatus) => {
-        if (permissionStatus.state === "granted") {
-          const link = "http://10.14.81.43:3003/RequestOthers";
-          const botToken =
-            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-          const chatIds = [-921205810];
-          const message = `Notification SMT LINE 1 Down  [Department Call : QA] - Please Click The Link To See The Poblem:\n\n ${link}`;
-
-          chatIds.forEach((chatId) => {
-            fetch(
-              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                message
-              )}`
-            )
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error("Error sending telegram message");
-                }
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-          });
-        }
-      });
-  }else if (data === "QC") {
-    const audio = new Audio("Sound.mp3");
-    audio.autoplay = true;
-    audio.play();
-
-    navigator.permissions
-      .query({ name: "clipboard-write" })
-      .then((permissionStatus) => {
-        if (permissionStatus.state === "granted") {
-          const link = "http://10.14.81.43:3003/RequestOthers";
-          const botToken =
-            "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-          const chatIds = [-921205810];
-          const message = `Notification SMT LINE 1 Down  [Department Call : QC] - Please Click The Link To See The Poblem:\n\n ${link}`;
-
-          chatIds.forEach((chatId) => {
-            fetch(
-              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                message
-              )}`
-            )
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error("Error sending telegram message");
-                }
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-          });
-        }
-      });
-  }
-});
-
 
     const ref10 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
     ref10.on("value", (snapshot) => {
@@ -931,12 +842,12 @@ ref17.on("value", (snapshot) => {
       ResultsCMA: ResultsCMA,
     };
 
-          firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing").set("Waiting...");
-          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set("0");
-          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set("0");
-          firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set("0");
-          setCMARunning(false);
-          window.location.reload();
+    firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing").set("Waiting...");
+    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/hours").set("0");
+    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set("0");
+    firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set("0");
+    setCMARunning(false);
+    window.location.reload();
 
     fetch("http://192.168.101.236:3001/api/UpdateCMA", {
       method: "PUT",
@@ -948,7 +859,6 @@ ref17.on("value", (snapshot) => {
       .then((response) => {
         if (response.status === 200) {
           alert("Change Model Telah Selesai Data Sudah Terinput");
-          
         } else {
           throw new Error("Error updating data");
         }
@@ -1059,7 +969,6 @@ ref17.on("value", (snapshot) => {
         ? "#BDD0D1"
         : data === "MAINTENANCE & IT"
         ? "#be4f62"
-  
         : "#565454"
     );
   };
@@ -1262,8 +1171,6 @@ ref17.on("value", (snapshot) => {
       Kerusakan: Kerusakan,
     };
 
-
-
     fetch(`http://192.168.101.236:3001/api/Others`, {
       method: "POST",
       headers: {
@@ -1324,7 +1231,16 @@ ref17.on("value", (snapshot) => {
   };
 
   const handleOthersPress = () => {
-    if (Others === "HRGA & EHS" || Others === "PURCHASING,PPIC,MP&L" || Others === "PROCESS ENGINEERING" || Others === "PRODUCT DEVELOPMENT"  || Others === "ADVANCED MANUFACTURING ENGINEERING" || Others === "QA"  || Others === "QC" || Others === "MAINTENANCE & IT"  )  {
+    if (
+      Others === "HRGA & EHS" ||
+      Others === "PURCHASING,PPIC,MP&L" ||
+      Others === "PROCESS ENGINEERING" ||
+      Others === "PRODUCT DEVELOPMENT" ||
+      Others === "ADVANCED MANUFACTURING ENGINEERING" ||
+      Others === "QA" ||
+      Others === "QC" ||
+      Others === "MAINTENANCE & IT"
+    ) {
       setOthersPressed(true);
       timeoutRefOthers.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
@@ -1438,6 +1354,64 @@ ref17.on("value", (snapshot) => {
     height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
 
+  const handleSelectChange = (selectedOption) => {
+    setSelectedOption(selectedOption);
+    setNamaPIC(selectedOption.value);
+  };
+
+  const [options, setOptions] = useState([]);
+
+useEffect(() => {
+  fetch("http://localhost:3001/api/Employee_Operator")
+    .then((response) => response.json())
+    .then((data) => {
+      const transformedOptions = data.map((item) => ({
+        value: item.nama_emp,
+        label: item.nama_emp,
+      }));
+      setOptions(transformedOptions);
+    })
+    .catch((error) => {
+      // Tangani error jika permintaan gagal
+      console.error("Error fetching data:", error);
+    });
+}, []);
+
+
+  const OptionsDepartment = [
+    { value: "", label: "-- Pilih Depart --" },
+    { value: "PURCHASING,PPIC,MP&L", label: "PURCHASING,PPIC,MP&L" },
+    { value: "PROCESS ENGINEERING", label: "PROCESS ENGINEERING" },
+    { value: "PRODUCT DEVELOPMENT", label: "PRODUCT DEVELOPMENT" },
+    {
+      value: "ADVANCED MANUFACTURING ENGINEERING",
+      label: "ADVANCED MANUFACTURING ENGINEERING",
+    },
+    { value: "QA", label: "QA" },
+    { value: "QC", label: "QC" },
+    { value: "HRGA & EHS", label: "HRGA & EHS" },
+    { value: "MAINTENANCE & IT", label: "MAINTENANCE & IT" },
+  ];
+
+  const handleSelectDepartment = (selectedOptionDepartment) => {
+    setSelectedOptionDepartment(selectedOptionDepartment);
+    setDepartment(selectedOptionDepartment.value);
+  };
+
+
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/Employee_Operator")
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   return (
     <body style={styles}>
       <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
@@ -1463,7 +1437,7 @@ ref17.on("value", (snapshot) => {
         <div class="mx-auto max-w-7xl px-4 ">
           <header class="bg-white shadow mb-3">
             <div class="mx-auto max-w-7xl px-4">
-              <marquee behavior="scroll" direction="right">
+              <div>
                 <div class="flex items-center">
                   <h1 class="text-xl font-sans tracking-tight text-gray-900">
                     | Andon 2.0 |
@@ -1518,7 +1492,7 @@ ref17.on("value", (snapshot) => {
                     </svg>{" "}
                   </a> */}
                 </div>
-              </marquee>
+              </div>
             </div>
           </header>
         </div>
@@ -1768,9 +1742,7 @@ ref17.on("value", (snapshot) => {
                     onTouchEnd={handleNetworkRelease}
                   >
                     <header class="px-5 py-4  ">
-                      <div class="italic  text-center text-white">
-                        NETWORK
-                      </div>
+                      <div class="italic  text-center text-white">NETWORK</div>
                     </header>
                   </button>
                 </div>
@@ -1826,9 +1798,7 @@ ref17.on("value", (snapshot) => {
                     class="w-full max-w-sm  bg-lime-900 shadow-lg rounded-full "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="italic  text-center  text-white">
-                        OTHERS
-                      </div>
+                      <div class="italic  text-center  text-white">OTHERS</div>
                     </header>
                   </button>
                 </button>
@@ -1998,7 +1968,7 @@ ref17.on("value", (snapshot) => {
                 aria-modal="true"
                 aria-labelledby="modal-headline"
               >
-                <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                <div className="bg-white h-[490px]  px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <form
                       className="w-full max-w-lg"
@@ -2007,60 +1977,42 @@ ref17.on("value", (snapshot) => {
                         database.ref("Mesin/Mesin1").set(selectedStatus);
                       }}
                     >
-                      <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
+                      <div className="justify-center  mb-2 items-center flex font-bold uppercase text-black ">
                         <span>Request</span>
                       </div>
-                      <div class="flex flex-wrap -mx-3 ">
-                        <div class="w-full px-1">
+                      <div className="flex flex-wrap -mx-3">
+                        <div className="w-full px-1">
                           <label
-                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            for="grid-first-name"
+                            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            htmlFor="grid-first-name"
                           >
                             Masukan Nama Anda
                           </label>
-                          <input
-                            type="text"
-                            class="appearance-none block w-full bg-white border-b-slate-900 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            name="NamaPIC"
-                            required
-                            onChange={(e) => {
-                              setNamaPIC(e.target.value);
-                            }}
-                          ></input>
+                          <Select
+                            value={selectedOption}
+                            onChange={handleSelectChange}
+                            options={options}
+                            isSearchable
+                            placeholder="Pilih Nama"
+                          />
                         </div>
                       </div>
 
                       {/*Status*/}
-                      <div className="mb-4">
+                      <div className="mb-4 mt-2">
                         <label
-                          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                          for="grid-city"
+                          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                          htmlFor="grid-city"
                         >
                           Depart To
                         </label>
-                        <div className="relative -mx-2">
-                          <select
-                            className="block appearance-none w-full bg-white border-b-slate-900  text-gray-700 py-3 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="Depart To"
-                            name="Depart To"
-                            onChange={(e) => setDepartment(e.target.value)}
-                            required
-                            defaultValue={""}
-                          >
-                            <option value="">-- Pilih Depart --</option>
-                            <option value="PURCHASING,PPIC,MP&L">PURCHASING,PPIC,MP&L</option>
-                            <option value="PROCESS ENGINEERING">PROCESS ENGINEERING</option>
-                            <option value="PRODUCT DEVELOPMENT">PRODUCT DEVELOPMENT</option>
-                            <option value="ADVANCED MANUFACTURING ENGINEERING">
-                            ADVANCED MANUFACTURING ENGINEERING
-                            </option>
-                            <option value="QA">QA</option>
-                            <option value="QC">QC</option>
-                            <option value="MAINTENANCE & IT">
-                              MAINTENANCE & IT
-                            </option>
-                          </select>
-                        </div>
+                            <Select
+                            value={selectedOptionDepartment}
+                            onChange={handleSelectDepartment}
+                            options={OptionsDepartment}
+                            isSearchable
+                            placeholder="Pilih Department"
+                          />
                       </div>
                       <div class="flex flex-wrap -mx-3 ">
                         <div class="w-full px-1 mb-2">
@@ -2081,7 +2033,7 @@ ref17.on("value", (snapshot) => {
                           </span>
                         </div>
                       </div>
-                      <div class="flex flex-wrap -mx-3 ">
+                      <div class="flex flex-wrap -mx-3 mt-3 ">
                         <div class="w-full px-1">
                           <label
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
@@ -2105,7 +2057,7 @@ ref17.on("value", (snapshot) => {
                           </p>
                         </div>
                       </div>
-                      <div className="flex justify-end">
+                      <div className="flex justify-end mt-7">
                         <button
                           className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
                           onClick={() => setIsOpenOthers(false)}
@@ -2180,13 +2132,17 @@ ref17.on("value", (snapshot) => {
                           </h3>
                           <table>
                             <tr>
-                              <td className="font-semibold">Production time 1:</td>
+                              <td className="font-semibold">
+                                Production time 1:
+                              </td>
                               <span className="px-4 text-lime-800">
                                 {RealPT1}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production time 2:</td>
+                              <td className="font-semibold">
+                                Production time 2:
+                              </td>
                               <span className="px-4 text-lime-800">
                                 {RealPT2}
                               </span>
@@ -2199,14 +2155,18 @@ ref17.on("value", (snapshot) => {
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production time 3:</td>
+                              <td className="font-semibold">
+                                Production time 3:
+                              </td>
                               <span className="px-4 text-lime-800">
                                 {RealPT3}
                               </span>
                             </tr>
 
                             <tr>
-                              <td className="font-semibold">Production time 4:</td>
+                              <td className="font-semibold">
+                                Production time 4:
+                              </td>
                               <span className="px-4 text-lime-800">
                                 {RealPT4}
                               </span>
@@ -2240,9 +2200,7 @@ ref17.on("value", (snapshot) => {
                     </div>
 
                     <div className="bg-white px-4 w-[700px] ml-3  rounded-lg shadow-md">
-                      <h3 className="text-lg italic  mb-2">
-                        Production Time
-                      </h3>
+                      <h3 className="text-lg italic  mb-2">Production Time</h3>
 
                       {data ? (
                         <table>
@@ -2254,10 +2212,14 @@ ref17.on("value", (snapshot) => {
                           </h3>
                           <tbody>
                             <tr>
-                              <td className="font-semibold">Shift: {data.SHIFT}</td>
+                              <td className="font-semibold">
+                                Shift: {data.SHIFT}
+                              </td>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production Time 1:</td>
+                              <td className="font-semibold">
+                                Production Time 1:
+                              </td>
                               <span style={{ color: "green" }}>
                                 {data.PT1_IN}
                               </span>
@@ -2273,7 +2235,9 @@ ref17.on("value", (snapshot) => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production Time 2:</td>
+                              <td className="font-semibold">
+                                Production Time 2:
+                              </td>
                               <span style={{ color: "green" }}>
                                 {data.PT2_IN}
                               </span>
@@ -2299,7 +2263,9 @@ ref17.on("value", (snapshot) => {
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production Time 3:</td>
+                              <td className="font-semibold">
+                                Production Time 3:
+                              </td>
                               <span style={{ color: "green" }}>
                                 {data.PT3_IN}
                               </span>
@@ -2315,7 +2281,9 @@ ref17.on("value", (snapshot) => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production time 4:</td>
+                              <td className="font-semibold">
+                                Production time 4:
+                              </td>
                               <span style={{ color: "green" }}>
                                 {data.PT4_IN}
                               </span>
@@ -2616,7 +2584,7 @@ ref17.on("value", (snapshot) => {
                               required
                             />
                             <p class="text-gray-600 text-xs mb-2 italic">
-                            Laporkan Permasalahan Yang Ditemukan
+                              Laporkan Permasalahan Yang Ditemukan
                             </p>
                           </div>
                           <div class="flex justify-center">

@@ -16,7 +16,6 @@ const SmtTop = () => {
   const [NamaPIC, setNamaPIC] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
 
-
   // NAVBAR
   const [currentTime, setCurrentTime] = useState(new Date());
   const [time, setTime] = useState(new Date().toLocaleString());
@@ -59,8 +58,6 @@ const SmtTop = () => {
   const [StatusRouterBE, setStatusRouterBE] = useState("");
   const [RouterBE, setRouterBE] = useState("Router (BE)");
 
-
-
   // Tindakan / Kehadiran
   const [DropinBEPressed, setDropinBEPressed] = useState(false);
   const timeoutRefDropinBE = useRef(null);
@@ -81,8 +78,6 @@ const SmtTop = () => {
   const [RouterBEPressed, setRouterBEPressed] = useState(false);
   const timeoutRefRouterBE = useRef(null);
 
-
-
   // ----
 
   //BACKGROUND / WARNA KOTAK
@@ -91,25 +86,21 @@ const SmtTop = () => {
     useState("");
   const [backgroundColorStatusFluxerBE, setBackgroundColorStatusFluxerBE] =
     useState("");
-    const [backgroundColorStatusPreheatBE, setBackgroundColorStatusPreheatBE] =
+  const [backgroundColorStatusPreheatBE, setBackgroundColorStatusPreheatBE] =
     useState("");
-    const [backgroundColorStatusSeho1BE, setBackgroundColorStatusSeho1BE] =
+  const [backgroundColorStatusSeho1BE, setBackgroundColorStatusSeho1BE] =
     useState("");
-    const [backgroundColorStatusSeho2BE, setBackgroundColorStatusSeho2BE] =
+  const [backgroundColorStatusSeho2BE, setBackgroundColorStatusSeho2BE] =
     useState("");
-    const [backgroundColorStatusTouchupBE, setBackgroundColorStatusTouchupBE] =
+  const [backgroundColorStatusTouchupBE, setBackgroundColorStatusTouchupBE] =
     useState("");
-    const [backgroundColorStatusICTBE, setBackgroundColorStatusICTBE] =
+  const [backgroundColorStatusICTBE, setBackgroundColorStatusICTBE] =
     useState("");
-    const [backgroundColorStatusFlashBE, setBackgroundColorStatusFlashBE] =
+  const [backgroundColorStatusFlashBE, setBackgroundColorStatusFlashBE] =
     useState("");
-    const [backgroundColorStatusRouterBE, setBackgroundColorStatusRouterBE] =
+  const [backgroundColorStatusRouterBE, setBackgroundColorStatusRouterBE] =
     useState("");
 
-
-  
-
- 
   // ---------------------------
 
   // //////
@@ -162,9 +153,6 @@ const SmtTop = () => {
       const data = snapshot.val();
       setStatusLine(data);
     });
-
-
-
 
     const ref10 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
     ref10.on("value", (snapshot) => {
@@ -228,8 +216,6 @@ const SmtTop = () => {
       setTotal(data);
     });
 
-
-    
     const ref8 = firebase.database().ref("SMTLine1BE/Drop in (BE)");
     ref8.on("value", (snapshot) => {
       const data = snapshot.val();
@@ -239,10 +225,7 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+        
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -262,18 +245,14 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
+             
           });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+        
               const link = "http://10.14.81.43:3003/ReturnMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -293,72 +272,56 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-         
-            }
+             
           });
-        } else if (data === "QC") {
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQC";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Control SMT LINE 1 Drop In (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-        } else if (data === "QA") {
-          
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQA";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Assurance SMT LINE 1 Drop In (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-          }
-      });
+      } else if (data === "QC") {
+        
+              const link = "http://10.14.81.43:3003/RequestQC";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 Drop In (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "QA") {
+        
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 Drop In (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      }
+    });
 
     const ref9 = firebase.database().ref("SMTLine1BE/Fluxer (BE)");
     ref9.on("value", (snapshot) => {
@@ -369,10 +332,7 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+        
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -392,19 +352,14 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-         
-            }
+             
           });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+        
               const link = "http://10.14.81.43:3003/ReturnMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -424,72 +379,56 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-         
-            }
+             
           });
-        } else if (data === "QC") {
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQC";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Control SMT LINE 1 Fluxer (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-        } else if (data === "QA") {
-          
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQA";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Assurance SMT LINE 1 Fluxer (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-          }
-      });
+      } else if (data === "QC") {
+        
+              const link = "http://10.14.81.43:3003/RequestQC";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 Fluxer (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "QA") {
+        
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 Fluxer (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      }
+    });
 
     const ref18 = firebase.database().ref("/SMTLine1BE/PreHeat (BE)");
     ref18.on("value", (snapshot) => {
@@ -500,10 +439,7 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+        
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -523,19 +459,14 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-         
-            }
+             
           });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+        
               const link = "http://10.14.81.43:3003/ReturnMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -555,879 +486,698 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-         
-            }
+             
           });
-        } else if (data === "QC") {
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQC";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Control SMT LINE 1 PreHeat (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-        } else if (data === "QA") {
-          
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQA";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Assurance SMT LINE 1 PreHeat (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-          }
-      });
+      } else if (data === "QC") {
+        
+              const link = "http://10.14.81.43:3003/RequestQC";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 PreHeat (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
-
-      const ref19 = firebase.database().ref("/SMTLine1BE/Seho1 (BE)");
-      ref19.on("value", (snapshot) => {
-        const data = snapshot.val();
-        updateStatusSeho1BE(data);
-        if (data === "Maintenance") {
-          const audio = new Audio("Sound.mp3");
-          audio.autoplay = true;
-          audio.play();
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestMaintenance";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-993707437];
-                const message = `Notification Maintenance SMT LINE 1 Seho1 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-        } else if (data === "Return Maintenance") {
-          const audio = new Audio("Sound.mp3");
-          audio.autoplay = true;
-          audio.play();
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/ReturnMaintenance";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-993707437];
-                const message = `Notification Return Maintenance SMT LINE 1 Seho1 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-          } else if (data === "QC") {
-    
-            navigator.permissions
-              .query({ name: "clipboard-write" })
-              .then((permissionStatus) => {
-                if (permissionStatus.state === "granted") {
-                  const link = "http://10.14.81.43:3003/RequestQC";
-                  const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                  const chatIds = [-912913885];
-                  const message = `Notification Request Quality Control SMT LINE 1 Seho1 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-    
-                  chatIds.forEach((chatId) => {
-                    fetch(
-                      `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                        message
-                      )}`
-                    )
-                      .then((response) => {
-                        if (!response.ok) {
-                          throw new Error("Error sending telegram message");
-                        }
-                      })
-                      .catch((error) => {
-                        console.error(error);
-                      });
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
                   });
-                } else {
-                  // Izin ditolak
-                }
-              });
-          } else if (data === "QA") {
-            
-            navigator.permissions
-              .query({ name: "clipboard-write" })
-              .then((permissionStatus) => {
-                if (permissionStatus.state === "granted") {
-                  const link = "http://10.14.81.43:3003/RequestQA";
-                  const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                  const chatIds = [-912913885];
-                  const message = `Notification Request Quality Assurance SMT LINE 1 Seho1 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-    
-                  chatIds.forEach((chatId) => {
-                    fetch(
-                      `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                        message
-                      )}`
-                    )
-                      .then((response) => {
-                        if (!response.ok) {
-                          throw new Error("Error sending telegram message");
-                        }
-                      })
-                      .catch((error) => {
-                        console.error(error);
-                      });
-                  });
-                } else {
-                  // Izin ditolak
-                }
-              });
-            }
-        });
-
-
-        const ref20 = firebase.database().ref("/SMTLine1BE/Seho2 (BE)");
-        ref20.on("value", (snapshot) => {
-          const data = snapshot.val();
-          updateStatusSeho2BE(data);
-          if (data === "Maintenance") {
-            const audio = new Audio("Sound.mp3");
-            audio.autoplay = true;
-            audio.play();
-    
-            navigator.permissions
-              .query({ name: "clipboard-write" })
-              .then((permissionStatus) => {
-                if (permissionStatus.state === "granted") {
-                  const link = "http://10.14.81.43:3003/RequestMaintenance";
-                  const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                  const chatIds = [-993707437];
-                  const message = `Notification Maintenance SMT LINE 1 Seho2 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-    
-                  chatIds.forEach((chatId) => {
-                    fetch(
-                      `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                        message
-                      )}`
-                    )
-                      .then((response) => {
-                        if (!response.ok) {
-                          throw new Error("Error sending telegram message");
-                        }
-                      })
-                      .catch((error) => {
-                        console.error(error);
-                      });
-                  });
-                } else {
-                  // Izin ditolak
-                }
-              });
-          } else if (data === "Return Maintenance") {
-            const audio = new Audio("Sound.mp3");
-            audio.autoplay = true;
-            audio.play();
-    
-            navigator.permissions
-              .query({ name: "clipboard-write" })
-              .then((permissionStatus) => {
-                if (permissionStatus.state === "granted") {
-                  const link = "http://10.14.81.43:3003/ReturnMaintenance";
-                  const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                  const chatIds = [-993707437];
-                  const message = `Notification Return Maintenance SMT LINE 1 Seho2 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-    
-                  chatIds.forEach((chatId) => {
-                    fetch(
-                      `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                        message
-                      )}`
-                    )
-                      .then((response) => {
-                        if (!response.ok) {
-                          throw new Error("Error sending telegram message");
-                        }
-                      })
-                      .catch((error) => {
-                        console.error(error);
-                      });
-                  });
-                } else {
-                  // Izin ditolak
-                }
-              });
-            } else if (data === "QC") {
-      
-              navigator.permissions
-                .query({ name: "clipboard-write" })
-                .then((permissionStatus) => {
-                  if (permissionStatus.state === "granted") {
-                    const link = "http://10.14.81.43:3003/RequestQC";
-                    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                    const chatIds = [-912913885];
-                    const message = `Notification Request Quality Control SMT LINE 1 Seho2 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-      
-                    chatIds.forEach((chatId) => {
-                      fetch(
-                        `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                          message
-                        )}`
-                      )
-                        .then((response) => {
-                          if (!response.ok) {
-                            throw new Error("Error sending telegram message");
-                          }
-                        })
-                        .catch((error) => {
-                          console.error(error);
-                        });
-                    });
-                  } else {
-                    // Izin ditolak
-                  }
-                });
-            } else if (data === "QA") {
-              
-              navigator.permissions
-                .query({ name: "clipboard-write" })
-                .then((permissionStatus) => {
-                  if (permissionStatus.state === "granted") {
-                    const link = "http://10.14.81.43:3003/RequestQA";
-                    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                    const chatIds = [-912913885];
-                    const message = `Notification Request Quality Assurance SMT LINE 1 Seho2 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-      
-                    chatIds.forEach((chatId) => {
-                      fetch(
-                        `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                          message
-                        )}`
-                      )
-                        .then((response) => {
-                          if (!response.ok) {
-                            throw new Error("Error sending telegram message");
-                          }
-                        })
-                        .catch((error) => {
-                          console.error(error);
-                        });
-                    });
-                  } else {
-                    // Izin ditolak
-                  }
-                });
-              }
+             
           });
+      } else if (data === "QA") {
+        
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 PreHeat (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
-
-          const ref21 = firebase.database().ref("/SMTLine1BE/Touch UP (BE)");
-          ref21.on("value", (snapshot) => {
-            const data = snapshot.val();
-            updateStatusTouchupBE(data);
-            if (data === "Maintenance") {
-              const audio = new Audio("Sound.mp3");
-              audio.autoplay = true;
-              audio.play();
-      
-              navigator.permissions
-                .query({ name: "clipboard-write" })
-                .then((permissionStatus) => {
-                  if (permissionStatus.state === "granted") {
-                    const link = "http://10.14.81.43:3003/RequestMaintenance";
-                    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                    const chatIds = [-993707437];
-                    const message = `Notification Maintenance SMT LINE 1 Touch UP (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-      
-                    chatIds.forEach((chatId) => {
-                      fetch(
-                        `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                          message
-                        )}`
-                      )
-                        .then((response) => {
-                          if (!response.ok) {
-                            throw new Error("Error sending telegram message");
-                          }
-                        })
-                        .catch((error) => {
-                          console.error(error);
-                        });
-                      });
-                    } else {
-                      // Izin ditolak
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
                     }
+                  })
+                  .catch((error) => {
+                    console.error(error);
                   });
-            } else if (data === "Return Maintenance") {
-              const audio = new Audio("Sound.mp3");
-              audio.autoplay = true;
-              audio.play();
-      
-              navigator.permissions
-                .query({ name: "clipboard-write" })
-                .then((permissionStatus) => {
-                  if (permissionStatus.state === "granted") {
-                    const link = "http://10.14.81.43:3003/ReturnMaintenance";
-                    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                    const chatIds = [-993707437];
-                    const message = `Notification Return Maintenance SMT LINE 1 Touch UP (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-      
-                    chatIds.forEach((chatId) => {
-                      fetch(
-                        `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                          message
-                        )}`
-                      )
-                        .then((response) => {
-                          if (!response.ok) {
-                            throw new Error("Error sending telegram message");
-                          }
-                        })
-                        .catch((error) => {
-                          console.error(error);
-                        });
-                      });
-                    } else {
-                      // Izin ditolak
+             
+          });
+      }
+    });
+
+    const ref19 = firebase.database().ref("/SMTLine1BE/Seho1 (BE)");
+    ref19.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusSeho1BE(data);
+      if (data === "Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        
+              const link = "http://10.14.81.43:3003/RequestMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Maintenance SMT LINE 1 Seho1 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
                     }
+                  })
+                  .catch((error) => {
+                    console.error(error);
                   });
-              } else if (data === "QC") {
-        
-                navigator.permissions
-                  .query({ name: "clipboard-write" })
-                  .then((permissionStatus) => {
-                    if (permissionStatus.state === "granted") {
-                      const link = "http://10.14.81.43:3003/RequestQC";
-                      const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                      const chatIds = [-912913885];
-                      const message = `Notification Request Quality Control SMT LINE 1 Touch UP (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-        
-                      chatIds.forEach((chatId) => {
-                        fetch(
-                          `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                            message
-                          )}`
-                        )
-                          .then((response) => {
-                            if (!response.ok) {
-                              throw new Error("Error sending telegram message");
-                            }
-                          })
-                          .catch((error) => {
-                            console.error(error);
-                          });
-                        });
-                      } else {
-                        // Izin ditolak
-                      }
-                    });
-              } else if (data === "QA") {
-                
-                navigator.permissions
-                  .query({ name: "clipboard-write" })
-                  .then((permissionStatus) => {
-                    if (permissionStatus.state === "granted") {
-                      const link = "http://10.14.81.43:3003/RequestQA";
-                      const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                      const chatIds = [-912913885];
-                      const message = `Notification Request Quality Assurance SMT LINE 1 Touch UP (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-        
-                      chatIds.forEach((chatId) => {
-                        fetch(
-                          `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                            message
-                          )}`
-                        )
-                          .then((response) => {
-                            if (!response.ok) {
-                              throw new Error("Error sending telegram message");
-                            }
-                          })
-                          .catch((error) => {
-                            console.error(error);
-                          });
-                        });
-                      } else {
-                        // Izin ditolak
-                      }
-                    });
-                }
-            });
-            
+             
+          });
+      } else if (data === "Return Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
 
+        
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 Seho1 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
-            const ref22 = firebase.database().ref("/SMTLine1BE/ICT (BE)");
-            ref22.on("value", (snapshot) => {
-              const data = snapshot.val();
-              updateStatusICTBE(data);
-              if (data === "Maintenance") {
-                const audio = new Audio("Sound.mp3");
-                audio.autoplay = true;
-                audio.play();
-        
-                navigator.permissions
-                  .query({ name: "clipboard-write" })
-                  .then((permissionStatus) => {
-                    if (permissionStatus.state === "granted") {
-                      const link = "http://10.14.81.43:3003/RequestMaintenance";
-                      const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                      const chatIds = [-993707437];
-                      const message = `Notification Maintenance SMT LINE 1 ICT (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-        
-                      chatIds.forEach((chatId) => {
-                        fetch(
-                          `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                            message
-                          )}`
-                        )
-                          .then((response) => {
-                            if (!response.ok) {
-                              throw new Error("Error sending telegram message");
-                            }
-                          })
-                          .catch((error) => {
-                            console.error(error);
-                          });
-                      });
-                    } else {
-                      // Izin ditolak
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
                     }
+                  })
+                  .catch((error) => {
+                    console.error(error);
                   });
-              } else if (data === "Return Maintenance") {
-                const audio = new Audio("Sound.mp3");
-                audio.autoplay = true;
-                audio.play();
+             
+          });
+      } else if (data === "QC") {
         
-                navigator.permissions
-                  .query({ name: "clipboard-write" })
-                  .then((permissionStatus) => {
-                    if (permissionStatus.state === "granted") {
-                      const link = "http://10.14.81.43:3003/ReturnMaintenance";
-                      const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                      const chatIds = [-993707437];
-                      const message = `Notification Return Maintenance SMT LINE 1 ICT (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-        
-                      chatIds.forEach((chatId) => {
-                        fetch(
-                          `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                            message
-                          )}`
-                        )
-                          .then((response) => {
-                            if (!response.ok) {
-                              throw new Error("Error sending telegram message");
-                            }
-                          })
-                          .catch((error) => {
-                            console.error(error);
-                          });
-                      });
-                    } else {
-                      // Izin ditolak
+              const link = "http://10.14.81.43:3003/RequestQC";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 Seho1 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
                     }
+                  })
+                  .catch((error) => {
+                    console.error(error);
                   });
-                } else if (data === "QC") {
-          
-                  navigator.permissions
-                    .query({ name: "clipboard-write" })
-                    .then((permissionStatus) => {
-                      if (permissionStatus.state === "granted") {
-                        const link = "http://10.14.81.43:3003/RequestQC";
-                        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                        const chatIds = [-912913885];
-                        const message = `Notification Request Quality Control SMT LINE 1 ICT (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-          
-                        chatIds.forEach((chatId) => {
-                          fetch(
-                            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                              message
-                            )}`
-                          )
-                            .then((response) => {
-                              if (!response.ok) {
-                                throw new Error("Error sending telegram message");
-                              }
-                            })
-                            .catch((error) => {
-                              console.error(error);
-                            });
-                        });
-                      } else {
-                        // Izin ditolak
-                      }
-                    });
-                } else if (data === "QA") {
-                  
-                  navigator.permissions
-                    .query({ name: "clipboard-write" })
-                    .then((permissionStatus) => {
-                      if (permissionStatus.state === "granted") {
-                        const link = "http://10.14.81.43:3003/RequestQA";
-                        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                        const chatIds = [-912913885];
-                        const message = `Notification Request Quality Assurance SMT LINE 1 ICT (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-          
-                        chatIds.forEach((chatId) => {
-                          fetch(
-                            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                              message
-                            )}`
-                          )
-                            .then((response) => {
-                              if (!response.ok) {
-                                throw new Error("Error sending telegram message");
-                              }
-                            })
-                            .catch((error) => {
-                              console.error(error);
-                            });
-                        });
-                      } else {
-                        // Izin ditolak
-                      }
-                    });
-                  }
-              });
-
-
-              const ref23 = firebase.database().ref("/SMTLine1BE/Flash (BE)");
-            ref23.on("value", (snapshot) => {
-              const data = snapshot.val();
-              updateStatusFlashBE(data);
-              if (data === "Maintenance") {
-                const audio = new Audio("Sound.mp3");
-                audio.autoplay = true;
-                audio.play();
+             
+          });
+      } else if (data === "QA") {
         
-                navigator.permissions
-                  .query({ name: "clipboard-write" })
-                  .then((permissionStatus) => {
-                    if (permissionStatus.state === "granted") {
-                      const link = "http://10.14.81.43:3003/RequestMaintenance";
-                      const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                      const chatIds = [-993707437];
-                      const message = `Notification Maintenance SMT LINE 1 Flash (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-        
-                      chatIds.forEach((chatId) => {
-                        fetch(
-                          `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                            message
-                          )}`
-                        )
-                          .then((response) => {
-                            if (!response.ok) {
-                              throw new Error("Error sending telegram message");
-                            }
-                          })
-                          .catch((error) => {
-                            console.error(error);
-                          });
-                      });
-                    } else {
-                      // Izin ditolak
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 Seho1 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
                     }
+                  })
+                  .catch((error) => {
+                    console.error(error);
                   });
-              } else if (data === "Return Maintenance") {
-                const audio = new Audio("Sound.mp3");
-                audio.autoplay = true;
-                audio.play();
+             
+          });
+      }
+    });
+
+    const ref20 = firebase.database().ref("/SMTLine1BE/Seho2 (BE)");
+    ref20.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusSeho2BE(data);
+      if (data === "Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
         
-                navigator.permissions
-                  .query({ name: "clipboard-write" })
-                  .then((permissionStatus) => {
-                    if (permissionStatus.state === "granted") {
-                      const link = "http://10.14.81.43:3003/ReturnMaintenance";
-                      const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                      const chatIds = [-993707437];
-                      const message = `Notification Return Maintenance SMT LINE 1 Flash (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-        
-                      chatIds.forEach((chatId) => {
-                        fetch(
-                          `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                            message
-                          )}`
-                        )
-                          .then((response) => {
-                            if (!response.ok) {
-                              throw new Error("Error sending telegram message");
-                            }
-                          })
-                          .catch((error) => {
-                            console.error(error);
-                          });
-                      });
-                    } else {
-                      // Izin ditolak
+              const link = "http://10.14.81.43:3003/RequestMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Maintenance SMT LINE 1 Seho2 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
                     }
+                  })
+                  .catch((error) => {
+                    console.error(error);
                   });
-                } else if (data === "QC") {
-          
-                  navigator.permissions
-                    .query({ name: "clipboard-write" })
-                    .then((permissionStatus) => {
-                      if (permissionStatus.state === "granted") {
-                        const link = "http://10.14.81.43:3003/RequestQC";
-                        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                        const chatIds = [-912913885];
-                        const message = `Notification Request Quality Control SMT LINE 1 Flash (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-          
-                        chatIds.forEach((chatId) => {
-                          fetch(
-                            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                              message
-                            )}`
-                          )
-                            .then((response) => {
-                              if (!response.ok) {
-                                throw new Error("Error sending telegram message");
-                              }
-                            })
-                            .catch((error) => {
-                              console.error(error);
-                            });
-                        });
-                      } else {
-                        // Izin ditolak
-                      }
-                    });
-                } else if (data === "QA") {
-                  
-                  navigator.permissions
-                    .query({ name: "clipboard-write" })
-                    .then((permissionStatus) => {
-                      if (permissionStatus.state === "granted") {
-                        const link = "http://10.14.81.43:3003/RequestQA";
-                        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                        const chatIds = [-912913885];
-                        const message = `Notification Request Quality Assurance SMT LINE 1 Flash (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-          
-                        chatIds.forEach((chatId) => {
-                          fetch(
-                            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                              message
-                            )}`
-                          )
-                            .then((response) => {
-                              if (!response.ok) {
-                                throw new Error("Error sending telegram message");
-                              }
-                            })
-                            .catch((error) => {
-                              console.error(error);
-                            });
-                        });
-                      } else {
-                        // Izin ditolak
-                      }
-                    });
-                  }
-              });
-  
+             
+          });
+      } else if (data === "Return Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
 
-              const ref24 = firebase.database().ref("/SMTLine1BE/Router (BE)");
-              ref24.on("value", (snapshot) => {
-                const data = snapshot.val();
-                updateStatusRouterBE(data);
-                if (data === "Maintenance") {
-                  const audio = new Audio("Sound.mp3");
-                  audio.autoplay = true;
-                  audio.play();
-          
-                  navigator.permissions
-                    .query({ name: "clipboard-write" })
-                    .then((permissionStatus) => {
-                      if (permissionStatus.state === "granted") {
-                        const link = "http://10.14.81.43:3003/RequestMaintenance";
-                        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                        const chatIds = [-993707437];
-                        const message = `Notification Maintenance SMT LINE 1 Router (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-          
-                        chatIds.forEach((chatId) => {
-                          fetch(
-                            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                              message
-                            )}`
-                          )
-                            .then((response) => {
-                              if (!response.ok) {
-                                throw new Error("Error sending telegram message");
-                              }
-                            })
-                            .catch((error) => {
-                              console.error(error);
-                            });
-                          });
-                        } else {
-                          // Izin ditolak
-                        }
-                      });
-                    } else if (data === "Return Maintenance") {
-                  const audio = new Audio("Sound.mp3");
-                  audio.autoplay = true;
-                  audio.play();
-          
-                  navigator.permissions
-                    .query({ name: "clipboard-write" })
-                    .then((permissionStatus) => {
-                      if (permissionStatus.state === "granted") {
-                        const link = "http://10.14.81.43:3003/ReturnMaintenance";
-                        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                        const chatIds = [-993707437];
-                        const message = `Notification Return Maintenance SMT LINE 1 Router (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-          
-                        chatIds.forEach((chatId) => {
-                          fetch(
-                            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                              message
-                            )}`
-                          )
-                            .then((response) => {
-                              if (!response.ok) {
-                                throw new Error("Error sending telegram message");
-                              }
-                            })
-                            .catch((error) => {
-                              console.error(error);
-                            });
-                          });
-                        } else {
-                          // Izin ditolak
-                        }
-                      });
-                  } else if (data === "QC") {
-            
-                    navigator.permissions
-                      .query({ name: "clipboard-write" })
-                      .then((permissionStatus) => {
-                        if (permissionStatus.state === "granted") {
-                          const link = "http://10.14.81.43:3003/RequestQC";
-                          const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                          const chatIds = [-912913885];
-                          const message = `Notification Request Quality Control SMT LINE 1 Router (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-            
-                          chatIds.forEach((chatId) => {
-                            fetch(
-                              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                                message
-                              )}`
-                            )
-                              .then((response) => {
-                                if (!response.ok) {
-                                  throw new Error("Error sending telegram message");
-                                }
-                              })
-                              .catch((error) => {
-                                console.error(error);
-                              });
-                            });
-                          } else {
-                            // Izin ditolak
-                          }
-                        });
-                  } else if (data === "QA") {
-                    
-                    navigator.permissions
-                      .query({ name: "clipboard-write" })
-                      .then((permissionStatus) => {
-                        if (permissionStatus.state === "granted") {
-                          const link = "http://10.14.81.43:3003/RequestQA";
-                          const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                          const chatIds = [-912913885];
-                          const message = `Notification Request Quality Assurance SMT LINE 1 Router (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
-            
-                          chatIds.forEach((chatId) => {
-                            fetch(
-                              `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                                message
-                              )}`
-                            )
-                              .then((response) => {
-                                if (!response.ok) {
-                                  throw new Error("Error sending telegram message");
-                                }
-                              })
-                              .catch((error) => {
-                                console.error(error);
-                              });
-                            });
-                          } else {
-                            // Izin ditolak
-                          }
-                        });
+        
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 Seho2 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
                     }
-                });
-                
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "QC") {
+        
+              const link = "http://10.14.81.43:3003/RequestQC";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 Seho2 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "QA") {
+        
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 Seho2 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      }
+    });
+
+    const ref21 = firebase.database().ref("/SMTLine1BE/Touch UP (BE)");
+    ref21.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusTouchupBE(data);
+      if (data === "Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        
+              const link = "http://10.14.81.43:3003/RequestMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Maintenance SMT LINE 1 Touch UP (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "Return Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 Touch UP (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "QC") {
+        
+              const link = "http://10.14.81.43:3003/RequestQC";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 Touch UP (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "QA") {
+        
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 Touch UP (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      }
+    });
+
+    const ref22 = firebase.database().ref("/SMTLine1BE/ICT (BE)");
+    ref22.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusICTBE(data);
+      if (data === "Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        
+              const link = "http://10.14.81.43:3003/RequestMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Maintenance SMT LINE 1 ICT (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "Return Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 ICT (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "QC") {
+        
+              const link = "http://10.14.81.43:3003/RequestQC";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 ICT (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "QA") {
+        
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 ICT (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      }
+    });
+
+    const ref23 = firebase.database().ref("/SMTLine1BE/Flash (BE)");
+    ref23.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusFlashBE(data);
+      if (data === "Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        
+              const link = "http://10.14.81.43:3003/RequestMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Maintenance SMT LINE 1 Flash (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "Return Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 Flash (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "QC") {
+        
+              const link = "http://10.14.81.43:3003/RequestQC";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 Flash (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "QA") {
+        
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 Flash (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      }
+    });
+
+    const ref24 = firebase.database().ref("/SMTLine1BE/Router (BE)");
+    ref24.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusRouterBE(data);
+      if (data === "Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        
+              const link = "http://10.14.81.43:3003/RequestMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Maintenance SMT LINE 1 Router (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "Return Maintenance") {
+        const audio = new Audio("Sound.mp3");
+        audio.autoplay = true;
+        audio.play();
+
+        
+              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-993707437];
+              const message = `Notification Return Maintenance SMT LINE 1 Router (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "QC") {
+        
+              const link = "http://10.14.81.43:3003/RequestQC";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 Router (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      } else if (data === "QA") {
+        
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 Router (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+             
+          });
+      }
+    });
 
     return () => {};
   }, []);
@@ -1528,8 +1278,6 @@ const SmtTop = () => {
 
   // --------------------
 
-
-
   // fungsi  schedule
   function formatDate(dateString) {
     const options = { day: "numeric", month: "numeric", year: "numeric" };
@@ -1550,10 +1298,6 @@ const SmtTop = () => {
   useEffect(() => {
     updateTime();
   }, []);
-
-
-
-
 
   // Fetching Data Schedule Planing
   useEffect(() => {
@@ -1647,7 +1391,7 @@ const SmtTop = () => {
     );
   };
 
-   const updateStatusSeho1BE = (data) => {
+  const updateStatusSeho1BE = (data) => {
     setStatusSeho1BE(data);
     setBackgroundColorStatusSeho1BE(
       data === "Go"
@@ -1670,7 +1414,6 @@ const SmtTop = () => {
     );
   };
 
-
   const updateStatusSeho2BE = (data) => {
     setStatusSeho2BE(data);
     setBackgroundColorStatusSeho2BE(
@@ -1692,9 +1435,7 @@ const SmtTop = () => {
         ? "#BDD0D1"
         : "#565454"
     );
-  };;
-
-
+  };
 
   const updateStatusTouchupBE = (data) => {
     setStatusTouchupBE(data);
@@ -1718,7 +1459,6 @@ const SmtTop = () => {
         : "#565454"
     );
   };
-
 
   const updateStatusICTBE = (data) => {
     setStatusICTBE(data);
@@ -1766,8 +1506,6 @@ const SmtTop = () => {
     );
   };
 
-
-  
   const updateStatusRouterBE = (data) => {
     setStatusRouterBE(data);
     setBackgroundColorStatusRouterBE(
@@ -1791,8 +1529,6 @@ const SmtTop = () => {
     );
   };
 
-
- 
   // ----
 
   // FUNGSI WAKTU
@@ -2040,7 +1776,6 @@ const SmtTop = () => {
     clearTimeout(timeoutRefDropinBE.current);
   };
 
-
   const handleFluxerBEPress = () => {
     if (
       StatusFluxerBE === "Maintenance" ||
@@ -2067,11 +1802,11 @@ const SmtTop = () => {
     clearTimeout(timeoutRefFluxerBE.current);
   };
 
- 
-
-
   const handlePreheatBEPress = () => {
-    if (StatusPreheatBE === "Maintenance" || StatusPreheatBE === "Return Maintenance") {
+    if (
+      StatusPreheatBE === "Maintenance" ||
+      StatusPreheatBE === "Return Maintenance"
+    ) {
       setPreheatBEPressed(true);
       timeoutRefPreheatBE.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
@@ -2093,17 +1828,18 @@ const SmtTop = () => {
     clearTimeout(timeoutRefPreheatBE.current);
   };
 
-
-
   const handleSeho1BEPress = () => {
-    if (StatusSeho1BE === "Maintenance" || StatusSeho1BE === "Return Maintenance") {
+    if (
+      StatusSeho1BE === "Maintenance" ||
+      StatusSeho1BE === "Return Maintenance"
+    ) {
       setSeho1BEPressed(true);
       timeoutRefSeho1BE.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
         firebase.database().ref("SMTLine1BE/Seho1 (BE)").set("Repair");
         window.location.reload();
       }, 3000);
-    } else if (StatusSeho1BE  === "QA" || StatusSeho1BE === "QC") {
+    } else if (StatusSeho1BE === "QA" || StatusSeho1BE === "QC") {
       setSeho1BEPressed(true);
       timeoutRefSeho1BE.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
@@ -2118,16 +1854,18 @@ const SmtTop = () => {
     clearTimeout(timeoutRefSeho1BE.current);
   };
 
-
   const handleSeho2BEPress = () => {
-    if (StatusSeho2BE === "Maintenance" || StatusSeho2BE === "Return Maintenance") {
+    if (
+      StatusSeho2BE === "Maintenance" ||
+      StatusSeho2BE === "Return Maintenance"
+    ) {
       setSeho2BEPressed(true);
       timeoutRefSeho2BE.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
         firebase.database().ref("SMTLine1BE/Seho2 (BE)").set("Repair");
         window.location.reload();
       }, 3000);
-    } else if (StatusSeho2BE  === "QA" || StatusSeho2BE === "QC") {
+    } else if (StatusSeho2BE === "QA" || StatusSeho2BE === "QC") {
       setSeho2BEPressed(true);
       timeoutRefSeho2BE.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
@@ -2142,16 +1880,18 @@ const SmtTop = () => {
     clearTimeout(timeoutRefSeho2BE.current);
   };
 
-
   const handleTouchupBEPress = () => {
-    if (StatusTouchupBE === "Maintenance" || StatusTouchupBE === "Return Maintenance") {
+    if (
+      StatusTouchupBE === "Maintenance" ||
+      StatusTouchupBE === "Return Maintenance"
+    ) {
       setTouchupBEPressed(true);
       timeoutRefTouchupBE.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
         firebase.database().ref("SMTLine1BE/Touch UP (BE)").set("Repair");
         window.location.reload();
       }, 3000);
-    } else if (StatusTouchupBE  === "QA" || StatusTouchupBE === "QC") {
+    } else if (StatusTouchupBE === "QA" || StatusTouchupBE === "QC") {
       setTouchupBEPressed(true);
       timeoutRefTouchupBE.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
@@ -2166,8 +1906,6 @@ const SmtTop = () => {
     clearTimeout(timeoutRefTouchupBE.current);
   };
 
-
-
   const handleICTBEPress = () => {
     if (StatusICTBE === "Maintenance" || StatusICTBE === "Return Maintenance") {
       setICTBEPressed(true);
@@ -2176,7 +1914,7 @@ const SmtTop = () => {
         firebase.database().ref("SMTLine1BE/ICT (BE)").set("Repair");
         window.location.reload();
       }, 3000);
-    } else if (StatusICTBE  === "QA" || StatusICTBE === "QC") {
+    } else if (StatusICTBE === "QA" || StatusICTBE === "QC") {
       setICTBEPressed(true);
       timeoutRefICTBE.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
@@ -2191,16 +1929,18 @@ const SmtTop = () => {
     clearTimeout(timeoutRefICTBE.current);
   };
 
-
   const handleFlashBEPress = () => {
-    if (StatusFlashBE === "Maintenance" || StatusFlashBE === "Return Maintenance") {
+    if (
+      StatusFlashBE === "Maintenance" ||
+      StatusFlashBE === "Return Maintenance"
+    ) {
       setFlashBEPressed(true);
       timeoutRefFlashBE.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
         firebase.database().ref("SMTLine1BE/Flash (BE)").set("Repair");
         window.location.reload();
       }, 3000);
-    } else if (StatusFlashBE  === "QA" || StatusFlashBE === "QC") {
+    } else if (StatusFlashBE === "QA" || StatusFlashBE === "QC") {
       setFlashBEPressed(true);
       timeoutRefFlashBE.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
@@ -2215,16 +1955,18 @@ const SmtTop = () => {
     clearTimeout(timeoutRefFlashBE.current);
   };
 
-
   const handleRouterBEPress = () => {
-    if (StatusRouterBE === "Maintenance" || StatusRouterBE === "Return Maintenance") {
+    if (
+      StatusRouterBE === "Maintenance" ||
+      StatusRouterBE === "Return Maintenance"
+    ) {
       setRouterBEPressed(true);
       timeoutRefRouterBE.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
         firebase.database().ref("SMTLine1BE/Router (BE)").set("Repair");
         window.location.reload();
       }, 3000);
-    } else if (StatusRouterBE  === "QA" || StatusRouterBE === "QC") {
+    } else if (StatusRouterBE === "QA" || StatusRouterBE === "QC") {
       setRouterBEPressed(true);
       timeoutRefRouterBE.current = setTimeout(() => {
         // Kode yang dijalankan setelah tombol ditekan selama 3 detik
@@ -2239,8 +1981,6 @@ const SmtTop = () => {
     clearTimeout(timeoutRefFlashBE.current);
   };
 
-
-
   // ------
 
   const handleCall = () => {
@@ -2251,96 +1991,94 @@ const SmtTop = () => {
     window.location.href = "https://api.whatsapp.com/send?phone=6281929749600";
   };
 
+  // Realtime production
+  const calculateTotalTime = () => {
+    let totalJam = 0;
+    let totalMenit = 0;
 
-  // Realtime production 
-const calculateTotalTime = () => {
-  let totalJam = 0;
-  let totalMenit = 0;
+    // Mengambil nilai dari state
+    const waktuPT1 = RealPT1.split(" ");
+    const waktuPT2 = RealPT2.split(" ");
+    const waktuPT3 = RealPT3.split(" ");
+    const waktuPT4 = RealPT4.split(" ");
+    const waktuPD = RealPD.split(" ");
+    const waktuOT = RealOT.split(" ");
 
-  // Mengambil nilai dari state
-  const waktuPT1 = RealPT1.split(" ");
-  const waktuPT2 = RealPT2.split(" ");
-  const waktuPT3 = RealPT3.split(" ");
-  const waktuPT4 = RealPT4.split(" ");
-  const waktuPD = RealPD.split(" ");
-  const waktuOT = RealOT.split(" ");
-
-  // Menambahkan waktu PT1
-  if (waktuPT1[0] !== "waiting...") {
-    if (waktuPT1.length === 4) {
-      totalJam += parseInt(waktuPT1[0]);
-      totalMenit += parseInt(waktuPT1[2]);
-    } else if (waktuPT1.length === 2) {
-      totalMenit += parseInt(waktuPT1[0]);
+    // Menambahkan waktu PT1
+    if (waktuPT1[0] !== "waiting...") {
+      if (waktuPT1.length === 4) {
+        totalJam += parseInt(waktuPT1[0]);
+        totalMenit += parseInt(waktuPT1[2]);
+      } else if (waktuPT1.length === 2) {
+        totalMenit += parseInt(waktuPT1[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PT2
-  if (waktuPT2[0] !== "waiting...") {
-    if (waktuPT2.length === 4) {
-      totalJam += parseInt(waktuPT2[0]);
-      totalMenit += parseInt(waktuPT2[2]);
-    } else if (waktuPT2.length === 2) {
-      totalMenit += parseInt(waktuPT2[0]);
+    // Menambahkan waktu PT2
+    if (waktuPT2[0] !== "waiting...") {
+      if (waktuPT2.length === 4) {
+        totalJam += parseInt(waktuPT2[0]);
+        totalMenit += parseInt(waktuPT2[2]);
+      } else if (waktuPT2.length === 2) {
+        totalMenit += parseInt(waktuPT2[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PT3
-  if (waktuPT3[0] !== "waiting...") {
-    if (waktuPT3.length === 4) {
-      totalJam += parseInt(waktuPT3[0]);
-      totalMenit += parseInt(waktuPT3[2]);
-    } else if (waktuPT3.length === 2) {
-      totalMenit += parseInt(waktuPT3[0]);
+    // Menambahkan waktu PT3
+    if (waktuPT3[0] !== "waiting...") {
+      if (waktuPT3.length === 4) {
+        totalJam += parseInt(waktuPT3[0]);
+        totalMenit += parseInt(waktuPT3[2]);
+      } else if (waktuPT3.length === 2) {
+        totalMenit += parseInt(waktuPT3[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PT4
-  if (waktuPT4[0] !== "waiting...") {
-    if (waktuPT4.length === 4) {
-      totalJam += parseInt(waktuPT4[0]);
-      totalMenit += parseInt(waktuPT4[2]);
-    } else if (waktuPT4.length === 2) {
-      totalMenit += parseInt(waktuPT4[0]);
+    // Menambahkan waktu PT4
+    if (waktuPT4[0] !== "waiting...") {
+      if (waktuPT4.length === 4) {
+        totalJam += parseInt(waktuPT4[0]);
+        totalMenit += parseInt(waktuPT4[2]);
+      } else if (waktuPT4.length === 2) {
+        totalMenit += parseInt(waktuPT4[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PD jika bukan "waiting..."
-  if (waktuPD[0] !== "waiting...") {
-    if (waktuPD.length === 4) {
-      totalJam += parseInt(waktuPD[0]);
-      totalMenit += parseInt(waktuPD[2]);
-    } else if (waktuPD.length === 2) {
-      totalMenit += parseInt(waktuPD[0]);
+    // Menambahkan waktu PD jika bukan "waiting..."
+    if (waktuPD[0] !== "waiting...") {
+      if (waktuPD.length === 4) {
+        totalJam += parseInt(waktuPD[0]);
+        totalMenit += parseInt(waktuPD[2]);
+      } else if (waktuPD.length === 2) {
+        totalMenit += parseInt(waktuPD[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu OT jika bukan "waiting..."
-  if (waktuOT[0] !== "waiting...") {
-    if (waktuOT.length === 4) {
-      totalJam += parseInt(waktuOT[0]);
-      totalMenit += parseInt(waktuOT[2]);
-    } else if (waktuOT.length === 2) {
-      totalMenit += parseInt(waktuOT[0]);
+    // Menambahkan waktu OT jika bukan "waiting..."
+    if (waktuOT[0] !== "waiting...") {
+      if (waktuOT.length === 4) {
+        totalJam += parseInt(waktuOT[0]);
+        totalMenit += parseInt(waktuOT[2]);
+      } else if (waktuOT.length === 2) {
+        totalMenit += parseInt(waktuOT[0]);
+      }
     }
-  }
 
-  // Mengubah menit menjadi jam jika lebih dari 60
-  if (totalMenit >= 60) {
-    const tambahanJam = Math.floor(totalMenit / 60);
-    totalJam += tambahanJam;
-    totalMenit -= tambahanJam * 60;
-  }
+    // Mengubah menit menjadi jam jika lebih dari 60
+    if (totalMenit >= 60) {
+      const tambahanJam = Math.floor(totalMenit / 60);
+      totalJam += tambahanJam;
+      totalMenit -= tambahanJam * 60;
+    }
 
-  // Mengatur nilai hasil penjumlahan ke state Total
-  const output = `${totalJam} jam ${totalMenit} menit`;
-  setTotal(output);
-};
+    // Mengatur nilai hasil penjumlahan ke state Total
+    const output = `${totalJam} jam ${totalMenit} menit`;
+    setTotal(output);
+  };
 
-useEffect(() => {
-  calculateTotalTime();
-}, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
-
+  useEffect(() => {
+    calculateTotalTime();
+  }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
 
   // Background
   const styles = {
@@ -2369,7 +2107,7 @@ useEffect(() => {
 
       <header class="bg-white shadow mb-3">
         <div class="mx-auto max-w-7xl px-4">
-          <marquee behavior="scroll" direction="right">
+          <div>
             <div class="flex items-center">
               <h1 class="text-xl font-sans tracking-tight text-gray-900">
                 | SMT Line 1 - BE|
@@ -2391,13 +2129,13 @@ useEffect(() => {
                 <span class="ml-4 text-green-500">RUNNING </span>|
               </h1>
             </div>
-          </marquee>
+          </div>
         </div>
       </header>
 
       {/*  */}
       <main>
-      <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
+        <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
           <button class="w-60 sm:w-36 lg:w-32">
             <a
               href="/Andonline1"
@@ -2408,8 +2146,11 @@ useEffect(() => {
             </a>
           </button>
 
-          <button  onClick={() => setIsOpen2(true)} class="w-60 sm:w-36 lg:w-32 bg-white">
-          <svg
+          <button
+            onClick={() => setIsOpen2(true)}
+            class="w-60 sm:w-36 lg:w-32 bg-white"
+          >
+            <svg
               fill="#ff7f50"
               width="23px"
               version="1.1"
@@ -2542,7 +2283,7 @@ useEffect(() => {
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
-                       FLUXER (BE)
+                        FLUXER (BE)
                       </div>
                     </header>
                   </button>
@@ -2664,7 +2405,7 @@ useEffect(() => {
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
-                       SEHO2 (BE)
+                        SEHO2 (BE)
                       </div>
                     </header>
                   </button>
@@ -2676,30 +2417,30 @@ useEffect(() => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                   onMouseDown={handleTouchupBEPress}
-                   onMouseUp={handleTouchupBERelease}
-                   onMouseLeave={handleTouchupBERelease}
-                   onTouchStart={handleTouchupBEPress}
-                   onTouchEnd={handleTouchupBERelease}
-                   style={{ backgroundColor: backgroundColorStatusTouchupBE }}
-                   value={StatusTouchupBE}
-                   onClick={() => {
-                     if (StatusTouchupBE === "Go") {
-                       // set isOpenDestacker state to true if StatusTouchupBE is "Go"
-                       setIsOpenMaintenance(true);
-                     } else if (StatusTouchupBE === "Repair") {
-                       // set Quality state to true if StatusTouchupBE is "Repair"
-                       setQualityOption(true);
-                     } else if (StatusTouchupBE === "QA") {
-                       // set Quality state to true if StatusTouchupBE is "Repair"
-                       setIsOpenValQA(true);
-                     } else if (StatusTouchupBE === "QC") {
-                       // set Quality state to true if Statusdestacker is "Repair"
-                       setIsOpenValQC(true);
-                     }
-                     setStation(TouchupBE);
-                   }}
-                   class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                    onMouseDown={handleTouchupBEPress}
+                    onMouseUp={handleTouchupBERelease}
+                    onMouseLeave={handleTouchupBERelease}
+                    onTouchStart={handleTouchupBEPress}
+                    onTouchEnd={handleTouchupBERelease}
+                    style={{ backgroundColor: backgroundColorStatusTouchupBE }}
+                    value={StatusTouchupBE}
+                    onClick={() => {
+                      if (StatusTouchupBE === "Go") {
+                        // set isOpenDestacker state to true if StatusTouchupBE is "Go"
+                        setIsOpenMaintenance(true);
+                      } else if (StatusTouchupBE === "Repair") {
+                        // set Quality state to true if StatusTouchupBE is "Repair"
+                        setQualityOption(true);
+                      } else if (StatusTouchupBE === "QA") {
+                        // set Quality state to true if StatusTouchupBE is "Repair"
+                        setIsOpenValQA(true);
+                      } else if (StatusTouchupBE === "QC") {
+                        // set Quality state to true if Statusdestacker is "Repair"
+                        setIsOpenValQC(true);
+                      }
+                      setStation(TouchupBE);
+                    }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -2715,35 +2456,33 @@ useEffect(() => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                     onMouseDown={handleICTBEPress}
-                     onMouseUp={handleICTBERelease}
-                     onMouseLeave={handleICTBERelease}
-                     onTouchStart={handleICTBEPress}
-                     onTouchEnd={handleICTBERelease}
-                     style={{ backgroundColor: backgroundColorStatusICTBE }}
-                     value={StatusICTBE}
-                     onClick={() => {
-                       if (StatusICTBE === "Go") {
-                         // set isOpenDestacker state to true if StatusICTBE is "Go"
-                         setIsOpenMaintenance(true);
-                       } else if (StatusICTBE === "Repair") {
-                         // set Quality state to true if StatusICTBE is "Repair"
-                         setQualityOption(true);
-                       } else if (StatusICTBE === "QA") {
-                         // set Quality state to true if StatusICTBE is "Repair"
-                         setIsOpenValQA(true);
-                       } else if (StatusICTBE === "QC") {
-                         // set Quality state to true if Statusdestacker is "Repair"
-                         setIsOpenValQC(true);
-                       }
-                       setStation(ICTBE);
-                     }}
-                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                    onMouseDown={handleICTBEPress}
+                    onMouseUp={handleICTBERelease}
+                    onMouseLeave={handleICTBERelease}
+                    onTouchStart={handleICTBEPress}
+                    onTouchEnd={handleICTBERelease}
+                    style={{ backgroundColor: backgroundColorStatusICTBE }}
+                    value={StatusICTBE}
+                    onClick={() => {
+                      if (StatusICTBE === "Go") {
+                        // set isOpenDestacker state to true if StatusICTBE is "Go"
+                        setIsOpenMaintenance(true);
+                      } else if (StatusICTBE === "Repair") {
+                        // set Quality state to true if StatusICTBE is "Repair"
+                        setQualityOption(true);
+                      } else if (StatusICTBE === "QA") {
+                        // set Quality state to true if StatusICTBE is "Repair"
+                        setIsOpenValQA(true);
+                      } else if (StatusICTBE === "QC") {
+                        // set Quality state to true if Statusdestacker is "Repair"
+                        setIsOpenValQC(true);
+                      }
+                      setStation(ICTBE);
+                    }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="italic  text-center text-white">
-                       ICT (BE)
-                      </div>
+                      <div class="italic  text-center text-white">ICT (BE)</div>
                     </header>
                   </button>
                 </div>
@@ -2754,29 +2493,29 @@ useEffect(() => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-               onMouseDown={handleFlashBEPress}
-               onMouseUp={handleFlashBERelease}
-               onMouseLeave={handleFlashBERelease}
-               onTouchStart={handleFlashBEPress}
-               onTouchEnd={handleFlashBERelease}
-               style={{ backgroundColor: backgroundColorStatusFlashBE }}
-               value={StatusFlashBE}
-               onClick={() => {
-                 if (StatusFlashBE === "Go") {
-                   // set isOpenDestacker state to true if StatusFlashBE is "Go"
-                   setIsOpenMaintenance(true);
-                 } else if (StatusFlashBE === "Repair") {
-                   // set Quality state to true if StatusFlashBE is "Repair"
-                   setQualityOption(true);
-                 } else if (StatusFlashBE === "QA") {
-                   // set Quality state to true if StatusFlashBE is "Repair"
-                   setIsOpenValQA(true);
-                 } else if (StatusFlashBE === "QC") {
-                   // set Quality state to true if Statusdestacker is "Repair"
-                   setIsOpenValQC(true);
-                 }
-                 setStation(FlashBE);
-               }}
+                    onMouseDown={handleFlashBEPress}
+                    onMouseUp={handleFlashBERelease}
+                    onMouseLeave={handleFlashBERelease}
+                    onTouchStart={handleFlashBEPress}
+                    onTouchEnd={handleFlashBERelease}
+                    style={{ backgroundColor: backgroundColorStatusFlashBE }}
+                    value={StatusFlashBE}
+                    onClick={() => {
+                      if (StatusFlashBE === "Go") {
+                        // set isOpenDestacker state to true if StatusFlashBE is "Go"
+                        setIsOpenMaintenance(true);
+                      } else if (StatusFlashBE === "Repair") {
+                        // set Quality state to true if StatusFlashBE is "Repair"
+                        setQualityOption(true);
+                      } else if (StatusFlashBE === "QA") {
+                        // set Quality state to true if StatusFlashBE is "Repair"
+                        setIsOpenValQA(true);
+                      } else if (StatusFlashBE === "QC") {
+                        // set Quality state to true if Statusdestacker is "Repair"
+                        setIsOpenValQC(true);
+                      }
+                      setStation(FlashBE);
+                    }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -2788,38 +2527,36 @@ useEffect(() => {
                 </div>
               </div>
             </section>
-            
           </div>
           <div class="pt-4 flex   flex-col md:flex-row p-4 sm:ml-5">
-          
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                     onMouseDown={handleRouterBEPress}
-                     onMouseUp={handleRouterBERelease}
-                     onMouseLeave={handleRouterBERelease}
-                     onTouchStart={handleRouterBEPress}
-                     onTouchEnd={handleRouterBERelease}
-                     style={{ backgroundColor: backgroundColorStatusRouterBE }}
-                     value={StatusRouterBE}
-                     onClick={() => {
-                       if (StatusRouterBE === "Go") {
-                         // set isOpenDestacker state to true if StatusRouterBE is "Go"
-                         setIsOpenMaintenance(true);
-                       } else if (StatusRouterBE === "Repair") {
-                         // set Quality state to true if StatusRouterBE is "Repair"
-                         setQualityOption(true);
-                       } else if (StatusRouterBE === "QA") {
-                         // set Quality state to true if StatusRouterBE is "Repair"
-                         setIsOpenValQA(true);
-                       } else if (StatusRouterBE === "QC") {
-                         // set Quality state to true if Statusdestacker is "Repair"
-                         setIsOpenValQC(true);
-                       }
-                       setStation(RouterBE);
-                     }}
+                    onMouseDown={handleRouterBEPress}
+                    onMouseUp={handleRouterBERelease}
+                    onMouseLeave={handleRouterBERelease}
+                    onTouchStart={handleRouterBEPress}
+                    onTouchEnd={handleRouterBERelease}
+                    style={{ backgroundColor: backgroundColorStatusRouterBE }}
+                    value={StatusRouterBE}
+                    onClick={() => {
+                      if (StatusRouterBE === "Go") {
+                        // set isOpenDestacker state to true if StatusRouterBE is "Go"
+                        setIsOpenMaintenance(true);
+                      } else if (StatusRouterBE === "Repair") {
+                        // set Quality state to true if StatusRouterBE is "Repair"
+                        setQualityOption(true);
+                      } else if (StatusRouterBE === "QA") {
+                        // set Quality state to true if StatusRouterBE is "Repair"
+                        setIsOpenValQA(true);
+                      } else if (StatusRouterBE === "QC") {
+                        // set Quality state to true if Statusdestacker is "Repair"
+                        setIsOpenValQC(true);
+                      }
+                      setStation(RouterBE);
+                    }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -2831,7 +2568,6 @@ useEffect(() => {
                 </div>
               </div>
             </section>
-            
           </div>
         </div>
       </main>
@@ -2851,8 +2587,6 @@ useEffect(() => {
                     </td>
                   </table>
                 </div> */}
-
- 
 
       {/* POP UP  Operator To Maintenance*/}
       <td class="">
@@ -3010,13 +2744,17 @@ useEffect(() => {
                           </h3>
                           <table>
                             <tr>
-                              <td className="font-semibold">Production time 1:</td>
+                              <td className="font-semibold">
+                                Production time 1:
+                              </td>
                               <span className="px-4 text-lime-800">
                                 {RealPT1}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production time 2:</td>
+                              <td className="font-semibold">
+                                Production time 2:
+                              </td>
                               <span className="px-4 text-lime-800">
                                 {RealPT2}
                               </span>
@@ -3029,14 +2767,18 @@ useEffect(() => {
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production time 3:</td>
+                              <td className="font-semibold">
+                                Production time 3:
+                              </td>
                               <span className="px-4 text-lime-800">
                                 {RealPT3}
                               </span>
                             </tr>
 
                             <tr>
-                              <td className="font-semibold">Production time 4:</td>
+                              <td className="font-semibold">
+                                Production time 4:
+                              </td>
                               <span className="px-4 text-lime-800">
                                 {RealPT4}
                               </span>
@@ -3070,9 +2812,7 @@ useEffect(() => {
                     </div>
 
                     <div className="bg-white px-4 w-[700px] ml-3  rounded-lg shadow-md">
-                      <h3 className="text-lg italic  mb-2">
-                        Production Time
-                      </h3>
+                      <h3 className="text-lg italic  mb-2">Production Time</h3>
 
                       {data ? (
                         <table>
@@ -3084,10 +2824,14 @@ useEffect(() => {
                           </h3>
                           <tbody>
                             <tr>
-                              <td className="font-semibold">Shift: {data.SHIFT}</td>
+                              <td className="font-semibold">
+                                Shift: {data.SHIFT}
+                              </td>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production Time 1:</td>
+                              <td className="font-semibold">
+                                Production Time 1:
+                              </td>
                               <span style={{ color: "green" }}>
                                 {data.PT1_IN}
                               </span>
@@ -3103,7 +2847,9 @@ useEffect(() => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production Time 2:</td>
+                              <td className="font-semibold">
+                                Production Time 2:
+                              </td>
                               <span style={{ color: "green" }}>
                                 {data.PT2_IN}
                               </span>
@@ -3129,7 +2875,9 @@ useEffect(() => {
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production Time 3:</td>
+                              <td className="font-semibold">
+                                Production Time 3:
+                              </td>
                               <span style={{ color: "green" }}>
                                 {data.PT3_IN}
                               </span>
@@ -3145,7 +2893,9 @@ useEffect(() => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production time 4:</td>
+                              <td className="font-semibold">
+                                Production time 4:
+                              </td>
                               <span style={{ color: "green" }}>
                                 {data.PT4_IN}
                               </span>
@@ -3300,7 +3050,7 @@ useEffect(() => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                               Area
+                              Area
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -3544,7 +3294,7 @@ useEffect(() => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                               Area
+                              Area
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -3561,7 +3311,7 @@ useEffect(() => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                               Line
+                              Line
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -3578,7 +3328,7 @@ useEffect(() => {
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                               for="grid-city"
                             >
-                               Station
+                              Station
                             </label>
                             <span
                               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -3825,9 +3575,7 @@ useEffect(() => {
                 >
                   <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                     <div className="sm:flex sm:items-start">
-                      <form
-                        className="w-full max-w-lg"
-                      >
+                      <form className="w-full max-w-lg">
                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
                           <span>Return To Maintenance</span>
                         </div>

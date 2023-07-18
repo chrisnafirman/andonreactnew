@@ -212,21 +212,17 @@ const SmtTop = () => {
     });
 
     const ref8 = firebase.database().ref("SMTLine1TOP/Destacker (TOP)");
-    ref8.on("value", (snapshot) => {
-      const data = snapshot.val();
+    ref8.on("value", (snapshot) => {      const data = snapshot.val();
       updateStatusdestackerTop(data);
       if (data === "Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
-              const message = `Notification Maintenance SMT LINE 1 Label (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+              const message = `Notification Maintenance SMT LINE 1 Destacker (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
               chatIds.forEach((chatId) => {
                 fetch(
@@ -242,18 +238,13 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/ReturnMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -273,14 +264,9 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
       } else if (data === "QC") {
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/RequestQC";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-912913885];
@@ -300,16 +286,11 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
       } else if (data === "QA") {
        
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/RequestQA";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-912913885];
@@ -329,8 +310,6 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
         }
     });
@@ -344,10 +323,7 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -367,18 +343,13 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/ReturnMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -398,8 +369,6 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
         } else if (data === "QC") {
      
@@ -475,10 +444,7 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -498,18 +464,13 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/ReturnMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -529,8 +490,6 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
         } else if (data === "QC") {
   
@@ -604,10 +563,7 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -627,18 +583,13 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/ReturnMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -658,8 +609,6 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
         } else if (data === "QC") {
   
@@ -734,10 +683,7 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -757,18 +703,13 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/ReturnMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -788,8 +729,6 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
         } else if (data === "QC") {
       
@@ -863,10 +802,7 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -886,18 +822,13 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/ReturnMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -917,8 +848,6 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
      } else if (data === "QC") {
       
@@ -994,10 +923,7 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -1017,18 +943,13 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/ReturnMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -1048,8 +969,6 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
         } else if (data === "QC") {
   
@@ -1124,10 +1043,7 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -1147,18 +1063,13 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-        navigator.permissions
-          .query({ name: "clipboard-write" })
-          .then((permissionStatus) => {
-            if (permissionStatus.state === "granted") {
+      
               const link = "http://10.14.81.43:3003/ReturnMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
               const chatIds = [-993707437];
@@ -1178,8 +1089,6 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
-              });
-            }
           });
         } else if (data === "QC") {
   
@@ -2126,7 +2035,7 @@ useEffect(() => {
 
       <header class="bg-white shadow mb-3">
         <div class="mx-auto max-w-7xl px-4">
-          <marquee behavior="scroll" direction="right">
+          <div>
             <div class="flex items-center">
               <h1 class="text-xl font-sans tracking-tight text-gray-900">
                 | SMT Line 1 - TOP |
@@ -2148,7 +2057,7 @@ useEffect(() => {
                 <span class="ml-4 text-green-500">RUNNING </span>|
               </h1>
             </div>
-          </marquee>
+          </div>
         </div>
       </header>
 

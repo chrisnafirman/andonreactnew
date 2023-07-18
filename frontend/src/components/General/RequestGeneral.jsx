@@ -174,7 +174,7 @@ const RepairReport = () => {
 
       <header class="bg-white shadow mb-3">
         <div class="mx-auto max-w-7xl px-4">
-          <marquee behavior="scroll" direction="right">
+          <div >
             <div class="flex items-center">
               <h1 class="text-xl font-sans tracking-tight text-gray-900">
                 | General |
@@ -198,7 +198,7 @@ const RepairReport = () => {
                 <span class="ml-4 text-green-500">RUNNING </span>|
               </h1>
             </div>
-          </marquee>
+          </div>
         </div>
       </header>
 
