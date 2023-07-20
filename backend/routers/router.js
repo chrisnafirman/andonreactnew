@@ -58,6 +58,10 @@ router.get("/Others", Generalcontrollers.getRequestOthers);
 // Employee
 
 router.get("/Employee_Operator", Employeecontrollers.getRequestEmployee);
+router.get("/Employee_Operator_Manufacturing", Employeecontrollers.getRequestEmployeeOperatorManufacturing);
+router.get("/Employee_Team_Maintenance", Employeecontrollers.getRequestEmployeeTeamMaintenance);
+router.get("/Employee_Team_Quality", Employeecontrollers.getRequestEmployeeTeamQuality);
+
 
 
 module.exports = router;

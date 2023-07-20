@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
+import Select from "react-select";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
@@ -141,6 +142,24 @@ const SmtTop = () => {
   const [RealPD, setRealPD] = useState("");
   const [RealOT, setRealOT] = useState("");
   const [Total, setTotal] = useState("");
+
+    // select operator manufacturing
+    const [optionsOperatorManufacturing, setOptionsOperatorManufacturing] =
+    useState([]);
+  const [
+    selectedOptionOperatorManufacturing,
+    setSelectedOptionOperatorManufacturing,
+  ] = useState(null);
+
+  const [optionsTeamMaintenance, setOptionsTeamMaintenance] = useState([]);
+  const [selectedOptionTeamMaintenance, setSelectedOptionTeamMaintenance] =
+    useState(null);
+
+  const [optionsTeamQuality, setOptionsTeamQuality] = useState([]);
+  const [selectedOptionTeamQuality, setSelectedOptionTeamQuality] =
+    useState(null);
+  // ..................................
+
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
@@ -2080,6 +2099,82 @@ const SmtTop = () => {
     calculateTotalTime();
   }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
 
+  // Fungsi selected
+
+  //  Select Nama Operator
+  const handleSelectChangeOperatorManufacturing = (
+    selectedOptionOperatorManufacturing
+  ) => {
+    setSelectedOptionOperatorManufacturing(selectedOptionOperatorManufacturing);
+    setNamaPIC(selectedOptionOperatorManufacturing.value);
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/Employee_Operator_Manufacturing")
+      .then((response) => response.json())
+      .then((data) => {
+        const transformedOptions = data.map((item) => ({
+          value: item.nama_emp,
+          label: item.nama_emp,
+        }));
+        setOptionsOperatorManufacturing(transformedOptions);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  // ....................
+
+  // Select Team Maintenance
+  const handleSelectChangeTeamMaintenance = (selectedOptionTeamMaintenance) => {
+    setSelectedOptionTeamMaintenance(selectedOptionTeamMaintenance);
+    setNamaPIC(selectedOptionTeamMaintenance.value);
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/Employee_Team_Maintenance")
+      .then((response) => response.json())
+      .then((data) => {
+        const transformedOptions = data.map((item) => ({
+          value: item.nama_emp,
+          label: item.nama_emp,
+        }));
+        setOptionsTeamMaintenance(transformedOptions);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  // ...............................................
+
+  // Select Team Quality
+  const handleSelectChangeTeamQuality = (selectedOptionTeamQuality) => {
+    setSelectedOptionTeamQuality(selectedOptionTeamQuality);
+    setNamaPIC(selectedOptionTeamQuality.value);
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/Employee_Team_Quality")
+      .then((response) => response.json())
+      .then((data) => {
+        const transformedOptions = data.map((item) => ({
+          value: item.nama_emp,
+          label: item.nama_emp,
+        }));
+        setOptionsTeamQuality(transformedOptions);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  // ...............................................
+
   // Background
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/Background.jpg)`,
@@ -2992,8 +3087,8 @@ const SmtTop = () => {
         ) : null}
       </td>
 
-      {/*  */}
-      {/* POP UP Maintenance to QC  */}
+         {/*  */}
+      {/* POP UP RequestMaintenance */}
       <td class="">
         {isOpenMaintenance ? (
           <>
@@ -3030,21 +3125,19 @@ const SmtTop = () => {
                             >
                               Masukan Nama Anda
                             </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
+                            <Select
+                              value={selectedOptionOperatorManufacturing}
+                              onChange={handleSelectChangeOperatorManufacturing}
+                              options={optionsOperatorManufacturing}
+                              isSearchable
+                              placeholder="Pilih Nama"
+                            />
                           </div>
                         </div>
 
                         {/*Status*/}
 
-                        <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="flex flex-wrap -mx-3 mb-3 mt-3">
                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <label
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -3107,7 +3200,7 @@ const SmtTop = () => {
                               Problem
                             </label>
                             <input
-                              class="appearance-none block w-full text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               id="grid-password"
                               type="text"
                               placeholder=""
@@ -3124,17 +3217,17 @@ const SmtTop = () => {
                         </div>
                         <div className="flex justify-end">
                           <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                             onClick={() => setIsOpenMaintenance(false)}
                           >
-                            Batal
+                            No, cancel
                           </button>
                           <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             type="submit"
                             onClick={submitMaintenance}
                           >
-                            Submit
+                            Yes, I'm sure
                           </button>
                         </div>
                       </form>
@@ -3246,7 +3339,7 @@ const SmtTop = () => {
                     <div className="sm:flex sm:items-start">
                       <form className="w-full max-w-lg">
                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Depart To Quality Assurance</span>
+                          <span>Request To Quality Assurance</span>
                         </div>
 
                         <div class="flex flex-wrap -mx-3 ">
@@ -3257,24 +3350,22 @@ const SmtTop = () => {
                             >
                               Masukan Nama Anda
                             </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
+                            <Select
+                              value={selectedOptionTeamMaintenance}
+                              onChange={handleSelectChangeTeamMaintenance}
+                              options={optionsTeamMaintenance}
+                              isSearchable
+                              placeholder="Pilih Nama"
+                            />
                           </div>
                         </div>
                         {/*Status*/}
                         <div className="mb-4">
                           <label
-                            className="block text-gray-700 font-semibold mb-2"
+                            className="block text-gray-700 mt-1 font-semibold mb-2"
                             htmlFor="Depart To"
                           >
-                            Depart To
+                            Request To
                           </label>
                           <div className="relative">
                             <span
@@ -3350,7 +3441,7 @@ const SmtTop = () => {
                               Problem
                             </label>
                             <input
-                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               id="grid-password"
                               type="text"
                               placeholder=""
@@ -3361,23 +3452,23 @@ const SmtTop = () => {
                               required
                             />
                             <p class="text-gray-600 text-xs italic">
-                              Jenis Problem Yang DI Temukan
+                              Jenis Problem Yang Di Temukan
                             </p>
                           </div>
                         </div>
                         <div className="flex justify-end">
                           <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                             onClick={() => setQualityA(false)}
                           >
-                            Batal
+                            No, cancel
                           </button>
                           <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             type="submit"
                             onClick={submitQualityA}
                           >
-                            Submit
+                            Yes, I'm sure
                           </button>
                         </div>
                       </form>
@@ -3412,7 +3503,7 @@ const SmtTop = () => {
                     <div className="sm:flex sm:items-start">
                       <form className="w-full max-w-lg">
                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Depart To Quality Control</span>
+                          <span>Request To Quality Control</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full px-1">
@@ -3422,24 +3513,22 @@ const SmtTop = () => {
                             >
                               Masukan Nama Anda
                             </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
+                            <Select
+                              value={selectedOptionTeamMaintenance}
+                              onChange={handleSelectChangeTeamMaintenance}
+                              options={optionsTeamMaintenance}
+                              isSearchable
+                              placeholder="Pilih Nama"
+                            />
                           </div>
                         </div>
                         {/*Status*/}
                         <div className="mb-4">
                           <label
-                            className="block text-gray-700 font-semibold mb-2"
+                            className="block text-gray-700 mt-1 font-semibold mb-2"
                             htmlFor="Depart To"
                           >
-                            Depart To
+                            Request To
                           </label>
                           <div className="relative">
                             <span
@@ -3515,7 +3604,7 @@ const SmtTop = () => {
                               Problem
                             </label>
                             <input
-                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                               id="grid-password"
                               type="text"
                               placeholder=""
@@ -3532,17 +3621,17 @@ const SmtTop = () => {
                         </div>
                         <div className="flex justify-end">
                           <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                             onClick={() => setQualityC(false)}
                           >
-                            Batal
+                            No, cancel
                           </button>
                           <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             type="submit"
                             onClick={submitQualityC}
                           >
-                            Submit
+                            Yes, I'm sure
                           </button>
                         </div>
                       </form>
@@ -3587,21 +3676,19 @@ const SmtTop = () => {
                             >
                               Masukan Nama Anda
                             </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
+                            <Select
+                              value={selectedOptionTeamQuality}
+                              onChange={handleSelectChangeTeamQuality}
+                              options={optionsTeamQuality}
+                              isSearchable
+                              placeholder="Pilih Nama"
+                            />
                           </div>
                         </div>
 
                         {/*Status*/}
 
-                        <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="flex flex-wrap -mx-3 mt-3 mb-3">
                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <label
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -3740,18 +3827,16 @@ const SmtTop = () => {
                             >
                               Masukan Nama Anda
                             </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
+                            <Select
+                              value={selectedOptionTeamQuality}
+                              onChange={handleSelectChangeTeamQuality}
+                              options={optionsTeamQuality}
+                              isSearchable
+                              placeholder="Pilih Nama"
+                            />
                           </div>
                         </div>
-                        <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="flex flex-wrap -mx-3 mt-3 mb-4">
                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <label
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -3828,17 +3913,17 @@ const SmtTop = () => {
                         </div>
                         <div className="flex justify-end">
                           <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                             onClick={() => setIsOpenValQA(false)}
                           >
-                            Batal
+                            No, cancel
                           </button>
                           <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             type="submit"
                             onClick={submitValQA}
                           >
-                            Submit
+                            Yes, I'm sure
                           </button>
                         </div>
                         <button
@@ -3892,18 +3977,16 @@ const SmtTop = () => {
                             >
                               Masukan Nama Anda
                             </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full bg-white border-b-slate-900 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
+                            <Select
+                              value={selectedOptionTeamQuality}
+                              onChange={handleSelectChangeTeamQuality}
+                              options={optionsTeamQuality}
+                              isSearchable
+                              placeholder="Pilih Nama"
+                            />
                           </div>
                         </div>
-                        <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="flex flex-wrap -mx-3 mt-3 mb-4">
                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <label
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -3980,17 +4063,17 @@ const SmtTop = () => {
                         </div>
                         <div className="flex justify-end">
                           <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                             onClick={() => setIsOpenValQC(false)}
                           >
-                            Batal
+                            No, cancel
                           </button>
                           <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             type="submit"
                             onClick={submitValQC}
                           >
-                            Submit
+                            Yes, I'm sure
                           </button>
                         </div>
                         <button

@@ -47,11 +47,16 @@ const postValidationQA = (req, res) => {
     }
 
     const { NamaPIC, NpkPIC, Area, Line, Station } = req.body;
-  const Validation = req.file.path.replace(/\\/g, "/").substring(7); //
+    let Validation = null;
+
+    if (req.file) {
+      // Jika ada file 'validation', ambil path-nya dan ubah ke format yang diinginkan
+      Validation = req.file.path.replace(/\\/g, "/").substring(7);
+    }
 
     db.query(
-  "INSERT INTO validationqa(NamaPIC, NpkPIC, Area, Line, Station, validation) VALUES (?, ?, ?, ?, ?, ?)",
-    [NamaPIC, NpkPIC, Area,Line,Station, Validation],
+      "INSERT INTO validationqa(NamaPIC, NpkPIC, Area, Line, Station, validation) VALUES (?, ?, ?, ?, ?, ?)",
+      [NamaPIC, NpkPIC, Area, Line, Station, Validation],
       (error, results) => {
         if (error) {
           console.log(error);

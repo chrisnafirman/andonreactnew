@@ -33,7 +33,7 @@ import ReturnMaintenance from "./components/Maintenance/ReturnMaintenance.jsx"
 import EM from "./components/EMaintenance.jsx"
 
 
-import Tickets from "./components/Tickets.jsx"
+import UserMobile from "./components/User/UserMobile.jsx"
 
 function App() {
   return (
@@ -74,7 +74,7 @@ function App() {
 
         <Route path="E" element={<EM/>}/>
 
-        <Route path="Tickets" element={<Tickets/>}/>
+        <Route path="UserMobile" element={<UserMobile/>}/>
         
       </Routes>
     </>

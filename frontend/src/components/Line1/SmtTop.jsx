@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
+import Select from "react-select";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
@@ -137,6 +138,23 @@ const SmtTop = () => {
   const [RealOT, setRealOT] = useState("");
   const [Total, setTotal] = useState("");
 
+  // select operator manufacturing
+  const [optionsOperatorManufacturing, setOptionsOperatorManufacturing] =
+    useState([]);
+  const [
+    selectedOptionOperatorManufacturing,
+    setSelectedOptionOperatorManufacturing,
+  ] = useState(null);
+
+  const [optionsTeamMaintenance, setOptionsTeamMaintenance] = useState([]);
+  const [selectedOptionTeamMaintenance, setSelectedOptionTeamMaintenance] =
+    useState(null);
+
+  const [optionsTeamQuality, setOptionsTeamQuality] = useState([]);
+  const [selectedOptionTeamQuality, setSelectedOptionTeamQuality] =
+    useState(null);
+  // ..................................
+
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
@@ -212,12 +230,14 @@ const SmtTop = () => {
     });
 
     const ref8 = firebase.database().ref("SMTLine1TOP/Destacker (TOP)");
-    ref8.on("value", (snapshot) => {      const data = snapshot.val();
+    ref8.on("value", (snapshot) => {
+      const data = snapshot.val();
       updateStatusdestackerTop(data);
       if (data === "Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
+
       
               const link = "http://10.14.81.43:3003/RequestMaintenance";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -239,79 +259,49 @@ const SmtTop = () => {
                     console.error(error);
                   });
           });
-      } else if (data === "Return Maintenance") {
-        const audio = new Audio("Sound.mp3");
-        audio.autoplay = true;
-        audio.play();
-
-      
-              const link = "http://10.14.81.43:3003/ReturnMaintenance";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Return Maintenance SMT LINE 1 Destacker (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-          });
       } else if (data === "QC") {
-      
-              const link = "http://10.14.81.43:3003/RequestQC";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-912913885];
-              const message = `Notification Request Quality Control SMT LINE 1 Destacker (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestQC";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request Quality Control SMT LINE 1 Destacker (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       } else if (data === "QA") {
-       
+        const link = "http://10.14.81.43:3003/RequestQA";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request Quality Assurance SMT LINE 1 Destacker (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
-      
-              const link = "http://10.14.81.43:3003/RequestQA";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-912913885];
-              const message = `Notification Request Quality Assurance SMT LINE 1 Destacker (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-          });
-        }
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      }
     });
 
     const ref9 = firebase.database().ref("SMTLine1TOP/Label (TOP)");
@@ -323,37 +313,60 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/RequestMaintenance";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Maintenance SMT LINE 1 Label (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Maintenance SMT LINE 1 Label (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Return Maintenance SMT LINE 1 Label (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "QC") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQC";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Return Maintenance SMT LINE 1 Label (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 Label (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
               chatIds.forEach((chatId) => {
                 fetch(
@@ -369,71 +382,42 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
+              });
+            } else {
+              // Izin ditolak
+            }
           });
-        } else if (data === "QC") {
-     
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQC";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Control SMT LINE 1 Label (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-        } else if (data === "QA") {
-       
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQA";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Assurance SMT LINE 1 Label (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-          }
-      });
+      } else if (data === "QA") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 Label (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
+    });
 
     const ref18 = firebase.database().ref("/SMTLine1TOP/Printer (TOP)");
     ref18.on("value", (snapshot) => {
@@ -444,37 +428,60 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/RequestMaintenance";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Maintenance SMT LINE 1 Printer (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Maintenance SMT LINE 1 Printer (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Return Maintenance SMT LINE 1 Printer (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "QC") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQC";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Return Maintenance SMT LINE 1 Printer (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 Printer (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
               chatIds.forEach((chatId) => {
                 fetch(
@@ -490,69 +497,42 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
+              });
+            } else {
+              // Izin ditolak
+            }
           });
-        } else if (data === "QC") {
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQC";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Control SMT LINE 1 Printer (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-        } else if (data === "QA") {
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQA";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Assurance SMT LINE 1 Printer (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-          }
-      });
+      } else if (data === "QA") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 Printer (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
+    });
 
     const ref19 = firebase.database().ref("/SMTLine1TOP/Spi (TOP)");
     ref19.on("value", (snapshot) => {
@@ -563,37 +543,60 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/RequestMaintenance";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Maintenance SMT LINE 1 Spi (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Maintenance SMT LINE 1 Spi (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Return Maintenance SMT LINE 1 Spi (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "QC") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQC";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Return Maintenance SMT LINE 1 Spi (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 Spi (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
               chatIds.forEach((chatId) => {
                 fetch(
@@ -609,70 +612,42 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
+              });
+            } else {
+              // Izin ditolak
+            }
           });
-        } else if (data === "QC") {
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQC";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Control SMT LINE 1 Spi (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-        } else if (data === "QA") {
-       
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQA";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Assurance SMT LINE 1 Spi (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-          }
-      });
+      } else if (data === "QA") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 Spi (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
+    });
 
     const ref20 = firebase.database().ref("/SMTLine1TOP/Pick&Place (TOP)");
     ref20.on("value", (snapshot) => {
@@ -683,37 +658,60 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/RequestMaintenance";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Maintenance SMT LINE 1 Pick&Place (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Maintenance SMT LINE 1 Pick&Place (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Return Maintenance SMT LINE 1 Pick&Place (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "QC") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQC";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Return Maintenance SMT LINE 1 Pick&Place (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 Pick&Place (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
               chatIds.forEach((chatId) => {
                 fetch(
@@ -729,69 +727,42 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
+              });
+            } else {
+              // Izin ditolak
+            }
           });
-        } else if (data === "QC") {
-      
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQC";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Control SMT LINE 1 Pick&Place (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-        } else if (data === "QA") {
- 
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQA";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Assurance SMT LINE 1 Pick&Place (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-          }
-      });
+      } else if (data === "QA") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 Pick&Place (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
+    });
 
     const ref21 = firebase.database().ref("/SMTLine1TOP/Reflow (TOP)");
     ref21.on("value", (snapshot) => {
@@ -802,37 +773,60 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/RequestMaintenance";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Maintenance SMT LINE 1 Reflow (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Maintenance SMT LINE 1 Reflow (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Return Maintenance SMT LINE 1 Reflow (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "QC") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQC";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Return Maintenance SMT LINE 1 Reflow (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 Reflow (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
               chatIds.forEach((chatId) => {
                 fetch(
@@ -848,71 +842,42 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
+              });
+            } else {
+              // Izin ditolak
+            }
           });
-     } else if (data === "QC") {
-      
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQC";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Control SMT LINE 1 Reflow (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-        } else if (data === "QA") {
-    
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQA";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Assurance SMT LINE 1 Reflow (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-          }
-      });
+      } else if (data === "QA") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 Reflow (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
+    });
 
     const ref22 = firebase.database().ref("/SMTLine1TOP/AOI (TOP)");
     ref22.on("value", (snapshot) => {
@@ -923,37 +888,60 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/RequestMaintenance";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Maintenance SMT LINE 1 AOI (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Maintenance SMT LINE 1 AOI (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Return Maintenance SMT LINE 1 AOI (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "QC") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQC";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Return Maintenance SMT LINE 1 AOI (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 AOI (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
               chatIds.forEach((chatId) => {
                 fetch(
@@ -969,70 +957,42 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
+              });
+            } else {
+              // Izin ditolak
+            }
           });
-        } else if (data === "QC") {
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQC";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Control SMT LINE 1 AOI (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-        } else if (data === "QA") {
-       
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQA";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Assurance SMT LINE 1 AOI (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-          }
-      });
+      } else if (data === "QA") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 AOI (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
+    });
 
     const ref23 = firebase.database().ref("/SMTLine1TOP/RVS (TOP)");
     ref23.on("value", (snapshot) => {
@@ -1043,37 +1003,60 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/RequestMaintenance";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Maintenance SMT LINE 1 RVS (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const link = "http://10.14.81.43:3003/RequestMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Maintenance SMT LINE 1 RVS (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-          });
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       } else if (data === "Return Maintenance") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const link = "http://10.14.81.43:3003/ReturnMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Return Maintenance SMT LINE 1 RVS (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "QC") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQC";
               const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Return Maintenance SMT LINE 1 RVS (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Control SMT LINE 1 RVS (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
               chatIds.forEach((chatId) => {
                 fetch(
@@ -1089,69 +1072,42 @@ const SmtTop = () => {
                   .catch((error) => {
                     console.error(error);
                   });
+              });
+            } else {
+              // Izin ditolak
+            }
           });
-        } else if (data === "QC") {
-  
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQC";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Control SMT LINE 1 RVS (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-        } else if (data === "QA") {
-          
-          navigator.permissions
-            .query({ name: "clipboard-write" })
-            .then((permissionStatus) => {
-              if (permissionStatus.state === "granted") {
-                const link = "http://10.14.81.43:3003/RequestQA";
-                const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-                const chatIds = [-912913885];
-                const message = `Notification Request Quality Assurance SMT LINE 1 RVS (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
-  
-                chatIds.forEach((chatId) => {
-                  fetch(
-                    `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                      message
-                    )}`
-                  )
-                    .then((response) => {
-                      if (!response.ok) {
-                        throw new Error("Error sending telegram message");
-                      }
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                    });
-                });
-              } else {
-                // Izin ditolak
-              }
-            });
-          }
-      });
+      } else if (data === "QA") {
+        navigator.permissions
+          .query({ name: "clipboard-write" })
+          .then((permissionStatus) => {
+            if (permissionStatus.state === "granted") {
+              const link = "http://10.14.81.43:3003/RequestQA";
+              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+              const chatIds = [-912913885];
+              const message = `Notification Request Quality Assurance SMT LINE 1 RVS (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+              chatIds.forEach((chatId) => {
+                fetch(
+                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+                    message
+                  )}`
+                )
+                  .then((response) => {
+                    if (!response.ok) {
+                      throw new Error("Error sending telegram message");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              });
+            } else {
+              // Izin ditolak
+            }
+          });
+      }
+    });
 
     return () => {};
   }, []);
@@ -1626,6 +1582,7 @@ const SmtTop = () => {
             .database()
             .ref(`SMTLine1TOP/${Station}`)
             .set("Return Maintenance");
+            firebase.database().ref("StatusLine/SMTLine1").set("Down");
           window.location.reload();
         } else {
           throw new Error("Error adding data");
@@ -1647,7 +1604,7 @@ const SmtTop = () => {
     data.append("Station", Station);
     data.append("validation", file);
 
-    alert("File Validation Telah Berhasil Di Input");
+    alert("Validation Telah Berhasil ");
     setIsOpen2(false);
     window.location.reload();
 
@@ -1675,7 +1632,7 @@ const SmtTop = () => {
     data.append("Station", Station);
     data.append("validation", file);
 
-    alert("File Validation Telah Berhasil Di Input");
+    alert("Validation Telah Berhasil");
     setIsOpen2(false);
     window.location.reload();
 
@@ -1919,95 +1876,173 @@ const SmtTop = () => {
     window.location.href = "https://api.whatsapp.com/send?phone=6281929749600";
   };
 
-  // Realtime production 
-const calculateTotalTime = () => {
-  let totalJam = 0;
-  let totalMenit = 0;
+  // Realtime production
+  const calculateTotalTime = () => {
+    let totalJam = 0;
+    let totalMenit = 0;
 
-  // Mengambil nilai dari state
-  const waktuPT1 = RealPT1.split(" ");
-  const waktuPT2 = RealPT2.split(" ");
-  const waktuPT3 = RealPT3.split(" ");
-  const waktuPT4 = RealPT4.split(" ");
-  const waktuPD = RealPD.split(" ");
-  const waktuOT = RealOT.split(" ");
+    // Mengambil nilai dari state
+    const waktuPT1 = RealPT1.split(" ");
+    const waktuPT2 = RealPT2.split(" ");
+    const waktuPT3 = RealPT3.split(" ");
+    const waktuPT4 = RealPT4.split(" ");
+    const waktuPD = RealPD.split(" ");
+    const waktuOT = RealOT.split(" ");
 
-  // Menambahkan waktu PT1
-  if (waktuPT1[0] !== "waiting...") {
-    if (waktuPT1.length === 4) {
-      totalJam += parseInt(waktuPT1[0]);
-      totalMenit += parseInt(waktuPT1[2]);
-    } else if (waktuPT1.length === 2) {
-      totalMenit += parseInt(waktuPT1[0]);
+    // Menambahkan waktu PT1
+    if (waktuPT1[0] !== "waiting...") {
+      if (waktuPT1.length === 4) {
+        totalJam += parseInt(waktuPT1[0]);
+        totalMenit += parseInt(waktuPT1[2]);
+      } else if (waktuPT1.length === 2) {
+        totalMenit += parseInt(waktuPT1[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PT2
-  if (waktuPT2[0] !== "waiting...") {
-    if (waktuPT2.length === 4) {
-      totalJam += parseInt(waktuPT2[0]);
-      totalMenit += parseInt(waktuPT2[2]);
-    } else if (waktuPT2.length === 2) {
-      totalMenit += parseInt(waktuPT2[0]);
+    // Menambahkan waktu PT2
+    if (waktuPT2[0] !== "waiting...") {
+      if (waktuPT2.length === 4) {
+        totalJam += parseInt(waktuPT2[0]);
+        totalMenit += parseInt(waktuPT2[2]);
+      } else if (waktuPT2.length === 2) {
+        totalMenit += parseInt(waktuPT2[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PT3
-  if (waktuPT3[0] !== "waiting...") {
-    if (waktuPT3.length === 4) {
-      totalJam += parseInt(waktuPT3[0]);
-      totalMenit += parseInt(waktuPT3[2]);
-    } else if (waktuPT3.length === 2) {
-      totalMenit += parseInt(waktuPT3[0]);
+    // Menambahkan waktu PT3
+    if (waktuPT3[0] !== "waiting...") {
+      if (waktuPT3.length === 4) {
+        totalJam += parseInt(waktuPT3[0]);
+        totalMenit += parseInt(waktuPT3[2]);
+      } else if (waktuPT3.length === 2) {
+        totalMenit += parseInt(waktuPT3[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PT4
-  if (waktuPT4[0] !== "waiting...") {
-    if (waktuPT4.length === 4) {
-      totalJam += parseInt(waktuPT4[0]);
-      totalMenit += parseInt(waktuPT4[2]);
-    } else if (waktuPT4.length === 2) {
-      totalMenit += parseInt(waktuPT4[0]);
+    // Menambahkan waktu PT4
+    if (waktuPT4[0] !== "waiting...") {
+      if (waktuPT4.length === 4) {
+        totalJam += parseInt(waktuPT4[0]);
+        totalMenit += parseInt(waktuPT4[2]);
+      } else if (waktuPT4.length === 2) {
+        totalMenit += parseInt(waktuPT4[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu PD jika bukan "waiting..."
-  if (waktuPD[0] !== "waiting...") {
-    if (waktuPD.length === 4) {
-      totalJam += parseInt(waktuPD[0]);
-      totalMenit += parseInt(waktuPD[2]);
-    } else if (waktuPD.length === 2) {
-      totalMenit += parseInt(waktuPD[0]);
+    // Menambahkan waktu PD jika bukan "waiting..."
+    if (waktuPD[0] !== "waiting...") {
+      if (waktuPD.length === 4) {
+        totalJam += parseInt(waktuPD[0]);
+        totalMenit += parseInt(waktuPD[2]);
+      } else if (waktuPD.length === 2) {
+        totalMenit += parseInt(waktuPD[0]);
+      }
     }
-  }
 
-  // Menambahkan waktu OT jika bukan "waiting..."
-  if (waktuOT[0] !== "waiting...") {
-    if (waktuOT.length === 4) {
-      totalJam += parseInt(waktuOT[0]);
-      totalMenit += parseInt(waktuOT[2]);
-    } else if (waktuOT.length === 2) {
-      totalMenit += parseInt(waktuOT[0]);
+    // Menambahkan waktu OT jika bukan "waiting..."
+    if (waktuOT[0] !== "waiting...") {
+      if (waktuOT.length === 4) {
+        totalJam += parseInt(waktuOT[0]);
+        totalMenit += parseInt(waktuOT[2]);
+      } else if (waktuOT.length === 2) {
+        totalMenit += parseInt(waktuOT[0]);
+      }
     }
-  }
 
-  // Mengubah menit menjadi jam jika lebih dari 60
-  if (totalMenit >= 60) {
-    const tambahanJam = Math.floor(totalMenit / 60);
-    totalJam += tambahanJam;
-    totalMenit -= tambahanJam * 60;
-  }
+    // Mengubah menit menjadi jam jika lebih dari 60
+    if (totalMenit >= 60) {
+      const tambahanJam = Math.floor(totalMenit / 60);
+      totalJam += tambahanJam;
+      totalMenit -= tambahanJam * 60;
+    }
 
-  // Mengatur nilai hasil penjumlahan ke state Total
-  const output = `${totalJam} jam ${totalMenit} menit`;
-  setTotal(output);
-};
+    // Mengatur nilai hasil penjumlahan ke state Total
+    const output = `${totalJam} jam ${totalMenit} menit`;
+    setTotal(output);
+  };
 
-useEffect(() => {
-  calculateTotalTime();
-}, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
+  useEffect(() => {
+    calculateTotalTime();
+  }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
 
+
+
+
+  // Fungsi selected
+
+  //  Select Nama Operator
+  const handleSelectChangeOperatorManufacturing = (
+    selectedOptionOperatorManufacturing
+  ) => {
+    setSelectedOptionOperatorManufacturing(selectedOptionOperatorManufacturing);
+    setNamaPIC(selectedOptionOperatorManufacturing.value);
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/Employee_Operator_Manufacturing")
+      .then((response) => response.json())
+      .then((data) => {
+        const transformedOptions = data.map((item) => ({
+          value: item.nama_emp,
+          label: item.nama_emp,
+        }));
+        setOptionsOperatorManufacturing(transformedOptions);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  // ....................
+
+  // Select Team Maintenance
+  const handleSelectChangeTeamMaintenance = (selectedOptionTeamMaintenance) => {
+    setSelectedOptionTeamMaintenance(selectedOptionTeamMaintenance);
+    setNamaPIC(selectedOptionTeamMaintenance.value);
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/Employee_Team_Maintenance")
+      .then((response) => response.json())
+      .then((data) => {
+        const transformedOptions = data.map((item) => ({
+          value: item.nama_emp,
+          label: item.nama_emp,
+        }));
+        setOptionsTeamMaintenance(transformedOptions);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  // ...............................................
+
+  // Select Team Quality
+  const handleSelectChangeTeamQuality = (selectedOptionTeamQuality) => {
+    setSelectedOptionTeamQuality(selectedOptionTeamQuality);
+    setNamaPIC(selectedOptionTeamQuality.value);
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/Employee_Team_Quality")
+      .then((response) => response.json())
+      .then((data) => {
+        const transformedOptions = data.map((item) => ({
+          value: item.nama_emp,
+          label: item.nama_emp,
+        }));
+        setOptionsTeamQuality(transformedOptions);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  // ...............................................
 
   // Background
   const styles = {
@@ -2074,8 +2109,11 @@ useEffect(() => {
             </a>
           </button>
 
-          <button  onClick={() => setIsOpen2(true)} class="w-60 sm:w-36 lg:w-32 bg-white">
-          <svg
+          <button
+            onClick={() => setIsOpen2(true)}
+            class="w-60 sm:w-36 lg:w-32 bg-white"
+          >
+            <svg
               fill="#ff7f50"
               width="23px"
               version="1.1"
@@ -2287,9 +2325,7 @@ useEffect(() => {
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="italic  text-center text-white">
-                        SPI TOP
-                      </div>
+                      <div class="italic  text-center text-white">SPI TOP</div>
                     </header>
                   </button>
                 </div>
@@ -2409,9 +2445,7 @@ useEffect(() => {
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
-                      <div class="italic  text-center text-white">
-                        AOI TOP
-                      </div>
+                      <div class="italic  text-center text-white">AOI TOP</div>
                     </header>
                   </button>
                 </div>
@@ -2632,13 +2666,17 @@ useEffect(() => {
                           </h3>
                           <table>
                             <tr>
-                              <td className="font-semibold">Production time 1:</td>
+                              <td className="font-semibold">
+                                Production time 1:
+                              </td>
                               <span className="px-4 text-lime-800">
                                 {RealPT1}
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production time 2:</td>
+                              <td className="font-semibold">
+                                Production time 2:
+                              </td>
                               <span className="px-4 text-lime-800">
                                 {RealPT2}
                               </span>
@@ -2651,14 +2689,18 @@ useEffect(() => {
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production time 3:</td>
+                              <td className="font-semibold">
+                                Production time 3:
+                              </td>
                               <span className="px-4 text-lime-800">
                                 {RealPT3}
                               </span>
                             </tr>
 
                             <tr>
-                              <td className="font-semibold">Production time 4:</td>
+                              <td className="font-semibold">
+                                Production time 4:
+                              </td>
                               <span className="px-4 text-lime-800">
                                 {RealPT4}
                               </span>
@@ -2692,9 +2734,7 @@ useEffect(() => {
                     </div>
 
                     <div className="bg-white px-4 w-[700px] ml-3  rounded-lg shadow-md">
-                      <h3 className="text-lg italic  mb-2">
-                        Production Time
-                      </h3>
+                      <h3 className="text-lg italic  mb-2">Production Time</h3>
 
                       {data ? (
                         <table>
@@ -2706,10 +2746,14 @@ useEffect(() => {
                           </h3>
                           <tbody>
                             <tr>
-                              <td className="font-semibold">Shift: {data.SHIFT}</td>
+                              <td className="font-semibold">
+                                Shift: {data.SHIFT}
+                              </td>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production Time 1:</td>
+                              <td className="font-semibold">
+                                Production Time 1:
+                              </td>
                               <span style={{ color: "green" }}>
                                 {data.PT1_IN}
                               </span>
@@ -2725,7 +2769,9 @@ useEffect(() => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production Time 2:</td>
+                              <td className="font-semibold">
+                                Production Time 2:
+                              </td>
                               <span style={{ color: "green" }}>
                                 {data.PT2_IN}
                               </span>
@@ -2751,7 +2797,9 @@ useEffect(() => {
                               </span>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production Time 3:</td>
+                              <td className="font-semibold">
+                                Production Time 3:
+                              </td>
                               <span style={{ color: "green" }}>
                                 {data.PT3_IN}
                               </span>
@@ -2767,7 +2815,9 @@ useEffect(() => {
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-semibold">Production time 4:</td>
+                              <td className="font-semibold">
+                                Production time 4:
+                              </td>
                               <span style={{ color: "green" }}>
                                 {data.PT4_IN}
                               </span>
@@ -2865,7 +2915,7 @@ useEffect(() => {
       </td>
 
       {/*  */}
-      {/* POP UP Maintenance to QC  */}
+ {/* POP UP RequestMaintenance */}
       <td class="">
         {isOpenMaintenance ? (
           <>
@@ -2902,21 +2952,19 @@ useEffect(() => {
                             >
                               Masukan Nama Anda
                             </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full bg-white border-b-slate-900 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
+                            <Select
+                              value={selectedOptionOperatorManufacturing}
+                              onChange={handleSelectChangeOperatorManufacturing}
+                              options={optionsOperatorManufacturing}
+                              isSearchable
+                              placeholder="Pilih Nama"
+                            />
                           </div>
                         </div>
 
                         {/*Status*/}
 
-                        <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="flex flex-wrap -mx-3 mb-3 mt-3">
                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <label
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -2996,17 +3044,17 @@ useEffect(() => {
                         </div>
                         <div className="flex justify-end">
                           <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                             onClick={() => setIsOpenMaintenance(false)}
                           >
-                            Batal
+                            No, cancel
                           </button>
                           <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             type="submit"
                             onClick={submitMaintenance}
                           >
-                            Submit
+                            Yes, I'm sure
                           </button>
                         </div>
                       </form>
@@ -3118,7 +3166,7 @@ useEffect(() => {
                     <div className="sm:flex sm:items-start">
                       <form className="w-full max-w-lg">
                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Depart To Quality Assurance</span>
+                          <span>Request To Quality Assurance</span>
                         </div>
 
                         <div class="flex flex-wrap -mx-3 ">
@@ -3129,24 +3177,22 @@ useEffect(() => {
                             >
                               Masukan Nama Anda
                             </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full bg-white border-b-slate-900 text-gray-700   rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
+                            <Select
+                              value={selectedOptionTeamMaintenance}
+                              onChange={handleSelectChangeTeamMaintenance}
+                              options={optionsTeamMaintenance}
+                              isSearchable
+                              placeholder="Pilih Nama"
+                            />
                           </div>
                         </div>
                         {/*Status*/}
                         <div className="mb-4">
                           <label
-                            className="block text-gray-700 font-semibold mb-2"
+                            className="block text-gray-700 mt-1 font-semibold mb-2"
                             htmlFor="Depart To"
                           >
-                            Depart To
+                            Request To
                           </label>
                           <div className="relative">
                             <span
@@ -3233,23 +3279,23 @@ useEffect(() => {
                               required
                             />
                             <p class="text-gray-600 text-xs italic">
-                              Jenis Problem Yang DI Temukan
+                              Jenis Problem Yang Di Temukan
                             </p>
                           </div>
                         </div>
                         <div className="flex justify-end">
                           <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                             onClick={() => setQualityA(false)}
                           >
-                            Batal
+                            No, cancel
                           </button>
                           <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             type="submit"
                             onClick={submitQualityA}
                           >
-                            Submit
+                            Yes, I'm sure
                           </button>
                         </div>
                       </form>
@@ -3284,7 +3330,7 @@ useEffect(() => {
                     <div className="sm:flex sm:items-start">
                       <form className="w-full max-w-lg">
                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Depart To Quality Control</span>
+                          <span>Request To Quality Control</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full px-1">
@@ -3294,24 +3340,22 @@ useEffect(() => {
                             >
                               Masukan Nama Anda
                             </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
+                            <Select
+                              value={selectedOptionTeamMaintenance}
+                              onChange={handleSelectChangeTeamMaintenance}
+                              options={optionsTeamMaintenance}
+                              isSearchable
+                              placeholder="Pilih Nama"
+                            />
                           </div>
                         </div>
                         {/*Status*/}
                         <div className="mb-4">
                           <label
-                            className="block text-gray-700 font-semibold mb-2"
+                            className="block text-gray-700 mt-1 font-semibold mb-2"
                             htmlFor="Depart To"
                           >
-                            Depart To
+                            Request To
                           </label>
                           <div className="relative">
                             <span
@@ -3404,17 +3448,17 @@ useEffect(() => {
                         </div>
                         <div className="flex justify-end">
                           <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                             onClick={() => setQualityC(false)}
                           >
-                            Batal
+                            No, cancel
                           </button>
                           <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             type="submit"
                             onClick={submitQualityC}
                           >
-                            Submit
+                            Yes, I'm sure
                           </button>
                         </div>
                       </form>
@@ -3459,21 +3503,19 @@ useEffect(() => {
                             >
                               Masukan Nama Anda
                             </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
+                            <Select
+                              value={selectedOptionTeamQuality}
+                              onChange={handleSelectChangeTeamQuality}
+                              options={optionsTeamQuality}
+                              isSearchable
+                              placeholder="Pilih Nama"
+                            />
                           </div>
                         </div>
 
                         {/*Status*/}
 
-                        <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="flex flex-wrap -mx-3 mt-3 mb-3">
                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <label
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -3612,18 +3654,16 @@ useEffect(() => {
                             >
                               Masukan Nama Anda
                             </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full bg-white border-b-slate-900 text-gray-700   rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
+                            <Select
+                              value={selectedOptionTeamQuality}
+                              onChange={handleSelectChangeTeamQuality}
+                              options={optionsTeamQuality}
+                              isSearchable
+                              placeholder="Pilih Nama"
+                            />
                           </div>
                         </div>
-                        <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="flex flex-wrap -mx-3 mt-3 mb-4">
                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <label
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -3700,17 +3740,17 @@ useEffect(() => {
                         </div>
                         <div className="flex justify-end">
                           <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                             onClick={() => setIsOpenValQA(false)}
                           >
-                            Batal
+                            No, cancel
                           </button>
                           <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             type="submit"
                             onClick={submitValQA}
                           >
-                            Submit
+                            Yes, I'm sure
                           </button>
                         </div>
                         <button
@@ -3764,18 +3804,16 @@ useEffect(() => {
                             >
                               Masukan Nama Anda
                             </label>
-                            <input
-                              type="text"
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              name="NamaPIC"
-                              required
-                              onChange={(e) => {
-                                setNamaPIC(e.target.value);
-                              }}
-                            ></input>
+                            <Select
+                              value={selectedOptionTeamQuality}
+                              onChange={handleSelectChangeTeamQuality}
+                              options={optionsTeamQuality}
+                              isSearchable
+                              placeholder="Pilih Nama"
+                            />
                           </div>
                         </div>
-                        <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="flex flex-wrap -mx-3 mt-3 mb-4">
                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <label
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -3852,17 +3890,17 @@ useEffect(() => {
                         </div>
                         <div className="flex justify-end">
                           <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                             onClick={() => setIsOpenValQC(false)}
                           >
-                            Batal
+                            No, cancel
                           </button>
                           <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             type="submit"
                             onClick={submitValQC}
                           >
-                            Submit
+                            Yes, I'm sure
                           </button>
                         </div>
                         <button

@@ -59,9 +59,7 @@ const Andonline1 = () => {
   const npkList = ["0301"];
   // -------------
 
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [selectedOptionDepartment, setSelectedOptionDepartment] =
-    useState(null);
+
 
   // DATA SCHEDULE PLANING
   const [data, setData] = useState(null);
@@ -138,6 +136,23 @@ const Andonline1 = () => {
   const [OverchangePressed, setOverchangePressed] = useState(false);
   const timeoutRefOverchange = useRef(null);
   // ----
+
+  // Selceted Name
+
+  // Tanpa database
+  const [selectedOptionDepartment, setSelectedOptionDepartment] =
+    useState(null);
+  // ....
+
+
+    
+  const [optionsOperator, setOptionsOperator] = useState([]);
+  const [selectedOptionOperator, setSelectedOptionOperator] = useState(null);
+
+  const [optionsOperatorManufacturing, setOptionsOperatorManufacturing] = useState([]);
+  const [selectedOptionOperatorManufacturing, setSelectedOptionOperatorManufacturing] = useState(null);
+  // .......................
+  
 
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -1347,36 +1362,63 @@ const Andonline1 = () => {
   };
   // ------
 
-  const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/Background.jpg)`,
-    backgroundSize: "1300px",
-    backgroundPosition: "0px",
-    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
+ 
+
+  //  Select Nama Operator
+  const handleSelectChangeOperatorManufacturing = (selectedselectedOptionOperatorManufacturingOption) => {
+    setSelectedOptionOperatorManufacturing(selectedOptionOperatorManufacturing);
+    setNamaPIC(selectedOptionOperatorManufacturing.value);
   };
 
-  const handleSelectChange = (selectedOption) => {
-    setSelectedOption(selectedOption);
-    setNamaPIC(selectedOption.value);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/Employee_Operator_Manufacturing")
+      .then((response) => response.json())
+      .then((data) => {
+        const transformedOptions = data.map((item) => ({
+          value: item.nama_emp,
+          label: item.nama_emp,
+        }));
+        setOptionsOperatorManufacturing(transformedOptions);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  // ...............................................
+
+
+
+
+
+  //  Select Nama Operator
+  const handleSelectChangeOperator = (selectedOptionOperator) => {
+    setSelectedOptionOperator(selectedOptionOperator);
+    setNamaPIC(selectedOptionOperator.value);
   };
 
-  const [options, setOptions] = useState([]);
 
-useEffect(() => {
-  fetch("http://localhost:3001/api/Employee_Operator")
-    .then((response) => response.json())
-    .then((data) => {
-      const transformedOptions = data.map((item) => ({
-        value: item.nama_emp,
-        label: item.nama_emp,
-      }));
-      setOptions(transformedOptions);
-    })
-    .catch((error) => {
-      // Tangani error jika permintaan gagal
-      console.error("Error fetching data:", error);
-    });
-}, []);
+  useEffect(() => {
+    fetch("http://localhost:3001/api/Employee_Operator")
+      .then((response) => response.json())
+      .then((data) => {
+        const transformedOptions = data.map((item) => ({
+          value: item.nama_emp,
+          label: item.nama_emp,
+        }));
+        setOptionsOperator(transformedOptions);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
+  // ...............................................
+
+  // Tanpa Database Select Department
 
   const OptionsDepartment = [
     { value: "", label: "-- Pilih Depart --" },
@@ -1398,19 +1440,15 @@ useEffect(() => {
     setDepartment(selectedOptionDepartment.value);
   };
 
+  // ...............................................
 
+  const styles = {
+    backgroundImage: `url(${process.env.PUBLIC_URL}/Background.jpg)`,
+    backgroundSize: "1300px",
+    backgroundPosition: "0px",
+    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
+  };
 
-  useEffect(() => {
-    fetch("http://localhost:3001/api/Employee_Operator")
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  }, []);
 
   return (
     <body style={styles}>
@@ -1710,7 +1748,7 @@ useEffect(() => {
                     onTouchEnd={handleElectricityRelease}
                     style={{ backgroundColor: backgroundColorElectricity }}
                     value={Electricity}
-                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1728,7 +1766,7 @@ useEffect(() => {
                   <button
                     style={{ backgroundColor: backgroundColorNetwork }}
                     value={Network}
-                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
                     onClick={() => {
                       setStation("Network");
                       if (Network === "Go") {
@@ -1766,7 +1804,7 @@ useEffect(() => {
                     onTouchEnd={handleAircompRelease}
                     style={{ backgroundColor: backgroundColorAircomp }}
                     value={Aircomp}
-                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1795,7 +1833,7 @@ useEffect(() => {
                     onMouseLeave={handleOthersRelease}
                     onTouchStart={handleOthersPress}
                     onTouchEnd={handleOthersRelease}
-                    class="w-full max-w-sm  bg-lime-900 shadow-lg rounded-full "
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-full "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center  text-white">OTHERS</div>
@@ -1833,7 +1871,7 @@ useEffect(() => {
                     onTouchEnd={handleShorcompRelease}
                     style={{ backgroundColor: backgroundColorShorcomp }}
                     value={Shorcomp}
-                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1862,7 +1900,7 @@ useEffect(() => {
                     onTouchEnd={handleShorboxRelease}
                     style={{ backgroundColor: backgroundColorShorbox }}
                     value={Shorbox}
-                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1891,7 +1929,7 @@ useEffect(() => {
                     onTouchEnd={handleOvertrialRelease}
                     style={{ backgroundColor: backgroundColorOvertrial }}
                     value={Overtrial}
-                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1920,7 +1958,7 @@ useEffect(() => {
                     onTouchEnd={handleOverchangeRelease}
                     style={{ backgroundColor: backgroundColorOverchange }}
                     value={Overchange}
-                    class="w-full max-w-sm   bg-lime-600 shadow-lg rounded-xl "
+                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-sm text-center text-white">
@@ -1989,9 +2027,9 @@ useEffect(() => {
                             Masukan Nama Anda
                           </label>
                           <Select
-                            value={selectedOption}
-                            onChange={handleSelectChange}
-                            options={options}
+                            value={selectedOptionOperator}
+                            onChange={handleSelectChangeOperator}
+                            options={optionsOperator}
                             isSearchable
                             placeholder="Pilih Nama"
                           />
@@ -2006,13 +2044,13 @@ useEffect(() => {
                         >
                           Depart To
                         </label>
-                            <Select
-                            value={selectedOptionDepartment}
-                            onChange={handleSelectDepartment}
-                            options={OptionsDepartment}
-                            isSearchable
-                            placeholder="Pilih Department"
-                          />
+                        <Select
+                          value={selectedOptionDepartment}
+                          onChange={handleSelectDepartment}
+                          options={OptionsDepartment}
+                          isSearchable
+                          placeholder="Pilih Department"
+                        />
                       </div>
                       <div class="flex flex-wrap -mx-3 ">
                         <div class="w-full px-1 mb-2">
@@ -2020,7 +2058,7 @@ useEffect(() => {
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for="grid-city"
                           >
-                            Machine Line
+                            Line
                           </label>
                           <span
                             class="appearance-none block w-full bg-gray-200  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -2058,18 +2096,19 @@ useEffect(() => {
                         </div>
                       </div>
                       <div className="flex justify-end mt-7">
+                       
                         <button
-                          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                          onClick={() => setIsOpenOthers(false)}
-                        >
-                          Batal
-                        </button>
-                        <button
-                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                          class="text-white bg-emerald-600 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                           type="submit"
                           onClick={SubmitOthers}
                         >
-                          Submit
+                          Yes, I'm sure
+                        </button>
+                        <button
+                         class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                          onClick={() => setIsOpenOthers(false)}
+                        >
+                           No, cancel
                         </button>
                       </div>
                     </form>
@@ -2542,15 +2581,13 @@ useEffect(() => {
                               >
                                 Masukan Nama Anda
                               </label>
-                              <input
-                                type="text"
-                                class="appearance-none block w-full bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                name="NamaPIC"
-                                required
-                                onChange={(e) => {
-                                  setNamaPIC(e.target.value);
-                                }}
-                              ></input>
+                              <Select
+                                value={selectedOptionOperatorManufacturing}
+                                onChange={handleSelectChangeOperatorManufacturing}
+                                options={optionsOperatorManufacturing}
+                                isSearchable
+                                placeholder="Pilih Nama"
+                              />
                             </div>
                             <div class="w-full md:w-1/2 px-3">
                               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -2558,7 +2595,7 @@ useEffect(() => {
                               </label>
                               <input
                                 type="text"
-                                class="appearance-none block w-full text-center  font-bold bg-gray-200 text-black border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                class="appearance-none block w-full text-center  font-semibold bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                 name="NamaPIC"
                                 readOnly
                                 value={Line}
@@ -2592,7 +2629,7 @@ useEffect(() => {
                               data-modal-hide="popup-modal"
                               type="button"
                               onClick={SubmitGeneral}
-                              class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                              class="text-white bg-emerald-600 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                             >
                               Yes, I'm sure
                             </button>
@@ -2600,7 +2637,7 @@ useEffect(() => {
                               data-modal-hide="popup-modal"
                               type="button"
                               onClick={() => setIsOpenGeneral(false)}
-                              class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                              class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                             >
                               No, cancel
                             </button>
