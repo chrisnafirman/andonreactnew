@@ -1626,7 +1626,7 @@ const SmtBot = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/Employee_Operator_Manufacturing")
+    fetch("http://192.168.101.236:3001/api/Employee_Operator_Manufacturing")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({
@@ -1650,7 +1650,7 @@ const SmtBot = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/Employee_Team_Maintenance")
+    fetch("http://192.168.101.236:3001/api/Employee_Team_Maintenance")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({
@@ -1674,7 +1674,7 @@ const SmtBot = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/Employee_Team_Quality")
+    fetch("http://192.168.101.236:3001/api/Employee_Team_Quality")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({

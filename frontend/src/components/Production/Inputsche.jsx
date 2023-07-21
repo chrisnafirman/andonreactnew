@@ -373,26 +373,24 @@ const SmtTop = () => {
       return interval; // Return the interval ID for cleanup
     };
 
-const formatTime = (time) => {
-  const totalSeconds = Math.floor(time / 1000);
-  const minutes = Math.floor(totalSeconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const remainingMinutes = minutes % 60;
-
-  if (hours >= 1) {
-    if (remainingMinutes >= 1) {
-      return `${hours} jam ${remainingMinutes} menit`;
-    } else {
-      return `${hours} jam`;
-    }
-  } else if (minutes >= 1) {
-    return `${minutes} menit`;
-  } else if (totalSeconds < 60) {
-    return "Running";
-  } else {
-    return "Invalid time";
-  }
-};
+    const formatTime = (time) => {
+      const totalSeconds = Math.floor(time / 1000);
+      const minutes = Math.floor(totalSeconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const remainingMinutes = minutes % 60;
+    
+      if (hours >= 1) {
+        return `${hours} jam ${remainingMinutes} menit`;
+      } else if (minutes >= 1) {
+        return `${minutes} menit`;
+      } else if (totalSeconds < 60) {
+        return "Running";
+      } else {
+        return "Invalid time";
+      }
+    };
+    
+    
 
     let intervals = [];
 
@@ -430,7 +428,7 @@ const formatTime = (time) => {
   const calculateTotalTime = () => {
     let totalJam = 0;
     let totalMenit = 0;
-
+  
     // Mengambil nilai dari state
     const waktuPT1 = RealPT1.split(" ");
     const waktuPT2 = RealPT2.split(" ");
@@ -438,78 +436,61 @@ const formatTime = (time) => {
     const waktuPT4 = RealPT4.split(" ");
     const waktuPD = RealPD.split(" ");
     const waktuOT = RealOT.split(" ");
-
+  
+    // Helper function untuk mengonversi waktu dalam bentuk jam-menit ke menit
+    const convertToMinutes = (waktu) => {
+      if (waktu.length === 4) {
+        const jam = parseInt(waktu[0]);
+        const menit = parseInt(waktu[2]);
+        return jam * 60 + menit;
+      } else if (waktu.length === 2) {
+        const menit = parseInt(waktu[0]);
+        return menit;
+      }
+      return 0;
+    };
+  
     // Menambahkan waktu PT1
     if (waktuPT1[0] !== "Waiting...") {
-      if (waktuPT1.length === 4) {
-        totalJam += parseInt(waktuPT1[0]);
-        totalMenit += parseInt(waktuPT1[2]);
-      } else if (waktuPT1.length === 2) {
-        totalMenit += parseInt(waktuPT1[0]);
-      }
+      totalMenit += convertToMinutes(waktuPT1);
     }
-
+  
     // Menambahkan waktu PT2
     if (waktuPT2[0] !== "Waiting...") {
-      if (waktuPT2.length === 4) {
-        totalJam += parseInt(waktuPT2[0]);
-        totalMenit += parseInt(waktuPT2[2]);
-      } else if (waktuPT2.length === 2) {
-        totalMenit += parseInt(waktuPT2[0]);
-      }
+      totalMenit += convertToMinutes(waktuPT2);
     }
-
+  
     // Menambahkan waktu PT3
     if (waktuPT3[0] !== "Waiting...") {
-      if (waktuPT3.length === 4) {
-        totalJam += parseInt(waktuPT3[0]);
-        totalMenit += parseInt(waktuPT3[2]);
-      } else if (waktuPT3.length === 2) {
-        totalMenit += parseInt(waktuPT3[0]);
-      }
+      totalMenit += convertToMinutes(waktuPT3);
     }
-
+  
     // Menambahkan waktu PT4
     if (waktuPT4[0] !== "Waiting...") {
-      if (waktuPT4.length === 4) {
-        totalJam += parseInt(waktuPT4[0]);
-        totalMenit += parseInt(waktuPT4[2]);
-      } else if (waktuPT4.length === 2) {
-        totalMenit += parseInt(waktuPT4[0]);
-      }
+      totalMenit += convertToMinutes(waktuPT4);
     }
-
+  
     // Menambahkan waktu PD jika bukan "Waiting..."
     if (waktuPD[0] !== "Waiting...") {
-      if (waktuPD.length === 4) {
-        totalJam += parseInt(waktuPD[0]);
-        totalMenit += parseInt(waktuPD[2]);
-      } else if (waktuPD.length === 2) {
-        totalMenit += parseInt(waktuPD[0]);
-      }
+      totalMenit += convertToMinutes(waktuPD);
     }
-
+  
     // Menambahkan waktu OT jika bukan "Waiting..."
     if (waktuOT[0] !== "Waiting...") {
-      if (waktuOT.length === 4) {
-        totalJam += parseInt(waktuOT[0]);
-        totalMenit += parseInt(waktuOT[2]);
-      } else if (waktuOT.length === 2) {
-        totalMenit += parseInt(waktuOT[0]);
-      }
+      totalMenit += convertToMinutes(waktuOT);
     }
-
+  
     // Mengubah menit menjadi jam jika lebih dari 60
     if (totalMenit >= 60) {
       const tambahanJam = Math.floor(totalMenit / 60);
       totalJam += tambahanJam;
       totalMenit -= tambahanJam * 60;
     }
-
+  
     // Mengatur nilai hasil penjumlahan ke state Total
     const output = `${totalJam} jam ${totalMenit} menit`;
     setTotal(output);
-
+  
     // Mengirim hasil total ke Firebase
     firebase
       .database()
@@ -522,10 +503,12 @@ const formatTime = (time) => {
         console.error("Error mengirim total waktu ke Firebase:", error);
       });
   };
-
+  
   useEffect(() => {
     calculateTotalTime();
   }, [RealPT1, RealPT2, RealPT3, RealPT4, RealPD, RealOT]);
+  
+  
 
   //
 

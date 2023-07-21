@@ -149,8 +149,13 @@ const Andonline1 = () => {
   const [optionsOperator, setOptionsOperator] = useState([]);
   const [selectedOptionOperator, setSelectedOptionOperator] = useState(null);
 
-  const [optionsOperatorManufacturing, setOptionsOperatorManufacturing] = useState([]);
-  const [selectedOptionOperatorManufacturing, setSelectedOptionOperatorManufacturing] = useState(null);
+  // select operator manufacturing
+  const [optionsOperatorManufacturing, setOptionsOperatorManufacturing] =
+    useState([]);
+  const [
+    selectedOptionOperatorManufacturing,
+    setSelectedOptionOperatorManufacturing,
+  ] = useState(null);
   // .......................
   
 
@@ -1365,14 +1370,15 @@ const Andonline1 = () => {
  
 
   //  Select Nama Operator
-  const handleSelectChangeOperatorManufacturing = (selectedselectedOptionOperatorManufacturingOption) => {
+  const handleSelectChangeOperatorManufacturing = (
+    selectedOptionOperatorManufacturing
+  ) => {
     setSelectedOptionOperatorManufacturing(selectedOptionOperatorManufacturing);
     setNamaPIC(selectedOptionOperatorManufacturing.value);
   };
 
-
   useEffect(() => {
-    fetch("http://localhost:3001/api/Employee_Operator_Manufacturing")
+    fetch("http://192.168.101.236:3001/api/Employee_Operator_Manufacturing")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({
@@ -1401,7 +1407,7 @@ const Andonline1 = () => {
 
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/Employee_Operator")
+    fetch("http://192.168.101.236:3001/api/Employee_Operator")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({
@@ -2582,12 +2588,12 @@ const Andonline1 = () => {
                                 Masukan Nama Anda
                               </label>
                               <Select
-                                value={selectedOptionOperatorManufacturing}
-                                onChange={handleSelectChangeOperatorManufacturing}
-                                options={optionsOperatorManufacturing}
-                                isSearchable
-                                placeholder="Pilih Nama"
-                              />
+                              value={selectedOptionOperatorManufacturing}
+                              onChange={handleSelectChangeOperatorManufacturing}
+                              options={optionsOperatorManufacturing}
+                              isSearchable
+                              placeholder="Pilih Nama"
+                            />
                             </div>
                             <div class="w-full md:w-1/2 px-3">
                               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
