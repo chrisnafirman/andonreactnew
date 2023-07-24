@@ -191,7 +191,6 @@ const UserMobile = () => {
 
   // Gesture Button
 
-
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
   //  fungsi mengambil data dari firebase
@@ -207,22 +206,6 @@ const UserMobile = () => {
       setStatusLine(data);
     });
 
-    // Failure
-
-    const ref3 = firebase.database().ref("SMTLine1/Network");
-    ref3.on("value", (snapshot) => {
-      const data = snapshot.val();
-      updateNetwork(data);
-    });
-
-    const ref4 = firebase.database().ref("SMTLine1/Electricity");
-    ref4.on("value", (snapshot) => {
-      const data = snapshot.val();
-      updateElectricity(data);
-    });
-
-    // ...........
-
     const ref10 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
     ref10.on("value", (snapshot) => {
       const data = snapshot.val();
@@ -234,6 +217,7 @@ const UserMobile = () => {
       .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1");
     ref11.on("value", (snapshot) => {
       const data = snapshot.val();
+
       setRealPT1(data);
     });
 
@@ -277,7 +261,207 @@ const UserMobile = () => {
       setRealOT(data);
     });
 
-    return () => {};
+    // Failure
+
+    const ref20 = firebase.database().ref("SMTLine1/Network");
+    ref20.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateNetwork(data);
+    });
+
+    const ref21 = firebase.database().ref("SMTLine1/Electricity");
+    ref21.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateElectricity(data);
+    });
+
+    const ref22 = firebase.database().ref("SMTLine1/Air Compressor");
+    ref22.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateAircomp(data);
+    });
+
+    const ref23 = firebase.database().ref("SMTLine1/Shortage Comp");
+    ref23.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateShorcomp(data);
+    });
+
+    const ref24 = firebase.database().ref("SMTLine1/Shortage Box FG");
+    ref24.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateShorbox(data);
+    });
+
+    const ref25 = firebase.database().ref("SMTLine1/Over Trial");
+    ref25.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateOvertrial(data);
+    });
+
+
+    const ref26 = firebase.database().ref("SMTLine1/Over Change Model");
+    ref26.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateOverchange(data);
+    });
+
+    const ref27 = firebase.database().ref("SMTLine1/Others");
+    ref27.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateOthers(data);
+    });
+
+    // SMT TOP
+
+    const ref28 = firebase.database().ref("SMTLine1TOP/Destacker (TOP)");
+    ref28.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusdestackerTop(data);
+    });
+
+
+    const ref29 = firebase.database().ref("SMTLine1TOP/Label (TOP)");
+    ref29.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatuslabelTop(data);
+    });
+
+
+    const ref30 = firebase.database().ref("/SMTLine1TOP/Printer (TOP)");
+    ref30.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusPrinterTop(data);
+    });
+
+    const ref31 = firebase.database().ref("/SMTLine1TOP/Spi (TOP)");
+    ref31.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusSpiTop(data);
+    });
+
+    const ref32 = firebase.database().ref("/SMTLine1TOP/Pick&Place (TOP)");
+    ref32.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusPickNPlace(data);
+    });
+
+    const ref33 = firebase.database().ref("/SMTLine1TOP/Reflow (TOP)");
+    ref33.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusReflowTop(data);
+    });
+
+    const ref34 = firebase.database().ref("/SMTLine1TOP/AOI (TOP)");
+    ref34.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusAOITop(data);
+    });
+
+    const ref35 = firebase.database().ref("/SMTLine1TOP/RVS (TOP)");
+    ref35.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusRVSTop(data);
+    });
+
+    // SMT BOT
+    const ref36 = firebase.database().ref("SMTLine1BOT/Printer (BOT)");
+    ref36.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusPrinterBot(data);
+    });
+
+    const ref37 = firebase.database().ref("SMTLine1BOT/Spi (BOT)");
+    ref37.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusSpiBot(data);
+    });
+
+
+    const ref38 = firebase.database().ref("/SMTLine1BOT/Pick&Place (BOT)");
+    ref38.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusPickNPlaceBot(data);
+    });
+
+    const ref39 = firebase.database().ref("/SMTLine1BOT/Reflow (BOT)");
+    ref39.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusReflowBot(data);
+    });
+
+    const ref40 = firebase.database().ref("/SMTLine1BOT/AOI (BOT)");
+    ref40.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusAOIBot(data);
+    });
+
+    const ref41 = firebase.database().ref("/SMTLine1BOT/RVS (BOT)");
+    ref41.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusRVSBot(data);
+    });
+
+
+    // Update Status BE
+
+    const ref42 = firebase.database().ref("SMTLine1BE/Drop in (BE)");
+    ref42.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusDropinBE(data);
+    });
+
+    const ref43 = firebase.database().ref("SMTLine1BE/Fluxer (BE)");
+    ref43.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusFluxerBE(data);
+    });
+
+    const ref44 = firebase.database().ref("/SMTLine1BE/PreHeat (BE)");
+    ref44.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusPreheatBE(data);
+    });
+
+    const ref45 = firebase.database().ref("/SMTLine1BE/Seho1 (BE)");
+    ref45.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusSeho1BE(data);
+    });
+
+    const ref46 = firebase.database().ref("/SMTLine1BE/Seho2 (BE)");
+    ref46.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusSeho2BE(data);
+    });
+
+    const ref47 = firebase.database().ref("/SMTLine1BE/Touch UP (BE)");
+    ref47.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusTouchupBE(data);
+    });
+
+    const ref48 = firebase.database().ref("/SMTLine1BE/ICT (BE)");
+    ref48.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusICTBE(data);
+    });
+
+    const ref49 = firebase.database().ref("/SMTLine1BE/Flash (BE)");
+    ref49.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusFlashBE(data);
+    });
+
+
+    const ref50 = firebase.database().ref("/SMTLine1BE/Router (BE)");
+    ref50.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusRouterBE(data);
+    });
+    // ...........
+
+    return () => { };
   }, []);
 
   // ---------------------
@@ -448,9 +632,8 @@ const UserMobile = () => {
   // ----
 
   //  FUNGSI WAKTU
-  const formattedTime = `${currentTime.getDate()}/${
-    currentTime.getMonth() + 1
-  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+  const formattedTime = `${currentTime.getDate()}/${currentTime.getMonth() + 1
+    }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
   // fungsi time di navbar
   function updateTime() {
@@ -477,45 +660,653 @@ const UserMobile = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "PPIC"
+                ? "#7A6544"
+                : data === "QA"
+                  ? "#93C2C4"
+                  : data === "QC"
+                    ? "#BDD0D1"
+                    : "#565454"
     );
   };
 
-  // UPDATE Failure
+  // UPDATE Others
+  const updateOthers = (data) => {
+    setStatusOthers(data);
+    setBackgroundColorOthers(
+      data === "Go"
+        ? "rgb(54, 83, 20)"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "HRGA & EHS"
+            ? "#A61D00"
+            : data === "PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "QA"
+                      ? "#93C2C4"
+                      : data === "QC"
+                        ? "#BDD0D1"
+                        : data === "MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : "#565454"
+    );
+  };
+
+  // UPDATE Network
   const updateNetwork = (data) => {
     setBackgroundColorNetwork(
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Down"
-        ? "#C00000"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
     );
   };
+
+  // UPDATE Electricity
   const updateElectricity = (data) => {
     setBackgroundColorElectricity(
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Down"
-        ? "#C00000"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
     );
   };
 
+  // UPDATE Aircomp
+  const updateAircomp = (data) => {
+    setBackgroundColorAircomp(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
+    );
+  };
+
+  // UPDATE Shorcomp
+  const updateShorcomp = (data) => {
+    setBackgroundColorShorcomp(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
+    );
+  };
+
+  // UPDATE Shorbox
+  const updateShorbox = (data) => {
+    setBackgroundColorShorbox(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
+    );
+  };
+
+  // UPDATE OverTrial
+  const updateOvertrial = (data) => {
+    setBackgroundColorOvertrial(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
+    );
+  };
+
+  // UPDATE Overchangemodel
+  const updateOverchange = (data) => {
+    setBackgroundColorOverchange(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
+    );
+  };
+
+
+  // Update Status SMT TOP
+  const updateStatusdestackerTop = (data) => {
+    setBackgroundColorStatusdestackerTop(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatuslabelTop = (data) => {
+    setBackgroundColorStatuslabelTop(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusPrinterTop = (data) => {
+    setBackgroundColorStatusPrinterTop(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusSpiTop = (data) => {
+    setBackgroundColorStatusSpiTop(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusPickNPlace = (data) => {
+    setBackgroundColorStatusPickNPlace(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusReflowTop = (data) => {
+    setBackgroundColorStatusReflowTop(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusAOITop = (data) => {
+    setBackgroundColorStatusAOITop(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusRVSTop = (data) => {
+    setBackgroundColorStatusRVSTop(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+
+  // Update Status BOT
+
+
+  const updateStatusPrinterBot = (data) => {
+    setBackgroundColorStatusPrinterBot(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusSpiBot = (data) => {
+    setBackgroundColorStatusSpiBot(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusPickNPlaceBot = (data) => {
+    setBackgroundColorStatusPickNPlace(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusReflowBot = (data) => {
+    setBackgroundColorStatusReflowBot(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusAOIBot = (data) => {
+    setBackgroundColorStatusAOIBot(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusRVSBot = (data) => {
+    setBackgroundColorStatusRVSBot(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  // Update Status BE
+
+  const updateStatusDropinBE = (data) => {
+    setBackgroundColorStatusDropinBE(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusFluxerBE = (data) => {
+    setBackgroundColorStatusFluxerBE(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusPreheatBE = (data) => {
+    setBackgroundColorStatusPreheatBE(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusSeho1BE = (data) => {
+    setBackgroundColorStatusSeho1BE(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusSeho2BE = (data) => {
+    setBackgroundColorStatusSeho2BE(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusTouchupBE = (data) => {
+    setBackgroundColorStatusTouchupBE(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusICTBE = (data) => {
+    setBackgroundColorStatusICTBE(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusFlashBE = (data) => {
+    setBackgroundColorStatusFlashBE(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
+
+  const updateStatusRouterBE = (data) => {
+    setBackgroundColorStatusRouterBE(
+      data === "Go"
+        ? "#31A207"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
+    );
+  };
   // ----
 
   // Function Call Leader
@@ -529,13 +1320,11 @@ const UserMobile = () => {
   // ------
 
   const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/Background.jpg)`,
+    background: "linear-gradient(100deg, #1E295D, #020A2F)",
     backgroundSize: "1300px",
     backgroundPosition: "0px",
-    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
+    height: "2000px", // Change the height according to your needs
   };
-
-
 
   return (
     <body style={styles}>
@@ -625,162 +1414,27 @@ const UserMobile = () => {
 
       {/*  */}
       <main>
-        <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
-          <button class="w-60 sm:w-36 lg:w-32">
-            <a
-              href="/Andonline1"
-              class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4  active focus:outline-none dark:bg-gray-700 dark:text-white"
-              aria-current="page"
-            >
-              SMT Line 1
-            </a>
-          </button>
-
-          <button class="w-60 sm:w-36 lg:w-32 bg-white">
-            <a href="Inputsche">
-              <svg
-                width="20px"
-                className="justify-center items-center mx-auto"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M9 20H6C3.79086 20 2 18.2091 2 16V7C2 4.79086 3.79086 3 6 3H17C19.2091 3 21 4.79086 21 7V10"
-                  stroke="#000000"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M8 2V4"
-                  stroke="#000000"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M15 2V4"
-                  stroke="#000000"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M2 8H21"
-                  stroke="#000000"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M18.5 15.6429L17 17.1429"
-                  stroke="#000000"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <circle
-                  cx="17"
-                  cy="17"
-                  r="5"
-                  stroke="#000000"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </a>
-          </button>
+        <ul class="text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
           <button
+            className="absolute mt-8 right-3 rounded-full"
             onClick={() => setIsOpen2(true)}
-            class="w-60 sm:w-36 lg:w-32 bg-white rounded-r-lg"
           >
             <svg
-              fill="#ff7f50"
-              width="23px"
-              version="1.1"
-              className="justify-center items-center mx-auto animate-bounce"
-              id="Layer_1"
-              viewBox="0 0 512 512"
+              width="40px"
+              viewBox="0 0 64 64"
+              aria-hidden="true"
+              role="img"
+              className="iconify iconify--emojione"
+              preserveAspectRatio="xMidYMid meet"
             >
-              <g>
-                <g>
-                  <path
-                    d="M256,0C120.477,0,10.224,110.255,10.224,245.778c0,62.171,23.12,121.186,65.206,166.725l-13.707,88.342
-			c-0.558,3.601,0.953,7.208,3.91,9.336c1.677,1.207,3.657,1.82,5.647,1.82c1.52,0,3.046-0.357,4.447-1.083l79.241-41.036
-			c31.825,14.386,65.788,21.675,101.032,21.675c135.521,0,245.778-110.255,245.778-245.778C501.778,110.255,391.523,0,256,0z
-			 M256,472.211c-33.973,0-66.646-7.347-97.114-21.835c-2.731-1.3-5.914-1.245-8.601,0.146l-66.524,34.45l11.51-74.177
-			c0.463-2.982-0.493-6.007-2.582-8.184c-40.704-42.373-63.121-98.072-63.121-156.835C29.568,120.922,131.145,19.344,256,19.344
-			s226.433,101.577,226.433,226.433S380.856,472.211,256,472.211z"
-                  />
-                </g>
-              </g>
-              <g>
-                <g>
-                  <path
-                    d="M256,70.708c-28.236,0-51.208,22.972-51.208,51.208c0,28.236,22.972,51.208,51.208,51.208
-			c28.238,0,51.208-22.972,51.208-51.208C307.208,93.678,284.236,70.708,256,70.708z M256,153.78
-			c-17.57,0-31.864-14.294-31.864-31.864S238.43,90.052,256,90.052c17.571,0,31.864,14.294,31.864,31.864S273.57,153.78,256,153.78z
-			"
-                  />
-                </g>
-              </g>
-              <g>
-                <g>
-                  <path
-                    d="M312.758,357.74h-11.013V199.148c0-5.342-4.331-9.672-9.672-9.672h-92.828c-5.342,0-9.672,4.331-9.672,9.672v32.143
-			c0,5.342,4.331,9.672,9.672,9.672h11.013v116.777h-11.013c-5.342,0-9.672,4.331-9.672,9.672v32.143
-			c0,5.343,4.331,9.673,9.672,9.673h113.514c5.342,0,9.672-4.331,9.672-9.672v-32.143C322.43,362.071,318.099,357.74,312.758,357.74
-			z M303.085,389.884h-94.17v-12.8h11.013c5.342,0,9.672-4.331,9.672-9.672V231.291c0-5.342-4.331-9.672-9.672-9.672h-11.013
-			v-12.798H282.4v158.593c0,5.342,4.331,9.672,9.672,9.672h11.013V389.884z"
-                  />
-                </g>
+              <circle cx="32" cy="32" r="30" fill="#0014a8 "></circle>
+              <g fill="#ffffff">
+                <path d="M27 27.8h10v24H27z"></path>
+                <circle cx="32" cy="17.2" r="5"></circle>
               </g>
             </svg>
           </button>
         </ul>
-
-        <button
-          className=" absolute top-0 right-0  rounded-full "
-          style={{
-            top: `100px`,
-          }}
-          onClick={() => setIsOpen2(true)}
-        >
-          <svg
-            width="50px"
-            viewBox="0 0 64 64"
-            aria-hidden="true"
-            role="img"
-            class="iconify iconify--emojione"
-            preserveAspectRatio="xMidYMid meet"
-          >
-            <circle cx="32" cy="32" r="30" fill="#4fd1d9"></circle>
-
-            <g fill="#ffffff">
-              <path d="M27 27.8h10v24H27z"></path>
-
-              <circle cx="32" cy="17.2" r="5"></circle>
-            </g>
-          </svg>
-        </button>
-
-        {/* <button  >
-          <span
-            className="pt-4 sm:ml-5   text-2xl flex  text-white font-thin px-2"
-          >
-            Failure
-            <svg width="30px" className="ml-3" viewBox="0 0 15 15" fill="none">
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M7.49999 3.09998C7.27907 3.09998 7.09999 3.27906 7.09999 3.49998C7.09999 3.72089 7.27907 3.89998 7.49999 3.89998H14.5C14.7209 3.89998 14.9 3.72089 14.9 3.49998C14.9 3.27906 14.7209 3.09998 14.5 3.09998H7.49999ZM7.49998 5.1C7.27907 5.1 7.09998 5.27908 7.09998 5.5C7.09998 5.72091 7.27907 5.9 7.49998 5.9H14.5C14.7209 5.9 14.9 5.72091 14.9 5.5C14.9 5.27908 14.7209 5.1 14.5 5.1H7.49998ZM7.1 7.5C7.1 7.27908 7.27909 7.1 7.5 7.1H14.5C14.7209 7.1 14.9 7.27908 14.9 7.5C14.9 7.72091 14.7209 7.9 14.5 7.9H7.5C7.27909 7.9 7.1 7.72091 7.1 7.5ZM7.49998 9.1C7.27907 9.1 7.09998 9.27908 7.09998 9.5C7.09998 9.72091 7.27907 9.9 7.49998 9.9H14.5C14.7209 9.9 14.9 9.72091 14.9 9.5C14.9 9.27908 14.7209 9.1 14.5 9.1H7.49998ZM7.09998 11.5C7.09998 11.2791 7.27907 11.1 7.49998 11.1H14.5C14.7209 11.1 14.9 11.2791 14.9 11.5C14.9 11.7209 14.7209 11.9 14.5 11.9H7.49998C7.27907 11.9 7.09998 11.7209 7.09998 11.5ZM2.5 9.25003L5 6.00003H0L2.5 9.25003Z"
-                fill=" #FFFFFF"
-              />
-            </svg>
-          </span>
-        </button> */}
 
         <div
           class="relative pt-4 sm:ml-5   text-2xl flex mb-4  text-white font-thin px-2 "
@@ -880,8 +1534,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorAircomp }}
+                        value={Aircomp}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -942,8 +1596,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorOthers }}
+                        value={Others}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -985,8 +1639,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorShorcomp }}
+                        value={Shorcomp}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -1019,8 +1673,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorShorbox }}
+                        value={Shorbox}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -1053,8 +1707,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorOvertrial }}
+                        value={Overtrial}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -1095,8 +1749,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorOverchange }}
+                        value={Overchange}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -1180,8 +1834,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorStatusdestackerTop }}
+                        value={DestackerTop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -1287,8 +1941,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorStatuslabelTop }}
+                        value={LabelTop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -1394,8 +2048,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorStatusPrinterTop }}
+                        value={PrinterTop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -1501,8 +2155,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorStatusSpiTop }}
+                        value={SpiTop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -1613,8 +2267,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorStatusPickNPlace }}
+                        value={PickNPlace}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -1720,8 +2374,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorStatusReflowTop }}
+                        value={ReflowTop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -1827,8 +2481,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorStatusAOITop }}
+                        value={AOITop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -1934,8 +2588,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorStatusRVSTop }}
+                        value={RVSTop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -2082,8 +2736,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: setBackgroundColorStatusPrinterBot }}
+                        value={PrinterBot}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -2189,8 +2843,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorStatusSpiBot }}
+                        value={SpiBot}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -2296,8 +2950,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorStatusPickNPlaceBot }}
+                        value={PickNPlaceBot}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -2403,8 +3057,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorStatusReflowBot }}
+                        value={ReflowBot}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -2515,8 +3169,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorStatusAOIBot }}
+                        value={AOIBot}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -2622,8 +3276,8 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: backgroundColorNetwork }}
-                        value={Network}
+                        style={{ backgroundColor: backgroundColorStatusRVSBot }}
+                        value={RVSBot}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
                         <svg
@@ -2729,7 +3383,6 @@ const UserMobile = () => {
           </>
         ) : null}
 
-
         <div
           class="relative pt-4 sm:ml-5   text-2xl flex mb-4  text-white font-thin px-2 "
           data-te-dropdown-ref
@@ -2764,31 +3417,31 @@ const UserMobile = () => {
 
         {isSMTBE ? (
           <>
-        <div>
-          <div class="pt-4 flex   md:flex-row p-4 sm:ml-5">
-            <section class="antialiased  text-gray-600  px-2" x-data="app">
-              <div class="flex flex-col ">
-                {/* <!-- Table --> */}
-                <div className=" pt-2 w-50 sm:w-50 lg:w-50">
-                  <button
-                    style={{ backgroundColor: backgroundColorNetwork }}
-                    value={Network}
-                    class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
-                  >
-                    <svg
-                      width="50px"
-                      fill="#2e3436"
-                      fill-opacity="0.7000"
-                      className="justify-center items-center mx-auto mt-1"
-                      version="1.1"
-                      id="Layer_1"
-                      viewBox="0 0 512 512"
-                    >
-                      <g>
-                        <g>
+            <div>
+              <div class="pt-4 flex   md:flex-row p-4 sm:ml-5">
+                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                  <div class="flex flex-col ">
+                    {/* <!-- Table --> */}
+                    <div className=" pt-2 w-50 sm:w-50 lg:w-50">
+                      <button
+                        style={{ backgroundColor: backgroundColorStatusDropinBE }}
+                        value={DropinBE}
+                        class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                      >
+                        <svg
+                          width="50px"
+                          fill="#2e3436"
+                          fill-opacity="0.7000"
+                          className="justify-center items-center mx-auto mt-1"
+                          version="1.1"
+                          id="Layer_1"
+                          viewBox="0 0 512 512"
+                        >
                           <g>
-                            <path
-                              d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+                            <g>
+                              <g>
+                                <path
+                                  d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
 				c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
 				s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
 				 M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
@@ -2798,104 +3451,104 @@ const UserMobile = () => {
 				 M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
 				v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
 				h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
-                            />
-                            <path
-                              d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+                                />
+                                <path
+                                  d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
 				c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
 				z"
-                            />
-                            <path
-                              d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C358.4,175.38,362.221,179.2,366.933,179.2z"
-                            />
-                            <path
-                              d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C477.867,140.354,474.046,136.533,469.333,136.533z"
-                            />
-                            <path
-                              d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C426.667,175.38,430.487,179.2,435.2,179.2z"
-                            />
-                            <path
-                              d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C409.6,140.354,405.78,136.533,401.067,136.533z"
-                            />
-                            <path
-                              d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+                                />
+                                <path
+                                  d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
 				c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
 				V213.333z"
-                            />
-                            <path
-                              d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+                                />
+                                <path
+                                  d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
 				c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
 				V230.4z"
-                            />
-                            <path
-                              d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
-                            />
-                            <path
-                              d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
-                            />
-                            <path
-                              d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
-                            />
-                            <path
-                              d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
-                            />
-                            <path
-                              d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
 				s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
-                            />
-                            <path
-                              d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
 				c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
-                            />
+                                />
+                              </g>
+                            </g>
                           </g>
-                        </g>
-                      </g>
-                    </svg>
-                    <header class="px-5 py-2  ">
-                      <div class="italic  text-center text-sm text-white">
-                        Drop In (BE)
-                      </div>
-                    </header>
-                  </button>
-                </div>
-              </div>
-            </section>
-            <section class="antialiased  text-gray-600  px-2" x-data="app">
-              <div class="flex flex-col ">
-                {/* <!-- Table --> */}
-                <div className=" pt-2 w-50 sm:w-50 lg:w-50">
-                  <button
-                    style={{ backgroundColor: backgroundColorNetwork }}
-                    value={Network}
-                    class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
-                  >
-                    <svg
-                      width="50px"
-                      fill="#2e3436"
-                      fill-opacity="0.7000"
-                      className="justify-center items-center mx-auto mt-1"
-                      version="1.1"
-                      id="Layer_1"
-                      viewBox="0 0 512 512"
-                    >
-                      <g>
-                        <g>
+                        </svg>
+                        <header class="px-5 py-2  ">
+                          <div class="italic  text-center text-sm text-white">
+                            Drop In (BE)
+                          </div>
+                        </header>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                  <div class="flex flex-col ">
+                    {/* <!-- Table --> */}
+                    <div className=" pt-2 w-50 sm:w-50 lg:w-50">
+                      <button
+                        style={{ backgroundColor: backgroundColorStatusFluxerBE }}
+                        value={FluxerBE}
+                        class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                      >
+                        <svg
+                          width="50px"
+                          fill="#2e3436"
+                          fill-opacity="0.7000"
+                          className="justify-center items-center mx-auto mt-1"
+                          version="1.1"
+                          id="Layer_1"
+                          viewBox="0 0 512 512"
+                        >
                           <g>
-                            <path
-                              d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+                            <g>
+                              <g>
+                                <path
+                                  d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
 				c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
 				s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
 				 M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
@@ -2905,104 +3558,104 @@ const UserMobile = () => {
 				 M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
 				v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
 				h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
-                            />
-                            <path
-                              d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+                                />
+                                <path
+                                  d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
 				c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
 				z"
-                            />
-                            <path
-                              d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C358.4,175.38,362.221,179.2,366.933,179.2z"
-                            />
-                            <path
-                              d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C477.867,140.354,474.046,136.533,469.333,136.533z"
-                            />
-                            <path
-                              d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C426.667,175.38,430.487,179.2,435.2,179.2z"
-                            />
-                            <path
-                              d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C409.6,140.354,405.78,136.533,401.067,136.533z"
-                            />
-                            <path
-                              d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+                                />
+                                <path
+                                  d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
 				c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
 				V213.333z"
-                            />
-                            <path
-                              d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+                                />
+                                <path
+                                  d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
 				c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
 				V230.4z"
-                            />
-                            <path
-                              d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
-                            />
-                            <path
-                              d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
-                            />
-                            <path
-                              d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
-                            />
-                            <path
-                              d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
-                            />
-                            <path
-                              d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
 				s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
-                            />
-                            <path
-                              d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
 				c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
-                            />
+                                />
+                              </g>
+                            </g>
                           </g>
-                        </g>
-                      </g>
-                    </svg>
-                    <header class="px-5 py-2  ">
-                      <div class="italic  text-center text-sm text-white">
-                        Fluxer (BE)
-                      </div>
-                    </header>
-                  </button>
-                </div>
-              </div>
-            </section>
-            <section class="antialiased  text-gray-600  px-2" x-data="app">
-              <div class="flex flex-col ">
-                {/* <!-- Table --> */}
-                <div className=" pt-2 w-50 sm:w-50 lg:w-50">
-                  <button
-                    style={{ backgroundColor: backgroundColorNetwork }}
-                    value={Network}
-                    class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
-                  >
-                    <svg
-                      width="50px"
-                      fill="#2e3436"
-                      fill-opacity="0.7000"
-                      className="justify-center items-center mx-auto mt-1"
-                      version="1.1"
-                      id="Layer_1"
-                      viewBox="0 0 512 512"
-                    >
-                      <g>
-                        <g>
+                        </svg>
+                        <header class="px-5 py-2  ">
+                          <div class="italic  text-center text-sm text-white">
+                            Fluxer (BE)
+                          </div>
+                        </header>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                  <div class="flex flex-col ">
+                    {/* <!-- Table --> */}
+                    <div className=" pt-2 w-50 sm:w-50 lg:w-50">
+                      <button
+                        style={{ backgroundColor: backgroundColorStatusPreheatBE }}
+                        value={PreheatBE}
+                        class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                      >
+                        <svg
+                          width="50px"
+                          fill="#2e3436"
+                          fill-opacity="0.7000"
+                          className="justify-center items-center mx-auto mt-1"
+                          version="1.1"
+                          id="Layer_1"
+                          viewBox="0 0 512 512"
+                        >
                           <g>
-                            <path
-                              d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+                            <g>
+                              <g>
+                                <path
+                                  d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
 				c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
 				s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
 				 M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
@@ -3012,104 +3665,104 @@ const UserMobile = () => {
 				 M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
 				v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
 				h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
-                            />
-                            <path
-                              d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+                                />
+                                <path
+                                  d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
 				c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
 				z"
-                            />
-                            <path
-                              d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C358.4,175.38,362.221,179.2,366.933,179.2z"
-                            />
-                            <path
-                              d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C477.867,140.354,474.046,136.533,469.333,136.533z"
-                            />
-                            <path
-                              d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C426.667,175.38,430.487,179.2,435.2,179.2z"
-                            />
-                            <path
-                              d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C409.6,140.354,405.78,136.533,401.067,136.533z"
-                            />
-                            <path
-                              d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+                                />
+                                <path
+                                  d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
 				c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
 				V213.333z"
-                            />
-                            <path
-                              d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+                                />
+                                <path
+                                  d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
 				c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
 				V230.4z"
-                            />
-                            <path
-                              d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
-                            />
-                            <path
-                              d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
-                            />
-                            <path
-                              d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
-                            />
-                            <path
-                              d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
-                            />
-                            <path
-                              d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
 				s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
-                            />
-                            <path
-                              d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
 				c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
-                            />
+                                />
+                              </g>
+                            </g>
                           </g>
-                        </g>
-                      </g>
-                    </svg>
-                    <header class="px-5 py-2  ">
-                      <div class="italic  text-center text-sm text-white">
-                        PreHeat (BE)
-                      </div>
-                    </header>
-                  </button>
-                </div>
-              </div>
-            </section>
-            <section class="antialiased  text-gray-600  px-2" x-data="app">
-              <div class="flex flex-col ">
-                {/* <!-- Table --> */}
-                <div className=" pt-2 w-50 sm:w-50 lg:w-50">
-                  <button
-                    style={{ backgroundColor: backgroundColorNetwork }}
-                    value={Network}
-                    class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
-                  >
-                    <svg
-                      width="50px"
-                      fill="#2e3436"
-                      fill-opacity="0.7000"
-                      className="justify-center items-center mx-auto mt-1"
-                      version="1.1"
-                      id="Layer_1"
-                      viewBox="0 0 512 512"
-                    >
-                      <g>
-                        <g>
+                        </svg>
+                        <header class="px-5 py-2  ">
+                          <div class="italic  text-center text-sm text-white">
+                            PreHeat (BE)
+                          </div>
+                        </header>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                  <div class="flex flex-col ">
+                    {/* <!-- Table --> */}
+                    <div className=" pt-2 w-50 sm:w-50 lg:w-50">
+                      <button
+                        style={{ backgroundColor: backgroundColorStatusSeho1BE }}
+                        value={Seho1BE}
+                        class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                      >
+                        <svg
+                          width="50px"
+                          fill="#2e3436"
+                          fill-opacity="0.7000"
+                          className="justify-center items-center mx-auto mt-1"
+                          version="1.1"
+                          id="Layer_1"
+                          viewBox="0 0 512 512"
+                        >
                           <g>
-                            <path
-                              d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+                            <g>
+                              <g>
+                                <path
+                                  d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
 				c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
 				s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
 				 M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
@@ -3119,109 +3772,109 @@ const UserMobile = () => {
 				 M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
 				v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
 				h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
-                            />
-                            <path
-                              d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+                                />
+                                <path
+                                  d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
 				c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
 				z"
-                            />
-                            <path
-                              d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C358.4,175.38,362.221,179.2,366.933,179.2z"
-                            />
-                            <path
-                              d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C477.867,140.354,474.046,136.533,469.333,136.533z"
-                            />
-                            <path
-                              d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C426.667,175.38,430.487,179.2,435.2,179.2z"
-                            />
-                            <path
-                              d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C409.6,140.354,405.78,136.533,401.067,136.533z"
-                            />
-                            <path
-                              d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+                                />
+                                <path
+                                  d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
 				c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
 				V213.333z"
-                            />
-                            <path
-                              d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+                                />
+                                <path
+                                  d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
 				c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
 				V230.4z"
-                            />
-                            <path
-                              d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
-                            />
-                            <path
-                              d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
-                            />
-                            <path
-                              d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
-                            />
-                            <path
-                              d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
-                            />
-                            <path
-                              d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
 				s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
-                            />
-                            <path
-                              d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
 				c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
-                            />
+                                />
+                              </g>
+                            </g>
                           </g>
-                        </g>
-                      </g>
-                    </svg>
-                    <header class="px-5 py-2  ">
-                      <div class="italic  text-center text-sm text-white">
-                        Seho 1 (BE)
-                      </div>
-                    </header>
-                  </button>
-                </div>
+                        </svg>
+                        <header class="px-5 py-2  ">
+                          <div class="italic  text-center text-sm text-white">
+                            Seho 1 (BE)
+                          </div>
+                        </header>
+                      </button>
+                    </div>
+                  </div>
+                </section>
               </div>
-            </section>
-          </div>
-        </div>
+            </div>
 
-        <div>
-          <div class="pt-4 flex   md:flex-row p-4 sm:ml-5">
-            <section class="antialiased  text-gray-600  px-2" x-data="app">
-              <div class="flex flex-col ">
-                {/* <!-- Table --> */}
-                <div className=" pt-2 w-50 sm:w-50 lg:w-50">
-                  <button
-                    style={{ backgroundColor: backgroundColorNetwork }}
-                    value={Network}
-                    class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
-                  >
-                    <svg
-                      width="50px"
-                      fill="#2e3436"
-                      fill-opacity="0.7000"
-                      className="justify-center items-center mx-auto mt-1"
-                      version="1.1"
-                      id="Layer_1"
-                      viewBox="0 0 512 512"
-                    >
-                      <g>
-                        <g>
+            <div>
+              <div class="pt-4 flex   md:flex-row p-4 sm:ml-5">
+                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                  <div class="flex flex-col ">
+                    {/* <!-- Table --> */}
+                    <div className=" pt-2 w-50 sm:w-50 lg:w-50">
+                      <button
+                        style={{ backgroundColor: backgroundColorStatusSeho2BE }}
+                        value={Seho2BE}
+                        class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                      >
+                        <svg
+                          width="50px"
+                          fill="#2e3436"
+                          fill-opacity="0.7000"
+                          className="justify-center items-center mx-auto mt-1"
+                          version="1.1"
+                          id="Layer_1"
+                          viewBox="0 0 512 512"
+                        >
                           <g>
-                            <path
-                              d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+                            <g>
+                              <g>
+                                <path
+                                  d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
 				c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
 				s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
 				 M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
@@ -3231,104 +3884,104 @@ const UserMobile = () => {
 				 M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
 				v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
 				h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
-                            />
-                            <path
-                              d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+                                />
+                                <path
+                                  d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
 				c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
 				z"
-                            />
-                            <path
-                              d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C358.4,175.38,362.221,179.2,366.933,179.2z"
-                            />
-                            <path
-                              d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C477.867,140.354,474.046,136.533,469.333,136.533z"
-                            />
-                            <path
-                              d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C426.667,175.38,430.487,179.2,435.2,179.2z"
-                            />
-                            <path
-                              d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C409.6,140.354,405.78,136.533,401.067,136.533z"
-                            />
-                            <path
-                              d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+                                />
+                                <path
+                                  d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
 				c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
 				V213.333z"
-                            />
-                            <path
-                              d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+                                />
+                                <path
+                                  d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
 				c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
 				V230.4z"
-                            />
-                            <path
-                              d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
-                            />
-                            <path
-                              d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
-                            />
-                            <path
-                              d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
-                            />
-                            <path
-                              d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
-                            />
-                            <path
-                              d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
 				s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
-                            />
-                            <path
-                              d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
 				c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
-                            />
+                                />
+                              </g>
+                            </g>
                           </g>
-                        </g>
-                      </g>
-                    </svg>
-                    <header class="px-5 py-2  ">
-                      <div class="italic  text-center text-sm text-white">
-                        Seho 2 (BE)
-                      </div>
-                    </header>
-                  </button>
-                </div>
-              </div>
-            </section>
-            <section class="antialiased  text-gray-600  px-2" x-data="app">
-              <div class="flex flex-col ">
-                {/* <!-- Table --> */}
-                <div className=" pt-2 w-50 sm:w-50 lg:w-50">
-                  <button
-                    style={{ backgroundColor: backgroundColorNetwork }}
-                    value={Network}
-                    class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
-                  >
-                    <svg
-                      width="50px"
-                      fill="#2e3436"
-                      fill-opacity="0.7000"
-                      className="justify-center items-center mx-auto mt-1"
-                      version="1.1"
-                      id="Layer_1"
-                      viewBox="0 0 512 512"
-                    >
-                      <g>
-                        <g>
+                        </svg>
+                        <header class="px-5 py-2  ">
+                          <div class="italic  text-center text-sm text-white">
+                            Seho 2 (BE)
+                          </div>
+                        </header>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                  <div class="flex flex-col ">
+                    {/* <!-- Table --> */}
+                    <div className=" pt-2 w-50 sm:w-50 lg:w-50">
+                      <button
+                        style={{ backgroundColor: backgroundColorStatusTouchupBE }}
+                        value={TouchupBE}
+                        class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                      >
+                        <svg
+                          width="50px"
+                          fill="#2e3436"
+                          fill-opacity="0.7000"
+                          className="justify-center items-center mx-auto mt-1"
+                          version="1.1"
+                          id="Layer_1"
+                          viewBox="0 0 512 512"
+                        >
                           <g>
-                            <path
-                              d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+                            <g>
+                              <g>
+                                <path
+                                  d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
 				c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
 				s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
 				 M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
@@ -3338,104 +3991,104 @@ const UserMobile = () => {
 				 M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
 				v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
 				h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
-                            />
-                            <path
-                              d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+                                />
+                                <path
+                                  d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
 				c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
 				z"
-                            />
-                            <path
-                              d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C358.4,175.38,362.221,179.2,366.933,179.2z"
-                            />
-                            <path
-                              d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C477.867,140.354,474.046,136.533,469.333,136.533z"
-                            />
-                            <path
-                              d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C426.667,175.38,430.487,179.2,435.2,179.2z"
-                            />
-                            <path
-                              d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C409.6,140.354,405.78,136.533,401.067,136.533z"
-                            />
-                            <path
-                              d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+                                />
+                                <path
+                                  d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
 				c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
 				V213.333z"
-                            />
-                            <path
-                              d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+                                />
+                                <path
+                                  d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
 				c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
 				V230.4z"
-                            />
-                            <path
-                              d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
-                            />
-                            <path
-                              d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
-                            />
-                            <path
-                              d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
-                            />
-                            <path
-                              d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
-                            />
-                            <path
-                              d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
 				s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
-                            />
-                            <path
-                              d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
 				c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
-                            />
+                                />
+                              </g>
+                            </g>
                           </g>
-                        </g>
-                      </g>
-                    </svg>
-                    <header class="px-5 py-2  ">
-                      <div class="italic  text-center text-sm text-white">
-                        Touch Up (BE)
-                      </div>
-                    </header>
-                  </button>
-                </div>
-              </div>
-            </section>
-            <section class="antialiased  text-gray-600  px-2" x-data="app">
-              <div class="flex flex-col ">
-                {/* <!-- Table --> */}
-                <div className=" pt-2 w-50 sm:w-50 lg:w-50">
-                  <button
-                    style={{ backgroundColor: backgroundColorNetwork }}
-                    value={Network}
-                    class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
-                  >
-                    <svg
-                      width="50px"
-                      fill="#2e3436"
-                      fill-opacity="0.7000"
-                      className="justify-center items-center mx-auto mt-1"
-                      version="1.1"
-                      id="Layer_1"
-                      viewBox="0 0 512 512"
-                    >
-                      <g>
-                        <g>
+                        </svg>
+                        <header class="px-5 py-2  ">
+                          <div class="italic  text-center text-sm text-white">
+                            Touch Up (BE)
+                          </div>
+                        </header>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                  <div class="flex flex-col ">
+                    {/* <!-- Table --> */}
+                    <div className=" pt-2 w-50 sm:w-50 lg:w-50">
+                      <button
+                        style={{ backgroundColor: backgroundColorStatusICTBE }}
+                        value={ICTBE}
+                        class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                      >
+                        <svg
+                          width="50px"
+                          fill="#2e3436"
+                          fill-opacity="0.7000"
+                          className="justify-center items-center mx-auto mt-1"
+                          version="1.1"
+                          id="Layer_1"
+                          viewBox="0 0 512 512"
+                        >
                           <g>
-                            <path
-                              d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+                            <g>
+                              <g>
+                                <path
+                                  d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
 				c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
 				s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
 				 M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
@@ -3445,104 +4098,104 @@ const UserMobile = () => {
 				 M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
 				v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
 				h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
-                            />
-                            <path
-                              d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+                                />
+                                <path
+                                  d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
 				c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
 				z"
-                            />
-                            <path
-                              d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C358.4,175.38,362.221,179.2,366.933,179.2z"
-                            />
-                            <path
-                              d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C477.867,140.354,474.046,136.533,469.333,136.533z"
-                            />
-                            <path
-                              d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C426.667,175.38,430.487,179.2,435.2,179.2z"
-                            />
-                            <path
-                              d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C409.6,140.354,405.78,136.533,401.067,136.533z"
-                            />
-                            <path
-                              d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+                                />
+                                <path
+                                  d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
 				c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
 				V213.333z"
-                            />
-                            <path
-                              d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+                                />
+                                <path
+                                  d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
 				c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
 				V230.4z"
-                            />
-                            <path
-                              d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
-                            />
-                            <path
-                              d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
-                            />
-                            <path
-                              d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
-                            />
-                            <path
-                              d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
-                            />
-                            <path
-                              d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
 				s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
-                            />
-                            <path
-                              d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
 				c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
-                            />
+                                />
+                              </g>
+                            </g>
                           </g>
-                        </g>
-                      </g>
-                    </svg>
-                    <header class="px-5 py-2  ">
-                      <div class="italic  text-center text-sm text-white">
-                        ICT (BE)
-                      </div>
-                    </header>
-                  </button>
-                </div>
-              </div>
-            </section>
-            <section class="antialiased  text-gray-600  px-2" x-data="app">
-              <div class="flex flex-col ">
-                {/* <!-- Table --> */}
-                <div className=" pt-2 w-50 sm:w-50 lg:w-50">
-                  <button
-                    style={{ backgroundColor: backgroundColorNetwork }}
-                    value={Network}
-                    class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
-                  >
-                    <svg
-                      width="50px"
-                      fill="#2e3436"
-                      fill-opacity="0.7000"
-                      className="justify-center items-center mx-auto mt-1"
-                      version="1.1"
-                      id="Layer_1"
-                      viewBox="0 0 512 512"
-                    >
-                      <g>
-                        <g>
+                        </svg>
+                        <header class="px-5 py-2  ">
+                          <div class="italic  text-center text-sm text-white">
+                            ICT (BE)
+                          </div>
+                        </header>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                  <div class="flex flex-col ">
+                    {/* <!-- Table --> */}
+                    <div className=" pt-2 w-50 sm:w-50 lg:w-50">
+                      <button
+                        style={{ backgroundColor: backgroundColorStatusFlashBE }}
+                        value={FlashBE}
+                        class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                      >
+                        <svg
+                          width="50px"
+                          fill="#2e3436"
+                          fill-opacity="0.7000"
+                          className="justify-center items-center mx-auto mt-1"
+                          version="1.1"
+                          id="Layer_1"
+                          viewBox="0 0 512 512"
+                        >
                           <g>
-                            <path
-                              d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+                            <g>
+                              <g>
+                                <path
+                                  d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
 				c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
 				s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
 				 M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
@@ -3552,104 +4205,104 @@ const UserMobile = () => {
 				 M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
 				v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
 				h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
-                            />
-                            <path
-                              d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+                                />
+                                <path
+                                  d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
 				c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
 				z"
-                            />
-                            <path
-                              d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C358.4,175.38,362.221,179.2,366.933,179.2z"
-                            />
-                            <path
-                              d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C477.867,140.354,474.046,136.533,469.333,136.533z"
-                            />
-                            <path
-                              d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C426.667,175.38,430.487,179.2,435.2,179.2z"
-                            />
-                            <path
-                              d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C409.6,140.354,405.78,136.533,401.067,136.533z"
-                            />
-                            <path
-                              d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+                                />
+                                <path
+                                  d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
 				c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
 				V213.333z"
-                            />
-                            <path
-                              d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+                                />
+                                <path
+                                  d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
 				c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
 				V230.4z"
-                            />
-                            <path
-                              d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
-                            />
-                            <path
-                              d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
-                            />
-                            <path
-                              d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
-                            />
-                            <path
-                              d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
-                            />
-                            <path
-                              d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
 				s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
-                            />
-                            <path
-                              d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
 				c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
-                            />
+                                />
+                              </g>
+                            </g>
                           </g>
-                        </g>
-                      </g>
-                    </svg>
-                    <header class="px-5 py-2  ">
-                      <div class="italic  text-center text-sm text-white">
-                        Flash (BE)
-                      </div>
-                    </header>
-                  </button>
-                </div>
-              </div>
-            </section>
-            <section class="antialiased  text-gray-600  px-2" x-data="app">
-              <div class="flex flex-col ">
-                {/* <!-- Table --> */}
-                <div className=" pt-2 w-50 sm:w-50 lg:w-50">
-                  <button
-                    style={{ backgroundColor: backgroundColorNetwork }}
-                    value={Network}
-                    class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
-                  >
-                    <svg
-                      width="50px"
-                      fill="#2e3436"
-                      fill-opacity="0.7000"
-                      className="justify-center items-center mx-auto mt-1"
-                      version="1.1"
-                      id="Layer_1"
-                      viewBox="0 0 512 512"
-                    >
-                      <g>
-                        <g>
+                        </svg>
+                        <header class="px-5 py-2  ">
+                          <div class="italic  text-center text-sm text-white">
+                            Flash (BE)
+                          </div>
+                        </header>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                  <div class="flex flex-col ">
+                    {/* <!-- Table --> */}
+                    <div className=" pt-2 w-50 sm:w-50 lg:w-50">
+                      <button
+                        style={{ backgroundColor: backgroundColorStatusRouterBE }}
+                        value={RouterBE}
+                        class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                      >
+                        <svg
+                          width="50px"
+                          fill="#2e3436"
+                          fill-opacity="0.7000"
+                          className="justify-center items-center mx-auto mt-1"
+                          version="1.1"
+                          id="Layer_1"
+                          viewBox="0 0 512 512"
+                        >
                           <g>
-                            <path
-                              d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+                            <g>
+                              <g>
+                                <path
+                                  d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
 				c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
 				s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
 				 M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
@@ -3659,84 +4312,84 @@ const UserMobile = () => {
 				 M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
 				v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
 				h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
-                            />
-                            <path
-                              d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+                                />
+                                <path
+                                  d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
 				c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
 				z"
-                            />
-                            <path
-                              d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C358.4,175.38,362.221,179.2,366.933,179.2z"
-                            />
-                            <path
-                              d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C477.867,140.354,474.046,136.533,469.333,136.533z"
-                            />
-                            <path
-                              d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+                                />
+                                <path
+                                  d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
 				C426.667,175.38,430.487,179.2,435.2,179.2z"
-                            />
-                            <path
-                              d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+                                />
+                                <path
+                                  d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
 				C409.6,140.354,405.78,136.533,401.067,136.533z"
-                            />
-                            <path
-                              d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+                                />
+                                <path
+                                  d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
 				c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
 				V213.333z"
-                            />
-                            <path
-                              d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+                                />
+                                <path
+                                  d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
 				c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
 				V230.4z"
-                            />
-                            <path
-                              d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
-                            />
-                            <path
-                              d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
 				C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
 				c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
-                            />
-                            <path
-                              d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
-                            />
-                            <path
-                              d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+                                />
+                                <path
+                                  d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
 				C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
 				c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
-                            />
-                            <path
-                              d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
 				s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
-                            />
-                            <path
-                              d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+                                />
+                                <path
+                                  d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
 				C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
 				c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
-                            />
+                                />
+                              </g>
+                            </g>
                           </g>
-                        </g>
-                      </g>
-                    </svg>
-                    <header class="px-5 py-2  ">
-                      <div class="italic  text-center text-sm text-white">
-                        Router (BE)
-                      </div>
-                    </header>
-                  </button>
-                </div>
+                        </svg>
+                        <header class="px-5 py-2  ">
+                          <div class="italic  text-center text-sm text-white">
+                            Router (BE)
+                          </div>
+                        </header>
+                      </button>
+                    </div>
+                  </div>
+                </section>
               </div>
-            </section>
-          </div>
-        </div>
-        </>
+            </div>
+          </>
         ) : null}
 
         <div>
@@ -3780,83 +4433,8 @@ const UserMobile = () => {
                   <h2 className="text-lg italic font-bold  text-center">
                     Production Area: SMT
                   </h2>
-                  <div className="bg-white px-4 pt-1 pb-4 flex sm:p-6 sm:pb-4">
-                    <div className="overflow-y-auto max-h-96 w-[700px]">
-                      {data ? (
-                        <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
-                          <h3 className="text-lg italic mb-2">
-                            Real Production Time
-                          </h3>
-                          <table>
-                            <tr>
-                              <td className="font-semibold">
-                                Production time 1:
-                              </td>
-                              <span className="px-4 text-lime-800">
-                                {RealPT1}
-                              </span>
-                            </tr>
-                            <tr>
-                              <td className="font-semibold">
-                                Production time 2:
-                              </td>
-                              <span className="px-4 text-lime-800">
-                                {RealPT2}
-                              </span>
-                            </tr>
-
-                            <tr>
-                              <td className="font-semibold">Planned DT:</td>
-                              <span className="px-4 text-lime-800">
-                                {RealPD}
-                              </span>
-                            </tr>
-                            <tr>
-                              <td className="font-semibold">
-                                Production time 3:
-                              </td>
-                              <span className="px-4 text-lime-800">
-                                {RealPT3}
-                              </span>
-                            </tr>
-
-                            <tr>
-                              <td className="font-semibold">
-                                Production time 4:
-                              </td>
-                              <span className="px-4 text-lime-800">
-                                {RealPT4}
-                              </span>
-                            </tr>
-                            <tr>
-                              <td className="font-semibold">Over Time:</td>
-                              <span className="px-4 text-lime-800">
-                                {RealOT}
-                              </span>
-                            </tr>
-                          </table>
-                          <div className="flex mt-2">
-                            <td className="font-semibold">Total:</td>
-                            <span className="ml-10 w-44 text-center text-white rounded-md bg-lime-700">
-                              {Total}
-                            </span>
-                          </div>
-                          <div className="mt-5 bg-green-400 rounded-md ">
-                            <p className="font-semibold text-sm">
-                              Change Model Allocation:
-                            </p>
-                            <p>{data.CMA} </p>
-                            <p className="text-sm text-black font-mono text-center mt-3 justify-center rounded-xl">
-                              {ResultsCMA}{" "}
-                            </p>
-                          </div>
-                        </div>
-                      ) : (
-                        <p>Loading...</p>
-                      )}
-                    </div>
-
-                    <div className="bg-white px-4 w-[700px] ml-3  rounded-lg shadow-md">
+                  <div className="bg-white px-4 pt-1 pb-4 flex flex-col sm:p-6 sm:pb-4">
+                    <div className="bg-gray-100 px-4 w-[500px]  rounded-lg shadow-md">
                       <h3 className="text-lg italic  mb-2">Production Time</h3>
 
                       {data ? (
@@ -3970,6 +4548,82 @@ const UserMobile = () => {
                       ) : (
                         <p>Loading...</p>
                       )}
+                    </div>
+                    <div className="pt-2">
+                      <div className="overflow-y-auto max-h-96 w-[500px]">
+                        {data ? (
+                          <div className="bg-gray-100 px-4 py-6 sm:p-6 rounded-lg shadow-md">
+                            <h3 className="text-lg italic mb-2">
+                              Real Production Time
+                            </h3>
+                            <table>
+                              <tr>
+                                <td className="font-semibold">
+                                  Production time 1:
+                                </td>
+                                <span className="px-4 text-lime-800">
+                                  {RealPT1}
+                                </span>
+                              </tr>
+                              <tr>
+                                <td className="font-semibold">
+                                  Production time 2:
+                                </td>
+                                <span className="px-4 text-lime-800">
+                                  {RealPT2}
+                                </span>
+                              </tr>
+
+                              <tr>
+                                <td className="font-semibold">Planned DT:</td>
+                                <span className="px-4 text-lime-800">
+                                  {RealPD}
+                                </span>
+                              </tr>
+                              <tr>
+                                <td className="font-semibold">
+                                  Production time 3:
+                                </td>
+                                <span className="px-4 text-lime-800">
+                                  {RealPT3}
+                                </span>
+                              </tr>
+
+                              <tr>
+                                <td className="font-semibold">
+                                  Production time 4:
+                                </td>
+                                <span className="px-4 text-lime-800">
+                                  {RealPT4}
+                                </span>
+                              </tr>
+                              <tr>
+                                <td className="font-semibold">Over Time:</td>
+                                <span className="px-4 text-lime-800">
+                                  {RealOT}
+                                </span>
+                              </tr>
+                            </table>
+                            <div className="flex mt-2">
+                              <td className="font-semibold">Total:</td>
+                              <span className="ml-10 w-44 text-center text-white rounded-md bg-lime-700">
+                                {Total}
+                              </span>
+                            </div>
+                            <div className="mt-5 bg-green-400 rounded-md ">
+                              <p className="font-semibold text-sm">
+                                Change Model Allocation:
+                              </p>
+                              <p>{data.CMA} </p>
+                              <p className="text-sm text-black font-mono text-center mt-3 justify-center rounded-xl">
+                                {ResultsCMA}{" "}
+                              </p>
+                            </div>
+                          </div>
+                        ) : (
+                          <p>Loading...</p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
