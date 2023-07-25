@@ -32,15 +32,13 @@ const UserMobile = () => {
   const [isSMTBE, setIsSMTBE] = useState(false);
   const [isOpenOperator, setIsOpenOperator] = useState(false);
 
-  // Data lama
-  // -------------
 
-  // OTHERS
-  // -------------
-
-  // DATA
-  // -------------
-  // Data STATION
+  // popup DestackerTOP
+  const [isRequestMaintenance, setIsRequestMaintenance] = useState(false);
+  const [isReturnMaintenance, setIsReturnMaintenance] = useState(false);
+  const [isRequestQA, setIsRequestQA] = useState(false);
+  const [isRequestQC, setIsRequestQC] = useState(false);
+  const [isRepair, setIsRepair] = useState(false);
 
   // -------------
   // SMT LINE 1
@@ -49,6 +47,13 @@ const UserMobile = () => {
 
   // DATA SCHEDULE PLANING
   const [data, setData] = useState(null);
+
+
+  const [OptionData, setOptionData] = useState(null);
+  const [dataDestackerTOP, setDataDestackerTOP] = useState(null);
+  const [dataDestackerTOPQA, setDataDestackerTOPQA] = useState(null);
+  const [dataDestackerTOPQC, setDataDestackerTOPQC] = useState(null);
+  const [dataDestackerTOPReturn, setDataDestackerTOPReturn] = useState(null);
 
   // ---------------------
 
@@ -73,14 +78,21 @@ const UserMobile = () => {
 
   // SMT TOP
   const [DestackerTop, setDestackerTop] = useState("Destacker (TOP)");
+  const [StatusdestackerTop, setStatusdestackerTop] = useState("");
+  const [StatuslabelTop, setStatuslabelTop] = useState("");
   const [LabelTop, setLabelTop] = useState("Label (TOP)");
+  const [StatusPrinterTop, setStatusPrinterTop] = useState("");
   const [PrinterTop, setPrinterTop] = useState("Printer (TOP)");
+  const [StatusSpiTop, setStatusSpiTop] = useState("");
   const [SpiTop, setSpiTop] = useState("Spi (TOP)");
+  const [StatusPickNPlace, setStatusPickNPlace] = useState("");
   const [PickNPlace, setPickNPlace] = useState("Pick&Place (TOP)");
+  const [StatusReflowTop, setStatusReflowTop] = useState("");
   const [ReflowTop, setReflowTop] = useState("Reflow (TOP)");
+  const [StatusAOITop, setStatusAOITop] = useState("");
   const [AOITop, setAOITop] = useState("AOI (TOP)");
+  const [StatusRVSTop, setStatusRVSTop] = useState("");
   const [RVSTop, setRVSTop] = useState("RVS (TOP)");
-  // ....................
 
   // SMT BOT
   const [PrinterBot, setPrinterBot] = useState("Printer (BOT)");
@@ -797,6 +809,7 @@ const UserMobile = () => {
 
   // Update Status SMT TOP
   const updateStatusdestackerTop = (data) => {
+    setStatusdestackerTop(data);
     setBackgroundColorStatusdestackerTop(
       data === "Go"
         ? "#31A207"
@@ -905,6 +918,8 @@ const UserMobile = () => {
                       : "#565454"
     );
   };
+
+
 
   const updateStatusReflowTop = (data) => {
     setBackgroundColorStatusReflowTop(
@@ -1021,7 +1036,7 @@ const UserMobile = () => {
   };
 
   const updateStatusPickNPlaceBot = (data) => {
-    setBackgroundColorStatusPickNPlace(
+    setBackgroundColorStatusPickNPlaceBot(
       data === "Go"
         ? "#31A207"
         : data === "Repair"
@@ -1320,11 +1335,104 @@ const UserMobile = () => {
   // ------
 
   const styles = {
-    background: "linear-gradient(100deg, #1E295D, #020A2F)",
+    background: "linear-gradient(800deg, #020A2F, #1E295D)",
     backgroundSize: "1300px",
     backgroundPosition: "0px",
-    height: "2000px", // Change the height according to your needs
+    height: "1500px", // Change the height according to your needs
   };
+
+
+  const formatDateAPI = (dateString) => {
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    return `${day}/${month}/${year} ~~ ${hours}:${minutes} WIB`;
+  };
+
+
+  const fetchDataDestackerTOP = () => {
+    fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1")
+      .then((response) => response.json())
+      .then((data) => {
+        setDataDestackerTOP(data);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  };
+
+
+
+  const fetchDataDestackerTOPQA = () => {
+    fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1QA")
+      .then((response) => response.json())
+      .then((data) => {
+        setDataDestackerTOPQA(data);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  };
+
+
+  const fetchDataDestackerTOPQC = () => {
+    fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1QC")
+      .then((response) => response.json())
+      .then((data) => {
+        setDataDestackerTOPQC(data);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  };
+
+
+
+  const fetchDataDestackerTOPReturn = () => {
+    fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1Return")
+      .then((response) => response.json())
+      .then((data) => {
+        setDataDestackerTOPReturn(data);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  };
+
+
+
+
+
+  useEffect(() => {
+    // Fetch data initially
+    fetchDataDestackerTOP();
+    fetchDataDestackerTOPQA();
+    fetchDataDestackerTOPQC();
+    fetchDataDestackerTOPReturn();
+
+    // Set up interval to fetch data every 5 seconds (adjust the interval as needed)
+    const intervalIdDestackerTOP = setInterval(fetchDataDestackerTOP, 5000);
+    const intervalIdDestackerTOPQA = setInterval(fetchDataDestackerTOPQA, 5000);
+    const intervalIdDestackerTOPQC = setInterval(fetchDataDestackerTOPQC, 5000);
+    const intervalIdDestackerTOPReturn = setInterval(fetchDataDestackerTOPReturn, 5000);
+    // Clear the intervals on component unmount to avoid memory leaks
+    return () => {
+      clearInterval(intervalIdDestackerTOP);
+      clearInterval(intervalIdDestackerTOPQA);
+      clearInterval(intervalIdDestackerTOPQC);
+      clearInterval(intervalIdDestackerTOPReturn);
+    };
+  }, []);
 
   return (
     <body style={styles}>
@@ -1837,6 +1945,32 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusdestackerTop }}
                         value={DestackerTop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusdestackerTop === "Maintenance") {
+                            // set isOpenDestackerTop state to true if DestackerTop is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataDestackerTOP);
+                          } else if (StatusdestackerTop === "Repair") {
+                            // set Quality state to true if DestackerTop is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataDestackerTOP);
+                          } else if (StatusdestackerTop === "QA") {
+                            // set Quality state to true if DestackerTop is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataDestackerTOPQA);
+                          } else if (StatusdestackerTop === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataDestackerTOPQC);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          } else if (StatusdestackerTop === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataDestackerTOPReturn);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -2736,7 +2870,7 @@ const UserMobile = () => {
                     {/* <!-- Table --> */}
                     <div className=" pt-2 w-50 sm:w-50 lg:w-50">
                       <button
-                        style={{ backgroundColor: setBackgroundColorStatusPrinterBot }}
+                        style={{ backgroundColor: backgroundColorStatusPrinterBot }}
                         value={PrinterBot}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
                       >
@@ -4635,103 +4769,99 @@ const UserMobile = () => {
         ) : null}
       </td>
 
-      {/* isOpenOperator */}
-      <td class="">
-        {isOpenOperator ? (
+
+
+
+      {/* is RequestMaintenance */}
+      <td>
+        {isRequestMaintenance ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute bg-gray-500 opacity-75"></div>
-                </div>
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+              <div className="flex items-start justify-center min-h-screen pt-24 px-4 pb-20 text-center sm:block sm:p-0">
                 <div
-                  className="inline-block  align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full"
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
                   role="dialog"
                   aria-modal="true"
                   aria-labelledby="modal-headline"
                 >
-                  <div
-                    onClick={() => {
-                      setIsOpenOperator(false);
-                      setIsOpen2(true);
-                    }}
-                    className="flex justify-end p-2"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 cursor-pointer"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </div>
-                  <h2 className="text-lg font-bold   text-center">
-                    Operator Area: SMT
-                  </h2>
-                  <div className="bg-white px-4 pt-1 pb-4 flex sm:p-6 sm:pb-4">
-                    <div className="bg-white px-4 w-96 py-6 sm:p-6 ml-10 rounded-lg shadow-md">
-                      <div className="overflow-y-auto max-h-96 w-[400px]">
-                        <div className="bg-white px-4 py-6 sm:p-6 rounded-lg shadow-md">
-                          <h3 className="text-lg font-bold mb-4">
-                            Today's Login
-                          </h3>
-                          <div className="ml-6">
-                            <p className="mb-2 flex">
-                              <span className="font-bold w-40">Leader:</span>
-                              <span className="font-bold ml-4">Chrisna </span>
-                            </p>
-                            <p className="mb-2 flex">
-                              <span className="font-bold w-40">
-                                SMT Top Operator:
-                              </span>
-                              <span className="font-bold ml-4">Chrisna </span>
-                            </p>
-                            <p className="mb-2 flex">
-                              <span className="font-bold w-40">
-                                SMT Bot Operator:
-                              </span>
-                              <span className="font-bold ml-4">Chrisna</span>
-                            </p>
-                            <p className="mb-2 flex">
-                              <span className="font-bold w-40">
-                                Drop In Operator:
-                              </span>
-                              <span className="font-bold ml-4">Chrisna</span>
-                            </p>
-                            <p className="mb-2 flex">
-                              <span className="font-bold w-40">
-                                Touch Up Operator:
-                              </span>
-                              <span className="font-bold ml-4">Chrisna</span>
-                            </p>
-                            <p className="mb-2 flex">
-                              <span className="font-bold w-40">
-                                Router Operator:
-                              </span>
-                              <span className="font-bold ml-4">Chrisna</span>
-                            </p>
-                            <p className="mb-2 flex">
-                              <span className="font-bold w-40">
-                                FCT Operator:
-                              </span>
-                              <span className="font-bold ml-4">Chrisna</span>
-                            </p>
-                            <p className="mb-2 flex">
-                              <span className="font-bold w-40">
-                                Coating Operator:
-                              </span>
-                              <span className="font-bold ml-4">Chrisna</span>
-                            </p>
+                  <div className="sm:flex sm:items-start">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <div class="p-6 text-center">
+                        <svg
+                          aria-hidden="true"
+                          class="mx-auto mb-4 text-red-600 animate-pulse w-14 h-14 dark:text-gray-200"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
+                        <h3 class="mb-5 text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
+                          Permintaan Bantuan Terhadap Team Maintenance Telah Di Lakukan Oleh:
+                        </h3>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
+                              Name Operator :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={OptionData?.Nama || ""}
+
+                            />
+                          </div>
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
+                              Date Problem :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={formatDateAPI(OptionData?.Date) || ""}
+                            />
                           </div>
                         </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block  tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Problem :
+                          </label>
+                          <input
+                            class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="text"
+                            placeholder=""
+                            name="Kerusakan"
+                            value={OptionData?.Problem || ""}
+
+                          />
+                          <p class="text-gray-600 text-xs  italic">
+                            Permasalahan Yang Ditemukan
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="flex justify-center">
+                        <button
+                          data-modal-hide="popup-modal"
+                          type="button"
+                          onClick={() => setIsRequestMaintenance(false)}
+                          className="text-white bg-red-600 mb-2 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                        >
+                          Back
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -4743,6 +4873,522 @@ const UserMobile = () => {
           </>
         ) : null}
       </td>
+
+
+      {/* is repair */}
+      <td>
+        {isRepair ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen pt-32 px-4 pb-20 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <form>
+                      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <div class="p-6 text-center">
+                          <svg
+                            fill="#e28743"
+                            class="mx-auto mb-4 animate-bounce w-32 h-14 "
+                            viewBox="0 0 32 32"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <title>repair</title>
+                            <path d="M27.472 25.67l3.511 2.664c0.764-1.983 0.2-4.311-1.579-5.661-1.368-1.038-3.108-1.248-4.61-0.713l-0.532-0.403-0.070-0.132c0.37-0.526 0.691-1.076 0.961-1.644l2.417-0.067 0.495-1.58-1.953-1.438c0.095-0.591 0.142-1.189 0.143-1.786l2.167-1.1-0.229-1.64-2.392-0.468c-0.2-0.688-0.466-1.362-0.798-2.011l1.426-1.973-0.954-1.354-2.347 0.682c-0.029-0.031-0.058-0.062-0.088-0.093-0.375-0.388-0.771-0.743-1.184-1.066l0.451-2.321-1.435-0.827-1.781 1.551c-0.577-0.232-1.169-0.415-1.769-0.549l-0.584-2.291-1.651-0.135-0.951 2.172c-0.492 0.030-0.982 0.091-1.468 0.185l-1.454-1.877-1.568 0.533-0.008 2.39c-0.664 0.342-1.303 0.753-1.904 1.236l-2.215-0.998-1.134 1.207 1.134 2.151c-0.366 0.521-0.683 1.067-0.951 1.63l-2.433 0.067-0.495 1.58 1.966 1.448c-0.094 0.586-0.142 1.179-0.144 1.772l-2.18 1.106 0.229 1.64 2.394 0.468c0.143 0.498 0.319 0.989 0.531 1.468l-1.58 1.959 0.881 1.402 2.453-0.573c0.154 0.181 0.315 0.359 0.482 0.532 0.353 0.365 0.723 0.701 1.107 1.008l-0.477 2.459 1.435 0.827 1.873-1.632c0.538 0.216 1.089 0.389 1.649 0.519l0.612 2.401 1.651 0.135 0.991-2.263c0.686-0.041 1.369-0.144 2.041-0.308l1.576 1.825 1.538-0.616-0.083-1.685 0.974 0.739c-0.115 1.597 0.543 3.233 1.909 4.271 1.778 1.349 4.172 1.266 5.877-0.004l-3.51-2.663c-0.619-0.469-0.762-1.358-0.312-1.952s1.328-0.672 1.946-0.202zM13.845 23.736c-1.985-0.224-3.892-1.12-5.388-2.669-3.421-3.538-3.323-9.167 0.216-12.587s9.17-3.36 12.59 0.178c3.012 3.115 3.293 7.878 0.903 11.308l-5.822-4.417c0.11-1.589-0.561-3.21-1.928-4.247-1.778-1.349-4.172-1.266-5.877 0.004l3.51 2.663c0.618 0.469 0.78 1.334 0.33 1.929s-1.346 0.696-1.964 0.226l-3.51-2.663c-0.763 1.983-0.2 4.311 1.579 5.661 1.367 1.036 3.121 1.229 4.628 0.688l4.617 3.503c-1.254 0.428-2.582 0.569-3.883 0.422z"></path>
+                          </svg>
+                          <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-serif text-gray-500 dark:text-gray-400">
+                            Sedang Dalam Perbaikan Oleh Team Maintenance
+                          </h3>
+
+                          <div className="flex flex-col mt-2">
+                            <svg
+                              width="50px"
+                              fill="#950804"
+                              fill-opacity="0.7000"
+                              className="justify-center items-center mx-auto mt-1"
+                              version="1.1"
+                              id="Layer_1"
+                              viewBox="0 0 512 512"
+                            >
+                              <g>
+                                <g>
+                                  <g>
+                                    <path
+                                      d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+				c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+				s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+				 M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+				H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+				c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+				c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+				 M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+				v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+				h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                    />
+                                    <path
+                                      d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+				c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+				z"
+                                    />
+                                    <path
+                                      d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+				C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                    />
+                                    <path
+                                      d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+				C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                    />
+                                    <path
+                                      d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+				C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                    />
+                                    <path
+                                      d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+				C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                    />
+                                    <path
+                                      d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+				c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+				V213.333z"
+                                    />
+                                    <path
+                                      d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+				c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+				V230.4z"
+                                    />
+                                    <path
+                                      d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+				C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+				c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                    />
+                                    <path
+                                      d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+				C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+				c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                    />
+                                    <path
+                                      d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+				C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+				c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                    />
+                                    <path
+                                      d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+				C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+				c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                    />
+                                    <path
+                                      d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+				C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+				s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                    />
+                                    <path
+                                      d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+				C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+				c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                    />
+                                  </g>
+                                </g>
+                              </g>
+                            </svg>
+                            <span className="font-mono mt-2 text-gray-500 ">Down Since :  {formatDateAPI(OptionData?.Date) || ""}</span>
+                          </div>
+
+                          <div class="flex justify-center mt-4">
+                            <button
+                              data-modal-hide="popup-modal"
+                              type="button"
+                              onClick={() => setIsRepair(false)}
+                              className="text-white bg-red-600 mb-2 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                            >
+                              Back
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
+      {/* is RequestQA*/}
+      <td>
+        {isRequestQA ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen pt-24 px-4 pb-20 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <div class="p-6 text-center">
+                        <svg version="1.1" id="REPAIR"
+                          class="mx-auto mb-4 text-red-600 animate-pulse w-14 h-14 dark:text-gray-200"
+                          viewBox="0 0 1800 1800" enable-background="new 0 0 1800 1800" >
+                          <g>
+                            <g>
+                              <path fill="#e28743" d="M803.722,820.892l-247.878-247.87l71.705-71.702l247.875,247.871l40.808-40.802L655.949,448.104
+			l74.925-74.921c0.596-0.596,1.147-1.216,1.682-1.86c0.592-0.499,1.175-1.006,1.735-1.562l135.512-135.512
+			c11.126-11.12,11.292-29.106,0.366-40.43l-1.538-1.606c-1.284-1.349-2.572-2.693-3.893-4.018
+			C796.995,120.454,709.056,80.01,629.497,80.01c-53.655,0-99.814,17.796-133.483,51.468c-0.733,0.73-1.409,1.503-2.053,2.3
+			c-0.443,0.388-0.89,0.765-1.309,1.183L185.294,442.324c-11.267,11.271-11.267,29.539,0,40.81l45.403,45.399l-37.493,37.493
+			l-45.403-45.408c-5.414-5.41-12.752-8.453-20.405-8.453c-7.652,0-14.99,3.043-20.404,8.453L12.869,614.75
+			c-11.268,11.271-11.268,29.538,0,40.802l197.415,197.416c5.414,5.41,12.752,8.454,20.404,8.454c7.653,0,14.995-3.043,20.405-8.454
+			l94.115-94.13c11.268-11.264,11.268-29.531,0-40.802l-45.395-45.399l37.493-37.493l45.395,45.399
+			c5.636,5.636,13.019,8.446,20.405,8.446c7.383,0,14.77-2.818,20.401-8.446l79.124-79.124l260.285,260.285L803.722,820.892z
+			 M629.497,137.719c58.812,0,124.33,28.287,178.733,76.497l-94.34,94.334L559.981,154.64
+			C579.485,143.503,603.046,137.719,629.497,137.719z M230.688,791.756L74.079,635.15l53.317-53.321l156.602,156.605
+			L230.688,791.756z M261.089,629.749l-24.999-24.999l35.408-35.408l24.998,24.998L261.089,629.749z M403.106,619.331
+			L246.505,462.725L513.058,196.17l156.609,156.612L403.106,619.331z"/>
+                              <path fill="#e28743" d="M1763.996,1556.146l-593.695-593.688l-40.803,40.801l573.296,573.296l-71.701,71.709l-573.303-573.303
+			l-40.803,40.81l593.704,593.705c5.41,5.408,12.752,8.452,20.401,8.452c7.657,0,14.999-3.044,20.409-8.452l112.502-112.521
+			C1775.268,1585.686,1775.268,1567.418,1763.996,1556.146z"/>
+                            </g>
+                            <path fill="#e28743" d="M1780.444,264.271c-3.269-9.372-11.135-16.4-20.812-18.614c-9.67-2.206-19.806,0.708-26.825,7.729
+		l-116.585,116.576l-109.307-109.315l116.585-116.57c7.02-7.021,9.942-17.156,7.729-26.833c-2.214-9.679-9.243-17.541-18.614-20.814
+		c-29.071-10.149-59.48-15.298-90.379-15.298c-73.062,0-141.743,28.449-193.397,80.104c-51.671,51.66-80.123,120.344-80.123,193.406
+		c0,35.343,6.723,69.648,19.442,101.514l-736.242,736.236c-31.861-12.721-66.158-19.435-101.497-19.435
+		c-73.058,0-141.744,28.452-193.407,80.115c-73.802,73.801-99.243,185.193-64.809,283.775c3.272,9.372,11.134,16.4,20.812,18.614
+		c9.673,2.206,19.809-0.7,26.833-7.72l116.581-116.586l109.315,109.299l-116.585,116.586c-7.021,7.02-9.938,17.155-7.729,26.833
+		c2.214,9.677,9.242,17.534,18.613,20.812c29.064,10.152,59.468,15.296,90.372,15.304c0.008,0,0.008,0,0.016,0
+		c73.042,0,141.728-28.46,193.39-80.122c79.559-79.566,99.726-196.352,60.563-294.822l736.347-736.333
+		c31.865,12.728,66.162,19.443,101.506,19.443c0.008,0,0,0,0.008,0c73.046,0,141.736-28.444,193.391-80.106
+		C1789.438,474.246,1814.878,362.854,1780.444,264.271z M583.011,1599.065c-40.762,40.763-94.948,63.216-152.58,63.216
+		c0,0-0.012,0-0.016,0c-7.915-0.008-15.792-0.436-23.602-1.28l100.137-100.138c5.414-5.417,8.454-12.752,8.454-20.408
+		c0-7.648-3.04-14.99-8.454-20.4L356.83,1369.946c-11.263-11.264-29.535-11.264-40.806,0l-100.072,100.072
+		c-6.835-64.134,15.333-129.603,61.871-176.146c40.762-40.762,94.952-63.207,152.597-63.207c57.64,0,111.83,22.445,152.588,63.215
+		C667.146,1378.013,667.146,1514.926,583.011,1599.065z M659.282,1288.535l-70.945-70.951l702.501-702.488l70.953,70.944
+		L659.282,1288.535z M1674.832,507.246c-40.761,40.753-94.951,63.199-152.596,63.199S1410.394,548,1369.632,507.238
+		c-40.753-40.762-63.207-94.953-63.207-152.597s22.454-111.834,63.216-152.598c40.753-40.758,94.951-63.204,152.596-63.204
+		c7.922,0,15.796,0.429,23.605,1.28l-100.137,100.127c-5.411,5.41-8.453,12.752-8.453,20.4c0,7.657,3.042,14.991,8.453,20.401
+		l150.108,150.117c11.271,11.271,29.547,11.271,40.81,0.008l100.072-100.073C1743.531,395.234,1721.367,460.704,1674.832,507.246z"
+                            />
+                          </g>
+                        </svg>
+
+                        <h3 class="mb-5 text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
+                          Perbaikan Telah Di Lakukan Oleh
+                        </h3>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
+                              Name Maintenance :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={OptionData?.Nama || ""}
+
+                            />
+                          </div>
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
+                              Done Repair at :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={formatDateAPI(OptionData?.Date) || ""}
+                            />
+                          </div>
+                        </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block  tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Problem :
+                          </label>
+                          <input
+                            class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="text"
+                            placeholder=""
+                            name="Kerusakan"
+                            value={OptionData?.Problem || ""}
+
+                          />
+                          <p class="text-gray-600 text-xs  italic">
+                            Status : Menunggu Validation Quality
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="flex justify-center">
+                        <button
+                          data-modal-hide="popup-modal"
+                          type="button"
+                          onClick={() => setIsRequestQA(false)}
+                          className="text-white bg-red-600 mb-2 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                        >
+                          Back
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
+      <td>
+        {isRequestQC ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen pt-24 px-4 pb-20 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <div class="p-6 text-center">
+                        <svg version="1.1" id="REPAIR"
+                          class="mx-auto mb-4 text-red-600 animate-pulse w-14 h-14 dark:text-gray-200"
+                          viewBox="0 0 1800 1800" enable-background="new 0 0 1800 1800" >
+                          <g>
+                            <g>
+                              <path fill="#e28743" d="M803.722,820.892l-247.878-247.87l71.705-71.702l247.875,247.871l40.808-40.802L655.949,448.104
+			l74.925-74.921c0.596-0.596,1.147-1.216,1.682-1.86c0.592-0.499,1.175-1.006,1.735-1.562l135.512-135.512
+			c11.126-11.12,11.292-29.106,0.366-40.43l-1.538-1.606c-1.284-1.349-2.572-2.693-3.893-4.018
+			C796.995,120.454,709.056,80.01,629.497,80.01c-53.655,0-99.814,17.796-133.483,51.468c-0.733,0.73-1.409,1.503-2.053,2.3
+			c-0.443,0.388-0.89,0.765-1.309,1.183L185.294,442.324c-11.267,11.271-11.267,29.539,0,40.81l45.403,45.399l-37.493,37.493
+			l-45.403-45.408c-5.414-5.41-12.752-8.453-20.405-8.453c-7.652,0-14.99,3.043-20.404,8.453L12.869,614.75
+			c-11.268,11.271-11.268,29.538,0,40.802l197.415,197.416c5.414,5.41,12.752,8.454,20.404,8.454c7.653,0,14.995-3.043,20.405-8.454
+			l94.115-94.13c11.268-11.264,11.268-29.531,0-40.802l-45.395-45.399l37.493-37.493l45.395,45.399
+			c5.636,5.636,13.019,8.446,20.405,8.446c7.383,0,14.77-2.818,20.401-8.446l79.124-79.124l260.285,260.285L803.722,820.892z
+			 M629.497,137.719c58.812,0,124.33,28.287,178.733,76.497l-94.34,94.334L559.981,154.64
+			C579.485,143.503,603.046,137.719,629.497,137.719z M230.688,791.756L74.079,635.15l53.317-53.321l156.602,156.605
+			L230.688,791.756z M261.089,629.749l-24.999-24.999l35.408-35.408l24.998,24.998L261.089,629.749z M403.106,619.331
+			L246.505,462.725L513.058,196.17l156.609,156.612L403.106,619.331z"/>
+                              <path fill="#e28743" d="M1763.996,1556.146l-593.695-593.688l-40.803,40.801l573.296,573.296l-71.701,71.709l-573.303-573.303
+			l-40.803,40.81l593.704,593.705c5.41,5.408,12.752,8.452,20.401,8.452c7.657,0,14.999-3.044,20.409-8.452l112.502-112.521
+			C1775.268,1585.686,1775.268,1567.418,1763.996,1556.146z"/>
+                            </g>
+                            <path fill="#e28743" d="M1780.444,264.271c-3.269-9.372-11.135-16.4-20.812-18.614c-9.67-2.206-19.806,0.708-26.825,7.729
+		l-116.585,116.576l-109.307-109.315l116.585-116.57c7.02-7.021,9.942-17.156,7.729-26.833c-2.214-9.679-9.243-17.541-18.614-20.814
+		c-29.071-10.149-59.48-15.298-90.379-15.298c-73.062,0-141.743,28.449-193.397,80.104c-51.671,51.66-80.123,120.344-80.123,193.406
+		c0,35.343,6.723,69.648,19.442,101.514l-736.242,736.236c-31.861-12.721-66.158-19.435-101.497-19.435
+		c-73.058,0-141.744,28.452-193.407,80.115c-73.802,73.801-99.243,185.193-64.809,283.775c3.272,9.372,11.134,16.4,20.812,18.614
+		c9.673,2.206,19.809-0.7,26.833-7.72l116.581-116.586l109.315,109.299l-116.585,116.586c-7.021,7.02-9.938,17.155-7.729,26.833
+		c2.214,9.677,9.242,17.534,18.613,20.812c29.064,10.152,59.468,15.296,90.372,15.304c0.008,0,0.008,0,0.016,0
+		c73.042,0,141.728-28.46,193.39-80.122c79.559-79.566,99.726-196.352,60.563-294.822l736.347-736.333
+		c31.865,12.728,66.162,19.443,101.506,19.443c0.008,0,0,0,0.008,0c73.046,0,141.736-28.444,193.391-80.106
+		C1789.438,474.246,1814.878,362.854,1780.444,264.271z M583.011,1599.065c-40.762,40.763-94.948,63.216-152.58,63.216
+		c0,0-0.012,0-0.016,0c-7.915-0.008-15.792-0.436-23.602-1.28l100.137-100.138c5.414-5.417,8.454-12.752,8.454-20.408
+		c0-7.648-3.04-14.99-8.454-20.4L356.83,1369.946c-11.263-11.264-29.535-11.264-40.806,0l-100.072,100.072
+		c-6.835-64.134,15.333-129.603,61.871-176.146c40.762-40.762,94.952-63.207,152.597-63.207c57.64,0,111.83,22.445,152.588,63.215
+		C667.146,1378.013,667.146,1514.926,583.011,1599.065z M659.282,1288.535l-70.945-70.951l702.501-702.488l70.953,70.944
+		L659.282,1288.535z M1674.832,507.246c-40.761,40.753-94.951,63.199-152.596,63.199S1410.394,548,1369.632,507.238
+		c-40.753-40.762-63.207-94.953-63.207-152.597s22.454-111.834,63.216-152.598c40.753-40.758,94.951-63.204,152.596-63.204
+		c7.922,0,15.796,0.429,23.605,1.28l-100.137,100.127c-5.411,5.41-8.453,12.752-8.453,20.4c0,7.657,3.042,14.991,8.453,20.401
+		l150.108,150.117c11.271,11.271,29.547,11.271,40.81,0.008l100.072-100.073C1743.531,395.234,1721.367,460.704,1674.832,507.246z"
+                            />
+                          </g>
+                        </svg>
+
+                        <h3 class="mb-5 text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
+                          Perbaikan Telah Di Lakukan Oleh
+                        </h3>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
+                              Name Maintenance :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={OptionData?.Nama || ""}
+
+                            />
+                          </div>
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
+                              Done Repair at :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={formatDateAPI(OptionData?.Date) || ""}
+                            />
+                          </div>
+                        </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block  tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Problem :
+                          </label>
+                          <input
+                            class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="text"
+                            placeholder=""
+                            name="Kerusakan"
+                            value={OptionData?.Problem || ""}
+
+                          />
+                          <p class="text-gray-600 text-xs  italic">
+                            Status : Menunggu Validation Quality
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="flex justify-center">
+                        <button
+                          data-modal-hide="popup-modal"
+                          type="button"
+                          onClick={() => setIsRequestQC(false)}
+                          className="text-white bg-red-600 mb-2 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                        >
+                          Back
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
+
+
+      {/* is RequestMaintenance */}
+      <td>
+        {isReturnMaintenance ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen pt-24 px-4 pb-20 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <div class="p-6 text-center">
+                        <svg
+                          aria-hidden="true"
+                          class="mx-auto mb-4 text-red-600 animate-pulse w-14 h-14 dark:text-gray-200"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+
+                        <h3 class="mb-5 text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
+                          Perbaikan Di Kembalikan Karena Tidak Lolos Quality
+                        </h3>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
+                              Name Quality :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={OptionData?.Nama || ""}
+
+                            />
+                          </div>
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
+                              Date Return :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={formatDateAPI(OptionData?.Date) || ""}
+                            />
+                          </div>
+                        </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block  tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Problem :
+                          </label>
+                          <input
+                            class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="text"
+                            placeholder=""
+                            name="Kerusakan"
+                            value={OptionData?.Problem || ""}
+
+                          />
+                          <p class="text-gray-600 text-xs  italic">
+                            Permasalahan Yang Ditemukan
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="flex justify-center">
+                        <button
+                          data-modal-hide="popup-modal"
+                          type="button"
+                          onClick={() => setIsReturnMaintenance(false)}
+                          className="text-white bg-red-600 mb-2 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                        >
+                          Back
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
     </body>
   );
 };

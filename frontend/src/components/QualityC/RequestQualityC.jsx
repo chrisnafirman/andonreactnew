@@ -32,7 +32,7 @@ const RequestQA = () => {
       const data = snapshot.val();
       setStatusLine(data);
     });
-    return () => {};
+    return () => { };
   }, []);
 
   // waktu navbar
@@ -43,9 +43,8 @@ const RequestQA = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const formattedTime = `${currentTime.getDate()}/${
-    currentTime.getMonth() + 1
-  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+  const formattedTime = `${currentTime.getDate()}/${currentTime.getMonth() + 1
+    }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
   //  fungsi export to pdf
   const exportToPDF = () => {
@@ -95,8 +94,8 @@ const RequestQA = () => {
           const formattedDate = `${day.toString().padStart(2, "0")}-${month
             .toString()
             .padStart(2, "0")}-${year} / ${hours
-            .toString()
-            .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+              .toString()
+              .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
           item.Date = formattedDate;
         });
         json.sort((a, b) => Date.parse(a.Date) - Date.parse(b.Date));
@@ -157,7 +156,7 @@ const RequestQA = () => {
     height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
 
-  
+
 
   return (
     <body style={styles}>
@@ -210,9 +209,8 @@ const RequestQA = () => {
       <sidebar>
         <div
           id="drawer-navigation"
-          className={`fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform ${
-            showDrawer ? "" : "-translate-x-full"
-          } bg-gray-100  dark:bg-gray-100 `}
+          className={`fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform ${showDrawer ? "" : "-translate-x-full"
+            } bg-gray-100  dark:bg-gray-100 `}
           tabIndex="-1"
           aria-labelledby="drawer-navigation-label"
         >
@@ -275,7 +273,7 @@ const RequestQA = () => {
           x-data="app"
         >
           <div className="flex flex-col mt-1 h-full">
-          <div>
+            <div>
               {showDatePicker && (
                 <form className="" onSubmit={handleSubmit}>
                   <label htmlFor="date" className="text-gray-300">
@@ -392,7 +390,7 @@ const RequestQA = () => {
                           </div>
                         </td>
                         <td className="p-2 ">
-                        <button
+                          <button
                             onClick={() => setSelectedItem(item)}
                             className="bg-blue-900 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                           >
@@ -412,125 +410,6 @@ const RequestQA = () => {
                             <span>Details</span>
                           </button>
                         </td>
-
-                        {selectedItem && (
-                          <>
-                            <div className="fixed z-10 inset-0 overflow-y-auto">
-                              <div class="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                                <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-                                <div
-                                  class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                                  role="dialog"
-                                  aria-modal="true"
-                                  aria-labelledby="modal-headline"
-                                >
-                                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                                    <div className="sm:flex sm:items-start">
-                                    <div className="w-full max-w-lg">
-                                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                          <span>REQUESTED BY</span>
-                                        </div>
-                                        <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full  px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-first-name"
-                                            >
-                                              Nama PIC Maintenance
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Nama}{" "}
-                                            </div>
-                                          </div>
-                                        </div>
-
-                                        <div class="flex flex-wrap -mx-3 mb-1">
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Area
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Area}{" "}
-                                            </div>
-                                          </div>
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Line
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Area}{" "}
-                                            </div>
-                                          </div>
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Station
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Station}{" "}
-                                            </div>
-                                          </div>
-                                           <div class="w-full px-1">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                                              for="grid-password"
-                                            >
-                                              Problem
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-red-600 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Problem}{" "}
-                                            </div>
-                                          </div>
-                                        </div>
-                                      
-                                        <div className="flex justify-end">
-                                          <button
-                                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                            onClick={() =>
-                                              setSelectedItem(false)
-                                            }
-                                          >
-                                            CLOSE
-                                          </button>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
-                          </>
-                        )}
 
                         {/* <td className="p-5 w-40">
                           <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out">
@@ -559,6 +438,126 @@ const RequestQA = () => {
                     ))}
                   </tbody>
                 </table>
+
+                {selectedItem && (
+                  <>
+                    <div className="fixed z-10 inset-0 overflow-y-auto">
+                      <div class="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                        <div
+                          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                          role="dialog"
+                          aria-modal="true"
+                          aria-labelledby="modal-headline"
+                        >
+                          <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                            <div className="sm:flex sm:items-start">
+                              <div className="w-full max-w-lg">
+                                <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
+                                  <span>REQUESTED BY</span>
+                                </div>
+                                <div class="flex flex-wrap -mx-3 ">
+                                  <div class="w-full  px-3 mb-6 md:mb-0">
+                                    <label
+                                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                      for="grid-first-name"
+                                    >
+                                      Nama PIC Maintenance
+                                    </label>
+                                    <div
+                                      class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                      type="text"
+                                    >
+                                      {" "}
+                                      {selectedItem.Nama}{" "}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="flex flex-wrap -mx-3 mb-1">
+                                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                    <label
+                                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                      for="grid-city"
+                                    >
+                                      Area
+                                    </label>
+                                    <div
+                                      class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                      type="text"
+                                    >
+                                      {" "}
+                                      {selectedItem.Area}{" "}
+                                    </div>
+                                  </div>
+                                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                    <label
+                                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                      for="grid-city"
+                                    >
+                                      Line
+                                    </label>
+                                    <div
+                                      class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                      type="text"
+                                    >
+                                      {" "}
+                                      {selectedItem.Area}{" "}
+                                    </div>
+                                  </div>
+                                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                    <label
+                                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                      for="grid-city"
+                                    >
+                                      Station
+                                    </label>
+                                    <div
+                                      class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                      type="text"
+                                    >
+                                      {" "}
+                                      {selectedItem.Station}{" "}
+                                    </div>
+                                  </div>
+                                  <div class="w-full px-1">
+                                    <label
+                                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                                      for="grid-password"
+                                    >
+                                      Problem
+                                    </label>
+                                    <div
+                                      class="appearance-none block w-full bg-gray-200 text-red-600 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                      type="text"
+                                    >
+                                      {" "}
+                                      {selectedItem.Problem}{" "}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="flex justify-end">
+                                  <button
+                                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                    onClick={() =>
+                                      setSelectedItem(false)
+                                    }
+                                  >
+                                    CLOSE
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+                  </>
+                )}
+
               </div>
             </div>
           </div>

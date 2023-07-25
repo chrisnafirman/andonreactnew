@@ -439,7 +439,36 @@ const ReturnQA = () => {
                           </button>
                         </td>
 
-                        {selectedItem && (
+                      
+
+                        {/* <td className="p-5 w-40">
+                          <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              className="w-6 h-6 mr-2"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10 18a8 8 0 110-16 8 8 0 010 16zm0-2a6 6 0 100-12 6 6 0 000 12zM8 9a1 1 0 011-1h2a1 1 0 010 2H9a1 1 0 01-1-1zm5.293 5.293a1 1 0 00-1.414 0L11 14.586l-1.879-1.88a1 1 0 00-1.414 1.414l2.586 2.586a1 1 0 001.414 0l4.586-4.586a1 1 0 000-1.414z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                            <span>QUALITY</span>
+                          </button>
+                        </td> */}
+
+                        <td className="p-2">
+                          <div className="text-center h-6 text-black...">
+                            {item.waktu}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {selectedItem && (
                           <>
                             <div className="fixed z-10 inset-0 overflow-y-auto">
                               <div class="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -560,34 +589,6 @@ const ReturnQA = () => {
                             </div>
                           </>
                         )}
-
-                        {/* <td className="p-5 w-40">
-                          <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="w-6 h-6 mr-2"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 110-16 8 8 0 010 16zm0-2a6 6 0 100-12 6 6 0 000 12zM8 9a1 1 0 011-1h2a1 1 0 010 2H9a1 1 0 01-1-1zm5.293 5.293a1 1 0 00-1.414 0L11 14.586l-1.879-1.88a1 1 0 00-1.414 1.414l2.586 2.586a1 1 0 001.414 0l4.586-4.586a1 1 0 000-1.414z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <span>QUALITY</span>
-                          </button>
-                        </td> */}
-
-                        <td className="p-2">
-                          <div className="text-center h-6 text-black...">
-                            {item.waktu}
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
               </div>
             </div>
           </div>

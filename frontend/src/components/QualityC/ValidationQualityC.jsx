@@ -31,7 +31,7 @@ const ReturnQA = () => {
       const data = snapshot.val();
       setStatusLine(data);
     });
-    return () => {};
+    return () => { };
   }, []);
 
   //  fungsi mengambil data dari firebase
@@ -54,9 +54,8 @@ const ReturnQA = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const formattedTime = `${currentTime.getDate()}/${
-    currentTime.getMonth() + 1
-  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+  const formattedTime = `${currentTime.getDate()}/${currentTime.getMonth() + 1
+    }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
   updateTime();
 
@@ -85,8 +84,8 @@ const ReturnQA = () => {
           const formattedDate = `${day.toString().padStart(2, "0")}-${month
             .toString()
             .padStart(2, "0")}-${year} / ${hours
-            .toString()
-            .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+              .toString()
+              .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
           item.waktu = formattedDate;
         });
         json.sort((a, b) => Date.parse(a.waktu) - Date.parse(b.waktu));
@@ -201,7 +200,7 @@ const ReturnQA = () => {
           x-data="app"
         >
           <div className="flex flex-col mt-1 h-full">
-          <div>
+            <div>
               {showDatePicker && (
                 <form className="" onSubmit={handleSubmit}>
                   <label htmlFor="date" className="text-gray-300">
@@ -377,129 +376,7 @@ const ReturnQA = () => {
                           </button>
                         </td>
 
-                        {selectedItem && (
-                          <>
-                            <div className="fixed z-10 inset-0 overflow-y-auto">
-                              <div class="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                                <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-                                <div
-                                  class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                                  role="dialog"
-                                  aria-modal="true"
-                                  aria-labelledby="modal-headline"
-                                >
-                                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                                    <div className="sm:flex sm:items-start">
-                                      <div className="w-full max-w-lg">
-                                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                          <span>Validation By</span>
-                                        </div>
-                                        <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full  px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-first-name"
-                                            >
-                                              Nama PIC Quality
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.NamaPIC}{" "}
-                                            </div>
-                                          </div>
-                                        </div>
 
-                                        <div class="flex flex-wrap -mx-3 mb-6">
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Area
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Line}{" "}
-                                            </div>
-                                          </div>
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Line
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Area}{" "}
-                                            </div>
-                                          </div>
-                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                              for="grid-city"
-                                            >
-                                              Station
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Station}{" "}
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full px-1">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                                              for="grid-password"
-                                            >
-                                              Validation
-                                            </label>
-                                            <div class="flex items-center">
-                                              <a
-                                                href={`http://192.168.101.236:3001/${selectedItem.Validation}`}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                class="text-blue-600 hover:text-blue-800"
-                                              >
-                                                <i class="far fa-file-pdf mr-2"></i>
-                                                View PDF
-                                              </a>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div className="flex justify-end">
-                                          <button
-                                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                                            onClick={() =>
-                                              setSelectedItem(false)
-                                            }
-                                          >
-                                            CLOSE
-                                          </button>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                          
-                          </>
-                        )}
 
                         {/* <td className="p-5 w-40">
                           <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out">
@@ -528,6 +405,127 @@ const ReturnQA = () => {
                     ))}
                   </tbody>
                 </table>
+                {selectedItem && (
+                  <>
+                    <div className="fixed z-10 inset-0 overflow-y-auto">
+                      <div class="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                        <div
+                          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                          role="dialog"
+                          aria-modal="true"
+                          aria-labelledby="modal-headline"
+                        >
+                          <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                            <div className="sm:flex sm:items-start">
+                              <div className="w-full max-w-lg">
+                                <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
+                                  <span>Validation By</span>
+                                </div>
+                                <div class="flex flex-wrap -mx-3 ">
+                                  <div class="w-full  px-3 mb-6 md:mb-0">
+                                    <label
+                                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                      for="grid-first-name"
+                                    >
+                                      Nama PIC Quality
+                                    </label>
+                                    <div
+                                      class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                      type="text"
+                                    >
+                                      {" "}
+                                      {selectedItem.NamaPIC}{" "}
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="flex flex-wrap -mx-3 mb-6">
+                                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                    <label
+                                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                      for="grid-city"
+                                    >
+                                      Area
+                                    </label>
+                                    <div
+                                      class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                      type="text"
+                                    >
+                                      {" "}
+                                      {selectedItem.Line}{" "}
+                                    </div>
+                                  </div>
+                                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                    <label
+                                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                      for="grid-city"
+                                    >
+                                      Line
+                                    </label>
+                                    <div
+                                      class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                      type="text"
+                                    >
+                                      {" "}
+                                      {selectedItem.Area}{" "}
+                                    </div>
+                                  </div>
+                                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                    <label
+                                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                      for="grid-city"
+                                    >
+                                      Station
+                                    </label>
+                                    <div
+                                      class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                      type="text"
+                                    >
+                                      {" "}
+                                      {selectedItem.Station}{" "}
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="flex flex-wrap -mx-3 ">
+                                  <div class="w-full px-1">
+                                    <label
+                                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                                      for="grid-password"
+                                    >
+                                      Validation
+                                    </label>
+                                    <div class="flex items-center">
+                                      <a
+                                        href={`http://192.168.101.236:3001/${selectedItem.Validation}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="text-blue-600 hover:text-blue-800"
+                                      >
+                                        <i class="far fa-file-pdf mr-2"></i>
+                                        View PDF
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="flex justify-end">
+                                  <button
+                                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                    onClick={() =>
+                                      setSelectedItem(false)
+                                    }
+                                  >
+                                    CLOSE
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

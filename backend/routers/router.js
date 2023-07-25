@@ -6,6 +6,7 @@ const QCcontrollers = require("../controller/QC");
 const TimeProductioncontrollers = require("../controller/TimeProduction")
 const Generalcontrollers = require("../controller/General")
 const Employeecontrollers = require("../controller/Employee")
+const UMLine1TOP = require("../controller/UMLine1TOP")
 
 // MTC
 router.post("/Maintenance", MTCcontrollers.postRequestMaintenance);
@@ -62,6 +63,13 @@ router.get("/Employee_Operator_Manufacturing", Employeecontrollers.getRequestEmp
 router.get("/Employee_Team_Maintenance", Employeecontrollers.getRequestEmployeeTeamMaintenance);
 router.get("/Employee_Team_Quality", Employeecontrollers.getRequestEmployeeTeamQuality);
 
+
+
+// 
+router.get("/UMDestackerTOPLine1", UMLine1TOP.getUMDestackerTOPLine1);
+router.get("/UMDestackerTOPLine1QA", UMLine1TOP.getUMDestackerTOPLine1QA);
+router.get("/UMDestackerTOPLine1QC", UMLine1TOP.getUMDestackerTOPLine1QC);
+router.get("/UMDestackerTOPLine1Return", UMLine1TOP.getUMDestackerTOPLine1Return);
 
 
 module.exports = router;
