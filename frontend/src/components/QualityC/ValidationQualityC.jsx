@@ -75,7 +75,7 @@ const ReturnQA = () => {
       .then((json) => {
         // mengubah properti timestamp menjadi tanggal dan waktu
         json.forEach((item) => {
-          const date = new Date(item.waktu);
+          const date = new Date(item.Date);
           const day = date.getDate();
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
@@ -86,9 +86,9 @@ const ReturnQA = () => {
             .padStart(2, "0")}-${year} / ${hours
               .toString()
               .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
-          item.waktu = formattedDate;
+          item.Date = formattedDate;
         });
-        json.sort((a, b) => Date.parse(a.waktu) - Date.parse(b.waktu));
+        json.sort((a, b) => Date.parse(a.Date) - Date.parse(b.Date));
         json.reverse();
         setData(json);
         setFilteredData(json);
@@ -106,16 +106,16 @@ const ReturnQA = () => {
       .then((json) => {
         // mengubah properti waktu menjadi tanggal saja
         json.forEach((item) => {
-          const date = new Date(item.waktu);
+          const date = new Date(item.Date);
           const day = date.getDate();
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
           const formattedDate = `${day.toString().padStart(2, "0")}-${month
             .toString()
             .padStart(2, "0")}-${year}`;
-          item.waktu = formattedDate;
+          item.Date = formattedDate;
         });
-        json.sort((a, b) => Date.parse(a.waktu) - Date.parse(b.waktu));
+        json.sort((a, b) => Date.parse(a.Date) - Date.parse(b.Date));
         json.reverse();
         setFilteredData(json);
       });
@@ -134,9 +134,9 @@ const ReturnQA = () => {
       .toString()
       .padStart(2, "0")}-${date.getFullYear()}`;
     const filteredData = data.filter((item) =>
-      item.waktu.includes(formattedDate)
+      item.Date.includes(formattedDate)
     );
-    filteredData.sort((a, b) => Date.parse(b.waktu) - Date.parse(a.waktu));
+    filteredData.sort((a, b) => Date.parse(b.Date) - Date.parse(a.Date));
     setFilteredData(filteredData);
   };
 
@@ -287,7 +287,7 @@ const ReturnQA = () => {
                       <tr key={item.id}>
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
-                            {item.NamaPIC}
+                            {item.Nama}
                           </div>
                         </td>
                         <td className="p-2">
@@ -398,7 +398,7 @@ const ReturnQA = () => {
 
                         <td className="p-2">
                           <div className="text-center h-6 text-black...">
-                            {item.waktu}
+                            {item.Date}
                           </div>
                         </td>
                       </tr>
@@ -435,7 +435,7 @@ const ReturnQA = () => {
                                       type="text"
                                     >
                                       {" "}
-                                      {selectedItem.NamaPIC}{" "}
+                                      {selectedItem.Nama}{" "}
                                     </div>
                                   </div>
                                 </div>

@@ -23,22 +23,22 @@ const UserMobile = () => {
   // -------------------
 
   // popup form 1
-  const [isOpenOthers, setIsOpenOthers] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
 
   const [isGeneral, setIsGeneral] = useState(true);
   const [isSMTTOP, setIsSMTTOP] = useState(false);
   const [isSMTBOT, setIsSMTBOT] = useState(false);
   const [isSMTBE, setIsSMTBE] = useState(false);
-  const [isOpenOperator, setIsOpenOperator] = useState(false);
 
 
   // popup DestackerTOP
+  const [isRequestGeneral, setIsRequestGeneral] = useState(false);
   const [isRequestMaintenance, setIsRequestMaintenance] = useState(false);
   const [isReturnMaintenance, setIsReturnMaintenance] = useState(false);
   const [isRequestQA, setIsRequestQA] = useState(false);
   const [isRequestQC, setIsRequestQC] = useState(false);
   const [isRepair, setIsRepair] = useState(false);
+  const [isValidation, setIsValidation] = useState(false);
 
   // -------------
   // SMT LINE 1
@@ -47,13 +47,32 @@ const UserMobile = () => {
 
   // DATA SCHEDULE PLANING
   const [data, setData] = useState(null);
-
-
   const [OptionData, setOptionData] = useState(null);
+
+
+  // Failure
+  const [dataElectricity, setDataElectricity] = useState(null);
+  const [dataNetwork, setDataNetwork] = useState(null);
+  const [dataAirComp, setDataAirComp] = useState(null);
+  const [dataOthers, setDataOthers] = useState(null);
+  const [dataShorComp, setDataShorcomp] = useState(null);
+  const [dataShorBox, setDataShorbox] = useState(null);
+  const [dataOverTrial, setDataOvertrial] = useState(null);
+  const [dataOverChange, setDataOverchange] = useState(null);
+  // ..
+
   const [dataDestackerTOP, setDataDestackerTOP] = useState(null);
   const [dataDestackerTOPQA, setDataDestackerTOPQA] = useState(null);
   const [dataDestackerTOPQC, setDataDestackerTOPQC] = useState(null);
   const [dataDestackerTOPReturn, setDataDestackerTOPReturn] = useState(null);
+  const [dataDestackerTOPValQuality, setDataDestackerTOPValQuality] = useState(null);
+
+
+  const [dataLabelTOP, setDataLabelTOP] = useState(null);
+  const [dataLabelTOPQA, setDataLabelTOPQA] = useState(null);
+  const [dataLabelTOPQC, setDataLabelTOPQC] = useState(null);
+  const [dataLabelTOPReturn, setDataLabelTOPReturn] = useState(null);
+  const [dataLabelTOPValQuality, setDataLabelTOPValQuality] = useState(null);
 
   // ---------------------
 
@@ -96,35 +115,57 @@ const UserMobile = () => {
 
   // SMT BOT
   const [PrinterBot, setPrinterBot] = useState("Printer (BOT)");
+  const [StatusPrinterBot, setStatusPrinterBot] = useState("");
+  const [StatusSpiBot, setStatusSpiBot] = useState("");
   const [SpiBot, setSpiBot] = useState("Spi (BOT)");
+  const [StatusPickNPlaceBot, setStatusPickNPlaceBot] = useState("");
   const [PickNPlaceBot, setPickNPlaceBot] = useState("Pick&Place (BOT)");
+  const [StatusReflowBot, setStatusReflowBot] = useState("");
   const [ReflowBot, setReflowBot] = useState("Reflow (BOT)");
+  const [StatusAOIBot, setStatusAOIBot] = useState("");
   const [AOIBot, setAOIBot] = useState("AOI (BOT)");
+  const [StatusRVSBot, setStatusRVSBot] = useState("");
   const [RVSBot, setRVSBot] = useState("RVS (BOT)");
   // .............
 
   // SMT BE
   const [DropinBE, setDropinBE] = useState("Drop in (BE)");
+  const [StatusDropinBE, setStatusDropinBE] = useState("");
+  const [StatusFluxerBE, setStatusFluxerBE] = useState("");
   const [FluxerBE, setFluxerBE] = useState("Fluxer (BE)");
+  const [StatusPreheatBE, setStatusPreheatBE] = useState("");
   const [PreheatBE, setPreheatBE] = useState("PreHeat (BE)");
+  const [StatusSeho1BE, setStatusSeho1BE] = useState("");
   const [Seho1BE, setSeho1BE] = useState("Seho1 (BE)");
+  const [StatusSeho2BE, setStatusSeho2BE] = useState("");
   const [Seho2BE, setSeho2BE] = useState("Seho2 (BE)");
+  const [StatusTouchupBE, setStatusTouchupBE] = useState("");
   const [TouchupBE, setTouchupBE] = useState("Touch UP (BE)");
+  const [StatusICTBE, setStatusICTBE] = useState("");
   const [ICTBE, setICTBE] = useState("ICT (BE)");
+  const [StatusFlashBE, setStatusFlashBE] = useState("");
   const [FlashBE, setFlashBE] = useState("Flash (BE)");
+  const [StatusRouterBE, setStatusRouterBE] = useState("");
   const [RouterBE, setRouterBE] = useState("Router (BE)");
   // .............
 
   // Status Failure
-  const [Others, setStatusOthers] = useState("");
-  const [status, setStatus] = useState("");
-  const [Network, setStatusNetwork] = useState("");
-  const [Electricity, setStatusElectricity] = useState("");
-  const [Aircomp, setStatusAircomp] = useState("");
-  const [Shorcomp, setStatusShorcomp] = useState("");
-  const [Shorbox, setStatusShorbox] = useState("");
-  const [Overtrial, setStatusOvertrial] = useState("");
-  const [Overchange, setStatusOverchange] = useState("");
+  const [Others, setOthers] = useState("");
+  const [StatusOthers, setStatusOthers] = useState("");
+  const [Network, setNetwork] = useState("");
+  const [StatusNetwork, setStatusNetwork] = useState("");
+  const [Electricity, setElectricity] = useState("");
+  const [StatusElectricity, setStatusElectricity] = useState("");
+  const [Aircomp, setAircomp] = useState("");
+  const [StatusAircomp, setStatusAircomp] = useState("");
+  const [Shorcomp, setShorcomp] = useState("");
+  const [StatusShorcomp, setStatusShorcomp] = useState("");
+  const [Shorbox, setShorbox] = useState("");
+  const [StatusShorbox, setStatusShorbox] = useState("");
+  const [Overtrial, setOvertrial] = useState("");
+  const [StatusOvertrial, setStatusOvertrial] = useState("");
+  const [Overchange, setOverchange] = useState("");
+  const [StatusOverchange, setStatusOverchange] = useState("");
 
   // ------------------------
 
@@ -666,26 +707,7 @@ const UserMobile = () => {
   // ----
 
   // FUNGSI UPDATE STATUS
-  const updateStatus = (data) => {
-    setStatus(data);
-    setBackgroundColor(
-      data === "Go"
-        ? "#31A207"
-        : data === "Repair"
-          ? "#E9CE08"
-          : data === "Leader"
-            ? "#C00000"
-            : data === "Maintenance"
-              ? "#be4f62"
-              : data === "PPIC"
-                ? "#7A6544"
-                : data === "QA"
-                  ? "#93C2C4"
-                  : data === "QC"
-                    ? "#BDD0D1"
-                    : "#565454"
-    );
-  };
+
 
   // UPDATE Others
   const updateOthers = (data) => {
@@ -717,6 +739,7 @@ const UserMobile = () => {
 
   // UPDATE Network
   const updateNetwork = (data) => {
+    setStatusNetwork(data);
     setBackgroundColorNetwork(
       data === "Go"
         ? "#31A207"
@@ -730,6 +753,7 @@ const UserMobile = () => {
 
   // UPDATE Electricity
   const updateElectricity = (data) => {
+    setStatusElectricity(data);
     setBackgroundColorElectricity(
       data === "Go"
         ? "#31A207"
@@ -743,6 +767,7 @@ const UserMobile = () => {
 
   // UPDATE Aircomp
   const updateAircomp = (data) => {
+    setStatusAircomp(data);
     setBackgroundColorAircomp(
       data === "Go"
         ? "#31A207"
@@ -756,6 +781,7 @@ const UserMobile = () => {
 
   // UPDATE Shorcomp
   const updateShorcomp = (data) => {
+    setStatusShorcomp(data);
     setBackgroundColorShorcomp(
       data === "Go"
         ? "#31A207"
@@ -769,6 +795,7 @@ const UserMobile = () => {
 
   // UPDATE Shorbox
   const updateShorbox = (data) => {
+    setStatusShorbox(data);
     setBackgroundColorShorbox(
       data === "Go"
         ? "#31A207"
@@ -782,6 +809,7 @@ const UserMobile = () => {
 
   // UPDATE OverTrial
   const updateOvertrial = (data) => {
+    setStatusOvertrial(data);
     setBackgroundColorOvertrial(
       data === "Go"
         ? "#31A207"
@@ -795,6 +823,7 @@ const UserMobile = () => {
 
   // UPDATE Overchangemodel
   const updateOverchange = (data) => {
+    setStatusOverchange(data);
     setBackgroundColorOverchange(
       data === "Go"
         ? "#31A207"
@@ -832,6 +861,7 @@ const UserMobile = () => {
   };
 
   const updateStatuslabelTop = (data) => {
+    setStatuslabelTop(data);
     setBackgroundColorStatuslabelTop(
       data === "Go"
         ? "#31A207"
@@ -854,6 +884,7 @@ const UserMobile = () => {
   };
 
   const updateStatusPrinterTop = (data) => {
+    setStatusPrinterTop(data);
     setBackgroundColorStatusPrinterTop(
       data === "Go"
         ? "#31A207"
@@ -876,6 +907,7 @@ const UserMobile = () => {
   };
 
   const updateStatusSpiTop = (data) => {
+    setStatusSpiTop(data);
     setBackgroundColorStatusSpiTop(
       data === "Go"
         ? "#31A207"
@@ -898,6 +930,7 @@ const UserMobile = () => {
   };
 
   const updateStatusPickNPlace = (data) => {
+    setStatusPickNPlace(data);
     setBackgroundColorStatusPickNPlace(
       data === "Go"
         ? "#31A207"
@@ -919,9 +952,8 @@ const UserMobile = () => {
     );
   };
 
-
-
   const updateStatusReflowTop = (data) => {
+    setStatusReflowTop(data);
     setBackgroundColorStatusReflowTop(
       data === "Go"
         ? "#31A207"
@@ -944,6 +976,7 @@ const UserMobile = () => {
   };
 
   const updateStatusAOITop = (data) => {
+    setStatusAOITop(data);
     setBackgroundColorStatusAOITop(
       data === "Go"
         ? "#31A207"
@@ -966,6 +999,7 @@ const UserMobile = () => {
   };
 
   const updateStatusRVSTop = (data) => {
+    setStatusRVSTop(data);
     setBackgroundColorStatusRVSTop(
       data === "Go"
         ? "#31A207"
@@ -987,11 +1021,10 @@ const UserMobile = () => {
     );
   };
 
-
   // Update Status BOT
 
-
   const updateStatusPrinterBot = (data) => {
+    setStatusPrinterBot(data);
     setBackgroundColorStatusPrinterBot(
       data === "Go"
         ? "#31A207"
@@ -1014,6 +1047,7 @@ const UserMobile = () => {
   };
 
   const updateStatusSpiBot = (data) => {
+    setStatusSpiBot(data);
     setBackgroundColorStatusSpiBot(
       data === "Go"
         ? "#31A207"
@@ -1036,6 +1070,7 @@ const UserMobile = () => {
   };
 
   const updateStatusPickNPlaceBot = (data) => {
+    setStatusPickNPlaceBot(data);
     setBackgroundColorStatusPickNPlaceBot(
       data === "Go"
         ? "#31A207"
@@ -1058,6 +1093,7 @@ const UserMobile = () => {
   };
 
   const updateStatusReflowBot = (data) => {
+    setStatusReflowBot(data);
     setBackgroundColorStatusReflowBot(
       data === "Go"
         ? "#31A207"
@@ -1080,6 +1116,7 @@ const UserMobile = () => {
   };
 
   const updateStatusAOIBot = (data) => {
+    setStatusAOIBot(data);
     setBackgroundColorStatusAOIBot(
       data === "Go"
         ? "#31A207"
@@ -1102,6 +1139,7 @@ const UserMobile = () => {
   };
 
   const updateStatusRVSBot = (data) => {
+    setStatusRVSBot(data);
     setBackgroundColorStatusRVSBot(
       data === "Go"
         ? "#31A207"
@@ -1126,6 +1164,7 @@ const UserMobile = () => {
   // Update Status BE
 
   const updateStatusDropinBE = (data) => {
+    setStatusDropinBE(data);
     setBackgroundColorStatusDropinBE(
       data === "Go"
         ? "#31A207"
@@ -1148,6 +1187,7 @@ const UserMobile = () => {
   };
 
   const updateStatusFluxerBE = (data) => {
+    setStatusFluxerBE(data);
     setBackgroundColorStatusFluxerBE(
       data === "Go"
         ? "#31A207"
@@ -1170,6 +1210,7 @@ const UserMobile = () => {
   };
 
   const updateStatusPreheatBE = (data) => {
+    setStatusPreheatBE(data);
     setBackgroundColorStatusPreheatBE(
       data === "Go"
         ? "#31A207"
@@ -1192,6 +1233,7 @@ const UserMobile = () => {
   };
 
   const updateStatusSeho1BE = (data) => {
+    setStatusSeho1BE(data);
     setBackgroundColorStatusSeho1BE(
       data === "Go"
         ? "#31A207"
@@ -1214,6 +1256,7 @@ const UserMobile = () => {
   };
 
   const updateStatusSeho2BE = (data) => {
+    setStatusSeho2BE(data);
     setBackgroundColorStatusSeho2BE(
       data === "Go"
         ? "#31A207"
@@ -1236,6 +1279,7 @@ const UserMobile = () => {
   };
 
   const updateStatusTouchupBE = (data) => {
+    setStatusTouchupBE(data);
     setBackgroundColorStatusTouchupBE(
       data === "Go"
         ? "#31A207"
@@ -1258,6 +1302,7 @@ const UserMobile = () => {
   };
 
   const updateStatusICTBE = (data) => {
+    setStatusICTBE(data);
     setBackgroundColorStatusICTBE(
       data === "Go"
         ? "#31A207"
@@ -1280,6 +1325,7 @@ const UserMobile = () => {
   };
 
   const updateStatusFlashBE = (data) => {
+    setStatusFlashBE(data);
     setBackgroundColorStatusFlashBE(
       data === "Go"
         ? "#31A207"
@@ -1302,6 +1348,7 @@ const UserMobile = () => {
   };
 
   const updateStatusRouterBE = (data) => {
+    setStatusRouterBE(data);
     setBackgroundColorStatusRouterBE(
       data === "Go"
         ? "#31A207"
@@ -1349,13 +1396,44 @@ const UserMobile = () => {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
+    const hours = date.getHours().toString().padStart(2, '0'); // Add leading zeros to hours
+    const minutes = date.getMinutes().toString().padStart(2, '0'); // Add leading zeros to minutes
 
     return `${day}/${month}/${year} ~~ ${hours}:${minutes} WIB`;
   };
 
 
+
+  // Fetch Failure
+  const fetchDataElectricity = () => {
+    fetch("http://192.168.101.236:3001/api/UMElectricityLine1")
+      .then((response) => response.json())
+      .then((data) => {
+        setDataElectricity(data);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  };
+
+  const fetchDataNetwork = () => {
+    fetch("http://192.168.101.236:3001/api/UMNetworkLine1")
+      .then((response) => response.json())
+      .then((data) => {
+        setDataNetwork(data);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  };
+
+
+
+  // ....
+
+  // DestackerTop
   const fetchDataDestackerTOP = () => {
     fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1")
       .then((response) => response.json())
@@ -1368,8 +1446,6 @@ const UserMobile = () => {
       });
   };
 
-
-
   const fetchDataDestackerTOPQA = () => {
     fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1QA")
       .then((response) => response.json())
@@ -1381,8 +1457,6 @@ const UserMobile = () => {
         console.error("Error fetching data:", error);
       });
   };
-
-
   const fetchDataDestackerTOPQC = () => {
     fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1QC")
       .then((response) => response.json())
@@ -1394,8 +1468,6 @@ const UserMobile = () => {
         console.error("Error fetching data:", error);
       });
   };
-
-
 
   const fetchDataDestackerTOPReturn = () => {
     fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1Return")
@@ -1409,28 +1481,143 @@ const UserMobile = () => {
       });
   };
 
+  const fetchDataDestackerTOPValQuality = () => {
+    fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1ValQuality")
+      .then((response) => response.json())
+      .then((data) => {
+        setDataDestackerTOPValQuality(data);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  };
+
+
+
+  // Label
+  const fetchDataLabelTOP = () => {
+    fetch("http://192.168.101.236:3001/api/UMLabelTOPLine1")
+      .then((response) => response.json())
+      .then((data) => {
+        setDataLabelTOP(data);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  };
+
+  const fetchDataLabelTOPQA = () => {
+    fetch("http://192.168.101.236:3001/api/UMLabelTOPLine1QA")
+      .then((response) => response.json())
+      .then((data) => {
+        setDataLabelTOPQA(data);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  };
+  const fetchDataLabelTOPQC = () => {
+    fetch("http://192.168.101.236:3001/api/UMLabelTOPLine1QC")
+      .then((response) => response.json())
+      .then((data) => {
+        setDataLabelTOPQC(data);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  };
+
+  const fetchDataLabelTOPReturn = () => {
+    fetch("http://192.168.101.236:3001/api/UMLabelTOPLine1Return")
+      .then((response) => response.json())
+      .then((data) => {
+        setDataLabelTOPReturn(data);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  };
+  const fetchDataLabelTOPValQuality = () => {
+    fetch("http://192.168.101.236:3001/api/UMLabelTOPLine1ValQuality")
+      .then((response) => response.json())
+      .then((data) => {
+        setDataLabelTOPValQuality(data);
+      })
+      .catch((error) => {
+        // Tangani error jika permintaan gagal
+        console.error("Error fetching data:", error);
+      });
+  };
+
+
+
+  // Label
+
 
 
 
 
   useEffect(() => {
-    // Fetch data initially
+
+    fetchDataElectricity();
+    fetchDataNetwork();
+
+    // SMTTOP
     fetchDataDestackerTOP();
     fetchDataDestackerTOPQA();
     fetchDataDestackerTOPQC();
     fetchDataDestackerTOPReturn();
+    fetchDataDestackerTOPValQuality();
 
+    fetchDataLabelTOP();
+    fetchDataLabelTOPQA();
+    fetchDataLabelTOPQC();
+    fetchDataLabelTOPReturn();
+    fetchDataLabelTOPValQuality();
+
+
+
+    // Failure
+    const intervalIdElectricity = setInterval(fetchDataElectricity, 5000);
+    const intervalIdNetwork = setInterval(fetchDataNetwork, 5000);
     // Set up interval to fetch data every 5 seconds (adjust the interval as needed)
     const intervalIdDestackerTOP = setInterval(fetchDataDestackerTOP, 5000);
     const intervalIdDestackerTOPQA = setInterval(fetchDataDestackerTOPQA, 5000);
     const intervalIdDestackerTOPQC = setInterval(fetchDataDestackerTOPQC, 5000);
     const intervalIdDestackerTOPReturn = setInterval(fetchDataDestackerTOPReturn, 5000);
+    const intervalIdDestackerTOPValQuality = setInterval(fetchDataDestackerTOPValQuality, 5000);
+
+    const intervalIdLabelTOP = setInterval(fetchDataLabelTOP, 5000);
+    const intervalIdLabelTOPQA = setInterval(fetchDataLabelTOPQA, 5000);
+    const intervalIdLabelTOPQC = setInterval(fetchDataLabelTOPQC, 5000);
+    const intervalIdLabelTOPReturn = setInterval(fetchDataLabelTOPReturn, 5000);
+    const intervalIdLabelTOPValQuality = setInterval(fetchDataLabelTOPValQuality, 5000);
     // Clear the intervals on component unmount to avoid memory leaks
     return () => {
+
+      // Failure
+      clearInterval(intervalIdElectricity);
+      clearInterval(intervalIdNetwork);
+
+
+      // SMT Top 
       clearInterval(intervalIdDestackerTOP);
       clearInterval(intervalIdDestackerTOPQA);
       clearInterval(intervalIdDestackerTOPQC);
       clearInterval(intervalIdDestackerTOPReturn);
+      clearInterval(intervalIdDestackerTOPValQuality);
+
+      clearInterval(intervalIdLabelTOP);
+      clearInterval(intervalIdLabelTOPQA);
+      clearInterval(intervalIdLabelTOPQC);
+      clearInterval(intervalIdLabelTOPReturn);
+      clearInterval(intervalIdLabelTOPValQuality);
+
     };
   }, []);
 
@@ -1439,7 +1626,7 @@ const UserMobile = () => {
       <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
         <div class="flex h-14 items-center justify-between">
           <div class="flex items-center">
-            <a href="/RequestNetwork">
+            <a href="/AndonLine1">
               <div class="flex-shrink-0">
                 <img
                   src={process.env.PUBLIC_URL + "/smt.jpeg"}
@@ -1588,6 +1775,19 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorElectricity }}
                         value={Electricity}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusElectricity === "Go") {
+
+
+                          } else if (StatusElectricity === "Repair") {
+
+
+                          } else if (StatusElectricity === "Down") {
+
+                            setIsRequestGeneral(true);
+                            setOptionData(dataElectricity);
+                          }
+                        }}
                       >
                         <svg
                           fill="#2e3436"
@@ -1616,6 +1816,19 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorNetwork }}
                         value={Network}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusNetwork === "Go") {
+                            // set isOpenEStatusNetwork state to true if EStatusNetwork is "Go"
+                            ;
+                          } else if (StatusNetwork === "Repair") {
+                            // set Quality state to true if EStatusNetwork is "Repair"
+
+                          } else if (StatusNetwork === "Down") {
+
+                            setIsRequestGeneral(true);
+                            setOptionData(dataNetwork)
+                          }
+                        }}
                       >
                         <svg
                           width="60px"
@@ -1969,6 +2182,12 @@ const UserMobile = () => {
                             // set Quality state to true if DestackerTop is "Repair"
 
                           }
+                          else if (StatusdestackerTop === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataDestackerTOPValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
 
                         }}
                       >
@@ -2078,6 +2297,37 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatuslabelTop }}
                         value={LabelTop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatuslabelTop === "Maintenance") {
+                            // set isOpenLabelTop state to true if LabelTop is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataLabelTOP);
+                          } else if (StatuslabelTop === "Repair") {
+                            // set Quality state to true if LabelTop is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataLabelTOP);
+                          } else if (StatuslabelTop === "QA") {
+                            // set Quality state to true if LabelTop is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataLabelTOPQA);
+                          } else if (StatuslabelTop === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataLabelTOPQC);
+                            // set Quality state to true if LabelTop is "Repair"
+
+                          } else if (StatuslabelTop === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataLabelTOPReturn);
+                            // set Quality state to true if Top is "Repair"
+
+                          } else if (StatuslabelTop === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataLabelTOPValQuality);
+                            // set Quality state to true if Label Top is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -5388,6 +5638,275 @@ const UserMobile = () => {
           </>
         ) : null}
       </td>
+
+
+      {/* is RequestGeneral */}
+      <td>
+        {isRequestGeneral ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen pt-24 px-4 pb-20 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <div class="p-6 text-center">
+                        <svg
+                          aria-hidden="true"
+                          class="mx-auto mb-4 text-red-600 animate-pulse w-14 h-14 dark:text-gray-200"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
+                        <h3 class="mb-5 text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
+                          Permintaan Bantuan Terhadap Team Terkait Telah Di Lakukan Oleh:
+                        </h3>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
+                              Name Operator :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={OptionData?.Nama || ""}
+
+                            />
+                          </div>
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
+                              Date Problem :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={formatDateAPI(OptionData?.Date) || ""}
+                            />
+                          </div>
+                        </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block  tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Problem :
+                          </label>
+                          <input
+                            class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="text"
+                            placeholder=""
+                            name="Kerusakan"
+                            value={OptionData?.Problem || ""}
+
+                          />
+                          <p class="text-gray-600 text-xs  italic">
+                            Permasalahan Yang Ditemukan
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="flex justify-center">
+                        <button
+                          data-modal-hide="popup-modal"
+                          type="button"
+                          onClick={() => setIsRequestGeneral(false)}
+                          className="text-white bg-red-600 mb-2 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                        >
+                          Back
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
+
+      {/* is Validation */}
+      <td>
+        {isValidation ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen pt-32 px-4 pb-20 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <form>
+                      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <div class="p-6 text-center">
+                          <svg fill="#e28743"
+                            class="mx-auto mb-4 animate-bounce w-32 h-14 " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <g fill="none" stroke="#27AE60" stroke-linecap="round" stroke-width="2">
+                              <path d="M8.5 14.5h7.657" />
+                              <path d="M8.5 10.5h7.657" />
+                              <path d="M8.5 6.5h7.657" />
+                              <path d="M5.5 14.5h0" />
+                              <path d="M5.5 10.5h0" />
+                              <path d="M5.5 6.5h0" />
+                            </g>
+                            <path fill="none" stroke="#27AE60" stroke-linecap="round" stroke-width="2" d="M9.128 20.197H3.444a2.22 2.22 0 01-2.229-2.153V3.152A2.153 2.153 0 013.367.997h15.48A2.153 2.153 0 0121 3.152v8.738" />
+                            <path fill="#27AE60" d="M16.5 23.499a1.464 1.464 0 01-1.094-.484l-2.963-2.969A1.479 1.479 0 0112 18.985a1.5 1.5 0 01.462-1.078 1.56 1.56 0 012.113.037l1.925 1.931 4.943-4.959a1.543 1.543 0 012.132.02 1.461 1.461 0 01.425 1.04 1.5 1.5 0 01-.45 1.068l-5.993 6.012a1.44 1.44 0 01-1.057.443z" />
+                          </svg>
+                          <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-serif text-gray-500 dark:text-gray-400">
+                            Mesin Telah Di Validasi Oleh Quality
+                          </h3>
+
+
+                          <button
+                            onClick={() => {
+                              if (OptionData?.Validation === null) {
+                                window.open('http://192.168.101.236:3003/--', '_blank');
+                              } else {
+                                window.open(`http://192.168.101.236:3001/${OptionData?.Validation}`, '_blank');
+                              }
+                            }}
+                            className="flex gap-2 mt-2 justify-center items-center"
+                          >
+                            <svg
+                              width="50px"
+                              fill="#27AE60"
+                              fill-opacity="0.7000"
+                              className="justify-center items-center mx-auto mt-1"
+                              version="1.1"
+                              id="Layer_1"
+                              viewBox="0 0 512 512"
+                            >
+                              <g>
+                                <g>
+                                  <g>
+                                    <path
+                                      d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+				c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+				s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+				 M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+				H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+				c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+				c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+				 M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+				v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+				h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                    />
+                                    <path
+                                      d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+				c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+				z"
+                                    />
+                                    <path
+                                      d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+				C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                    />
+                                    <path
+                                      d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+				C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                    />
+                                    <path
+                                      d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+				C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                    />
+                                    <path
+                                      d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+				C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                    />
+                                    <path
+                                      d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+				c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+				V213.333z"
+                                    />
+                                    <path
+                                      d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+				c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+				V230.4z"
+                                    />
+                                    <path
+                                      d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+				C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+				c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                    />
+                                    <path
+                                      d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+				C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+				c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                    />
+                                    <path
+                                      d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+				C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+				c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                    />
+                                    <path
+                                      d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+				C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+				c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                    />
+                                    <path
+                                      d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+				C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+				s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                    />
+                                    <path
+                                      d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+				C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+				c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                    />
+                                  </g>
+                                </g>
+                              </g>
+                            </svg>
+                            <div className="flex flex-col">
+                              <span className="font-mono mt-2  text-black ">Validate By:  {OptionData?.Nama || ""}</span>
+                              <span className="font-mono mt-2 text-black ">{formatDateAPI(OptionData?.Date) || ""}</span>
+                            </div>
+                          </button>
+
+
+                          <div class="flex justify-center mt-4">
+                            <button
+                              data-modal-hide="popup-modal"
+                              type="button"
+                              onClick={() => setIsValidation(false)}
+                              className="text-white bg-red-600 mb-2 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                            >
+                              Back
+                            </button>
+
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
 
     </body>
   );
