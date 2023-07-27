@@ -459,6 +459,21 @@ const RequestQA = () => {
                                       {selectedItem.Problem}{" "}
                                     </div>
                                   </div>
+                                  <div class="w-full px-1">
+                                    <label
+                                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                                      for="grid-password"
+                                    >
+                                      Action
+                                    </label>
+                                    <div
+                                      class="appearance-none block w-full bg-gray-200 text-green-800  border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                      type="text"
+                                    >
+                                      {" "}
+                                      {selectedItem.Action}{" "}
+                                    </div>
+                                  </div>
                                 </div>
 
                                 <div className="flex justify-end">

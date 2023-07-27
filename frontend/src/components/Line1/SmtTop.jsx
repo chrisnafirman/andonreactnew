@@ -16,6 +16,7 @@ const SmtTop = () => {
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
+  const [Action, setAction] = useState("");
 
   // NAVBAR
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -238,27 +239,27 @@ const SmtTop = () => {
         audio.autoplay = true;
         audio.play();
 
-      
-              const link = "http://10.14.81.43:3003/RequestMaintenance";
-              const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-              const chatIds = [-993707437];
-              const message = `Notification Maintenance SMT LINE 1 Destacker (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
 
-              chatIds.forEach((chatId) => {
-                fetch(
-                  `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-                    message
-                  )}`
-                )
-                  .then((response) => {
-                    if (!response.ok) {
-                      throw new Error("Error sending telegram message");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(error);
-                  });
-          });
+        const link = "http://10.14.81.43:3003/RequestMaintenance";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `Notification Maintenance SMT LINE 1 Destacker (TOP) Status: DOWN - Please Click The Link:\n\n ${link}`;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
+              message
+            )}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
       } else if (data === "QC") {
         const link = "http://10.14.81.43:3003/RequestQC";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -1109,7 +1110,7 @@ const SmtTop = () => {
       }
     });
 
-    return () => {};
+    return () => { };
   }, []);
 
   // ------------------------
@@ -1259,20 +1260,20 @@ const SmtTop = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "Return Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
     );
   };
 
@@ -1282,20 +1283,20 @@ const SmtTop = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "Return Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
     );
   };
 
@@ -1305,20 +1306,20 @@ const SmtTop = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "Return Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
     );
   };
 
@@ -1328,20 +1329,20 @@ const SmtTop = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "Return Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
     );
   };
 
@@ -1351,20 +1352,20 @@ const SmtTop = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "Return Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
     );
   };
 
@@ -1374,20 +1375,20 @@ const SmtTop = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "Return Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
     );
   };
 
@@ -1397,20 +1398,20 @@ const SmtTop = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "Return Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
     );
   };
 
@@ -1420,20 +1421,20 @@ const SmtTop = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "Return Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "Return Maintenance"
+                ? "#be4f62"
+                : data === "PPIC"
+                  ? "#7A6544"
+                  : data === "QA"
+                    ? "#93C2C4"
+                    : data === "QC"
+                      ? "#BDD0D1"
+                      : "#565454"
     );
   };
   // ----
@@ -1445,9 +1446,8 @@ const SmtTop = () => {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
-  const formattedTime = `${currentTime.getDate()}/${
-    currentTime.getMonth() + 1
-  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+  const formattedTime = `${currentTime.getDate()}/${currentTime.getMonth() + 1
+    }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
   // -------
 
   const submitMaintenance = () => {
@@ -1487,7 +1487,7 @@ const SmtTop = () => {
   };
 
   const submitQualityA = () => {
-    if (!NamaPIC || !Line || !Kerusakan || !Area) {
+    if (!NamaPIC || !Line || !Kerusakan || !Area || !Action) {
       alert("Harap isi semua kolom!");
       return;
     }
@@ -1496,6 +1496,7 @@ const SmtTop = () => {
       Area: Area,
       Line: Line,
       Station: Station,
+      Action: Action,
       Kerusakan: Kerusakan,
     };
 
@@ -1523,7 +1524,7 @@ const SmtTop = () => {
   };
 
   const submitQualityC = () => {
-    if (!NamaPIC || !Line || !Kerusakan || !Area) {
+    if (!NamaPIC || !Line || !Kerusakan || !Area || !Action) {
       alert("Harap isi semua kolom!");
       return;
     }
@@ -1532,6 +1533,7 @@ const SmtTop = () => {
       Area: Area,
       Line: Line,
       Station: Station,
+      Action: Action,
       Kerusakan: Kerusakan,
     };
 
@@ -1558,6 +1560,7 @@ const SmtTop = () => {
       });
   };
 
+
   const submitReturnMaintenance = () => {
     const data = {
       NamaPIC: NamaPIC,
@@ -1566,6 +1569,15 @@ const SmtTop = () => {
       Station: Station,
       Kerusakan: Kerusakan,
     };
+
+    alert("Laporan Terkait Pengembalian Ke Maintenance Sudah Berhasil");
+    setIsOpenMaintenance(false);
+    firebase
+      .database()
+      .ref(`SMTLine1TOP/${Station}`)
+      .set("Return Maintenance");
+    firebase.database().ref("StatusLine/SMTLine1").set("Down");
+    window.location.reload();
 
     fetch(`http://192.168.101.236:3001/api/ReturnMaintenance`, {
       method: "POST",
@@ -1576,14 +1588,7 @@ const SmtTop = () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("Laporan Terkait Pengembalian Ke Maintenance Sudah Berhasil");
-          setIsOpenMaintenance(false);
-          firebase
-            .database()
-            .ref(`SMTLine1TOP/${Station}`)
-            .set("Return Maintenance");
-            firebase.database().ref("StatusLine/SMTLine1").set("Down");
-          window.location.reload();
+
         } else {
           throw new Error("Error adding data");
         }
@@ -2915,7 +2920,7 @@ const SmtTop = () => {
       </td>
 
       {/*  */}
- {/* POP UP RequestMaintenance */}
+      {/* POP UP RequestMaintenance */}
       <td class="">
         {isOpenMaintenance ? (
           <>
@@ -3189,7 +3194,7 @@ const SmtTop = () => {
                         {/*Status*/}
                         <div className="mb-4">
                           <label
-                            className="block text-gray-700 mt-1 font-semibold mb-2"
+                            className="block text-gray-700 mt-1 font-semibold mb-1"
                             htmlFor="Depart To"
                           >
                             Request To
@@ -3206,7 +3211,7 @@ const SmtTop = () => {
                             </span>
                           </div>
                         </div>
-                        <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="flex flex-wrap -mx-3 mb-2">
                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <label
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -3278,9 +3283,28 @@ const SmtTop = () => {
                               }}
                               required
                             />
-                            <p class="text-gray-600 text-xs italic">
-                              Jenis Problem Yang Di Temukan
-                            </p>
+                            
+                          </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full px-1">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                              for="grid-password"
+                            >
+                             Action
+                            </label>
+                            <input
+                              class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-password"
+                              type="text"
+                              placeholder=""
+                              name="Action"
+                              onChange={(e) => {
+                                setAction(e.target.value);
+                              }}
+                              required
+                            />
                           </div>
                         </div>
                         <div className="flex justify-end">
@@ -3352,7 +3376,7 @@ const SmtTop = () => {
                         {/*Status*/}
                         <div className="mb-4">
                           <label
-                            className="block text-gray-700 mt-1 font-semibold mb-2"
+                            className="block text-gray-700 mt-1 font-semibold mb-1"
                             htmlFor="Depart To"
                           >
                             Request To
@@ -3369,7 +3393,7 @@ const SmtTop = () => {
                             </span>
                           </div>
                         </div>
-                        <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="flex flex-wrap -mx-3 mb-2">
                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <label
                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -3441,9 +3465,27 @@ const SmtTop = () => {
                               }}
                               required
                             />
-                            <p class="text-gray-600 text-xs italic">
-                              Jenis Problem Yang Di Temukan
-                            </p>
+                          </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full px-1">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                              for="grid-password"
+                            >
+                             Action
+                            </label>
+                            <input
+                              class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-password"
+                              type="text"
+                              placeholder=""
+                              name="Action"
+                              onChange={(e) => {
+                                setAction(e.target.value);
+                              }}
+                              required
+                            />
                           </div>
                         </div>
                         <div className="flex justify-end">

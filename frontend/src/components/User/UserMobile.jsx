@@ -33,6 +33,7 @@ const UserMobile = () => {
 
   // popup DestackerTOP
   const [isRequestGeneral, setIsRequestGeneral] = useState(false);
+  const [isRequestDepartment, setIsRequestDepartment] = useState(false);
   const [isRequestMaintenance, setIsRequestMaintenance] = useState(false);
   const [isReturnMaintenance, setIsReturnMaintenance] = useState(false);
   const [isRequestQA, setIsRequestQA] = useState(false);
@@ -67,12 +68,68 @@ const UserMobile = () => {
   const [dataDestackerTOPReturn, setDataDestackerTOPReturn] = useState(null);
   const [dataDestackerTOPValQuality, setDataDestackerTOPValQuality] = useState(null);
 
-
   const [dataLabelTOP, setDataLabelTOP] = useState(null);
   const [dataLabelTOPQA, setDataLabelTOPQA] = useState(null);
   const [dataLabelTOPQC, setDataLabelTOPQC] = useState(null);
   const [dataLabelTOPReturn, setDataLabelTOPReturn] = useState(null);
   const [dataLabelTOPValQuality, setDataLabelTOPValQuality] = useState(null);
+
+  const [dataPrinterTOP, setDataPrinterTOP] = useState(null);
+  const [dataPrinterTOPQA, setDataPrinterTOPQA] = useState(null);
+  const [dataPrinterTOPQC, setDataPrinterTOPQC] = useState(null);
+  const [dataPrinterTOPReturn, setDataPrinterTOPReturn] = useState(null);
+  const [dataPrinterTOPValQuality, setDataPrinterTOPValQuality] = useState(null);
+
+  const [dataSpiTOP, setDataSpiTOP] = useState(null);
+  const [dataSpiTOPQA, setDataSpiTOPQA] = useState(null);
+  const [dataSpiTOPQC, setDataSpiTOPQC] = useState(null);
+  const [dataSpiTOPReturn, setDataSpiTOPReturn] = useState(null);
+  const [dataSpiTOPValQuality, setDataSpiTOPValQuality] = useState(null);
+
+  const [dataPickNPlaceTOP, setDataPickNPlaceTOP] = useState(null);
+  const [dataPickNPlaceTOPQA, setDataPickNPlaceTOPQA] = useState(null);
+  const [dataPickNPlaceTOPQC, setDataPickNPlaceTOPQC] = useState(null);
+  const [dataPickNPlaceTOPReturn, setDataPickNPlaceTOPReturn] = useState(null);
+  const [dataPickNPlaceTOPValQuality, setDataPickNPlaceTOPValQuality] = useState(null);
+
+  const [dataReflowTOP, setDataReflowTOP] = useState(null);
+  const [dataReflowTOPQA, setDataReflowTOPQA] = useState(null);
+  const [dataReflowTOPQC, setDataReflowTOPQC] = useState(null);
+  const [dataReflowTOPReturn, setDataReflowTOPReturn] = useState(null);
+  const [dataReflowTOPValQuality, setDataReflowTOPValQuality] = useState(null);
+
+  const [dataAOITOP, setDataAOITOP] = useState(null);
+  const [dataAOITOPQA, setDataAOITOPQA] = useState(null);
+  const [dataAOITOPQC, setDataAOITOPQC] = useState(null);
+  const [dataAOITOPReturn, setDataAOITOPReturn] = useState(null);
+  const [dataAOITOPValQuality, setDataAOITOPValQuality] = useState(null);
+
+  const [dataRVSTOP, setDataRVSTOP] = useState(null);
+  const [dataRVSTOPQA, setDataRVSTOPQA] = useState(null);
+  const [dataRVSTOPQC, setDataRVSTOPQC] = useState(null);
+  const [dataRVSTOPReturn, setDataRVSTOPReturn] = useState(null);
+  const [dataRVSTOPValQuality, setDataRVSTOPValQuality] = useState(null);
+
+
+  // Data Bot
+  const [dataPrinterBOT, setDataPrinterBOT] = useState(null);
+  const [dataPrinterBOTQA, setDataPrinterBOTQA] = useState(null);
+  const [dataPrinterBOTQC, setDataPrinterBOTQC] = useState(null);
+  const [dataPrinterBOTReturn, setDataPrinterBOTReturn] = useState(null);
+  const [dataPrinterBOTValQuality, setDataPrinterBOTValQuality] = useState(null);
+
+
+  const [dataSPIBOT, setDataSPIBOT] = useState(null);
+  const [dataSPIBOTQA, setDataSPIBOTQA] = useState(null);
+  const [dataSPIBOTQC, setDataSPIBOTQC] = useState(null);
+  const [dataSPIBOTReturn, setDataSPIBOTReturn] = useState(null);
+  const [dataSPIBOTValQuality, setDataSPIBOTValQuality] = useState(null);
+
+  const [dataPickNPlaceBOT, setDataPickNPlaceBOT] = useState(null);
+  const [dataPickNPlaceBOTQA, setDataPickNPlaceBOTQA] = useState(null);
+  const [dataPickNPlaceBOTQC, setDataPickNPlaceBOTQC] = useState(null);
+  const [dataPickNPlaceBOTReturn, setDataPickNPlaceBOTReturn] = useState(null);
+  const [dataPickNPlaceBOTValQuality, setDataPickNPlaceBOTValQuality] = useState(null);
 
   // ---------------------
 
@@ -1405,221 +1462,184 @@ const UserMobile = () => {
 
 
   // Fetch Failure
-  const fetchDataElectricity = () => {
-    fetch("http://192.168.101.236:3001/api/UMElectricityLine1")
-      .then((response) => response.json())
-      .then((data) => {
-        setDataElectricity(data);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  };
-
-  const fetchDataNetwork = () => {
-    fetch("http://192.168.101.236:3001/api/UMNetworkLine1")
-      .then((response) => response.json())
-      .then((data) => {
-        setDataNetwork(data);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  };
 
 
 
   // ....
 
-  // DestackerTop
-  const fetchDataDestackerTOP = () => {
-    fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1")
+  // Printer
+  const fetchDataNetwork = () => fetchData("UMNetworkLine1", setDataNetwork);
+  const fetchDataElectricity = () => fetchData("UMElectricityLine1", setDataElectricity);
+  const fetchDataAirComp = () => fetchData("UMNAirCompLine1", setDataAirComp);
+  const fetchDataOthers = () => fetchData("UMNOthersLine1", setDataOthers);
+  const fetchDataShorComp = () => fetchData("UMNShorCompLine1", setDataShorcomp);
+
+  const fetchDataDestackerTOP = () => fetchData("UMDestackerTOPLine1", setDataDestackerTOP);
+  const fetchDataDestackerTOPQA = () => fetchData("UMDestackerTOPLine1QA", setDataDestackerTOPQA);
+  const fetchDataDestackerTOPQC = () => fetchData("UMDestackerTOPLine1QC", setDataDestackerTOPQC);
+  const fetchDataDestackerTOPReturn = () => fetchData("UMDestackerTOPLine1Return", setDataDestackerTOPReturn);
+  const fetchDataDestackerTOPValQuality = () => fetchData("UMDestackerTOPLine1ValQuality", setDataDestackerTOPValQuality);
+
+  const fetchDataLabelTOP = () => fetchData("UMLabelTOPLine1", setDataLabelTOP);
+  const fetchDataLabelTOPQA = () => fetchData("UMLabelTOPLine1QA", setDataLabelTOPQA);
+  const fetchDataLabelTOPQC = () => fetchData("UMLabelTOPLine1QC", setDataLabelTOPQC);
+  const fetchDataLabelTOPReturn = () => fetchData("UMLabelTOPLine1Return", setDataLabelTOPReturn);
+  const fetchDataLabelTOPValQuality = () => fetchData("UMLabelTOPLine1ValQuality", setDataLabelTOPValQuality);
+
+  const fetchDataPrinterTOP = () => fetchData("UMPrinterTOPLine1", setDataPrinterTOP);
+  const fetchDataPrinterTOPQA = () => fetchData("UMPrinterTOPLine1QA", setDataPrinterTOPQA);
+  const fetchDataPrinterTOPQC = () => fetchData("UMPrinterTOPLine1QC", setDataPrinterTOPQC);
+  const fetchDataPrinterTOPReturn = () => fetchData("UMPrinterTOPLine1Return", setDataPrinterTOPReturn);
+  const fetchDataPrinterTOPValQuality = () => fetchData("UMPrinterTOPLine1ValQuality", setDataPrinterTOPValQuality);
+
+  const fetchDataSpiTOP = () => fetchData("UMSpiTOPLine1", setDataSpiTOP);
+  const fetchDataSpiTOPQA = () => fetchData("UMSpiTOPLine1QA", setDataSpiTOPQA);
+  const fetchDataSpiTOPQC = () => fetchData("UMSpiTOPLine1QC", setDataSpiTOPQC);
+  const fetchDataSpiTOPReturn = () => fetchData("UMSpiTOPLine1Return", setDataSpiTOPReturn);
+  const fetchDataSpiTOPValQuality = () => fetchData("UMSpiTOPLine1ValQuality", setDataSpiTOPValQuality);
+
+  const fetchDataPickNPlaceTOP = () => fetchData("UMPickNPlaceTOPLine1", setDataPickNPlaceTOP);
+  const fetchDataPickNPlaceTOPQA = () => fetchData("UMPickNPlaceTOPLine1QA", setDataPickNPlaceTOPQA);
+  const fetchDataPickNPlaceTOPQC = () => fetchData("UMPickNPlaceTOPLine1QC", setDataPickNPlaceTOPQC);
+  const fetchDataPickNPlaceTOPReturn = () => fetchData("UMPickNPlaceTOPLine1Return", setDataPickNPlaceTOPReturn);
+  const fetchDataPickNPlaceTOPValQuality = () => fetchData("UMPickNPlaceTOPLine1ValQuality", setDataPickNPlaceTOPValQuality);
+
+  const fetchDataReflowTOP = () => fetchData("UMReflowTOPLine1", setDataReflowTOP);
+  const fetchDataReflowTOPQA = () => fetchData("UMReflowTOPLine1QA", setDataReflowTOPQA);
+  const fetchDataReflowTOPQC = () => fetchData("UMReflowTOPLine1QC", setDataReflowTOPQC);
+  const fetchDataReflowTOPReturn = () => fetchData("UMReflowTOPLine1Return", setDataReflowTOPReturn);
+  const fetchDataReflowTOPValQuality = () => fetchData("UMReflowTOPLine1ValQuality", setDataReflowTOPValQuality);
+
+
+  const fetchDataAOITOP = () => fetchData("UMAOITOPLine1", setDataAOITOP);
+  const fetchDataAOITOPQA = () => fetchData("UMAOITOPLine1QA", setDataAOITOPQA);
+  const fetchDataAOITOPQC = () => fetchData("UMAOITOPLine1QC", setDataAOITOPQC);
+  const fetchDataAOITOPReturn = () => fetchData("UMAOITOPLine1Return", setDataAOITOPReturn);
+  const fetchDataAOITOPValQuality = () => fetchData("UMAOITOPLine1ValQuality", setDataAOITOPValQuality);
+
+  const fetchDataRVSTOP = () => fetchData("UMRVSTOPLine1", setDataRVSTOP);
+  const fetchDataRVSTOPQA = () => fetchData("UMRVSTOPLine1QA", setDataRVSTOPQA);
+  const fetchDataRVSTOPQC = () => fetchData("UMRVSTOPLine1QC", setDataRVSTOPQC);
+  const fetchDataRVSTOPReturn = () => fetchData("UMRVSTOPLine1Return", setDataRVSTOPReturn);
+  const fetchDataRVSTOPValQuality = () => fetchData("UMRVSTOPLine1ValQuality", setDataRVSTOPValQuality);
+
+// BOT
+  const fetchDataPrinterBOT = () => fetchData("UMPrinterBOTLine1", setDataPrinterBOT);
+  const fetchDataPrinterBOTQA = () => fetchData("UMPrinterBOTLine1QA", setDataPrinterBOTQA);
+  const fetchDataPrinterBOTQC = () => fetchData("UMPrinterBOTLine1QC", setDataPrinterBOTQC);
+  const fetchDataPrinterBOTReturn = () => fetchData("UMPrinterBOTLine1Return", setDataPrinterBOTReturn);
+  const fetchDataPrinterBOTValQuality = () => fetchData("UMPrinterBOTLine1ValQuality", setDataPrinterBOTValQuality);
+
+  const fetchDataSPIBOT = () => fetchData("UMSPIBOTLine1", setDataSPIBOT);
+  const fetchDataSPIBOTQA = () => fetchData("UMSPIBOTLine1QA", setDataSPIBOTQA);
+  const fetchDataSPIBOTQC = () => fetchData("UMSPIBOTLine1QC", setDataSPIBOTQC);
+  const fetchDataSPIBOTReturn = () => fetchData("UMSPIBOTLine1Return", setDataSPIBOTReturn);
+  const fetchDataSPIBOTValQuality = () => fetchData("UMSPIBOTLine1ValQuality", setDataSPIBOTValQuality);
+
+  const fetchDataPickNPlaceBOT = () => fetchData("UMPickNPlaceBOTLine1", setDataPickNPlaceBOT);
+  const fetchDataPickNPlaceBOTQA = () => fetchData("UMPickNPlaceBOTLine1QA", setDataPickNPlaceBOTQA);
+  const fetchDataPickNPlaceBOTQC = () => fetchData("UMPickNPlaceBOTLine1QC", setDataPickNPlaceBOTQC);
+  const fetchDataPickNPlaceBOTReturn = () => fetchData("UMPickNPlaceBOTLine1Return", setDataPickNPlaceBOTReturn);
+  const fetchDataPickNPlaceBOTValQuality = () => fetchData("UMPickNPlaceBOTLine1ValQuality", setDataPickNPlaceBOTValQuality);
+
+  const fetchData = (endpoint, setDataFunction) => {
+    fetch(`http://192.168.101.236:3001/api/${endpoint}`)
       .then((response) => response.json())
       .then((data) => {
-        setDataDestackerTOP(data);
+        setDataFunction(data);
       })
       .catch((error) => {
-        // Tangani error jika permintaan gagal
+        // Handle error if the request fails
         console.error("Error fetching data:", error);
       });
   };
-
-  const fetchDataDestackerTOPQA = () => {
-    fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1QA")
-      .then((response) => response.json())
-      .then((data) => {
-        setDataDestackerTOPQA(data);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  };
-  const fetchDataDestackerTOPQC = () => {
-    fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1QC")
-      .then((response) => response.json())
-      .then((data) => {
-        setDataDestackerTOPQC(data);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  };
-
-  const fetchDataDestackerTOPReturn = () => {
-    fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1Return")
-      .then((response) => response.json())
-      .then((data) => {
-        setDataDestackerTOPReturn(data);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  };
-
-  const fetchDataDestackerTOPValQuality = () => {
-    fetch("http://192.168.101.236:3001/api/UMDestackerTOPLine1ValQuality")
-      .then((response) => response.json())
-      .then((data) => {
-        setDataDestackerTOPValQuality(data);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  };
-
-
-
-  // Label
-  const fetchDataLabelTOP = () => {
-    fetch("http://192.168.101.236:3001/api/UMLabelTOPLine1")
-      .then((response) => response.json())
-      .then((data) => {
-        setDataLabelTOP(data);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  };
-
-  const fetchDataLabelTOPQA = () => {
-    fetch("http://192.168.101.236:3001/api/UMLabelTOPLine1QA")
-      .then((response) => response.json())
-      .then((data) => {
-        setDataLabelTOPQA(data);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  };
-  const fetchDataLabelTOPQC = () => {
-    fetch("http://192.168.101.236:3001/api/UMLabelTOPLine1QC")
-      .then((response) => response.json())
-      .then((data) => {
-        setDataLabelTOPQC(data);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  };
-
-  const fetchDataLabelTOPReturn = () => {
-    fetch("http://192.168.101.236:3001/api/UMLabelTOPLine1Return")
-      .then((response) => response.json())
-      .then((data) => {
-        setDataLabelTOPReturn(data);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  };
-  const fetchDataLabelTOPValQuality = () => {
-    fetch("http://192.168.101.236:3001/api/UMLabelTOPLine1ValQuality")
-      .then((response) => response.json())
-      .then((data) => {
-        setDataLabelTOPValQuality(data);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  };
-
-
-
-  // Label
-
-
-
-
 
   useEffect(() => {
+    const fetchDataFunctions = [
+      fetchDataElectricity,
+      fetchDataNetwork,
+      fetchDataAirComp,
+      fetchDataOthers,
+      fetchDataShorComp,
 
-    fetchDataElectricity();
-    fetchDataNetwork();
+      fetchDataDestackerTOP,
+      fetchDataDestackerTOPQA,
+      fetchDataDestackerTOPQC,
+      fetchDataDestackerTOPReturn,
+      fetchDataDestackerTOPValQuality,
 
-    // SMTTOP
-    fetchDataDestackerTOP();
-    fetchDataDestackerTOPQA();
-    fetchDataDestackerTOPQC();
-    fetchDataDestackerTOPReturn();
-    fetchDataDestackerTOPValQuality();
+      fetchDataLabelTOP,
+      fetchDataLabelTOPQA,
+      fetchDataLabelTOPQC,
+      fetchDataLabelTOPReturn,
+      fetchDataLabelTOPValQuality,
 
-    fetchDataLabelTOP();
-    fetchDataLabelTOPQA();
-    fetchDataLabelTOPQC();
-    fetchDataLabelTOPReturn();
-    fetchDataLabelTOPValQuality();
+      fetchDataPrinterTOP,
+      fetchDataPrinterTOPQA,
+      fetchDataPrinterTOPQC,
+      fetchDataPrinterTOPReturn,
+      fetchDataPrinterTOPValQuality,
+
+      fetchDataSpiTOP,
+      fetchDataSpiTOPQA,
+      fetchDataSpiTOPQC,
+      fetchDataSpiTOPReturn,
+      fetchDataSpiTOPValQuality,
+
+      fetchDataPickNPlaceTOP,
+      fetchDataPickNPlaceTOPQA,
+      fetchDataPickNPlaceTOPQC,
+      fetchDataPickNPlaceTOPReturn,
+      fetchDataPickNPlaceTOPValQuality,
+
+      fetchDataReflowTOP,
+      fetchDataReflowTOPQA,
+      fetchDataReflowTOPQC,
+      fetchDataReflowTOPReturn,
+      fetchDataReflowTOPValQuality,
+
+      fetchDataAOITOP,
+      fetchDataAOITOPQA,
+      fetchDataAOITOPQC,
+      fetchDataAOITOPReturn,
+      fetchDataAOITOPValQuality,
+
+      fetchDataRVSTOP,
+      fetchDataRVSTOPQA,
+      fetchDataRVSTOPQC,
+      fetchDataRVSTOPReturn,
+      fetchDataRVSTOPValQuality,
 
 
+      // BOT
+      fetchDataPrinterBOT,
+      fetchDataPrinterBOTQA,
+      fetchDataPrinterBOTQC,
+      fetchDataPrinterBOTReturn,
+      fetchDataPrinterBOTValQuality,
 
-    // Failure
-    const intervalIdElectricity = setInterval(fetchDataElectricity, 5000);
-    const intervalIdNetwork = setInterval(fetchDataNetwork, 5000);
-    // Set up interval to fetch data every 5 seconds (adjust the interval as needed)
-    const intervalIdDestackerTOP = setInterval(fetchDataDestackerTOP, 5000);
-    const intervalIdDestackerTOPQA = setInterval(fetchDataDestackerTOPQA, 5000);
-    const intervalIdDestackerTOPQC = setInterval(fetchDataDestackerTOPQC, 5000);
-    const intervalIdDestackerTOPReturn = setInterval(fetchDataDestackerTOPReturn, 5000);
-    const intervalIdDestackerTOPValQuality = setInterval(fetchDataDestackerTOPValQuality, 5000);
 
-    const intervalIdLabelTOP = setInterval(fetchDataLabelTOP, 5000);
-    const intervalIdLabelTOPQA = setInterval(fetchDataLabelTOPQA, 5000);
-    const intervalIdLabelTOPQC = setInterval(fetchDataLabelTOPQC, 5000);
-    const intervalIdLabelTOPReturn = setInterval(fetchDataLabelTOPReturn, 5000);
-    const intervalIdLabelTOPValQuality = setInterval(fetchDataLabelTOPValQuality, 5000);
-    // Clear the intervals on component unmount to avoid memory leaks
+      fetchDataSPIBOT,
+      fetchDataSPIBOTQA,
+      fetchDataSPIBOTQC,
+      fetchDataSPIBOTReturn,
+      fetchDataSPIBOTValQuality,
+
+      
+      fetchDataPickNPlaceBOT,
+      fetchDataPickNPlaceBOTQA,
+      fetchDataPickNPlaceBOTQC,
+      fetchDataPickNPlaceBOTReturn,
+      fetchDataPickNPlaceBOTValQuality,
+    ];
+  
+    const intervalIds = fetchDataFunctions.map((func) => setInterval(func, 5000));
+  
     return () => {
-
-      // Failure
-      clearInterval(intervalIdElectricity);
-      clearInterval(intervalIdNetwork);
-
-
-      // SMT Top 
-      clearInterval(intervalIdDestackerTOP);
-      clearInterval(intervalIdDestackerTOPQA);
-      clearInterval(intervalIdDestackerTOPQC);
-      clearInterval(intervalIdDestackerTOPReturn);
-      clearInterval(intervalIdDestackerTOPValQuality);
-
-      clearInterval(intervalIdLabelTOP);
-      clearInterval(intervalIdLabelTOPQA);
-      clearInterval(intervalIdLabelTOPQC);
-      clearInterval(intervalIdLabelTOPReturn);
-      clearInterval(intervalIdLabelTOPValQuality);
-
+      intervalIds.forEach((intervalId) => clearInterval(intervalId));
     };
   }, []);
+  
 
   return (
     <body style={styles}>
@@ -1858,6 +1878,19 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorAircomp }}
                         value={Aircomp}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusAircomp === "Go") {
+                            // set isOpenEStatusAirComp state to true if EStatusAirComp is "Go"
+                            ;
+                          } else if (StatusAircomp === "Repair") {
+                            // set Quality state to true if EStatusAirComp is "Repair"
+
+                          } else if (StatusAircomp === "Down") {
+
+                            setIsRequestGeneral(true);
+                            setOptionData(dataAirComp)
+                          }
+                        }}
                       >
                         <svg
                           fill="#2e3436"
@@ -1920,6 +1953,19 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorOthers }}
                         value={Others}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusOthers === "Go") {
+                            // set isOpenEStatusOthers state to true if EStatusOthers is "Go"
+                            ;
+                          } else if (StatusOthers === "Repair") {
+                            // set Quality state to true if EStatusOthers is "Repair"
+
+                          } else if (StatusOthers === "Down" || StatusOthers === "MAINTENANCE & IT" || StatusOthers === "HRGA & EHS" || StatusOthers === "PURCHASING,PPIC,MP&L" || StatusOthers === "PROCESS ENGINEERING" || StatusOthers === "PRODUCT DEVELOPMENT" || StatusOthers === "ADVANCED MANUFACTURING ENGINEERING" || StatusOthers === "QA" || StatusOthers === "QC") {
+                            setIsRequestDepartment(true);
+                            setOptionData(dataOthers);
+                          }
+                          
+                        }}
                       >
                         <svg
                           width="60px"
@@ -1963,6 +2009,19 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorShorcomp }}
                         value={Shorcomp}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusShorcomp === "Go") {
+                            // set isOpenEStatusShorComp state to true if EStatusShorComp is "Go"
+                            ;
+                          } else if (StatusShorcomp === "Repair") {
+                            // set Quality state to true if EStatusShorComp is "RepShor"
+
+                          } else if (StatusShorcomp === "Down") {
+
+                            setIsRequestGeneral(true);
+                            setOptionData(dataShorComp)
+                          }
+                        }}
                       >
                         <svg
                           fill="#2e3436"
@@ -2435,6 +2494,37 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusPrinterTop }}
                         value={PrinterTop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusPrinterTop === "Maintenance") {
+                            // set isOpenPrinterTop state to true if PrinterTop is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataPrinterTOP);
+                          } else if (StatusPrinterTop === "Repair") {
+                            // set Quality state to true if PrinterTop is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataPrinterTOP);
+                          } else if (StatusPrinterTop === "QA") {
+                            // set Quality state to true if PrinterTop is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataPrinterTOPQA);
+                          } else if (StatusPrinterTop === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataPrinterTOPQC);
+                            // set Quality state to true if PrinterTop is "Repair"
+
+                          } else if (StatusPrinterTop === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataPrinterTOPReturn);
+                            // set Quality state to true if Top is "Repair"
+
+                          } else if (StatusPrinterTop === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataPrinterTOPValQuality);
+                            // set Quality state to true if Label Top is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -2542,6 +2632,37 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusSpiTop }}
                         value={SpiTop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusSpiTop === "Maintenance") {
+                            // set isOpenSpiTop state to true if SpiTop is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataSpiTOP);
+                          } else if (StatusSpiTop === "Repair") {
+                            // set Quality state to true if SpiTop is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataSpiTOP);
+                          } else if (StatusSpiTop === "QA") {
+                            // set Quality state to true if SpiTop is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataSpiTOPQA);
+                          } else if (StatusSpiTop === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataSpiTOPQC);
+                            // set Quality state to true if SpiTop is "Repair"
+
+                          } else if (StatusSpiTop === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataSpiTOPReturn);
+                            // set Quality state to true if Top is "Repair"
+
+                          } else if (StatusSpiTop === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataSpiTOPValQuality);
+                            // set Quality state to true if Spi Top is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -2654,6 +2775,37 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusPickNPlace }}
                         value={PickNPlace}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusPickNPlace === "Maintenance") {
+                            // set isOpenPickNPlaceTop state to true if PickNPlaceTop is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataPickNPlaceTOP);
+                          } else if (StatusPickNPlace === "Repair") {
+                            // set Quality state to true if PickNPlaceTop is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataPickNPlaceTOP);
+                          } else if (StatusPickNPlace === "QA") {
+                            // set Quality state to true if PickNPlaceTop is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataPickNPlaceTOPQA);
+                          } else if (StatusPickNPlace === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataPickNPlaceTOPQC);
+                            // set Quality state to true if PickNPlaceTop is "Repair"
+
+                          } else if (StatusPickNPlace === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataPickNPlaceTOPReturn);
+                            // set Quality state to true if Top is "Repair"
+
+                          } else if (StatusPickNPlace === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataPickNPlaceTOPValQuality);
+                            // set Quality state to true if PickNPlace Top is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -2761,6 +2913,34 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusReflowTop }}
                         value={ReflowTop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusReflowTop === "Maintenance") {
+                            // set isOpenReflowTop state to true if ReflowTop is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataReflowTOP);
+                          } else if (StatusReflowTop === "Repair") {
+                            // set Quality state to true if ReflowTop is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataReflowTOP);
+                          } else if (StatusReflowTop === "QA") {
+                            // set Quality state to true if ReflowTop is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataReflowTOPQA);
+                          } else if (StatusReflowTop === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataReflowTOPQC);
+                            // set Quality state to true if ReflowTop is "Repair"
+
+                          } else if (StatusReflowTop === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataReflowTOPReturn);
+                            // set Quality state to true if Top is "Repair"
+                          } else if (StatusReflowTop === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataReflowTOPValQuality);
+                            // set Quality state to true if PickNPlace Top is "Repair"
+                          }
+                        }}
                       >
                         <svg
                           width="50px"
@@ -2868,6 +3048,34 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusAOITop }}
                         value={AOITop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusAOITop === "Maintenance") {
+                            // set isOpenAOITop state to true if AOITop is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataAOITOP);
+                          } else if (StatusAOITop === "Repair") {
+                            // set Quality state to true if AOITop is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataAOITOP);
+                          } else if (StatusAOITop === "QA") {
+                            // set Quality state to true if AOITop is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataAOITOPQA);
+                          } else if (StatusAOITop === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataAOITOPQC);
+                            // set Quality state to true if AOITop is "Repair"
+
+                          } else if (StatusAOITop === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataAOITOPReturn);
+                            // set Quality state to true if Top is "Repair"
+                          } else if (StatusAOITop === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataAOITOPValQuality);
+                            // set Quality state to true if PickNPlace Top is "Repair"
+                          }
+                        }}
                       >
                         <svg
                           width="50px"
@@ -2975,6 +3183,34 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusRVSTop }}
                         value={RVSTop}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusRVSTop === "Maintenance") {
+                            // set isOpenRVSTop state to true if RVSTop is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataRVSTOP);
+                          } else if (StatusRVSTop === "Repair") {
+                            // set Quality state to true if RVSTop is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataRVSTOP);
+                          } else if (StatusRVSTop === "QA") {
+                            // set Quality state to true if RVSTop is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataRVSTOPQA);
+                          } else if (StatusRVSTop === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataRVSTOPQC);
+                            // set Quality state to true if RVSTop is "Repair"
+
+                          } else if (StatusRVSTop === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataRVSTOPReturn);
+                            // set Quality state to true if Top is "Repair"
+                          } else if (StatusRVSTop === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataRVSTOPValQuality);
+                            // set Quality state to true if PickNPlace Top is "Repair"
+                          }
+                        }}
                       >
                         <svg
                           width="50px"
@@ -3123,6 +3359,39 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusPrinterBot }}
                         value={PrinterBot}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusPrinterBot === "Maintenance") {
+                            // set isOpenPrinterBOT state to true if PrinterBOT is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataPrinterBOT);
+                          } else if (StatusPrinterBot === "Repair") {
+                            // set Quality state to true if PrinterBOT is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataPrinterBOT);
+                          } else if (StatusPrinterBot === "QA") {
+                            // set Quality state to true if PrinterBOT is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataPrinterBOTQA);
+                          } else if (StatusPrinterBot === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataPrinterBOTQC);
+                            // set Quality state to true if PrinterBOT is "Repair"
+
+                          } else if (StatusPrinterBot === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataPrinterBOTReturn);
+                            // set Quality state to true if PrinterBOT is "Repair"
+
+                          }
+                          else if (StatusPrinterBot === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataPrinterBOTValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
+                      
                       >
                         <svg
                           width="50px"
@@ -3230,6 +3499,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusSpiBot }}
                         value={SpiBot}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusSpiBot === "Maintenance") {
+                            // set isOpenSPIBOT state to true if SPIBOT is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataSPIBOT);
+                          } else if (StatusSpiBot === "Repair") {
+                            // set Quality state to true if SPIBOT is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataSPIBOT);
+                          } else if (StatusSpiBot === "QA") {
+                            // set Quality state to true if SPIBOT is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataSPIBOTQA);
+                          } else if (StatusSpiBot === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataSPIBOTQC);
+                            // set Quality state to true if SPIBOT is "Repair"
+
+                          } else if (StatusSpiBot === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataSPIBOTReturn);
+                            // set Quality state to true if SPIBOT is "Repair"
+
+                          }
+                          else if (StatusSpiBot === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataSPIBOTValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -3337,6 +3638,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusPickNPlaceBot }}
                         value={PickNPlaceBot}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusPickNPlaceBot === "Maintenance") {
+                            // set isOpenPickNPlaceBOT state to true if PickNPlaceBOT is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataPickNPlaceBOT);
+                          } else if (StatusPickNPlaceBot === "Repair") {
+                            // set Quality state to true if PickNPlaceBOT is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataPickNPlaceBOT);
+                          } else if (StatusPickNPlaceBot === "QA") {
+                            // set Quality state to true if PickNPlaceBOT is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataPickNPlaceBOTQA);
+                          } else if (StatusPickNPlaceBot === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataPickNPlaceBOTQC);
+                            // set Quality state to true if PickNPlaceBOT is "Repair"
+
+                          } else if (StatusPickNPlaceBot === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataPickNPlaceBOTReturn);
+                            // set Quality state to true if PickNPlaceBOT is "Repair"
+
+                          }
+                          else if (StatusPickNPlaceBot === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataPickNPlaceBOTValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -5375,6 +5708,22 @@ const UserMobile = () => {
                             value={OptionData?.Problem || ""}
 
                           />
+                        </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block  tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Action :
+                          </label>
+                          <input
+                            class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="text"
+                            placeholder=""
+                            name="Kerusakan"
+                            value={OptionData?.Action || ""}
+
+                          />
                           <p class="text-gray-600 text-xs  italic">
                             Status : Menunggu Validation Quality
                           </p>
@@ -5503,6 +5852,22 @@ const UserMobile = () => {
                             placeholder=""
                             name="Kerusakan"
                             value={OptionData?.Problem || ""}
+
+                          />
+                        </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block  tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Action :
+                          </label>
+                          <input
+                            class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="text"
+                            placeholder=""
+                            name="Kerusakan"
+                            value={OptionData?.Action || ""}
 
                           />
                           <p class="text-gray-600 text-xs  italic">
@@ -5742,6 +6107,124 @@ const UserMobile = () => {
         ) : null}
       </td>
 
+      {/* is RequestGeneral */}
+      <td>
+        {isRequestDepartment ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen pt-24 px-4 pb-20 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <div class="p-6 text-center">
+                        <svg
+                          aria-hidden="true"
+                          class="mx-auto mb-4 text-red-600 animate-pulse w-14 h-14 dark:text-gray-200"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
+                        <h3 class="mb-5 text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
+                          Permintaan Bantuan Terhadap Department Terkait Telah Di Lakukan Oleh:
+                        </h3>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-1">
+                              Name Operator :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={OptionData?.Nama || ""}
+
+                            />
+                          </div>
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
+                              Date Problem :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={formatDateAPI(OptionData?.Date) || ""}
+                            />
+                          </div>
+                        </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block  tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Department Yang Di Tuju :
+                          </label>
+                          <input
+                            class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-blue-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="text"
+                            placeholder=""
+                            name="Kerusakan"
+                            value={OptionData?.Department || ""}
+
+                          />
+                        </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block  tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Problem :
+                          </label>
+                          <input
+                            class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            type="text"
+                            placeholder=""
+                            name="Kerusakan"
+                            value={OptionData?.Problem || ""}
+
+                          />
+                          <p class="text-gray-600 text-xs  italic">
+                            Permasalahan Yang Ditemukan
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="flex justify-center">
+                        <button
+                          data-modal-hide="popup-modal"
+                          type="button"
+                          onClick={() => setIsRequestDepartment(false)}
+                          className="text-white bg-red-600 mb-2 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                        >
+                          Back
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
 
       {/* is Validation */}
       <td>
@@ -5780,7 +6263,7 @@ const UserMobile = () => {
                           <button
                             onClick={() => {
                               if (OptionData?.Validation === null) {
-                                window.open('http://192.168.101.236:3003/--', '_blank');
+                                window.open('http://10.14.81.43:3003/--', '_blank');
                               } else {
                                 window.open(`http://192.168.101.236:3001/${OptionData?.Validation}`, '_blank');
                               }

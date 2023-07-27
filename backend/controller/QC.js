@@ -7,11 +7,11 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 
 const postRequestQC = (req, res) => {
-  const { NamaPIC, Area, Line, Station, Kerusakan } = req.body;
+  const { NamaPIC, Area, Line, Station, Kerusakan, Action } = req.body;
 
   db.query(
-    "INSERT INTO qualityc (Nama, Area, Line, Station, Problem) VALUES (?, ?, ?, ?, ?)",
-    [NamaPIC, Area, Line, Station, Kerusakan],
+    "INSERT INTO qualityc (Nama, Area, Line, Station, Problem, Action) VALUES (?, ?, ?, ?, ?, ?)",
+    [NamaPIC, Area, Line, Station, Kerusakan, Action],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -46,7 +46,7 @@ const postValidationQC = (req, res) => {
       return res.status(500).json({ message: "Internal server error" });
     }
 
-    const { NamaPIC, NpkPIC, Area, Line, Station } = req.body;
+    const { NamaPIC, Area, Line, Station } = req.body;
     let Validation = null;
 
     if (req.file) {
@@ -55,8 +55,8 @@ const postValidationQC = (req, res) => {
     }
 
     db.query(
-      "INSERT INTO validationqc(NamaPIC, NpkPIC, Area, Line, Station, validation) VALUES (?, ?, ?, ?, ?, ?)",
-      [NamaPIC, NpkPIC, Area, Line, Station, Validation],
+      "INSERT INTO validationqc(Nama, Area, Line, Station, validation) VALUES (?, ?, ?, ?, ?)",
+      [NamaPIC, Area, Line, Station, Validation],
       (error, results) => {
         if (error) {
           console.log(error);
