@@ -131,6 +131,80 @@ const UserMobile = () => {
   const [dataPickNPlaceBOTReturn, setDataPickNPlaceBOTReturn] = useState(null);
   const [dataPickNPlaceBOTValQuality, setDataPickNPlaceBOTValQuality] = useState(null);
 
+  const [dataReflowBOT, setDataReflowBOT] = useState(null);
+  const [dataReflowBOTQA, setDataReflowBOTQA] = useState(null);
+  const [dataReflowBOTQC, setDataReflowBOTQC] = useState(null);
+  const [dataReflowBOTReturn, setDataReflowBOTReturn] = useState(null);
+  const [dataReflowBOTValQuality, setDataReflowBOTValQuality] = useState(null);
+
+  const [dataAOIBOT, setDataAOIBOT] = useState(null);
+  const [dataAOIBOTQA, setDataAOIBOTQA] = useState(null);
+  const [dataAOIBOTQC, setDataAOIBOTQC] = useState(null);
+  const [dataAOIBOTReturn, setDataAOIBOTReturn] = useState(null);
+  const [dataAOIBOTValQuality, setDataAOIBOTValQuality] = useState(null);
+
+  const [dataRVSBOT, setDataRVSBOT] = useState(null);
+  const [dataRVSBOTQA, setDataRVSBOTQA] = useState(null);
+  const [dataRVSBOTQC, setDataRVSBOTQC] = useState(null);
+  const [dataRVSBOTReturn, setDataRVSBOTReturn] = useState(null);
+  const [dataRVSBOTValQuality, setDataRVSBOTValQuality] = useState(null);
+
+  // SMT BE
+
+  const [dataDropinBE, setDataDropinBE] = useState(null);
+  const [dataDropinBEQA, setDataDropinBEQA] = useState(null);
+  const [dataDropinBEQC, setDataDropinBEQC] = useState(null);
+  const [dataDropinBEReturn, setDataDropinBEReturn] = useState(null);
+  const [dataDropinBEValQuality, setDataDropinBEValQuality] = useState(null);
+
+  const [dataFluxerBE, setDataFluxerBE] = useState(null);
+  const [dataFluxerBEQA, setDataFluxerBEQA] = useState(null);
+  const [dataFluxerBEQC, setDataFluxerBEQC] = useState(null);
+  const [dataFluxerBEReturn, setDataFluxerBEReturn] = useState(null);
+  const [dataFluxerBEValQuality, setDataFluxerBEValQuality] = useState(null);
+
+  
+  const [dataPreHeatBE, setDataPreHeatBE] = useState(null);
+  const [dataPreHeatBEQA, setDataPreHeatBEQA] = useState(null);
+  const [dataPreHeatBEQC, setDataPreHeatBEQC] = useState(null);
+  const [dataPreHeatBEReturn, setDataPreHeatBEReturn] = useState(null);
+  const [dataPreHeatBEValQuality, setDataPreHeatBEValQuality] = useState(null);
+
+  const [dataSeho1BE, setDataSeho1BE] = useState(null);
+  const [dataSeho1BEQA, setDataSeho1BEQA] = useState(null);
+  const [dataSeho1BEQC, setDataSeho1BEQC] = useState(null);
+  const [dataSeho1BEReturn, setDataSeho1BEReturn] = useState(null);
+  const [dataSeho1BEValQuality, setDataSeho1BEValQuality] = useState(null);
+
+  const [dataSeho2BE, setDataSeho2BE] = useState(null);
+  const [dataSeho2BEQA, setDataSeho2BEQA] = useState(null);
+  const [dataSeho2BEQC, setDataSeho2BEQC] = useState(null);
+  const [dataSeho2BEReturn, setDataSeho2BEReturn] = useState(null);
+  const [dataSeho2BEValQuality, setDataSeho2BEValQuality] = useState(null);
+
+  const [dataTouchupBE, setDataTouchupBE] = useState(null);
+  const [dataTouchupBEQA, setDataTouchupBEQA] = useState(null);
+  const [dataTouchupBEQC, setDataTouchupBEQC] = useState(null);
+  const [dataTouchupBEReturn, setDataTouchupBEReturn] = useState(null);
+  const [dataTouchupBEValQuality, setDataTouchupBEValQuality] = useState(null);
+
+  const [dataICTBE, setDataICTBE] = useState(null);
+  const [dataICTBEQA, setDataICTBEQA] = useState(null);
+  const [dataICTBEQC, setDataICTBEQC] = useState(null);
+  const [dataICTBEReturn, setDataICTBEReturn] = useState(null);
+  const [dataICTBEValQuality, setDataICTBEValQuality] = useState(null);
+
+  const [dataFlashBE, setDataFlashBE] = useState(null);
+  const [dataFlashBEQA, setDataFlashBEQA] = useState(null);
+  const [dataFlashBEQC, setDataFlashBEQC] = useState(null);
+  const [dataFlashBEReturn, setDataFlashBEReturn] = useState(null);
+  const [dataFlashBEValQuality, setDataFlashBEValQuality] = useState(null);
+
+  const [dataRouterBE, setDataRouterBE] = useState(null);
+  const [dataRouterBEQA, setDataRouterBEQA] = useState(null);
+  const [dataRouterBEQC, setDataRouterBEQC] = useState(null);
+  const [dataRouterBEReturn, setDataRouterBEReturn] = useState(null);
+  const [dataRouterBEValQuality, setDataRouterBEValQuality] = useState(null);
   // ---------------------
 
   // REAL PRODUCTION TIME
@@ -1473,6 +1547,9 @@ const UserMobile = () => {
   const fetchDataAirComp = () => fetchData("UMNAirCompLine1", setDataAirComp);
   const fetchDataOthers = () => fetchData("UMNOthersLine1", setDataOthers);
   const fetchDataShorComp = () => fetchData("UMNShorCompLine1", setDataShorcomp);
+  const fetchDataShorBox = () => fetchData("UMNShorBoxLine1", setDataShorbox);
+  const fetchDataOverTrial = () => fetchData("UMNOverTrialLine1", setDataOvertrial);
+  const fetchDataOverChange = () => fetchData("UMNOverChangeLine1", setDataOverchange);
 
   const fetchDataDestackerTOP = () => fetchData("UMDestackerTOPLine1", setDataDestackerTOP);
   const fetchDataDestackerTOPQA = () => fetchData("UMDestackerTOPLine1QA", setDataDestackerTOPQA);
@@ -1542,6 +1619,82 @@ const UserMobile = () => {
   const fetchDataPickNPlaceBOTReturn = () => fetchData("UMPickNPlaceBOTLine1Return", setDataPickNPlaceBOTReturn);
   const fetchDataPickNPlaceBOTValQuality = () => fetchData("UMPickNPlaceBOTLine1ValQuality", setDataPickNPlaceBOTValQuality);
 
+  const fetchDataReflowBOT = () => fetchData("UMReflowBOTLine1", setDataReflowBOT);
+  const fetchDataReflowBOTQA = () => fetchData("UMReflowBOTLine1QA", setDataReflowBOTQA);
+  const fetchDataReflowBOTQC = () => fetchData("UMReflowBOTLine1QC", setDataReflowBOTQC);
+  const fetchDataReflowBOTReturn = () => fetchData("UMReflowBOTLine1Return", setDataReflowBOTReturn);
+  const fetchDataReflowBOTValQuality = () => fetchData("UMReflowBOTLine1ValQuality", setDataReflowBOTValQuality);
+
+  const fetchDataAOIBOT = () => fetchData("UMAOIBOTLine1", setDataAOIBOT);
+  const fetchDataAOIBOTQA = () => fetchData("UMAOIBOTLine1QA", setDataAOIBOTQA);
+  const fetchDataAOIBOTQC = () => fetchData("UMAOIBOTLine1QC", setDataAOIBOTQC);
+  const fetchDataAOIBOTReturn = () => fetchData("UMAOIBOTLine1Return", setDataAOIBOTReturn);
+  const fetchDataAOIBOTValQuality = () => fetchData("UMAOIBOTLine1ValQuality", setDataAOIBOTValQuality);
+
+  const fetchDataRVSBOT = () => fetchData("UMRVSBOTLine1", setDataRVSBOT);
+  const fetchDataRVSBOTQA = () => fetchData("UMRVSBOTLine1QA", setDataRVSBOTQA);
+  const fetchDataRVSBOTQC = () => fetchData("UMRVSBOTLine1QC", setDataRVSBOTQC);
+  const fetchDataRVSBOTReturn = () => fetchData("UMRVSBOTLine1Return", setDataRVSBOTReturn);
+  const fetchDataRVSBOTValQuality = () => fetchData("UMRVSBOTLine1ValQuality", setDataRVSBOTValQuality);
+
+  // smt be
+
+  const fetchDataDropinBE = () => fetchData("UMDropinBELine1", setDataDropinBE);
+  const fetchDataDropinBEQA = () => fetchData("UMDropinBELine1QA", setDataDropinBEQA);
+  const fetchDataDropinBEQC = () => fetchData("UMDropinBELine1QC", setDataDropinBEQC);
+  const fetchDataDropinBEReturn = () => fetchData("UMDropinBELine1Return", setDataDropinBEReturn);
+  const fetchDataDropinBEValQuality = () => fetchData("UMDropinBELine1ValQuality", setDataDropinBEValQuality);
+
+  const fetchDataFluxerBE = () => fetchData("UMFluxerBELine1", setDataFluxerBE);
+  const fetchDataFluxerBEQA = () => fetchData("UMFluxerBELine1QA", setDataFluxerBEQA);
+  const fetchDataFluxerBEQC = () => fetchData("UMFluxerBELine1QC", setDataFluxerBEQC);
+  const fetchDataFluxerBEReturn = () => fetchData("UMFluxerBELine1Return", setDataFluxerBEReturn);
+  const fetchDataFluxerBEValQuality = () => fetchData("UMFluxerBELine1ValQuality", setDataFluxerBEValQuality);
+
+  const fetchDataPreHeatBE = () => fetchData("UMPreHeatBELine1", setDataPreHeatBE);
+  const fetchDataPreHeatBEQA = () => fetchData("UMPreHeatBELine1QA", setDataPreHeatBEQA);
+  const fetchDataPreHeatBEQC = () => fetchData("UMPreHeatBELine1QC", setDataPreHeatBEQC);
+  const fetchDataPreHeatBEReturn = () => fetchData("UMPreHeatBELine1Return", setDataPreHeatBEReturn);
+  const fetchDataPreHeatBEValQuality = () => fetchData("UMPreHeatBELine1ValQuality", setDataPreHeatBEValQuality);
+
+  const fetchDataSeho1BE = () => fetchData("UMSeho1BELine1", setDataSeho1BE);
+  const fetchDataSeho1BEQA = () => fetchData("UMSeho1BELine1QA", setDataSeho1BEQA);
+  const fetchDataSeho1BEQC = () => fetchData("UMSeho1BELine1QC", setDataSeho1BEQC);
+  const fetchDataSeho1BEReturn = () => fetchData("UMSeho1BELine1Return", setDataSeho1BEReturn);
+  const fetchDataSeho1BEValQuality = () => fetchData("UMSeho1BELine1ValQuality", setDataSeho1BEValQuality);
+
+  const fetchDataSeho2BE = () => fetchData("UMSeho2BELine1", setDataSeho2BE);
+  const fetchDataSeho2BEQA = () => fetchData("UMSeho2BELine1QA", setDataSeho2BEQA);
+  const fetchDataSeho2BEQC = () => fetchData("UMSeho2BELine1QC", setDataSeho2BEQC);
+  const fetchDataSeho2BEReturn = () => fetchData("UMSeho2BELine1Return", setDataSeho2BEReturn);
+  const fetchDataSeho2BEValQuality = () => fetchData("UMSeho2BELine1ValQuality", setDataSeho2BEValQuality);
+
+  const fetchDataTouchupBE = () => fetchData("UMTouchupBELine1", setDataTouchupBE);
+  const fetchDataTouchupBEQA = () => fetchData("UMTouchupBELine1QA", setDataTouchupBEQA);
+  const fetchDataTouchupBEQC = () => fetchData("UMTouchupBELine1QC", setDataTouchupBEQC);
+  const fetchDataTouchupBEReturn = () => fetchData("UMTouchupBELine1Return", setDataTouchupBEReturn);
+  const fetchDataTouchupBEValQuality = () => fetchData("UMTouchupBELine1ValQuality", setDataTouchupBEValQuality);
+
+
+  const fetchDataICTBE = () => fetchData("UMICTBELine1", setDataICTBE);
+  const fetchDataICTBEQA = () => fetchData("UMICTBELine1QA", setDataICTBEQA);
+  const fetchDataICTBEQC = () => fetchData("UMICTBELine1QC", setDataICTBEQC);
+  const fetchDataICTBEReturn = () => fetchData("UMICTBELine1Return", setDataICTBEReturn);
+  const fetchDataICTBEValQuality = () => fetchData("UMICTBELine1ValQuality", setDataICTBEValQuality);
+
+  
+  const fetchDataFlashBE = () => fetchData("UMFlashBELine1", setDataFlashBE);
+  const fetchDataFlashBEQA = () => fetchData("UMFlashBELine1QA", setDataFlashBEQA);
+  const fetchDataFlashBEQC = () => fetchData("UMFlashBELine1QC", setDataFlashBEQC);
+  const fetchDataFlashBEReturn = () => fetchData("UMFlashBELine1Return", setDataFlashBEReturn);
+  const fetchDataFlashBEValQuality = () => fetchData("UMFlashBELine1ValQuality", setDataFlashBEValQuality);
+
+  const fetchDataRouterBE = () => fetchData("UMRouterBELine1", setDataRouterBE);
+  const fetchDataRouterBEQA = () => fetchData("UMRouterBELine1QA", setDataRouterBEQA);
+  const fetchDataRouterBEQC = () => fetchData("UMRouterBELine1QC", setDataRouterBEQC);
+  const fetchDataRouterBEReturn = () => fetchData("UMRouterBELine1Return", setDataRouterBEReturn);
+  const fetchDataRouterBEValQuality = () => fetchData("UMRouterBELine1ValQuality", setDataRouterBEValQuality);
+
   const fetchData = (endpoint, setDataFunction) => {
     fetch(`http://192.168.101.236:3001/api/${endpoint}`)
       .then((response) => response.json())
@@ -1561,6 +1714,9 @@ const UserMobile = () => {
       fetchDataAirComp,
       fetchDataOthers,
       fetchDataShorComp,
+      fetchDataShorBox,
+      fetchDataOverTrial,
+      fetchDataOverChange,
 
       fetchDataDestackerTOP,
       fetchDataDestackerTOPQA,
@@ -1631,6 +1787,82 @@ const UserMobile = () => {
       fetchDataPickNPlaceBOTQC,
       fetchDataPickNPlaceBOTReturn,
       fetchDataPickNPlaceBOTValQuality,
+
+         
+      fetchDataReflowBOT,
+      fetchDataReflowBOTQA,
+      fetchDataReflowBOTQC,
+      fetchDataReflowBOTReturn,
+      fetchDataReflowBOTValQuality,
+
+      fetchDataAOIBOT,
+      fetchDataAOIBOTQA,
+      fetchDataAOIBOTQC,
+      fetchDataAOIBOTReturn,
+      fetchDataAOIBOTValQuality,
+
+      fetchDataRVSBOT,
+      fetchDataRVSBOTQA,
+      fetchDataRVSBOTQC,
+      fetchDataRVSBOTReturn,
+      fetchDataRVSBOTValQuality,
+
+
+      // BE
+
+      fetchDataDropinBE,
+      fetchDataDropinBEQA,
+      fetchDataDropinBEQC,
+      fetchDataDropinBEReturn,
+      fetchDataDropinBEValQuality,
+      
+      fetchDataFluxerBE,
+      fetchDataFluxerBEQA,
+      fetchDataFluxerBEQC,
+      fetchDataFluxerBEReturn,
+      fetchDataFluxerBEValQuality,
+
+      fetchDataPreHeatBE,
+      fetchDataPreHeatBEQA,
+      fetchDataPreHeatBEQC,
+      fetchDataPreHeatBEReturn,
+      fetchDataPreHeatBEValQuality,
+
+      fetchDataSeho1BE,
+      fetchDataSeho1BEQA,
+      fetchDataSeho1BEQC,
+      fetchDataSeho1BEReturn,
+      fetchDataSeho1BEValQuality,
+
+      fetchDataSeho2BE,
+      fetchDataSeho2BEQA,
+      fetchDataSeho2BEQC,
+      fetchDataSeho2BEReturn,
+      fetchDataSeho2BEValQuality,
+
+      fetchDataTouchupBE,
+      fetchDataTouchupBEQA,
+      fetchDataTouchupBEQC,
+      fetchDataTouchupBEReturn,
+      fetchDataTouchupBEValQuality,
+
+      fetchDataICTBE,
+      fetchDataICTBEQA,
+      fetchDataICTBEQC,
+      fetchDataICTBEReturn,
+      fetchDataICTBEValQuality,
+
+      fetchDataFlashBE,
+      fetchDataFlashBEQA,
+      fetchDataFlashBEQC,
+      fetchDataFlashBEReturn,
+      fetchDataFlashBEValQuality,
+
+      fetchDataRouterBE,
+      fetchDataRouterBEQA,
+      fetchDataRouterBEQC,
+      fetchDataRouterBEReturn,
+      fetchDataRouterBEValQuality,
     ];
   
     const intervalIds = fetchDataFunctions.map((func) => setInterval(func, 5000));
@@ -2056,6 +2288,19 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorShorbox }}
                         value={Shorbox}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusShorbox === "Go") {
+                            // set isOpenEStatusShorbox state to true if EStatusShorbox is "Go"
+                            ;
+                          } else if (StatusShorbox === "Repair") {
+                            // set Quality state to true if EStatusShorbox is "RepShor"
+
+                          } else if (StatusShorbox === "Down") {
+
+                            setIsRequestGeneral(true);
+                            setOptionData(dataShorBox)
+                          }
+                        }}
                       >
                         <svg
                           fill="#2e3436"
@@ -2090,6 +2335,19 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorOvertrial }}
                         value={Overtrial}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusOvertrial === "Go") {
+                            // set isOpenEStatusOvertrial state to true if EStatusOvertrial is "Go"
+                            ;
+                          } else if (StatusOvertrial === "Repair") {
+                            // set Quality state to true if EStatusOvertrial is "RepShor"
+
+                          } else if (StatusOvertrial === "Down") {
+
+                            setIsRequestGeneral(true);
+                            setOptionData(dataOverTrial)
+                          }
+                        }}
                       >
                         <svg
                           width="50px"
@@ -2132,6 +2390,19 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorOverchange }}
                         value={Overchange}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusOverchange === "Go") {
+                            // set isOpenEStatusOverchange state to true if EStatusOverchange is "Go"
+                            ;
+                          } else if (StatusOverchange === "Repair") {
+                            // set Quality state to true if EStatusOverchange is "RepShor"
+
+                          } else if (StatusOverchange === "Down") {
+
+                            setIsRequestGeneral(true);
+                            setOptionData(dataOverChange)
+                          }
+                        }}
                       >
                         <svg
                           width="50px"
@@ -3777,6 +4048,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusReflowBot }}
                         value={ReflowBot}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusReflowBot === "Maintenance") {
+                            // set isOpenReflowBOT state to true if ReflowBOT is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataReflowBOT);
+                          } else if (StatusReflowBot === "Repair") {
+                            // set Quality state to true if ReflowBOT is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataReflowBOT);
+                          } else if (StatusReflowBot === "QA") {
+                            // set Quality state to true if ReflowBOT is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataReflowBOTQA);
+                          } else if (StatusReflowBot === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataReflowBOTQC);
+                            // set Quality state to true if ReflowBOT is "Repair"
+
+                          } else if (StatusReflowBot === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataReflowBOTReturn);
+                            // set Quality state to true if ReflowBOT is "Repair"
+
+                          }
+                          else if (StatusReflowBot === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataReflowBOTValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -3889,6 +4192,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusAOIBot }}
                         value={AOIBot}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusAOIBot === "Maintenance") {
+                            // set isOpenAOIBOT state to true if AOIBOT is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataAOIBOT);
+                          } else if (StatusAOIBot === "Repair") {
+                            // set Quality state to true if AOIBOT is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataAOIBOT);
+                          } else if (StatusAOIBot === "QA") {
+                            // set Quality state to true if AOIBOT is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataAOIBOTQA);
+                          } else if (StatusAOIBot === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataAOIBOTQC);
+                            // set Quality state to true if AOIBOT is "Repair"
+
+                          } else if (StatusAOIBot === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataAOIBOTReturn);
+                            // set Quality state to true if AOIBOT is "Repair"
+
+                          }
+                          else if (StatusAOIBot === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataAOIBOTValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -3996,6 +4331,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusRVSBot }}
                         value={RVSBot}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusRVSBot === "Maintenance") {
+                            // set isOpenRVSBOT state to true if RVSBOT is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataRVSBOT);
+                          } else if (StatusRVSBot === "Repair") {
+                            // set Quality state to true if RVSBOT is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataRVSBOT);
+                          } else if (StatusRVSBot === "QA") {
+                            // set Quality state to true if RVSBOT is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataRVSBOTQA);
+                          } else if (StatusRVSBot === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataRVSBOTQC);
+                            // set Quality state to true if RVSBOT is "Repair"
+
+                          } else if (StatusRVSBot === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataRVSBOTReturn);
+                            // set Quality state to true if RVSBOT is "Repair"
+
+                          }
+                          else if (StatusRVSBot === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataRVSBOTValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -4144,6 +4511,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusDropinBE }}
                         value={DropinBE}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusDropinBE === "Maintenance") {
+                            // set isOpenDropinBE state to true if DropinBE is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataDropinBE);
+                          } else if (StatusDropinBE === "Repair") {
+                            // set Quality state to true if DropinBE is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataDropinBE);
+                          } else if (StatusDropinBE === "QA") {
+                            // set Quality state to true if DropinBE is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataDropinBEQA);
+                          } else if (StatusDropinBE === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataDropinBEQC);
+                            // set Quality state to true if DropinBE is "Repair"
+
+                          } else if (StatusDropinBE === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataDropinBEReturn);
+                            // set Quality state to true if DropinBE is "Repair"
+
+                          }
+                          else if (StatusDropinBE === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataDropinBEValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -4251,6 +4650,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusFluxerBE }}
                         value={FluxerBE}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusFluxerBE === "Maintenance") {
+                            // set isOpenFluxerBE state to true if FluxerBE is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataFluxerBE);
+                          } else if (StatusFluxerBE === "Repair") {
+                            // set Quality state to true if FluxerBE is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataFluxerBE);
+                          } else if (StatusFluxerBE === "QA") {
+                            // set Quality state to true if FluxerBE is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataFluxerBEQA);
+                          } else if (StatusFluxerBE === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataFluxerBEQC);
+                            // set Quality state to true if FluxerBE is "Repair"
+
+                          } else if (StatusFluxerBE === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataFluxerBEReturn);
+                            // set Quality state to true if FluxerBE is "Repair"
+
+                          }
+                          else if (StatusFluxerBE === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataFluxerBEValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -4358,6 +4789,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusPreheatBE }}
                         value={PreheatBE}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusPreheatBE === "Maintenance") {
+                            // set isOpenPreheatBE state to true if PreheatBE is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataPreHeatBE);
+                          } else if (StatusPreheatBE === "Repair") {
+                            // set Quality state to true if PreheatBE is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataPreHeatBE);
+                          } else if (StatusPreheatBE === "QA") {
+                            // set Quality state to true if PreheatBE is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataPreHeatBEQA);
+                          } else if (StatusPreheatBE === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataPreHeatBEQC);
+                            // set Quality state to true if PreheatBE is "Repair"
+
+                          } else if (StatusPreheatBE === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataPreHeatBEReturn);
+                            // set Quality state to true if PreheatBE is "Repair"
+
+                          }
+                          else if (StatusPreheatBE === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataPreHeatBEValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -4465,6 +4928,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusSeho1BE }}
                         value={Seho1BE}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusSeho1BE === "Maintenance") {
+                            // set isOpenSeho1BE state to true if Seho1BE is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataSeho1BE);
+                          } else if (StatusSeho1BE === "Repair") {
+                            // set Quality state to true if Seho1BE is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataSeho1BE);
+                          } else if (StatusSeho1BE === "QA") {
+                            // set Quality state to true if Seho1BE is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataSeho1BEQA);
+                          } else if (StatusSeho1BE === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataSeho1BEQC);
+                            // set Quality state to true if Seho1BE is "Repair"
+
+                          } else if (StatusSeho1BE === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataSeho1BEReturn);
+                            // set Quality state to true if Seho1BE is "Repair"
+
+                          }
+                          else if (StatusSeho1BE === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataSeho1BEValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -4577,6 +5072,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusSeho2BE }}
                         value={Seho2BE}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusSeho2BE === "Maintenance") {
+                            // set isOpenSeho2BE state to true if Seho2BE is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataSeho2BE);
+                          } else if (StatusSeho2BE === "Repair") {
+                            // set Quality state to true if Seho2BE is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataSeho2BE);
+                          } else if (StatusSeho2BE === "QA") {
+                            // set Quality state to true if Seho2BE is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataSeho2BEQA);
+                          } else if (StatusSeho2BE === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataSeho2BEQC);
+                            // set Quality state to true if Seho2BE is "Repair"
+
+                          } else if (StatusSeho2BE === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataSeho2BEReturn);
+                            // set Quality state to true if Seho2BE is "Repair"
+
+                          }
+                          else if (StatusSeho2BE === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataSeho2BEValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -4684,6 +5211,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusTouchupBE }}
                         value={TouchupBE}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusTouchupBE === "Maintenance") {
+                            // set isOpenTouchupBE state to true if TouchupBE is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataTouchupBE);
+                          } else if (StatusTouchupBE === "Repair") {
+                            // set Quality state to true if TouchupBE is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataTouchupBE);
+                          } else if (StatusTouchupBE === "QA") {
+                            // set Quality state to true if TouchupBE is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataTouchupBEQA);
+                          } else if (StatusTouchupBE === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataTouchupBEQC);
+                            // set Quality state to true if TouchupBE is "Repair"
+
+                          } else if (StatusTouchupBE === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataTouchupBEReturn);
+                            // set Quality state to true if TouchupBE is "Repair"
+
+                          }
+                          else if (StatusTouchupBE === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataTouchupBEValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -4791,6 +5350,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusICTBE }}
                         value={ICTBE}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusICTBE === "Maintenance") {
+                            // set isOpenICTBE state to true if ICTBE is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataICTBE);
+                          } else if (StatusICTBE === "Repair") {
+                            // set Quality state to true if ICTBE is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataICTBE);
+                          } else if (StatusICTBE === "QA") {
+                            // set Quality state to true if ICTBE is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataICTBEQA);
+                          } else if (StatusICTBE === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataICTBEQC);
+                            // set Quality state to true if ICTBE is "Repair"
+
+                          } else if (StatusICTBE === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataICTBEReturn);
+                            // set Quality state to true if ICTBE is "Repair"
+
+                          }
+                          else if (StatusICTBE === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataICTBEValQuality);
+                   
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -4898,6 +5489,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusFlashBE }}
                         value={FlashBE}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusFlashBE === "Maintenance") {
+                            // set isOpenFlashBE state to true if FlashBE is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataFlashBE);
+                          } else if (StatusFlashBE === "Repair") {
+                            // set Quality state to true if FlashBE is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataFlashBE);
+                          } else if (StatusFlashBE === "QA") {
+                            // set Quality state to true if FlashBE is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataFlashBEQA);
+                          } else if (StatusFlashBE === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataFlashBEQC);
+                            // set Quality state to true if FlashBE is "Repair"
+
+                          } else if (StatusFlashBE === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataFlashBEReturn);
+                            // set Quality state to true if FlashBE is "Repair"
+
+                          }
+                          else if (StatusFlashBE === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataFlashBEValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"
@@ -5005,6 +5628,38 @@ const UserMobile = () => {
                         style={{ backgroundColor: backgroundColorStatusRouterBE }}
                         value={RouterBE}
                         class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
+                        onClick={() => {
+                          if (StatusRouterBE === "Maintenance") {
+                            // set isOpenRouterBE state to true if RouterBE is "Go"
+                            setIsRequestMaintenance(true);
+                            setOptionData(dataRouterBE);
+                          } else if (StatusRouterBE === "Repair") {
+                            // set Quality state to true if RouterBE is "Repair"
+                            setIsRepair(true);
+                            setOptionData(dataRouterBE);
+                          } else if (StatusRouterBE === "QA") {
+                            // set Quality state to true if RouterBE is "Repair"
+                            setIsRequestQA(true);
+                            setOptionData(dataRouterBEQA);
+                          } else if (StatusRouterBE === "QC") {
+                            setIsRequestQC(true);
+                            setOptionData(dataRouterBEQC);
+                            // set Quality state to true if RouterBE is "Repair"
+
+                          } else if (StatusRouterBE === "Return Maintenance") {
+                            setIsReturnMaintenance(true);
+                            setOptionData(dataRouterBEReturn);
+                            // set Quality state to true if RouterBE is "Repair"
+
+                          }
+                          else if (StatusRouterBE === "Go") {
+                            setIsValidation(true);
+                            setOptionData(dataRouterBEValQuality);
+                            // set Quality state to true if DestackerTop is "Repair"
+
+                          }
+
+                        }}
                       >
                         <svg
                           width="50px"

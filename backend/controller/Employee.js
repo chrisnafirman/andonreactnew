@@ -16,7 +16,7 @@ const getRequestEmployee = (req, res) => {
   
   
   const getRequestEmployeeOperatorManufacturing = (req, res) => {
-    const sqlSelect = "SELECT nama_emp FROM employee WHERE jabatan = 'Operator' and departement = 'MANUFACTURING' ";
+    const sqlSelect = "SELECT nama_emp FROM employee WHERE jabatan IN ('Operator', 'Staff', 'Leader', 'Supervisor') and departement = 'MANUFACTURING' ";
     db.query(sqlSelect, (err, results) => {
       if (err) {
         // Handle error
@@ -32,7 +32,7 @@ const getRequestEmployee = (req, res) => {
 
 
   const getRequestEmployeeTeamMaintenance = (req, res) => {
-    const sqlSelect = "SELECT nama_emp FROM employee WHERE jabatan IN ('Operator', 'staff') AND departement = 'MAINTENANCE & IT'";
+    const sqlSelect = "SELECT nama_emp FROM employee WHERE jabatan IN ('Operator', 'Staff', 'Leader', 'Supervisor') AND departement = 'MAINTENANCE & IT'";
 
     db.query(sqlSelect, (err, results) => {
       if (err) {
@@ -47,7 +47,7 @@ const getRequestEmployee = (req, res) => {
 
 
   const getRequestEmployeeTeamQuality = (req, res) => {
-    const sqlSelect = "SELECT nama_emp FROM employee WHERE jabatan IN ('Operator', 'staff') AND departement = 'QUALITY'";
+    const sqlSelect = "SELECT nama_emp FROM employee WHERE jabatan IN ('Operator', 'Staff', 'Leader', 'Supervisor') AND departement = 'QUALITY'";
 
     db.query(sqlSelect, (err, results) => {
       if (err) {

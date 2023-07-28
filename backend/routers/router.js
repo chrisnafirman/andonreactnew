@@ -9,6 +9,7 @@ const Employeecontrollers = require("../controller/Employee")
 const UMLine1TOP = require("../controller/UMLine1TOP")
 const UMLine1General = require("../controller/UMLine1General")
 const UMLine1BOT = require("../controller/UMLine1BOT")
+const UMLine1BE = require("../controller/UMLine1BE")
 
 // MTC
 router.post("/Maintenance", MTCcontrollers.postRequestMaintenance);
@@ -77,7 +78,9 @@ router.get("/UMElectricityLine1", UMLine1General.getUMElectricityLine1);
 router.get("/UMNetworkLine1", UMLine1General.getUMNetworkLine1);
 router.get("/UMNAirCompLine1", UMLine1General.getUMAirCompLine1);
 router.get("/UMNShorCompLine1", UMLine1General.getUMShorCompLine1);
-
+router.get("/UMNShorBoxLine1", UMLine1General.getUMShorBoxLine1);
+router.get("/UMNOverTrialLine1", UMLine1General.getUMOverTrialLine1);
+router.get("/UMNOverChangeLine1", UMLine1General.getUMOverChangeLine1);
 
 router.get("/UMDestackerTOPLine1", UMLine1TOP.getUMDestackerTOPLine1);
 router.get("/UMDestackerTOPLine1QA", UMLine1TOP.getUMDestackerTOPLine1QA);
@@ -151,6 +154,79 @@ router.get("/UMPickNPlaceBOTLine1QC", UMLine1BOT.getUMPickNPlaceBOTLine1QC);
 router.get("/UMPickNPlaceBOTLine1Return", UMLine1BOT.getUMPickNPlaceBOTLine1Return);
 router.get("/UMPickNPlaceBOTLine1ValQuality", UMLine1BOT.getUMPickNPlaceBOTLine1ValQuality);
 
+
+router.get("/UMReflowBOTLine1", UMLine1BOT.getUMReflowBOTLine1);
+router.get("/UMReflowBOTLine1QA", UMLine1BOT.getUMReflowBOTLine1QA);
+router.get("/UMReflowBOTLine1QC", UMLine1BOT.getUMReflowBOTLine1QC);
+router.get("/UMReflowBOTLine1Return", UMLine1BOT.getUMReflowBOTLine1Return);
+router.get("/UMReflowBOTLine1ValQuality", UMLine1BOT.getUMReflowBOTLine1ValQuality);
+
+router.get("/UMAOIBOTLine1", UMLine1BOT.getUMAOIBOTLine1);
+router.get("/UMAOIBOTLine1QA", UMLine1BOT.getUMAOIBOTLine1QA);
+router.get("/UMAOIBOTLine1QC", UMLine1BOT.getUMAOIBOTLine1QC);
+router.get("/UMAOIBOTLine1Return", UMLine1BOT.getUMAOIBOTLine1Return);
+router.get("/UMAOIBOTLine1ValQuality", UMLine1BOT.getUMAOIBOTLine1ValQuality);
+
+router.get("/UMRVSBOTLine1", UMLine1BOT.getUMRVSBOTLine1);
+router.get("/UMRVSBOTLine1QA", UMLine1BOT.getUMRVSBOTLine1QA);
+router.get("/UMRVSBOTLine1QC", UMLine1BOT.getUMRVSBOTLine1QC);
+router.get("/UMRVSBOTLine1Return", UMLine1BOT.getUMRVSBOTLine1Return);
+router.get("/UMRVSBOTLine1ValQuality", UMLine1BOT.getUMRVSBOTLine1ValQuality);
+
+// SMT BE
+router.get("/UMDropinBELine1", UMLine1BE.getUMDropinBELine1);
+router.get("/UMDropinBELine1QA", UMLine1BE.getUMDropinBELine1QA);
+router.get("/UMDropinBELine1QC", UMLine1BE.getUMDropinBELine1QC);
+router.get("/UMDropinBELine1Return", UMLine1BE.getUMDropinBELine1Return);
+router.get("/UMDropinBELine1ValQuality", UMLine1BE.getUMDropinBELine1ValQuality);
+
+router.get("/UMFluxerBELine1", UMLine1BE.getUMFluxerBELine1);
+router.get("/UMFluxerBELine1QA", UMLine1BE.getUMFluxerBELine1QA);
+router.get("/UMFluxerBELine1QC", UMLine1BE.getUMFluxerBELine1QC);
+router.get("/UMFluxerBELine1Return", UMLine1BE.getUMFluxerBELine1Return);
+router.get("/UMFluxerBELine1ValQuality", UMLine1BE.getUMFluxerBELine1ValQuality);
+
+router.get("/UMPreHeatBELine1", UMLine1BE.getUMPreHeatBELine1);
+router.get("/UMPreHeatBELine1QA", UMLine1BE.getUMPreHeatBELine1QA);
+router.get("/UMPreHeatBELine1QC", UMLine1BE.getUMPreHeatBELine1QC);
+router.get("/UMPreHeatBELine1Return", UMLine1BE.getUMPreHeatBELine1Return);
+router.get("/UMPreHeatBELine1ValQuality", UMLine1BE.getUMPreHeatBELine1ValQuality);
+
+router.get("/UMSeho1BELine1", UMLine1BE.getUMSeho1BELine1);
+router.get("/UMSeho1BELine1QA", UMLine1BE.getUMSeho1BELine1QA);
+router.get("/UMSeho1BELine1QC", UMLine1BE.getUMSeho1BELine1QC);
+router.get("/UMSeho1BELine1Return", UMLine1BE.getUMSeho1BELine1Return);
+router.get("/UMSeho1BELine1ValQuality", UMLine1BE.getUMSeho1BELine1ValQuality);
+
+router.get("/UMSeho2BELine1", UMLine1BE.getUMSeho2BELine1);
+router.get("/UMSeho2BELine1QA", UMLine1BE.getUMSeho2BELine1QA);
+router.get("/UMSeho2BELine1QC", UMLine1BE.getUMSeho2BELine1QC);
+router.get("/UMSeho2BELine1Return", UMLine1BE.getUMSeho2BELine1Return);
+router.get("/UMSeho2BELine1ValQuality", UMLine1BE.getUMSeho2BELine1ValQuality);
+
+router.get("/UMTouchupBELine1", UMLine1BE.getUMTouchupBELine1);
+router.get("/UMTouchupBELine1QA", UMLine1BE.getUMTouchupBELine1QA);
+router.get("/UMTouchupBELine1QC", UMLine1BE.getUMTouchupBELine1QC);
+router.get("/UMTouchupBELine1Return", UMLine1BE.getUMTouchupBELine1Return);
+router.get("/UMTouchupBELine1ValQuality", UMLine1BE.getUMTouchupBELine1ValQuality);
+
+router.get("/UMICTBELine1", UMLine1BE.getUMICTBELine1);
+router.get("/UMICTBELine1QA", UMLine1BE.getUMICTBELine1QA);
+router.get("/UMICTBELine1QC", UMLine1BE.getUMICTBELine1QC);
+router.get("/UMICTBELine1Return", UMLine1BE.getUMICTBELine1Return);
+router.get("/UMICTBELine1ValQuality", UMLine1BE.getUMICTBELine1ValQuality);
+
+router.get("/UMFlashBELine1", UMLine1BE.getUMFlashBELine1);
+router.get("/UMFlashBELine1QA", UMLine1BE.getUMFlashBELine1QA);
+router.get("/UMFlashBELine1QC", UMLine1BE.getUMFlashBELine1QC);
+router.get("/UMFlashBELine1Return", UMLine1BE.getUMFlashBELine1Return);
+router.get("/UMFlashBELine1ValQuality", UMLine1BE.getUMFlashBELine1ValQuality);
+
+router.get("/UMRouterBELine1", UMLine1BE.getUMRouterBELine1);
+router.get("/UMRouterBELine1QA", UMLine1BE.getUMRouterBELine1QA);
+router.get("/UMRouterBELine1QC", UMLine1BE.getUMRouterBELine1QC);
+router.get("/UMRouterBELine1Return", UMLine1BE.getUMRouterBELine1Return);
+router.get("/UMRouterBELine1ValQuality", UMLine1BE.getUMRouterBELine1ValQuality);
 
 module.exports = router;
 
