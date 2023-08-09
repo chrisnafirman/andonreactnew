@@ -1363,7 +1363,7 @@ const SmtTop = () => {
                         </tr>
                         <tr>
                           <td className="font-bold text-xs">
-                            Planned Production Time 1 :
+                           Production Time 1 :
                           </td>
                           <td className="text-sm">
                             <span style={{ color: "green" }}>

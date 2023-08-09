@@ -249,7 +249,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Drop In (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Maintenance SMT LINE 1 Drop In (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -276,7 +276,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/ReturnMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Return Maintenance SMT LINE 1 Drop In (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Return Maintenance SMT LINE 1 Drop In (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -299,7 +299,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQC";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Control SMT LINE 1 Drop In (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Control SMT LINE 1 Drop In (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -322,7 +322,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQA";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Assurance SMT LINE 1 Drop In (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Assurance SMT LINE 1 Drop In (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -356,7 +356,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Fluxer (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Maintenance SMT LINE 1 Fluxer (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -383,7 +383,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/ReturnMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Return Maintenance SMT LINE 1 Fluxer (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Return Maintenance SMT LINE 1 Fluxer (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -406,7 +406,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQC";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Control SMT LINE 1 Fluxer (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Control SMT LINE 1 Fluxer (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -429,7 +429,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQA";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Assurance SMT LINE 1 Fluxer (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Assurance SMT LINE 1 Fluxer (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -463,7 +463,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 PreHeat (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Maintenance SMT LINE 1 PreHeat (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -490,7 +490,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/ReturnMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Return Maintenance SMT LINE 1 PreHeat (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Return Maintenance SMT LINE 1 PreHeat (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -513,7 +513,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQC";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Control SMT LINE 1 PreHeat (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Control SMT LINE 1 PreHeat (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -536,7 +536,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQA";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Assurance SMT LINE 1 PreHeat (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Assurance SMT LINE 1 PreHeat (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -570,7 +570,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Seho1 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Maintenance SMT LINE 1 Seho1 (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -597,7 +597,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/ReturnMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Return Maintenance SMT LINE 1 Seho1 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Return Maintenance SMT LINE 1 Seho1 (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -620,7 +620,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQC";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Control SMT LINE 1 Seho1 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Control SMT LINE 1 Seho1 (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -643,7 +643,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQA";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Assurance SMT LINE 1 Seho1 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Assurance SMT LINE 1 Seho1 (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -677,7 +677,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Seho2 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Maintenance SMT LINE 1 Seho2 (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -704,7 +704,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/ReturnMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Return Maintenance SMT LINE 1 Seho2 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Return Maintenance SMT LINE 1 Seho2 (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -727,7 +727,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQC";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Control SMT LINE 1 Seho2 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Control SMT LINE 1 Seho2 (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -750,7 +750,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQA";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Assurance SMT LINE 1 Seho2 (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Assurance SMT LINE 1 Seho2 (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -784,7 +784,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Touch UP (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Maintenance SMT LINE 1 Touch UP (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -811,7 +811,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/ReturnMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Return Maintenance SMT LINE 1 Touch UP (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Return Maintenance SMT LINE 1 Touch UP (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -834,7 +834,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQC";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Control SMT LINE 1 Touch UP (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Control SMT LINE 1 Touch UP (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -857,7 +857,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQA";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Assurance SMT LINE 1 Touch UP (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Assurance SMT LINE 1 Touch UP (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -891,7 +891,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 ICT (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Maintenance SMT LINE 1 ICT (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -918,7 +918,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/ReturnMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Return Maintenance SMT LINE 1 ICT (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Return Maintenance SMT LINE 1 ICT (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -941,7 +941,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQC";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Control SMT LINE 1 ICT (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Control SMT LINE 1 ICT (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -964,7 +964,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQA";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Assurance SMT LINE 1 ICT (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Assurance SMT LINE 1 ICT (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -998,7 +998,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Flash (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Maintenance SMT LINE 1 Flash (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -1025,7 +1025,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/ReturnMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Return Maintenance SMT LINE 1 Flash (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Return Maintenance SMT LINE 1 Flash (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -1048,7 +1048,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQC";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Control SMT LINE 1 Flash (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Control SMT LINE 1 Flash (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -1071,7 +1071,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQA";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Assurance SMT LINE 1 Flash (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Assurance SMT LINE 1 Flash (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -1105,7 +1105,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Router (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Maintenance SMT LINE 1 Router (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -1132,7 +1132,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/ReturnMaintenance";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `Notification Return Maintenance SMT LINE 1 Router (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Return Maintenance SMT LINE 1 Router (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -1155,7 +1155,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQC";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Control SMT LINE 1 Router (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Control SMT LINE 1 Router (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -1178,7 +1178,7 @@ const SmtTop = () => {
         const link = "http://10.14.81.43:3003/RequestQA";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
-        const message = `Notification Request Quality Assurance SMT LINE 1 Router (BE) Status: DOWN - Please Click The Link:\n\n ${link}`;
+        const message = `Notification Request Quality Assurance SMT LINE 1 Router (BE) Status: DOWN - Please Check the Details In Department Side`;
 
         chatIds.forEach((chatId) => {
           fetch(

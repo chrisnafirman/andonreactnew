@@ -30,10 +30,17 @@ import RequestMaintenance from "./components/Maintenance/RequestMaintenance.jsx"
 import ReturnMaintenance from "./components/Maintenance/ReturnMaintenance.jsx"
 
 
-import EM from "./components/EMaintenance.jsx"
+import RequestLeader from "./components/Leader/RequestLeader.jsx"
+import ReturnLeader from "./components/Leader/ReturnLeader.jsx"
+
+
+
 
 
 import UserMobile from "./components/User/UserMobile.jsx"
+
+import QRDestacker from "./components/QR/Destacker.jsx"
+import QRLeader from "./components/QR/QRLeader.jsx"
 
 function App() {
   return (
@@ -63,6 +70,9 @@ function App() {
 
         <Route path="RequestMaintenance" element={<RequestMaintenance/>}/>
         <Route path="ReturnMaintenance" element={<ReturnMaintenance/>}/>
+
+        <Route path="RequestLeader" element={<RequestLeader/>}/>
+        <Route path="ReturnLeader" element={<ReturnLeader/>}/>
       
 
         <Route path="SmtTop" element={<SmtTop/>}/>
@@ -72,9 +82,13 @@ function App() {
         <Route path="Inputsche" element={<Inputsche/>}/>
         <Route path="ScheProd" element={<ScheProd/>}/>
 
-        <Route path="E" element={<EM/>}/>
-
         <Route path="UserMobile" element={<UserMobile/>}/>
+
+        <Route path="QRLeader" element={<QRLeader/>}/>
+
+        <Route path="QRDestacker" element={<QRDestacker/>}/>
+
+        <Route path="QRDestacker" element={<QRDestacker/>}/>
         
       </Routes>
     </>

@@ -145,7 +145,7 @@ const Andonline1 = () => {
   // ....
 
 
-    
+
   const [optionsOperator, setOptionsOperator] = useState([]);
   const [selectedOptionOperator, setSelectedOptionOperator] = useState(null);
 
@@ -157,7 +157,7 @@ const Andonline1 = () => {
     setSelectedOptionOperatorManufacturing,
   ] = useState(null);
   // .......................
-  
+
 
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -704,7 +704,7 @@ const Andonline1 = () => {
       setRealOT(data);
     });
 
-    return () => {};
+    return () => { };
   }, []);
 
   // ---------------------
@@ -867,7 +867,9 @@ const Andonline1 = () => {
     firebase.database().ref("/StatusLine/SMTLine1CMALastTime/minutes").set("0");
     firebase.database().ref("/StatusLine/SMTLine1CMALastTime/seconds").set("0");
     setCMARunning(false);
+    alert("Change Model Telah Selesai Data Sudah Terinput");
     window.location.reload();
+
 
     fetch("http://192.168.101.236:3001/api/UpdateCMA", {
       method: "PUT",
@@ -878,7 +880,6 @@ const Andonline1 = () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          alert("Change Model Telah Selesai Data Sudah Terinput");
         } else {
           throw new Error("Error updating data");
         }
@@ -921,9 +922,8 @@ const Andonline1 = () => {
   // ----
 
   //  FUNGSI WAKTU
-  const formattedTime = `${currentTime.getDate()}/${
-    currentTime.getMonth() + 1
-  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+  const formattedTime = `${currentTime.getDate()}/${currentTime.getMonth() + 1
+    }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
   // fungsi time di navbar
   function updateTime() {
@@ -950,18 +950,18 @@ const Andonline1 = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Maintenance"
-        ? "#be4f62"
-        : data === "PPIC"
-        ? "#7A6544"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Maintenance"
+              ? "#be4f62"
+              : data === "PPIC"
+                ? "#7A6544"
+                : data === "QA"
+                  ? "#93C2C4"
+                  : data === "QC"
+                    ? "#BDD0D1"
+                    : "#565454"
     );
   };
 
@@ -972,24 +972,24 @@ const Andonline1 = () => {
       data === "Go"
         ? "rgb(54, 83, 20)"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "HRGA & EHS"
-        ? "#A61D00"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "HRGA & EHS"
+            ? "#A61D00"
+            : data === "PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "QA"
+                      ? "#93C2C4"
+                      : data === "QC"
+                        ? "#BDD0D1"
+                        : data === "MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : "#565454"
     );
   };
 
@@ -1000,10 +1000,10 @@ const Andonline1 = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Down"
-        ? "#C00000"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
     );
   };
 
@@ -1014,10 +1014,10 @@ const Andonline1 = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Down"
-        ? "#C00000"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
     );
   };
 
@@ -1028,10 +1028,10 @@ const Andonline1 = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Down"
-        ? "#C00000"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
     );
   };
 
@@ -1042,10 +1042,10 @@ const Andonline1 = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Down"
-        ? "#C00000"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
     );
   };
 
@@ -1056,10 +1056,10 @@ const Andonline1 = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Down"
-        ? "#C00000"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
     );
   };
 
@@ -1070,10 +1070,10 @@ const Andonline1 = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Down"
-        ? "#C00000"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
     );
   };
 
@@ -1084,10 +1084,10 @@ const Andonline1 = () => {
       data === "Go"
         ? "#31A207"
         : data === "Repair"
-        ? "#E9CE08"
-        : data === "Down"
-        ? "#C00000"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Down"
+            ? "#C00000"
+            : "#565454"
     );
   };
 
@@ -1367,7 +1367,7 @@ const Andonline1 = () => {
   };
   // ------
 
- 
+
 
   //  Select Nama Operator
   const handleSelectChangeOperatorManufacturing = (
@@ -1448,6 +1448,17 @@ const Andonline1 = () => {
 
   // ...............................................
 
+  // redresfh from other page
+  // Check if the "refresh" parameter is present in the URL
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('refresh') === 'true') {
+  // Refresh the page
+  window.location.reload();
+}
+
+
+
+
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/Background.jpg)`,
     backgroundSize: "1300px",
@@ -1461,7 +1472,7 @@ const Andonline1 = () => {
       <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
         <div class="flex h-14 items-center justify-between">
           <div class="flex items-center">
-            <a href="/RequestNetwork">
+            <a href="/Andonline1">
               <div class="flex-shrink-0">
                 <img
                   src={process.env.PUBLIC_URL + "/smt.jpeg"}
@@ -1671,9 +1682,9 @@ const Andonline1 = () => {
                       // style={{ backgroundColor: backgroundColorDesteckerTop }}
                       // value={desteckerTop}
                       class="w-full max-w-sm  bg-slate-800 border border-white shadow-lg rounded-xl "
-                      // onClick={
-                      //   desteckerTop === "Leader" ? () => setIsOpen(true) : null
-                      // }
+                    // onClick={
+                    //   desteckerTop === "Leader" ? () => setIsOpen(true) : null
+                    // }
                     >
                       <header class="px-5 py-4  ">
                         <div class="italic  text-center text-white">
@@ -2102,7 +2113,7 @@ const Andonline1 = () => {
                         </div>
                       </div>
                       <div className="flex justify-end mt-7">
-                       
+
                         <button
                           class="text-white bg-emerald-600 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                           type="submit"
@@ -2111,10 +2122,10 @@ const Andonline1 = () => {
                           Yes, I'm sure
                         </button>
                         <button
-                         class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                          class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                           onClick={() => setIsOpenOthers(false)}
                         >
-                           No, cancel
+                          No, cancel
                         </button>
                       </div>
                     </form>
@@ -2588,12 +2599,12 @@ const Andonline1 = () => {
                                 Masukan Nama Anda
                               </label>
                               <Select
-                              value={selectedOptionOperatorManufacturing}
-                              onChange={handleSelectChangeOperatorManufacturing}
-                              options={optionsOperatorManufacturing}
-                              isSearchable
-                              placeholder="Pilih Nama"
-                            />
+                                value={selectedOptionOperatorManufacturing}
+                                onChange={handleSelectChangeOperatorManufacturing}
+                                options={optionsOperatorManufacturing}
+                                isSearchable
+                                placeholder="Pilih Nama"
+                              />
                             </div>
                             <div class="w-full md:w-1/2 px-3">
                               <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">

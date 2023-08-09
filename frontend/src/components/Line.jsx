@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const Line = () => {
   return (
     <body>
@@ -76,6 +77,13 @@ const Line = () => {
           </div>
           </a>
         </div>  
+      </div>
+      <div style={{ width: '100%', height: '100vh', overflow: 'hidden' }}>
+        <iframe
+          source={{ uri: "https://www.contohwebview.com" }} // Corrected prop name to "source"
+          title="WebView"
+          style={{ width: '100%', height: '100%', border: 'none' }}
+        />
       </div>
     </body>
   );

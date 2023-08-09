@@ -1,12 +1,19 @@
-const mysql = require('mysql');
+const sql = require('mssql');
 require('dotenv').config();
 
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
+const config = {
   user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
+  server: process.env.DB_HOST,
   database: process.env.DB_DATABASE,
-});
+  password: process.env.DB_PWD,
+  options: {
+    encrypt: true,
+    trustServerCertificate: true, 
+  },
+};
+
+
+const db = new sql.ConnectionPool(config);
 
 db.connect((err) => {
   if (err) {
@@ -17,4 +24,3 @@ db.connect((err) => {
 });
 
 module.exports = db;
-
