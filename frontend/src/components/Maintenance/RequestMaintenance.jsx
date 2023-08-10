@@ -3,6 +3,7 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
+import { Link } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
@@ -149,11 +150,36 @@ const RepairReport = () => {
     filteredData.sort((a, b) => Date.parse(b.Date) - Date.parse(a.Date));
     setFilteredData(filteredData);
   };
+
+
+  const QRResponseLink = () => {
+    if (selectedItem.Area === "SMT TOP" && selectedItem.Action === "") {
+        return "/QRResponseTop";
+    } else if (selectedItem.Area === "SMT BE" && selectedItem.Action === "") {
+        return "/QRResponseBE";
+    } else {
+    }
+};
+
+
+
+  const formatDateTimeAPI = (dateString) => {
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.getHours().toString().padStart(2, '0'); 
+    const minutes = date.getMinutes().toString().padStart(2, '0'); 
+
+    return `${day}/${month}/${year} ~~ ${hours}:${minutes} WIB`;
+  };
+
+
   const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/MTC.jpg)`,
-    backgroundSize: "1400px",
-    backgroundPosition: "1400px",
-    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
+    background: "linear-gradient(45deg, #95754B, #8a8b90, #E1B203)",
+    height: "1000px",
   };
 
 
@@ -180,10 +206,10 @@ const RepairReport = () => {
         <div class="mx-auto max-w-7xl px-4">
           <div>
             <div class="flex items-center">
-              <h1 class="text-xl font-sans tracking-tight text-gray-900">
+              <h1 class="text-base lg:text-xl font-sans tracking-tight text-gray-900">
                 | Request Maintenance |
               </h1>
-              <h1 class="text-xl font-sans tracking-tight ml-4">
+              <h1 class="text-base lg:text-xl  font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
                 <span
                   class="ml-4"
@@ -196,7 +222,7 @@ const RepairReport = () => {
                 <span className="ml-4">|</span>
               </h1>
 
-              <h1 class="text-xl font-sans tracking-tight ml-4">
+              <h1 class="text-base lg:text-xl font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
                 <span class="ml-4 text-green-500">RUNNING </span>|
               </h1>
@@ -205,66 +231,7 @@ const RepairReport = () => {
         </div>
       </header>
 
-      <sidebar>
-        <div
-          id="drawer-navigation"
-          className={`fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform ${showDrawer ? "" : "-translate-x-full"
-            } bg-gray-100  dark:bg-gray-100 `}
-          tabIndex="-1"
-          aria-labelledby="drawer-navigation-label"
-        >
-          <h5
-            id="drawer-navigation-label"
-            className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"
-          >
-            Menu
-          </h5>
-          <button
-            type="button"
-            data-drawer-hide="drawer-navigation"
-            onClick={toggleDrawer}
-            aria-controls="drawer-navigation"
-            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-          >
-            <svg
-              aria-hidden="true"
-              className="w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-            <span className="sr-only">Close menu</span>
-          </button>
-          <div className="py-4 overflow-y-auto">
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="/PPIC"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    className="w-6  h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                  </svg>
-                  <span class="ml-3 text-gray-500">Realtime Dashboard</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </sidebar>
+
 
       <main>
         <section
@@ -342,16 +309,16 @@ const RepairReport = () => {
                 <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
-                      <th className="p-1 w-40">
-                        <div className="font-semibold text-left">Nama</div>
+                      <th className="p-1 w-10 lg:w-40">
+                        <div className="font-sans lg:font-semibold text-left">Nama</div>
                       </th>
-                      <th className="p-1  w-32">
+                      <th className="p-1  w-20 lg:w-32">
                         <div className="font-semibold text-left">Line</div>
                       </th>
-                      <th className="p-1  w-32">
+                      <th className="p-1  w-20 lg:w-32">
                         <div className="font-semibold text-left">Area</div>
                       </th>
-                      <th className="p-1  w-32">
+                      <th className="p-1  w-15 lg:w-32">
                         <div className="font-semibold text-left">Station</div>
                       </th>
                       <th className="p-1 w-10">
@@ -369,17 +336,17 @@ const RepairReport = () => {
                         className={index === 0 ? "bg-green-400" : ""}
                       >
                         <td className="p-2">
-                          <div className="font-medium text-gray-800">
+                          <div className="font-medium text-xs lg:text-sm text-gray-800">
                             {item.Nama}
                           </div>
                         </td>
                         <td className="p-2">
-                          <div className="font-medium text-gray-800">
+                          <div className="font-medium text-xs lg:text-sm text-gray-800">
                             {item.Line}
                           </div>
                         </td>
                         <td className="p-2">
-                          <div className="font-medium text-gray-800">
+                          <div className="font-medium text-xs lg:text-sm text-gray-800">
                             {item.Area}
                           </div>
                         </td>
@@ -391,7 +358,7 @@ const RepairReport = () => {
                         <td className="p-5 ">
                           <button
                             onClick={() => setSelectedItem(item)}
-                            className="bg-blue-900 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                            className="bg-blue-900  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -444,7 +411,7 @@ const RepairReport = () => {
                 {selectedItem && (
                   <>
                     <div className="fixed z-10 inset-0 overflow-y-auto">
-                      <div class="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                      <div class="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-96 text-center sm:block sm:p-0">
                         <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
                         <div
                           class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
@@ -453,31 +420,29 @@ const RepairReport = () => {
                           aria-labelledby="modal-headline"
                         >
                           <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                            <div className="sm:flex sm:items-start">
+                            <div className="sm:flex  sm:items-start">
                               <div className="w-full max-w-lg">
                                 <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
                                   <span>Request BY</span>
                                 </div>
                                 <div class="flex flex-wrap -mx-3 ">
-                                  <div class="w-full px-1">
+                                  <div class="w-full  px-3 mb-3 md:mb-0">
                                     <label
                                       class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                      for="grid-first-name"
+                                      for="grid-city"
                                     >
-                                      Nama PIC Operator
+                                      Nama PIC
                                     </label>
                                     <div
-                                      class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                      class="appearance-none block w-full  bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                       type="text"
                                     >
                                       {" "}
                                       {selectedItem.Nama}{" "}
                                     </div>
                                   </div>
-                                </div>
-
-                                <div class="flex flex-wrap -mx-3 ">
-                                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                  <div class="w-full px-3 flex space-x-3 mb-3 md:mb-0">
+                                    <div className="flex flex-col">
                                     <label
                                       class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                       for="grid-city"
@@ -491,8 +456,8 @@ const RepairReport = () => {
                                       {" "}
                                       {selectedItem.Line}{" "}
                                     </div>
-                                  </div>
-                                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                    </div>
+                                    <div className="flex flex-col">
                                     <label
                                       class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                       for="grid-city"
@@ -506,8 +471,8 @@ const RepairReport = () => {
                                       {" "}
                                       {selectedItem.Area}{" "}
                                     </div>
-                                  </div>
-                                  <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                    </div>
+                                    <div className="flex flex-col">
                                     <label
                                       class="block uppercase tracking-wide  text-gray-700 text-xs font-bold mb-2"
                                       for="grid-city"
@@ -521,19 +486,19 @@ const RepairReport = () => {
                                       {" "}
                                       {selectedItem.Station}{" "}
                                     </div>
+                                    </div>
                                   </div>
-                                </div>
-
-                                <div class="flex flex-wrap -mx-3 ">
-                                  <div class="w-full px-1">
+                                  
+                            
+                                  <div class="w-full px-3 mb-2 md:mb-0">
                                     <label
-                                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                                      for="grid-password"
+                                      class="block uppercase tracking-wide  text-gray-700 text-xs font-bold mb-2"
+                                      for="grid-city"
                                     >
                                       Problem
                                     </label>
                                     <div
-                                      class="appearance-none block w-full bg-gray-200 text-red-600 border   rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                      class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                       type="text"
                                     >
                                       {" "}
@@ -541,16 +506,45 @@ const RepairReport = () => {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="flex justify-end">
+
+
+
+                                <div className="flex ">
+                                  <a href={QRResponseLink()} >
+                                    {selectedItem.Action === "" && (
+                                      <button
+                                        className="bg-yellow-400 hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded mr-2"
+                                        onClick={() =>
+                                          setSelectedItem(false)
+                                        }
+                                      >
+                                        Respon
+                                      </button>
+                                    )}
+                                    
+                                    {selectedItem.Action === "Responses" && (
+                                      <div
+                                        className="bg-slate-700 flex flex-col  text-white font-mono text-xs py-2 px-4 rounded mr-2"
+                                       
+                                      >
+                                        <span >    Repair PIC : {selectedItem.ResponseName}</span>
+                                        <span>    Start At : {formatDateTimeAPI(selectedItem?.Date) || ""}</span>
+                                      </div>
+                                      
+                                    )}
+
+                                  </a>
+                                  </div>
+                                  <div className="flex justify-end" >
                                   <button
-                                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                    className="bg-red-900  hover:bg-red-900 h-11  text-white font-mono py-2 px-4 rounded mr-2"
                                     onClick={() =>
                                       setSelectedItem(false)
                                     }
                                   >
-                                    CLOSE
+                                    Close
                                   </button>
-                                </div>
+                                  </div>
                               </div>
                             </div>
                           </div>

@@ -39,8 +39,9 @@ import ReturnLeader from "./components/Leader/ReturnLeader.jsx"
 
 import UserMobile from "./components/User/UserMobile.jsx"
 
-import QRDestacker from "./components/QR/Destacker.jsx"
-import QRLeader from "./components/QR/QRLeader.jsx"
+import QROperator from "./components/QR/QROperator.jsx"
+import QRLeader from "./components/QR/QRLeaderTOP.jsx"
+import QRResponseTop from "./components/QR/QRResponsesTop.jsx"
 
 function App() {
   return (
@@ -86,9 +87,9 @@ function App() {
 
         <Route path="QRLeader" element={<QRLeader/>}/>
 
-        <Route path="QRDestacker" element={<QRDestacker/>}/>
+        <Route path="QROperator" element={<QROperator/>}/>
 
-        <Route path="QRDestacker" element={<QRDestacker/>}/>
+        <Route path="QRResponseTop" element={<QRResponseTop/>}/>
         
       </Routes>
     </>

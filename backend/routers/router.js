@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const MTCcontrollers = require("../controller/Maintenance");
+const LDRcontrollers = require("../controller/Leader");
 const QAcontrollers = require("../controller/QA");
 const QCcontrollers = require("../controller/QC");
 const TimeProductioncontrollers = require("../controller/TimeProduction")
@@ -11,11 +12,19 @@ const UMLine1General = require("../controller/UMLine1General")
 const UMLine1BOT = require("../controller/UMLine1BOT")
 const UMLine1BE = require("../controller/UMLine1BE")
 
+
+// lDR
+router.post("/Leader", LDRcontrollers.postRequestLeader);
+router.get("/Leader", LDRcontrollers.getRequestLeader);
+router.put("/Leader", LDRcontrollers.PutAction);
+router.delete("/leader/:id", LDRcontrollers.DeleteReject);
+
 // MTC
+
+router.put("/Maintenance", MTCcontrollers.PutResponseMaintenance);
+
 router.post("/Maintenance", MTCcontrollers.postRequestMaintenance);
-
 router.post("/ReturnMaintenance", MTCcontrollers.postReturnMaintenance);
-
 router.get("/Maintenance", MTCcontrollers.getRequestMaintenance);
 
 router.get("/ReturnMaintenance", MTCcontrollers.getReturnMaintenance);

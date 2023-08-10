@@ -236,7 +236,7 @@ const SmtTop = () => {
     ref8.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusdestackerTop(data);
-      if (data === "Leader") {
+      if (data === "Maintenance") {
         audio.autoplay = true;
         audio.play();
         const link = "http://10.14.81.43:3003/RequestMaintenance";
@@ -262,8 +262,6 @@ const SmtTop = () => {
       } else if (data === "QC") {
         audio.pause();
         audio.currentTime = 0;
-
-
         const link = "http://10.14.81.43:3003/RequestQC";
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-912913885];
@@ -285,7 +283,6 @@ const SmtTop = () => {
             });
         });
       } else if (data === "QA") {
-
         audio.pause();
         audio.currentTime = 0;
         const link = "http://10.14.81.43:3003/RequestQA";
