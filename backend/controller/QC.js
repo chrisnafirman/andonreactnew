@@ -7,11 +7,11 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 
 const postRequestQC = (req, res) => {
-  const { NamaPIC, Area, Line, Station, Kerusakan, Action } = req.body;
+  const { NamaPIC, Area, Line, Station, Kerusakan, Action, Department } = req.body;
 
   db.query(
-    "INSERT INTO qualityc (Nama, Area, Line, Station, Problem, Action) VALUES (?, ?, ?, ?, ?, ?)",
-    [NamaPIC, Area, Line, Station, Kerusakan, Action],
+    "INSERT INTO qualityc (Nama, Area, Line, Station, Problem, Action, Department) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    [NamaPIC, Area, Line, Station, Kerusakan, Action, Department],
     (error, results) => {
       if (error) {
         console.log(error);

@@ -31,7 +31,7 @@ const ReuestLeader = () => {
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT TOP");
-  const [Action, setAction] = useState("Validate");
+  const [Status, setStatus] = useState("Validate");
 
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
@@ -357,7 +357,7 @@ const ReuestLeader = () => {
                         <div className="font-semibold text-left">Station</div>
                       </th>
                       <th className="p-1 w-10">
-                        <div className="font-semibold text-center">Action</div>
+                        <div className="font-semibold text-center">Status</div>
                       </th>
                       <th className="p-1 w-26">
                         <div className="font-semibold text-center">Date</div>
@@ -390,8 +390,8 @@ const ReuestLeader = () => {
                             {item.Station}
                           </div>
                         </td>
-                        <td className="p-5 ">
-                          {item.Action === "" && (
+                        <td className="p-2 ">
+                          {item.Status === "" && (
                             <button
                               onClick={() => setSelectedItem(item)}
                               className="bg-blue-900  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
@@ -399,7 +399,7 @@ const ReuestLeader = () => {
                               <span className="text-xs lg:text-sm">Action</span>
                             </button>
                           )}
-                           {item.Action === "Validate" && (
+                           {item.Status === "Validate" && (
                             <button
                               
                               className="bg-amber-700 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
@@ -476,13 +476,13 @@ const ReuestLeader = () => {
                             <div className="sm:flex sm:items-start">
                               <div className="w-full max-w-lg">
                                 <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                  <span>Request BY</span>
+                                  <span>Request</span>
                                 </div>
                                 {/* ... (Other fields) ... */}
 
                                 {/* Add Validate and Reject buttons */}
                                 <div className="flex justify-between space-x-6 mt-4">
-                                  <a href="http://192.168.101.236:3003/QRLeader">
+                                  <a href="/QRLeaderTop">
                                     <button
                                       className="bg-green-500 flex  hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
 

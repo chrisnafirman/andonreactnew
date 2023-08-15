@@ -25,7 +25,7 @@ function Destacker() {
   const [hasilScanMesin, setHasilScanMesin] = useState("");
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
-  const [Action, setAction] = useState("Responses");
+  const [Status, setStatus] = useState("Responses");
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
@@ -73,14 +73,14 @@ function Destacker() {
 
  
 
-  const submitUpdate = () => {
-    if (!NamaPIC || !Action || !Station) {
+  const submitResponse = () => {
+    if (!NamaPIC || !Status || !Station) {
       alert("Harap isi semua kolom!");
       return;
   }
     const data = {
       Station: Station,
-      Action: Action,
+      Status: Status,
       NamaPIC: NamaPIC,
       Area: Area,
     };
@@ -93,7 +93,7 @@ function Destacker() {
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.236:3001/api/maintenance`, {
+    fetch(`http://192.168.101.236:3001/api/PutResponseMaintenance`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -144,7 +144,7 @@ function Destacker() {
 
 
   const handleButtonClick = () => {
-    submitUpdate();
+    submitResponse();
     // Mengalihkan pengguna ke halaman yang diinginkan
     window.location.href = "/RequestMaintenance"; // Ganti dengan URL halaman tujuan
   };

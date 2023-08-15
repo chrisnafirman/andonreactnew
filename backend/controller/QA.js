@@ -7,11 +7,11 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 
 const postRequestQA = (req, res) => {
-  const { NamaPIC, Area, Line, Station, Kerusakan, Action } = req.body;
+  const { NamaPIC, Area, Line, Station, Kerusakan, Action, Department } = req.body;
 
   db.query(
-    "INSERT INTO qualitya (Nama, Area, Line, Station, Problem, Action) VALUES (?, ?, ?, ?, ?, ?)",
-    [NamaPIC, Area, Line, Station, Kerusakan, Action],
+    "INSERT INTO qualitya (Nama, Area, Line, Station, Problem, Action, Department) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    [NamaPIC, Area, Line, Station, Kerusakan, Action, Department],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -82,9 +82,28 @@ const getValidationQA = (req, res) => {
   });
 };
 
+
+const PutStatus = (req, res) => {
+  const { Status, Station, Area } = req.body;
+
+  db.query(
+    "UPDATE qualitya SET Status = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [Status, Station, Area],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been updated successfully' });
+    }
+  );
+};
+
+
 module.exports = {
   postRequestQA,
   postValidationQA,
   getRequestQA,
   getValidationQA,
+  PutStatus,
 };

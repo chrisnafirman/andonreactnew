@@ -15,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRLeaderTOP() {
+function QRMaintenanceTOP() {
 
 
 
@@ -34,6 +34,7 @@ function QRLeaderTOP() {
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
+  const [Action, setAction] = useState("");
 
   const [
     backgroundColorStatusdestackerTop,
@@ -87,8 +88,8 @@ function QRLeaderTOP() {
 
 
   // QR
-  const submitMaintenance = () => {
-    if (!NamaPIC || !Line || !Area || !Department || !Kerusakan) {
+  const submitQuality = () => {
+    if (!NamaPIC || !Line || !Area || !Department || !Kerusakan || !Action) {
       alert("Harap isi semua kolom!");
       return;
     }
@@ -100,12 +101,12 @@ function QRLeaderTOP() {
       Station: Station,
       Department: Department,
       Kerusakan: Kerusakan,
-
+      Action: Action,
     };
 
-    alert("Laporan Telah Berhasil Di Kirim Ke Team Maintenance ");
+    alert("Laporan Telah Berhasil Di Kirim Ke Team Quality ");
 
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Maintenance");
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set(`${DepartTo}`);
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setStation(null);
     setNamaPIC(null);
@@ -137,11 +138,12 @@ function QRLeaderTOP() {
       Station: Station,
       Status: Status,
       Area: Area,
+      Action: Action,
     };
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.236:3001/api/PutStatusLeader`, {
+    fetch(`http://192.168.101.236:3001/api/PutRepairDoneMaintenance`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -196,18 +198,8 @@ function QRLeaderTOP() {
 
   const OptionsDepartment = [
     { value: "", label: "-- Pilih Depart --" },
-    { value: "PURCHASING,PPIC,MP&L", value2: "others", label: "PURCHASING,PPIC,MP&L" },
-    { value: "PROCESS ENGINEERING", value2: "others", label: "PROCESS ENGINEERING" },
-    { value: "PRODUCT DEVELOPMENT", value2: "others", label: "PRODUCT DEVELOPMENT" },
-    {
-      value: "ADVANCED MANUFACTURING ENGINEERING", value2: "others",
-      label: "ADVANCED MANUFACTURING ENGINEERING",
-    },
-    { value: "QA", value2: "QA", label: "QA" },
     { value: "QC", value2: "QC", label: "QC" },
-    { value: "HRGA & EHS", value2: "others", label: "HRGA & EHS" },
-    { value: "MAINTENANCE & IT", value2: "Maintenance", label: "MAINTENANCE & IT" },
-
+    { value: "QA", value2: "QA", label: "QA" },
   ];
 
   const handleSelectDepartment = (selectedOptionDepartment) => {
@@ -218,10 +210,10 @@ function QRLeaderTOP() {
 
   const handleButtonClick = () => {
     submitUpdate();
-    submitMaintenance();
+    submitQuality();
 
     // Mengalihkan pengguna ke halaman yang diinginkan
-    window.location.href = '/RequestLeader'; // Ganti dengan URL halaman tujuan
+    window.location.href = '/RequestMaintenance'; // Ganti dengan URL halaman tujuan
   };
 
 
@@ -231,7 +223,7 @@ function QRLeaderTOP() {
         {isQRLeader ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-72 text-center sm:block sm:p-0">
+              <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-60 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
                   <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
                 </div>
@@ -253,7 +245,7 @@ function QRLeaderTOP() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Request Repairment</span>
+                          <span>Request Quality</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div className="w-full mt-3 px-3 mb-2 md:mb-0">
@@ -426,9 +418,25 @@ function QRLeaderTOP() {
                             }}
                             required
                           />
-                          <p class="text-gray-600 text-xs italic">
-                            Laporkan Permasalahan Yang Ditemukan
-                          </p>
+                        </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Action
+                          </label>
+                          <input
+                            class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            id="grid-password"
+                            type="text"
+                            placeholder=""
+                            name="Action"
+                            onChange={(e) => {
+                              setAction(e.target.value);
+                            }}
+                            required
+                          />
                         </div>
 
 
@@ -445,7 +453,7 @@ function QRLeaderTOP() {
                           </button>
                         </div>
                       </form>  
-                      <a href="/RequestLeader">  
+                      <a href="/RequestMaintenance">  
                       <button
                             class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                           
@@ -492,4 +500,4 @@ function QRLeaderTOP() {
   )
 }
 
-export default QRLeaderTOP
+export default QRMaintenanceTOP

@@ -59,22 +59,7 @@ const SmtTop = () => {
   const [RVSTop, setRVSTop] = useState("RVS (TOP)");
 
   // Tindakan / Kehadiran
-  const [DestackerTopPressed, setDestackerTopPressed] = useState(false);
-  const timeoutRefDestackerTop = useRef(null);
-  const [LabelTopPressed, setLabelTopPressed] = useState(false);
-  const timeoutRefLabelTop = useRef(null);
-  const [PrinterTopPressed, setPrinterTopPressed] = useState(false);
-  const timeoutRefPrinterTop = useRef(null);
-  const [SpiTopPressed, setSpiTopPressed] = useState(false);
-  const timeoutRefSpiTop = useRef(null);
-  const [PickNPlacePressed, setPickNPlacePressed] = useState(false);
-  const timeoutRefPickNPlace = useRef(null);
-  const [ReflowTopPressed, setReflowTopPressed] = useState(false);
-  const timeoutRefReflowTop = useRef(null);
-  const [AOITopPressed, setAOITopPressed] = useState(false);
-  const timeoutRefAOITop = useRef(null);
-  const [RVSTopPressed, setRVSTopPressed] = useState(false);
-  const timeoutRefRVSTop = useRef(null);
+
   // ----
 
   //BACKGROUND / WARNA KOTAK
@@ -158,6 +143,68 @@ const SmtTop = () => {
     const audio = new Audio("Sound.mp3");
   // ..................................
 
+  const [startTimeDestackerTop, setStartTimeDestackerTop] = useState(null);
+  const [isRunningDestackerTop, setIsRunningDestackerTop] = useState(false);
+  const [TimeDestacker, setTimeDestacker] = useState(null);
+
+ 
+  
+
+  useEffect(() => {
+    const onBeforeUnload = (ev) => {
+      ev.returnValue = "";
+      return "";
+    };
+
+    window.addEventListener("beforeunload", onBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", onBeforeUnload);
+    };
+  }, []);
+
+
+useEffect(() => {
+  let interval;
+
+  if (StatusdestackerTop === 'Leader') {
+    setIsRunningDestackerTop(true);
+    setStartTimeDestackerTop(Date.now());
+
+    interval = setInterval(() => {
+      const currentTime = Date.now();
+      const elapsedTime = currentTime - startTimeDestackerTop;
+
+      const hours = Math.floor(elapsedTime / 3600000);
+      const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+      const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+      const timeString = `${hours} Jam ${minutes} Menit ${seconds} Detik`;
+
+      firebase
+        .database()
+        .ref('/SMTLine1TOP/DestackerTime')
+        .set(timeString);
+
+        setTimeDestacker(timeString);
+    }, 1000);
+  } else if (StatusdestackerTop === 'Go') {
+    setIsRunningDestackerTop(false);
+    clearInterval(interval);
+
+    // Clear startTime when status changes to 'Go'
+    setTimeDestacker(null);
+  }
+
+  return () => {
+    clearInterval(interval);
+  };
+}, [StatusdestackerTop, startTimeDestackerTop]);
+
+  
+
+
+  
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
@@ -1667,217 +1714,7 @@ const SmtTop = () => {
     setFile(e.target.files[0]);
   };
 
-  // Tindakan / Kehadiran
 
-  const handleDestackerTopPress = () => {
-    if (
-      StatusdestackerTop === "Maintenance" ||
-      StatusdestackerTop === "Return Maintenance"
-    ) {
-      setDestackerTopPressed(true);
-      timeoutRefDestackerTop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/Destacker (TOP)").set("Repair");
-        window.location.reload();
-      }, 3000);
-    } else if (StatusdestackerTop === "QA" || StatusdestackerTop === "QC") {
-      setDestackerTopPressed(true);
-      timeoutRefDestackerTop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/Destacker (TOP)").set("Go");
-        firebase.database().ref("StatusLine/SMTLine1").set("Running");
-        window.location.reload();
-      }, 3000);
-    }
-  };
-  const handleDestackerTopRelease = () => {
-    setDestackerTopPressed(false);
-    clearTimeout(timeoutRefDestackerTop.current);
-  };
-
-  const handleLabelTopPress = () => {
-    if (
-      StatuslabelTop === "Maintenance" ||
-      StatuslabelTop === "Return Maintenance"
-    ) {
-      setLabelTopPressed(true);
-      timeoutRefLabelTop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/Label (TOP)").set("Repair");
-        window.location.reload();
-      }, 3000);
-    } else if (StatuslabelTop === "QA" || StatuslabelTop === "QC") {
-      setLabelTopPressed(true);
-      timeoutRefLabelTop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/Label (TOP)").set("Go");
-        firebase.database().ref("StatusLine/SMTLine1").set("Running");
-        window.location.reload();
-      }, 3000);
-    }
-  };
-  const handleLabelTopRelease = () => {
-    setLabelTopPressed(false);
-    clearTimeout(timeoutRefLabelTop.current);
-  };
-
-  const handlePrinterTopPress = () => {
-    if (
-      StatusPrinterTop === "Maintenance" ||
-      StatusPrinterTop === "Return Maintenance"
-    ) {
-      setPrinterTopPressed(true);
-      timeoutRefPrinterTop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/Printer (TOP)").set("Repair");
-        window.location.reload();
-      }, 3000);
-    } else if (StatusPrinterTop === "QA" || StatusPrinterTop === "QC") {
-      setPrinterTopPressed(true);
-      timeoutRefPrinterTop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/Printer (TOP)").set("Go");
-        firebase.database().ref("StatusLine/SMTLine1").set("Running");
-        window.location.reload();
-      }, 3000);
-    }
-  };
-  const handlePrinterTopRelease = () => {
-    setPrinterTopPressed(false);
-    clearTimeout(timeoutRefPrinterTop.current);
-  };
-
-  const handleSpiTopPress = () => {
-    if (
-      StatusSpiTop === "Maintenance" ||
-      StatusSpiTop === "Return Maintenance"
-    ) {
-      setSpiTopPressed(true);
-      timeoutRefSpiTop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/Spi (TOP)").set("Repair");
-        window.location.reload();
-      }, 3000);
-    } else if (StatusSpiTop === "QA" || StatusSpiTop === "QC") {
-      setSpiTopPressed(true);
-      timeoutRefSpiTop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/Spi (TOP)").set("Go");
-        firebase.database().ref("StatusLine/SMTLine1").set("Running");
-        window.location.reload();
-      }, 3000);
-    }
-  };
-  const handleSpiTopRelease = () => {
-    setSpiTopPressed(false);
-    clearTimeout(timeoutRefSpiTop.current);
-  };
-
-  const handlePickNPlacePress = () => {
-    if (
-      StatusPickNPlace === "Maintenance" ||
-      StatusPickNPlace === "Return Maintenance"
-    ) {
-      setPickNPlacePressed(true);
-      timeoutRefPickNPlace.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/Pick&Place (TOP)").set("Repair");
-        window.location.reload();
-      }, 3000);
-    } else if (StatusPickNPlace === "QA" || StatusPickNPlace === "QC") {
-      setPickNPlacePressed(true);
-      timeoutRefPickNPlace.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/Pick&Place (TOP)").set("Go");
-        firebase.database().ref("StatusLine/SMTLine1").set("Running");
-        window.location.reload();
-      }, 3000);
-    }
-  };
-  const handlePickNPlaceRelease = () => {
-    setPickNPlacePressed(false);
-    clearTimeout(timeoutRefPickNPlace.current);
-  };
-
-  const handleReflowTopPress = () => {
-    if (
-      StatusReflowTop === "Maintenance" ||
-      StatusReflowTop === "Return Maintenance"
-    ) {
-      setReflowTopPressed(true);
-      timeoutRefReflowTop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/Reflow (TOP)").set("Repair");
-        window.location.reload();
-      }, 3000);
-    } else if (StatusReflowTop === "QA" || StatusReflowTop === "QC") {
-      setReflowTopPressed(true);
-      timeoutRefReflowTop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/Reflow (TOP)").set("Go");
-        firebase.database().ref("StatusLine/SMTLine1").set("Running");
-        window.location.reload();
-      }, 3000);
-    }
-  };
-  const handleReflowTopRelease = () => {
-    setReflowTopPressed(false);
-    clearTimeout(timeoutRefReflowTop.current);
-  };
-
-  const handleAOITopPress = () => {
-    if (
-      StatusAOITop === "Maintenance" ||
-      StatusAOITop === "Return Maintenance"
-    ) {
-      setAOITopPressed(true);
-      timeoutRefAOITop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/AOI (TOP)").set("Repair");
-        window.location.reload();
-      }, 3000);
-    } else if (StatusAOITop === "QA" || StatusAOITop === "QC") {
-      setAOITopPressed(true);
-      timeoutRefAOITop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/AOI (TOP)").set("Go");
-        firebase.database().ref("StatusLine/SMTLine1").set("Running");
-        window.location.reload();
-      }, 3000);
-    }
-  };
-  const handleAOITopRelease = () => {
-    setAOITopPressed(false);
-    clearTimeout(timeoutRefAOITop.current);
-  };
-
-  const handleRVSTopPress = () => {
-    if (
-      StatusRVSTop === "Maintenance" ||
-      StatusRVSTop === "Return Maintenance"
-    ) {
-      setRVSTopPressed(true);
-      timeoutRefRVSTop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/RVS (TOP)").set("Repair");
-        window.location.reload();
-      }, 3000);
-    } else if (StatusRVSTop === "QA" || StatusRVSTop === "QC") {
-      setRVSTopPressed(true);
-      timeoutRefRVSTop.current = setTimeout(() => {
-        // Kode yang dijalankan setelah tombol ditekan selama 3 detik
-        firebase.database().ref("SMTLine1TOP/RVS (TOP)").set("Go");
-        firebase.database().ref("StatusLine/SMTLine1").set("Running");
-        window.location.reload();
-      }, 3000);
-    }
-  };
-  const handleRVSTopRelease = () => {
-    setRVSTopPressed(false);
-    clearTimeout(timeoutRefRVSTop.current);
-  };
-
-  // ------
 
   const handleCall = () => {
     window.location.href = "https://api.whatsapp.com/send?phone=6281380996094";
@@ -2192,11 +2029,6 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    onMouseDown={handleDestackerTopPress}
-                    onMouseUp={handleDestackerTopRelease}
-                    onMouseLeave={handleDestackerTopRelease}
-                    onTouchStart={handleDestackerTopPress}
-                    onTouchEnd={handleDestackerTopRelease}
                     style={{
                       backgroundColor: backgroundColorStatusdestackerTop,
                     }}
@@ -2233,11 +2065,6 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    onMouseDown={handleLabelTopPress}
-                    onMouseUp={handleLabelTopRelease}
-                    onMouseLeave={handleLabelTopRelease}
-                    onTouchStart={handleLabelTopPress}
-                    onTouchEnd={handleLabelTopRelease}
                     style={{ backgroundColor: backgroundColorStatuslabelTop }}
                     value={StatuslabelTop}
                     onClick={() => {
@@ -2272,11 +2099,6 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    onMouseDown={handlePrinterTopPress}
-                    onMouseUp={handlePrinterTopRelease}
-                    onMouseLeave={handlePrinterTopRelease}
-                    onTouchStart={handlePrinterTopPress}
-                    onTouchEnd={handlePrinterTopRelease}
                     style={{ backgroundColor: backgroundColorStatusPrinterTop }}
                     value={StatusPrinterTop}
                     onClick={() => {
@@ -2311,11 +2133,7 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    onMouseDown={handleSpiTopPress}
-                    onMouseUp={handleSpiTopRelease}
-                    onMouseLeave={handleSpiTopRelease}
-                    onTouchStart={handleSpiTopPress}
-                    onTouchEnd={handleSpiTopRelease}
+              
                     style={{ backgroundColor: backgroundColorStatusSpiTop }}
                     value={StatusSpiTop}
                     onClick={() => {
@@ -2353,11 +2171,7 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    onMouseDown={handlePickNPlacePress}
-                    onMouseUp={handlePickNPlaceRelease}
-                    onMouseLeave={handlePickNPlaceRelease}
-                    onTouchStart={handlePickNPlacePress}
-                    onTouchEnd={handlePickNPlaceRelease}
+        
                     style={{ backgroundColor: backgroundColorStatusPickNPlace }}
                     value={StatusPickNPlace}
                     onClick={() => {
@@ -2392,11 +2206,7 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    onMouseDown={handleReflowTopPress}
-                    onMouseUp={handleReflowTopRelease}
-                    onMouseLeave={handleReflowTopRelease}
-                    onTouchStart={handleReflowTopPress}
-                    onTouchEnd={handleReflowTopRelease}
+      
                     style={{ backgroundColor: backgroundColorStatusReflowTop }}
                     value={StatusReflowTop}
                     onClick={() => {
@@ -2431,11 +2241,7 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    onMouseDown={handleAOITopPress}
-                    onMouseUp={handleAOITopRelease}
-                    onMouseLeave={handleAOITopRelease}
-                    onTouchStart={handleAOITopPress}
-                    onTouchEnd={handleAOITopRelease}
+            
                     style={{ backgroundColor: backgroundColorStatusAOITop }}
                     value={StatusAOITop}
                     onClick={() => {
@@ -2468,11 +2274,7 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    onMouseDown={handleRVSTopPress}
-                    onMouseUp={handleRVSTopRelease}
-                    onMouseLeave={handleRVSTopRelease}
-                    onTouchStart={handleRVSTopPress}
-                    onTouchEnd={handleRVSTopRelease}
+    
                     style={{ backgroundColor: backgroundColorStatusRVSTop }}
                     value={StatusRVSTop}
                     onClick={() => {

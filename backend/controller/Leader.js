@@ -18,12 +18,12 @@ const postRequestLeader = (req, res) => {
 };
 
 
-const PutAction = (req, res) => {
-  const { Action, Station, Area } = req.body;
+const PutStatus = (req, res) => {
+  const { Status, Station, Area } = req.body;
 
   db.query(
-    "UPDATE leader SET Action = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
-    [Action, Station, Area],
+    "UPDATE leader SET Status = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [Status, Station, Area],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -69,7 +69,7 @@ const DeleteReject = (req, res) => {
 module.exports = {
   postRequestLeader,
   getRequestLeader,
-  PutAction,
+  PutStatus,
   DeleteReject,
 
 };

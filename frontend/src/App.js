@@ -40,7 +40,9 @@ import ReturnLeader from "./components/Leader/ReturnLeader.jsx"
 import UserMobile from "./components/User/UserMobile.jsx"
 
 import QROperator from "./components/QR/QROperator.jsx"
-import QRLeader from "./components/QR/QRLeaderTOP.jsx"
+import QRLeaderTop from "./components/QR/QRLeaderTOP.jsx"
+import QRValidationQA from "./components/QR/QRValidationQA.jsx"
+import QRMaintenanceTop from "./components/QR/QRMaintenanceTOP.jsx"
 import QRResponseTop from "./components/QR/QRResponsesTop.jsx"
 
 function App() {
@@ -85,11 +87,12 @@ function App() {
 
         <Route path="UserMobile" element={<UserMobile/>}/>
 
-        <Route path="QRLeader" element={<QRLeader/>}/>
-
+        <Route path="QRLeaderTop" element={<QRLeaderTop/>}/>
+        <Route path="QRLeaderTop" element={<QRLeaderTop/>}/>
         <Route path="QROperator" element={<QROperator/>}/>
-
+        <Route path="QRMaintenanceTop" element={<QRMaintenanceTop/>}/>
         <Route path="QRResponseTop" element={<QRResponseTop/>}/>
+        <Route path="QRValidationQA" element={<QRValidationQA/>}/>
         
       </Routes>
     </>

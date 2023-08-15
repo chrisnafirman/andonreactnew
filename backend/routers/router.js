@@ -16,22 +16,21 @@ const UMLine1BE = require("../controller/UMLine1BE")
 // lDR
 router.post("/Leader", LDRcontrollers.postRequestLeader);
 router.get("/Leader", LDRcontrollers.getRequestLeader);
-router.put("/Leader", LDRcontrollers.PutAction);
+router.put("/PutStatusLeader", LDRcontrollers.PutStatus);
 router.delete("/leader/:id", LDRcontrollers.DeleteReject);
 
 // MTC
 
-router.put("/Maintenance", MTCcontrollers.PutResponseMaintenance);
-
 router.post("/Maintenance", MTCcontrollers.postRequestMaintenance);
-router.post("/ReturnMaintenance", MTCcontrollers.postReturnMaintenance);
 router.get("/Maintenance", MTCcontrollers.getRequestMaintenance);
-
+router.put("/PutResponseMaintenance", MTCcontrollers.PutResponseMaintenance);
+router.put("/PutRepairDoneMaintenance", MTCcontrollers.PutRepairDone);
+router.post("/ReturnMaintenance", MTCcontrollers.postReturnMaintenance);
 router.get("/ReturnMaintenance", MTCcontrollers.getReturnMaintenance);
 
 // QA
 router.post("/QA", QAcontrollers.postRequestQA);
-
+router.put("/PutStatusQA", QAcontrollers.PutStatus);
 router.post("/ValidationQA", QAcontrollers.postValidationQA);
 
 router.get("/QA", QAcontrollers.getRequestQA);

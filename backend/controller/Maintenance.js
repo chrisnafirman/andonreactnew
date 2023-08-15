@@ -34,11 +34,27 @@ const postReturnMaintenance = (req, res) => {
 };
 
 const PutResponseMaintenance = (req, res) => {
-  const { NamaPIC, Action, Station, Area} = req.body;
+  const { NamaPIC, Status, Station, Area} = req.body;
 
   db.query(
-    "UPDATE maintenance SET ResponseName = ?, Action = ?, ResponseTime = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
-    [NamaPIC, Action, Station, Area],
+    "UPDATE maintenance SET ResponseName = ?, Status = ?, ResponseTime = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [NamaPIC, Status, Station, Area],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been updated successfully' });
+    }
+  );
+};
+
+const PutRepairDone = (req, res) => {
+  const {Status, Station, Area} = req.body;
+
+  db.query(
+    "UPDATE maintenance SET Status = ?, ResponseDone = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [Status, Station, Area],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -73,4 +89,5 @@ module.exports = {
   getRequestMaintenance,
   getReturnMaintenance,
   PutResponseMaintenance,
+  PutRepairDone,
 };
