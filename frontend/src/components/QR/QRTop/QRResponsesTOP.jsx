@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import Select from "react-select";
-import QRScannerPopup from "./QR";
+import QRScannerPopup from "../QR";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
@@ -17,7 +17,7 @@ function Destacker() {
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
-  const [Area, setArea] = useState("SMT TOP");
+  // const [Area, setArea] = useState("SMT TOP");
   const [isQRLeader, setIsQRLeader] = useState(true);
   const [DestackerTop, setDestackerTop] = useState("Destacker (TOP)");
   const [StatusdestackerTop, setStatusdestackerTop] = useState("");
@@ -25,7 +25,8 @@ function Destacker() {
   const [hasilScanMesin, setHasilScanMesin] = useState("");
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
-  const [Status, setStatus] = useState("Responses");
+  const [Status, setStatus] = useState("Repair");
+  const [Area, setArea] = useState("SMT TOP");
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
@@ -177,7 +178,7 @@ function Destacker() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Responses</span>
+                          <span>Repair</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div className="w-full mt-1 px-3 mb-3 md:mb-0">
@@ -448,7 +449,7 @@ function Destacker() {
                             type="button"
                             onClick={handleButtonClick}
                           >
-                            Responses
+                            Repair Top
                           </button>
                         </div>
                       </form>

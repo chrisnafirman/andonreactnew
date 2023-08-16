@@ -30,8 +30,8 @@ router.get("/ReturnMaintenance", MTCcontrollers.getReturnMaintenance);
 
 // QA
 router.post("/QA", QAcontrollers.postRequestQA);
-router.put("/PutStatusQA", QAcontrollers.PutStatus);
-router.post("/ValidationQA", QAcontrollers.postValidationQA);
+router.put("/PutValidationQA", QAcontrollers.PutValidationQA);
+router.put("/PutFileValidationQA", QAcontrollers.PutFileValidationQA);
 
 router.get("/QA", QAcontrollers.getRequestQA);
 

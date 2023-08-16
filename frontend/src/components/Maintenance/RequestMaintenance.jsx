@@ -35,7 +35,7 @@ const RepairReport = () => {
  const [Department, setDepartment] = useState("Maintenance & IT");
  const [DepartTo, setDepartTo] = useState("");
   const [StatusLine, setStatusLine] = useState("");
-  const [Status, setStatus] = useState("Validate");
+  const [Status, setStatus] = useState("Closed");
   
   const [selectedOptionDepartment, setSelectedOptionDepartment] =
     useState(null);
@@ -475,20 +475,20 @@ const submitUpdate = () => {
                           {item.Status === "" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-blue-900  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                              className="bg-green-600  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                             >
-                              <span className="text-xs lg:text-sm">Action</span>
+                              <span className="text-xs lg:text-sm">Open</span>
                             </button>
                           )}
-                          {item.Status === "Validate" && (
+                          {item.Status === "Closed" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-green-500 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                              className="bg-red-600 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
-                              <span className="text-xs lg:text-sm">Validate</span>
+                              <span className="text-xs lg:text-sm">Closed</span>
                             </button>
                           )}
-                          {item.Status === "Responses" && (
+                          {item.Status === "Repair" && (
                             <button
                               onClick={() => setSelectedItem(item)}
                               className="bg-yellow-500 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
@@ -658,11 +658,11 @@ const submitUpdate = () => {
                                           setSelectedItem(false)
                                         }
                                       >
-                                        Respon
+                                        Repair
                                       </button>
                                     )}
 
-                                    {selectedItem.Status === "Responses" && (
+                                    {selectedItem.Status === "Repair" && (
                                       <div className="flex space-x-32">
                                         <div
                                           className="bg-lime-600 flex flex-col  text-white font-mono text-xs py-2 px-4 rounded mr-16"
@@ -737,7 +737,7 @@ const submitUpdate = () => {
 
                                     )}
 
-                                    {selectedItem.Status === "Validate" && (
+                                    {selectedItem.Status === "Closed" && (
                                       <div
                                         className="bg-slate-900 flex flex-col  text-white font-mono text-xs py-2 px-4 rounded mr-2"
 

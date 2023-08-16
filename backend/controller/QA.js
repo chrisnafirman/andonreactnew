@@ -6,21 +6,6 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
 
-const postRequestQA = (req, res) => {
-  const { NamaPIC, Area, Line, Station, Kerusakan, Action, Department } = req.body;
-
-  db.query(
-    "INSERT INTO qualitya (Nama, Area, Line, Station, Problem, Action, Department) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [NamaPIC, Area, Line, Station, Kerusakan, Action, Department],
-    (error, results) => {
-      if (error) {
-        console.log(error);
-        return res.status(500).json({ message: 'Internal server error' });
-      }
-      res.status(200).json({ message: 'Data has been added successfully' });
-    }
-  );
-};
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -39,34 +24,75 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-const postValidationQA = (req, res) => {
+const PutFileValidationQA = (req, res) => {
   upload.single("validation")(req, res, (error) => {
     if (error) {
-      console.log(error);
-      return res.status(500).json({ message: "Internal server error" });
+      console.error(error);
+      return res.status(500).json({ message: "Error during upload", error: error.message });
     }
 
-    const { NamaPIC, Area, Line, Station } = req.body;
+    console.log("File uploaded successfully:", req.file); // Log the uploaded file
+
+    const { Status, No } = req.body;
     let Validation = null;
 
     if (req.file) {
-      // Jika ada file 'validation', ambil path-nya dan ubah ke format yang diinginkan
       Validation = req.file.path.replace(/\\/g, "/").substring(7);
     }
 
     db.query(
-      "INSERT INTO validationqa(Nama, Area, Line, Station, validation) VALUES (?, ?, ?, ?, ?)",
-      [NamaPIC, Area, Line, Station, Validation],
+      "UPDATE qualitya SET Status = ?, validation = ? WHERE No = ?",
+      [Status, Validation, No],
       (error, results) => {
         if (error) {
-          console.log(error);
+          console.error(error);
           return res.status(500).json({ message: "Internal server error" });
         }
-        res.status(200).json({ message: "Data has been added successfully" });
+        res.status(200).json({ message: "Data has been updated successfully" });
       }
     );
   });
 };
+
+
+
+const PutValidationQA = (req, res) => {
+  const { Status, NamaPIC, Desc, Station, Area } = req.body;
+
+  db.query(
+    "UPDATE qualitya SET Status = ?, ValidationName = ?, ValidationDescription = ?, ValidationDate = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [Status, NamaPIC, Desc, Station, Area],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been updated successfully' });
+    }
+  );
+};
+
+
+
+const postRequestQA = (req, res) => {
+  const { NamaPIC, Area, Line, Station, Kerusakan, Action, Department } = req.body;
+
+  db.query(
+    "INSERT INTO qualitya (Nama, Area, Line, Station, Problem, Action, Department) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    [NamaPIC, Area, Line, Station, Kerusakan, Action, Department],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been added successfully' });
+    }
+  );
+};
+
+
+
+
 
 const getRequestQA = (req, res) => {
   const sqlSelect = "SELECT * FROM qualitya";
@@ -83,27 +109,16 @@ const getValidationQA = (req, res) => {
 };
 
 
-const PutStatus = (req, res) => {
-  const { Status, Station, Area } = req.body;
 
-  db.query(
-    "UPDATE qualitya SET Status = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
-    [Status, Station, Area],
-    (error, results) => {
-      if (error) {
-        console.log(error);
-        return res.status(500).json({ message: 'Internal server error' });
-      }
-      res.status(200).json({ message: 'Data has been updated successfully' });
-    }
-  );
-};
+
+
+
 
 
 module.exports = {
   postRequestQA,
-  postValidationQA,
   getRequestQA,
   getValidationQA,
-  PutStatus,
+  PutValidationQA,
+  PutFileValidationQA,
 };
