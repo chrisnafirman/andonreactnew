@@ -16,35 +16,38 @@ const UMLine1BE = require("../controller/UMLine1BE")
 // lDR
 router.post("/Leader", LDRcontrollers.postRequestLeader);
 router.get("/Leader", LDRcontrollers.getRequestLeader);
-router.put("/PutStatusLeader", LDRcontrollers.PutStatus);
+router.put("/PutStatusLeader", LDRcontrollers.PutStatusLeader);
 router.delete("/leader/:id", LDRcontrollers.DeleteReject);
 
 // MTC
 
 router.post("/Maintenance", MTCcontrollers.postRequestMaintenance);
 router.get("/Maintenance", MTCcontrollers.getRequestMaintenance);
-router.put("/PutResponseMaintenance", MTCcontrollers.PutResponseMaintenance);
-router.put("/PutRepairDoneMaintenance", MTCcontrollers.PutRepairDone);
 router.post("/ReturnMaintenance", MTCcontrollers.postReturnMaintenance);
 router.get("/ReturnMaintenance", MTCcontrollers.getReturnMaintenance);
+
+
+router.put("/PutResponseMaintenance", MTCcontrollers.PutResponseMaintenance);
+router.put("/PutRepairDoneMaintenance", MTCcontrollers.PutRepairDoneMaintenance);
+
+router.put("/PutReturnResponseMaintenance", MTCcontrollers.PutReturnResponseMaintenance);
+router.put("/PutReturnRepairDoneMaintenance", MTCcontrollers.PutReturnRepairDoneMaintenance);
+
+
 
 // QA
 router.post("/QA", QAcontrollers.postRequestQA);
 router.put("/PutValidationQA", QAcontrollers.PutValidationQA);
+router.put("/PutReturnQA", QAcontrollers.PutReturnQA);
 router.put("/PutFileValidationQA", QAcontrollers.PutFileValidationQA);
-
 router.get("/QA", QAcontrollers.getRequestQA);
-
 router.get("/ValidationQA", QAcontrollers.getValidationQA);
 
 
 // QC
 router.post("/QC", QCcontrollers.postRequestQC);
-
 router.post("/ValidationQC", QCcontrollers.postValidationQC);
-
 router.get("/QC", QCcontrollers.getRequestQC);
-
 router.get("/ValidationQC", QCcontrollers.getValidationQC);
 
 

@@ -21,7 +21,7 @@ const RequestQA = () => {
   const [isOpenAction, setisOpenAction] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [IsOpenValidation, setIsOpenValidation] = useState(false);
-
+  const [IsOpenReturn, setIsOpenReturn] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -356,21 +356,30 @@ const RequestQA = () => {
                               <span className="text-xs lg:text-sm">Open</span>
                             </button>
                           )}
-                          {item.Status === "Closed" && (
+                          {item.Status === "Valid" && (
                             <button
                               onClick={() => {
                                 setSelectedItem(item)
 
                               }}
-                              className="bg-red-600 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                              className="bg-green-600 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                             >
-                              <span className="text-xs lg:text-sm">Closed</span>
+                              <span className="text-xs lg:text-sm">Valid</span>
+                            </button>
+                          )}
+                          {item.Status === "Return" && (
+                            <button
+                              onClick={() => {
+                                setSelectedItem(item)
+                                setIsOpenReturn(item)
+                              }}
+                              className="bg-orange-800 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                            >
+                              <span className="text-xs lg:text-sm">Return</span>
                             </button>
                           )}
                         </td>
-
-
-
+                        
 
 
                         <td className="p-2">
@@ -537,19 +546,19 @@ const RequestQA = () => {
                                   <a>
                                     {selectedItem.Status === "" && (
                                       <button
-                                        className="bg-green-600 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded mr-2"
+                                        className="bg-blue-900 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded mr-2"
                                         onClick={() => {
                                           setisOpenAction(true);
                                         }}
                                       >
-                                        Action
+                                        Open
                                       </button>
                                     )}
 
-                                    {selectedItem.Status === "Closed" && (
+                                    {selectedItem.Status === "Valid" && (
                                       <div className="flex space-x-32">
                                         <button
-                                          className="bg-green-700 bg-green-600 text-white font-bold py-2 px-4 rounded mr-2"
+                                          className="bg-green-700  text-white font-bold py-2 px-4 rounded mr-2"
                                           onClick={() => {
                                             setIsOpenValidation(true);
                                           }}
@@ -559,6 +568,8 @@ const RequestQA = () => {
                                       </div >
 
                                     )}
+
+
 
 
 
@@ -697,7 +708,80 @@ const RequestQA = () => {
 
 
                                     <div className="flex justify-end" >
-                                      
+
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    )}
+
+                    {IsOpenReturn && (
+                      <>
+                        <div className="fixed z-10 inset-0 overflow-y-auto">
+                          <div className="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-[800px] text-center sm:block sm:p-0">
+                            <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                            <div
+                              className="inline-block align-bottom bg-green-700 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                              role="dialog"
+                              aria-modal="true"
+                              aria-labelledby="modal-headline"
+                            >
+                              <div className="bg-orange-800 px-4 pt-1 pb-4 w-[500px]  lg:w-full sm:p-6 sm:pb-4">
+                                <div className="sm:flex sm:items-start">
+                                  {/* Close button */}
+                                  <button
+                                    className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
+                                    onClick={() =>{
+                                      setSelectedItem(false)
+                                    }}
+                                  >
+                                    <svg
+                                      className="w-6 h-6"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      viewBox="0 0 24 24"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                      />
+                                    </svg>
+                                  </button>
+                                  <div className="w-full max-w-lg">
+                                    <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
+                                      <span>Return To </span>
+                                    </div>
+                                    <div class="flex flex-wrap w-full -mx-3 ">
+                                      <div class="w-full  px-3 mb-3 md:mb-0">
+                                        <label
+                                          class="block uppercase tracking-wide w-full text-black text-xs font-bold mb-2"
+                                          for="grid-city"
+                                        >
+                                          Department
+                                        </label>
+                                        <div
+                                          class="appearance-none block w-full  bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                          type="text"
+                                        >
+                                          {" "}
+                                          {selectedItem.ReturnDepartment}{" "}
+                                        </div>
+                                      </div>
+
+                                    
+                                    </div>
+
+
+                                    <div className="flex justify-end" >
+
 
                                     </div>
                                   </div>
@@ -772,14 +856,16 @@ const RequestQA = () => {
                               </span>
                             </button>
                           </a>
-                          <button
-                            className="bg-red-500  w-36 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                            onClick={() => {
-                              //  handleDelete();
-                            }}
-                          >
-                            Return
-                          </button>
+                          <a href="/QRReturnQATOP">
+                            <button
+                              className="bg-red-500  w-36 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                              onClick={() => {
+                                //  handleDelete();
+                              }}
+                            >
+                              Return
+                            </button>
+                          </a>
                         </div>
                       </div>
                     </div>

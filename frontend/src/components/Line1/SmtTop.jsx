@@ -140,15 +140,15 @@ const SmtTop = () => {
   const [selectedOptionTeamQuality, setSelectedOptionTeamQuality] =
     useState(null);
 
-    const audio = new Audio("Sound.mp3");
+  const audio = new Audio("Sound.mp3");
   // ..................................
 
   const [startTimeDestackerTop, setStartTimeDestackerTop] = useState(null);
   const [isRunningDestackerTop, setIsRunningDestackerTop] = useState(false);
   const [TimeDestacker, setTimeDestacker] = useState(null);
 
- 
-  
+
+
 
   useEffect(() => {
     const onBeforeUnload = (ev) => {
@@ -164,47 +164,47 @@ const SmtTop = () => {
   }, []);
 
 
-useEffect(() => {
-  let interval;
+  useEffect(() => {
+    let interval;
 
-  if (StatusdestackerTop === 'Leader') {
-    setIsRunningDestackerTop(true);
-    setStartTimeDestackerTop(Date.now());
+    if (StatusdestackerTop === 'Leader') {
+      setIsRunningDestackerTop(true);
+      setStartTimeDestackerTop(Date.now());
 
-    interval = setInterval(() => {
-      const currentTime = Date.now();
-      const elapsedTime = currentTime - startTimeDestackerTop;
+      interval = setInterval(() => {
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - startTimeDestackerTop;
 
-      const hours = Math.floor(elapsedTime / 3600000);
-      const minutes = Math.floor((elapsedTime % 3600000) / 60000);
-      const seconds = Math.floor((elapsedTime % 60000) / 1000);
+        const hours = Math.floor(elapsedTime / 3600000);
+        const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+        const seconds = Math.floor((elapsedTime % 60000) / 1000);
 
-      const timeString = `${hours} Jam ${minutes} Menit ${seconds} Detik`;
+        const timeString = `${hours} Jam ${minutes} Menit ${seconds} Detik`;
 
-      firebase
-        .database()
-        .ref('/SMTLine1TOP/DestackerTime')
-        .set(timeString);
+        firebase
+          .database()
+          .ref('/SMTLine1TOP/DestackerTime')
+          .set(timeString);
 
         setTimeDestacker(timeString);
-    }, 1000);
-  } else if (StatusdestackerTop === 'Go') {
-    setIsRunningDestackerTop(false);
-    clearInterval(interval);
+      }, 1000);
+    } else if (StatusdestackerTop === 'Go') {
+      setIsRunningDestackerTop(false);
+      clearInterval(interval);
 
-    // Clear startTime when status changes to 'Go'
-    setTimeDestacker(null);
-  }
+      // Clear startTime when status changes to 'Go'
+      setTimeDestacker(null);
+    }
 
-  return () => {
-    clearInterval(interval);
-  };
-}, [StatusdestackerTop, startTimeDestackerTop]);
-
-  
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusdestackerTop, startTimeDestackerTop]);
 
 
-  
+
+
+
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
@@ -283,7 +283,7 @@ useEffect(() => {
     ref8.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusdestackerTop(data);
-      if (data === "Maintenance") {
+      if (data === "MAINTENANCE & IT") {
         audio.autoplay = true;
         audio.play();
         const link = "http://10.14.81.43:3003/RequestMaintenance";
@@ -352,7 +352,7 @@ useEffect(() => {
               console.error(error);
             });
         });
-      }else if (data === "Go") {
+      } else if (data === "Go") {
         audio.pause();
       }
     });
@@ -361,7 +361,7 @@ useEffect(() => {
     ref9.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatuslabelTop(data);
-      if (data === "Maintenance") {
+      if (data === "MAINTENANCE & IT") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
@@ -476,7 +476,7 @@ useEffect(() => {
     ref18.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusPrinterTop(data);
-      if (data === "Maintenance") {
+      if (data === "MAINTENANCE & IT") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
@@ -591,7 +591,7 @@ useEffect(() => {
     ref19.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusSpiTop(data);
-      if (data === "Maintenance") {
+      if (data === "MAINTENANCE & IT") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
@@ -706,7 +706,7 @@ useEffect(() => {
     ref20.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusPickNPlace(data);
-      if (data === "Maintenance") {
+      if (data === "MAINTENANCE & IT") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
@@ -821,7 +821,7 @@ useEffect(() => {
     ref21.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusReflowTop(data);
-      if (data === "Maintenance") {
+      if (data === "MAINTENANCE & IT") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
@@ -936,7 +936,7 @@ useEffect(() => {
     ref22.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusAOITop(data);
-      if (data === "Maintenance") {
+      if (data === "MAINTENANCE & IT") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
@@ -1051,7 +1051,7 @@ useEffect(() => {
     ref23.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusRVSTop(data);
-      if (data === "Maintenance") {
+      if (data === "MAINTENANCE & IT") {
         const audio = new Audio("Sound.mp3");
         audio.autoplay = true;
         audio.play();
@@ -1309,185 +1309,377 @@ useEffect(() => {
   const updateStatusdestackerTop = (data) => {
     setStatusdestackerTop(data);
     setBackgroundColorStatusdestackerTop(
-      data === "Go"
-        ? "#31A207"
+          data === "Go"
+        ? "rgb(54, 83, 20)"
         : data === "Repair"
           ? "#E9CE08"
           : data === "Leader"
-            ? "#C00000"
-            : data === "Maintenance"
-              ? "#be4f62"
-              : data === "Return Maintenance"
-                ? "#be4f62"
-                : data === "PPIC"
-                  ? "#7A6544"
-                  : data === "QA"
-                    ? "#93C2C4"
-                    : data === "QC"
-                      ? "#BDD0D1"
-                      : "#565454"
-                      
+          ? "#C00000"
+          : data === "Return Leader"
+          ? "#C00000"
+          : data === "HRGA & EHS"
+            ? "#A61D00"
+            : data === "Return HRGA & EHS"
+            ? "#A61D00"
+            : data === "PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "Return PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "Return PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "Return PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "QA"
+                      ? "#93C2C4"
+                      : data === "Return QA"
+                      ? "#93C2C4"
+                      : data === "QC"
+                        ? "#BDD0D1"
+                        : data === "Return QC"
+                        ? "#BDD0D1"
+                        : data === "MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : data === "Return MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : "#565454"
+
     );
   };
 
   const updateStatuslabelTop = (data) => {
     setStatuslabelTop(data);
     setBackgroundColorStatuslabelTop(
-      data === "Go"
-        ? "#31A207"
+          data === "Go"
+        ? "rgb(54, 83, 20)"
         : data === "Repair"
           ? "#E9CE08"
           : data === "Leader"
-            ? "#C00000"
-            : data === "Maintenance"
-              ? "#be4f62"
-              : data === "Return Maintenance"
-                ? "#be4f62"
-                : data === "PPIC"
-                  ? "#7A6544"
-                  : data === "QA"
-                    ? "#93C2C4"
-                    : data === "QC"
-                      ? "#BDD0D1"
-                      : "#565454"
+          ? "#C00000"
+          : data === "Return Leader"
+          ? "#C00000"
+          : data === "HRGA & EHS"
+            ? "#A61D00"
+            : data === "Return HRGA & EHS"
+            ? "#A61D00"
+            : data === "PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "Return PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "Return PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "Return PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "QA"
+                      ? "#93C2C4"
+                      : data === "Return QA"
+                      ? "#93C2C4"
+                      : data === "QC"
+                        ? "#BDD0D1"
+                        : data === "Return QC"
+                        ? "#BDD0D1"
+                        : data === "MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : data === "Return MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : "#565454"
     );
   };
 
   const updateStatusPrinterTop = (data) => {
     setStatusPrinterTop(data);
     setBackgroundColorStatusPrinterTop(
-      data === "Go"
-        ? "#31A207"
+          data === "Go"
+        ? "rgb(54, 83, 20)"
         : data === "Repair"
           ? "#E9CE08"
           : data === "Leader"
-            ? "#C00000"
-            : data === "Maintenance"
-              ? "#be4f62"
-              : data === "Return Maintenance"
-                ? "#be4f62"
-                : data === "PPIC"
-                  ? "#7A6544"
-                  : data === "QA"
-                    ? "#93C2C4"
-                    : data === "QC"
-                      ? "#BDD0D1"
-                      : "#565454"
+          ? "#C00000"
+          : data === "Return Leader"
+          ? "#C00000"
+          : data === "HRGA & EHS"
+            ? "#A61D00"
+            : data === "Return HRGA & EHS"
+            ? "#A61D00"
+            : data === "PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "Return PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "Return PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "Return PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "QA"
+                      ? "#93C2C4"
+                      : data === "Return QA"
+                      ? "#93C2C4"
+                      : data === "QC"
+                        ? "#BDD0D1"
+                        : data === "Return QC"
+                        ? "#BDD0D1"
+                        : data === "MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : data === "Return MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : "#565454"
     );
   };
 
   const updateStatusSpiTop = (data) => {
     setStatusSpiTop(data);
     setBackgroundColorStatusSpiTop(
-      data === "Go"
-        ? "#31A207"
+          data === "Go"
+        ? "rgb(54, 83, 20)"
         : data === "Repair"
           ? "#E9CE08"
           : data === "Leader"
-            ? "#C00000"
-            : data === "Maintenance"
-              ? "#be4f62"
-              : data === "Return Maintenance"
-                ? "#be4f62"
-                : data === "PPIC"
-                  ? "#7A6544"
-                  : data === "QA"
-                    ? "#93C2C4"
-                    : data === "QC"
-                      ? "#BDD0D1"
-                      : "#565454"
+          ? "#C00000"
+          : data === "Return Leader"
+          ? "#C00000"
+          : data === "HRGA & EHS"
+            ? "#A61D00"
+            : data === "Return HRGA & EHS"
+            ? "#A61D00"
+            : data === "PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "Return PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "Return PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "Return PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "QA"
+                      ? "#93C2C4"
+                      : data === "Return QA"
+                      ? "#93C2C4"
+                      : data === "QC"
+                        ? "#BDD0D1"
+                        : data === "Return QC"
+                        ? "#BDD0D1"
+                        : data === "MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : data === "Return MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : "#565454"
     );
   };
 
   const updateStatusPickNPlace = (data) => {
     setStatusPickNPlace(data);
     setBackgroundColorStatusPickNPlace(
-      data === "Go"
-        ? "#31A207"
+          data === "Go"
+        ? "rgb(54, 83, 20)"
         : data === "Repair"
           ? "#E9CE08"
           : data === "Leader"
-            ? "#C00000"
-            : data === "Maintenance"
-              ? "#be4f62"
-              : data === "Return Maintenance"
-                ? "#be4f62"
-                : data === "PPIC"
-                  ? "#7A6544"
-                  : data === "QA"
-                    ? "#93C2C4"
-                    : data === "QC"
-                      ? "#BDD0D1"
-                      : "#565454"
+          ? "#C00000"
+          : data === "Return Leader"
+          ? "#C00000"
+          : data === "HRGA & EHS"
+            ? "#A61D00"
+            : data === "Return HRGA & EHS"
+            ? "#A61D00"
+            : data === "PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "Return PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "Return PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "Return PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "QA"
+                      ? "#93C2C4"
+                      : data === "Return QA"
+                      ? "#93C2C4"
+                      : data === "QC"
+                        ? "#BDD0D1"
+                        : data === "Return QC"
+                        ? "#BDD0D1"
+                        : data === "MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : data === "Return MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : "#565454"
     );
   };
 
   const updateStatusReflowTop = (data) => {
     setStatusReflowTop(data);
     setBackgroundColorStatusReflowTop(
-      data === "Go"
-        ? "#31A207"
+          data === "Go"
+        ? "rgb(54, 83, 20)"
         : data === "Repair"
           ? "#E9CE08"
           : data === "Leader"
-            ? "#C00000"
-            : data === "Maintenance"
-              ? "#be4f62"
-              : data === "Return Maintenance"
-                ? "#be4f62"
-                : data === "PPIC"
-                  ? "#7A6544"
-                  : data === "QA"
-                    ? "#93C2C4"
-                    : data === "QC"
-                      ? "#BDD0D1"
-                      : "#565454"
+          ? "#C00000"
+          : data === "Return Leader"
+          ? "#C00000"
+          : data === "HRGA & EHS"
+            ? "#A61D00"
+            : data === "Return HRGA & EHS"
+            ? "#A61D00"
+            : data === "PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "Return PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "Return PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "Return PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "QA"
+                      ? "#93C2C4"
+                      : data === "Return QA"
+                      ? "#93C2C4"
+                      : data === "QC"
+                        ? "#BDD0D1"
+                        : data === "Return QC"
+                        ? "#BDD0D1"
+                        : data === "MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : data === "Return MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : "#565454"
     );
   };
 
   const updateStatusAOITop = (data) => {
     setStatusAOITop(data);
     setBackgroundColorStatusAOITop(
-      data === "Go"
-        ? "#31A207"
+          data === "Go"
+        ? "rgb(54, 83, 20)"
         : data === "Repair"
           ? "#E9CE08"
           : data === "Leader"
-            ? "#C00000"
-            : data === "Maintenance"
-              ? "#be4f62"
-              : data === "Return Maintenance"
-                ? "#be4f62"
-                : data === "PPIC"
-                  ? "#7A6544"
-                  : data === "QA"
-                    ? "#93C2C4"
-                    : data === "QC"
-                      ? "#BDD0D1"
-                      : "#565454"
+          ? "#C00000"
+          : data === "Return Leader"
+          ? "#C00000"
+          : data === "HRGA & EHS"
+            ? "#A61D00"
+            : data === "Return HRGA & EHS"
+            ? "#A61D00"
+            : data === "PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "Return PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "Return PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "Return PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "QA"
+                      ? "#93C2C4"
+                      : data === "Return QA"
+                      ? "#93C2C4"
+                      : data === "QC"
+                        ? "#BDD0D1"
+                        : data === "Return QC"
+                        ? "#BDD0D1"
+                        : data === "MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : data === "Return MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : "#565454"
     );
   };
 
   const updateStatusRVSTop = (data) => {
     setStatusRVSTop(data);
     setBackgroundColorStatusRVSTop(
-      data === "Go"
-        ? "#31A207"
+          data === "Go"
+        ? "rgb(54, 83, 20)"
         : data === "Repair"
           ? "#E9CE08"
           : data === "Leader"
-            ? "#C00000"
-            : data === "Maintenance"
-              ? "#be4f62"
-              : data === "Return Maintenance"
-                ? "#be4f62"
-                : data === "PPIC"
-                  ? "#7A6544"
-                  : data === "QA"
-                    ? "#93C2C4"
-                    : data === "QC"
-                      ? "#BDD0D1"
-                      : "#565454"
+          ? "#C00000"
+          : data === "Return Leader"
+          ? "#C00000"
+          : data === "HRGA & EHS"
+            ? "#A61D00"
+            : data === "Return HRGA & EHS"
+            ? "#A61D00"
+            : data === "PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "Return PURCHASING,PPIC,MP&L"
+              ? "#873e23"
+              : data === "PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "Return PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "Return PRODUCT DEVELOPMENT"
+                  ? "#233087"
+                  : data === "ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "QA"
+                      ? "#93C2C4"
+                      : data === "Return QA"
+                      ? "#93C2C4"
+                      : data === "QC"
+                        ? "#BDD0D1"
+                        : data === "Return QC"
+                        ? "#BDD0D1"
+                        : data === "MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : data === "Return MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : "#565454"
     );
   };
   // ----
@@ -1503,183 +1695,6 @@ useEffect(() => {
     }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
   // -------
 
-  const submitMaintenance = () => {
-    if (!NamaPIC || !Line || !Kerusakan || !Area) {
-      alert("Harap isi semua kolom!");
-      return;
-    }
-    const data = {
-      NamaPIC: NamaPIC,
-      Area: Area,
-      Line: Line,
-      Station: Station,
-      Kerusakan: Kerusakan,
-    };
-
-    fetch(`http://192.168.101.236:3001/api/Maintenance`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          alert("Laporan Telah Berhasil Di Kirim Ke Team Maintenance ");
-          setIsOpenMaintenance(false);
-          firebase.database().ref(`SMTLine1TOP/${Station}`).set("Maintenance");
-          firebase.database().ref("StatusLine/SMTLine1").set("Down");
-          window.location.reload();
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const submitQualityA = () => {
-    if (!NamaPIC || !Line || !Kerusakan || !Area || !Action) {
-      alert("Harap isi semua kolom!");
-      return;
-    }
-    const data = {
-      NamaPIC: NamaPIC,
-      Area: Area,
-      Line: Line,
-      Station: Station,
-      Action: Action,
-      Kerusakan: Kerusakan,
-    };
-
-    alert("Laporan Telah Berhasil Di Kirim Ke Quality Assurance");
-    setQualityA(false);
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set("QA");
-    window.location.reload();
-
-    fetch(`http://192.168.101.236:3001/api/QA`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const submitQualityC = () => {
-    if (!NamaPIC || !Line || !Kerusakan || !Area || !Action) {
-      alert("Harap isi semua kolom!");
-      return;
-    }
-    const data = {
-      NamaPIC: NamaPIC,
-      Area: Area,
-      Line: Line,
-      Station: Station,
-      Action: Action,
-      Kerusakan: Kerusakan,
-    };
-
-    alert("Laporan Telah Berhasil Di Kirim Ke Quality Control");
-    setQualityC(false);
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set("QC");
-    window.location.reload();
-
-    fetch(`http://192.168.101.236:3001/api/QC`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-
-  const submitReturnMaintenance = () => {
-    const data = {
-      NamaPIC: NamaPIC,
-      Area: Area,
-      Line: Line,
-      Station: Station,
-      Kerusakan: Kerusakan,
-    };
-
-    alert("Laporan Terkait Pengembalian Ke Maintenance Sudah Berhasil");
-    setIsOpenMaintenance(false);
-    firebase
-      .database()
-      .ref(`SMTLine1TOP/${Station}`)
-      .set("Return Maintenance");
-    firebase.database().ref("StatusLine/SMTLine1").set("Down");
-    window.location.reload();
-
-    fetch(`http://192.168.101.236:3001/api/ReturnMaintenance`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  // --------------------------------------------
-
-  //  Submit Validation Quality A
-  const submitValQA = () => {
-    const data = new FormData();
-    data.append("NamaPIC", NamaPIC);
-    data.append("NpkPIC", NpkPIC);
-    data.append("Area", Area);
-    data.append("Line", Line);
-    data.append("Station", Station);
-    data.append("validation", file);
-
-    alert("Validation Telah Berhasil ");
-    setIsOpen2(false);
-    window.location.reload();
-
-    fetch("http://192.168.101.236:3001/api/ValidationQA", {
-      method: "POST",
-      body: data,
-    })
-      .then((response) => {
-        if (response.status === 200) {
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const submitValQC = () => {
     const data = new FormData();
@@ -1818,78 +1833,10 @@ useEffect(() => {
 
   // Fungsi selected
 
-  //  Select Nama Operator
-  const handleSelectChangeOperatorManufacturing = (
-    selectedOptionOperatorManufacturing
-  ) => {
-    setSelectedOptionOperatorManufacturing(selectedOptionOperatorManufacturing);
-    setNamaPIC(selectedOptionOperatorManufacturing.value);
-  };
-
-  useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/Employee_Operator_Manufacturing")
-      .then((response) => response.json())
-      .then((data) => {
-        const transformedOptions = data.map((item) => ({
-          value: item.nama_emp,
-          label: item.nama_emp,
-        }));
-        setOptionsOperatorManufacturing(transformedOptions);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-
-
 
   // ....................
 
-  // Select Team Maintenance
-  const handleSelectChangeTeamMaintenance = (selectedOptionTeamMaintenance) => {
-    setSelectedOptionTeamMaintenance(selectedOptionTeamMaintenance);
-    setNamaPIC(selectedOptionTeamMaintenance.value);
-  };
 
-  useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/Employee_Team_Maintenance")
-      .then((response) => response.json())
-      .then((data) => {
-        const transformedOptions = data.map((item) => ({
-          value: item.nama_emp,
-          label: item.nama_emp,
-        }));
-        setOptionsTeamMaintenance(transformedOptions);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-
-  // ...............................................
-
-  // Select Team Quality
-  const handleSelectChangeTeamQuality = (selectedOptionTeamQuality) => {
-    setSelectedOptionTeamQuality(selectedOptionTeamQuality);
-    setNamaPIC(selectedOptionTeamQuality.value);
-  };
-
-  useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/Employee_Team_Quality")
-      .then((response) => response.json())
-      .then((data) => {
-        const transformedOptions = data.map((item) => ({
-          value: item.nama_emp,
-          label: item.nama_emp,
-        }));
-        setOptionsTeamQuality(transformedOptions);
-      })
-      .catch((error) => {
-        // Tangani error jika permintaan gagal
-        console.error("Error fetching data:", error);
-      });
-  }, []);
 
   // ...............................................
 
@@ -2133,7 +2080,7 @@ useEffect(() => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-              
+
                     style={{ backgroundColor: backgroundColorStatusSpiTop }}
                     value={StatusSpiTop}
                     onClick={() => {
@@ -2171,7 +2118,7 @@ useEffect(() => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-        
+
                     style={{ backgroundColor: backgroundColorStatusPickNPlace }}
                     value={StatusPickNPlace}
                     onClick={() => {
@@ -2206,7 +2153,7 @@ useEffect(() => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-      
+
                     style={{ backgroundColor: backgroundColorStatusReflowTop }}
                     value={StatusReflowTop}
                     onClick={() => {
@@ -2241,7 +2188,7 @@ useEffect(() => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-            
+
                     style={{ backgroundColor: backgroundColorStatusAOITop }}
                     value={StatusAOITop}
                     onClick={() => {
@@ -2274,7 +2221,7 @@ useEffect(() => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-    
+
                     style={{ backgroundColor: backgroundColorStatusRVSTop }}
                     value={StatusRVSTop}
                     onClick={() => {
@@ -2310,7 +2257,7 @@ useEffect(() => {
       {/* <div class="overflow-x-auto p-3">
                   <table class="table-auto w-full">
                     <td class="p-1   ">
-                      {status === "Go" || status === "Leader" || status === "Maintenance" ? (
+                      {status === "Go" || status === "Leader" || status === "MAINTENANCE & IT" ? (
                         <>
                           <span className="text-xs uppercase text-black font-bold">
                             TIME
@@ -2728,158 +2675,7 @@ useEffect(() => {
         ) : null}
       </td>
 
-      {/*  */}
-      {/* POP UP RequestMaintenance */}
-      <td class="">
-        {isOpenMaintenance ? (
-          <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
-                </div>
 
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                <div
-                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
-                >
-                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <form
-                        className="w-full max-w-lg"
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                        }}
-                      >
-                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Request Maintenance</span>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-first-name"
-                            >
-                              Masukan Nama Anda
-                            </label>
-                            <Select
-                              value={selectedOptionOperatorManufacturing}
-                              onChange={handleSelectChangeOperatorManufacturing}
-                              options={optionsOperatorManufacturing}
-                              isSearchable
-                              placeholder="Pilih Nama"
-                            />
-                          </div>
-                        </div>
-
-                        {/*Status*/}
-
-                        <div class="flex flex-wrap -mx-3 mb-3 mt-3">
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Area
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Area}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Line
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Line}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Station
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Station}
-                            </span>
-                          </div>
-                        </div>
-
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                              for="grid-password"
-                            >
-                              Problem
-                            </label>
-                            <input
-                              class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-password"
-                              type="text"
-                              placeholder=""
-                              name="Kerusakan"
-                              onChange={(e) => {
-                                setKerusakan(e.target.value);
-                              }}
-                              required
-                            />
-                            <p class="text-gray-600 text-xs italic">
-                              Laporkan Permasalahan Yang Ditemukan
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex justify-end">
-                          <button
-                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                            onClick={() => setIsOpenMaintenance(false)}
-                          >
-                            No, cancel
-                          </button>
-                          <button
-                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                            type="submit"
-                            onClick={submitMaintenance}
-                          >
-                            Yes, I'm sure
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : null}
-      </td>
 
       {/* QualityOption */}
       <td class="">
@@ -2958,820 +2754,7 @@ useEffect(() => {
         ) : null}
       </td>
 
-      {/* QualityA */}
-      <td class="">
-        {QualityA ? (
-          <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
-                </div>
 
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                <div
-                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
-                >
-                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <form className="w-full max-w-lg">
-                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Request To Quality Assurance</span>
-                        </div>
-
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-first-name"
-                            >
-                              Masukan Nama Anda
-                            </label>
-                            <Select
-                              value={selectedOptionTeamMaintenance}
-                              onChange={handleSelectChangeTeamMaintenance}
-                              options={optionsTeamMaintenance}
-                              isSearchable
-                              placeholder="Pilih Nama"
-                            />
-                          </div>
-                        </div>
-                        {/*Status*/}
-                        <div className="mb-4">
-                          <label
-                            className="block text-gray-700 mt-1 font-semibold mb-1"
-                            htmlFor="Depart To"
-                          >
-                            Request To
-                          </label>
-                          <div className="relative">
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              Quality Assurance
-                            </span>
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 mb-2">
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Area
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="Name"
-                            >
-                              {Area}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Line
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="Name"
-                            >
-                              {Line}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Station
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="Name"
-                            >
-                              {Station}
-                            </span>
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                              for="grid-password"
-                            >
-                              Problem
-                            </label>
-                            <input
-                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-password"
-                              type="text"
-                              placeholder=""
-                              name="Kerusakan"
-                              onChange={(e) => {
-                                setKerusakan(e.target.value);
-                              }}
-                              required
-                            />
-
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                              for="grid-password"
-                            >
-                              Action
-                            </label>
-                            <input
-                              class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-password"
-                              type="text"
-                              placeholder=""
-                              name="Action"
-                              onChange={(e) => {
-                                setAction(e.target.value);
-                              }}
-                              required
-                            />
-                          </div>
-                        </div>
-                        <div className="flex justify-end">
-                          <button
-                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                            onClick={() => setQualityA(false)}
-                          >
-                            No, cancel
-                          </button>
-                          <button
-                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                            type="submit"
-                            onClick={submitQualityA}
-                          >
-                            Yes, I'm sure
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : null}
-      </td>
-
-      {/* QualityC*/}
-      <td class="">
-        {QualityC ? (
-          <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
-                </div>
-
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                <div
-                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
-                >
-                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <form className="w-full max-w-lg">
-                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Request To Quality Control</span>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-first-name"
-                            >
-                              Masukan Nama Anda
-                            </label>
-                            <Select
-                              value={selectedOptionTeamMaintenance}
-                              onChange={handleSelectChangeTeamMaintenance}
-                              options={optionsTeamMaintenance}
-                              isSearchable
-                              placeholder="Pilih Nama"
-                            />
-                          </div>
-                        </div>
-                        {/*Status*/}
-                        <div className="mb-4">
-                          <label
-                            className="block text-gray-700 mt-1 font-semibold mb-1"
-                            htmlFor="Depart To"
-                          >
-                            Request To
-                          </label>
-                          <div className="relative">
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              Quality Control
-                            </span>
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 mb-2">
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Area
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Area}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Line
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Line}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Station
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Station}
-                            </span>
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                              for="grid-password"
-                            >
-                              Problem
-                            </label>
-                            <input
-                              class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-password"
-                              type="text"
-                              placeholder=""
-                              name="Kerusakan"
-                              onChange={(e) => {
-                                setKerusakan(e.target.value);
-                              }}
-                              required
-                            />
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                              for="grid-password"
-                            >
-                              Action
-                            </label>
-                            <input
-                              class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-password"
-                              type="text"
-                              placeholder=""
-                              name="Action"
-                              onChange={(e) => {
-                                setAction(e.target.value);
-                              }}
-                              required
-                            />
-                          </div>
-                        </div>
-                        <div className="flex justify-end">
-                          <button
-                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                            onClick={() => setQualityC(false)}
-                          >
-                            No, cancel
-                          </button>
-                          <button
-                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                            type="submit"
-                            onClick={submitQualityC}
-                          >
-                            Yes, I'm sure
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : null}
-      </td>
-
-      {/* POP UP  RETURN Maintenance*/}
-      <td class="">
-        {isOpenReturnMaintenance ? (
-          <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
-                </div>
-
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                <div
-                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
-                >
-                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <form className="w-full max-w-lg">
-                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Return To Maintenance</span>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-first-name"
-                            >
-                              Masukan Nama Anda
-                            </label>
-                            <Select
-                              value={selectedOptionTeamQuality}
-                              onChange={handleSelectChangeTeamQuality}
-                              options={optionsTeamQuality}
-                              isSearchable
-                              placeholder="Pilih Nama"
-                            />
-                          </div>
-                        </div>
-
-                        {/*Status*/}
-
-                        <div class="flex flex-wrap -mx-3 mt-3 mb-3">
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Area
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Area}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Line
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Line}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Station
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="MachineName"
-                            >
-                              {Station}
-                            </span>
-                          </div>
-                        </div>
-
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                              for="grid-password"
-                            >
-                              Problem
-                            </label>
-                            <input
-                              class="appearance-none block w-full  text-gray-700 bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-password"
-                              type="text"
-                              placeholder=""
-                              name="Kerusakan"
-                              onChange={(e) => {
-                                setKerusakan(e.target.value);
-                              }}
-                              required
-                            />
-                            <p class="text-gray-600 text-xs italic">
-                              Laporkan Problem Yang Di temukan
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex justify-end">
-                          <button
-                            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                            onClick={() => setIsOpenReturnMaintenance(false)}
-                          >
-                            Batal
-                          </button>
-                          <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                            type="submit"
-                            onClick={submitReturnMaintenance}
-                          >
-                            Submit
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : null}
-      </td>
-
-      {/* ------------- */}
-
-      {/* ----- */}
-
-      {/* Val QA */}
-      <td class="">
-        {isOpenValQA ? (
-          <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
-                </div>
-
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                <div
-                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
-                >
-                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <form className="w-full max-w-lg">
-                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Validation Quality Assurance</span>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-first-name"
-                            >
-                              Masukan Nama Anda
-                            </label>
-                            <Select
-                              value={selectedOptionTeamQuality}
-                              onChange={handleSelectChangeTeamQuality}
-                              options={optionsTeamQuality}
-                              isSearchable
-                              placeholder="Pilih Nama"
-                            />
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 mt-3 mb-4">
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Area
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="Area"
-                            >
-                              {Area}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Line
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="Line"
-                            >
-                              {Line}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Station
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="Station"
-                            >
-                              {Station}
-                            </span>
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                              for="grid-password"
-                            >
-                              Input File Validation
-                            </label>
-                            <input
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-password"
-                              type="file"
-                              placeholder=""
-                              name="validation"
-                              onChange={handleFileChange}
-                              required
-                            />
-                            <p class="text-gray-600 text-xs italic">
-                              Input File Validation
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex justify-end">
-                          <button
-                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                            onClick={() => setIsOpenValQA(false)}
-                          >
-                            No, cancel
-                          </button>
-                          <button
-                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                            type="submit"
-                            onClick={submitValQA}
-                          >
-                            Yes, I'm sure
-                          </button>
-                        </div>
-                        <button
-                          className="bg-red-900 animate-bounce hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                          onClick={() => {
-                            setIsOpenValQA(false);
-                            setIsOpenReturnMaintenance(true);
-                          }}
-                        >
-                          Return To Maintenance
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : null}
-      </td>
-
-      {/* Val QC */}
-      <td class="">
-        {isOpenValQC ? (
-          <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
-                </div>
-
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-
-                <div
-                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
-                >
-                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <form className="w-full max-w-lg">
-                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                          <span>Validation Quality Control</span>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-first-name"
-                            >
-                              Masukan Nama Anda
-                            </label>
-                            <Select
-                              value={selectedOptionTeamQuality}
-                              onChange={handleSelectChangeTeamQuality}
-                              options={optionsTeamQuality}
-                              isSearchable
-                              placeholder="Pilih Nama"
-                            />
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 mt-3 mb-4">
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Area
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="Area"
-                            >
-                              {Area}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Line
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="Line"
-                            >
-                              {Line}
-                            </span>
-                          </div>
-                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Station
-                            </label>
-                            <span
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-city"
-                              type="text"
-                              placeholder="ICT"
-                              name="Station"
-                            >
-                              {Station}
-                            </span>
-                          </div>
-                        </div>
-                        <div class="flex flex-wrap -mx-3 ">
-                          <div class="w-full px-1">
-                            <label
-                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                              for="grid-password"
-                            >
-                              Validation File
-                            </label>
-                            <input
-                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                              id="grid-password"
-                              type="file"
-                              placeholder=""
-                              name="validation"
-                              onChange={handleFileChange}
-                              required
-                            />
-                            <p class="text-gray-600 text-xs italic">
-                              Input File Validation
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex justify-end">
-                          <button
-                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                            onClick={() => setIsOpenValQC(false)}
-                          >
-                            No, cancel
-                          </button>
-                          <button
-                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                            type="submit"
-                            onClick={submitValQC}
-                          >
-                            Yes, I'm sure
-                          </button>
-                        </div>
-                        <button
-                          className="bg-red-900 animate-bounce hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
-                          onClick={() => {
-                            setIsOpenValQC(false);
-                            setIsOpenReturnMaintenance(true);
-                          }}
-                        >
-                          Return To Maintenance
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : null}
-      </td>
     </body>
   );
 };

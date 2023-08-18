@@ -79,10 +79,10 @@ function Destacker() {
 
 
     const submitLeader = () => {
-        if (!NamaPIC || !Line || !Area) {
+        if (!NamaPIC || !Area || !Station) {
             alert("Harap isi semua kolom!");
             return;
-        }
+          }
         const data = {
             NamaPIC: NamaPIC,
             Area: Area,

@@ -973,25 +973,49 @@ const Andonline1 = () => {
         ? "rgb(54, 83, 20)"
         : data === "Repair"
           ? "#E9CE08"
+          : data === "Leader"
+          ? "#C00000"
+          : data === "Return Leader"
+          ? "#C00000"
           : data === "HRGA & EHS"
+            ? "#A61D00"
+            : data === "Return HRGA & EHS"
             ? "#A61D00"
             : data === "PURCHASING,PPIC,MP&L"
               ? "#873e23"
+              : data === "Return PURCHASING,PPIC,MP&L"
+              ? "#873e23"
               : data === "PROCESS ENGINEERING"
+                ? "#1e81b0"
+                : data === "Return PROCESS ENGINEERING"
                 ? "#1e81b0"
                 : data === "PRODUCT DEVELOPMENT"
                   ? "#233087"
+                  : data === "Return PRODUCT DEVELOPMENT"
+                  ? "#233087"
                   : data === "ADVANCED MANUFACTURING ENGINEERING"
+                    ? "#C5B602"
+                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                     ? "#C5B602"
                     : data === "QA"
                       ? "#93C2C4"
+                      : data === "Return QA"
+                      ? "#93C2C4"
                       : data === "QC"
                         ? "#BDD0D1"
+                        : data === "Return QC"
+                        ? "#BDD0D1"
                         : data === "MAINTENANCE & IT"
+                          ? "#be4f62"
+                          : data === "Return MAINTENANCE & IT"
                           ? "#be4f62"
                           : "#565454"
     );
   };
+
+  
+
+
 
   // UPDATE Network
   const updateNetwork = (data) => {

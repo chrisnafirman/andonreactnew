@@ -17,12 +17,13 @@ const postRequestMaintenance = (req, res) => {
   );
 };
 
+
 const postReturnMaintenance = (req, res) => {
-  const { NamaPIC, Area, Line, Station, Kerusakan } = req.body;
+  const { NamaPIC, Area, Line, Department, Station, Kerusakan } = req.body;
 
   db.query(
-    "INSERT INTO returnmaintenance (Nama, Area, Line, Station, Problem) VALUES (?, ?, ?, ?, ?)",
-    [NamaPIC, Area, Line, Station, Kerusakan],
+    "INSERT INTO returnmaintenance (Nama, Area, Line, Department, Station, Problem) VALUES (?, ?, ?, ?, ?, ?)",
+    [NamaPIC, Area, Line, Department, Station, Kerusakan],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -32,6 +33,9 @@ const postReturnMaintenance = (req, res) => {
     }
   );
 };
+
+
+
 
 const PutResponseMaintenance = (req, res) => {
   const { NamaPIC, Status, Station, Area} = req.body;
@@ -49,12 +53,12 @@ const PutResponseMaintenance = (req, res) => {
   );
 };
 
-const PutRepairDone = (req, res) => {
-  const {Status, Station, Area} = req.body;
+const PutReturnResponseMaintenance = (req, res) => {
+  const { NamaPIC, Status, Station, Area} = req.body;
 
   db.query(
-    "UPDATE maintenance SET Status = ?, ResponseDone = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
-    [Status, Station, Area],
+    "UPDATE returnmaintenance SET ResponseName = ?, Status = ?, ResponseTime = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [NamaPIC, Status, Station, Area],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -64,6 +68,40 @@ const PutRepairDone = (req, res) => {
     }
   );
 };
+
+const PutRepairDoneMaintenance = (req, res) => {
+  const {Status, DepartTo, Station, Area} = req.body;
+
+  db.query(
+    "UPDATE maintenance SET Status = ?, DepartTo = ?, ResponseDone = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [Status, DepartTo, Station, Area],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been updated successfully' });
+    }
+  );
+};
+
+const PutReturnRepairDoneMaintenance = (req, res) => {
+  const {Status, DepartTo, Station, Area} = req.body;
+
+  db.query(
+    "UPDATE returnmaintenance SET Status = ?, DepartTo = ?, ResponseDone = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [Status, DepartTo, Station, Area],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been updated successfully' });
+    }
+  );
+};
+
+
 
 
 const getRequestMaintenance = (req, res) => {
@@ -88,6 +126,11 @@ module.exports = {
   postReturnMaintenance,
   getRequestMaintenance,
   getReturnMaintenance,
+
   PutResponseMaintenance,
-  PutRepairDone,
+  PutRepairDoneMaintenance,
+
+  
+  PutReturnResponseMaintenance,
+  PutReturnRepairDoneMaintenance,
 };

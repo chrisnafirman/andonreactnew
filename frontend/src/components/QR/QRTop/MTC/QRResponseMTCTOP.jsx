@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import Select from "react-select";
-import QRScannerPopup from "../QR";
+import QRScannerPopup from "../../QR";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
@@ -13,7 +13,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function Destacker() {
+function QRResponsesMTCTOP() {
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
@@ -75,10 +75,10 @@ function Destacker() {
  
 
   const submitResponse = () => {
-    if (!NamaPIC || !Status || !Station) {
+    if (!NamaPIC || !Area || !Station) {
       alert("Harap isi semua kolom!");
       return;
-  }
+    }
     const data = {
       Station: Station,
       Status: Status,
@@ -449,7 +449,7 @@ function Destacker() {
                             type="button"
                             onClick={handleButtonClick}
                           >
-                            Repair Top
+                            Repair
                           </button>
                         </div>
                       </form>
@@ -500,4 +500,4 @@ function Destacker() {
   );
 }
 
-export default Destacker;
+export default QRResponsesMTCTOP;

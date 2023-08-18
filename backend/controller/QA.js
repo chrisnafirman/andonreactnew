@@ -91,6 +91,23 @@ const postRequestQA = (req, res) => {
 };
 
 
+const PutReturnQA = (req, res) => {
+  const { Status, Department, Station, Area } = req.body;
+
+  db.query(
+    "UPDATE qualitya SET Status = ?, ReturnDepartment = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [Status, Department, Station, Area],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been updated successfully' });
+    }
+  );
+};
+
+
 
 
 
@@ -120,5 +137,6 @@ module.exports = {
   getRequestQA,
   getValidationQA,
   PutValidationQA,
+  PutReturnQA,
   PutFileValidationQA,
 };

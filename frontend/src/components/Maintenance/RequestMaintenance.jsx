@@ -25,17 +25,17 @@ const RepairReport = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState(null);
   const [Station, setStation] = useState("");
-  const [NamaPIC, setNamaPIC] = useState(selectedItem ? selectedItem.Nama : '');
+  const [NamaPIC, setNamaPIC] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
   const [Action, setAction] = useState("");
   const [Area, setArea] = useState("");
   const [Line, setLine] = useState("");
   const [isOpenQuality, setisOpenQuality] = useState(false);
 
- const [Department, setDepartment] = useState("Maintenance & IT");
+ const [Department, setDepartment] = useState("");
  const [DepartTo, setDepartTo] = useState("");
   const [StatusLine, setStatusLine] = useState("");
-  const [Status, setStatus] = useState("Closed");
+  const [Status, setStatus] = useState("Solved");
   
   const [selectedOptionDepartment, setSelectedOptionDepartment] =
     useState(null);
@@ -169,7 +169,7 @@ const RepairReport = () => {
 
  // QR
  const submitQuality = () => {
-  if (!NamaPIC || !Line || !Area || !Department || !Kerusakan || !Action) {
+  if (!NamaPIC || !Line || !Area || !Department || !Kerusakan || !Station || !Action) {
     alert("Harap isi semua kolom!");
     return;
   }
@@ -182,6 +182,7 @@ const RepairReport = () => {
     Department: Department,
     Kerusakan: Kerusakan,
     Action: Action,
+    DepartTo: DepartTo,
   };
 
   alert("Laporan Telah Berhasil Di Kirim Ke Team Quality ");
@@ -214,11 +215,19 @@ const RepairReport = () => {
 
 
 const submitUpdate = () => {
+  if (!Area || !Department || !Action || !Station || !Kerusakan ) {
+    return;
+  }
+
   const data = {
+    NamaPIC: NamaPIC,
     Station: Station,
     Status: Status,
     Area: Area,
     Action: Action,
+    Kerusakan: Kerusakan,
+    Department: Department,
+    DepartTo : DepartTo,
   };
 
   console.log("Sending data:", data);
@@ -248,9 +257,9 @@ const submitUpdate = () => {
 
   const QRResponseLink = () => {
     if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRResponseTop";
+      return "/QRResponseMaintenanceTop";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRResponseBE";
+      return "/QRResponseMaintenanceBe";
     } else {
     }
   };
@@ -480,12 +489,12 @@ const submitUpdate = () => {
                               <span className="text-xs lg:text-sm">Open</span>
                             </button>
                           )}
-                          {item.Status === "Closed" && (
+                          {item.Status === "Solved" && (
                             <button
                               onClick={() => setSelectedItem(item)}
                               className="bg-red-600 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
-                              <span className="text-xs lg:text-sm">Closed</span>
+                              <span className="text-xs lg:text-sm">Solved</span>
                             </button>
                           )}
                           {item.Status === "Repair" && (
@@ -563,7 +572,7 @@ const submitUpdate = () => {
                               </button>
                               <div className="w-full max-w-lg">
                                 <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                  <span>Request BY</span>
+                                  <span>Request BY </span>
                                 </div>
                                 <div class="flex flex-wrap -mx-3 ">
                                   <div class="w-full  px-3 mb-3 md:mb-0">
@@ -676,6 +685,7 @@ const submitUpdate = () => {
                                           className="" onClick= {()=>{
                                             setisOpenQuality(true)
                                             setNamaPIC(selectedItem.Nama)
+                                            setDepartment(selectedItem.Department)
                                             setArea(selectedItem.Area)
                                             setLine(selectedItem.Line)
                                             setStation(selectedItem.Station)
@@ -737,7 +747,7 @@ const submitUpdate = () => {
 
                                     )}
 
-                                    {selectedItem.Status === "Closed" && (
+                                    {selectedItem.Status === "Solved" && (
                                       <div
                                         className="bg-slate-900 flex flex-col  text-white font-mono text-xs py-2 px-4 rounded mr-2"
 
@@ -745,6 +755,7 @@ const submitUpdate = () => {
                                         <span >    Repair PIC : {selectedItem.ResponseName}</span>
                                         <span>    Start At : {formatDateTimeAPI(selectedItem?.ResponseTime) || ""}</span>
                                         <span>    Done At : {formatDateTimeAPI(selectedItem?.ResponseDone) || ""}</span>
+                                        <span>    Depart To : {selectedItem.DepartTo}</span>
                                       </div>
 
                                     )}
@@ -813,7 +824,7 @@ const submitUpdate = () => {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Request Quality</span>
+                          <span>Request Validation</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div className="w-full mt-3 px-3 mb-2 md:mb-0">
@@ -843,10 +854,11 @@ const submitUpdate = () => {
                                 placeholder="ICT"
                                 name="MachineName"
                               >
-                                {NamaPIC}
+                                {NamaPIC} 
                               </span>
 
                             </div>
+                            
 
                           </div>
                           <div className="w-full mt-1 px-3 mb-3 md:mb-0">

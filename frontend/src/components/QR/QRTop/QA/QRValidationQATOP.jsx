@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import Select from "react-select";
-import QRScannerPopup from "../QR";
+import QRScannerPopup from "../../QR";
 
 
 
@@ -15,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRMaintenanceTOP() {
+function QRValidationQATOP() {
 
 
 
@@ -23,18 +23,19 @@ function QRMaintenanceTOP() {
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT TOP");
-  const [isQRLeader, setIsQRLeader] = useState(true);
+  const [isQRValidationQA, setIsQRValidationQA] = useState(true);
   const [DestackerTop, setDestackerTop] = useState("Destacker (TOP)");
   const [StatusdestackerTop, setStatusdestackerTop] = useState("");
   const [hasilScan, setHasilScan] = useState("");
   const [hasilScanMesin, setHasilScanMesin] = useState("");
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
-  const [Status, setStatus] = useState("Closed");
+  const [Status, setStatus] = useState("Valid");
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
-  const [Action, setAction] = useState("");
+  const [file, setFile] = useState(null);
+  const [Desc, setDesc] = useState("");
 
   const [
     backgroundColorStatusdestackerTop,
@@ -60,7 +61,7 @@ function QRMaintenanceTOP() {
 
   const updateStatusdestackerTop = (data) => {
     if (data === "Go") {
-      setIsQRLeader(true);
+      setIsQRValidationQA(true);
     }
     setStatusdestackerTop(data);
     setBackgroundColorStatusdestackerTop(
@@ -88,62 +89,68 @@ function QRMaintenanceTOP() {
 
 
   // QR
-  const submitQuality = () => {
-    if (!NamaPIC || !Line || !Area || !Department || !Kerusakan || !Action) {
+
+
+
+  // const submitValidationQA = () => {
+  //   const data = new FormData();
+  //   data.append("Status", Status);
+  //   data.append("NamaPIC", NamaPIC);
+  //   data.append("Area", Area);
+  //   data.append("Station", Station);
+
+  //   if (file) {
+  //     data.append("validation", file);
+  //   }
+
+  //   firebase.database().ref(`SMTLine1TOP/${Station}`).set("Go");
+  //   firebase.database().ref("StatusLine/SMTLine1").set("Running");
+  //   alert("Validation Telah Berhasil ");
+  //   setIsQRValidationQA(false);
+  //   window.location.reload();
+  //   setStation(null);
+  //   setNamaPIC(null);
+
+  //   fetch("http://192.168.101.236:3001/api/PutValidationQA", {
+  //     method: "PUT",
+  //     body: data,
+  //   })
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         // Handle success if needed
+  //       } else {
+  //         throw new Error("Error updating data");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+
+  const submitUpdate = () => {
+    if (!NamaPIC || !Desc || !Area || !Station) {
       alert("Harap isi semua kolom!");
       return;
     }
 
     const data = {
       NamaPIC: NamaPIC,
-      Area: Area,
-      Line: Line,
-      Station: Station,
-      Department: Department,
-      Kerusakan: Kerusakan,
-      Action: Action,
-    };
-
-    alert("Laporan Telah Berhasil Di Kirim Ke Team Quality ");
-
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set(`${DepartTo}`);
-    firebase.database().ref("StatusLine/SMTLine1").set("Down");
-    setStation(null);
-    setNamaPIC(null);
-
-    fetch(`http://192.168.101.236:3001/api/${DepartTo}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          // Handle success if needed
-        } else {
-          throw new Error("Error adding data");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-
-  };
-
-
-  const submitUpdate = () => {
-    const data = {
       Station: Station,
       Status: Status,
       Area: Area,
-      Action: Action,
+      Desc: Desc,
     };
+    
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Go");
+    firebase.database().ref("StatusLine/SMTLine1").set("Running");
+    alert("Validation Telah Berhasil ");
+    setIsQRValidationQA(false);
+    window.location.reload();
+    setStation(null);
+    setNamaPIC(null);
 
-    console.log("Sending data:", data);
-
-    fetch(`http://192.168.101.236:3001/api/PutRepairDoneMaintenance`, {
+    fetch(`http://192.168.101.236:3001/api/PutValidationQA`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -153,7 +160,7 @@ function QRMaintenanceTOP() {
       .then((response) => {
         console.log("Response status:", response.status);
         if (response.status === 200) {
-          console.log("PUT request successful");
+      
         } else {
           throw new Error("Error updating data");
         }
@@ -164,7 +171,10 @@ function QRMaintenanceTOP() {
   };
 
 
-
+  // SUBMIT FILE
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
   const styles = {
     background: "linear-gradient(45deg, #000, #768087, #87CEEB)",
@@ -173,57 +183,43 @@ function QRMaintenanceTOP() {
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
-    setIsQRLeader(false);
+    setIsQRValidationQA(false);
   };
 
   const togglePopupMesin = () => {
     setShowPopupMesin(!showPopupMesin);
-    setIsQRLeader(false);
+    setIsQRValidationQA(false);
   };
 
   const handleScanSuccessNama = (data) => {
     setNamaPIC(data);
     setShowPopupNama(false)
     setShowPopupMesin(false)
-    setIsQRLeader(true);
+    setIsQRValidationQA(true);
 
   };
 
   const handleScanSuccessMesin = (data) => {
     setStation(data);
     setShowPopupMesin(false)
-    setIsQRLeader(true);
+    setIsQRValidationQA(true);
   };
 
 
-  const OptionsDepartment = [
-    { value: "", label: "-- Pilih Depart --" },
-    { value: "QC", value2: "QC", label: "QC" },
-    { value: "QA", value2: "QA", label: "QA" },
-  ];
-
-  const handleSelectDepartment = (selectedOptionDepartment) => {
-    setSelectedOptionDepartment(selectedOptionDepartment);
-    setDepartment(selectedOptionDepartment.value);
-    setDepartTo(selectedOptionDepartment.value2);
-  };
 
   const handleButtonClick = () => {
     submitUpdate();
-    submitQuality();
-
-    // Mengalihkan pengguna ke halaman yang diinginkan
-    window.location.href = '/RequestMaintenance'; // Ganti dengan URL halaman tujuan
+    window.location.href = "/RequestQA";
   };
 
 
   return (
     <body style={styles}>
       <td class="">
-        {isQRLeader ? (
+        {isQRValidationQA ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-60 text-center sm:block sm:p-0">
+              <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-96 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
                   <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
                 </div>
@@ -245,24 +241,10 @@ function QRMaintenanceTOP() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Request Quality</span>
+                          <span>Validation QA</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
-                          <div className="w-full mt-3 px-3 mb-2 md:mb-0">
-                            <label
-                              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              htmlFor="grid-city"
-                            >
-                              Depart To
-                            </label>
-                            <Select
-                              value={selectedOptionDepartment}
-                              onChange={handleSelectDepartment}
-                              options={OptionsDepartment}
-                              isSearchable
-                              placeholder="Pilih Department"
-                            />
-                          </div>
+
                           <div className="w-full mt-1 px-3 mb-3 md:mb-0">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
                               Nama
@@ -273,7 +255,7 @@ function QRMaintenanceTOP() {
                                 id="grid-city"
                                 type="text"
                                 placeholder="ICT"
-                                name="MachineName"
+                                name="NamaPIC"
                               >
                                 {NamaPIC}
                               </span>
@@ -319,13 +301,13 @@ function QRMaintenanceTOP() {
                                 id="grid-city"
                                 type="text"
                                 placeholder="ICT"
-                                name="MachineName"
+                                name="Station"
                               >
                                 {Station}
                               </span>
                               <button onClick={() => {
                                 togglePopupMesin();
-                                setIsQRLeader(false);
+                                setIsQRValidationQA(false);
                               }}
                               >
                                 {showPopupMesin ? (
@@ -377,7 +359,7 @@ function QRMaintenanceTOP() {
                               id="grid-city"
                               type="text"
                               placeholder="ICT"
-                              name="MachineName"
+                              name="Area"
                             >
                               {Area}
                             </span>
@@ -394,7 +376,7 @@ function QRMaintenanceTOP() {
                               id="grid-city"
                               type="text"
                               placeholder="ICT"
-                              name="MachineName"
+                              name="Line"
                             >
                               {Line}
                             </span>
@@ -405,71 +387,52 @@ function QRMaintenanceTOP() {
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                             for="grid-password"
                           >
-                            Problem
+                           Validation Description
                           </label>
                           <input
                             class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-password"
                             type="text"
                             placeholder=""
-                            name="Kerusakan"
+                            name="Desc"
                             onChange={(e) => {
-                              setKerusakan(e.target.value);
+                              setDesc(e.target.value);
                             }}
                             required
                           />
                         </div>
                         <div class="w-full px-1">
-                          <label
-                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                            for="grid-password"
-                          >
-                            Action
-                          </label>
-                          <input
-                            class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-password"
-                            type="text"
-                            placeholder=""
-                            name="Action"
-                            onChange={(e) => {
-                              setAction(e.target.value);
-                            }}
-                            required
-                          />
-                        </div>
-
-
-
-                        <div className="flex justify-end">
-
-                          <button
-                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                            type="button" // Change to type="button" to prevent form submission
-                            onClick={handleButtonClick}
-
-                          >
-                            Yes, I'm sure
-                          </button>
-                        </div>
-                      </form>  
-                      <a href="/RequestMaintenance">  
-                      <button
-                            class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                           
-                          >
-                            <svg width="20px" viewBox="0 0 1024 1024">
-                              <path fill="#F7F7F7" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" />
-                              <path fill="#F7F7F7" d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" />
-                            </svg>
-                          </button>
-                          </a>
+                          </div>
+                          <div className="flex justify-end mt-4">
+
+                            <button
+                              class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                              type="button" // Change to type="button" to prevent form submission
+                              onClick={handleButtonClick}
+
+                            >
+                              Yes, I'm sure
+                            </button>
+                          </div>
+                      </form>
+                      <a href="/RequestQA">
+                        <button
+                          class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+
+                        >
+                          <svg width="20px" viewBox="0 0 1024 1024">
+                            <path fill="#F7F7F7" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" />
+                            <path fill="#F7F7F7" d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" />
+                          </svg>
+                        </button>
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            
+
           </>
         ) : null}
       </td>
@@ -479,7 +442,7 @@ function QRMaintenanceTOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupMesin();
-              setIsQRLeader(true);
+              setIsQRValidationQA(true);
             }}
             onScanSuccess={handleScanSuccessMesin}
           />
@@ -489,7 +452,7 @@ function QRMaintenanceTOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupNama();
-              setIsQRLeader(true);
+              setIsQRValidationQA(true);
             }}
             onScanSuccess={handleScanSuccessNama}
           />
@@ -500,4 +463,4 @@ function QRMaintenanceTOP() {
   )
 }
 
-export default QRMaintenanceTOP
+export default QRValidationQATOP;

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import Select from "react-select";
-import QRScannerPopup from "../QR";
+import QRScannerPopup from "../../QR";
 
 
 
@@ -15,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRLeaderTOP() {
+function QRReturnTOP() {
 
 
 
@@ -30,7 +30,7 @@ function QRLeaderTOP() {
   const [hasilScanMesin, setHasilScanMesin] = useState("");
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
-  const [Status, setStatus] = useState("Solved");
+  const [Status, setStatus] = useState("Return");
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
@@ -103,14 +103,14 @@ function QRLeaderTOP() {
 
     };
 
-    alert("Laporan Telah Berhasil Di Kirim Ke Team MAINTENANCE & IT ");
+    alert("Return Telah Berhasil Di Kirim Ke Team Terkait");
 
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set("MAINTENANCE & IT");
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set(`${Department}`);
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.236:3001/api/${DepartTo}`, {
+    fetch(`http://192.168.101.236:3001/api/Return${DepartTo}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -127,30 +127,20 @@ function QRLeaderTOP() {
       .catch((err) => {
         console.log(err);
       });
-
-
   };
 
 
   const submitUpdate = () => {
-    if (!NamaPIC || !Area  || !Station) {
-     
-      return;
-    }
-    
     const data = {
       Station: Station,
       Status: Status,
       Area: Area,
-      NamaPIC: NamaPIC,
-      Line: Line,
       Department: Department,
-      Kerusakan: Kerusakan,
     };
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.236:3001/api/PutStatusLeader`, {
+    fetch(`http://192.168.101.236:3001/api/PutReturnQA`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -212,8 +202,6 @@ function QRLeaderTOP() {
       value: "ADVANCED MANUFACTURING ENGINEERING", value2: "others",
       label: "ADVANCED MANUFACTURING ENGINEERING",
     },
-    { value: "QA", value2: "QA", label: "QA" },
-    { value: "QC", value2: "QC", label: "QC" },
     { value: "HRGA & EHS", value2: "others", label: "HRGA & EHS" },
     { value: "MAINTENANCE & IT", value2: "Maintenance", label: "MAINTENANCE & IT" },
 
@@ -230,7 +218,7 @@ function QRLeaderTOP() {
     submitMaintenance();
 
     // Mengalihkan pengguna ke halaman yang diinginkan
-    window.location.href = '/RequestLeader'; // Ganti dengan URL halaman tujuan
+    window.location.href = '/RequestQA'; // Ganti dengan URL halaman tujuan
   };
 
 
@@ -262,7 +250,7 @@ function QRLeaderTOP() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Request Repairment</span>
+                          <span>Return For Repairment</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div className="w-full mt-3 px-3 mb-2 md:mb-0">
@@ -422,7 +410,7 @@ function QRLeaderTOP() {
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                             for="grid-password"
                           >
-                            Problem
+                            Description
                           </label>
                           <input
                             class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -435,9 +423,7 @@ function QRLeaderTOP() {
                             }}
                             required
                           />
-                          <p class="text-gray-600 text-xs italic">
-                            Laporkan Permasalahan Yang Ditemukan
-                          </p>
+                         
                         </div>
 
 
@@ -454,7 +440,7 @@ function QRLeaderTOP() {
                           </button>
                         </div>
                       </form>  
-                      <a href="/RequestLeader">  
+                      <a href="/RequestQA">  
                       <button
                             class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                           
@@ -501,4 +487,4 @@ function QRLeaderTOP() {
   )
 }
 
-export default QRLeaderTOP
+export default QRReturnTOP
