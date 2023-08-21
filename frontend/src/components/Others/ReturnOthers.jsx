@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
+import Select from "react-select";
+import { Link } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
@@ -12,19 +15,40 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const RequestQA = () => {
+const ReturnOthers = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
-
-  const [selectedItem, setSelectedItem] = useState(null);
-
   const [showDatePicker, setShowDatePicker] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
-
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [Station, setStation] = useState("");
+  const [NamaPIC, setNamaPIC] = useState("");
+  const [Kerusakan, setKerusakan] = useState("");
+  const [Action, setAction] = useState("");
+  const [Area, setArea] = useState("");
+  const [Line, setLine] = useState("");
+  const [isOpenQuality, setisOpenQuality] = useState(false);
+  const [Requestor, setRequestor] = useState("");
+ const [Department, setDepartment] = useState("");
+ const [DepartTo, setDepartTo] = useState("");
   const [StatusLine, setStatusLine] = useState("");
+  const [Status, setStatus] = useState("Solved");
+  
+  const [selectedOptionDepartment, setSelectedOptionDepartment] =
+    useState(null);
+
+  // button search
+  function handleToggleDatePicker() {
+    setShowDatePicker(!showDatePicker);
+  }
+
+  useEffect(() => {
+    // set showDatePicker ke false ketika halaman dimuat
+    setShowDatePicker(false);
+  }, []);
 
   useEffect(() => {
     const ref3 = firebase.database().ref("StatusLine/SMTLine1");
@@ -59,16 +83,6 @@ const RequestQA = () => {
     setShowDrawer(!showDrawer);
   };
 
-  // button search
-  function handleToggleDatePicker() {
-    setShowDatePicker(!showDatePicker);
-  }
-
-  useEffect(() => {
-    // set showDatePicker ke false ketika halaman dimuat
-    setShowDatePicker(false);
-  }, []);
-
   function updateTime() {
     const interval = setInterval(() => {
       setTime(new Date().toLocaleString());
@@ -79,7 +93,7 @@ const RequestQA = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/QC")
+    fetch("http://192.168.101.236:3001/api/ReturnOthers")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -109,7 +123,9 @@ const RequestQA = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://192.168.101.236:3001/api/QC?date=${selectedDate}`)
+    fetch(
+      `http://192.168.101.236:3001/api/ReturnOthers?date=${selectedDate}`
+    )
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -149,13 +165,151 @@ const RequestQA = () => {
     setFilteredData(filteredData);
   };
 
-  const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/QC.jpg)`,
-    backgroundSize: "1300px",
-    backgroundPosition: "1px",
-    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
+
+
+ // QR
+ const submitQuality = () => {
+  if (!NamaPIC || !Line || !Area || !Requestor || !Kerusakan || !Station || !Action) {
+    alert("Harap isi semua kolom!");
+    return;
+  }
+
+  const data = {
+    NamaPIC: NamaPIC,
+    Area: Area,
+    Line: Line,
+    Station: Station,
+    Requestor: Requestor,
+    Kerusakan: Kerusakan,
+    Action: Action,
+    DepartTo: DepartTo,
+    Department: Department,
   };
 
+  alert("Laporan Telah Berhasil Di Kirim Ke Team Validation ");
+
+  firebase.database().ref(`SMTLine1TOP/${Station}`).set(`${DepartTo}`);
+  firebase.database().ref("StatusLine/SMTLine1").set("Down");
+  setStation(null);
+  setNamaPIC(null);
+
+  fetch(`http://192.168.101.236:3001/api/${DepartTo}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        // Handle success if needed
+      } else {
+        throw new Error("Error adding data");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+
+};
+
+
+const submitUpdate = () => {
+  if (!Area || !Requestor || !Action || !Station || !Kerusakan ) {
+    return;
+  }
+
+  const data = {
+    NamaPIC: NamaPIC,
+    Station: Station,
+    Status: Status,
+    Area: Area,
+    Action: Action,
+    Kerusakan: Kerusakan,
+    Requestor: Requestor,
+    DepartTo : DepartTo,
+    Department: Department,
+  };
+
+  console.log("Sending data:", data);
+
+  fetch(`http://192.168.101.236:3001/api/PutReturnRepairDoneOthers`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      console.log("Response status:", response.status);
+      if (response.status === 200) {
+        console.log("PUT request successful");
+      } else {
+        throw new Error("Error updating data");
+      }
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+    });
+};
+
+
+
+
+  const QRResponseLink = () => {
+    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
+      return "/QRReturnResponseOthersTop";
+    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
+      return "/QRReturnResponseOthersBe";
+    } else {
+    }
+  };
+
+
+
+  const formatDateTimeAPI = (dateString) => {
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+
+    return `${day}/${month}/${year} ~~ ${hours}:${minutes} WIB`;
+  };
+
+
+
+  const styles = {
+    background: "linear-gradient(45deg, #3B3131, #8a8b90, #34282C)",
+    height: "1000px",
+  };
+
+
+  const OptionsDepartment = [
+    { value: "", label: "-- Pilih Depart --" },
+    { value: "QC", value2: "Quality", label: "QC" },
+    { value: "QA", value2: "Quality", label: "QA" },
+    { value: "ProductionLeader", value2: "ProductionLeader", label: "Production Leader" },
+  ];
+
+  const handleSelectDepartment = (selectedOptionDepartment) => {
+    setSelectedOptionDepartment(selectedOptionDepartment);
+    setDepartment(selectedOptionDepartment.value);
+    setDepartTo(selectedOptionDepartment.value2);
+  };
+
+  const handleButtonClick = () => {
+    submitUpdate();
+    submitQuality();
+    setisOpenQuality(false)
+    setSelectedItem(false)
+    window.location.reload();
+    // Mengalihkan pengguna ke halaman yang diinginkan
+  };
 
 
   return (
@@ -182,7 +336,7 @@ const RequestQA = () => {
           <div>
             <div class="flex items-center">
               <h1 class="text-base lg:text-xl font-sans tracking-tight text-gray-900">
-                | Request Quality Control |
+                | Return All Department |
               </h1>
               <h1 class="text-base lg:text-xl  font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
@@ -206,66 +360,7 @@ const RequestQA = () => {
         </div>
       </header>
 
-      <sidebar>
-        <div
-          id="drawer-navigation"
-          className={`fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform ${showDrawer ? "" : "-translate-x-full"
-            } bg-gray-100  dark:bg-gray-100 `}
-          tabIndex="-1"
-          aria-labelledby="drawer-navigation-label"
-        >
-          <h5
-            id="drawer-navigation-label"
-            className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"
-          >
-            Menu
-          </h5>
-          <button
-            type="button"
-            data-drawer-hide="drawer-navigation"
-            onClick={toggleDrawer}
-            aria-controls="drawer-navigation"
-            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-          >
-            <svg
-              aria-hidden="true"
-              className="w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-            <span className="sr-only">Close menu</span>
-          </button>
-          <div className="py-4 overflow-y-auto">
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="/PPIC"
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
-                >
-                  <svg
-                    aria-hidden="true"
-                    className="w-6  h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                  </svg>
-                  <span class="ml-3 text-gray-500">Realtime Dashboard</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </sidebar>
+
 
       <main>
         <section
@@ -332,7 +427,7 @@ const RequestQA = () => {
               </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Request For Quality Control
+                  Return For All Department
                 </div>
               </header>
 
@@ -343,16 +438,19 @@ const RequestQA = () => {
                 <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
-                    <th className="p-1 w-10 lg:w-40">
-                        <div className="font-sans lg:font-semibold text-left">Nama</div>
+                      <th className="p-1 w-10 lg:w-32">
+                        <div className="font-sans lg:font-semibold text-left">Requestor</div>
                       </th>
-                      <th className="p-1  w-20 lg:w-32">
+                      <th className="p-1 w-10 lg:w-28">
+                        <div className="font-sans lg:font-semibold text-left">Department</div>
+                      </th>
+                      <th className="p-1  w-10 lg:w-28">
                         <div className="font-semibold text-left">Line</div>
                       </th>
-                      <th className="p-1  w-20 lg:w-32">
+                      <th className="p-1  w-10 lg:w-24">
                         <div className="font-semibold text-left">Area</div>
                       </th>
-                      <th className="p-1  w-15 lg:w-32">
+                      <th className="p-1  w-10 lg:w-36">
                         <div className="font-semibold text-left">Station</div>
                       </th>
                       <th className="p-1 w-10">
@@ -371,46 +469,55 @@ const RequestQA = () => {
                       >
                         <td className="p-2">
                           <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.Nama}
+                            {item.Requestor}
                           </div>
                         </td>
-                        <td className="p-1">
+                         <td className="p-2">
+                          <div className="font-medium text-xs lg:text-sm text-gray-800">
+                            {item.Department}
+                          </div>
+                        </td>
+                        <td className="p-2">
                           <div className="font-medium text-xs lg:text-sm text-gray-800">
                             {item.Line}
                           </div>
                         </td>
-                        <td className="p-4 ">
+                        <td className="p-2">
                           <div className="font-medium text-xs lg:text-sm text-gray-800">
                             {item.Area}
                           </div>
                         </td>
-                        <td className="p-5">
+                        <td className="p-2">
                           <div className="font-medium text-gray-800">
                             {item.Station}
                           </div>
                         </td>
                         <td className="p-2 ">
-                          <button
-                            onClick={() => setSelectedItem(item)}
-                            className="bg-blue-900 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="w-6 h-6 mr-2"
+                          {item.Status === "" && (
+                            <button
+                              onClick={() => setSelectedItem(item)}
+                              className="bg-green-600 w-16  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                             >
-                              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 110-16 8 8 0 010 16zm0-2a6 6 0 100-12 6 6 0 000 12z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <span>Details</span>
-                          </button>
+                              <span className="text-xs lg:text-sm">Open</span>
+                            </button>
+                          )}
+                          {item.Status === "Solved" && (
+                            <button
+                              onClick={() => setSelectedItem(item)}
+                              className="bg-red-600  w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                            >
+                              <span className="text-xs lg:text-sm">Solved</span>
+                            </button>
+                          )}
+                          {item.Status === "Repair" && (
+                            <button
+                              onClick={() => setSelectedItem(item)}
+                              className="bg-yellow-500 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                            >
+                              <span className="text-xs lg:text-sm">Repair</span>
+                            </button>
+                          )}
                         </td>
-
                         {/* <td className="p-5 w-40">
                           <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out">
                             <svg
@@ -435,10 +542,11 @@ const RequestQA = () => {
                           </div>
                         </td>
                       </tr>
+
+
                     ))}
                   </tbody>
                 </table>
-
                 {selectedItem && (
                   <>
                     <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -476,7 +584,7 @@ const RequestQA = () => {
                               </button>
                               <div className="w-full max-w-lg">
                                 <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                  <span>Request BY</span>
+                                  <span>Request BY </span>
                                 </div>
                                 <div class="flex flex-wrap -mx-3 ">
                                   <div class="w-full  px-3 mb-3 md:mb-0">
@@ -562,8 +670,8 @@ const RequestQA = () => {
 
 
 
-                                <div className="flex ">
-                                  <a  >
+                                <div className="flex justify-end">
+                                  <a href={QRResponseLink()} >
                                     {selectedItem.Status === "" && (
                                       <button
                                         className="bg-yellow-400 hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded mr-2"
@@ -571,27 +679,28 @@ const RequestQA = () => {
                                           setSelectedItem(false)
                                         }
                                       >
-                                        Respon
+                                        Repair
                                       </button>
                                     )}
 
-                                    {selectedItem.Status === "Responses" && (
+                                    {selectedItem.Status === "Repair" && (
                                       <div className="flex space-x-32">
                                         <div
-                                          className="bg-lime-600 flex flex-col  text-white font-mono text-xs py-2 px-4 rounded mr-2"
+                                          className="bg-lime-600 flex flex-col  text-white font-mono text-xs py-2 px-4 rounded mr-16"
 
                                         >
-                                          {/* <span >    Repair PIC : {selectedItem.ResponseName}</span>
-                                          <span>    Start At : {formatDateTimeAPI(selectedItem?.ResponseTime) || ""}</span> */}
+                                          <span >    Repair PIC : {selectedItem.ResponseName}</span>
+                                          <span>    Start At : {formatDateTimeAPI(selectedItem?.ResponseTime) || ""}</span>
                                         </div>
 
                                         <button
                                           className="" onClick= {()=>{
-                                            // setisOpenQuality(true)
-                                            // setNamaPIC(selectedItem.Nama)
-                                            // setArea(selectedItem.Area)
-                                            // setLine(selectedItem.Line)
-                                            // setStation(selectedItem.Station)
+                                            setisOpenQuality(true)
+                                            setNamaPIC(selectedItem.Nama)                 
+                                            setRequestor(selectedItem.Department)
+                                            setArea(selectedItem.Area)
+                                            setLine(selectedItem.Line)
+                                            setStation(selectedItem.Station)
                                           }}
                                           
                                         >
@@ -650,14 +759,15 @@ const RequestQA = () => {
 
                                     )}
 
-                                    {selectedItem.Status === "Validate" && (
+                                    {selectedItem.Status === "Solved" && (
                                       <div
                                         className="bg-slate-900 flex flex-col  text-white font-mono text-xs py-2 px-4 rounded mr-2"
 
                                       >
-                                        {/* <span >    Repair PIC : {selectedItem.ResponseName}</span>
+                                        <span >    Repair PIC : {selectedItem.ResponseName}</span>
                                         <span>    Start At : {formatDateTimeAPI(selectedItem?.ResponseTime) || ""}</span>
-                                        <span>    Done At : {formatDateTimeAPI(selectedItem?.ResponseDone) || ""}</span> */}
+                                        <span>    Done At : {formatDateTimeAPI(selectedItem?.ResponseDone) || ""}</span>
+                                        <span>    Depart To : {selectedItem.DepartTo}</span>
                                       </div>
 
                                     )}
@@ -675,14 +785,216 @@ const RequestQA = () => {
                     </div>
                   </>
                 )}
-
               </div>
             </div>
           </div>
         </section>
+        <td class="">
+        {isOpenQuality ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-60 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 transition-opacity">
+                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
+                </div>
+
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+
+                <div
+                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                    <div className="sm:flex sm:items-start">
+                    <button
+                                className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
+                                onClick={() =>
+                                  setisOpenQuality(false)
+                                }
+                              >
+                                <svg
+                                  className="w-6 h-6"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M6 18L18 6M6 6l12 12"
+                                  />
+                                </svg>
+                              </button>
+                      <form
+                        className="w-full max-w-lg"
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                        }}
+                      >
+                        <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
+                          <span>Request Validation</span>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div className="w-full mt-3 px-3 mb-2 md:mb-0">
+                            <label
+                              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              htmlFor="grid-city"
+                            >
+                              Depart To
+                            </label>
+                            <Select
+                              value={selectedOptionDepartment}
+                              onChange={handleSelectDepartment}
+                              options={OptionsDepartment}
+                              isSearchable
+                              placeholder="Pilih Department"
+                            />
+                          </div>
+                          <div className="w-full mt-1 px-3 mb-3 md:mb-0">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
+                              Nama
+                            </label>
+                            <div className="flex">
+                              <span
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="grid-city"
+                                type="text"
+                                placeholder="ICT"
+                                name="MachineName"
+                              >
+                                {NamaPIC} 
+                              </span>
+
+                            </div>
+                            
+
+                          </div>
+                          <div className="w-full mt-1 px-3 mb-3 md:mb-0">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
+                              Station
+                            </label>
+                            <div className="flex">
+                              <span
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="grid-city"
+                                type="text"
+                                placeholder="ICT"
+                                name="MachineName"
+                              >
+                                {Station}
+                              </span>
+                             
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                        {/*Status*/}
+
+                        <div class="flex  -mx-3 mb-2 ">
+                          <div class="w-full md:w-1/3 px-3 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Area
+                            </label>
+                            <span
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-city"
+                              type="text"
+                              placeholder="ICT"
+                              name="MachineName"
+                            >
+                              {Area}
+                            </span>
+                          </div>
+                          <div class="w-full md:w-1/3 px-3  md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Line
+                            </label>
+                            <span
+                              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                              id="grid-city"
+                              type="text"
+                              placeholder="ICT"
+                              name="MachineName"
+                            >
+                              {Line}
+                            </span>
+                          </div>
+                        </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Problem
+                          </label>
+                          <input
+                            class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            id="grid-password"
+                            type="text"
+                            placeholder=""
+                            name="Kerusakan"
+                            onChange={(e) => {
+                              setKerusakan(e.target.value);
+                            }}
+                            required
+                          />
+                        </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Action
+                          </label>
+                          <input
+                            class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            id="grid-password"
+                            type="text"
+                            placeholder=""
+                            name="Action"
+                            onChange={(e) => {
+                              setAction(e.target.value);
+                            }}
+                            required
+                          />
+                        </div>
+
+                        <div className="flex justify-end">
+
+                          <button
+                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                            type="button" // Change to type="button" to prevent form submission
+                            onClick={handleButtonClick}
+
+                          >
+                            Yes, I'm sure
+                          </button>
+                        </div>
+                      </form>  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </>
+        ) : null}
+      </td>
       </main>
     </body>
   );
 };
 
-export default RequestQA;
+export default ReturnOthers;

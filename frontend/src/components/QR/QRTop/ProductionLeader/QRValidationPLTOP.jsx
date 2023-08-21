@@ -15,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRValidationQATOP() {
+function QRValidationProductionLeaderTOP() {
 
 
 
@@ -23,7 +23,7 @@ function QRValidationQATOP() {
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT TOP");
-  const [isQRValidationQA, setIsQRValidationQA] = useState(true);
+  const [isQRValidation, setIsQRValidation] = useState(true);
   const [DestackerTop, setDestackerTop] = useState("Destacker (TOP)");
   const [StatusdestackerTop, setStatusdestackerTop] = useState("");
   const [hasilScan, setHasilScan] = useState("");
@@ -61,7 +61,7 @@ function QRValidationQATOP() {
 
   const updateStatusdestackerTop = (data) => {
     if (data === "Go") {
-      setIsQRValidationQA(true);
+      setIsQRValidation(true);
     }
     setStatusdestackerTop(data);
     setBackgroundColorStatusdestackerTop(
@@ -106,7 +106,7 @@ function QRValidationQATOP() {
   //   firebase.database().ref(`SMTLine1TOP/${Station}`).set("Go");
   //   firebase.database().ref("StatusLine/SMTLine1").set("Running");
   //   alert("Validation Telah Berhasil ");
-  //   setIsQRValidationQA(false);
+  //   setIsQRValidation(false);
   //   window.location.reload();
   //   setStation(null);
   //   setNamaPIC(null);
@@ -145,12 +145,12 @@ function QRValidationQATOP() {
     firebase.database().ref(`SMTLine1TOP/${Station}`).set("Go");
     firebase.database().ref("StatusLine/SMTLine1").set("Running");
     alert("Validation Telah Berhasil ");
-    setIsQRValidationQA(false);
+    setIsQRValidation(false);
     window.location.reload();
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.236:3001/api/PutValidationQA`, {
+    fetch(`http://192.168.101.236:3001/api/PutValidationProductionLeader`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -183,40 +183,40 @@ function QRValidationQATOP() {
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
-    setIsQRValidationQA(false);
+    setIsQRValidation(false);
   };
 
   const togglePopupMesin = () => {
     setShowPopupMesin(!showPopupMesin);
-    setIsQRValidationQA(false);
+    setIsQRValidation(false);
   };
 
   const handleScanSuccessNama = (data) => {
     setNamaPIC(data);
     setShowPopupNama(false)
     setShowPopupMesin(false)
-    setIsQRValidationQA(true);
+    setIsQRValidation(true);
 
   };
 
   const handleScanSuccessMesin = (data) => {
     setStation(data);
     setShowPopupMesin(false)
-    setIsQRValidationQA(true);
+    setIsQRValidation(true);
   };
 
 
 
   const handleButtonClick = () => {
     submitUpdate();
-    window.location.href = "/RequestQA";
+    window.location.href = "/ProductionLeader";
   };
 
 
   return (
     <body style={styles}>
       <td class="">
-        {isQRValidationQA ? (
+        {isQRValidation ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-96 text-center sm:block sm:p-0">
@@ -241,7 +241,7 @@ function QRValidationQATOP() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Validation QA</span>
+                          <span>Validation Production Leader</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
 
@@ -307,7 +307,7 @@ function QRValidationQATOP() {
                               </span>
                               <button onClick={() => {
                                 togglePopupMesin();
-                                setIsQRValidationQA(false);
+                                setIsQRValidation(false);
                               }}
                               >
                                 {showPopupMesin ? (
@@ -416,7 +416,7 @@ function QRValidationQATOP() {
                             </button>
                           </div>
                       </form>
-                      <a href="/RequestQA">
+                      <a href="/ProductionLeader">
                         <button
                           class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
 
@@ -442,7 +442,7 @@ function QRValidationQATOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupMesin();
-              setIsQRValidationQA(true);
+              setIsQRValidation(true);
             }}
             onScanSuccess={handleScanSuccessMesin}
           />
@@ -452,7 +452,7 @@ function QRValidationQATOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupNama();
-              setIsQRValidationQA(true);
+              setIsQRValidation(true);
             }}
             onScanSuccess={handleScanSuccessNama}
           />
@@ -463,4 +463,4 @@ function QRValidationQATOP() {
   )
 }
 
-export default QRValidationQATOP;
+export default QRValidationProductionLeaderTOP;

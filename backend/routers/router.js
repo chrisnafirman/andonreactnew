@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const MTCcontrollers = require("../controller/Maintenance");
 const LDRcontrollers = require("../controller/Leader");
-const QAcontrollers = require("../controller/QA");
-const QCcontrollers = require("../controller/QC");
+const QualityControllers = require("../controller/Quality");
+const ProductionLeaderControllers = require("../controller/ProductionLeader");
 const TimeProductioncontrollers = require("../controller/TimeProduction")
-const Generalcontrollers = require("../controller/General")
+const Otherscontrollers = require("../controller/Others")
 const Employeecontrollers = require("../controller/Employee")
 const UMLine1TOP = require("../controller/UMLine1TOP")
 const UMLine1General = require("../controller/UMLine1General")
@@ -33,22 +33,45 @@ router.put("/PutRepairDoneMaintenance", MTCcontrollers.PutRepairDoneMaintenance)
 router.put("/PutReturnResponseMaintenance", MTCcontrollers.PutReturnResponseMaintenance);
 router.put("/PutReturnRepairDoneMaintenance", MTCcontrollers.PutReturnRepairDoneMaintenance);
 
+// Others
+
+router.post("/Others", Otherscontrollers.postRequestOthers);
+router.get("/Others", Otherscontrollers.getRequestOthers);
+router.post("/ReturnOthers", Otherscontrollers.postReturnOthers);
+router.get("/ReturnOthers", Otherscontrollers.getReturnOthers);
+
+router.put("/PutResponseOthers", Otherscontrollers.PutResponseOthers);
+router.put("/PutRepairDoneOthers", Otherscontrollers.PutRepairDoneOthers);
+
+router.put("/PutReturnResponseOthers", Otherscontrollers.PutReturnResponseOthers);
+router.put("/PutReturnRepairDoneOthers", Otherscontrollers.PutReturnRepairDoneOthers);
+
+
+
+
+
+
+
+router.post("/General", Otherscontrollers.postRequestGeneral);
+router.get("/General", Otherscontrollers.getRequestGeneral);
 
 
 // QA
-router.post("/QA", QAcontrollers.postRequestQA);
-router.put("/PutValidationQA", QAcontrollers.PutValidationQA);
-router.put("/PutReturnQA", QAcontrollers.PutReturnQA);
-router.put("/PutFileValidationQA", QAcontrollers.PutFileValidationQA);
-router.get("/QA", QAcontrollers.getRequestQA);
-router.get("/ValidationQA", QAcontrollers.getValidationQA);
+router.post("/Quality", QualityControllers.postRequestQuality);
+router.put("/PutValidationQuality", QualityControllers.PutValidationQuality);
+router.put("/PutReturnQuality", QualityControllers.PutReturnQuality);
+router.put("/PutFileValidationQQuality", QualityControllers.PutFileValidationQuality);
+router.get("/Quality", QualityControllers.getRequestQuality);
+router.get("/ValidationQuality", QualityControllers.getValidationQuality);
 
 
-// QC
-router.post("/QC", QCcontrollers.postRequestQC);
-router.post("/ValidationQC", QCcontrollers.postValidationQC);
-router.get("/QC", QCcontrollers.getRequestQC);
-router.get("/ValidationQC", QCcontrollers.getValidationQC);
+router.post("/ProductionLeader", ProductionLeaderControllers.postRequestProductionLeader);
+router.put("/PutValidationProductionLeader", ProductionLeaderControllers.PutValidationProductionLeader);
+router.put("/PutReturnProductionLeader", ProductionLeaderControllers.PutReturnProductionLeader);
+router.put("/PutFileValidationQProductionLeader", ProductionLeaderControllers.PutFileValidationProductionLeader);
+router.get("/ProductionLeader", ProductionLeaderControllers.getRequestProductionLeader);
+router.get("/ValidationProductionLeader", ProductionLeaderControllers.getValidationProductionLeader);
+
 
 
 // Time Production
@@ -62,15 +85,10 @@ router.put("/UpdateOverTime", TimeProductioncontrollers.updateOverTime);
 
 router.get("/ScheduleProduction", TimeProductioncontrollers.getTimeProduction);
 
-// General
 
-router.post("/General", Generalcontrollers.postRequestGeneral);
 
-router.post("/Others", Generalcontrollers.postRequestOthers);
 
-router.get("/General", Generalcontrollers.getRequestGeneral);
 
-router.get("/Others", Generalcontrollers.getRequestOthers);
 
 // Employee
 

@@ -15,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const RepairReport = () => {
+const Others = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -31,8 +31,8 @@ const RepairReport = () => {
   const [Area, setArea] = useState("");
   const [Line, setLine] = useState("");
   const [isOpenQuality, setisOpenQuality] = useState(false);
-
- const [Department, setDepartment] = useState("");
+  const [Department, setDepartment] = useState("");
+ const [Requestor, setRequestor] = useState("");
  const [DepartTo, setDepartTo] = useState("");
   const [StatusLine, setStatusLine] = useState("");
   const [Status, setStatus] = useState("Solved");
@@ -93,7 +93,7 @@ const RepairReport = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/Maintenance")
+    fetch("http://192.168.101.236:3001/api/Others")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -124,7 +124,7 @@ const RepairReport = () => {
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
     fetch(
-      `http://192.168.101.236:3001/api/Maintenance?date=${selectedDate}`
+      `http://192.168.101.236:3001/api/Others?date=${selectedDate}`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -169,7 +169,7 @@ const RepairReport = () => {
 
  // QR
  const submitQuality = () => {
-  if (!NamaPIC || !Line || !Area || !Department || !Kerusakan || !Station || !Action) {
+  if (!NamaPIC || !Line || !Area || !Requestor || !Kerusakan || !Station || !Action) {
     alert("Harap isi semua kolom!");
     return;
   }
@@ -179,13 +179,14 @@ const RepairReport = () => {
     Area: Area,
     Line: Line,
     Station: Station,
-    Department: Department,
+    Requestor: Requestor,
     Kerusakan: Kerusakan,
     Action: Action,
     DepartTo: DepartTo,
+    Department: Department,
   };
 
-  alert("Laporan Telah Berhasil Di Kirim Ke Team Quality ");
+  alert("Laporan Telah Berhasil Di Kirim Ke Team Validation ");
 
   firebase.database().ref(`SMTLine1TOP/${Station}`).set(`${DepartTo}`);
   firebase.database().ref("StatusLine/SMTLine1").set("Down");
@@ -215,7 +216,7 @@ const RepairReport = () => {
 
 
 const submitUpdate = () => {
-  if (!Area || !Department || !Action || !Station || !Kerusakan ) {
+  if (!Area || !Requestor || !Action || !Station || !Kerusakan ) {
     return;
   }
 
@@ -226,13 +227,14 @@ const submitUpdate = () => {
     Area: Area,
     Action: Action,
     Kerusakan: Kerusakan,
-    Department: Department,
+    Requestor: Requestor,
     DepartTo : DepartTo,
+    Department: Department,
   };
 
   console.log("Sending data:", data);
 
-  fetch(`http://192.168.101.236:3001/api/PutRepairDoneMaintenance`, {
+  fetch(`http://192.168.101.236:3001/api/PutRepairDoneOthers`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -257,9 +259,9 @@ const submitUpdate = () => {
 
   const QRResponseLink = () => {
     if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRResponseMaintenanceTop";
+      return "/QRResponseOthersTop";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRResponseMaintenanceBe";
+      return "/QRResponseOthersBe";
     } else {
     }
   };
@@ -281,22 +283,23 @@ const submitUpdate = () => {
 
 
   const styles = {
-    background: "linear-gradient(45deg, #95754B, #8a8b90, #E1B203)",
+    background: "linear-gradient(45deg, #3B3131, #8a8b90, #34282C)",
     height: "1000px",
   };
 
 
   const OptionsDepartment = [
     { value: "", label: "-- Pilih Depart --" },
-    { value: "QC", value2: "QC", label: "QC" },
-    { value: "QA", value2: "QA", label: "QA" },
+    { value: "QC", value2: "Quality", label: "QC" },
+    { value: "QA", value2: "Quality", label: "QA" },
+    { value: "ProductionLeader", value2: "ProductionLeader", label: "Production Leader" },
   ];
 
   const handleSelectDepartment = (selectedOptionDepartment) => {
     setSelectedOptionDepartment(selectedOptionDepartment);
+    setDepartment(selectedOptionDepartment.value);
     setDepartTo(selectedOptionDepartment.value2);
   };
-
 
   const handleButtonClick = () => {
     submitUpdate();
@@ -332,7 +335,7 @@ const submitUpdate = () => {
           <div>
             <div class="flex items-center">
               <h1 class="text-base lg:text-xl font-sans tracking-tight text-gray-900">
-                | Request Maintenance |
+                | Request All Department |
               </h1>
               <h1 class="text-base lg:text-xl  font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
@@ -423,7 +426,7 @@ const submitUpdate = () => {
               </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Request For Maintenance
+                  Request For All Department
                 </div>
               </header>
 
@@ -432,18 +435,18 @@ const submitUpdate = () => {
                 style={{ height: "300px", overflowY: "scroll" }}
               >
                 <table id="data-table" className="table-auto w-full">
-                  <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
-                      <th className="p-1 w-10 lg:w-40">
-                        <div className="font-sans lg:font-semibold text-left">Nama</div>
+                      <th className="p-1 w-10 lg:w-30">
+                        <div className="font-sans lg:font-semibold text-left">Department</div>
                       </th>
-                      <th className="p-1  w-20 lg:w-32">
+                      <th className="p-1  w-20 lg:w-24">
                         <div className="font-semibold text-left">Line</div>
                       </th>
-                      <th className="p-1  w-20 lg:w-32">
+                      <th className="p-1  w-10 lg:w-24">
                         <div className="font-semibold text-left">Area</div>
                       </th>
-                      <th className="p-1  w-15 lg:w-32">
+                      <th className="p-1  w-10 lg:w-40">
                         <div className="font-semibold text-left">Station</div>
                       </th>
                       <th className="p-1 w-10">
@@ -460,9 +463,10 @@ const submitUpdate = () => {
                         key={item.id}
                         className={index === 0 ? "bg-green-400" : ""}
                       >
+                       
                         <td className="p-2">
                           <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.Nama}
+                            {item.Department}
                           </div>
                         </td>
                         <td className="p-2">
@@ -484,7 +488,7 @@ const submitUpdate = () => {
                           {item.Status === "" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-green-600  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                              className="bg-green-600 w-16  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Open</span>
                             </button>
@@ -494,44 +498,27 @@ const submitUpdate = () => {
                               onClick={() => setSelectedItem(item)}
                               className="bg-red-600 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
-                              <span className="text-xs lg:text-sm">Solved</span>
+                              <span className="text-xs w-16 lg:text-sm">Solved</span>
                             </button>
                           )}
                           {item.Status === "Repair" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-yellow-500 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                              className="bg-yellow-500 flex items-center w-16 justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Repair</span>
                             </button>
                           )}
                         </td>
-                        {/* <td className="p-5 w-40">
-                          <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="w-6 h-6 mr-2"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 110-16 8 8 0 010 16zm0-2a6 6 0 100-12 6 6 0 000 12zM8 9a1 1 0 011-1h2a1 1 0 010 2H9a1 1 0 01-1-1zm5.293 5.293a1 1 0 00-1.414 0L11 14.586l-1.879-1.88a1 1 0 00-1.414 1.414l2.586 2.586a1 1 0 001.414 0l4.586-4.586a1 1 0 000-1.414z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <span>QUALITY</span>
-                          </button>
-                        </td> */}
+                        
+
 
                         <td className="p-2">
-                          <div className="text-center h-6 text-black...">
+                          <div className="text-center h-6 text-black">
                             {item.Date} WIB
                           </div>
                         </td>
                       </tr>
-
-
                     ))}
                   </tbody>
                 </table>
@@ -572,9 +559,24 @@ const submitUpdate = () => {
                               </button>
                               <div className="w-full max-w-lg">
                                 <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                  <span>Request BY </span>
+                                  <span>Request BY  </span>
                                 </div>
                                 <div class="flex flex-wrap -mx-3 ">
+                                <div class="w-full  px-3 mb-3 md:mb-0">
+                                    <label
+                                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                      for="grid-city"
+                                    >
+                                      Requestor
+                                    </label>
+                                    <div
+                                      class="appearance-none block w-full  bg-gray-200 text-red-900 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                      type="text"
+                                    >
+                                      {" "}
+                                      {selectedItem.Requestor}{" "}
+                                    </div>
+                                  </div>
                                   <div class="w-full  px-3 mb-3 md:mb-0">
                                     <label
                                       class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -685,7 +687,7 @@ const submitUpdate = () => {
                                           className="" onClick= {()=>{
                                             setisOpenQuality(true)
                                             setNamaPIC(selectedItem.Nama)
-                                            setDepartment(selectedItem.Department)
+                                            setRequestor(selectedItem.Department)
                                             setArea(selectedItem.Area)
                                             setLine(selectedItem.Line)
                                             setStation(selectedItem.Station)
@@ -985,4 +987,4 @@ const submitUpdate = () => {
   );
 };
 
-export default RepairReport;
+export default Others;

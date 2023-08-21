@@ -12,7 +12,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const RequestQA = () => {
+const Quality = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -80,7 +80,7 @@ const RequestQA = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/QA")
+    fetch("http://192.168.101.236:3001/api/Quality")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -110,7 +110,7 @@ const RequestQA = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://192.168.101.236:3001/api/QA?date=${selectedDate}`)
+    fetch(`http://192.168.101.236:3001/api/Quality?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -195,7 +195,7 @@ const RequestQA = () => {
           <div>
             <div class="flex items-center">
               <h1 class="text-base lg:text-xl font-sans tracking-tight text-gray-900">
-                | Request QA |
+                | Request Quality |
               </h1>
               <h1 class="text-base lg:text-xl  font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
@@ -287,7 +287,7 @@ const RequestQA = () => {
               </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Request For Quality Assurance
+                  Request For Quality 
                 </div>
               </header>
 
@@ -298,16 +298,19 @@ const RequestQA = () => {
                 <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
-                      <th className="p-1 w-10 lg:w-40">
-                        <div className="font-sans lg:font-semibold text-left">Nama</div>
+                    <th className="p-1 w-10 lg:w-20">
+                        <div className="font-sans lg:font-semibold text-left">Option</div>
                       </th>
-                      <th className="p-1  w-20 lg:w-32">
+                      <th className="p-1 w-10 lg:w-32">
+                        <div className="font-sans lg:font-semibold text-left">Department</div>
+                      </th>
+                      <th className="p-1  w-14 lg:w-28">
                         <div className="font-semibold text-left">Line</div>
                       </th>
-                      <th className="p-1  w-20 lg:w-32">
+                      <th className="p-1  w-10 lg:w-24">
                         <div className="font-semibold text-left">Area</div>
                       </th>
-                      <th className="p-1  w-15 lg:w-32">
+                      <th className="p-1  w-10 lg:w-32">
                         <div className="font-semibold text-left">Station</div>
                       </th>
                       <th className="p-1 w-10">
@@ -326,7 +329,12 @@ const RequestQA = () => {
                       >
                         <td className="p-2">
                           <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.Nama}
+                            {item.DepartTo}
+                          </div>
+                        </td>
+                        <td className="p-2">
+                          <div className="font-medium text-xs lg:text-sm text-gray-800">
+                            {item.Requestor}
                           </div>
                         </td>
                         <td className="p-2">
@@ -351,7 +359,7 @@ const RequestQA = () => {
                                 setSelectedItem(item)
 
                               }}
-                              className="bg-green-600 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                              className="bg-blue-600 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Open</span>
                             </button>
@@ -362,7 +370,7 @@ const RequestQA = () => {
                                 setSelectedItem(item)
 
                               }}
-                              className="bg-green-600 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                              className="bg-green-600 w-20 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Valid</span>
                             </button>
@@ -373,7 +381,7 @@ const RequestQA = () => {
                                 setSelectedItem(item)
                                 setIsOpenReturn(item)
                               }}
-                              className="bg-orange-800 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                              className="bg-orange-800 w-20 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Return</span>
                             </button>
@@ -505,7 +513,7 @@ const RequestQA = () => {
                                       type="text"
                                     >
                                       {" "}
-                                      {selectedItem.Department}{" "}
+                                      {selectedItem.Requestor}{" "}
                                     </div>
                                   </div>
                                   <div class="w-full px-3 mb-2 md:mb-0">
@@ -591,7 +599,7 @@ const RequestQA = () => {
                     {IsOpenValidation && (
                       <>
                         <div className="fixed z-10 inset-0 overflow-y-auto">
-                          <div className="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-96 text-center sm:block sm:p-0">
+                          <div className="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-[500px] text-center sm:block sm:p-0">
                             <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
                             <div
                               className="inline-block align-bottom bg-green-700 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
@@ -644,36 +652,9 @@ const RequestQA = () => {
                                         </div>
                                       </div>
 
-                                      <div class="w-full px-3 mb-2 md:mb-0">
-                                        <label
-                                          class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
-                                          for="grid-city"
-                                        >
-                                          Problem
-                                        </label>
-                                        <div
-                                          class="appearance-none block w-full bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                          type="text"
-                                        >
-                                          {" "}
-                                          {selectedItem.Problem}{" "}
-                                        </div>
-                                      </div>
-                                      <div class="w-full px-3 mb-2 md:mb-0">
-                                        <label
-                                          class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
-                                          for="grid-city"
-                                        >
-                                          Action
-                                        </label>
-                                        <div
-                                          class="appearance-none block w-full bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                          type="text"
-                                        >
-                                          {" "}
-                                          {selectedItem.Action}{" "}
-                                        </div>
-                                      </div>
+                                    
+                                     
+                                 
                                       <div class="w-full px-3 mb-2 md:mb-0">
                                         <label
                                           class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
@@ -723,7 +704,7 @@ const RequestQA = () => {
                     {IsOpenReturn && (
                       <>
                         <div className="fixed z-10 inset-0 overflow-y-auto">
-                          <div className="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-[800px] text-center sm:block sm:p-0">
+                          <div className="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-[750px] text-center sm:block sm:p-0">
                             <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
                             <div
                               className="inline-block align-bottom bg-green-700 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
@@ -737,7 +718,8 @@ const RequestQA = () => {
                                   <button
                                     className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
                                     onClick={() =>{
-                                      setSelectedItem(false)
+                                   
+                                      setIsOpenReturn(false)
                                     }}
                                   >
                                     <svg
@@ -843,7 +825,7 @@ const RequestQA = () => {
 
                         {/* Add Validation and Reject buttons */}
                         <div className="flex justify-between space-x-6 mt-4">
-                          <a href="/QRValidationQATOP">
+                          <a href="/QRValidationQualityTOP">
                             <button
                               className="bg-green-500 flex  hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
 
@@ -856,9 +838,9 @@ const RequestQA = () => {
                               </span>
                             </button>
                           </a>
-                          <a href="/QRReturnQATOP">
+                          <a href="/QRReturnQualityTOP">
                             <button
-                              className="bg-red-500  w-36 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                              className="bg-red-500  w-36 h-12 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                               onClick={() => {
                                 //  handleDelete();
                               }}
@@ -880,4 +862,4 @@ const RequestQA = () => {
   );
 };
 
-export default RequestQA;
+export default Quality;

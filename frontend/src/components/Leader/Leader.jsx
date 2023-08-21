@@ -346,16 +346,16 @@ const ReuestLeader = () => {
                 <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
-                      <th className="p-1 w-10 lg:w-40">
-                        <div className="font-sans lg:font-semibold text-left">Nama</div>
+                      <th className="p-1 w-32 lg:w-32">
+                        <div className="font-sans lg:font-semibold text-left">Operator</div>
                       </th>
-                      <th className="p-1  w-20 lg:w-32">
+                      <th className="p-1  w-20 lg:w-28">
                         <div className="font-semibold text-left">Line</div>
                       </th>
-                      <th className="p-1  w-20 lg:w-32">
+                      <th className="p-1  w-20 lg:w-28">
                         <div className="font-semibold text-left">Area</div>
                       </th>
-                      <th className="p-1  w-15 lg:w-32">
+                      <th className="p-1  w-15 lg:w-40">
                         <div className="font-semibold text-left">Station</div>
                       </th>
                       <th className="p-1 w-10">
@@ -396,7 +396,7 @@ const ReuestLeader = () => {
                           {item.Status === "" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-lime-600 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                              className="bg-lime-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Open</span>
                             </button>
@@ -407,7 +407,7 @@ const ReuestLeader = () => {
                               setSelectedItem(item)
                               setisOpenDepartTo(item)
                             }}
-                              className="bg-red-600 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                              className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Solved</span>
                             </button>

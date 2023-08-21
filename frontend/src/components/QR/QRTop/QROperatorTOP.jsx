@@ -14,7 +14,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function Destacker() {
+function QROperatorTOP() {
     const [StationView, setStationView] = useState("");
     const [Station, setStation] = useState("");
     const [NamaPIC, setNamaPIC] = useState("");
@@ -412,4 +412,4 @@ function Destacker() {
     )
 }
 
-export default Destacker
+export default QROperatorTOP

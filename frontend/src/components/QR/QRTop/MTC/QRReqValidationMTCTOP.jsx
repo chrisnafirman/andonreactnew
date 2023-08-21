@@ -15,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRReturnTOP() {
+function QRMaintenanceTOP() {
 
 
 
@@ -30,10 +30,11 @@ function QRReturnTOP() {
   const [hasilScanMesin, setHasilScanMesin] = useState("");
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
-  const [Status, setStatus] = useState("Return");
+  const [Status, setStatus] = useState("Solved");
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
+  const [Action, setAction] = useState("");
 
   const [
     backgroundColorStatusdestackerTop,
@@ -87,8 +88,8 @@ function QRReturnTOP() {
 
 
   // QR
-  const submitMaintenance = () => {
-    if (!NamaPIC || !Line || !Area || !Department || !Kerusakan) {
+  const submitQuality = () => {
+    if (!NamaPIC || !Line || !Area || !Department || !Kerusakan || !Action) {
       alert("Harap isi semua kolom!");
       return;
     }
@@ -99,18 +100,19 @@ function QRReturnTOP() {
       Line: Line,
       Station: Station,
       Department: Department,
+      DepartTo: DepartTo,
       Kerusakan: Kerusakan,
-
+      Action: Action,
     };
 
-    alert("Return Telah Berhasil Di Kirim Ke Team Terkait");
+    alert("Laporan Telah Berhasil Di Kirim Ke Team Quality ");
 
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set(`${Department}`);
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set(`${DepartTo}`);
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.236:3001/api/Return${DepartTo}`, {
+    fetch(`http://192.168.101.236:3001/api/${Department}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -127,6 +129,8 @@ function QRReturnTOP() {
       .catch((err) => {
         console.log(err);
       });
+
+
   };
 
 
@@ -135,12 +139,12 @@ function QRReturnTOP() {
       Station: Station,
       Status: Status,
       Area: Area,
-      Department: Department,
+      Action: Action,
     };
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.236:3001/api/PutReturnQA`, {
+    fetch(`http://192.168.101.236:3001/api/PutRepairDoneMaintenance`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -195,16 +199,8 @@ function QRReturnTOP() {
 
   const OptionsDepartment = [
     { value: "", label: "-- Pilih Depart --" },
-    { value: "PURCHASING,PPIC,MP&L", value2: "others", label: "PURCHASING,PPIC,MP&L" },
-    { value: "PROCESS ENGINEERING", value2: "others", label: "PROCESS ENGINEERING" },
-    { value: "PRODUCT DEVELOPMENT", value2: "others", label: "PRODUCT DEVELOPMENT" },
-    {
-      value: "ADVANCED MANUFACTURING ENGINEERING", value2: "others",
-      label: "ADVANCED MANUFACTURING ENGINEERING",
-    },
-    { value: "HRGA & EHS", value2: "others", label: "HRGA & EHS" },
-    { value: "MAINTENANCE & IT", value2: "Maintenance", label: "MAINTENANCE & IT" },
-
+    { value: "quality", value2: "QC", label: "QC" },
+    { value: "quality", value2: "QA", label: "QA" },
   ];
 
   const handleSelectDepartment = (selectedOptionDepartment) => {
@@ -215,10 +211,10 @@ function QRReturnTOP() {
 
   const handleButtonClick = () => {
     submitUpdate();
-    submitMaintenance();
+    submitQuality();
 
     // Mengalihkan pengguna ke halaman yang diinginkan
-    window.location.href = '/RequestQA'; // Ganti dengan URL halaman tujuan
+    window.location.href = '/Maintenance'; // Ganti dengan URL halaman tujuan
   };
 
 
@@ -228,7 +224,7 @@ function QRReturnTOP() {
         {isQRLeader ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-72 text-center sm:block sm:p-0">
+              <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-60 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
                   <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
                 </div>
@@ -250,7 +246,7 @@ function QRReturnTOP() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Return For Repairment</span>
+                          <span>Request Quality</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div className="w-full mt-3 px-3 mb-2 md:mb-0">
@@ -410,7 +406,7 @@ function QRReturnTOP() {
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                             for="grid-password"
                           >
-                            Description
+                            Problem
                           </label>
                           <input
                             class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -423,7 +419,25 @@ function QRReturnTOP() {
                             }}
                             required
                           />
-                         
+                        </div>
+                        <div class="w-full px-1">
+                          <label
+                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
+                            for="grid-password"
+                          >
+                            Action
+                          </label>
+                          <input
+                            class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            id="grid-password"
+                            type="text"
+                            placeholder=""
+                            name="Action"
+                            onChange={(e) => {
+                              setAction(e.target.value);
+                            }}
+                            required
+                          />
                         </div>
 
 
@@ -440,7 +454,7 @@ function QRReturnTOP() {
                           </button>
                         </div>
                       </form>  
-                      <a href="/RequestQA">  
+                      <a href="/Maintenance">  
                       <button
                             class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                           
@@ -487,4 +501,4 @@ function QRReturnTOP() {
   )
 }
 
-export default QRReturnTOP
+export default QRMaintenanceTOP

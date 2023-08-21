@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 
@@ -13,15 +11,18 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const RepairReport = () => {
+const ValidationQuality = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
+
+  const [selectedItem, setSelectedItem] = useState(null);
+
   const [showDatePicker, setShowDatePicker] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [selectedItem, setSelectedItem] = useState(null);
+  //
   const [StatusLine, setStatusLine] = useState("");
 
   useEffect(() => {
@@ -32,36 +33,6 @@ const RepairReport = () => {
     });
     return () => {};
   }, []);
-
-  // button search
-  function handleToggleDatePicker() {
-    setShowDatePicker(!showDatePicker);
-  }
-
-  useEffect(() => {
-    // set showDatePicker ke false ketika halaman dimuat
-    setShowDatePicker(false);
-  }, []);
-
-  // waktu navbar
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const formattedTime = `${currentTime.getDate()}/${
-    currentTime.getMonth() + 1
-  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
-
-  //  fungsi export to pdf
-  const exportToPDF = () => {
-    const doc = new jsPDF();
-    const table = document.getElementById("data-table");
-    doc.autoTable({ html: table });
-    doc.save(`Report Repair Status.pdf`);
-  };
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
@@ -75,13 +46,35 @@ const RepairReport = () => {
     return () => clearInterval(interval);
   }
 
+  // waktu navbar
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formattedTime = `${currentTime.getDate()}/${
+    currentTime.getMonth() + 1
+  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+
   updateTime();
 
+  // button search
+  function handleToggleDatePicker() {
+    setShowDatePicker(!showDatePicker);
+  }
+
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/Others")
+    // set showDatePicker ke false ketika halaman dimuat
+    setShowDatePicker(false);
+  }, []);
+
+  useEffect(() => {
+    fetch("http://192.168.101.236:3001/api/validationqa")
       .then((response) => response.json())
       .then((json) => {
-        // mengubah properti timestamp menjadi tanggal dan Date
+        // mengubah properti timestamp menjadi tanggal dan waktu
         json.forEach((item) => {
           const date = new Date(item.Date);
           const day = date.getDate();
@@ -107,10 +100,12 @@ const RepairReport = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://192.168.101.236:3001/api/Others?date=${selectedDate}`)
+    fetch(
+      `http://192.168.101.236:3001/api/validationqa?date=${selectedDate}`
+    )
       .then((response) => response.json())
       .then((json) => {
-        // mengubah properti Date menjadi tanggal saja
+        // mengubah properti waktu menjadi tanggal saja
         json.forEach((item) => {
           const date = new Date(item.Date);
           const day = date.getDate();
@@ -147,9 +142,9 @@ const RepairReport = () => {
   };
 
   const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/Others.jpg)`,
+    backgroundImage: `url(${process.env.PUBLIC_URL}/QA.jpg)`,
     backgroundSize: "1300px",
-    backgroundPosition: "0px",
+    backgroundPosition: "1px",
     height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
 
@@ -177,9 +172,8 @@ const RepairReport = () => {
           <div>
             <div class="flex items-center">
               <h1 class="text-xl font-sans tracking-tight text-gray-900">
-                | Request Department |
+                | Validation Quality Assurance |
               </h1>
-
               <h1 class="text-xl font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
                 <span
@@ -192,7 +186,6 @@ const RepairReport = () => {
                 </span>
                 <span className="ml-4">|</span>
               </h1>
-
               <h1 class="text-xl font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
                 <span class="ml-4 text-green-500">RUNNING </span>|
@@ -202,7 +195,67 @@ const RepairReport = () => {
         </div>
       </header>
 
-   
+      <sidebar>
+        <div
+          id="drawer-navigation"
+          className={`fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform ${
+            showDrawer ? "" : "-translate-x-full"
+          } bg-gray-100  dark:bg-gray-100 `}
+          tabIndex="-1"
+          aria-labelledby="drawer-navigation-label"
+        >
+          <h5
+            id="drawer-navigation-label"
+            className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"
+          >
+            Menu
+          </h5>
+          <button
+            type="button"
+            data-drawer-hide="drawer-navigation"
+            onClick={toggleDrawer}
+            aria-controls="drawer-navigation"
+            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          >
+            <svg
+              aria-hidden="true"
+              className="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+            <span className="sr-only">Close menu</span>
+          </button>
+          <div className="py-4 overflow-y-auto">
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="/PPIC"
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-black dark:hover:bg-gray-700"
+                >
+                  <svg
+                    aria-hidden="true"
+                    className="w-6  h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                  </svg>
+                  <span class="ml-3 text-gray-500">Realtime Dashboard</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </sidebar>
 
       <main>
         <section
@@ -259,17 +312,9 @@ const RepairReport = () => {
             </div>
             {/* <!-- Table --> */}
             <div className="w-full max-w-4xl mt-1 mx-auto bg-white shadow-lg rounded-2xl border border-gray-200">
-              {/* <button className="flex" onClick={exportToPDF}>
-                Export To:
-                <img
-                  className="w-[25px]"
-                  src={process.env.PUBLIC_URL + "/pdf.png"}
-                  alt=""
-                />
-              </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Request For Others Department
+                  Validation Quality Assurance
                 </div>
               </header>
 
@@ -283,14 +328,17 @@ const RepairReport = () => {
                       <th className="p-1 w-40">
                         <div className="font-semibold text-left">Nama</div>
                       </th>
-                      <th className="p-1  w-32">
+                      <th className="p-1 w-32">
                         <div className="font-semibold text-left">Line</div>
                       </th>
-                      <th className="p-1  w-32">
-                        <div className="font-semibold text-left">Department</div>
+                      <th className="p-1 w-24">
+                        <div className="font-semibold text-center">AREA</div>
+                      </th>
+                      <th className="p-1 w-28">
+                        <div className="font-semibold text-center">Station</div>
                       </th>
                       <th className="p-1 w-10">
-                        <div className="font-semibold text-center">Details</div>
+                        <div className="font-semibold text-center">File</div>
                       </th>
                       <th className="p-1 w-26">
                         <div className="font-semibold text-center">Date</div>
@@ -299,10 +347,7 @@ const RepairReport = () => {
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
                     {filteredData.map((item, index) => (
-                      <tr
-                        key={item.id}
-                        className={index === 0 ? "bg-green-400" : ""}
-                      >
+                      <tr key={item.id}>
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
                             {item.Nama}
@@ -313,34 +358,88 @@ const RepairReport = () => {
                             {item.Line}
                           </div>
                         </td>
+                        <td className="p-2 ">
+                          <div className="font-medium text-gray-800">
+                            {item.Area}
+                          </div>
+                        </td>
                         <td className="p-2">
                           <div className="font-medium text-gray-800">
-                            {item.Department}
+                            {item.Station}
                           </div>
                         </td>
                         <td className="p-5 ">
                           <button
                             onClick={() => setSelectedItem(item)}
-                            className="bg-blue-900 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                            className="flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                           >
                             <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
+                              width="800px"
+                              height="800px"
+                              viewBox="0 0 24 24"
                               className="w-6 h-6 mr-2"
+                              xmlns="http://www.w3.org/2000/svg"
                             >
-                              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 110-16 8 8 0 010 16zm0-2a6 6 0 100-12 6 6 0 000 12z"
-                                clipRule="evenodd"
-                              />
+                              <title />
+
+                              <g id="Complete">
+                                <g id="F-File">
+                                  <g id="Text">
+                                    <g>
+                                      <path
+                                        d="M18,22H6a2,2,0,0,1-2-2V4A2,2,0,0,1,6,2h7.1a2,2,0,0,1,1.5.6l4.9,5.2A2,2,0,0,1,20,9.2V20A2,2,0,0,1,18,22Z"
+                                        fill="none"
+                                        id="File"
+                                        stroke="#000000"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                      />
+
+                                      <line
+                                        fill="none"
+                                        stroke="#000000"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        x1="7.9"
+                                        x2="16.1"
+                                        y1="17.5"
+                                        y2="17.5"
+                                      />
+
+                                      <line
+                                        fill="none"
+                                        stroke="#000000"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        x1="7.9"
+                                        x2="16.1"
+                                        y1="13.5"
+                                        y2="13.5"
+                                      />
+
+                                      <line
+                                        fill="none"
+                                        stroke="#000000"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        x1="8"
+                                        x2="13"
+                                        y1="9.5"
+                                        y2="9.5"
+                                      />
+                                    </g>
+                                  </g>
+                                </g>
+                              </g>
                             </svg>
-                            <span>Details</span>
                           </button>
                         </td>
 
-                     
+                      
 
                         {/* <td className="p-5 w-40">
                           <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out">
@@ -362,7 +461,7 @@ const RepairReport = () => {
 
                         <td className="p-2">
                           <div className="text-center h-6 text-black...">
-                            {item.Date} WIB
+                            {item.Date}
                           </div>
                         </td>
                       </tr>
@@ -384,15 +483,15 @@ const RepairReport = () => {
                                     <div className="sm:flex sm:items-start">
                                       <div className="w-full max-w-lg">
                                         <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                          <span>Problem</span>
+                                          <span>Validation By</span>
                                         </div>
                                         <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full px-1">
+                                          <div class="w-full  px-3 mb-6 md:mb-0">
                                             <label
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                               for="grid-first-name"
                                             >
-                                              Nama PIC
+                                              Nama PIC Quality
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -404,37 +503,50 @@ const RepairReport = () => {
                                           </div>
                                         </div>
 
-                                        <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full px-1">
+                                        <div class="flex flex-wrap -mx-3 mb-6">
+                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                             <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                                              for="grid-password"
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                              for="grid-city"
                                             >
-                                              Line
-                                            </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200 font-semibold border text-black rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Line}{" "}
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="flex flex-wrap -mx-3 ">
-                                          <div class="w-full px-1">
-                                            <label
-                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                                              for="grid-password"
-                                            >
-                                              Department
+                                              Area
                                             </label>
                                             <div
                                               class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                               type="text"
                                             >
                                               {" "}
-                                              {selectedItem.Department}{" "}
+                                              {selectedItem.Area}{" "}
+                                            </div>
+                                          </div>
+                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                              for="grid-city"
+                                            >
+                                              Line
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.Area}{" "}
+                                            </div>
+                                          </div>
+                                          <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                            <label
+                                              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                              for="grid-city"
+                                            >
+                                              Station
+                                            </label>
+                                            <div
+                                              class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                              type="text"
+                                            >
+                                              {" "}
+                                              {selectedItem.Station}{" "}
                                             </div>
                                           </div>
                                         </div>
@@ -444,14 +556,18 @@ const RepairReport = () => {
                                               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                                               for="grid-password"
                                             >
-                                              Detail Problem
+                                              Validation
                                             </label>
-                                            <div
-                                              class="appearance-none block w-full bg-gray-200  border  text-red-600   rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                              type="text"
-                                            >
-                                              {" "}
-                                              {selectedItem.Problem}{" "}
+                                            <div class="flex items-center">
+                                              <a
+                                                href={`http://192.168.101.236:3001/${selectedItem.Validation}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="text-blue-600 hover:text-blue-800"
+                                              >
+                                                <i class="far fa-file-pdf mr-2"></i>
+                                                View PDF
+                                              </a>
                                             </div>
                                           </div>
                                         </div>
@@ -482,4 +598,4 @@ const RepairReport = () => {
   );
 };
 
-export default RepairReport;
+export default ValidationQuality;

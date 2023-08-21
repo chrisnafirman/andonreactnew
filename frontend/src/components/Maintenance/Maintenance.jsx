@@ -15,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const ReturnMaintenance = () => {
+const Maintenance = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -31,8 +31,8 @@ const ReturnMaintenance = () => {
   const [Area, setArea] = useState("");
   const [Line, setLine] = useState("");
   const [isOpenQuality, setisOpenQuality] = useState(false);
-  const [Requestor, setRequestor] = useState("");
- const [Department, setDepartment] = useState("");
+  const [Department, setDepartment] = useState("");
+ const [Requestor, setRequestor] = useState("");
  const [DepartTo, setDepartTo] = useState("");
   const [StatusLine, setStatusLine] = useState("");
   const [Status, setStatus] = useState("Solved");
@@ -93,7 +93,7 @@ const ReturnMaintenance = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/ReturnMaintenance")
+    fetch("http://192.168.101.236:3001/api/Maintenance")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -124,7 +124,7 @@ const ReturnMaintenance = () => {
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
     fetch(
-      `http://192.168.101.236:3001/api/ReturnMaintenance?date=${selectedDate}`
+      `http://192.168.101.236:3001/api/Maintenance?date=${selectedDate}`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -234,7 +234,7 @@ const submitUpdate = () => {
 
   console.log("Sending data:", data);
 
-  fetch(`http://192.168.101.236:3001/api/PutReturnRepairDoneMaintenance`, {
+  fetch(`http://192.168.101.236:3001/api/PutRepairDoneMaintenance`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -259,9 +259,9 @@ const submitUpdate = () => {
 
   const QRResponseLink = () => {
     if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRReturnResponseMaintenanceTop";
+      return "/QRResponseMaintenanceTop";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRReturnResponseMaintenanceBe";
+      return "/QRResponseMaintenanceBe";
     } else {
     }
   };
@@ -302,7 +302,6 @@ const submitUpdate = () => {
   };
 
 
-
   const handleButtonClick = () => {
     submitUpdate();
     submitQuality();
@@ -337,7 +336,7 @@ const submitUpdate = () => {
           <div>
             <div class="flex items-center">
               <h1 class="text-base lg:text-xl font-sans tracking-tight text-gray-900">
-                | Return Maintenance |
+                | Request Maintenance |
               </h1>
               <h1 class="text-base lg:text-xl  font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
@@ -428,7 +427,7 @@ const submitUpdate = () => {
               </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Return For Maintenance
+                  Request For Maintenance
                 </div>
               </header>
 
@@ -448,7 +447,7 @@ const submitUpdate = () => {
                       <th className="p-1  w-20 lg:w-24">
                         <div className="font-semibold text-left">Area</div>
                       </th>
-                      <th className="p-1  w-15 lg:w-40">
+                      <th className="p-1  w-32 lg:w-40">
                         <div className="font-semibold text-left">Station</div>
                       </th>
                       <th className="p-1 w-10">
@@ -489,15 +488,15 @@ const submitUpdate = () => {
                           {item.Status === "" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-green-600 w-16  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                              className="bg-green-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                             >
-                              <span className="text-xs lg:text-sm">Open</span>
+                              <span className="text-xs  lg:text-sm">Open</span>
                             </button>
                           )}
                           {item.Status === "Solved" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-red-600  w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                              className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Solved</span>
                             </button>
@@ -505,7 +504,7 @@ const submitUpdate = () => {
                           {item.Status === "Repair" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-yellow-500 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                              className="bg-yellow-500 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Repair</span>
                             </button>
@@ -689,7 +688,7 @@ const submitUpdate = () => {
                                         <button
                                           className="" onClick= {()=>{
                                             setisOpenQuality(true)
-                                            setNamaPIC(selectedItem.Nama)                 
+                                            setNamaPIC(selectedItem.Nama)
                                             setRequestor(selectedItem.Department)
                                             setArea(selectedItem.Area)
                                             setLine(selectedItem.Line)
@@ -990,4 +989,4 @@ const submitUpdate = () => {
   );
 };
 
-export default ReturnMaintenance;
+export default Maintenance;

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import QrScanner from "qr-scanner";
 
-const QRScannerPopup = ({ onClose, onScanSuccess }) => {
+const QR = ({ onClose, onScanSuccess }) => {
   const videoRef = useRef(null);
   const [scannedData, setScannedData] = useState("");
   const [flashOn, setFlashOn] = useState(false);
@@ -115,4 +115,4 @@ const QRScannerPopup = ({ onClose, onScanSuccess }) => {
   );
 };
 
-export default QRScannerPopup;
+export default QR;

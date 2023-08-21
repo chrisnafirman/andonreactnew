@@ -13,7 +13,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRReturnResponseMTCTOP() {
+function QRResponseMTCTOP() {
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
@@ -94,7 +94,7 @@ function QRReturnResponseMTCTOP() {
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.236:3001/api/PutReturnResponseMaintenance`, {
+    fetch(`http://192.168.101.236:3001/api/PutResponseOthers`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -147,7 +147,7 @@ function QRReturnResponseMTCTOP() {
   const handleButtonClick = () => {
     submitResponse();
     // Mengalihkan pengguna ke halaman yang diinginkan
-    window.location.href = "/ReturnMaintenance"; // Ganti dengan URL halaman tujuan
+    window.location.href = "/Others"; // Ganti dengan URL halaman tujuan
   };
 
   return (
@@ -178,7 +178,7 @@ function QRReturnResponseMTCTOP() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Return Respon</span>
+                          <span>Repair</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div className="w-full mt-1 px-3 mb-3 md:mb-0">
@@ -449,11 +449,11 @@ function QRReturnResponseMTCTOP() {
                             type="button"
                             onClick={handleButtonClick}
                           >
-                            Repair 
+                            Repair
                           </button>
                         </div>
                       </form>
-                      <a href="/ReturnMaintenance">
+                      <a href="/Others">
                         <button class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                           <svg width="20px" viewBox="0 0 1024 1024">
                             <path
@@ -500,4 +500,4 @@ function QRReturnResponseMTCTOP() {
   );
 }
 
-export default QRReturnResponseMTCTOP;
+export default QRResponseMTCTOP;

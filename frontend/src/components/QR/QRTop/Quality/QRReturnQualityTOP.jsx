@@ -15,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRMaintenanceTOP() {
+function QRReturnQualityTOP() {
 
 
 
@@ -30,11 +30,11 @@ function QRMaintenanceTOP() {
   const [hasilScanMesin, setHasilScanMesin] = useState("");
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
-  const [Status, setStatus] = useState("Solved");
+  const [Status, setStatus] = useState("Return");
+  const [Requestor, setRequestor] = useState("Quality");
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
-  const [Action, setAction] = useState("");
 
   const [
     backgroundColorStatusdestackerTop,
@@ -88,8 +88,8 @@ function QRMaintenanceTOP() {
 
 
   // QR
-  const submitQuality = () => {
-    if (!NamaPIC || !Line || !Area || !Department || !Kerusakan || !Action) {
+  const submitMaintenance = () => {
+    if (!NamaPIC || !Line || !Area || !Department || !Kerusakan) {
       alert("Harap isi semua kolom!");
       return;
     }
@@ -100,18 +100,19 @@ function QRMaintenanceTOP() {
       Line: Line,
       Station: Station,
       Department: Department,
+      Requestor: Requestor,
       Kerusakan: Kerusakan,
-      Action: Action,
+
     };
 
-    alert("Laporan Telah Berhasil Di Kirim Ke Team Quality ");
+    alert("Return Telah Berhasil Di Kirim Ke Team Terkait");
 
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set(`${DepartTo}`);
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set(`${Department}`);
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.236:3001/api/${DepartTo}`, {
+    fetch(`http://192.168.101.236:3001/api/Return${DepartTo}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -128,8 +129,6 @@ function QRMaintenanceTOP() {
       .catch((err) => {
         console.log(err);
       });
-
-
   };
 
 
@@ -138,12 +137,12 @@ function QRMaintenanceTOP() {
       Station: Station,
       Status: Status,
       Area: Area,
-      Action: Action,
+      Department: Department,
     };
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.236:3001/api/PutRepairDoneMaintenance`, {
+    fetch(`http://192.168.101.236:3001/api/PutReturnQuality`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -198,8 +197,16 @@ function QRMaintenanceTOP() {
 
   const OptionsDepartment = [
     { value: "", label: "-- Pilih Depart --" },
-    { value: "QC", value2: "QC", label: "QC" },
-    { value: "QA", value2: "QA", label: "QA" },
+    { value: "PURCHASING,PPIC,MP&L", value2: "Others", label: "PURCHASING,PPIC,MP&L" },
+    { value: "PROCESS ENGINEERING", value2: "Others", label: "PROCESS ENGINEERING" },
+    { value: "PRODUCT DEVELOPMENT", value2: "Others", label: "PRODUCT DEVELOPMENT" },
+    {
+      value: "ADVANCED MANUFACTURING ENGINEERING", value2: "others",
+      label: "ADVANCED MANUFACTURING ENGINEERING",
+    },
+    { value: "HRGA & EHS", value2: "Others", label: "HRGA & EHS" },
+    { value: "MAINTENANCE & IT", value2: "Maintenance", label: "MAINTENANCE & IT" },
+
   ];
 
   const handleSelectDepartment = (selectedOptionDepartment) => {
@@ -210,10 +217,10 @@ function QRMaintenanceTOP() {
 
   const handleButtonClick = () => {
     submitUpdate();
-    submitQuality();
+    submitMaintenance();
 
     // Mengalihkan pengguna ke halaman yang diinginkan
-    window.location.href = '/RequestMaintenance'; // Ganti dengan URL halaman tujuan
+    window.location.href = '/Quality'; // Ganti dengan URL halaman tujuan
   };
 
 
@@ -223,7 +230,7 @@ function QRMaintenanceTOP() {
         {isQRLeader ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-60 text-center sm:block sm:p-0">
+              <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-72 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
                   <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
                 </div>
@@ -245,7 +252,7 @@ function QRMaintenanceTOP() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Request Quality</span>
+                          <span>Return For Repairment</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div className="w-full mt-3 px-3 mb-2 md:mb-0">
@@ -405,7 +412,7 @@ function QRMaintenanceTOP() {
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                             for="grid-password"
                           >
-                            Problem
+                            Description
                           </label>
                           <input
                             class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -418,25 +425,7 @@ function QRMaintenanceTOP() {
                             }}
                             required
                           />
-                        </div>
-                        <div class="w-full px-1">
-                          <label
-                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
-                            for="grid-password"
-                          >
-                            Action
-                          </label>
-                          <input
-                            class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-password"
-                            type="text"
-                            placeholder=""
-                            name="Action"
-                            onChange={(e) => {
-                              setAction(e.target.value);
-                            }}
-                            required
-                          />
+                         
                         </div>
 
 
@@ -453,7 +442,7 @@ function QRMaintenanceTOP() {
                           </button>
                         </div>
                       </form>  
-                      <a href="/RequestMaintenance">  
+                      <a href="/Quality">  
                       <button
                             class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                           
@@ -500,4 +489,4 @@ function QRMaintenanceTOP() {
   )
 }
 
-export default QRMaintenanceTOP
+export default QRReturnQualityTOP

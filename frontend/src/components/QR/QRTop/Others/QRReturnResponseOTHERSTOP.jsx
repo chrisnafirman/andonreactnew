@@ -94,7 +94,7 @@ function QRReturnResponseMTCTOP() {
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.236:3001/api/PutReturnResponseMaintenance`, {
+    fetch(`http://192.168.101.236:3001/api/PutReturnResponseOthers`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -147,7 +147,7 @@ function QRReturnResponseMTCTOP() {
   const handleButtonClick = () => {
     submitResponse();
     // Mengalihkan pengguna ke halaman yang diinginkan
-    window.location.href = "/ReturnMaintenance"; // Ganti dengan URL halaman tujuan
+    window.location.href = "/ReturnOthers"; // Ganti dengan URL halaman tujuan
   };
 
   return (
@@ -453,7 +453,7 @@ function QRReturnResponseMTCTOP() {
                           </button>
                         </div>
                       </form>
-                      <a href="/ReturnMaintenance">
+                      <a href="/ReturnOthers">
                         <button class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                           <svg width="20px" viewBox="0 0 1024 1024">
                             <path

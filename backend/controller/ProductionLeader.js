@@ -24,7 +24,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-const PutFileValidationQA = (req, res) => {
+const PutFileValidationProductionLeader = (req, res) => {
   upload.single("validation")(req, res, (error) => {
     if (error) {
       console.error(error);
@@ -41,7 +41,7 @@ const PutFileValidationQA = (req, res) => {
     }
 
     db.query(
-      "UPDATE qualitya SET Status = ?, validation = ? WHERE No = ?",
+      "UPDATE productionleader SET Status = ?, validation = ? WHERE No = ?",
       [Status, Validation, No],
       (error, results) => {
         if (error) {
@@ -56,11 +56,11 @@ const PutFileValidationQA = (req, res) => {
 
 
 
-const PutValidationQA = (req, res) => {
+const PutValidationProductionLeader = (req, res) => {
   const { Status, NamaPIC, Desc, Station, Area } = req.body;
 
   db.query(
-    "UPDATE qualitya SET Status = ?, ValidationName = ?, ValidationDescription = ?, ValidationDate = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    "UPDATE productionleader SET Status = ?, ValidationName = ?, ValidationDescription = ?, ValidationDate = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
     [Status, NamaPIC, Desc, Station, Area],
     (error, results) => {
       if (error) {
@@ -74,12 +74,12 @@ const PutValidationQA = (req, res) => {
 
 
 
-const postRequestQA = (req, res) => {
-  const { NamaPIC, Area, Line, Station, Kerusakan, Action, Department } = req.body;
+const postRequestProductionLeader = (req, res) => {
+  const { NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor } = req.body;
 
   db.query(
-    "INSERT INTO qualitya (Nama, Area, Line, Station, Problem, Action, Department) VALUES (?, ?, ?, ?, ?, ?, ?)",
-    [NamaPIC, Area, Line, Station, Kerusakan, Action, Department],
+    "INSERT INTO productionleader (Nama, Area, Line, Station, Problem, Action, DepartTo, Requestor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+    [NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -91,11 +91,11 @@ const postRequestQA = (req, res) => {
 };
 
 
-const PutReturnQA = (req, res) => {
+const PutReturnProductionLeader = (req, res) => {
   const { Status, Department, Station, Area } = req.body;
 
   db.query(
-    "UPDATE qualitya SET Status = ?, ReturnDepartment = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    "UPDATE productionleader SET Status = ?, ReturnDepartment = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
     [Status, Department, Station, Area],
     (error, results) => {
       if (error) {
@@ -111,15 +111,15 @@ const PutReturnQA = (req, res) => {
 
 
 
-const getRequestQA = (req, res) => {
-  const sqlSelect = "SELECT * FROM qualitya";
+const getRequestProductionLeader = (req, res) => {
+  const sqlSelect = "SELECT * FROM productionleader";
   db.query(sqlSelect, (err, results) => {
     res.send(results);
   });
 };
 
-const getValidationQA = (req, res) => {
-  const sqlSelect = "SELECT * FROM validationqa";
+const getValidationProductionLeader = (req, res) => {
+  const sqlSelect = "SELECT * FROM validationproductionleader";
   db.query(sqlSelect, (err, results) => {
     res.send(results);
   });
@@ -133,10 +133,10 @@ const getValidationQA = (req, res) => {
 
 
 module.exports = {
-  postRequestQA,
-  getRequestQA,
-  getValidationQA,
-  PutValidationQA,
-  PutReturnQA,
-  PutFileValidationQA,
+  postRequestProductionLeader,
+  getRequestProductionLeader,
+  getValidationProductionLeader,
+  PutValidationProductionLeader,
+  PutReturnProductionLeader,
+  PutFileValidationProductionLeader,
 };
