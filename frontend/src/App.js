@@ -35,6 +35,7 @@ import ProductionLeader from "./components/ProductionLeader/ProductionLeader.jsx
 
 
 import UserMobile from "./components/User/UserMobile.jsx"
+import UserSMTTop from "./components/User/SmtTop.jsx"
 
 import QROperator from "./components/QR/QRTop/QROperatorTOP.jsx"
 import QRLeaderTop from "./components/QR/QRTop/QRLeaderTOP.jsx"
@@ -80,6 +81,9 @@ function App() {
         <Route path="Leader" element={<Leader/>}/>
         <Route path="ReturnLeader" element={<ReturnLeader/>}/>
       
+     
+
+        <Route path="UserSMTTop" element={<UserSMTTop/>}/>
 
         <Route path="SmtTop" element={<SmtTop/>}/>
         <Route path="SmtBot" element={<SmtBot/>}/>

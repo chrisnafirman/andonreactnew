@@ -193,7 +193,7 @@ const ReturnOthers = () => {
   setStation(null);
   setNamaPIC(null);
 
-  fetch(`http://192.168.101.236:3001/api/${DepartTo}`, {
+  fetch(`http://192.168.101.236:3001/api/${Department}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -293,7 +293,7 @@ const submitUpdate = () => {
     { value: "", label: "-- Pilih Depart --" },
     { value: "QC", value2: "Quality", label: "QC" },
     { value: "QA", value2: "Quality", label: "QA" },
-    { value: "ProductionLeader", value2: "ProductionLeader", label: "Production Leader" },
+    { value: "ProductionLeader", value2: "Quality", label: "Production Leader" },
   ];
 
   const handleSelectDepartment = (selectedOptionDepartment) => {

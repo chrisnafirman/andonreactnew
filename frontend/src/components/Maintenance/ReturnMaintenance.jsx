@@ -188,7 +188,7 @@ const ReturnMaintenance = () => {
 
   alert("Laporan Telah Berhasil Di Kirim Ke Team Validation ");
 
-  firebase.database().ref(`SMTLine1TOP/${Station}`).set(`${DepartTo}`);
+  firebase.database().ref(`SMTLine1TOP/${Station}`).set(`${Department}`);
   firebase.database().ref("StatusLine/SMTLine1").set("Down");
   setStation(null);
   setNamaPIC(null);
@@ -292,7 +292,7 @@ const submitUpdate = () => {
     { value: "", label: "-- Pilih Depart --" },
     { value: "QC", value2: "Quality", label: "QC" },
     { value: "QA", value2: "Quality", label: "QA" },
-    { value: "ProductionLeader", value2: "ProductionLeader", label: "Production Leader" },
+    { value: "ProductionLeader", value2: "Quality", label: "Production Leader" },
   ];
 
   const handleSelectDepartment = (selectedOptionDepartment) => {

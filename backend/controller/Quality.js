@@ -127,6 +127,21 @@ const getValidationQuality = (req, res) => {
 
 
 
+const PutRealTimeDestackerTOP = (req, res) => {
+  const { Line, Station, Area } = req.body;
+
+  db.query(
+    "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [Line, Station, Area],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been updated successfully' });
+    }
+  );
+};
 
 
 
@@ -139,4 +154,6 @@ module.exports = {
   PutValidationQuality,
   PutReturnQuality,
   PutFileValidationQuality,
+  PutRealTimeDestackerTOP ,
+
 };

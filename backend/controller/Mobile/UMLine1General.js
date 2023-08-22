@@ -1,4 +1,4 @@
-const db = require("../models/init");
+const db = require("../../models/init");
 
 // Failure
 const getUMElectricityLine1 = (req, res) => {

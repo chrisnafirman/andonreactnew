@@ -7,10 +7,13 @@ const ProductionLeaderControllers = require("../controller/ProductionLeader");
 const TimeProductioncontrollers = require("../controller/TimeProduction")
 const Otherscontrollers = require("../controller/Others")
 const Employeecontrollers = require("../controller/Employee")
-const UMLine1TOP = require("../controller/UMLine1TOP")
-const UMLine1General = require("../controller/UMLine1General")
-const UMLine1BOT = require("../controller/UMLine1BOT")
-const UMLine1BE = require("../controller/UMLine1BE")
+
+const UMLine1TOP = require("../controller/Mobile/UMLine1TOP")
+const UMLine1General = require("../controller/Mobile/UMLine1General")
+const UMLine1BOT = require("../controller/Mobile/UMLine1BOT")
+const UMLine1BE = require("../controller/Mobile/UMLine1BE")
+
+const SMTTOPDATA = require("../controller/SMTTOPDATA/DestackerTOP")
 
 
 // lDR
@@ -20,12 +23,10 @@ router.put("/PutStatusLeader", LDRcontrollers.PutStatusLeader);
 router.delete("/leader/:id", LDRcontrollers.DeleteReject);
 
 // MTC
-
 router.post("/Maintenance", MTCcontrollers.postRequestMaintenance);
 router.get("/Maintenance", MTCcontrollers.getRequestMaintenance);
 router.post("/ReturnMaintenance", MTCcontrollers.postReturnMaintenance);
 router.get("/ReturnMaintenance", MTCcontrollers.getReturnMaintenance);
-
 
 router.put("/PutResponseMaintenance", MTCcontrollers.PutResponseMaintenance);
 router.put("/PutRepairDoneMaintenance", MTCcontrollers.PutRepairDoneMaintenance);
@@ -34,7 +35,6 @@ router.put("/PutReturnResponseMaintenance", MTCcontrollers.PutReturnResponseMain
 router.put("/PutReturnRepairDoneMaintenance", MTCcontrollers.PutReturnRepairDoneMaintenance);
 
 // Others
-
 router.post("/Others", Otherscontrollers.postRequestOthers);
 router.get("/Others", Otherscontrollers.getRequestOthers);
 router.post("/ReturnOthers", Otherscontrollers.postReturnOthers);
@@ -45,11 +45,6 @@ router.put("/PutRepairDoneOthers", Otherscontrollers.PutRepairDoneOthers);
 
 router.put("/PutReturnResponseOthers", Otherscontrollers.PutReturnResponseOthers);
 router.put("/PutReturnRepairDoneOthers", Otherscontrollers.PutReturnRepairDoneOthers);
-
-
-
-
-
 
 
 router.post("/General", Otherscontrollers.postRequestGeneral);
@@ -76,14 +71,25 @@ router.get("/ValidationProductionLeader", ProductionLeaderControllers.getValidat
 
 // Time Production
 router.post("/ScheduleProduction", TimeProductioncontrollers.postInputSchedule);
-
 router.put("/UpdateCMA", TimeProductioncontrollers.updateResultsCMA);
-
 router.put("/UpdateRealProduction", TimeProductioncontrollers.updateRealProduction);
-
 router.put("/UpdateOverTime", TimeProductioncontrollers.updateOverTime);
-
 router.get("/ScheduleProduction", TimeProductioncontrollers.getTimeProduction);
+
+
+
+
+
+
+// Realtime Line 1 Top
+router.put("/PutRealtimeDestackerTOP", SMTTOPDATA.PutRealTimeDestackerTOP);
+router.get("/getDestackerTOPLeader", SMTTOPDATA.getDestackerTOPLeader);
+router.get("/getDestackerTOPMaintenance", SMTTOPDATA.getDestackerTOPMaintenance);
+router.get("/getDestackerTOPQuality", SMTTOPDATA.getDestackerTOPQuality);
+
+
+
+
 
 
 
@@ -96,6 +102,15 @@ router.get("/Employee_Operator", Employeecontrollers.getRequestEmployee);
 router.get("/Employee_Operator_Manufacturing", Employeecontrollers.getRequestEmployeeOperatorManufacturing);
 router.get("/Employee_Team_Maintenance", Employeecontrollers.getRequestEmployeeTeamMaintenance);
 router.get("/Employee_Team_Quality", Employeecontrollers.getRequestEmployeeTeamQuality);
+
+
+
+
+
+
+
+
+
 
 
 // User Mobile
@@ -116,6 +131,7 @@ router.get("/UMDestackerTOPLine1QA", UMLine1TOP.getUMDestackerTOPLine1QA);
 router.get("/UMDestackerTOPLine1QC", UMLine1TOP.getUMDestackerTOPLine1QC);
 router.get("/UMDestackerTOPLine1Return", UMLine1TOP.getUMDestackerTOPLine1Return);
 router.get("/UMDestackerTOPLine1ValQuality", UMLine1TOP.getUMDestackerTOPLine1ValQuality);
+
 
 
 router.get("/UMLabelTOPLine1", UMLine1TOP.getUMLabelTOPLine1);

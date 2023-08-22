@@ -107,7 +107,7 @@ function QRReturnQualityTOP() {
 
     alert("Return Telah Berhasil Di Kirim Ke Team Terkait");
 
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set(`${Department}`);
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set(`Return ${Department}`);
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setStation(null);
     setNamaPIC(null);

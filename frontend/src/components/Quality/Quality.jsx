@@ -322,82 +322,83 @@ const Quality = () => {
                     </tr>
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
-                    {filteredData.map((item, index) => (
-                      <tr
-                        key={item.id}
-                        className={index === 0 ? "bg-green-400" : ""}
-                      >
-                        <td className="p-2">
-                          <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.DepartTo}
-                          </div>
-                        </td>
-                        <td className="p-2">
-                          <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.Requestor}
-                          </div>
-                        </td>
-                        <td className="p-2">
-                          <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.Line}
-                          </div>
-                        </td>
-                        <td className="p-2">
-                          <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.Area}
-                          </div>
-                        </td>
-                        <td className="p-2">
-                          <div className="font-medium text-gray-800">
-                            {item.Station}
-                          </div>
-                        </td>
-                        <td className="p-2 ">
-                          {item.Status === "" && (
-                            <button
-                              onClick={() => {
-                                setSelectedItem(item)
+  {filteredData.map((item, index) => {
+    if (item.DepartTo === 'QA' || item.DepartTo === 'QC') {
+      return (
+        <tr
+          key={item.id}
+          className={index === 0 ? "bg-green-400" : ""}
+        >
+          <td className="p-2">
+            <div className="font-medium text-xs lg:text-sm text-gray-800">
+              {item.DepartTo}
+            </div>
+          </td>
+          <td className="p-2">
+            <div className="font-medium text-xs lg:text-sm text-gray-800">
+              {item.Requestor}
+            </div>
+          </td>
+          <td className="p-2">
+            <div className="font-medium text-xs lg:text-sm text-gray-800">
+              {item.Line}
+            </div>
+          </td>
+          <td className="p-2">
+            <div className="font-medium text-xs lg:text-sm text-gray-800">
+              {item.Area}
+            </div>
+          </td>
+          <td className="p-2">
+            <div className="font-medium text-gray-800">
+              {item.Station}
+            </div>
+          </td>
+          <td className="p-2 ">
+            {item.Status === "" && (
+              <button
+                onClick={() => {
+                  setSelectedItem(item)
+                }}
+                className="bg-blue-600 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+              >
+                <span className="text-xs lg:text-sm">Open</span>
+              </button>
+            )}
+            {item.Status === "Valid" && (
+              <button
+                onClick={() => {
+                  setSelectedItem(item)
+                }}
+                className="bg-green-600 w-20 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+              >
+                <span className="text-xs lg:text-sm">Valid</span>
+              </button>
+            )}
+            {item.Status === "Return" && (
+              <button
+                onClick={() => {
+                  setSelectedItem(item)
+                  setIsOpenReturn(item)
+                }}
+                className="bg-orange-800 w-20 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+              >
+                <span className="text-xs lg:text-sm">Return</span>
+              </button>
+            )}
+          </td>
+          <td className="p-2">
+            <div className="text-center h-6 text-black">
+              {item.Date} WIB
+            </div>
+          </td>
+        </tr>
+      );
+    }
+    return null;
+  })}
+</tbody>
 
-                              }}
-                              className="bg-blue-600 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
-                            >
-                              <span className="text-xs lg:text-sm">Open</span>
-                            </button>
-                          )}
-                          {item.Status === "Valid" && (
-                            <button
-                              onClick={() => {
-                                setSelectedItem(item)
-
-                              }}
-                              className="bg-green-600 w-20 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
-                            >
-                              <span className="text-xs lg:text-sm">Valid</span>
-                            </button>
-                          )}
-                          {item.Status === "Return" && (
-                            <button
-                              onClick={() => {
-                                setSelectedItem(item)
-                                setIsOpenReturn(item)
-                              }}
-                              className="bg-orange-800 w-20 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
-                            >
-                              <span className="text-xs lg:text-sm">Return</span>
-                            </button>
-                          )}
-                        </td>
-                        
-
-
-                        <td className="p-2">
-                          <div className="text-center h-6 text-black">
-                            {item.Date} WIB
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
                 </table>
                 {selectedItem && (
                   <>
