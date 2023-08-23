@@ -12,7 +12,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const ProductionLeader = () => {
+const ValidationLeader = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -193,7 +193,7 @@ const ProductionLeader = () => {
           <div>
             <div class="flex items-center">
               <h1 class="text-base lg:text-xl font-sans tracking-tight text-gray-900">
-                | Request Production Leader |
+                | Request Validation Leader |
               </h1>
               <h1 class="text-base lg:text-xl  font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
@@ -282,7 +282,7 @@ const ProductionLeader = () => {
               </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Request For ProductionLeader
+                  Request For Validation Leader
                 </div>
               </header>
 
@@ -317,7 +317,7 @@ const ProductionLeader = () => {
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
                     {filteredData.map((item, index) => {
-                      if (item.DepartTo === "ProductionLeader") {
+                      if (item.DepartTo === "Production Leader") {
                         return (
                           <tr
                             key={item.id}
@@ -349,7 +349,7 @@ const ProductionLeader = () => {
                                   onClick={() => {
                                     setSelectedItem(item);
                                   }}
-                                  className="bg-blue-600 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                                  className="bg-blue-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                                 >
                                   <span className="text-xs lg:text-sm">
                                     Open
@@ -361,7 +361,7 @@ const ProductionLeader = () => {
                                   onClick={() => {
                                     setSelectedItem(item);
                                   }}
-                                  className="bg-green-600 w-20 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                                  className="bg-green-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                                 >
                                   <span className="text-xs lg:text-sm">
                                     Valid
@@ -374,7 +374,7 @@ const ProductionLeader = () => {
                                     setSelectedItem(item);
                                     setIsOpenReturn(item);
                                   }}
-                                  className="bg-orange-800 w-20 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                                  className="bg-orange-800 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                                 >
                                   <span className="text-xs lg:text-sm">
                                     Return
@@ -562,7 +562,7 @@ const ProductionLeader = () => {
                                             setIsOpenValidation(true);
                                           }}
                                         >
-                                          Validation ProductionLeader
+                                          Validation Leader
                                         </button>
                                       </div>
                                     )}
@@ -787,7 +787,7 @@ const ProductionLeader = () => {
 
                         {/* Add Validation and Reject buttons */}
                         <div className="flex justify-between space-x-6 mt-4">
-                          <a href="/QRValidationProductionLeaderTOP">
+                          <a href="/QRValidationLeaderTOP">
                             <button className="bg-green-500 flex  hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                               <svg
                                 fill="#000000"
@@ -800,7 +800,7 @@ const ProductionLeader = () => {
                               <span className="text-2xl ">Validation</span>
                             </button>
                           </a>
-                          <a href="/QRReturnProductionLeaderTOP">
+                          <a href="/QRReturnLeaderTOP">
                             <button
                               className="bg-red-500  w-36 h-12 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                               onClick={() => {
@@ -824,4 +824,4 @@ const ProductionLeader = () => {
   );
 };
 
-export default ProductionLeader;
+export default ValidationLeader;

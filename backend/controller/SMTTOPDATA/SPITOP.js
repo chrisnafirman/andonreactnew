@@ -1,12 +1,12 @@
 const db = require("../../models/init");
 
 
-const PutDownTimeDestackerTOP = (req, res) => {
-    const { TimeDestacker, DestackerTop, Area } = req.body;
+const PutDownTimeSPITOP = (req, res) => {
+    const { TimeSPI, SPITop, Area } = req.body;
   
     db.query(
       "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
-      [TimeDestacker, DestackerTop, Area],
+      [TimeSPI, SPITop, Area],
       (error, results) => {
         if (error) {
           console.log(error);
@@ -17,9 +17,9 @@ const PutDownTimeDestackerTOP = (req, res) => {
     );
   }
 
-// DestackerTop
-const getDestackerTOPLeader = (req, res) => {
-    const sqlSelect = "SELECT * FROM leader WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+// SPITop
+const getSPITOPLeader = (req, res) => {
+    const sqlSelect = "SELECT * FROM leader WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -35,8 +35,8 @@ const getDestackerTOPLeader = (req, res) => {
 };
 
 
-const getDestackerTOPMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM maintenance WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getSPITOPMaintenance = (req, res) => {
+    const sqlSelect = "SELECT * FROM maintenance WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -51,8 +51,8 @@ const getDestackerTOPMaintenance = (req, res) => {
     });
 };
 
-const getDestackerTOPQuality = (req, res) => {
-    const sqlSelect = "SELECT * FROM quality WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getSPITOPQuality = (req, res) => {
+    const sqlSelect = "SELECT * FROM quality WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -67,25 +67,8 @@ const getDestackerTOPQuality = (req, res) => {
     });
 };
 
-const getDestackerTOPOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM Others WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
-
-
-const getDestackerTOPReturnMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnmaintenance WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getSPITOPOthers = (req, res) => {
+    const sqlSelect = "SELECT * FROM Others WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -101,9 +84,26 @@ const getDestackerTOPReturnMaintenance = (req, res) => {
 };
 
 
+const getSPITOPReturnMaintenance = (req, res) => {
+    const sqlSelect = "SELECT * FROM returnmaintenance WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+    db.query(sqlSelect, (err, results) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Error fetching data from the database.");
+        } else {
+            if (results.length > 0) {
+                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
+            } else {
+                res.status(404).send("No data found.");
+            }
+        }
+    });
+};
 
-const getDestackerTOPReturnOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnothers WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+
+
+const getSPITOPReturnOthers = (req, res) => {
+    const sqlSelect = "SELECT * FROM returnothers WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -121,11 +121,11 @@ const getDestackerTOPReturnOthers = (req, res) => {
 
 module.exports = {
 
-    getDestackerTOPLeader,
-    PutDownTimeDestackerTOP,
-    getDestackerTOPMaintenance,
-    getDestackerTOPQuality,
-    getDestackerTOPOthers,
-    getDestackerTOPReturnMaintenance,
-    getDestackerTOPReturnOthers,
+    getSPITOPLeader,
+    PutDownTimeSPITOP,
+    getSPITOPMaintenance,
+    getSPITOPQuality,
+    getSPITOPOthers,
+    getSPITOPReturnMaintenance,
+    getSPITOPReturnOthers,
 };

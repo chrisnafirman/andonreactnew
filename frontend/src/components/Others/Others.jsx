@@ -292,7 +292,7 @@ const submitUpdate = () => {
     { value: "", label: "-- Pilih Depart --" },
     { value: "QC", value2: "Quality", label: "QC" },
     { value: "QA", value2: "Quality", label: "QA" },
-    { value: "ProductionLeader", value2: "Quality", label: "Production Leader" },
+    { value: "Production Leader", value2: "Quality", label: "Production Leader" },
   ];
 
   const handleSelectDepartment = (selectedOptionDepartment) => {
@@ -496,15 +496,15 @@ const submitUpdate = () => {
                           {item.Status === "Solved" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-red-600 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                              className="bg-red-600 flex w-16 items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
-                              <span className="text-xs w-16 lg:text-sm">Solved</span>
+                              <span className="text-xs  lg:text-sm">Solved</span>
                             </button>
                           )}
                           {item.Status === "Repair" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-yellow-500 flex items-center w-16 justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                              className="bg-yellow-500  flex items-center w-16 justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Repair</span>
                             </button>

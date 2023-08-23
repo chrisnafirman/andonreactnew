@@ -90,7 +90,7 @@ function QRResponseMTCTOP() {
 
     alert("Response Telah Di Terima Selamat Bekerja");
 
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Repair");
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Repair Others");
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setNamaPIC(null);
     setStation(null);

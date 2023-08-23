@@ -292,7 +292,7 @@ const submitUpdate = () => {
     { value: "", label: "-- Pilih Depart --" },
     { value: "QC", value2: "Quality", label: "QC" },
     { value: "QA", value2: "Quality", label: "QA" },
-    { value: "ProductionLeader", value2: "Quality", label: "Production Leader" },
+    { value: "Production Leader", value2: "Quality", label: "Production Leader" },
   ];
 
   const handleSelectDepartment = (selectedOptionDepartment) => {

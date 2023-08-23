@@ -11,7 +11,7 @@ import ValidationQuality from "./components/Quality/ValidationQuality.jsx"
 
 
 import AndonLine1 from "./components/Line1/AndonLine1.jsx";
-import SmtTop from "./components/Line1/SmtTop.jsx";
+import SmtTop from "./components/Line1/SmtTop(Controler).jsx";
 import SmtBot from "./components/Line1/SmtBot.jsx";
 import SmtBE from "./components/Line1/SmtBE.jsx";
 import Inputsche from "./components/Production/Inputsche.jsx"
@@ -28,17 +28,17 @@ import ReturnMaintenance from "./components/Maintenance/ReturnMaintenance.jsx"
 
 
 import Leader from "./components/Leader/Leader.jsx"
-import ReturnLeader from "./components/Leader/ReturnLeader.jsx"
 
 
-import ProductionLeader from "./components/ProductionLeader/ProductionLeader.jsx"
+
+import ValidationLeader from "./components/Leader/ValidationLeader.jsx"
 
 
 import UserMobile from "./components/User/UserMobile.jsx"
 import UserSMTTop from "./components/User/SmtTop.jsx"
 
 import QROperator from "./components/QR/QRTop/QROperatorTOP.jsx"
-import QRLeaderTop from "./components/QR/QRTop/QRLeaderTOP.jsx"
+import QRLeaderTop from "./components/QR/QRTop/Leader/QRLeaderTOP.jsx"
 
 import QRMaintenanceTop from "./components/QR/QRTop/MTC/QRReqValidationMTCTOP.jsx"
 import QRReturnResponseMaintenanceTop from "./components/QR/QRTop/MTC/QRReturnResponseMTCTOP.jsx"
@@ -47,8 +47,8 @@ import QRResponseMaintenanceTop from "./components/QR/QRTop/MTC/QRResponseMTCTOP
 import QRReturnQualityTop from "./components/QR/QRTop/Quality/QRReturnQualityTOP.jsx"
 import QRValidationQualityTOP from "./components/QR/QRTop/Quality/QRValidationQualityTOP.jsx"
 
-import QRReturnProductionLeaderTop from "./components/QR/QRTop/ProductionLeader/QRReturnPLTOP.jsx"
-import QRValidationProductionLeaderTOP from "./components/QR/QRTop/ProductionLeader/QRValidationPLTOP.jsx"
+import QRReturnLeaderTop from "./components/QR/QRTop/Leader/QRReturnLeaderTOP.jsx"
+import QRValidationLeaderTOP from "./components/QR/QRTop/Leader/QRValidationLeaderTOP.jsx"
 
 import QRReturnResponseOthersTop from "./components/QR/QRTop/Others/QRReturnResponseOTHERSTOP.jsx"
 import QRResponseOthersTop from "./components/QR/QRTop/Others/QRResponseOTHERSTOP.jsx"
@@ -57,7 +57,7 @@ import PortalMaintenance from "./components/Portal/PortalMaintenance.jsx"
 import PortalLeader from "./components/Portal/PortalLeader.jsx"
 import PortalQuality from "./components/Portal/PortalQuality.jsx"
 import PortalOthers from "./components/Portal/PortalOthers.jsx"
-import PortalProductionLeader from "./components/Portal/PortalProductionLeader.jsx"
+
 
 function App() {
   return (
@@ -79,7 +79,7 @@ function App() {
 
 
         <Route path="Leader" element={<Leader/>}/>
-        <Route path="ReturnLeader" element={<ReturnLeader/>}/>
+
       
      
 
@@ -96,8 +96,6 @@ function App() {
 
 
 
-        <Route path="Leader" element={<Leader/>}/>
-        <Route path="ReturnLeader" element={<ReturnLeader/>}/>
 
         <Route path="Quality" element={<Quality/>}/>
         <Route path="ValidationQuality" element={<ValidationQuality/>}/>
@@ -110,7 +108,7 @@ function App() {
         <Route path="ReturnOthers" element={<ReturnOthers/>}/>
 
 
-        <Route path="ProductionLeader" element={<ProductionLeader/>}/>
+        <Route path="ValidationLeader" element={<ValidationLeader/>}/>
 
 
 
@@ -127,8 +125,8 @@ function App() {
         <Route path="QRReturnQualityTop" element={<QRReturnQualityTop/>}/>
         <Route path="QRValidationQualityTop" element={<QRValidationQualityTOP/>}/>
 
-        <Route path="QRReturnProductionLeaderTop" element={<QRReturnProductionLeaderTop/>}/>
-        <Route path="QRValidationProductionLeaderTop" element={<QRValidationProductionLeaderTOP/>}/>
+        <Route path="QRReturnLeaderTop" element={<QRReturnLeaderTop/>}/>
+        <Route path="QRValidationLeaderTop" element={<QRValidationLeaderTOP/>}/>
 
         <Route path="QRResponseOthersTop" element={<QRResponseOthersTop/>}/>
         <Route path="QRReturnResponseOthersTop" element={<QRReturnResponseOthersTop/>}/>
@@ -138,7 +136,7 @@ function App() {
         <Route path="PortalLeader" element={<PortalLeader/>}/>
         <Route path="PortalQuality" element={<PortalQuality/>}/>
         <Route path="PortalOthers" element={<PortalOthers/>}/>
-        <Route path="PortalProductionLeader" element={<PortalProductionLeader/>}/>
+
       </Routes>
     </>
   );

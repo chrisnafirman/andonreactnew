@@ -287,7 +287,7 @@ const Quality = () => {
               </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Request For Quality 
+                  Request For Quality
                 </div>
               </header>
 
@@ -298,7 +298,7 @@ const Quality = () => {
                 <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
-                    <th className="p-1 w-10 lg:w-20">
+                      <th className="p-1 w-10 lg:w-20">
                         <div className="font-sans lg:font-semibold text-left">Option</div>
                       </th>
                       <th className="p-1 w-10 lg:w-32">
@@ -322,82 +322,82 @@ const Quality = () => {
                     </tr>
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
-  {filteredData.map((item, index) => {
-    if (item.DepartTo === 'QA' || item.DepartTo === 'QC') {
-      return (
-        <tr
-          key={item.id}
-          className={index === 0 ? "bg-green-400" : ""}
-        >
-          <td className="p-2">
-            <div className="font-medium text-xs lg:text-sm text-gray-800">
-              {item.DepartTo}
-            </div>
-          </td>
-          <td className="p-2">
-            <div className="font-medium text-xs lg:text-sm text-gray-800">
-              {item.Requestor}
-            </div>
-          </td>
-          <td className="p-2">
-            <div className="font-medium text-xs lg:text-sm text-gray-800">
-              {item.Line}
-            </div>
-          </td>
-          <td className="p-2">
-            <div className="font-medium text-xs lg:text-sm text-gray-800">
-              {item.Area}
-            </div>
-          </td>
-          <td className="p-2">
-            <div className="font-medium text-gray-800">
-              {item.Station}
-            </div>
-          </td>
-          <td className="p-2 ">
-            {item.Status === "" && (
-              <button
-                onClick={() => {
-                  setSelectedItem(item)
-                }}
-                className="bg-blue-600 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
-              >
-                <span className="text-xs lg:text-sm">Open</span>
-              </button>
-            )}
-            {item.Status === "Valid" && (
-              <button
-                onClick={() => {
-                  setSelectedItem(item)
-                }}
-                className="bg-green-600 w-20 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
-              >
-                <span className="text-xs lg:text-sm">Valid</span>
-              </button>
-            )}
-            {item.Status === "Return" && (
-              <button
-                onClick={() => {
-                  setSelectedItem(item)
-                  setIsOpenReturn(item)
-                }}
-                className="bg-orange-800 w-20 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
-              >
-                <span className="text-xs lg:text-sm">Return</span>
-              </button>
-            )}
-          </td>
-          <td className="p-2">
-            <div className="text-center h-6 text-black">
-              {item.Date} WIB
-            </div>
-          </td>
-        </tr>
-      );
-    }
-    return null;
-  })}
-</tbody>
+                    {filteredData.map((item, index) => {
+                      if (item.DepartTo === 'QA' || item.DepartTo === 'QC') {
+                        return (
+                          <tr
+                            key={item.id}
+                            className={index === 0 ? "bg-green-400" : ""}
+                          >
+                            <td className="p-2">
+                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                                {item.DepartTo}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                                {item.Requestor}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                                {item.Line}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                                {item.Area}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-gray-800">
+                                {item.Station}
+                              </div>
+                            </td>
+                            <td className="p-2 ">
+                              {item.Status === "" && (
+                                <button
+                                  onClick={() => {
+                                    setSelectedItem(item)
+                                  }}
+                                  className="bg-blue-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                                >
+                                  <span className="text-xs lg:text-sm">Open</span>
+                                </button>
+                              )}
+                              {item.Status === "Valid" && (
+                                <button
+                                  onClick={() => {
+                                    setSelectedItem(item)
+                                  }}
+                                  className="bg-green-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                                >
+                                  <span className="text-xs lg:text-sm">Valid</span>
+                                </button>
+                              )}
+                              {item.Status === "Return" && (
+                                <button
+                                  onClick={() => {
+                                    setSelectedItem(item)
+                                    setIsOpenReturn(item)
+                                  }}
+                                  className="bg-orange-800 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                                >
+                                  <span className="text-xs lg:text-sm">Return</span>
+                                </button>
+                              )}
+                            </td>
+                            <td className="p-2">
+                              <div className="text-center h-6 text-black">
+                                {item.Date} WIB
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      }
+                      return null;
+                    })}
+                  </tbody>
 
                 </table>
                 {selectedItem && (
@@ -653,9 +653,9 @@ const Quality = () => {
                                         </div>
                                       </div>
 
-                                    
-                                     
-                                 
+
+
+
                                       <div class="w-full px-3 mb-2 md:mb-0">
                                         <label
                                           class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
@@ -718,8 +718,8 @@ const Quality = () => {
                                   {/* Close button */}
                                   <button
                                     className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
-                                    onClick={() =>{
-                                   
+                                    onClick={() => {
+
                                       setIsOpenReturn(false)
                                     }}
                                   >
@@ -759,7 +759,7 @@ const Quality = () => {
                                         </div>
                                       </div>
 
-                                    
+
                                     </div>
 
 

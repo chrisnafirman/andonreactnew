@@ -91,13 +91,13 @@ function QROperatorTOP() {
         };
 
 
-
-        alert("Laporan Telah Berhasil Di Kirim Ke Team Leader ");
         setIsQROperator(false);
-        firebase.database().ref(`SMTLine1TOP/${Station}`).set("Leader");
-        firebase.database().ref("StatusLine/SMTLine1").set("Down");
         setStation(null);
         setNamaPIC(null);
+        alert("Laporan Telah Berhasil Di Kirim Ke Team Leader ");
+        firebase.database().ref(`SMTLine1TOP/${Station}`).set("Leader");
+        firebase.database().ref("StatusLine/SMTLine1").set("Down");
+        
 
         fetch(`http://192.168.101.236:3001/api/Leader`, {
             method: "POST",

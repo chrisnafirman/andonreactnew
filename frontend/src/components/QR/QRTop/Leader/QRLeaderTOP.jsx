@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import Select from "react-select";
-import QRScannerPopup from "../QR";
+import QRScannerPopup from "../../QR";
 
 
 
