@@ -23,7 +23,7 @@ function QRReturnQualityTOP() {
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT TOP");
-  const [isQRLeader, setIsQRLeader] = useState(true);
+  const [isQRReturn, setIsQRReturn] = useState(true);
   const [DestackerTop, setDestackerTop] = useState("Destacker (TOP)");
   const [StatusdestackerTop, setStatusdestackerTop] = useState("");
   const [hasilScan, setHasilScan] = useState("");
@@ -60,7 +60,7 @@ function QRReturnQualityTOP() {
 
   const updateStatusdestackerTop = (data) => {
     if (data === "Go") {
-      setIsQRLeader(true);
+      setIsQRReturn(true);
     }
     setStatusdestackerTop(data);
     setBackgroundColorStatusdestackerTop(
@@ -172,26 +172,26 @@ function QRReturnQualityTOP() {
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
-    setIsQRLeader(false);
+    setIsQRReturn(false);
   };
 
   const togglePopupMesin = () => {
     setShowPopupMesin(!showPopupMesin);
-    setIsQRLeader(false);
+    setIsQRReturn(false);
   };
 
   const handleScanSuccessNama = (data) => {
     setNamaPIC(data);
     setShowPopupNama(false)
     setShowPopupMesin(false)
-    setIsQRLeader(true);
+    setIsQRReturn(true);
 
   };
 
   const handleScanSuccessMesin = (data) => {
     setStation(data);
     setShowPopupMesin(false)
-    setIsQRLeader(true);
+    setIsQRReturn(true);
   };
 
 
@@ -227,7 +227,7 @@ function QRReturnQualityTOP() {
   return (
     <body style={styles}>
       <td class="">
-        {isQRLeader ? (
+        {isQRReturn ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-72 text-center sm:block sm:p-0">
@@ -284,7 +284,10 @@ function QRReturnQualityTOP() {
                               >
                                 {NamaPIC}
                               </span>
-                              <button onClick={togglePopupNama}>
+                              <button onClick={() => {
+                                togglePopupNama();
+                                setIsQRReturn(false);
+                              }}>
                                 {showPopupNama ? (
                                   <svg width="60px" height="40px" viewBox="0 0 24 24" fill="none" >
                                     <path d="M23 4C23 2.34315 21.6569 1 20 1H16C15.4477 1 15 1.44772 15 2C15 2.55228 15.4477 3 16 3H20C20.5523 3 21 3.44772 21 4V8C21 8.55228 21.4477 9 22 9C22.5523 9 23 8.55228 23 8V4Z" fill="#0F0F0F" />
@@ -332,7 +335,7 @@ function QRReturnQualityTOP() {
                               </span>
                               <button onClick={() => {
                                 togglePopupMesin();
-                                setIsQRLeader(false);
+                                setIsQRReturn(false);
                               }}
                               >
                                 {showPopupMesin ? (
@@ -468,7 +471,7 @@ function QRReturnQualityTOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupMesin();
-              setIsQRLeader(true);
+              setIsQRReturn(true);
             }}
             onScanSuccess={handleScanSuccessMesin}
           />
@@ -478,7 +481,7 @@ function QRReturnQualityTOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupNama();
-              setIsQRLeader(true);
+              setIsQRReturn(true);
             }}
             onScanSuccess={handleScanSuccessNama}
           />

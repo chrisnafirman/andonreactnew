@@ -1,21 +1,7 @@
 const db = require("../models/init");
 
 
-const postRequestGeneral = (req, res) => {
-    const { NamaPIC, Line, Station, Kerusakan } = req.body;
 
-    db.query(
-        "INSERT INTO general (Nama, Line, Station, Problem) VALUES (?, ?, ?, ?)",
-        [NamaPIC, Line, Station, Kerusakan ],
-        (error, results) => {
-          if (error) {
-            console.log(error);
-            return res.status(500).json({ message: 'Internal server error' });
-          }
-          res.status(200).json({ message: 'Data has been added successfully' });
-        }
-      );
-    };
 
 
 
@@ -124,12 +110,7 @@ const PutReturnRepairDoneOthers = (req, res) => {
 
 
 
-const getRequestGeneral = (req, res) => {
-  const sqlSelect = "SELECT * FROM general";
-  db.query(sqlSelect, (err, results) => {
-    res.send(results);
-  });
-};
+
 
 const getRequestOthers = (req, res) => {
   const sqlSelect = "SELECT * FROM others";
@@ -148,8 +129,7 @@ const getReturnOthers = (req, res) => {
 
 
 module.exports = {
-    postRequestGeneral,
-    getRequestGeneral,
+
 
 
     postRequestOthers,

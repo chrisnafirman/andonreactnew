@@ -248,8 +248,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "HRGA & EHS" || data === "PURCHASING,PPIC,MP&L" || data === "PROCESS ENGINEERING" || data === "PRODUCT DEVELOPMENT" || data === "ADVANCED MANUFACTURING ENGINEERING") {
+        audio.pause();
         audio.currentTime = 0;
-        audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Destacker (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
@@ -314,7 +314,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return HRGA & EHS" || data === "Return PURCHASING,PPIC,MP&L" || data === "Return PROCESS ENGINEERING" || data === "Return PRODUCT DEVELOPMENT" || data === "Return ADVANCED MANUFACTURING ENGINEERING") {
-        audio.play()
+        audio.pause();
+        audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Destacker (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
@@ -335,6 +336,7 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return MAINTENANCE & IT") {
+        audio.currentTime = 0;
         audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
@@ -355,7 +357,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
         audio.pause();
       }
     });
@@ -411,8 +413,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "HRGA & EHS" || data === "PURCHASING,PPIC,MP&L" || data === "PROCESS ENGINEERING" || data === "PRODUCT DEVELOPMENT" || data === "ADVANCED MANUFACTURING ENGINEERING") {
+        audio.pause();
         audio.currentTime = 0;
-        audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Label (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
@@ -477,7 +479,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return HRGA & EHS" || data === "Return PURCHASING,PPIC,MP&L" || data === "Return PROCESS ENGINEERING" || data === "Return PRODUCT DEVELOPMENT" || data === "Return ADVANCED MANUFACTURING ENGINEERING") {
-        audio.play()
+        audio.pause();
+        audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Label (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
@@ -498,6 +501,7 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return MAINTENANCE & IT") {
+        audio.currentTime = 0;
         audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
@@ -518,7 +522,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
         audio.pause();
       }
     });
@@ -573,8 +577,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "HRGA & EHS" || data === "PURCHASING,PPIC,MP&L" || data === "PROCESS ENGINEERING" || data === "PRODUCT DEVELOPMENT" || data === "ADVANCED MANUFACTURING ENGINEERING") {
+        audio.pause();
         audio.currentTime = 0;
-        audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Printer (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
@@ -639,7 +643,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return HRGA & EHS" || data === "Return PURCHASING,PPIC,MP&L" || data === "Return PROCESS ENGINEERING" || data === "Return PRODUCT DEVELOPMENT" || data === "Return ADVANCED MANUFACTURING ENGINEERING") {
-        audio.play()
+        audio.pause();
+        audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Printer (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
@@ -660,6 +665,7 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return MAINTENANCE & IT") {
+        audio.currentTime = 0;
         audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
@@ -680,7 +686,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
         audio.pause();
       }
     });
@@ -734,8 +740,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "HRGA & EHS" || data === "PURCHASING,PPIC,MP&L" || data === "PROCESS ENGINEERING" || data === "PRODUCT DEVELOPMENT" || data === "ADVANCED MANUFACTURING ENGINEERING") {
+        audio.pause();
         audio.currentTime = 0;
-        audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 SPI (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
@@ -800,7 +806,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return HRGA & EHS" || data === "Return PURCHASING,PPIC,MP&L" || data === "Return PROCESS ENGINEERING" || data === "Return PRODUCT DEVELOPMENT" || data === "Return ADVANCED MANUFACTURING ENGINEERING") {
-        audio.play()
+        audio.pause();
+        audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 SPI (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
@@ -821,6 +828,7 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return MAINTENANCE & IT") {
+        audio.currentTime = 0;
         audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
@@ -841,7 +849,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
         audio.pause();
       }
     });
@@ -895,8 +903,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "HRGA & EHS" || data === "PURCHASING,PPIC,MP&L" || data === "PROCESS ENGINEERING" || data === "PRODUCT DEVELOPMENT" || data === "ADVANCED MANUFACTURING ENGINEERING") {
+        audio.pause();
         audio.currentTime = 0;
-        audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Pick&Place (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
@@ -961,7 +969,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return HRGA & EHS" || data === "Return PURCHASING,PPIC,MP&L" || data === "Return PROCESS ENGINEERING" || data === "Return PRODUCT DEVELOPMENT" || data === "Return ADVANCED MANUFACTURING ENGINEERING") {
-        audio.play()
+        audio.pause();
+        audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Pick&Place (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
@@ -983,6 +992,7 @@ const SmtTop = () => {
         });
       } else if (data === "Return MAINTENANCE & IT") {
         audio.play()
+        audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Pick&Place (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
@@ -1002,7 +1012,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
         audio.pause();
       }
     });
@@ -1056,8 +1066,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "HRGA & EHS" || data === "PURCHASING,PPIC,MP&L" || data === "PROCESS ENGINEERING" || data === "PRODUCT DEVELOPMENT" || data === "ADVANCED MANUFACTURING ENGINEERING") {
+        audio.pause();
         audio.currentTime = 0;
-        audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Reflow (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
@@ -1122,7 +1132,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return HRGA & EHS" || data === "Return PURCHASING,PPIC,MP&L" || data === "Return PROCESS ENGINEERING" || data === "Return PRODUCT DEVELOPMENT" || data === "Return ADVANCED MANUFACTURING ENGINEERING") {
-        audio.play()
+        audio.pause();
+        audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Reflow (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
@@ -1143,6 +1154,7 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return MAINTENANCE & IT") {
+        audio.currentTime = 0;
         audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
@@ -1163,7 +1175,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
         audio.pause();
       }
     });
@@ -1217,8 +1229,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "HRGA & EHS" || data === "PURCHASING,PPIC,MP&L" || data === "PROCESS ENGINEERING" || data === "PRODUCT DEVELOPMENT" || data === "ADVANCED MANUFACTURING ENGINEERING") {
+        audio.pause();
         audio.currentTime = 0;
-        audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 AOI (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
@@ -1283,7 +1295,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return HRGA & EHS" || data === "Return PURCHASING,PPIC,MP&L" || data === "Return PROCESS ENGINEERING" || data === "Return PRODUCT DEVELOPMENT" || data === "Return ADVANCED MANUFACTURING ENGINEERING") {
-        audio.play()
+        audio.pause();
+        audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 AOI (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
@@ -1304,6 +1317,7 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return MAINTENANCE & IT") {
+        audio.currentTime = 0;
         audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
@@ -1324,7 +1338,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
         audio.pause();
       }
     });
@@ -1378,8 +1392,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "HRGA & EHS" || data === "PURCHASING,PPIC,MP&L" || data === "PROCESS ENGINEERING" || data === "PRODUCT DEVELOPMENT" || data === "ADVANCED MANUFACTURING ENGINEERING") {
+        audio.pause();
         audio.currentTime = 0;
-        audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 RVS (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
@@ -1444,7 +1458,8 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return HRGA & EHS" || data === "Return PURCHASING,PPIC,MP&L" || data === "Return PROCESS ENGINEERING" || data === "Return PRODUCT DEVELOPMENT" || data === "Return ADVANCED MANUFACTURING ENGINEERING") {
-        audio.play()
+        audio.pause();
+        audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 RVS (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
@@ -1465,6 +1480,7 @@ const SmtTop = () => {
             });
         });
       } else if (data === "Return MAINTENANCE & IT") {
+        audio.currentTime = 0;
         audio.play()
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
@@ -1485,7 +1501,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
         audio.pause();
       }
     });
@@ -1554,9 +1570,9 @@ const SmtTop = () => {
                   : data === "Return Leader"
                     ? "#C00000"
                     : data === "HRGA & EHS"
-                      ? "#A61D00"
+                      ? "#DB7093"
                       : data === "Return HRGA & EHS"
-                        ? "#A61D00"
+                        ? "#DB7093"
                         : data === "PURCHASING,PPIC,MP&L"
                           ? "#873e23"
                           : data === "Return PURCHASING,PPIC,MP&L"
@@ -1606,9 +1622,9 @@ const SmtTop = () => {
                   : data === "Return Leader"
                     ? "#C00000"
                     : data === "HRGA & EHS"
-                      ? "#A61D00"
+                      ? "#DB7093"
                       : data === "Return HRGA & EHS"
-                        ? "#A61D00"
+                        ? "#DB7093"
                         : data === "PURCHASING,PPIC,MP&L"
                           ? "#873e23"
                           : data === "Return PURCHASING,PPIC,MP&L"
@@ -1658,9 +1674,9 @@ const SmtTop = () => {
                   : data === "Return Leader"
                     ? "#C00000"
                     : data === "HRGA & EHS"
-                      ? "#A61D00"
+                      ? "#DB7093"
                       : data === "Return HRGA & EHS"
-                        ? "#A61D00"
+                        ? "#DB7093"
                         : data === "PURCHASING,PPIC,MP&L"
                           ? "#873e23"
                           : data === "Return PURCHASING,PPIC,MP&L"
@@ -1710,9 +1726,9 @@ const SmtTop = () => {
                   : data === "Return Leader"
                     ? "#C00000"
                     : data === "HRGA & EHS"
-                      ? "#A61D00"
+                      ? "#DB7093"
                       : data === "Return HRGA & EHS"
-                        ? "#A61D00"
+                        ? "#DB7093"
                         : data === "PURCHASING,PPIC,MP&L"
                           ? "#873e23"
                           : data === "Return PURCHASING,PPIC,MP&L"
@@ -1762,9 +1778,9 @@ const SmtTop = () => {
                   : data === "Return Leader"
                     ? "#C00000"
                     : data === "HRGA & EHS"
-                      ? "#A61D00"
+                      ? "#DB7093"
                       : data === "Return HRGA & EHS"
-                        ? "#A61D00"
+                        ? "#DB7093"
                         : data === "PURCHASING,PPIC,MP&L"
                           ? "#873e23"
                           : data === "Return PURCHASING,PPIC,MP&L"
@@ -1814,9 +1830,9 @@ const SmtTop = () => {
                   : data === "Return Leader"
                     ? "#C00000"
                     : data === "HRGA & EHS"
-                      ? "#A61D00"
+                      ? "#DB7093"
                       : data === "Return HRGA & EHS"
-                        ? "#A61D00"
+                        ? "#DB7093"
                         : data === "PURCHASING,PPIC,MP&L"
                           ? "#873e23"
                           : data === "Return PURCHASING,PPIC,MP&L"
@@ -1866,9 +1882,9 @@ const SmtTop = () => {
                   : data === "Return Leader"
                     ? "#C00000"
                     : data === "HRGA & EHS"
-                      ? "#A61D00"
+                      ? "#DB7093"
                       : data === "Return HRGA & EHS"
-                        ? "#A61D00"
+                        ? "#DB7093"
                         : data === "PURCHASING,PPIC,MP&L"
                           ? "#873e23"
                           : data === "Return PURCHASING,PPIC,MP&L"
@@ -1918,9 +1934,9 @@ const SmtTop = () => {
                   : data === "Return Leader"
                     ? "#C00000"
                     : data === "HRGA & EHS"
-                      ? "#A61D00"
+                      ? "#DB7093"
                       : data === "Return HRGA & EHS"
-                        ? "#A61D00"
+                        ? "#DB7093"
                         : data === "PURCHASING,PPIC,MP&L"
                           ? "#873e23"
                           : data === "Return PURCHASING,PPIC,MP&L"

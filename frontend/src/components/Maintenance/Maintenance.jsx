@@ -317,7 +317,7 @@ const submitUpdate = () => {
       <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
         <div class="flex h-14 items-center justify-between">
           <div class="flex items-center">
-            <a href="/AndonLine1">
+            <a href="/PortalMaintenance">
               <div class="flex-shrink-0">
                 <img
                   src={process.env.PUBLIC_URL + "/smt.jpeg"}

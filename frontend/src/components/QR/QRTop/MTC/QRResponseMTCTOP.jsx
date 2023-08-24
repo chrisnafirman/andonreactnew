@@ -18,7 +18,7 @@ function QRResponseMTCTOP() {
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
   // const [Area, setArea] = useState("SMT TOP");
-  const [isQRLeader, setIsQRLeader] = useState(true);
+  const [isQRResponses, setIsQRResponses] = useState(true);
   const [DestackerTop, setDestackerTop] = useState("Destacker (TOP)");
   const [StatusdestackerTop, setStatusdestackerTop] = useState("");
   const [hasilScan, setHasilScan] = useState("");
@@ -48,7 +48,7 @@ function QRResponseMTCTOP() {
 
   const updateStatusdestackerTop = (data) => {
     if (data === "Go") {
-      setIsQRLeader(true);
+      setIsQRResponses(true);
     }
     setStatusdestackerTop(data);
     setBackgroundColorStatusdestackerTop(
@@ -121,25 +121,25 @@ function QRResponseMTCTOP() {
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
-    setIsQRLeader(false);
+    setIsQRResponses(false);
   };
 
   const togglePopupMesin = () => {
     setShowPopupMesin(!showPopupMesin);
-    setIsQRLeader(false);
+    setIsQRResponses(false);
   };
 
   const handleScanSuccessNama = (data) => {
     setNamaPIC(data);
     setShowPopupNama(false);
     setShowPopupMesin(false);
-    setIsQRLeader(true);
+    setIsQRResponses(true);
   };
 
   const handleScanSuccessMesin = (data) => {
     setStation(data);
     setShowPopupMesin(false);
-    setIsQRLeader(true);
+    setIsQRResponses(true);
   };
 
 
@@ -153,7 +153,7 @@ function QRResponseMTCTOP() {
   return (
     <body style={styles}>
       <td class="">
-        {isQRLeader ? (
+        {isQRResponses ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-[500px] text-center sm:block sm:p-0">
@@ -198,7 +198,10 @@ function QRResponseMTCTOP() {
                               >
                                 {NamaPIC}
                               </span>
-                              <button onClick={togglePopupNama}>
+                              <button onClick={() => {
+                                togglePopupNama();
+                                setIsQRResponses(false);
+                              }}>
                                 {showPopupNama ? (
                                   <svg
                                     width="60px"
@@ -327,7 +330,7 @@ function QRResponseMTCTOP() {
                               <button
                                 onClick={() => {
                                   togglePopupMesin();
-                                  setIsQRLeader(false);
+                                  setIsQRResponses(false);
                                 }}
                               >
                                 {showPopupMesin ? (
@@ -481,7 +484,7 @@ function QRResponseMTCTOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupMesin();
-              setIsQRLeader(true);
+              setIsQRResponses(true);
             }}
             onScanSuccess={handleScanSuccessMesin}
           />
@@ -490,7 +493,7 @@ function QRResponseMTCTOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupNama();
-              setIsQRLeader(true);
+              setIsQRResponses(true);
             }}
             onScanSuccess={handleScanSuccessNama}
           />

@@ -53,8 +53,8 @@ router.put("/PutReturnResponseOthers", Otherscontrollers.PutReturnResponseOthers
 router.put("/PutReturnRepairDoneOthers", Otherscontrollers.PutReturnRepairDoneOthers);
 
 
-router.post("/General", Otherscontrollers.postRequestGeneral);
-router.get("/General", Otherscontrollers.getRequestGeneral);
+// router.post("/General", Otherscontrollers.postRequestGeneral);
+// router.get("/General", Otherscontrollers.getRequestGeneral);
 
 
 // QA

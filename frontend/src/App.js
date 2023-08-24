@@ -40,7 +40,7 @@ import UserSMTTop from "./components/User/SmtTop.jsx"
 import QROperator from "./components/QR/QRTop/QROperatorTOP.jsx"
 import QRLeaderTop from "./components/QR/QRTop/Leader/QRLeaderTOP.jsx"
 
-import QRMaintenanceTop from "./components/QR/QRTop/MTC/QRReqValidationMTCTOP.jsx"
+
 import QRReturnResponseMaintenanceTop from "./components/QR/QRTop/MTC/QRReturnResponseMTCTOP.jsx"
 import QRResponseMaintenanceTop from "./components/QR/QRTop/MTC/QRResponseMTCTOP.jsx"
 
@@ -74,7 +74,7 @@ function App() {
 
 
                 
-        <Route path="RequestGeneral" element={<RequestGeneral/>}/>
+        <Route path="RequestGeneral" element={<BP/>}/>
 
 
 
@@ -92,13 +92,13 @@ function App() {
         <Route path="Inputsche" element={<Inputsche/>}/>
         <Route path="ScheProd" element={<ScheProd/>}/>
 
-        <Route path="UserMobile" element={<UserMobile/>}/>
+        <Route path="UserMobile" element={<BP/>}/>
 
 
 
 
         <Route path="Quality" element={<Quality/>}/>
-        <Route path="ValidationQuality" element={<ValidationQuality/>}/>
+        <Route path="ValidationQuality" element={<BP/>}/>
     
         <Route path="Maintenance" element={<Maintenance/>}/>
         <Route path="ReturnMaintenance" element={<ReturnMaintenance/>}/>
@@ -118,7 +118,6 @@ function App() {
 
         <Route path="QROperatorTop" element={<QROperator/>}/>
 
-        <Route path="QRMaintenanceTop" element={<QRMaintenanceTop/>}/>
         <Route path="QRResponseMaintenanceTop" element={<QRResponseMaintenanceTop/>}/>
         <Route path="QRReturnResponseMaintenanceTop" element={<QRReturnResponseMaintenanceTop/>}/>
 

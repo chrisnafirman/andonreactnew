@@ -174,7 +174,7 @@ const ValidationLeader = () => {
       <nav class="bg-slate px-3 sm:px-4 dark:bg-gray-900 bg-gray-900   w-full z-20 top-0 left-0  dark:border-gray-600">
         <div class="flex h-14 items-center justify-between">
           <div class="flex items-center">
-            <a href="/AndonLine1">
+            <a href="/PortalLeader">
               <div class="flex-shrink-0">
                 <img
                   src={process.env.PUBLIC_URL + "/smt.jpeg"}
@@ -361,10 +361,10 @@ const ValidationLeader = () => {
                                   onClick={() => {
                                     setSelectedItem(item);
                                   }}
-                                  className="bg-green-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                                  className="bg-green-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-green-400 focus:outline-none focus:bg-green-400 transition duration-300 ease-in-out"
                                 >
                                   <span className="text-xs lg:text-sm">
-                                    Valid
+                                    Running
                                   </span>
                                 </button>
                               )}

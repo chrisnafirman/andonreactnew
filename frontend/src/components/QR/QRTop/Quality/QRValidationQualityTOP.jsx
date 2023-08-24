@@ -144,9 +144,9 @@ function QRValidationQualityTOP() {
     
     firebase.database().ref(`SMTLine1TOP/${Station}`).set("Go");
     firebase.database().ref("StatusLine/SMTLine1").set("Running");
+    window.location.reload();
     alert("Validation Telah Berhasil ");
     setIsQRValidationQuality(false);
-    window.location.reload();
     setStation(null);
     setNamaPIC(null);
 
@@ -259,7 +259,10 @@ function QRValidationQualityTOP() {
                               >
                                 {NamaPIC}
                               </span>
-                              <button onClick={togglePopupNama}>
+                              <button onClick={() => {
+                                togglePopupNama();
+                                setIsQRValidationQuality(false);
+                              }}>
                                 {showPopupNama ? (
                                   <svg width="60px" height="40px" viewBox="0 0 24 24" fill="none" >
                                     <path d="M23 4C23 2.34315 21.6569 1 20 1H16C15.4477 1 15 1.44772 15 2C15 2.55228 15.4477 3 16 3H20C20.5523 3 21 3.44772 21 4V8C21 8.55228 21.4477 9 22 9C22.5523 9 23 8.55228 23 8V4Z" fill="#0F0F0F" />
