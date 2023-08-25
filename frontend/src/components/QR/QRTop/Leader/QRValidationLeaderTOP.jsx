@@ -141,7 +141,7 @@ function QRValidationValidationLeaderTOP() {
       Area: Area,
       Desc: Desc,
     };
-    
+
     firebase.database().ref(`SMTLine1TOP/${Station}`).set("Go");
     firebase.database().ref("StatusLine/SMTLine1").set("Running");
     alert("Validation Telah Berhasil ");
@@ -160,7 +160,7 @@ function QRValidationValidationLeaderTOP() {
       .then((response) => {
         console.log("Response status:", response.status);
         if (response.status === 200) {
-      
+          console.log("PUT request successful");
         } else {
           throw new Error("Error updating data");
         }
@@ -261,7 +261,7 @@ function QRValidationValidationLeaderTOP() {
                               </span>
                               <button onClick={() => {
                                 togglePopupNama();
-                             setIsQRValidation(false);
+                                setIsQRValidation(false);
                               }}>
                                 {showPopupNama ? (
                                   <svg width="60px" height="40px" viewBox="0 0 24 24" fill="none" >
@@ -390,7 +390,7 @@ function QRValidationValidationLeaderTOP() {
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                             for="grid-password"
                           >
-                           Validation Description
+                            Validation Description
                           </label>
                           <input
                             class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -405,19 +405,19 @@ function QRValidationValidationLeaderTOP() {
                           />
                         </div>
                         <div class="w-full px-1">
-                          
-                          </div>
-                          <div className="flex justify-end mt-4">
 
-                            <button
-                              class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                              type="button" // Change to type="button" to prevent form submission
-                              onClick={handleButtonClick}
+                        </div>
+                        <div className="flex justify-end mt-4">
 
-                            >
-                              Yes, I'm sure
-                            </button>
-                          </div>
+                          <button
+                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                            type="button" // Change to type="button" to prevent form submission
+                            onClick={handleButtonClick}
+
+                          >
+                            Yes, I'm sure
+                          </button>
+                        </div>
                       </form>
                       <a href="/ValidationLeader">
                         <button

@@ -106,7 +106,6 @@ function QRReturnValidationLeaderTOP() {
     };
 
     alert("Return Telah Berhasil Di Kirim Ke Team Terkait");
-
     firebase.database().ref(`SMTLine1TOP/${Station}`).set(`Return ${Department}`);
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setStation(null);
@@ -120,14 +119,15 @@ function QRReturnValidationLeaderTOP() {
       body: JSON.stringify(data),
     })
       .then((response) => {
+        console.log("Response status:", response.status);
         if (response.status === 200) {
-          // Handle success if needed
+          console.log("PUT request successful");
         } else {
-          throw new Error("Error adding data");
+          throw new Error("Error updating data");
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log("Error:", err);
       });
   };
 

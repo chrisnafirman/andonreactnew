@@ -321,7 +321,7 @@ const SmtTop = () => {
       updateStatusPrinterTop(data);
     });
 
-    const ref19 = firebase.database().ref("/SMTLine1TOP/Spi (TOP)");
+    const ref19 = firebase.database().ref("/SMTLine1TOP/SPI (TOP)");
     ref19.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusSPITop(data);
@@ -365,6 +365,43 @@ const SmtTop = () => {
     ref25.on("value", (snapshot) => {
       const data = snapshot.val();
       setTimeLabelTop(data);
+    });
+
+    const ref26 = firebase.database().ref("/SMTLine1TOP/PrinterTopTime");
+    ref26.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setTimePrinterTop(data);
+    });
+
+    const ref27 = firebase.database().ref("/SMTLine1TOP/SPITopTime");
+    ref27.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setTimeSPITop(data);
+    });
+
+    const ref28 = firebase.database().ref("/SMTLine1TOP/PickNPlaceTopTime");
+    ref28.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setTimePickNPlaceTop(data);
+    });
+
+    const ref29 = firebase.database().ref("/SMTLine1TOP/ReflowTopTime");
+    ref29.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setTimeReflowTop(data);
+    });
+
+
+    const ref30 = firebase.database().ref("/SMTLine1TOP/AOITopTime");
+    ref30.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setTimeAOITop(data);
+    });
+
+    const ref31 = firebase.database().ref("/SMTLine1TOP/RVSTopTime");
+    ref31.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setTimeRVSTop(data);
     });
 
     return () => { };

@@ -688,7 +688,7 @@ const submitUpdate = () => {
                                         <button
                                           className="" onClick= {()=>{
                                             setisOpenQuality(true)
-                                            setNamaPIC(selectedItem.Nama)
+                                            setNamaPIC(selectedItem.ResponseName)
                                             setRequestor(selectedItem.Department)
                                             setArea(selectedItem.Area)
                                             setLine(selectedItem.Line)

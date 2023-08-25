@@ -88,45 +88,6 @@ function QRValidationQualityTOP() {
 
 
 
-  // QR
-
-
-
-  // const submitValidationQA = () => {
-  //   const data = new FormData();
-  //   data.append("Status", Status);
-  //   data.append("NamaPIC", NamaPIC);
-  //   data.append("Area", Area);
-  //   data.append("Station", Station);
-
-  //   if (file) {
-  //     data.append("validation", file);
-  //   }
-
-  //   firebase.database().ref(`SMTLine1TOP/${Station}`).set("Go");
-  //   firebase.database().ref("StatusLine/SMTLine1").set("Running");
-  //   alert("Validation Telah Berhasil ");
-  //   setIsQRValidationQuality(false);
-  //   window.location.reload();
-  //   setStation(null);
-  //   setNamaPIC(null);
-
-  //   fetch("http://192.168.101.236:3001/api/PutValidationQA", {
-  //     method: "PUT",
-  //     body: data,
-  //   })
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         // Handle success if needed
-  //       } else {
-  //         throw new Error("Error updating data");
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
 
   const submitUpdate = () => {
     if (!NamaPIC || !Desc || !Area || !Station) {
@@ -141,7 +102,7 @@ function QRValidationQualityTOP() {
       Area: Area,
       Desc: Desc,
     };
-    
+
     firebase.database().ref(`SMTLine1TOP/${Station}`).set("Go");
     firebase.database().ref("StatusLine/SMTLine1").set("Running");
     window.location.reload();
@@ -160,7 +121,7 @@ function QRValidationQualityTOP() {
       .then((response) => {
         console.log("Response status:", response.status);
         if (response.status === 200) {
-      
+          console.log("PUT request successful");
         } else {
           throw new Error("Error updating data");
         }
@@ -390,7 +351,7 @@ function QRValidationQualityTOP() {
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                             for="grid-password"
                           >
-                           Validation Description
+                            Validation Description
                           </label>
                           <input
                             class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -405,19 +366,19 @@ function QRValidationQualityTOP() {
                           />
                         </div>
                         <div class="w-full px-1">
-                          
-                          </div>
-                          <div className="flex justify-end mt-4">
 
-                            <button
-                              class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                              type="button" // Change to type="button" to prevent form submission
-                              onClick={handleButtonClick}
+                        </div>
+                        <div className="flex justify-end mt-4">
 
-                            >
-                              Yes, I'm sure
-                            </button>
-                          </div>
+                          <button
+                            class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                            type="button" // Change to type="button" to prevent form submission
+                            onClick={handleButtonClick}
+
+                          >
+                            Yes, I'm sure
+                          </button>
+                        </div>
                       </form>
                       <a href="/Quality">
                         <button

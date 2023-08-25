@@ -109,14 +109,14 @@ const SmtTop = () => {
   // ---------------------------
 
 
-    // RVS Top
-    const [StatusRVSTop, setStatusRVSTop] = useState("");
-    const [RVSTop, setRVSTop] = useState("RVS (TOP)");
-    const [backgroundColorStatusRVSTop, setBackgroundColorStatusRVSTop] = useState("");
-    const [startTimeRVSTop, setStartTimeRVSTop] = useState(null);
-    const [isRunningRVSTop, setIsRunningRVSTop] = useState(false);
-    const [TimeRVS, setTimeRVS] = useState(null);
-    // ---------------------------
+  // RVS Top
+  const [StatusRVSTop, setStatusRVSTop] = useState("");
+  const [RVSTop, setRVSTop] = useState("RVS (TOP)");
+  const [backgroundColorStatusRVSTop, setBackgroundColorStatusRVSTop] = useState("");
+  const [startTimeRVSTop, setStartTimeRVSTop] = useState(null);
+  const [isRunningRVSTop, setIsRunningRVSTop] = useState(false);
+  const [TimeRVS, setTimeRVS] = useState(null);
+  // ---------------------------
 
 
 
@@ -192,12 +192,12 @@ const SmtTop = () => {
       setStatusLine(data);
     });
 
- 
-
-  
 
 
-  
+
+
+
+
 
     const ref8 = firebase.database().ref("SMTLine1TOP/Destacker (TOP)");
     ref8.on("value", (snapshot) => {
@@ -357,7 +357,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others") {
         audio.pause();
       }
     });
@@ -522,7 +522,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others") {
         audio.pause();
       }
     });
@@ -686,7 +686,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others") {
         audio.pause();
       }
     });
@@ -849,7 +849,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others") {
         audio.pause();
       }
     });
@@ -1012,7 +1012,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others") {
         audio.pause();
       }
     });
@@ -1175,7 +1175,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others") {
         audio.pause();
       }
     });
@@ -1338,7 +1338,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others") {
         audio.pause();
       }
     });
@@ -1501,7 +1501,7 @@ const SmtTop = () => {
               console.error(error);
             });
         });
-      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others"  ) {
+      } else if (data === "Go" || data === "Repair Maintenance" || data === "Repair Others" || data === "Return Repair Maintenance" || data === "Return Repair Others") {
         audio.pause();
       }
     });
@@ -1996,7 +1996,11 @@ const SmtTop = () => {
       'Return QC',
       'MAINTENANCE & IT',
       'Return MAINTENANCE & IT',
-      'Production Leader'
+      'Production Leader',
+      'Repair Maintenance',
+      'Return Repair Maintenance',
+      'Repair Others',
+      'Return Repair Others'
     ];
 
     if (validStatuses.includes(StatusDestackerTop)) {
@@ -2046,7 +2050,7 @@ const SmtTop = () => {
         DestackerTop: DestackerTop,
         StatusDestackerTop: StatusDestackerTop,
       };
-    
+
       fetch(`http://192.168.101.236:3001/api/PutDownTimeDestackerTOP`, {
         method: "PUT",
         headers: {
@@ -2068,14 +2072,14 @@ const SmtTop = () => {
         .catch((err) => {
           console.log("Error:", err);
         });
-    };    
+    };
   }, [TimeDestacker, Area, DestackerTop, StatusDestackerTop]);
 
   // LabelTOP
   useEffect(() => {
     let interval;
 
-        const validStatuses = [
+     const validStatuses = [
       'Repair',
       'Leader',
       'Return Leader',
@@ -2095,7 +2099,11 @@ const SmtTop = () => {
       'Return QC',
       'MAINTENANCE & IT',
       'Return MAINTENANCE & IT',
-      'Production Leader'
+      'Production Leader',
+      'Repair Maintenance',
+      'Return Repair Maintenance',
+      'Repair Others',
+      'Return Repair Others'
     ];
 
     if (validStatuses.includes(StatusLabelTop)) {
@@ -2177,7 +2185,7 @@ const SmtTop = () => {
   useEffect(() => {
     let interval;
 
-        const validStatuses = [
+     const validStatuses = [
       'Repair',
       'Leader',
       'Return Leader',
@@ -2197,7 +2205,11 @@ const SmtTop = () => {
       'Return QC',
       'MAINTENANCE & IT',
       'Return MAINTENANCE & IT',
-      'Production Leader'
+      'Production Leader',
+      'Repair Maintenance',
+      'Return Repair Maintenance',
+      'Repair Others',
+      'Return Repair Others'
     ];
 
     if (validStatuses.includes(StatusPrinterTop)) {
@@ -2279,7 +2291,7 @@ const SmtTop = () => {
   useEffect(() => {
     let interval;
 
-        const validStatuses = [
+     const validStatuses = [
       'Repair',
       'Leader',
       'Return Leader',
@@ -2299,7 +2311,11 @@ const SmtTop = () => {
       'Return QC',
       'MAINTENANCE & IT',
       'Return MAINTENANCE & IT',
-      'Production Leader'
+      'Production Leader',
+      'Repair Maintenance',
+      'Return Repair Maintenance',
+      'Repair Others',
+      'Return Repair Others'
     ];
 
     if (validStatuses.includes(StatusSPITop)) {
@@ -2381,7 +2397,7 @@ const SmtTop = () => {
   useEffect(() => {
     let interval;
 
-        const validStatuses = [
+     const validStatuses = [
       'Repair',
       'Leader',
       'Return Leader',
@@ -2401,7 +2417,11 @@ const SmtTop = () => {
       'Return QC',
       'MAINTENANCE & IT',
       'Return MAINTENANCE & IT',
-      'Production Leader'
+      'Production Leader',
+      'Repair Maintenance',
+      'Return Repair Maintenance',
+      'Repair Others',
+      'Return Repair Others'
     ];
 
     if (validStatuses.includes(StatusPickNPlaceTop)) {
@@ -2483,7 +2503,7 @@ const SmtTop = () => {
   useEffect(() => {
     let interval;
 
-        const validStatuses = [
+     const validStatuses = [
       'Repair',
       'Leader',
       'Return Leader',
@@ -2503,7 +2523,11 @@ const SmtTop = () => {
       'Return QC',
       'MAINTENANCE & IT',
       'Return MAINTENANCE & IT',
-      'Production Leader'
+      'Production Leader',
+      'Repair Maintenance',
+      'Return Repair Maintenance',
+      'Repair Others',
+      'Return Repair Others'
     ];
 
     if (validStatuses.includes(StatusReflowTop)) {
@@ -2581,12 +2605,12 @@ const SmtTop = () => {
 
 
 
-  
+
   // AOITOP
   useEffect(() => {
     let interval;
 
-        const validStatuses = [
+     const validStatuses = [
       'Repair',
       'Leader',
       'Return Leader',
@@ -2606,7 +2630,11 @@ const SmtTop = () => {
       'Return QC',
       'MAINTENANCE & IT',
       'Return MAINTENANCE & IT',
-      'Production Leader'
+      'Production Leader',
+      'Repair Maintenance',
+      'Return Repair Maintenance',
+      'Repair Others',
+      'Return Repair Others'
     ];
 
     if (validStatuses.includes(StatusAOITop)) {
@@ -2683,12 +2711,12 @@ const SmtTop = () => {
   }, [TimeAOI, Area, AOITop, StatusAOITop]);
 
 
-    
+
   // RVSTOP
   useEffect(() => {
     let interval;
 
-        const validStatuses = [
+     const validStatuses = [
       'Repair',
       'Leader',
       'Return Leader',
@@ -2708,7 +2736,11 @@ const SmtTop = () => {
       'Return QC',
       'MAINTENANCE & IT',
       'Return MAINTENANCE & IT',
-      'Production Leader'
+      'Production Leader',
+      'Repair Maintenance',
+      'Return Repair Maintenance',
+      'Repair Others',
+      'Return Repair Others'
     ];
 
     if (validStatuses.includes(StatusRVSTop)) {
@@ -2997,7 +3029,7 @@ const SmtTop = () => {
           </div>
         </div>
       </main>
-     
+
 
     </body>
   );
