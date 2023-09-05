@@ -799,7 +799,7 @@
 //     const fetchData = async () => {
 //       try {
 //         const response = await fetch(
-//           "http://192.168.101.236:3001/api/ScheduleProduction"
+//           "http://192.168.101.12:3001/api/ScheduleProduction"
 //         );
 //         const jsonData = await response.json();
 //         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -1696,7 +1696,7 @@
 //   const fetchDataRouterBEValQuality = () => fetchData("UMRouterBELine1ValQuality", setDataRouterBEValQuality);
 
 //   const fetchData = (endpoint, setDataFunction) => {
-//     fetch(`http://192.168.101.236:3001/api/${endpoint}`)
+//     fetch(`http://192.168.101.12:3001/api/${endpoint}`)
 //       .then((response) => response.json())
 //       .then((data) => {
 //         setDataFunction(data);
@@ -6920,7 +6920,7 @@
 //                               if (OptionData?.Validation === null) {
 //                                 window.open('http://10.14.81.43:3003/--', '_blank');
 //                               } else {
-//                                 window.open(`http://192.168.101.236:3001/${OptionData?.Validation}`, '_blank');
+//                                 window.open(`http://192.168.101.12:3001/${OptionData?.Validation}`, '_blank');
 //                               }
 //                             }}
 //                             className="flex gap-2 mt-2 justify-center items-center"

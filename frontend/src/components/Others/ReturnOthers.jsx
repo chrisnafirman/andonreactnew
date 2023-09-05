@@ -93,7 +93,7 @@ const ReturnOthers = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/ReturnOthers")
+    fetch("http://192.168.101.12:3001/api/ReturnOthers")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -124,7 +124,7 @@ const ReturnOthers = () => {
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
     fetch(
-      `http://192.168.101.236:3001/api/ReturnOthers?date=${selectedDate}`
+      `http://192.168.101.12:3001/api/ReturnOthers?date=${selectedDate}`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -193,7 +193,7 @@ const ReturnOthers = () => {
   setStation(null);
   setNamaPIC(null);
 
-  fetch(`http://192.168.101.236:3001/api/${Department}`, {
+  fetch(`http://192.168.101.12:3001/api/${Department}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -234,7 +234,7 @@ const submitUpdate = () => {
 
   console.log("Sending data:", data);
 
-  fetch(`http://192.168.101.236:3001/api/PutReturnRepairDoneOthers`, {
+  fetch(`http://192.168.101.12:3001/api/PutReturnRepairDoneOthers`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -496,7 +496,7 @@ const submitUpdate = () => {
                           {item.Status === "" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-green-600 w-16  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                              className="bg-red-600 w-16  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Open</span>
                             </button>
@@ -504,7 +504,7 @@ const submitUpdate = () => {
                           {item.Status === "Solved" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-red-600  w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                              className="bg-green-600  w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Solved</span>
                             </button>

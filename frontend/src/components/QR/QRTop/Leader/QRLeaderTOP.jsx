@@ -25,10 +25,6 @@ function QRLeaderTOP() {
   const [Area, setArea] = useState("SMT TOP");
   const [Requestor, setRequestor] = useState("Leader");
   const [isQRLeader, setIsQRLeader] = useState(true);
-  const [DestackerTop, setDestackerTop] = useState("Destacker (TOP)");
-  const [StatusdestackerTop, setStatusdestackerTop] = useState("");
-  const [hasilScan, setHasilScan] = useState("");
-  const [hasilScanMesin, setHasilScanMesin] = useState("");
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
   const [Status, setStatus] = useState("Solved");
@@ -36,10 +32,6 @@ function QRLeaderTOP() {
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
 
-  const [
-    backgroundColorStatusdestackerTop,
-    setBackgroundColorStatusdestackerTop,
-  ] = useState("");
 
 
 
@@ -49,40 +41,6 @@ function QRLeaderTOP() {
 
 
 
-  useEffect(() => {
-    const ref8 = firebase.database().ref("SMTLine1TOP/Destacker (TOP)");
-    ref8.on("value", (snapshot) => {
-      const data = snapshot.val();
-      updateStatusdestackerTop(data);
-    });
-    return () => { };
-  }, []);
-
-  const updateStatusdestackerTop = (data) => {
-    if (data === "Go") {
-      setIsQRLeader(true);
-    }
-    setStatusdestackerTop(data);
-    setBackgroundColorStatusdestackerTop(
-      data === "Go"
-        ? "#31A207"
-        : data === "Repair"
-          ? "#E9CE08"
-          : data === "Leader"
-            ? "#C00000"
-            : data === "Maintenance"
-              ? "#be4f62"
-              : data === "Return Maintenance"
-                ? "#be4f62"
-                : data === "PPIC"
-                  ? "#7A6544"
-                  : data === "QA"
-                    ? "#93C2C4"
-                    : data === "QC"
-                      ? "#BDD0D1"
-                      : "#565454"
-    );
-  };
 
 
 
@@ -112,7 +70,7 @@ function QRLeaderTOP() {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.236:3001/api/${DepartTo}`, {
+    fetch(`http://192.168.101.12:3001/api/${DepartTo}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -151,7 +109,7 @@ function QRLeaderTOP() {
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.236:3001/api/PutStatusLeader`, {
+    fetch(`http://192.168.101.12:3001/api/PutStatusLeader`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -2,11 +2,11 @@ const db = require("../../models/init");
 
 
 const PutDownTimePickNPlaceTOP = (req, res) => {
-    const { TimePickNPlace, PickNPlaceTop, Area } = req.body;
+    const { TimePickNPlaceTop, PickNPlaceTop, Area } = req.body;
   
     db.query(
       "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
-      [TimePickNPlace, PickNPlaceTop, Area],
+      [TimePickNPlaceTop, PickNPlaceTop, Area],
       (error, results) => {
         if (error) {
           console.log(error);

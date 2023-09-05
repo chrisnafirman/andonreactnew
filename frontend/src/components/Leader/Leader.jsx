@@ -93,7 +93,7 @@ const ReuestLeader = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/Leader")
+    fetch("http://192.168.101.12:3001/api/Leader")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -124,7 +124,7 @@ const ReuestLeader = () => {
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
     fetch(
-      `http://192.168.101.236:3001/api/Leader?date=${selectedDate}`
+      `http://192.168.101.12:3001/api/Leader?date=${selectedDate}`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -196,7 +196,7 @@ const ReuestLeader = () => {
   const handleDelete = () => {
     if (selectedItem) {
       // Send a request to the backend to delete data with the selected item's ID
-      fetch(`http://192.168.101.236:3001/api/leader/${selectedItem.No}`, {
+      fetch(`http://192.168.101.12:3001/api/leader/${selectedItem.No}`, {
         method: "DELETE",
       })
         .then((response) => response.json())
@@ -396,7 +396,7 @@ const ReuestLeader = () => {
                           {item.Status === "" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-lime-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                              className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Open</span>
                             </button>
@@ -407,7 +407,7 @@ const ReuestLeader = () => {
                               setSelectedItem(item)
                               setisOpenDepartTo(item)
                             }}
-                              className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                              className="bg-green-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Solved</span>
                             </button>

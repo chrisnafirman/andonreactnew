@@ -2,11 +2,11 @@ const db = require("../../models/init");
 
 
 const PutDownTimeReflowTOP = (req, res) => {
-    const { TimeReflow, ReflowTop, Area } = req.body;
+    const { TimeReflowTop, ReflowTop, Area } = req.body;
   
     db.query(
       "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
-      [TimeReflow, ReflowTop, Area],
+      [TimeReflowTop, ReflowTop, Area],
       (error, results) => {
         if (error) {
           console.log(error);

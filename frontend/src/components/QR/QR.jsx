@@ -101,7 +101,6 @@ const QR = ({ onClose, onScanSuccess }) => {
           <label htmlFor="qr-image" className="ml-4 cursor-pointer px-4 py-2 bg-black  text-white rounded-xl ">
             Upload QR
           </label>
-          <input type="file" id="qr-image" accept="image/*" className="hidden" onChange={handleImageUpload} />  
         </div>
         <div className="text-center">
           {/* Add scanned data display here */}

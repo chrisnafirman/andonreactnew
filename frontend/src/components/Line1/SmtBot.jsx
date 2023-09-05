@@ -983,7 +983,7 @@ const SmtBot = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.236:3001/api/ScheduleProduction"
+          "http://192.168.101.12:3001/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -1166,7 +1166,7 @@ const SmtBot = () => {
       Kerusakan: Kerusakan,
     };
 
-    fetch(`http://192.168.101.236:3001/api/Maintenance`, {
+    fetch(`http://192.168.101.12:3001/api/Maintenance`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1208,7 +1208,7 @@ const SmtBot = () => {
     firebase.database().ref(`SMTLine1BOT/${Station}`).set("QA");
     window.location.reload();
 
-    fetch(`http://192.168.101.236:3001/api/QA`, {
+    fetch(`http://192.168.101.12:3001/api/QA`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1245,7 +1245,7 @@ const SmtBot = () => {
     firebase.database().ref(`SMTLine1BOT/${Station}`).set("QC");
     window.location.reload();
 
-    fetch(`http://192.168.101.236:3001/api/QC`, {
+    fetch(`http://192.168.101.12:3001/api/QC`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1280,7 +1280,7 @@ const SmtBot = () => {
       .set("Return Maintenance");
     window.location.reload();
 
-    fetch(`http://192.168.101.236:3001/api/ReturnMaintenance`, {
+    fetch(`http://192.168.101.12:3001/api/ReturnMaintenance`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1314,7 +1314,7 @@ const SmtBot = () => {
     setIsOpen2(false);
     window.location.reload();
 
-    fetch("http://192.168.101.236:3001/api/ValidationQA", {
+    fetch("http://192.168.101.12:3001/api/ValidationQA", {
       method: "POST",
       body: data,
     })
@@ -1342,7 +1342,7 @@ const SmtBot = () => {
     setIsOpen2(false);
     window.location.reload();
 
-    fetch("http://192.168.101.236:3001/api/ValidationQC", {
+    fetch("http://192.168.101.12:3001/api/ValidationQC", {
       method: "POST",
       body: data,
     })
@@ -1630,7 +1630,7 @@ const SmtBot = () => {
   };
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/Employee_Operator_Manufacturing")
+    fetch("http://192.168.101.12:3001/api/Employee_Operator_Manufacturing")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({
@@ -1654,7 +1654,7 @@ const SmtBot = () => {
   };
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/Employee_Team_Maintenance")
+    fetch("http://192.168.101.12:3001/api/Employee_Team_Maintenance")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({
@@ -1678,7 +1678,7 @@ const SmtBot = () => {
   };
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/Employee_Team_Quality")
+    fetch("http://192.168.101.12:3001/api/Employee_Team_Quality")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({

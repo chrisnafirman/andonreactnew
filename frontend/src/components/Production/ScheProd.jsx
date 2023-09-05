@@ -41,7 +41,7 @@ const SmtTop = () => {
   }
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/ScheduleProduction")
+    fetch("http://192.168.101.12:3001/api/ScheduleProduction")
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti timestamp menjadi tanggal dan PDATE
@@ -68,7 +68,7 @@ const SmtTop = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://192.168.101.236:3001/api/ScheduleProduction?date=${selectedDate}`)
+    fetch(`http://192.168.101.12:3001/api/ScheduleProduction?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti PDATE menjadi tanggal saja
@@ -131,7 +131,7 @@ const SmtTop = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.236:3001/api/ScheduleProduction"
+          "http://192.168.101.12:3001/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir

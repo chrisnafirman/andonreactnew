@@ -33,7 +33,7 @@ const SmtTop = () => {
 
 
 
-  //  STATION Funtion
+  //  STATION Function
   // Destacker TOP
   const [DestackerTop, setDestackerTop] = useState("Destacker (TOP)");
   const [StatusDestackerTop, setStatusDestackerTop] = useState("");
@@ -519,7 +519,7 @@ const SmtTop = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.236:3001/api/ScheduleProduction"
+          "http://192.168.101.12:3001/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -533,7 +533,7 @@ const SmtTop = () => {
     fetchData();
   }, []);
 
-  // Realtime production
+  // Realtime Total production
   const calculateTotalTime = () => {
     let totalJam = 0;
     let totalMenit = 0;
@@ -1187,7 +1187,7 @@ const SmtTop = () => {
 
 
   const fetchData = (endpoint, setDataFunction) => {
-    fetch(`http://192.168.101.236:3001/api/${endpoint}`)
+    fetch(`http://192.168.101.12:3001/api/${endpoint}`)
       .then((response) => response.json())
       .then((data) => {
         setDataFunction(data);
@@ -1383,7 +1383,7 @@ const SmtTop = () => {
 
           <button class="w-60 sm:w-36 lg:w-32">
             <a
-              href="/UserSMTTop"
+              href="/UserHome"
               class="inline-block w-full p-4 400 bg-slate-800 text-white rounded-r-lg hover:text-gray-700 hover:bg-slate-800 focus:ring-4 focus:outline-none  dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
             >
               BACK
@@ -1402,7 +1402,7 @@ const SmtTop = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96 2xl:w-96">
                   <button
                     style={{
                       backgroundColor: backgroundColorStatusDestackerTop,
@@ -1471,7 +1471,7 @@ const SmtTop = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <button
                     style={{
                       backgroundColor: backgroundColorStatusLabelTop,
@@ -1540,7 +1540,7 @@ const SmtTop = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <button
                     style={{
                       backgroundColor: backgroundColorStatusPrinterTop,
@@ -1609,7 +1609,7 @@ const SmtTop = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <button
 
                     style={{
@@ -1682,7 +1682,7 @@ const SmtTop = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <button
                     style={{
                       backgroundColor: backgroundColorStatusPickNPlaceTop,
@@ -1751,7 +1751,7 @@ const SmtTop = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <button
 
                     style={{
@@ -1821,7 +1821,7 @@ const SmtTop = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <button
 
                     style={{
@@ -1889,7 +1889,7 @@ const SmtTop = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <button
 
                     style={{
@@ -2244,17 +2244,23 @@ const SmtTop = () => {
                               <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                                 Down Time:
                               </label>
-                              {(Button === "DestackerTOP" || Button === "LabelTOP") && (
-                                <input
-                                  type="text"
-                                  className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                                  name="NamaPIC"
-                                  readOnly
-                                  value={
-                                    Button === "DestackerTOP" ? TimeDestackerTop :
-                                      Button === "LabelTOP" ? TimeLabelTop :
-                                        ""
-                                  }
+                              {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
+                              <input
+                                type="text"
+                                className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                name="NamaPIC"
+                                readOnly
+                                value={
+                                  Button === "DestackerTop" ? TimeDestackerTop :
+                                    Button === "LabelTop" ? TimeLabelTop :
+                                    Button === "PrinterTop" ? TimePrinterTop :
+                                    Button === "SPITop" ? TimeSPITop :
+                                    Button === "PickNPlaceTop" ? TimePickNPlaceTop :
+                                    Button === "ReflowTop" ? TimeReflowTop :
+                                    Button === "AOITop" ? TimeAOITop :
+                                    Button === "RVSTop" ? TimeRVSTop :
+                                      ""
+                                }
                                 />
                               )}
                             </div>

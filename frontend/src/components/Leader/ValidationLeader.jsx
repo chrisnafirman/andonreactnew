@@ -81,7 +81,7 @@ const ValidationLeader = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/Quality")
+    fetch("http://192.168.101.12:3001/api/Quality")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -111,7 +111,7 @@ const ValidationLeader = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://192.168.101.236:3001/api/Quality?date=${selectedDate}`)
+    fetch(`http://192.168.101.12:3001/api/Quality?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -349,7 +349,7 @@ const ValidationLeader = () => {
                                   onClick={() => {
                                     setSelectedItem(item);
                                   }}
-                                  className="bg-blue-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                                  className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
                                 >
                                   <span className="text-xs lg:text-sm">
                                     Open
@@ -374,7 +374,7 @@ const ValidationLeader = () => {
                                     setSelectedItem(item);
                                     setIsOpenReturn(item);
                                   }}
-                                  className="bg-orange-800 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                                  className="bg-orange-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                                 >
                                   <span className="text-xs lg:text-sm">
                                     Return
@@ -545,7 +545,7 @@ const ValidationLeader = () => {
                                   <a>
                                     {selectedItem.Status === "" && (
                                       <button
-                                        className="bg-blue-900 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded mr-2"
+                                        className="bg-red-600 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded mr-2"
                                         onClick={() => {
                                           setisOpenAction(true);
                                         }}
@@ -578,7 +578,7 @@ const ValidationLeader = () => {
                     {IsOpenValidation && (
                       <>
                         <div className="fixed z-10 inset-0 overflow-y-auto">
-                          <div className="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-[500px] text-center sm:block sm:p-0">
+                          <div className="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-[450px] text-center sm:block sm:p-0">
                             <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
                             <div
                               className="inline-block align-bottom bg-green-700 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
@@ -659,6 +659,20 @@ const ValidationLeader = () => {
                                         >
                                           {" "}
                                           {selectedItem.ValidationDescription}
+                                        </div>
+                                      </div>
+                                      <div class="w-full px-3 mb-2 md:mb-0">
+                                        <label
+                                          class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
+                                          for="grid-city"
+                                        >
+                                          Total DownTime
+                                        </label>
+                                        <div
+                                         className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-2 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                        >
+                                          {" "}
+                                          {selectedItem.DownTime}
                                         </div>
                                       </div>
                                     </div>

@@ -13,6 +13,8 @@ const Employeecontrollers = require("../controller/Employee")
 // const UMLine1BOT = require("../controller/Mobile/UMLine1BOT")
 // const UMLine1BE = require("../controller/Mobile/UMLine1BE")
 
+
+// Top
 const DestackerTOP = require("../controller/SMTTOPDATA/DestackerTOP")
 const LabelTOP = require("../controller/SMTTOPDATA/LabelTOP")
 const PrinterTOP = require("../controller/SMTTOPDATA/PrinterTOP")
@@ -21,6 +23,14 @@ const PickNPlaceTOP = require("../controller/SMTTOPDATA/PickNPlaceTOP")
 const ReflowTOP = require("../controller/SMTTOPDATA/ReflowTOP")
 const AOITOP = require("../controller/SMTTOPDATA/AOITOP")
 const RVSTOP = require("../controller/SMTTOPDATA/RVSTOP")
+
+// Bot
+const PrinterBOT = require("../controller/SMTBOTDATA/PrinterBOT")
+const SPIBOT = require("../controller/SMTBOTDATA/SPIBOT")
+const PickNPlaceBOT = require("../controller/SMTBOTDATA/PickNPlaceBOT")
+const ReflowBOT = require("../controller/SMTBOTDATA/ReflowBOT")
+const AOIBOT = require("../controller/SMTBOTDATA/AOIBOT")
+const RVSBOT = require("../controller/SMTBOTDATA/RVSBOT")
 
 // lDR
 router.post("/Leader", LDRcontrollers.postRequestLeader);
@@ -87,7 +97,7 @@ router.get("/ScheduleProduction", TimeProductioncontrollers.getTimeProduction);
 
 
 
-// Fetch Data
+// Fetch Data TOP
 // Destacker
 router.put("/PutDownTimeDestackerTOP", DestackerTOP.PutDownTimeDestackerTOP);
 router.get("/getDestackerTOPLeader", DestackerTOP.getDestackerTOPLeader);
@@ -161,6 +171,79 @@ router.get("/getRVSTOPQuality", RVSTOP.getRVSTOPQuality);
 router.get("/getRVSTOPOthers", RVSTOP.getRVSTOPOthers);
 router.get("/getRVSTOPReturnMaintenance", RVSTOP.getRVSTOPReturnMaintenance);
 router.get("/getRVSTOPReturnOthers", RVSTOP.getRVSTOPReturnOthers);
+// ..........................................
+
+
+
+
+// Fetch Data BOT
+// Printer
+router.put("/PutDownTimePrinterBOT", PrinterBOT.PutDownTimePrinterBOT);
+router.get("/getPrinterBOTLeader", PrinterBOT.getPrinterBOTLeader);
+router.get("/getPrinterBOTMaintenance", PrinterBOT.getPrinterBOTMaintenance);
+router.get("/getPrinterBOTQuality", PrinterBOT.getPrinterBOTQuality);
+router.get("/getPrinterBOTOthers", PrinterBOT.getPrinterBOTOthers);
+router.get("/getPrinterBOTReturnMaintenance", PrinterBOT.getPrinterBOTReturnMaintenance);
+router.get("/getPrinterBOTReturnOthers", PrinterBOT.getPrinterBOTReturnOthers);
+
+// SPI
+router.put("/PutDownTimeSPIBOT", SPIBOT.PutDownTimeSPIBOT);
+router.get("/getSPIBOTLeader", SPIBOT.getSPIBOTLeader);
+router.get("/getSPIBOTMaintenance", SPIBOT.getSPIBOTMaintenance);
+router.get("/getSPIBOTQuality", SPIBOT.getSPIBOTQuality);
+router.get("/getSPIBOTOthers", SPIBOT.getSPIBOTOthers);
+router.get("/getSPIBOTReturnMaintenance", SPIBOT.getSPIBOTReturnMaintenance);
+router.get("/getSPIBOTReturnOthers", SPIBOT.getSPIBOTReturnOthers);
+
+// PickNPlace
+router.put("/PutDownTimePickNPlaceBOT", PickNPlaceBOT.PutDownTimePickNPlaceBOT);
+router.get("/getPickNPlaceBOTLeader", PickNPlaceBOT.getPickNPlaceBOTLeader);
+router.get("/getPickNPlaceBOTMaintenance", PickNPlaceBOT.getPickNPlaceBOTMaintenance);
+router.get("/getPickNPlaceBOTQuality", PickNPlaceBOT.getPickNPlaceBOTQuality);
+router.get("/getPickNPlaceBOTOthers", PickNPlaceBOT.getPickNPlaceBOTOthers);
+router.get("/getPickNPlaceBOTReturnMaintenance", PickNPlaceBOT.getPickNPlaceBOTReturnMaintenance);
+router.get("/getPickNPlaceBOTReturnOthers", PickNPlaceBOT.getPickNPlaceBOTReturnOthers);
+
+
+// Reflow
+router.put("/PutDownTimeReflowBOT", ReflowBOT.PutDownTimeReflowBOT);
+router.get("/getReflowBOTLeader", ReflowBOT.getReflowBOTLeader);
+router.get("/getReflowBOTMaintenance", ReflowBOT.getReflowBOTMaintenance);
+router.get("/getReflowBOTQuality", ReflowBOT.getReflowBOTQuality);
+router.get("/getReflowBOTOthers", ReflowBOT.getReflowBOTOthers);
+router.get("/getReflowBOTReturnMaintenance", ReflowBOT.getReflowBOTReturnMaintenance);
+router.get("/getReflowBOTReturnOthers", ReflowBOT.getReflowBOTReturnOthers);
+
+
+// AOI
+router.put("/PutDownTimeAOIBOT", AOIBOT.PutDownTimeAOIBOT);
+router.get("/getAOIBOTLeader", AOIBOT.getAOIBOTLeader);
+router.get("/getAOIBOTMaintenance", AOIBOT.getAOIBOTMaintenance);
+router.get("/getAOIBOTQuality", AOIBOT.getAOIBOTQuality);
+router.get("/getAOIBOTOthers", AOIBOT.getAOIBOTOthers);
+router.get("/getAOIBOTReturnMaintenance", AOIBOT.getAOIBOTReturnMaintenance);
+router.get("/getAOIBOTReturnOthers", AOIBOT.getAOIBOTReturnOthers);
+
+// RVS
+router.put("/PutDownTimeRVSBOT", RVSBOT.PutDownTimeRVSBOT);
+router.get("/getRVSBOTLeader", RVSBOT.getRVSBOTLeader);
+router.get("/getRVSBOTMaintenance", RVSBOT.getRVSBOTMaintenance);
+router.get("/getRVSBOTQuality", RVSBOT.getRVSBOTQuality);
+router.get("/getRVSBOTOthers", RVSBOT.getRVSBOTOthers);
+router.get("/getRVSBOTReturnMaintenance", RVSBOT.getRVSBOTReturnMaintenance);
+router.get("/getRVSBOTReturnOthers", RVSBOT.getRVSBOTReturnOthers);
+
+
+
+
+// ..........................................
+
+
+
+
+
+
+
 
 
 // Employee
@@ -169,13 +252,6 @@ router.get("/Employee_Operator", Employeecontrollers.getRequestEmployee);
 router.get("/Employee_Operator_Manufacturing", Employeecontrollers.getRequestEmployeeOperatorManufacturing);
 router.get("/Employee_Team_Maintenance", Employeecontrollers.getRequestEmployeeTeamMaintenance);
 router.get("/Employee_Team_Quality", Employeecontrollers.getRequestEmployeeTeamQuality);
-
-
-
-
-
-
-
 
 
 

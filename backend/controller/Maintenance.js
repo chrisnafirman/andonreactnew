@@ -126,11 +126,8 @@ module.exports = {
   postReturnMaintenance,
   getRequestMaintenance,
   getReturnMaintenance,
-
   PutResponseMaintenance,
   PutRepairDoneMaintenance,
-
-  
   PutReturnResponseMaintenance,
   PutReturnRepairDoneMaintenance,
 };

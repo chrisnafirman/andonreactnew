@@ -871,7 +871,7 @@ const Andonline1 = () => {
     window.location.reload();
 
 
-    fetch("http://192.168.101.236:3001/api/UpdateCMA", {
+    fetch("http://192.168.101.12:3001/api/UpdateCMA", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -905,7 +905,7 @@ const Andonline1 = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.236:3001/api/ScheduleProduction"
+          "http://192.168.101.12:3001/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -1141,7 +1141,7 @@ const Andonline1 = () => {
         department = "";
     }
 
-    fetch(`http://192.168.101.236:3001/api/${department}`, {
+    fetch(`http://192.168.101.12:3001/api/${department}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1176,7 +1176,7 @@ const Andonline1 = () => {
       Kerusakan: Kerusakan,
     };
 
-    fetch(`http://192.168.101.236:3001/api/General`, {
+    fetch(`http://192.168.101.12:3001/api/General`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1215,7 +1215,7 @@ const Andonline1 = () => {
       Kerusakan: Kerusakan,
     };
 
-    fetch(`http://192.168.101.236:3001/api/Others`, {
+    fetch(`http://192.168.101.12:3001/api/Others`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1402,7 +1402,7 @@ const Andonline1 = () => {
   };
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/Employee_Operator_Manufacturing")
+    fetch("http://192.168.101.12:3001/api/Employee_Operator_Manufacturing")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({
@@ -1431,7 +1431,7 @@ const Andonline1 = () => {
 
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/Employee_Operator")
+    fetch("http://192.168.101.12:3001/api/Employee_Operator")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({
@@ -1805,7 +1805,7 @@ if (urlParams.get('refresh') === 'true') {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                    style={{ backgroundColor: backgroundColorNetwork }}
+                    
                     value={Network}
                     class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
                     onClick={() => {
@@ -1821,7 +1821,7 @@ if (urlParams.get('refresh') === 'true') {
                     onTouchEnd={handleNetworkRelease}
                   >
                     <header class="px-5 py-4  ">
-                      <div class="italic  text-center text-white">NETWORK</div>
+                      <div class="italic  text-center text-white">NETWORK (Close)</div>
                     </header>
                   </button>
                 </div>

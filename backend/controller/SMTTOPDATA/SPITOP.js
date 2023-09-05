@@ -2,11 +2,11 @@ const db = require("../../models/init");
 
 
 const PutDownTimeSPITOP = (req, res) => {
-    const { TimeSPI, SPITop, Area } = req.body;
+    const { TimeSPITop, SPITop, Area } = req.body;
   
     db.query(
       "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
-      [TimeSPI, SPITop, Area],
+      [TimeSPITop, SPITop, Area],
       (error, results) => {
         if (error) {
           console.log(error);

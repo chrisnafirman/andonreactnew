@@ -71,7 +71,7 @@ const ValidationQuality = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://192.168.101.236:3001/api/validationqa")
+    fetch("http://192.168.101.12:3001/api/validationqa")
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti timestamp menjadi tanggal dan waktu
@@ -101,7 +101,7 @@ const ValidationQuality = () => {
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
     fetch(
-      `http://192.168.101.236:3001/api/validationqa?date=${selectedDate}`
+      `http://192.168.101.12:3001/api/validationqa?date=${selectedDate}`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -560,7 +560,7 @@ const ValidationQuality = () => {
                                             </label>
                                             <div class="flex items-center">
                                               <a
-                                                href={`http://192.168.101.236:3001/${selectedItem.Validation}`}
+                                                href={`http://192.168.101.12:3001/${selectedItem.Validation}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 class="text-blue-600 hover:text-blue-800"
