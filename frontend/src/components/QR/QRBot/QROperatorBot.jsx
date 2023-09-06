@@ -394,7 +394,7 @@ function QROperatorBOT() {
 
 
     const styles = {
-        background: "linear-gradient(45deg, #000, #768087, #27374D)",
+        background: "linear-gradient(45deg, #000, #626658, #292d1f)",
         height: "1000px",
     };
 

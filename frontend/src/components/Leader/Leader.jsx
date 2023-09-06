@@ -212,6 +212,16 @@ const ReuestLeader = () => {
   };
   
 
+  const QRValidationLink = () => {
+    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
+      return "/QRLeaderTop";
+    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
+      return "/QRLeaderBot";
+    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
+      return "/QRLeaderBE";
+    }   else {
+    }
+  };
 
 
   const styles = {
@@ -396,7 +406,7 @@ const ReuestLeader = () => {
                           {item.Status === "" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                              className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Open</span>
                             </button>
@@ -416,7 +426,7 @@ const ReuestLeader = () => {
 
 
                         {/* <td className="p-5 w-40">
-                          <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out">
+                          <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 20 20"
@@ -487,7 +497,8 @@ const ReuestLeader = () => {
 
                                 {/* Add Solved and Reject buttons */}
                                 <div className="flex justify-between space-x-6 mt-4">
-                                  <a href="/QRLeaderTop">
+                                  <a href={QRValidationLink()}>
+                                  {selectedItem.Status === "" && (
                                     <button
                                       className="bg-green-500 flex  hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
 
@@ -499,6 +510,7 @@ const ReuestLeader = () => {
                                         Validation
                                       </span>
                                     </button>
+                                    )}
                                   </a>
                                   <button
                                     className="bg-red-500  w-36 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"

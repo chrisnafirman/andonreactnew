@@ -5,7 +5,7 @@ const PutDownTimePickNPlaceTOP = (req, res) => {
     const { TimePickNPlaceTop, PickNPlaceTop, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
       [TimePickNPlaceTop, PickNPlaceTop, Area],
       (error, results) => {
         if (error) {

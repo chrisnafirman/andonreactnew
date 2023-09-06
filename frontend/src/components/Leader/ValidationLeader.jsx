@@ -164,6 +164,29 @@ const ValidationLeader = () => {
     return `${day}/${month}/${year} ~~ ${hours}:${minutes} WIB`;
   };
 
+
+  const QRValidationLink = () => {
+    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
+      return "/QRValidationLeaderTOP";
+    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
+      return "/QRValidationLeaderBOT";
+    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
+      return "/QRValidationLeaderBE";
+    } else {
+    }
+  };
+
+  const QRReturnLink = () => {
+    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
+      return "/QRReturnLeaderTOP";
+    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
+      return "/QRReturnLeaderBOT";
+    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
+      return "/QRReturnLeaderBE";
+    } else {
+    }
+  };
+
   const styles = {
     background: "linear-gradient(45deg, #BCC6CC, #8a8b90, #8D918D)",
     height: "1000px",
@@ -349,7 +372,7 @@ const ValidationLeader = () => {
                                   onClick={() => {
                                     setSelectedItem(item);
                                   }}
-                                  className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                                  className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out"
                                 >
                                   <span className="text-xs lg:text-sm">
                                     Open
@@ -374,7 +397,7 @@ const ValidationLeader = () => {
                                     setSelectedItem(item);
                                     setIsOpenReturn(item);
                                   }}
-                                  className="bg-orange-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                                  className="bg-orange-400 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                                 >
                                   <span className="text-xs lg:text-sm">
                                     Return
@@ -801,7 +824,8 @@ const ValidationLeader = () => {
 
                         {/* Add Validation and Reject buttons */}
                         <div className="flex justify-between space-x-6 mt-4">
-                          <a href="/QRValidationLeaderTOP">
+                        <a href={QRValidationLink()} >
+                        {selectedItem.Status === "" && (
                             <button className="bg-green-500 flex  hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                               <svg
                                 fill="#000000"
@@ -813,8 +837,10 @@ const ValidationLeader = () => {
                               </svg>
                               <span className="text-2xl ">Validation</span>
                             </button>
+                              )}
                           </a>
-                          <a href="/QRReturnLeaderTOP">
+                          <a href={QRReturnLink()} >
+                          {selectedItem.Status === "" && (
                             <button
                               className="bg-red-500  w-36 h-12 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                               onClick={() => {
@@ -823,6 +849,7 @@ const ValidationLeader = () => {
                             >
                               Return
                             </button>
+                               )}
                           </a>
                         </div>
                       </div>

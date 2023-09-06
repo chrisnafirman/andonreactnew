@@ -5,7 +5,7 @@ const PutDownTimeAOIBOT = (req, res) => {
     const { TimeAOIBot, AOIBot, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
       [TimeAOIBot, AOIBot, Area],
       (error, results) => {
         if (error) {

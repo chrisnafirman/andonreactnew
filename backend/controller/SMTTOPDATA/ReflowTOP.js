@@ -5,7 +5,7 @@ const PutDownTimeReflowTOP = (req, res) => {
     const { TimeReflowTop, ReflowTop, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
       [TimeReflowTop, ReflowTop, Area],
       (error, results) => {
         if (error) {

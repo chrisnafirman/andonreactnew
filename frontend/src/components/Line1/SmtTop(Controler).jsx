@@ -28,8 +28,6 @@ const SmtTop = () => {
   // SMT TOP LINE 1
   const [StatusLine, setStatusLine] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
-  const [Area, setArea] = useState("SMT TOP");
-
   // //////
 
   //  STATION Funtion
@@ -2593,408 +2591,408 @@ const SmtTop = () => {
   const updateStatusDestackerTop = (data) => {
     setStatusDestackerTop(data);
     setBackgroundColorStatusDestackerTop(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
 
   const updateStatusLabelTop = (data) => {
     setStatusLabelTop(data);
     setBackgroundColorStatusLabelTop(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
 
   const updateStatusPrinterTop = (data) => {
     setStatusPrinterTop(data);
     setBackgroundColorStatusPrinterTop(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
 
   const updateStatusSPITop = (data) => {
     setStatusSPITop(data);
     setBackgroundColorStatusSPITop(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
 
   const updateStatusPickNPlace = (data) => {
     setStatusPickNPlaceTop(data);
     setBackgroundColorStatusPickNPlaceTop(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
 
   const updateStatusReflowTop = (data) => {
     setStatusReflowTop(data);
     setBackgroundColorStatusReflowTop(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
 
   const updateStatusAOITop = (data) => {
     setStatusAOITop(data);
     setBackgroundColorStatusAOITop(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
 
   const updateStatusRVSTop = (data) => {
     setStatusRVSTop(data);
     setBackgroundColorStatusRVSTop(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
   // ------------------------------------
@@ -3003,305 +3001,305 @@ const SmtTop = () => {
   const updateStatusPrinterBot = (data) => {
     setStatusPrinterBot(data);
     setBackgroundColorStatusPrinterBot(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
   const updateStatusSPIBot = (data) => {
     setStatusSPIBot(data);
     setBackgroundColorStatusSPIBot(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
 
   const updateStatusPickNPlaceBot = (data) => {
     setStatusPickNPlaceBot(data);
     setBackgroundColorStatusPickNPlaceBot(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
 
   const updateStatusReflowBot = (data) => {
     setStatusReflowBot(data);
     setBackgroundColorStatusReflowBot(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
 
   const updateStatusAOIBot = (data) => {
     setStatusAOIBot(data);
     setBackgroundColorStatusAOIBot(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
 
   const updateStatusRVSBot = (data) => {
     setStatusRVSBot(data);
     setBackgroundColorStatusRVSBot(
-      data === "Go"
+       data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Maintenance"
-        ? "#E9CE08"
-        : data === "Repair Others"
-        ? "#E9CE08"
-        : data === "Return Repair Others"
-        ? "#E9CE08"
-        : data === "Leader"
-        ? "#C00000"
-        : data === "Return Leader"
-        ? "#C00000"
-        : data === "HRGA & EHS"
-        ? "#DB7093"
-        : data === "Return HRGA & EHS"
-        ? "#DB7093"
-        : data === "PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "Return PURCHASING,PPIC,MP&L"
-        ? "#873e23"
-        : data === "PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "Return PROCESS ENGINEERING"
-        ? "#1e81b0"
-        : data === "PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "Return PRODUCT DEVELOPMENT"
-        ? "#233087"
-        : data === "ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-        ? "#C5B602"
-        : data === "QA"
-        ? "#93C2C4"
-        : data === "QC"
-        ? "#BDD0D1"
-        : data === "Production Leader"
-        ? "#8fbc8f"
-        : data === "MAINTENANCE & IT"
-        ? "#be4f62"
-        : data === "Return MAINTENANCE & IT"
-        ? "#be4f62"
-        : "#565454"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : data === "Return MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : "#565454"
     );
   };
   // --------------------------------
@@ -3392,7 +3390,6 @@ const SmtTop = () => {
     ) {
       const data = {
         TimeDestackerTop: TimeDestackerTop,
-        Area: Area,
         DestackerTop: DestackerTop,
         StatusDestackerTop: StatusDestackerTop,
       };
@@ -3407,7 +3404,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimeDestackerTop);
-          console.log(Area);
           console.log(DestackerTop);
           if (response.status === 200) {
             console.log("Mantap");
@@ -3419,7 +3415,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimeDestackerTop, Area, DestackerTop, StatusDestackerTop]);
+  }, [TimeDestackerTop, DestackerTop, StatusDestackerTop]);
 
   // LabelTOP
   useEffect(() => {
@@ -3501,7 +3497,6 @@ const SmtTop = () => {
     ) {
       const data = {
         TimeLabelTop: TimeLabelTop,
-        Area: Area,
         LabelTop: LabelTop,
         StatusLabelTop: StatusLabelTop,
       };
@@ -3516,7 +3511,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimeLabelTop);
-          console.log(Area);
           console.log(LabelTop);
           if (response.status === 200) {
             console.log("Mantap");
@@ -3528,7 +3522,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimeLabelTop, Area, LabelTop, StatusLabelTop]);
+  }, [TimeLabelTop, LabelTop, StatusLabelTop]);
 
   // PrinterTOP
   useEffect(() => {
@@ -3613,7 +3607,6 @@ const SmtTop = () => {
     ) {
       const data = {
         TimePrinterTop: TimePrinterTop,
-        Area: Area,
         PrinterTop: PrinterTop,
         StatusPrinterTop: StatusPrinterTop,
       };
@@ -3628,7 +3621,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimePrinterTop);
-          console.log(Area);
           console.log(PrinterTop);
           if (response.status === 200) {
             console.log("Mantap");
@@ -3640,7 +3632,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimePrinterTop, Area, PrinterTop, StatusPrinterTop]);
+  }, [TimePrinterTop, PrinterTop, StatusPrinterTop]);
 
   // SpiTOP
   useEffect(() => {
@@ -3718,7 +3710,6 @@ const SmtTop = () => {
     if (StatusSPITop === "Go" && TimeSPITop !== null && TimeSPITop !== "") {
       const data = {
         TimeSPITop: TimeSPITop,
-        Area: Area,
         SPITop: SPITop,
         StatusSPITop: StatusSPITop,
       };
@@ -3733,7 +3724,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimeSPITop);
-          console.log(Area);
           console.log(SPITop);
           if (response.status === 200) {
             console.log("Mantap");
@@ -3745,7 +3735,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimeSPITop, Area, SPITop, StatusSPITop]);
+  }, [TimeSPITop, SPITop, StatusSPITop]);
 
   // PickNPlaceTOP
   useEffect(() => {
@@ -3830,7 +3820,6 @@ const SmtTop = () => {
     ) {
       const data = {
         TimePickNPlaceTop: TimePickNPlaceTop,
-        Area: Area,
         PickNPlaceTop: PickNPlaceTop,
         StatusPickNPlaceTop: StatusPickNPlaceTop,
       };
@@ -3845,7 +3834,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimePickNPlaceTop);
-          console.log(Area);
           console.log(PickNPlaceTop);
           if (response.status === 200) {
             console.log("Mantap");
@@ -3857,7 +3845,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimePickNPlaceTop, Area, PickNPlaceTop, StatusPickNPlaceTop]);
+  }, [TimePickNPlaceTop, PickNPlaceTop, StatusPickNPlaceTop]);
 
   // ReflowTOP
   useEffect(() => {
@@ -3939,7 +3927,6 @@ const SmtTop = () => {
     ) {
       const data = {
         TimeReflowTop: TimeReflowTop,
-        Area: Area,
         ReflowTop: ReflowTop,
         StatusReflowTop: StatusReflowTop,
       };
@@ -3954,7 +3941,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimeReflowTop);
-          console.log(Area);
           console.log(ReflowTop);
           if (response.status === 200) {
             console.log("Mantap");
@@ -3966,7 +3952,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimeReflowTop, Area, ReflowTop, StatusReflowTop]);
+  }, [TimeReflowTop, ReflowTop, StatusReflowTop]);
 
   // AOITOP
   useEffect(() => {
@@ -4044,7 +4030,6 @@ const SmtTop = () => {
     if (StatusAOITop === "Go" && TimeAOITop !== null && TimeAOITop !== "") {
       const data = {
         TimeAOITop: TimeAOITop,
-        Area: Area,
         AOITop: AOITop,
         StatusAOITop: StatusAOITop,
       };
@@ -4059,7 +4044,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimeAOITop);
-          console.log(Area);
           console.log(AOITop);
           if (response.status === 200) {
             console.log("Mantap");
@@ -4071,7 +4055,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimeAOITop, Area, AOITop, StatusAOITop]);
+  }, [TimeAOITop, AOITop, StatusAOITop]);
 
   // RVSTOP
   useEffect(() => {
@@ -4149,7 +4133,6 @@ const SmtTop = () => {
     if (StatusRVSTop === "Go" && TimeRVSTop !== null && TimeRVSTop !== "") {
       const data = {
         TimeRVSTop: TimeRVSTop,
-        Area: Area,
         RVSTop: RVSTop,
         StatusRVSTop: StatusRVSTop,
       };
@@ -4164,7 +4147,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimeRVSTop);
-          console.log(Area);
           console.log(RVSTop);
           if (response.status === 200) {
             console.log("Mantap");
@@ -4176,7 +4158,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimeRVSTop, Area, RVSTop, StatusRVSTop]);
+  }, [TimeRVSTop, RVSTop, StatusRVSTop]);
 
   // Line1 SMT BOT
   // PrinterBot
@@ -4262,7 +4244,6 @@ const SmtTop = () => {
     ) {
       const data = {
         TimePrinterBot: TimePrinterBot,
-        Area: Area,
         PrinterBot: PrinterBot,
         StatusPrinterBot: StatusPrinterBot,
       };
@@ -4277,7 +4258,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimePrinterBot);
-          console.log(Area);
           console.log(PrinterBot);
           if (response.status === 200) {
             console.log("Mantap");
@@ -4289,7 +4269,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimePrinterBot, Area, PrinterBot, StatusPrinterBot]);
+  }, [TimePrinterBot, PrinterBot, StatusPrinterBot]);
 
   // SPIBot
   useEffect(() => {
@@ -4367,7 +4347,6 @@ const SmtTop = () => {
     if (StatusSPIBot === "Go" && TimeSPIBot !== null && TimeSPIBot !== "") {
       const data = {
         TimeSPIBot: TimeSPIBot,
-        Area: Area,
         SPIBot: SPIBot,
         StatusSPIBot: StatusSPIBot,
       };
@@ -4382,7 +4361,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimeSPIBot);
-          console.log(Area);
           console.log(SPIBot);
           if (response.status === 200) {
             console.log("Mantap");
@@ -4394,7 +4372,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimeSPIBot, Area, SPIBot, StatusSPIBot]);
+  }, [TimeSPIBot, SPIBot, StatusSPIBot]);
 
   // PickNPlaceBot
   useEffect(() => {
@@ -4479,7 +4457,6 @@ const SmtTop = () => {
     ) {
       const data = {
         TimePickNPlaceBot: TimePickNPlaceBot,
-        Area: Area,
         PickNPlaceBot: PickNPlaceBot,
         StatusPickNPlaceBot: StatusPickNPlaceBot,
       };
@@ -4494,7 +4471,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimePickNPlaceBot);
-          console.log(Area);
           console.log(PickNPlaceBot);
           if (response.status === 200) {
             console.log("Mantap");
@@ -4506,7 +4482,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimePickNPlaceBot, Area, PickNPlaceBot, StatusPickNPlaceBot]);
+  }, [TimePickNPlaceBot, PickNPlaceBot, StatusPickNPlaceBot]);
 
   // ReflowBot
   useEffect(() => {
@@ -4588,7 +4564,6 @@ const SmtTop = () => {
     ) {
       const data = {
         TimeReflowBot: TimeReflowBot,
-        Area: Area,
         ReflowBot: ReflowBot,
         StatusReflowBot: StatusReflowBot,
       };
@@ -4603,7 +4578,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimeReflowBot);
-          console.log(Area);
           console.log(ReflowBot);
           if (response.status === 200) {
             console.log("Mantap");
@@ -4615,7 +4589,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimeReflowBot, Area, ReflowBot, StatusReflowBot]);
+  }, [TimeReflowBot, ReflowBot, StatusReflowBot]);
 
 
   // AOIBot
@@ -4698,7 +4672,6 @@ const SmtTop = () => {
     ) {
       const data = {
         TimeAOIBot: TimeAOIBot,
-        Area: Area,
         AOIBot: AOIBot,
         StatusAOIBot: StatusAOIBot,
       };
@@ -4713,7 +4686,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimeAOIBot);
-          console.log(Area);
           console.log(AOIBot);
           if (response.status === 200) {
             console.log("Mantap");
@@ -4725,7 +4697,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimeAOIBot, Area, AOIBot, StatusAOIBot]);
+  }, [TimeAOIBot, AOIBot, StatusAOIBot]);
 
   // RVSBot
   useEffect(() => {
@@ -4807,7 +4779,6 @@ const SmtTop = () => {
     ) {
       const data = {
         TimeRVSBot: TimeRVSBot,
-        Area: Area,
         RVSBot: RVSBot,
         StatusRVSBot: StatusRVSBot,
       };
@@ -4822,7 +4793,6 @@ const SmtTop = () => {
         .then((response) => {
           console.log("Response status:", response.status);
           console.log(TimeRVSBot);
-          console.log(Area);
           console.log(RVSBot);
           if (response.status === 200) {
             console.log("Mantap");
@@ -4834,7 +4804,7 @@ const SmtTop = () => {
           console.log("Error:", err);
         });
     }
-  }, [TimeRVSBot, Area, RVSBot, StatusRVSBot]);
+  }, [TimeRVSBot, RVSBot, StatusRVSBot]);
 
 
 
@@ -4845,7 +4815,7 @@ const SmtTop = () => {
     backgroundImage: `url(${process.env.PUBLIC_URL}/Background.jpg)`,
     backgroundSize: "1300px",
     backgroundPosition: "0px",
-    height: "700px", // Ubah tinggi (height) sesuai kebutuhan Anda
+    height: "900px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
   return (
     <body style={styles}>
@@ -5070,7 +5040,9 @@ const SmtTop = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <button class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
+                  <button 
+                  style={{ backgroundColor: backgroundColorStatusPrinterBot }}
+                  class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
                         PRINTER BOT
@@ -5084,7 +5056,9 @@ const SmtTop = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <button class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
+                  <button
+                  style={{ backgroundColor: backgroundColorStatusSPIBot }}
+                  class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">SPI BOT</div>
                     </header>
@@ -5096,7 +5070,9 @@ const SmtTop = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <button class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
+                  <button 
+                  style={{ backgroundColor: backgroundColorStatusPickNPlaceBot }}
+                  class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
                         PICK & PLACE BOT
@@ -5110,7 +5086,9 @@ const SmtTop = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <button class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
+                  <button 
+                  style={{ backgroundColor: backgroundColorStatusReflowBot }}
+                  class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
                         REFLOW BOT
@@ -5129,7 +5107,9 @@ const SmtTop = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <button class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
+                  <button 
+                  style={{ backgroundColor: backgroundColorStatusAOIBot }}
+                  class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">AOI BOT</div>
                     </header>
@@ -5141,7 +5121,9 @@ const SmtTop = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <button class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
+                  <button 
+                  style={{ backgroundColor: backgroundColorStatusRVSBot }}
+                  class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">RVS BOT</div>
                     </header>

@@ -165,6 +165,29 @@ const Quality = () => {
     return `${day}/${month}/${year} ~~ ${hours}:${minutes} WIB`;
   };
 
+
+  const QRValidationLink = () => {
+    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
+      return "/QRValidationQualityTOP";
+    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
+      return "/QRValidationQualityBOT";
+    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
+      return "/QRValidationQualityBE";
+    } else {
+    }
+  };
+
+  const QRReturnLink = () => {
+    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
+      return "/QRReturnQualityTOP";
+    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
+      return "/QRReturnQualityBOT";
+    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
+      return "/QRReturnQualityBE";
+    } else {
+    }
+  };
+
   const styles = {
     background: "linear-gradient(45deg, #4E86B0, #8a8b90, #0183E8)",
     height: "1000px",
@@ -360,7 +383,7 @@ const Quality = () => {
                                   onClick={() => {
                                     setSelectedItem(item)
                                   }}
-                                  className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300 ease-in-out"
+                                  className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out"
                                 >
                                   <span className="text-xs lg:text-sm">Open</span>
                                 </button>
@@ -381,7 +404,7 @@ const Quality = () => {
                                     setSelectedItem(item)
                                     setIsOpenReturn(item)
                                   }}
-                                  className="bg-orange-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                                  className="bg-orange-400 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                                 >
                                   <span className="text-xs lg:text-sm">Return</span>
                                 </button>
@@ -840,7 +863,8 @@ const Quality = () => {
 
                         {/* Add Validation and Reject buttons */}
                         <div className="flex justify-between space-x-6 mt-4">
-                          <a href="/QRValidationQualityTOP">
+                        <a href={QRValidationLink()} >
+                        {selectedItem.Status === "" && (
                             <button
                               className="bg-green-500 flex  hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
 
@@ -852,8 +876,10 @@ const Quality = () => {
                                 Validation
                               </span>
                             </button>
+                              )}
                           </a>
-                          <a href="/QRReturnQualityTOP">
+                          <a href={QRReturnLink()} >
+                          {selectedItem.Status === "" && (
                             <button
                               className="bg-red-500  w-36 h-12 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                               onClick={() => {
@@ -862,6 +888,7 @@ const Quality = () => {
                             >
                               Return
                             </button>
+                              )}
                           </a>
                         </div>
                       </div>
@@ -872,6 +899,7 @@ const Quality = () => {
             </div>
           </>
         )}
+        
       </main>
     </body>
   );
