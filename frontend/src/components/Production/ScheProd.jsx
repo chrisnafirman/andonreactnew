@@ -12,7 +12,7 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 const SmtTop = () => {
- 
+
   const [time, setTime] = useState(new Date().toLocaleString());
 
   const [showDrawer, setShowDrawer] = useState(false);
@@ -22,7 +22,7 @@ const SmtTop = () => {
 
   // popup 1
 
- 
+
 
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -30,9 +30,9 @@ const SmtTop = () => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   // SCHE PRODUCTION
- 
 
-  
+
+
   // RESET
 
   // button search
@@ -116,7 +116,7 @@ const SmtTop = () => {
     console.log(formattedDate);
   };
 
-  
+
 
   // function formatDate(dateString) {
   //   const options = { day: "numeric", month: "numeric", year: "numeric" };
@@ -168,9 +168,8 @@ const SmtTop = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const formattedTime = `${currentTime.getDate()}/${
-    currentTime.getMonth() + 1
-  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+  const formattedTime = `${currentTime.getDate()}/${currentTime.getMonth() + 1
+    }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/l.jpg)`,
@@ -198,24 +197,25 @@ const SmtTop = () => {
 
       <header class="bg-white shadow mb-3">
         <div class="mx-auto max-w-7xl px-4">
-          <marquee behavior="scroll" direction="right">
+          {/* <marquee behavior="scroll" direction="right"> */}
             <h1 class="text-xl font-bold tracking-tight text-gray-900">
               Schedule Production
             </h1>
-          </marquee>
+          {/* </marquee> */}
         </div>
       </header>
 
-    
+
 
       {/*  */}
       <main className="flex">
+
         {showDatePicker && (
           <form className="" onSubmit={handleSubmit}>
-            <label htmlFor="date" className="text-gray-300">
+            <label htmlFor="date" className="text-gray-300 ml-3">
               Pilih Tanggal :
             </label>
-            <div className="flex flex-col w-40">
+            <div className="flex flex-col ml-3 w-40">
               <div class="relative max-w-sm">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                   <svg
@@ -246,9 +246,14 @@ const SmtTop = () => {
               >
                 Submit
               </button>
+             
+
             </div>
           </form>
+
         )}
+
+
 
         <div className="ml-4"></div>
         <div class="flex ">
@@ -298,7 +303,7 @@ const SmtTop = () => {
                         </th>
                         <th className="p-1 w-5">
                           <div className="font-semibold text-center">
-                           
+
                           </div>
                         </th>
                       </tr>

@@ -28,6 +28,7 @@ const Andonline1 = () => {
   const [isOpenOperator, setIsOpenOperator] = useState(false);
   const [isOpenGeneral, setIsOpenGeneral] = useState(false);
   const [isOpenGeneral2, setIsOpenGeneral2] = useState(false);
+  const [isOpenGeneral3, setIsOpenGeneral3] = useState(false);
 
   // Data lama
   const [mesin, setMesin] = useState("");
@@ -1590,8 +1591,8 @@ if (urlParams.get('refresh') === 'true') {
             </a>
           </button>
 
-          <button class="w-60 sm:w-36 lg:w-32 bg-white">
-            <a href="Inputsche">
+          <button onClick={()=>{setIsOpenGeneral3(true)}} class="w-60 sm:w-36 lg:w-32 bg-white">
+            <a >
               <svg
                 width="20px"
                 className="justify-center items-center mx-auto"
@@ -1700,18 +1701,18 @@ if (urlParams.get('refresh') === 'true') {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <a href="UserSMTTop">
                     <div
                       // style={{ backgroundColor: backgroundColorDesteckerTop }}
                       // value={desteckerTop}
-                      class="w-full max-w-sm  bg-slate-800 border border-white shadow-lg rounded-xl "
+                      class="w-full max-w-sm   bg-[#003153] border border-white shadow-lg rounded-xl "
                     // onClick={
                     //   desteckerTop === "Leader" ? () => setIsOpen(true) : null
                     // }
                     >
                       <header class="px-5 py-4  ">
-                        <div class="italic  text-center text-white">
+                        <div class="font-sans  text-center text-white">
                           SMT TOP
                         </div>
                       </header>
@@ -1723,15 +1724,15 @@ if (urlParams.get('refresh') === 'true') {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <a href="UserSMTBot">
                     <div
                       // style={{ backgroundColor: backgroundColor }}
                       // value={status}
-                      class="w-full max-w-sm  bg-slate-800 border border-white shadow-lg rounded-xl  "
+                      class="w-full max-w-sm  bg-[#003153] border border-white shadow-lg rounded-xl  "
                     >
                       <header class="px-5 py-4  ">
-                        <div class="italic  text-center text-white">
+                        <div class="font-sans  text-center text-white">
                           SMT BOT
                         </div>
                       </header>
@@ -1743,15 +1744,15 @@ if (urlParams.get('refresh') === 'true') {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <a href="UserSMTBe">
                     <div
                       // style={{ backgroundColor: backgroundColor }}
                       // value={status}
-                      class="w-full max-w-sm  bg-slate-800 border border-white shadow-lg rounded-xl  "
+                      class="w-full max-w-sm  bg-[#003153] border border-white  shadow-lg rounded-xl  "
                     >
                       <header class="px-5 py-4  ">
-                        <div class="italic  text-center text-white">
+                        <div class="font-sans  text-center text-white">
                           SMT BACKEND
                         </div>
                       </header>
@@ -1774,22 +1775,16 @@ if (urlParams.get('refresh') === 'true') {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <button
                     onClick={() => {
-                      setStation("Electricity");
-                      if (Electricity === "Go") {
-                        setIsOpenGeneral(true);
-                      }
+
+                        setIsOpenGeneral2(true);
                     }}
-                    onMouseDown={handleElectricityPress}
-                    onMouseUp={handleElectricityRelease}
-                    onMouseLeave={handleElectricityRelease}
-                    onTouchStart={handleElectricityPress}
-                    onTouchEnd={handleElectricityRelease}
-                    style={{ backgroundColor: backgroundColorElectricity }}
-                    value={Electricity}
-                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
+                
+                    // style={{ backgroundColor: backgroundColorElectricity }}
+                    // value={Electricity}
+                    class="w-full max-w-sm   bg-[#3f3f3f] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1803,25 +1798,25 @@ if (urlParams.get('refresh') === 'true') {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <button
                     
                     value={Network}
-                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
+                    class="w-full max-w-sm   bg-[#3f3f3f] shadow-lg rounded-xl "
                     onClick={() => {
-                      setStation("Network");
-                      if (Network === "Go") {
-                        setIsOpenGeneral(true);
-                      }
+                      // setStation("Network");
+                      // if (Network === "Go") {
+                        setIsOpenGeneral2(true);
+                      // }
                     }}
-                    onMouseDown={handleNetworkPress}
-                    onMouseUp={handleNetworkRelease}
-                    onMouseLeave={handleNetworkRelease}
-                    onTouchStart={handleNetworkPress}
-                    onTouchEnd={handleNetworkRelease}
+                    // onMouseDown={handleNetworkPress}
+                    // onMouseUp={handleNetworkRelease}
+                    // onMouseLeave={handleNetworkRelease}
+                    // onTouchStart={handleNetworkPress}
+                    // onTouchEnd={handleNetworkRelease}
                   >
                     <header class="px-5 py-4  ">
-                      <div class="italic  text-center text-white">NETWORK (Close)</div>
+                      <div class="italic  text-center text-white">NETWORK </div>
                     </header>
                   </button>
                 </div>
@@ -1830,22 +1825,22 @@ if (urlParams.get('refresh') === 'true') {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <div
                     onClick={() => {
-                      setStation("Air Compressor");
-                      if (Aircomp === "Go") {
-                        setIsOpenGeneral(true);
-                      }
+                      // setStation("Air Compressor");
+                      // if (Aircomp === "Go") {
+                        setIsOpenGeneral2(true);
+                      // }
                     }}
-                    onMouseDown={handleAircompPress}
-                    onMouseUp={handleAircompRelease}
-                    onMouseLeave={handleAircompRelease}
-                    onTouchStart={handleAircompPress}
-                    onTouchEnd={handleAircompRelease}
-                    style={{ backgroundColor: backgroundColorAircomp }}
-                    value={Aircomp}
-                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
+                    // onMouseDown={handleAircompPress}
+                    // onMouseUp={handleAircompRelease}
+                    // onMouseLeave={handleAircompRelease}
+                    // onTouchStart={handleAircompPress}
+                    // onTouchEnd={handleAircompRelease}
+                    // style={{ backgroundColor: backgroundColorAircomp }}
+                    // value={Aircomp}
+                    class="w-full max-w-sm   bg-[#3f3f3f] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1860,21 +1855,21 @@ if (urlParams.get('refresh') === 'true') {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
 
-                <button className="animate-pulse w-72 pt-2 sm:w-48 lg:w-72">
+                <button className="animate-pulse w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <button
                     onClick={() => {
-                      if (Others === "Go") {
+                      // if (Others === "Go") {
                         setIsOpenOthers(true);
-                      }
+                      // }
                     }}
-                    style={{ backgroundColor: backgroundColorOthers }}
-                    value={Others}
-                    onMouseDown={handleOthersPress}
-                    onMouseUp={handleOthersRelease}
-                    onMouseLeave={handleOthersRelease}
-                    onTouchStart={handleOthersPress}
-                    onTouchEnd={handleOthersRelease}
-                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-full "
+                    // style={{ backgroundColor: backgroundColorOthers }}
+                    // value={Others}
+                    // onMouseDown={handleOthersPress}
+                    // onMouseUp={handleOthersRelease}
+                    // onMouseLeave={handleOthersRelease}
+                    // onTouchStart={handleOthersPress}
+                    // onTouchEnd={handleOthersRelease}
+                    class="w-full max-w-sm  bg-[#3f3f3f] shadow-lg rounded-full "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center  text-white">OTHERS</div>
@@ -1897,22 +1892,22 @@ if (urlParams.get('refresh') === 'true') {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <button
                     onClick={() => {
-                      setStation("Shortage Comp");
-                      if (Shorcomp === "Go") {
-                        setIsOpenGeneral(true);
-                      }
+                      // setStation("Shortage Comp");
+                      // if (Shorcomp === "Go") {
+                        setIsOpenGeneral2(true);
+                    //   }
                     }}
-                    onMouseDown={handleShorcompPress}
-                    onMouseUp={handleShorcompRelease}
-                    onMouseLeave={handleShorcompRelease}
-                    onTouchStart={handleShorcompPress}
-                    onTouchEnd={handleShorcompRelease}
-                    style={{ backgroundColor: backgroundColorShorcomp }}
-                    value={Shorcomp}
-                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
+                    // onMouseDown={handleShorcompPress}
+                    // onMouseUp={handleShorcompRelease}
+                    // onMouseLeave={handleShorcompRelease}
+                    // onTouchStart={handleShorcompPress}
+                    // onTouchEnd={handleShorcompRelease}
+                    // style={{ backgroundColor: backgroundColorShorcomp }}
+                    // value={Shorcomp}
+                    class="w-full max-w-sm   bg-[#3f3f3f] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1926,22 +1921,22 @@ if (urlParams.get('refresh') === 'true') {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <button className="w-72 pt-2 sm:w-48 lg:w-72">
+                <button className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <div
                     onClick={() => {
-                      setStation("Shortage Box FG");
-                      if (Shorbox === "Go") {
-                        setIsOpenGeneral(true);
-                      }
+                      // setStation("Shortage Box FG");
+                      // if (Shorbox === "Go") {
+                        setIsOpenGeneral2(true);
+                      // }
                     }}
-                    onMouseDown={handleShorboxPress}
-                    onMouseUp={handleShorboxRelease}
-                    onMouseLeave={handleShorboxRelease}
-                    onTouchStart={handleShorboxPress}
-                    onTouchEnd={handleShorboxRelease}
-                    style={{ backgroundColor: backgroundColorShorbox }}
-                    value={Shorbox}
-                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
+                    // onMouseDown={handleShorboxPress}
+                    // onMouseUp={handleShorboxRelease}
+                    // onMouseLeave={handleShorboxRelease}
+                    // onTouchStart={handleShorboxPress}
+                    // onTouchEnd={handleShorboxRelease}
+                    // style={{ backgroundColor: backgroundColorShorbox }}
+                    // value={Shorbox}
+                    class="w-full max-w-sm   bg-[#3f3f3f] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1955,22 +1950,22 @@ if (urlParams.get('refresh') === 'true') {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <button className="w-72 pt-2 sm:w-48 lg:w-72">
+                <button className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <div
                     onClick={() => {
-                      setStation("Over Trial");
-                      if (Overtrial === "Go") {
-                        setIsOpenGeneral(true);
-                      }
+                      // setStation("Over Trial");
+                      // if (Overtrial === "Go") {
+                        setIsOpenGeneral2(true);
+                      // }
                     }}
-                    onMouseDown={handleOvertrialPress}
-                    onMouseUp={handleOvertrialRelease}
-                    onMouseLeave={handleOvertrialRelease}
-                    onTouchStart={handleOvertrialPress}
-                    onTouchEnd={handleOvertrialRelease}
-                    style={{ backgroundColor: backgroundColorOvertrial }}
-                    value={Overtrial}
-                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
+                    // onMouseDown={handleOvertrialPress}
+                    // onMouseUp={handleOvertrialRelease}
+                    // onMouseLeave={handleOvertrialRelease}
+                    // onTouchStart={handleOvertrialPress}
+                    // onTouchEnd={handleOvertrialRelease}
+                    // style={{ backgroundColor: backgroundColorOvertrial }}
+                    // value={Overtrial}
+                    class="w-full max-w-sm   bg-[#3f3f3f] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1984,22 +1979,22 @@ if (urlParams.get('refresh') === 'true') {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <button className="w-72 pt-2 sm:w-48 lg:w-72">
+                <button className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <div
                     onClick={() => {
-                      setStation("Over Change Model");
-                      if (Overchange === "Go") {
-                        setIsOpenGeneral(true);
-                      }
+                      // setStation("Over Change Model");
+                      // if (Overchange === "Go") {
+                        setIsOpenGeneral2(true);
+                      // }
                     }}
-                    onMouseDown={handleOverchangePress}
-                    onMouseUp={handleOverchangeRelease}
-                    onMouseLeave={handleOverchangeRelease}
-                    onTouchStart={handleOverchangePress}
-                    onTouchEnd={handleOverchangeRelease}
-                    style={{ backgroundColor: backgroundColorOverchange }}
-                    value={Overchange}
-                    class="w-full max-w-sm   bg-[#565454] shadow-lg rounded-xl "
+                    // onMouseDown={handleOverchangePress}
+                    // onMouseUp={handleOverchangeRelease}
+                    // onMouseLeave={handleOverchangeRelease}
+                    // onTouchStart={handleOverchangePress}
+                    // onTouchEnd={handleOverchangeRelease}
+                    // style={{ backgroundColor: backgroundColorOverchange }}
+                    // value={Overchange}
+                    class="w-full max-w-sm   bg-[#3f3f3f] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-sm text-center text-white">
@@ -2735,6 +2730,56 @@ if (urlParams.get('refresh') === 'true') {
                               data-modal-hide="popup-modal"
                               type="button"
                               onClick={() => setIsOpenGeneral2(false)}
+                              class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                            >
+                              Back
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
+
+       <td>
+        {isOpenGeneral3 ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 transition-opacity">
+                  <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                </div>
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <form>
+                      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <div class="p-6 text-center">
+                        <svg 
+                        class="mx-auto mb-4 text-gray-400 w-32 h-14 dark:text-gray-200"
+                        width="80px" viewBox="0 0 1024 1024"   version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M224.3 251.4h556.2c14.3 0 25.9 11.6 25.9 25.9v501.8c0 14.3-11.6 25.9-25.9 25.9H224.3c-14.3 0-25.9-11.6-25.9-25.9V277.3c0-14.3 11.6-25.9 25.9-25.9z" fill="#FFFFFF" /><path d="M780.5 830.8H224.3c-28.5 0-51.7-23.2-51.7-51.7V277.3c0-28.5 23.2-51.7 51.7-51.7h556.2c28.5 0 51.7 23.2 51.7 51.7v501.8c0 28.5-23.2 51.7-51.7 51.7zM224.3 277.3v501.8h556.2V277.3H224.3z" fill="#333333" /><path d="M224.3 277h568.5v152.1H224.3z" fill="#FFDB5B" /><path d="M198.4 399.5h633.8v51.8H198.4zM495.6 638.8l101-101c11.8-11.8 30.9-11.8 42.7 0l0.1 0.1c11.8 11.8 11.8 30.9 0 42.7L518.7 701.2c-6.3 6.3-14.8 9.3-23.1 8.8-8.3 0.5-16.7-2.5-23.1-8.8l-76-76c-11.8-11.8-11.8-30.9 0-42.7l0.1-0.1c11.8-11.8 30.9-11.8 42.7 0l56.3 56.4z" fill="#333333" /><path d="M327.7 166.8c14.3 0 25.9 11.6 25.9 25.9v38.8h-51.7v-38.8c0-14.4 11.6-25.9 25.8-25.9zM664.1 166.8c14.3 0 25.9 11.6 25.9 25.9v38.8h-51.7v-38.8c-0.1-14.4 11.5-25.9 25.8-25.9z" fill="#333333" /></svg>
+                          <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-normal text-gray-500 dark:text-gray-400">
+                           Hanya PPIC Yang Bisa Mengaccses Halaman Ini
+                          </h3>
+
+                          <div class="flex justify-center">
+                            <button
+                              data-modal-hide="popup-modal"
+                              type="button"
+                              onClick={() => setIsOpenGeneral3(false)}
                               class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                             >
                               Back

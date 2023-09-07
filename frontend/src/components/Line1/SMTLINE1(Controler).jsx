@@ -12,7 +12,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const SmtTop = () => {
+const SMTLINE1CONTROLLER = () => {
   // NAVBAR
   const [currentTime, setCurrentTime] = useState(new Date());
   const [time, setTime] = useState(new Date().toLocaleString());
@@ -4871,6 +4871,10 @@ const SmtTop = () => {
             CONTROLLER
           </span>
         </div>
+        <div>
+
+          
+        </div>
 
         <div className="">
           <span className=" pt-4 sm:ml-5 text-2xl text-white font-thin px-2">
@@ -5138,4 +5142,4 @@ const SmtTop = () => {
   );
 };
 
-export default SmtTop;
+export default SMTLINE1CONTROLLER;

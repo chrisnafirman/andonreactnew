@@ -858,12 +858,14 @@ const Others = () => {
                                 Depart To
                               </label>
                               <Select
-                                value={selectedOptionDepartment}
-                                onChange={handleSelectDepartment}
-                                options={OptionsDepartment}
-                                isSearchable
-                                placeholder="Pilih Department"
-                              />
+                              value={selectedOptionDepartment}
+                              onChange={handleSelectDepartment}
+                              options={OptionsDepartment}
+                              isSearchable
+                              required
+                              placeholder="Pilih Department"
+                              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                            />
                             </div>
                             <div className="w-full mt-1 px-3 mb-3 md:mb-0">
                               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">

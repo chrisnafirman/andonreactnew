@@ -21,7 +21,7 @@ const QR = ({ onClose, onScanSuccess }) => {
         },
         {
           onDecodeError: (error) => {
-            console.error(error);
+            console.error(error);  
           },
           maxScansPerSecond: 1,
           highlightScanRegion: true,

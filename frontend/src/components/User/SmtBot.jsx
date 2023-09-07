@@ -1277,7 +1277,7 @@ const SmtBot = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                 <button
                     style={{
                       backgroundColor: backgroundColorStatusPrinterBot,
@@ -1346,7 +1346,7 @@ const SmtBot = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                 <button
                     style={{
                       backgroundColor: backgroundColorStatusSPIBot,
@@ -1412,7 +1412,7 @@ const SmtBot = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                 <button
                     style={{
                       backgroundColor: backgroundColorStatusPickNPlaceBot,
@@ -1480,7 +1480,7 @@ const SmtBot = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                 <button
                     style={{
                       backgroundColor: backgroundColorStatusReflowBot,
@@ -1553,7 +1553,7 @@ const SmtBot = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                 <button
                     style={{
                       backgroundColor: backgroundColorStatusAOIBot,
@@ -1619,7 +1619,7 @@ const SmtBot = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                 <button
                     style={{
                       backgroundColor: backgroundColorStatusRVSBot,

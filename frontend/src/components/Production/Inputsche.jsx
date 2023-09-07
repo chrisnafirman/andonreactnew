@@ -793,10 +793,10 @@ const SmtTop = () => {
 
           <button class="w-60 sm:w-36 lg:w-32">
             <a
-              href="/Andonline1"
-              class="inline-block w-full p-4 400 bg-blue-700 text-white rounded-r-lg hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+              href="/ScheduleProduction"
+              class="inline-block w-full p-4 400 bg-green-700 text-white rounded-r-lg hover:text-green-700 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
             >
-              BACK
+              Schedule
             </a>
           </button>
         </ul>

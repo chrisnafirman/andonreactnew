@@ -11,7 +11,7 @@ import ValidationQuality from "./components/Quality/ValidationQuality.jsx"
 
 
 import AndonLine1 from "./components/Line1/AndonLine1.jsx";
-import SmtTop from "./components/Line1/SmtTop(Controler).jsx";
+import SmtLine1Controller from "./components/Line1/SMTLINE1(Controler).jsx";
 import SmtBot from "./components/Line1/SmtBot.jsx";
 import SmtBE from "./components/Line1/SmtBE.jsx";
 import Inputsche from "./components/Production/Inputsche.jsx"
@@ -113,12 +113,12 @@ function App() {
         <Route path="UserSMTBot" element={<UserSMTBot />} />
         <Route path="UserHome" element={<UserHome />} />
 
-        <Route path="SmtTop" element={<SmtTop />} />
+        <Route path="SMTLine1Controller" element={<SmtLine1Controller />} />
         <Route path="SmtBot" element={<SmtBot />} />
         <Route path="SmtBE" element={<SmtBE />} />
 
-        <Route path="Inputsche" element={<Inputsche />} />
-        <Route path="ScheProd" element={<ScheProd />} />
+        <Route path="Inputschedule" element={<Inputsche />} />
+        <Route path="ScheduleProduction" element={<ScheProd />} />
 
         <Route path="UserMobile" element={<BP />} />
 

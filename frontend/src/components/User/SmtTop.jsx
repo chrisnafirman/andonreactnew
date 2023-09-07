@@ -1325,7 +1325,7 @@ const SmtTop = () => {
         <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex mx-auto justify-center item dark:divide-gray-700 dark:text-gray-400">
           <button class="w-60 sm:w-36 lg:w-32">
             <a
-              href="/UserSMTTop"
+              href="/UserHome"
               class="inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg focus:ring-4  active focus:outline-none dark:bg-gray-700 dark:text-white"
               aria-current="page"
             >
@@ -1402,7 +1402,7 @@ const SmtTop = () => {
             <section class="antialiased  text-gray-600  px-2" x-data="app">
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
-                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96 2xl:w-96">
+                <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
                   <button
                     style={{
                       backgroundColor: backgroundColorStatusDestackerTop,
@@ -2568,7 +2568,7 @@ const SmtTop = () => {
                   aria-labelledby="modal-headline"
                 >
                   <div className="sm:flex sm:items-start">
-                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <div class="relative bg-white  rounded-lg shadow dark:bg-gray-700">
 
                       <button
                         className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
@@ -2719,14 +2719,14 @@ const SmtTop = () => {
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-start justify-center min-h-screen pt-32 px-4 pb-20 text-center sm:block sm:p-0">
                 <div
-                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg  "
                   role="dialog"
                   aria-modal="true"
                   aria-labelledby="modal-headline"
                 >
                   <div className="sm:flex sm:items-start">
                     <form>
-                      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <div class="relative bg-white 2xl:w-[500px] rounded-lg shadow dark:bg-gray-700">
                         <button
                           className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
                           onClick={() => {
