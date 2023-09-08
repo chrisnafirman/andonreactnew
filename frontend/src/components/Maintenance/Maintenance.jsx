@@ -29,7 +29,7 @@ const Maintenance = () => {
   const [Action, setAction] = useState("");
 
   const [Line, setLine] = useState("");
-  const [isOpenQuality, setisOpenQuality] = useState(false);
+  const [isOpenRequestValidation, setisOpenRequestValidation] = useState(false);
   const [Department, setDepartment] = useState("");
   const [Requestor, setRequestor] = useState("");
   const [DepartTo, setDepartTo] = useState("");
@@ -95,7 +95,7 @@ const Maintenance = () => {
       const tableData = [];
       
       // Header untuk tabel PDF
-      const headers = ["Department", "Nama Request", "Line", "Area", "Station", "Status", "Problem", "Date"];
+      const headers = ["Requestor", "Request at", "Requestor PIC", "Line", "Area", "Station", "Problem"];
       
       // Warna teks header (abu-abu)
       const headerStyles = {
@@ -108,14 +108,12 @@ const Maintenance = () => {
       filteredData.forEach((item) => {
         const rowData = [
           item.Requestor,
+          item.Date,
           item.Nama,
           item.Line,
           item.Area,
           item.Station,
-          item.Status,
           item.Problem,
-          item.Date,
-
         ];
         tableData.push(rowData);
       });
@@ -152,8 +150,8 @@ const Maintenance = () => {
           fontStyle: fontSize, // Teks header tebal
         },
         columnStyles: {
-          6: { // Indeks 4 adalah kolom "Date"
-            textColor: [5, 150, 27], // Warna teks merah dalam format RGB
+          0: { // Indeks 4 adalah kolom "Date"
+            textColor: [159, 0, 0], // Warna teks merah dalam format RGB
           },
         },
        
@@ -170,7 +168,7 @@ const Maintenance = () => {
         const tableData = [];
         
         // Header untuk tabel PDF
-        const headers = ["Department", "Nama PIC", "Line", "Area", "Station", "Status", "Problem", "Case in", "Repair Start", "Repair Done", "Forward To"];
+        const headers = ["Requestor", "Request at", "Repair PIC", "Line", "Area", "Station", "Status", "Problem",  "Repair Start", "Forward To", "Forward at"];
         
         // Warna teks header (abu-abu)
         const headerStyles = {
@@ -181,19 +179,19 @@ const Maintenance = () => {
       
         // Mengisi data tabel PDF dengan properti yang Anda inginkan
         filteredData.forEach((item )  => {
-          const CaseIn = `${item.Date} WIB`;
+          const Requestat = `${item.Date} WIB`;
           const rowData = [
-            item.Department,
+            item.Requestor,
+            Requestat,
             item.ResponseName,
             item.Line,
             item.Area,
             item.Station,
             item.Status,
             item.Problem,
-            CaseIn,
             formatDateTimeAPI(item.ResponseTime),
-            formatDateTimeAPI(item.ResponseDone),
             item.DepartTo,
+            formatDateTimeAPI(item.ResponseDone),
           ];
           tableData.push(rowData);
         });
@@ -230,8 +228,11 @@ const Maintenance = () => {
             fontStyle: fontSize, // Teks header tebal
           },
           columnStyles: {
-            6: { // Indeks 4 adalah kolom "Date"
+            9: { // Indeks 4 adalah kolom "Date"
               textColor: [5, 150, 27], // Warna teks merah dalam format RGB
+            },
+            0: { // Indeks 4 adalah kolom "Date"
+              textColor: [159, 0, 0], // Warna teks merah dalam format RGB
             },
           },
         });
@@ -303,7 +304,7 @@ const Maintenance = () => {
 
 
   // QR
-  const submitQuality = () => {
+  const submitRequestValidation = () => {
     if (!NamaPIC || !Line || !Area || !Requestor || !Kerusakan || !Station || !Action) {
       alert("Harap isi semua kolom!");
       return;
@@ -418,9 +419,10 @@ const Maintenance = () => {
 
   const OptionsDepartment = [
     { value: "", label: "-- Pilih Depart --" },
-    { value: "QC", value2: "Quality", label: "QC" },
-    { value: "QA", value2: "Quality", label: "QA" },
-    { value: "Production Leader", value2: "Quality", label: "Production Leader" },
+    { value: "QC", value2: "Validation", label: "QC" },
+    { value: "QA", value2: "Validation", label: "QA" },
+    { value: "Production Leader", value2: "Validation", label: "Production Leader" },
+    { value: "Sub Leader", value2: "Validation", label: "Sub Leader" },
   ];
 
   const handleSelectDepartment = (selectedOptionDepartment) => {
@@ -432,8 +434,8 @@ const Maintenance = () => {
 
   const handleButtonClick = () => {
     submitUpdate();
-    submitQuality();
-    setisOpenQuality(false)
+    submitRequestValidation();
+    setisOpenRequestValidation(false)
     setSelectedItem(false)
     setIsLoader(true);
 
@@ -837,7 +839,7 @@ const Maintenance = () => {
 
                                         <button
                                           className="" onClick={() => {
-                                            setisOpenQuality(true)
+                                            setisOpenRequestValidation(true)
                                             setNamaPIC(selectedItem.ResponseName)
                                             setRequestor(selectedItem.Department)
                                             setArea(selectedItem.Area)
@@ -933,7 +935,7 @@ const Maintenance = () => {
           </div>
         </section>
         <td class="">
-          {isOpenQuality ? (
+          {isOpenRequestValidation ? (
             <>
               <div className="fixed z-10 inset-0 overflow-y-auto">
                 <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-60 text-center sm:block sm:p-0">
@@ -954,7 +956,7 @@ const Maintenance = () => {
                         <button
                           className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
                           onClick={() =>
-                            setisOpenQuality(false)
+                            setisOpenRequestValidation(false)
                           }
                         >
                           <svg
@@ -979,7 +981,7 @@ const Maintenance = () => {
                           }}
                         >
                           <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                            <span>Request Validation ${Station} ${Department}</span>
+                            <span>Request Validation </span>
                           </div>
                           <div class="flex flex-wrap -mx-3 ">
                             <div className="w-full mt-3 px-3 mb-2 md:mb-0">

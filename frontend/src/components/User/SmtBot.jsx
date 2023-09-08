@@ -97,7 +97,7 @@ const SmtBot = () => {
   const [isOpenReturn, setIsOpenReturn] = useState(false);
   const [isOpenReturnRepair, setIsOpenReturnRepair] = useState(false);
   const [isOpenRepair, setIsOpenRepair] = useState(false);
-  const [isOpenQuality, setIsOpenQuality] = useState(false);
+  const [isRequestValidation, setIsRequestValidation] = useState(false);
   const [isOpenValidation, setIsOpenValidation] = useState(false);
 
   // ----------------------
@@ -125,14 +125,14 @@ const SmtBot = () => {
 
   const [dataPrinterBOTLeader, setDataPrinterBOTLeader] = useState(null);
   const [dataPrinterBOTMaintenance, setDataPrinterBOTMaintenance] = useState(null);
-  const [dataPrinterBOTQuality, setDataPrinterBOTQuality] = useState(null);
+  const [dataPrinterBOTValidation, setDataPrinterBOTValidation] = useState(null);
   const [dataPrinterBOTOthers, setDataPrinterBOTOthers] = useState(null);
   const [dataPrinterBOTReturnOthers, setDataPrinterBOTReturnOthers] = useState(null);
   const [dataPrinterBOTReturnMaintenance, setDataPrinterBOTReturnMaintenance] = useState(null);
 
   const [dataSPIBOTLeader, setDataSPIBOTLeader] = useState(null);
   const [dataSPIBOTMaintenance, setDataSPIBOTMaintenance] = useState(null);
-  const [dataSPIBOTQuality, setDataSPIBOTQuality] = useState(null);
+  const [dataSPIBOTValidation, setDataSPIBOTValidation] = useState(null);
   const [dataSPIBOTOthers, setDataSPIBOTOthers] = useState(null);
   const [dataSPIBOTReturnOthers, setDataSPIBOTReturnOthers] = useState(null);
   const [dataSPIBOTReturnMaintenance, setDataSPIBOTReturnMaintenance] = useState(null);
@@ -140,7 +140,7 @@ const SmtBot = () => {
 
   const [dataPickNPlaceBOTLeader, setDataPickNPlaceBOTLeader] = useState(null);
   const [dataPickNPlaceBOTMaintenance, setDataPickNPlaceBOTMaintenance] = useState(null);
-  const [dataPickNPlaceBOTQuality, setDataPickNPlaceBOTQuality] = useState(null);
+  const [dataPickNPlaceBOTValidation, setDataPickNPlaceBOTValidation] = useState(null);
   const [dataPickNPlaceBOTOthers, setDataPickNPlaceBOTOthers] = useState(null);
   const [dataPickNPlaceBOTReturnOthers, setDataPickNPlaceBOTReturnOthers] = useState(null);
   const [dataPickNPlaceBOTReturnMaintenance, setDataPickNPlaceBOTReturnMaintenance] = useState(null);
@@ -148,14 +148,14 @@ const SmtBot = () => {
 
   const [dataReflowBOTLeader, setDataReflowBOTLeader] = useState(null);
   const [dataReflowBOTMaintenance, setDataReflowBOTMaintenance] = useState(null);
-  const [dataReflowBOTQuality, setDataReflowBOTQuality] = useState(null);
+  const [dataReflowBOTValidation, setDataReflowBOTValidation] = useState(null);
   const [dataReflowBOTOthers, setDataReflowBOTOthers] = useState(null);
   const [dataReflowBOTReturnOthers, setDataReflowBOTReturnOthers] = useState(null);
   const [dataReflowBOTReturnMaintenance, setDataReflowBOTReturnMaintenance] = useState(null);
 
   const [dataAOIBOTLeader, setDataAOIBOTLeader] = useState(null);
   const [dataAOIBOTMaintenance, setDataAOIBOTMaintenance] = useState(null);
-  const [dataAOIBOTQuality, setDataAOIBOTQuality] = useState(null);
+  const [dataAOIBOTValidation, setDataAOIBOTValidation] = useState(null);
   const [dataAOIBOTOthers, setDataAOIBOTOthers] = useState(null);
   const [dataAOIBOTReturnOthers, setDataAOIBOTReturnOthers] = useState(null);
   const [dataAOIBOTReturnMaintenance, setDataAOIBOTReturnMaintenance] = useState(null);
@@ -163,7 +163,7 @@ const SmtBot = () => {
 
   const [dataRVSBOTLeader, setDataRVSBOTLeader] = useState(null);
   const [dataRVSBOTMaintenance, setDataRVSBOTMaintenance] = useState(null);
-  const [dataRVSBOTQuality, setDataRVSBOTQuality] = useState(null);
+  const [dataRVSBOTValidation, setDataRVSBOTValidation] = useState(null);
   const [dataRVSBOTOthers, setDataRVSBOTOthers] = useState(null);
   const [dataRVSBOTReturnOthers, setDataRVSBOTReturnOthers] = useState(null);
   const [dataRVSBOTReturnMaintenance, setDataRVSBOTReturnMaintenance] = useState(null);
@@ -658,7 +658,7 @@ const SmtBot = () => {
   const updateStatusPrinterBot = (data) => {
     setStatusPrinterBot(data);
     setBackgroundColorStatusPrinterBot(
-       data === "Go"
+   data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -698,11 +698,13 @@ const SmtBot = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
 
     );
   };
@@ -710,7 +712,7 @@ const SmtBot = () => {
   const updateStatusSPIBot = (data) => {
     setStatusSPIBot(data);
     setBackgroundColorStatusSPIBot(
-       data === "Go"
+   data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -750,11 +752,13 @@ const SmtBot = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
 
     );
   };
@@ -762,7 +766,7 @@ const SmtBot = () => {
   const updateStatusPickNPlaceBot = (data) => {
     setStatusPickNPlaceBot(data);
     setBackgroundColorStatusPickNPlaceBot(
-       data === "Go"
+   data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -802,11 +806,13 @@ const SmtBot = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
 
     );
   };
@@ -814,7 +820,7 @@ const SmtBot = () => {
   const updateStatusReflowBot = (data) => {
     setStatusReflowBot(data);
     setBackgroundColorStatusReflowBot(
-       data === "Go"
+   data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -854,11 +860,13 @@ const SmtBot = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
 
     );
   };
@@ -866,59 +874,7 @@ const SmtBot = () => {
   const updateStatusAOIBot = (data) => {
     setStatusAOIBot(data);
     setBackgroundColorStatusAOIBot(
-       data === "Go"
-        ? "#32cd32"
-        : data === "Return Repair Maintenance"
-          ? "#E9CE08"
-          : data === "Repair Maintenance"
-            ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
-                : data === "Leader"
-                  ? "#C00000"
-                  : data === "Return Leader"
-                    ? "#C00000"
-                    : data === "HRGA & EHS"
-                      ? "#C00000"
-                      : data === "Return HRGA & EHS"
-                        ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
-                          ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
-                            ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
-                              ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
-                                ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
-                                  ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
-                                    ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
-                                      ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
-                                          ? "#93C2C4"
-                                          : data === "QC"
-                                            ? "#93C2C4"
-                                            : data === "Production Leader"
-                                              ? "#93C2C4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : "#565454"
-
-    );
-  };
-
-  const updateStatusRVSBot = (data) => {
-    setStatusRVSBot(data);
-    setBackgroundColorStatusRVSBot(
-       data === "Go"
+   data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -958,11 +914,67 @@ const SmtBot = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
+
+    );
+  };
+
+  const updateStatusRVSBot = (data) => {
+    setStatusRVSBot(data);
+    setBackgroundColorStatusRVSBot(
+   data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair Maintenance"
+          ? "#E9CE08"
+          : data === "Repair Maintenance"
+            ? "#E9CE08"
+            : data === "Repair Others"
+              ? "#E9CE08"
+              : data === "Return Repair Others"
+                ? "#E9CE08"
+                : data === "Leader"
+                  ? "#C00000"
+                  : data === "Return Leader"
+                    ? "#C00000"
+                    : data === "HRGA & EHS"
+                      ? "#C00000"
+                      : data === "Return HRGA & EHS"
+                        ? "#C00000"
+                        : data === "PURCHASING,PPIC,MP&L"
+                          ? "#C00000"
+                          : data === "Return PURCHASING,PPIC,MP&L"
+                            ? "#C00000"
+                            : data === "PROCESS ENGINEERING"
+                              ? "#C00000"
+                              : data === "Return PROCESS ENGINEERING"
+                                ? "#C00000"
+                                : data === "PRODUCT DEVELOPMENT"
+                                  ? "#C00000"
+                                  : data === "Return PRODUCT DEVELOPMENT"
+                                    ? "#C00000"
+                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                      ? "#C00000"
+                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                        ? "#C00000"
+                                        : data === "QA"
+                                          ? "#93c2c4"
+                                          : data === "QC"
+                                            ? "#93c2c4"
+                                            : data === "Production Leader"
+                                              ? "#93c2c4"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
+                                                  ? "#C00000"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
 
     );
   };
@@ -1025,7 +1037,7 @@ const SmtBot = () => {
   // Printer
   const fetchPrinterBOTLeader = () => fetchData("/getPrinterBOTLeader", setDataPrinterBOTLeader);
   const fetchPrinterBOTMaintenance = () => fetchData("/getPrinterBOTMaintenance", setDataPrinterBOTMaintenance);
-  const fetchPrinterBOTQuality = () => fetchData("/getPrinterBOTQuality", setDataPrinterBOTQuality);
+  const fetchPrinterBOTValidation = () => fetchData("/getPrinterBOTValidation", setDataPrinterBOTValidation);
   const fetchPrinterBOTOthers = () => fetchData("/getPrinterBOTOthers", setDataPrinterBOTOthers);
   const fetchPrinterBOTReturnMaintenance = () => fetchData("/getPrinterBOTReturnMaintenance", setDataPrinterBOTReturnMaintenance);
   const fetchPrinterBOTReturnOthers = () => fetchData("/getPrinterBOTReturnOthers", setDataPrinterBOTReturnOthers);
@@ -1034,7 +1046,7 @@ const SmtBot = () => {
   // SPI
   const fetchSPIBOTLeader = () => fetchData("/getSPIBOTLeader", setDataSPIBOTLeader);
   const fetchSPIBOTMaintenance = () => fetchData("/getSPIBOTMaintenance", setDataSPIBOTMaintenance);
-  const fetchSPIBOTQuality = () => fetchData("/getSPIBOTQuality", setDataSPIBOTQuality);
+  const fetchSPIBOTValidation = () => fetchData("/getSPIBOTValidation", setDataSPIBOTValidation);
   const fetchSPIBOTOthers = () => fetchData("/getSPIBOTOthers", setDataSPIBOTOthers);
   const fetchSPIBOTReturnMaintenance = () => fetchData("/getSPIBOTReturnMaintenance", setDataSPIBOTReturnMaintenance);
   const fetchSPIBOTReturnOthers = () => fetchData("/getSPIBOTReturnOthers", setDataSPIBOTReturnOthers);
@@ -1042,7 +1054,7 @@ const SmtBot = () => {
   // PickNPlace
   const fetchPickNPlaceBOTLeader = () => fetchData("/getPickNPlaceBOTLeader", setDataPickNPlaceBOTLeader);
   const fetchPickNPlaceBOTMaintenance = () => fetchData("/getPickNPlaceBOTMaintenance", setDataPickNPlaceBOTMaintenance);
-  const fetchPickNPlaceBOTQuality = () => fetchData("/getPickNPlaceBOTQuality", setDataPickNPlaceBOTQuality);
+  const fetchPickNPlaceBOTValidation = () => fetchData("/getPickNPlaceBOTValidation", setDataPickNPlaceBOTValidation);
   const fetchPickNPlaceBOTOthers = () => fetchData("/getPickNPlaceBOTOthers", setDataPickNPlaceBOTOthers);
   const fetchPickNPlaceBOTReturnMaintenance = () => fetchData("/getPickNPlaceBOTReturnMaintenance", setDataPickNPlaceBOTReturnMaintenance);
   const fetchPickNPlaceBOTReturnOthers = () => fetchData("/getPickNPlaceBOTReturnOthers", setDataPickNPlaceBOTReturnOthers);
@@ -1050,7 +1062,7 @@ const SmtBot = () => {
   // Reflow
   const fetchReflowBOTLeader = () => fetchData("/getReflowBOTLeader", setDataReflowBOTLeader);
   const fetchReflowBOTMaintenance = () => fetchData("/getReflowBOTMaintenance", setDataReflowBOTMaintenance);
-  const fetchReflowBOTQuality = () => fetchData("/getReflowBOTQuality", setDataReflowBOTQuality);
+  const fetchReflowBOTValidation = () => fetchData("/getReflowBOTValidation", setDataReflowBOTValidation);
   const fetchReflowBOTOthers = () => fetchData("/getReflowBOTOthers", setDataReflowBOTOthers);
   const fetchReflowBOTReturnMaintenance = () => fetchData("/getReflowBOTReturnMaintenance", setDataReflowBOTReturnMaintenance);
   const fetchReflowBOTReturnOthers = () => fetchData("/getReflowBOTReturnOthers", setDataReflowBOTReturnOthers);
@@ -1058,7 +1070,7 @@ const SmtBot = () => {
   // AOI
   const fetchAOIBOTLeader = () => fetchData("/getAOIBOTLeader", setDataAOIBOTLeader);
   const fetchAOIBOTMaintenance = () => fetchData("/getAOIBOTMaintenance", setDataAOIBOTMaintenance);
-  const fetchAOIBOTQuality = () => fetchData("/getAOIBOTQuality", setDataAOIBOTQuality);
+  const fetchAOIBOTValidation = () => fetchData("/getAOIBOTValidation", setDataAOIBOTValidation);
   const fetchAOIBOTOthers = () => fetchData("/getAOIBOTOthers", setDataAOIBOTOthers);
   const fetchAOIBOTReturnMaintenance = () => fetchData("/getAOIBOTReturnMaintenance", setDataAOIBOTReturnMaintenance);
   const fetchAOIBOTReturnOthers = () => fetchData("/getAOIBOTReturnOthers", setDataAOIBOTReturnOthers);
@@ -1066,7 +1078,7 @@ const SmtBot = () => {
   // RVS
   const fetchRVSBOTLeader = () => fetchData("/getRVSBOTLeader", setDataRVSBOTLeader);
   const fetchRVSBOTMaintenance = () => fetchData("/getRVSBOTMaintenance", setDataRVSBOTMaintenance);
-  const fetchRVSBOTQuality = () => fetchData("/getRVSBOTQuality", setDataRVSBOTQuality);
+  const fetchRVSBOTValidation = () => fetchData("/getRVSBOTValidation", setDataRVSBOTValidation);
   const fetchRVSBOTOthers = () => fetchData("/getRVSBOTOthers", setDataRVSBOTOthers);
   const fetchRVSBOTReturnMaintenance = () => fetchData("/getRVSBOTReturnMaintenance", setDataRVSBOTReturnMaintenance);
   const fetchRVSBOTReturnOthers = () => fetchData("/getRVSBOTReturnOthers", setDataRVSBOTReturnOthers);
@@ -1090,42 +1102,42 @@ const SmtBot = () => {
     const fetchDataFunctions = [
       fetchPrinterBOTLeader,
       fetchPrinterBOTMaintenance,
-      fetchPrinterBOTQuality,
+      fetchPrinterBOTValidation,
       fetchPrinterBOTOthers,
       fetchPrinterBOTReturnMaintenance,
       fetchPrinterBOTReturnOthers,
 
       fetchSPIBOTLeader,
       fetchSPIBOTMaintenance,
-      fetchSPIBOTQuality,
+      fetchSPIBOTValidation,
       fetchSPIBOTOthers,
       fetchSPIBOTReturnMaintenance,
       fetchSPIBOTReturnOthers,
 
       fetchPickNPlaceBOTLeader,
       fetchPickNPlaceBOTMaintenance,
-      fetchPickNPlaceBOTQuality,
+      fetchPickNPlaceBOTValidation,
       fetchPickNPlaceBOTOthers,
       fetchPickNPlaceBOTReturnMaintenance,
       fetchPickNPlaceBOTReturnOthers,
 
       fetchReflowBOTLeader,
       fetchReflowBOTMaintenance,
-      fetchReflowBOTQuality,
+      fetchReflowBOTValidation,
       fetchReflowBOTOthers,
       fetchReflowBOTReturnMaintenance,
       fetchReflowBOTReturnOthers,
 
       fetchAOIBOTLeader,
       fetchAOIBOTMaintenance,
-      fetchAOIBOTQuality,
+      fetchAOIBOTValidation,
       fetchAOIBOTOthers,
       fetchAOIBOTReturnMaintenance,
       fetchAOIBOTReturnOthers,
 
       fetchRVSBOTLeader,
       fetchRVSBOTMaintenance,
-      fetchRVSBOTQuality,
+      fetchRVSBOTValidation,
       fetchRVSBOTOthers,
       fetchRVSBOTReturnMaintenance,
       fetchRVSBOTReturnOthers,
@@ -1305,9 +1317,9 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataPrinterBOTOthers);
                         setButton("PrinterBot");
-                      } else if (StatusPrinterBot === "QA" || StatusPrinterBot === "QC" || StatusPrinterBot === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataPrinterBOTQuality);
+                      } else if (StatusPrinterBot === "QA" || StatusPrinterBot === "QC" || StatusPrinterBot === "Production Leader" || StatusPrinterBot === "Sub Leader") {
+                        setIsRequestValidation(true);
+                        setOptionData(dataPrinterBOTValidation);
                         setButton("PrinterBot");
                       } else if (StatusPrinterBot === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1327,7 +1339,7 @@ const SmtBot = () => {
                         setButton("PrinterBot");
                       } else if (StatusPrinterBot === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataPrinterBOTQuality);
+                        setOptionData(dataPrinterBOTValidation);
                         setButton("PrinterBot");
                       }
                       setStation(PrinterBot);
@@ -1373,9 +1385,9 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataSPIBOTOthers);
                         setButton("SPIBot");
-                      } else if (StatusSPIBot === "QA" || StatusSPIBot === "QC" || StatusSPIBot === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataSPIBOTQuality);
+                      } else if (StatusSPIBot === "QA" || StatusSPIBot === "QC" || StatusSPIBot === "Production Leader" || StatusSPIBot === "Sub Leader") {
+                        setIsRequestValidation(true);
+                        setOptionData(dataSPIBOTValidation);
                         setButton("SPIBot");
                       } else if (StatusSPIBot === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1395,7 +1407,7 @@ const SmtBot = () => {
                         setButton("SPIBot");
                       } else if (StatusSPIBot === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataSPIBOTQuality);
+                        setOptionData(dataSPIBOTValidation);
                         setButton("SPIBot");
                       }
                       setStation(SPIBot);
@@ -1439,9 +1451,9 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataPickNPlaceBOTOthers);
                         setButton("PickNPlaceBot");
-                      } else if (StatusPickNPlaceBot === "QA" || StatusPickNPlaceBot === "QC" || StatusPickNPlaceBot === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataPickNPlaceBOTQuality);
+                      } else if (StatusPickNPlaceBot === "QA" || StatusPickNPlaceBot === "QC" || StatusPickNPlaceBot === "Production Leader" || StatusPickNPlaceBot === "Sub Leader") {
+                        setIsRequestValidation(true);
+                        setOptionData(dataPickNPlaceBOTValidation);
                         setButton("PickNPlaceBot");
                       } else if (StatusPickNPlaceBot === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1461,7 +1473,7 @@ const SmtBot = () => {
                         setButton("PickNPlaceBot");
                       } else if (StatusPickNPlaceBot === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataPickNPlaceBOTQuality);
+                        setOptionData(dataPickNPlaceBOTValidation);
                         setButton("PickNPlaceBot");
                       }
                       setStation(PickNPlaceBot);
@@ -1507,9 +1519,9 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataReflowBOTOthers);
                         setButton("ReflowBot");
-                      } else if (StatusReflowBot === "QA" || StatusReflowBot === "QC" || StatusReflowBot === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataReflowBOTQuality);
+                      } else if (StatusReflowBot === "QA" || StatusReflowBot === "QC" || StatusReflowBot === "Production Leader" || StatusReflowBot === "Sub Leader") {
+                        setIsRequestValidation(true);
+                        setOptionData(dataReflowBOTValidation);
                         setButton("ReflowBot");
                       } else if (StatusReflowBot === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1529,7 +1541,7 @@ const SmtBot = () => {
                         setButton("ReflowBot");
                       } else if (StatusReflowBot === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataReflowBOTQuality);
+                        setOptionData(dataReflowBOTValidation);
                         setButton("ReflowBot");
                       }
                       setStation(ReflowBot);
@@ -1580,9 +1592,9 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataAOIBOTOthers);
                         setButton("AOIBot");
-                      } else if (StatusAOIBot === "QA" || StatusAOIBot === "QC" || StatusAOIBot === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataAOIBOTQuality);
+                      } else if (StatusAOIBot === "QA" || StatusAOIBot === "QC" || StatusAOIBot === "Production Leader" || StatusAOIBot === "Sub Leader") {
+                        setIsRequestValidation(true);
+                        setOptionData(dataAOIBOTValidation);
                         setButton("AOIBot");
                       } else if (StatusAOIBot === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1602,7 +1614,7 @@ const SmtBot = () => {
                         setButton("AOIBot");
                       } else if (StatusAOIBot === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataAOIBOTQuality);
+                        setOptionData(dataAOIBOTValidation);
                         setButton("AOIBot");
                       }
                       setStation(AOIBot);
@@ -1646,9 +1658,9 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataRVSBOTOthers);
                         setButton("RVSBot");
-                      } else if (StatusRVSBot === "QA" || StatusRVSBot === "QC" || StatusRVSBot === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataRVSBOTQuality);
+                      } else if (StatusRVSBot === "QA" || StatusRVSBot === "QC" || StatusRVSBot === "Production Leader" || StatusRVSBot === "Sub Leader") {
+                        setIsRequestValidation(true);
+                        setOptionData(dataRVSBOTValidation);
                         setButton("RVSBot");
                       } else if (StatusRVSBot === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1668,7 +1680,7 @@ const SmtBot = () => {
                         setButton("RVSBot");
                       } else if (StatusRVSBot === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataRVSBOTQuality);
+                        setOptionData(dataRVSBOTValidation);
                         setButton("RVSBot");
                       }
                       setStation(RVSBot);
@@ -1726,7 +1738,7 @@ const SmtBot = () => {
                         <svg fill="#B48900" class="mx-auto mb-4  animate-pulse w-14 h-14 dark:text-gray-200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M187.698 120.105c41.846-15.492 89.309-5.554 121.432 26.561 44.941 44.941 44.941 117.826-.002 162.769-44.953 44.953-117.828 44.953-162.781 0-32.25-32.25-42.125-79.975-26.367-121.934 3.977-10.589-1.383-22.396-11.972-26.373s-22.396 1.383-26.373 11.972c-21.357 56.869-7.968 121.581 35.749 165.298 60.949 60.949 159.758 60.949 220.707 0 60.939-60.939 60.939-159.758 0-220.697-43.541-43.53-107.898-57.005-164.614-36.008-10.607 3.927-16.023 15.709-12.096 26.316s15.709 16.023 26.316 12.096z" /><path d="M161.408 118.082l52.879 52.869c4.331 4.334 4.331 11.381-.001 15.713l-27.924 27.924c-4.341 4.341-11.373 4.341-15.714 0l-52.594-52.584c-7.999-7.997-20.966-7.996-28.963.003s-7.996 20.966.003 28.963l52.593 52.582c20.336 20.336 53.302 20.336 73.639-.001l27.924-27.924c20.326-20.326 20.326-53.297.006-73.634l-52.887-52.877c-7.999-7.997-20.966-7.996-28.963.003s-7.996 20.966.003 28.963zM836.42 904.635c-41.846 15.492-89.309 5.554-121.432-26.561-44.941-44.941-44.941-117.826.002-162.769 44.953-44.953 117.828-44.953 162.781 0 32.25 32.25 42.125 79.975 26.367 121.934-3.977 10.589 1.383 22.396 11.972 26.373s22.396-1.383 26.373-11.972c21.357-56.869 7.968-121.581-35.749-165.298-60.949-60.949-159.758-60.949-220.707 0-60.939 60.939-60.939 159.758 0 220.697 43.541 43.53 107.898 57.005 164.614 36.008 10.607-3.927 16.023-15.709 12.096-26.316s-15.709-16.023-26.316-12.096z" /><path d="M862.712 906.659l-52.869-52.869c-4.34-4.34-4.34-11.377-.006-15.708l27.923-27.933c4.339-4.339 11.37-4.339 15.711.003l52.594 52.584c7.999 7.997 20.966 7.996 28.963-.003s7.996-20.966-.003-28.963l-52.593-52.582c-20.336-20.336-53.302-20.336-73.639.001l-27.917 27.927c-20.335 20.319-20.335 53.299.003 73.638l52.869 52.869c7.998 7.998 20.965 7.998 28.963 0s7.998-20.965 0-28.963zM674.469 738.186l-391.26-391.26c-7.998-7.998-20.965-7.998-28.963 0s-7.998 20.965 0 28.963l391.26 391.26c7.998 7.998 20.965 7.998 28.963 0s7.998-20.965 0-28.963zM343.768 279.258l400.374 400.374c7.998 7.998 20.965 7.998 28.963 0s7.998-20.965 0-28.963L372.731 250.295c-7.998-7.998-20.965-7.998-28.963 0s-7.998 20.965 0 28.963zm255.917 112.52l176.732-176.732c7.998-7.998 7.998-20.965 0-28.963s-20.965-7.998-28.963 0L570.722 362.815c-7.998 7.998-7.998 20.965 0 28.963s20.965 7.998 28.963 0zm214.393-149.914L631.53 422.641c-8.037 7.959-8.1 20.926-.141 28.963s20.926 8.1 28.963.141L842.9 270.968c8.037-7.959 8.1-20.926.141-28.963s-20.926-8.1-28.963-.141z" /><path d="M945.721 131.005a20.48 20.48 0 014.873 21.176l-28.201 81.531a20.481 20.481 0 01-12.659 12.66l-81.541 28.211a20.48 20.48 0 01-21.179-4.874l-53.32-53.33a20.48 20.48 0 01-4.872-21.175l28.201-81.531a20.478 20.478 0 0112.658-12.659l81.531-28.211a20.478 20.478 0 0121.178 4.873l53.33 53.33zm-73.228-15.302l-60.012 20.765-20.758 60.014 35.194 35.201 60.021-20.766 20.758-60.012-35.202-35.202zm-421.165 544.57L208.763 902.838c-7.497 7.497-16.502 8.466-19.734 5.237l-74.541-74.541c-3.223-3.226-2.254-12.226 5.248-19.733l242.089-242.079c7.998-7.998 7.998-20.965.001-28.963s-20.965-7.998-28.963-.001L90.769 784.842c-22.28 22.295-26.003 56.877-5.249 77.648l74.553 74.553c20.778 20.76 55.375 17.036 77.654-5.243l242.565-242.565c7.998-7.998 7.998-20.965 0-28.963s-20.965-7.998-28.963 0z" /></svg>
 
                         <h3 class=" text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
-                          Permintaan Bantuan Perbaikan Oleh : {OptionData?.Requestor || ""} <br /> <span className="text-green-500"> Department : {OptionData?.Department || ""}</span>
+                          Permintaan Bantuan Perbaikan Oleh : {OptionData?.Requestor || ""} <br /> <span className="text-green-500"> To Department : {OptionData?.Department || ""}</span>
                         </h3>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full  px-3">
@@ -1744,7 +1756,7 @@ const SmtBot = () => {
                           </div>
                           <div class="w-full  px-3">
                             <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
-                              Date  :
+                              Request at  :
                             </label>
                             <input
                               type="text"
@@ -1886,7 +1898,8 @@ const SmtBot = () => {
                               </div>
                             </div>
                             <span className="font-mono mt-2 text-gray-500 ">PIC Repairment :  {OptionData?.ResponseName || ""} </span>
-                            <span className="font-mono mt-2 text-gray-500 ">Start AT :  {formatDateAPI(OptionData?.ResponseTime) || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Request at :  {formatDateAPI(OptionData?.Date) || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Start at :  {formatDateAPI(OptionData?.ResponseTime) || ""} </span>
                           </div>
 
                           <div class="flex justify-center mt-4">
@@ -2123,9 +2136,9 @@ const SmtBot = () => {
 
 
 
-      {/*Pop up Quality  */}
+      {/*Pop up Request Validation  */}
       <td>
-        {isOpenQuality ? (
+        {isRequestValidation ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-start justify-center min-h-screen  px-4 pb-96 text-center sm:block sm:p-0">
@@ -2141,7 +2154,7 @@ const SmtBot = () => {
                         className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
                         onClick={() => {
 
-                          setIsOpenQuality(false);
+                          setIsRequestValidation(false);
                         }}
                       >
                         <svg
@@ -2165,12 +2178,12 @@ const SmtBot = () => {
                         </svg>
 
                         <h3 class="mb-3 text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
-                          Perbaikan Di Teruskan ke {OptionData?.DepartTo || ""} Untuk Validation :
+                         Permintaan Untuk Validation {OptionData?.DepartTo || ""}  :
                         </h3>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full  px-3">
                             <label class="block  tracking-wide text-gray-700 text-xs font-bold ">
-                              Nama PIC {OptionData?.Requestor || ""} :
+                              PIC {OptionData?.Requestor || ""} :
                             </label>
                             <input
                               type="text"
@@ -2183,7 +2196,7 @@ const SmtBot = () => {
                           </div>
                           <div class="w-full  px-3">
                             <label class="block  tracking-wide text-gray-700 text-xs font-bold ">
-                              Date  :
+                              Request at  :
                             </label>
                             <input
                               type="text"
@@ -2363,7 +2376,7 @@ const SmtBot = () => {
                           </div>
                           <div class="w-full  px-3">
                             <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
-                              Date Call :
+                              Request at :
                             </label>
                             <input
                               type="text"

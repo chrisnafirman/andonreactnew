@@ -5,7 +5,7 @@ const PutDownTimeRVSBOT = (req, res) => {
     const { TimeRVSBot, RVSBot, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
+      "UPDATE validation SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
       [TimeRVSBot, RVSBot, Area],
       (error, results) => {
         if (error) {
@@ -51,8 +51,8 @@ const getRVSBOTMaintenance = (req, res) => {
     });
 };
 
-const getRVSBOTQuality = (req, res) => {
-    const sqlSelect = "SELECT * FROM quality WHERE Station = 'RVS (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
+const getRVSBOTValidation = (req, res) => {
+    const sqlSelect = "SELECT * FROM validation WHERE Station = 'RVS (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -66,6 +66,8 @@ const getRVSBOTQuality = (req, res) => {
         }
     });
 };
+
+
 
 const getRVSBOTOthers = (req, res) => {
     const sqlSelect = "SELECT * FROM Others WHERE Station = 'RVS (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
@@ -124,7 +126,7 @@ module.exports = {
     getRVSBOTLeader,
     PutDownTimeRVSBOT,
     getRVSBOTMaintenance,
-    getRVSBOTQuality,
+    getRVSBOTValidation,
     getRVSBOTOthers,
     getRVSBOTReturnMaintenance,
     getRVSBOTReturnOthers,

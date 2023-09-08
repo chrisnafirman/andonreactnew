@@ -5,7 +5,7 @@ const PutDownTimeDestackerTOP = (req, res) => {
     const { TimeDestackerTop, DestackerTop, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
+      "UPDATE validation SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
       [TimeDestackerTop, DestackerTop, Area],
       (error, results) => {
         if (error) {
@@ -51,8 +51,8 @@ const getDestackerTOPMaintenance = (req, res) => {
     });
 };
 
-const getDestackerTOPQuality = (req, res) => {
-    const sqlSelect = "SELECT * FROM quality WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getDestackerTOPValidation = (req, res) => {
+    const sqlSelect = "SELECT * FROM validation WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -66,6 +66,8 @@ const getDestackerTOPQuality = (req, res) => {
         }
     });
 };
+
+
 
 const getDestackerTOPOthers = (req, res) => {
     const sqlSelect = "SELECT * FROM Others WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
@@ -124,7 +126,7 @@ module.exports = {
     getDestackerTOPLeader,
     PutDownTimeDestackerTOP,
     getDestackerTOPMaintenance,
-    getDestackerTOPQuality,
+    getDestackerTOPValidation,
     getDestackerTOPOthers,
     getDestackerTOPReturnMaintenance,
     getDestackerTOPReturnOthers,

@@ -5,7 +5,7 @@ const PutDownTimeAOITOP = (req, res) => {
     const { TimeAOITop, AOITop, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
+      "UPDATE validation SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
       [TimeAOITop, AOITop, Area],
       (error, results) => {
         if (error) {
@@ -51,8 +51,8 @@ const getAOITOPMaintenance = (req, res) => {
     });
 };
 
-const getAOITOPQuality = (req, res) => {
-    const sqlSelect = "SELECT * FROM quality WHERE Station = 'AOI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getAOITOPValidation = (req, res) => {
+    const sqlSelect = "SELECT * FROM validation WHERE Station = 'AOI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -66,6 +66,7 @@ const getAOITOPQuality = (req, res) => {
         }
     });
 };
+
 
 const getAOITOPOthers = (req, res) => {
     const sqlSelect = "SELECT * FROM Others WHERE Station = 'AOI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
@@ -124,7 +125,7 @@ module.exports = {
     getAOITOPLeader,
     PutDownTimeAOITOP,
     getAOITOPMaintenance,
-    getAOITOPQuality,
+    getAOITOPValidation,
     getAOITOPOthers,
     getAOITOPReturnMaintenance,
     getAOITOPReturnOthers,

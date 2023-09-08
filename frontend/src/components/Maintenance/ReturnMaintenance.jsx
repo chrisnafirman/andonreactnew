@@ -29,7 +29,7 @@ const ReturnMaintenance = () => {
   const [Kerusakan, setKerusakan] = useState("");
   const [Action, setAction] = useState("");
   const [Line, setLine] = useState("");
-  const [isOpenQuality, setisOpenQuality] = useState(false);
+  const [isOpenRequestValidation, setisOpenRequestValidation] = useState(false);
   const [Requestor, setRequestor] = useState("");
  const [Department, setDepartment] = useState("");
  const [DepartTo, setDepartTo] = useState("");
@@ -183,7 +183,7 @@ const ReturnMaintenance = () => {
 
 
  // QR
- const submitQuality = () => {
+ const submitRequestValidation = () => {
   if (!NamaPIC || !Line || !Area || !Requestor || !Kerusakan || !Station || !Action) {
     alert("Harap isi semua kolom!");
     return;
@@ -308,9 +308,10 @@ const submitUpdate = () => {
 
   const OptionsDepartment = [
     { value: "", label: "-- Pilih Depart --" },
-    { value: "QC", value2: "Quality", label: "QC" },
-    { value: "QA", value2: "Quality", label: "QA" },
-    { value: "Production Leader", value2: "Quality", label: "Production Leader" },
+    { value: "QC", value2: "Validation", label: "QC" },
+    { value: "QA", value2: "Validation", label: "QA" },
+    { value: "Production Leader", value2: "Validation", label: "Production Leader" },
+    { value: "Sub Leader", value2: "Validation", label: "Sub Leader" },
   ];
 
   const handleSelectDepartment = (selectedOptionDepartment) => {
@@ -323,8 +324,8 @@ const submitUpdate = () => {
 
   const handleButtonClick = () => {
     submitUpdate();
-    submitQuality();
-    setisOpenQuality(false)
+    submitRequestValidation();
+    setisOpenRequestValidation(false)
     setSelectedItem(false)
     setIsLoader(true);
 
@@ -448,7 +449,7 @@ const submitUpdate = () => {
               </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Return For Maintenance
+                  Return Request For Maintenance
                 </div>
               </header>
 
@@ -708,9 +709,9 @@ const submitUpdate = () => {
 
                                         <button
                                           className="" onClick= {()=>{
-                                            setisOpenQuality(true)
+                                            setisOpenRequestValidation(true)
                                             setNamaPIC(selectedItem.Nama)                 
-                                            setRequestor(selectedItem.Department)
+                                            setRequestor(selectedItem.Department + ' [Return]');
                                             setArea(selectedItem.Area)
                                             setLine(selectedItem.Line)
                                             setStation(selectedItem.Station)
@@ -803,7 +804,7 @@ const submitUpdate = () => {
           </div>
         </section>
         <td class="">
-        {isOpenQuality ? (
+        {isOpenRequestValidation ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-60 text-center sm:block sm:p-0">
@@ -824,7 +825,7 @@ const submitUpdate = () => {
                     <button
                                 className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
                                 onClick={() =>
-                                  setisOpenQuality(false)
+                                  setisOpenRequestValidation(false)
                                 }
                               >
                                 <svg

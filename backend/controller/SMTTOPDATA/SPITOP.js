@@ -5,7 +5,7 @@ const PutDownTimeSPITOP = (req, res) => {
     const { TimeSPITop, SPITop, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
+      "UPDATE validation SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
       [TimeSPITop, SPITop, Area],
       (error, results) => {
         if (error) {
@@ -51,8 +51,8 @@ const getSPITOPMaintenance = (req, res) => {
     });
 };
 
-const getSPITOPQuality = (req, res) => {
-    const sqlSelect = "SELECT * FROM quality WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getSPITOPValidation = (req, res) => {
+    const sqlSelect = "SELECT * FROM validation WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -66,6 +66,8 @@ const getSPITOPQuality = (req, res) => {
         }
     });
 };
+
+
 
 const getSPITOPOthers = (req, res) => {
     const sqlSelect = "SELECT * FROM Others WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
@@ -124,7 +126,7 @@ module.exports = {
     getSPITOPLeader,
     PutDownTimeSPITOP,
     getSPITOPMaintenance,
-    getSPITOPQuality,
+    getSPITOPValidation,
     getSPITOPOthers,
     getSPITOPReturnMaintenance,
     getSPITOPReturnOthers,

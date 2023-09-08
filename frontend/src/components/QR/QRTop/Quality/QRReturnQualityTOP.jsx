@@ -98,7 +98,7 @@ function QRReturnQualityTOP() {
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.12:3001/api/PutReturnQuality`, {
+    fetch(`http://192.168.101.12:3001/api/PutReturnRequestValidation`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

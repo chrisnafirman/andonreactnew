@@ -7,7 +7,7 @@ import Line from "./components/Line.jsx"
 import Line1 from "./components/Line1/Line1.jsx"
 
 import Quality from "./components/Quality/Quality.jsx"
-import ValidationQuality from "./components/Quality/ValidationQuality.jsx"
+
 
 
 import AndonLine1 from "./components/Line1/AndonLine1.jsx";
@@ -126,7 +126,6 @@ function App() {
 
 
         <Route path="Quality" element={<Quality />} />
-        <Route path="ValidationQuality" element={<BP />} />
 
         <Route path="Maintenance" element={<Maintenance />} />
         <Route path="ReturnMaintenance" element={<ReturnMaintenance />} />

@@ -5,7 +5,7 @@ const PutDownTimeRVSTOP = (req, res) => {
     const { TimeRVSTop, RVSTop, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
+      "UPDATE validation SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
       [TimeRVSTop, RVSTop, Area],
       (error, results) => {
         if (error) {
@@ -51,8 +51,8 @@ const getRVSTOPMaintenance = (req, res) => {
     });
 };
 
-const getRVSTOPQuality = (req, res) => {
-    const sqlSelect = "SELECT * FROM quality WHERE Station = 'RVS (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getRVSTOPValidation = (req, res) => {
+    const sqlSelect = "SELECT * FROM validation WHERE Station = 'RVS (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -66,6 +66,8 @@ const getRVSTOPQuality = (req, res) => {
         }
     });
 };
+
+
 
 const getRVSTOPOthers = (req, res) => {
     const sqlSelect = "SELECT * FROM Others WHERE Station = 'RVS (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
@@ -124,7 +126,7 @@ module.exports = {
     getRVSTOPLeader,
     PutDownTimeRVSTOP,
     getRVSTOPMaintenance,
-    getRVSTOPQuality,
+    getRVSTOPValidation,
     getRVSTOPOthers,
     getRVSTOPReturnMaintenance,
     getRVSTOPReturnOthers,

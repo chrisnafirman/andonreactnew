@@ -122,7 +122,7 @@ const SmtTop = () => {
   const [isOpenReturn, setIsOpenReturn] = useState(false);
   const [isOpenReturnRepair, setIsOpenReturnRepair] = useState(false);
   const [isOpenRepair, setIsOpenRepair] = useState(false);
-  const [isOpenQuality, setIsOpenQuality] = useState(false);
+  const [isOpenRequestValidation, setIsOpenRequestValidation] = useState(false);
   const [isOpenValidation, setIsOpenValidation] = useState(false);
 
   // ----------------------
@@ -156,7 +156,7 @@ const SmtTop = () => {
 
   const [dataDestackerTOPLeader, setDataDestackerTOPLeader] = useState(null);
   const [dataDestackerTOPMaintenance, setDataDestackerTOPMaintenance] = useState(null);
-  const [dataDestackerTOPQuality, setDataDestackerTOPQuality] = useState(null);
+  const [dataDestackerTOPValidation, setDataDestackerTOPValidation] = useState(null);
   const [dataDestackerTOPOthers, setDataDestackerTOPOthers] = useState(null);
   const [dataDestackerTOPReturnOthers, setDataDestackerTOPReturnOthers] = useState(null);
   const [dataDestackerTOPReturnMaintenance, setDataDestackerTOPReturnMaintenance] = useState(null);
@@ -164,7 +164,7 @@ const SmtTop = () => {
 
   const [dataLabelTOPLeader, setDataLabelTOPLeader] = useState(null);
   const [dataLabelTOPMaintenance, setDataLabelTOPMaintenance] = useState(null);
-  const [dataLabelTOPQuality, setDataLabelTOPQuality] = useState(null);
+  const [dataLabelTOPValidation, setDataLabelTOPValidation] = useState(null);
   const [dataLabelTOPOthers, setDataLabelTOPOthers] = useState(null);
   const [dataLabelTOPReturnOthers, setDataLabelTOPReturnOthers] = useState(null);
   const [dataLabelTOPReturnMaintenance, setDataLabelTOPReturnMaintenance] = useState(null);
@@ -172,28 +172,28 @@ const SmtTop = () => {
 
   const [dataPrinterTOPLeader, setDataPrinterTOPLeader] = useState(null);
   const [dataPrinterTOPMaintenance, setDataPrinterTOPMaintenance] = useState(null);
-  const [dataPrinterTOPQuality, setDataPrinterTOPQuality] = useState(null);
+  const [dataPrinterTOPValidation, setDataPrinterTOPValidation] = useState(null);
   const [dataPrinterTOPOthers, setDataPrinterTOPOthers] = useState(null);
   const [dataPrinterTOPReturnOthers, setDataPrinterTOPReturnOthers] = useState(null);
   const [dataPrinterTOPReturnMaintenance, setDataPrinterTOPReturnMaintenance] = useState(null);
 
   const [dataSPITOPLeader, setDataSPITOPLeader] = useState(null);
   const [dataSPITOPMaintenance, setDataSPITOPMaintenance] = useState(null);
-  const [dataSPITOPQuality, setDataSPITOPQuality] = useState(null);
+  const [dataSPITOPValidation, setDataSPITOPValidation] = useState(null);
   const [dataSPITOPOthers, setDataSPITOPOthers] = useState(null);
   const [dataSPITOPReturnOthers, setDataSPITOPReturnOthers] = useState(null);
   const [dataSPITOPReturnMaintenance, setDataSPITOPReturnMaintenance] = useState(null);
 
   const [dataPickNPlaceTOPLeader, setDataPickNPlaceTOPLeader] = useState(null);
   const [dataPickNPlaceTOPMaintenance, setDataPickNPlaceTOPMaintenance] = useState(null);
-  const [dataPickNPlaceTOPQuality, setDataPickNPlaceTOPQuality] = useState(null);
+  const [dataPickNPlaceTOPValidation, setDataPickNPlaceTOPValidation] = useState(null);
   const [dataPickNPlaceTOPOthers, setDataPickNPlaceTOPOthers] = useState(null);
   const [dataPickNPlaceTOPReturnOthers, setDataPickNPlaceTOPReturnOthers] = useState(null);
   const [dataPickNPlaceTOPReturnMaintenance, setDataPickNPlaceTOPReturnMaintenance] = useState(null);
 
   const [dataReflowTOPLeader, setDataReflowTOPLeader] = useState(null);
   const [dataReflowTOPMaintenance, setDataReflowTOPMaintenance] = useState(null);
-  const [dataReflowTOPQuality, setDataReflowTOPQuality] = useState(null);
+  const [dataReflowTOPValidation, setDataReflowTOPValidation] = useState(null);
   const [dataReflowTOPOthers, setDataReflowTOPOthers] = useState(null);
   const [dataReflowTOPReturnOthers, setDataReflowTOPReturnOthers] = useState(null);
   const [dataReflowTOPReturnMaintenance, setDataReflowTOPReturnMaintenance] = useState(null);
@@ -201,14 +201,14 @@ const SmtTop = () => {
 
   const [dataAOITOPLeader, setDataAOITOPLeader] = useState(null);
   const [dataAOITOPMaintenance, setDataAOITOPMaintenance] = useState(null);
-  const [dataAOITOPQuality, setDataAOITOPQuality] = useState(null);
+  const [dataAOITOPValidation, setDataAOITOPValidation] = useState(null);
   const [dataAOITOPOthers, setDataAOITOPOthers] = useState(null);
   const [dataAOITOPReturnOthers, setDataAOITOPReturnOthers] = useState(null);
   const [dataAOITOPReturnMaintenance, setDataAOITOPReturnMaintenance] = useState(null);
 
   const [dataRVSTOPLeader, setDataRVSTOPLeader] = useState(null);
   const [dataRVSTOPMaintenance, setDataRVSTOPMaintenance] = useState(null);
-  const [dataRVSTOPQuality, setDataRVSTOPQuality] = useState(null);
+  const [dataRVSTOPValidation, setDataRVSTOPValidation] = useState(null);
   const [dataRVSTOPOthers, setDataRVSTOPOthers] = useState(null);
   const [dataRVSTOPReturnOthers, setDataRVSTOPReturnOthers] = useState(null);
   const [dataRVSTOPReturnMaintenance, setDataRVSTOPReturnMaintenance] = useState(null);
@@ -657,7 +657,7 @@ const SmtTop = () => {
   const updateStatusDestackerTop = (data) => {
     setStatusDestackerTop(data);
     setBackgroundColorStatusDestackerTop(
-       data === "Go"
+   data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -697,11 +697,13 @@ const SmtTop = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
 
     );
   };
@@ -709,7 +711,7 @@ const SmtTop = () => {
   const updateStatusLabelTop = (data) => {
     setStatusLabelTop(data);
     setBackgroundColorStatusLabelTop(
-      data === "Go"
+  data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -749,11 +751,13 @@ const SmtTop = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
 
     );
   };
@@ -761,7 +765,7 @@ const SmtTop = () => {
   const updateStatusPrinterTop = (data) => {
     setStatusPrinterTop(data);
     setBackgroundColorStatusPrinterTop(
-       data === "Go"
+   data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -801,11 +805,13 @@ const SmtTop = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
 
     );
   };
@@ -813,7 +819,7 @@ const SmtTop = () => {
   const updateStatusSPITop = (data) => {
     setStatusSPITop(data);
     setBackgroundColorStatusSPITop(
-       data === "Go"
+   data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -853,11 +859,13 @@ const SmtTop = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
 
     );
   };
@@ -865,7 +873,7 @@ const SmtTop = () => {
   const updateStatusPickNPlaceTop = (data) => {
     setStatusPickNPlaceTop(data);
     setBackgroundColorStatusPickNPlaceTop(
-       data === "Go"
+   data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -905,11 +913,13 @@ const SmtTop = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
 
     );
   };
@@ -917,7 +927,7 @@ const SmtTop = () => {
   const updateStatusReflowTop = (data) => {
     setStatusReflowTop(data);
     setBackgroundColorStatusReflowTop(
-       data === "Go"
+   data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -957,11 +967,13 @@ const SmtTop = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
 
     );
   };
@@ -969,7 +981,7 @@ const SmtTop = () => {
   const updateStatusAOITop = (data) => {
     setStatusAOITop(data);
     setBackgroundColorStatusAOITop(
-       data === "Go"
+   data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -1009,11 +1021,13 @@ const SmtTop = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
 
     );
   };
@@ -1021,7 +1035,7 @@ const SmtTop = () => {
   const updateStatusRVSTop = (data) => {
     setStatusRVSTop(data);
     setBackgroundColorStatusRVSTop(
-       data === "Go"
+   data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -1061,11 +1075,13 @@ const SmtTop = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
 
     );
   };
@@ -1124,7 +1140,7 @@ const SmtTop = () => {
   // Destacker
   const fetchDestackerTOPLeader = () => fetchData("/getDestackerTOPLeader", setDataDestackerTOPLeader);
   const fetchDestackerTOPMaintenance = () => fetchData("/getDestackerTOPMaintenance", setDataDestackerTOPMaintenance);
-  const fetchDestackerTOPQuality = () => fetchData("/getDestackerTOPQuality", setDataDestackerTOPQuality);
+  const fetchDestackerTOPValidation = () => fetchData("/getDestackerTOPValidation", setDataDestackerTOPValidation);
   const fetchDestackerTOPOthers = () => fetchData("/getDestackerTOPOthers", setDataDestackerTOPOthers);
   const fetchDestackerTOPReturnMaintenance = () => fetchData("/getDestackerTOPReturnMaintenance", setDataDestackerTOPReturnMaintenance);
   const fetchDestackerTOPReturnOthers = () => fetchData("/getDestackerTOPReturnOthers", setDataDestackerTOPReturnOthers);
@@ -1132,7 +1148,7 @@ const SmtTop = () => {
   // Label
   const fetchLabelTOPLeader = () => fetchData("/getLabelTOPLeader", setDataLabelTOPLeader);
   const fetchLabelTOPMaintenance = () => fetchData("/getLabelTOPMaintenance", setDataLabelTOPMaintenance);
-  const fetchLabelTOPQuality = () => fetchData("/getLabelTOPQuality", setDataLabelTOPQuality);
+  const fetchLabelTOPValidation = () => fetchData("/getLabelTOPValidation", setDataLabelTOPValidation);
   const fetchLabelTOPOthers = () => fetchData("/getLabelTOPOthers", setDataLabelTOPOthers);
   const fetchLabelTOPReturnMaintenance = () => fetchData("/getLabelTOPReturnMaintenance", setDataLabelTOPReturnMaintenance);
   const fetchLabelTOPReturnOthers = () => fetchData("/getLabelTOPReturnOthers", setDataLabelTOPReturnOthers);
@@ -1140,7 +1156,7 @@ const SmtTop = () => {
   // Printer
   const fetchPrinterTOPLeader = () => fetchData("/getPrinterTOPLeader", setDataPrinterTOPLeader);
   const fetchPrinterTOPMaintenance = () => fetchData("/getPrinterTOPMaintenance", setDataPrinterTOPMaintenance);
-  const fetchPrinterTOPQuality = () => fetchData("/getPrinterTOPQuality", setDataPrinterTOPQuality);
+  const fetchPrinterTOPValidation = () => fetchData("/getPrinterTOPValidation", setDataPrinterTOPValidation);
   const fetchPrinterTOPOthers = () => fetchData("/getPrinterTOPOthers", setDataPrinterTOPOthers);
   const fetchPrinterTOPReturnMaintenance = () => fetchData("/getPrinterTOPReturnMaintenance", setDataPrinterTOPReturnMaintenance);
   const fetchPrinterTOPReturnOthers = () => fetchData("/getPrinterTOPReturnOthers", setDataPrinterTOPReturnOthers);
@@ -1148,7 +1164,7 @@ const SmtTop = () => {
   // SPI
   const fetchSPITOPLeader = () => fetchData("/getSPITOPLeader", setDataSPITOPLeader);
   const fetchSPITOPMaintenance = () => fetchData("/getSPITOPMaintenance", setDataSPITOPMaintenance);
-  const fetchSPITOPQuality = () => fetchData("/getSPITOPQuality", setDataSPITOPQuality);
+  const fetchSPITOPValidation = () => fetchData("/getSPITOPValidation", setDataSPITOPValidation);
   const fetchSPITOPOthers = () => fetchData("/getSPITOPOthers", setDataSPITOPOthers);
   const fetchSPITOPReturnMaintenance = () => fetchData("/getSPITOPReturnMaintenance", setDataSPITOPReturnMaintenance);
   const fetchSPITOPReturnOthers = () => fetchData("/getSPITOPReturnOthers", setDataSPITOPReturnOthers);
@@ -1156,7 +1172,7 @@ const SmtTop = () => {
   // PickNPlace
   const fetchPickNPlaceTOPLeader = () => fetchData("/getPickNPlaceTOPLeader", setDataPickNPlaceTOPLeader);
   const fetchPickNPlaceTOPMaintenance = () => fetchData("/getPickNPlaceTOPMaintenance", setDataPickNPlaceTOPMaintenance);
-  const fetchPickNPlaceTOPQuality = () => fetchData("/getPickNPlaceTOPQuality", setDataPickNPlaceTOPQuality);
+  const fetchPickNPlaceTOPValidation = () => fetchData("/getPickNPlaceTOPValidation", setDataPickNPlaceTOPValidation);
   const fetchPickNPlaceTOPOthers = () => fetchData("/getPickNPlaceTOPOthers", setDataPickNPlaceTOPOthers);
   const fetchPickNPlaceTOPReturnMaintenance = () => fetchData("/getPickNPlaceTOPReturnMaintenance", setDataPickNPlaceTOPReturnMaintenance);
   const fetchPickNPlaceTOPReturnOthers = () => fetchData("/getPickNPlaceTOPReturnOthers", setDataPickNPlaceTOPReturnOthers);
@@ -1164,7 +1180,7 @@ const SmtTop = () => {
   // Reflow
   const fetchReflowTOPLeader = () => fetchData("/getReflowTOPLeader", setDataReflowTOPLeader);
   const fetchReflowTOPMaintenance = () => fetchData("/getReflowTOPMaintenance", setDataReflowTOPMaintenance);
-  const fetchReflowTOPQuality = () => fetchData("/getReflowTOPQuality", setDataReflowTOPQuality);
+  const fetchReflowTOPValidation = () => fetchData("/getReflowTOPValidation", setDataReflowTOPValidation);
   const fetchReflowTOPOthers = () => fetchData("/getReflowTOPOthers", setDataReflowTOPOthers);
   const fetchReflowTOPReturnMaintenance = () => fetchData("/getReflowTOPReturnMaintenance", setDataReflowTOPReturnMaintenance);
   const fetchReflowTOPReturnOthers = () => fetchData("/getReflowTOPReturnOthers", setDataReflowTOPReturnOthers);
@@ -1172,7 +1188,7 @@ const SmtTop = () => {
   // SPI
   const fetchAOITOPLeader = () => fetchData("/getAOITOPLeader", setDataAOITOPLeader);
   const fetchAOITOPMaintenance = () => fetchData("/getAOITOPMaintenance", setDataAOITOPMaintenance);
-  const fetchAOITOPQuality = () => fetchData("/getAOITOPQuality", setDataAOITOPQuality);
+  const fetchAOITOPValidation = () => fetchData("/getAOITOPValidation", setDataAOITOPValidation);
   const fetchAOITOPOthers = () => fetchData("/getAOITOPOthers", setDataAOITOPOthers);
   const fetchAOITOPReturnMaintenance = () => fetchData("/getAOITOPReturnMaintenance", setDataAOITOPReturnMaintenance);
   const fetchAOITOPReturnOthers = () => fetchData("/getAOITOPReturnOthers", setDataAOITOPReturnOthers);
@@ -1180,7 +1196,7 @@ const SmtTop = () => {
   // RVS
   const fetchRVSTOPLeader = () => fetchData("/getRVSTOPLeader", setDataRVSTOPLeader);
   const fetchRVSTOPMaintenance = () => fetchData("/getRVSTOPMaintenance", setDataRVSTOPMaintenance);
-  const fetchRVSTOPQuality = () => fetchData("/getRVSTOPQuality", setDataRVSTOPQuality);
+  const fetchRVSTOPValidation = () => fetchData("/getRVSTOPValidation", setDataRVSTOPValidation);
   const fetchRVSTOPOthers = () => fetchData("/getRVSTOPOthers", setDataRVSTOPOthers);
   const fetchRVSTOPReturnMaintenance = () => fetchData("/getRVSTOPReturnMaintenance", setDataRVSTOPReturnMaintenance);
   const fetchRVSTOPReturnOthers = () => fetchData("/getRVSTOPReturnOthers", setDataRVSTOPReturnOthers);
@@ -1202,56 +1218,56 @@ const SmtTop = () => {
     const fetchDataFunctions = [
       fetchDestackerTOPLeader,
       fetchDestackerTOPMaintenance,
-      fetchDestackerTOPQuality,
+      fetchDestackerTOPValidation,
       fetchDestackerTOPOthers,
       fetchDestackerTOPReturnMaintenance,
       fetchDestackerTOPReturnOthers,
 
       fetchLabelTOPLeader,
       fetchLabelTOPMaintenance,
-      fetchLabelTOPQuality,
+      fetchLabelTOPValidation,
       fetchLabelTOPOthers,
       fetchLabelTOPReturnMaintenance,
       fetchLabelTOPReturnOthers,
 
       fetchPrinterTOPLeader,
       fetchPrinterTOPMaintenance,
-      fetchPrinterTOPQuality,
+      fetchPrinterTOPValidation,
       fetchPrinterTOPOthers,
       fetchPrinterTOPReturnMaintenance,
       fetchPrinterTOPReturnOthers,
 
       fetchSPITOPLeader,
       fetchSPITOPMaintenance,
-      fetchSPITOPQuality,
+      fetchSPITOPValidation,
       fetchSPITOPOthers,
       fetchSPITOPReturnMaintenance,
       fetchSPITOPReturnOthers,
 
       fetchPickNPlaceTOPLeader,
       fetchPickNPlaceTOPMaintenance,
-      fetchPickNPlaceTOPQuality,
+      fetchPickNPlaceTOPValidation,
       fetchPickNPlaceTOPOthers,
       fetchPickNPlaceTOPReturnMaintenance,
       fetchPickNPlaceTOPReturnOthers,
 
       fetchReflowTOPLeader,
       fetchReflowTOPMaintenance,
-      fetchReflowTOPQuality,
+      fetchReflowTOPValidation,
       fetchReflowTOPOthers,
       fetchReflowTOPReturnMaintenance,
       fetchReflowTOPReturnOthers,
 
       fetchAOITOPLeader,
       fetchAOITOPMaintenance,
-      fetchAOITOPQuality,
+      fetchAOITOPValidation,
       fetchAOITOPOthers,
       fetchAOITOPReturnMaintenance,
       fetchAOITOPReturnOthers,
 
       fetchRVSTOPLeader,
       fetchRVSTOPMaintenance,
-      fetchRVSTOPQuality,
+      fetchRVSTOPValidation,
       fetchRVSTOPOthers,
       fetchRVSTOPReturnMaintenance,
       fetchRVSTOPReturnOthers,
@@ -1430,9 +1446,9 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataDestackerTOPOthers);
                         setButton("DestackerTop");
-                      } else if (StatusDestackerTop === "QA" || StatusDestackerTop === "QC" || StatusDestackerTop === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataDestackerTOPQuality);
+                      } else if (StatusDestackerTop === "QA" || StatusDestackerTop === "QC" || StatusDestackerTop === "Production Leader" || StatusDestackerTop === "Sub Leader") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataDestackerTOPValidation);
                         setButton("DestackerTop");
                       } else if (StatusDestackerTop === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1452,7 +1468,7 @@ const SmtTop = () => {
                         setButton("DestackerTop");
                       } else if (StatusDestackerTop === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataDestackerTOPQuality);
+                        setOptionData(dataDestackerTOPValidation);
                         setButton("DestackerTop");
                       }
                       setStation(DestackerTop);
@@ -1499,9 +1515,9 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataLabelTOPOthers);
                         setButton("LabelTop");
-                      } else if (StatusLabelTop === "QA" || StatusLabelTop === "QC" || StatusLabelTop === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataLabelTOPQuality);
+                      } else if (StatusLabelTop === "QA" || StatusLabelTop === "QC" || StatusLabelTop === "Production Leader" || StatusLabelTop === "Sub Leader") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataLabelTOPValidation);
                         setButton("LabelTop");
                       } else if (StatusLabelTop === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1521,7 +1537,7 @@ const SmtTop = () => {
                         setButton("LabelTop");
                       } else if (StatusLabelTop === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataLabelTOPQuality);
+                        setOptionData(dataLabelTOPValidation);
                         setButton("LabelTop");
                       }
                       setStation(LabelTop);
@@ -1568,9 +1584,9 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataPrinterTOPOthers);
                         setButton("PrinterTop");
-                      } else if (StatusPrinterTop === "QA" || StatusPrinterTop === "QC" || StatusPrinterTop === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataPrinterTOPQuality);
+                      } else if (StatusPrinterTop === "QA" || StatusPrinterTop === "QC" || StatusPrinterTop === "Production Leader" || StatusPrinterTop === "Sub Leader") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataPrinterTOPValidation);
                         setButton("PrinterTop");
                       } else if (StatusPrinterTop === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1590,7 +1606,7 @@ const SmtTop = () => {
                         setButton("PrinterTop");
                       } else if (StatusPrinterTop === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataPrinterTOPQuality);
+                        setOptionData(dataPrinterTOPValidation);
                         setButton("PrinterTop");
                       }
                       setStation(PrinterTop);
@@ -1638,9 +1654,9 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataSPITOPOthers);
                         setButton("SPITop");
-                      } else if (StatusSPITop === "QA" || StatusSPITop === "QC" || StatusSPITop === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataSPITOPQuality);
+                      } else if (StatusSPITop === "QA" || StatusSPITop === "QC" || StatusSPITop === "Production Leader" || StatusSPITop === "Sub Leader") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataSPITOPValidation);
                         setButton("SPITop");
                       } else if (StatusSPITop === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1660,7 +1676,7 @@ const SmtTop = () => {
                         setButton("SPITop");
                       } else if (StatusSPITop === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataSPITOPQuality);
+                        setOptionData(dataSPITOPValidation);
                         setButton("SPITop");
                       }
                       setStation(SPITop);
@@ -1710,9 +1726,9 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataPickNPlaceTOPOthers);
                         setButton("PickNPlaceTop");
-                      } else if (StatusPickNPlaceTop === "QA" || StatusPickNPlaceTop === "QC" || StatusPickNPlaceTop === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataPickNPlaceTOPQuality);
+                      } else if (StatusPickNPlaceTop === "QA" || StatusPickNPlaceTop === "QC" || StatusPickNPlaceTop === "Production Leader" || StatusPickNPlaceTop === "Sub Leader") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataPickNPlaceTOPValidation);
                         setButton("PickNPlaceTop");
                       } else if (StatusPickNPlaceTop === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1732,7 +1748,7 @@ const SmtTop = () => {
                         setButton("PickNPlaceTop");
                       } else if (StatusPickNPlaceTop === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataPickNPlaceTOPQuality);
+                        setOptionData(dataPickNPlaceTOPValidation);
                         setButton("PickNPlaceTop");
                       }
                       setStation(PickNPlaceTop);
@@ -1780,9 +1796,9 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataReflowTOPOthers);
                         setButton("ReflowTop");
-                      } else if (StatusReflowTop === "QA" || StatusReflowTop === "QC" || StatusReflowTop === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataReflowTOPQuality);
+                      } else if (StatusReflowTop === "QA" || StatusReflowTop === "QC" || StatusReflowTop === "Production Leader" || StatusReflowTop === "Sub Leader") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataReflowTOPValidation);
                         setButton("ReflowTop");
                       } else if (StatusReflowTop === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1802,7 +1818,7 @@ const SmtTop = () => {
                         setButton("ReflowTop");
                       } else if (StatusReflowTop === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataReflowTOPQuality);
+                        setOptionData(dataReflowTOPValidation);
                         setButton("ReflowTop");
                       }
                       setStation(ReflowTop);
@@ -1850,9 +1866,9 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataAOITOPOthers);
                         setButton("AOITop");
-                      } else if (StatusAOITop === "QA" || StatusAOITop === "QC" || StatusAOITop === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataAOITOPQuality);
+                      } else if (StatusAOITop === "QA" || StatusAOITop === "QC" || StatusAOITop === "Production Leader" || StatusAOITop === "Sub Leader") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataAOITOPValidation);
                         setButton("AOITop");
                       } else if (StatusAOITop === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1872,7 +1888,7 @@ const SmtTop = () => {
                         setButton("AOITop");
                       } else if (StatusAOITop === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataAOITOPQuality);
+                        setOptionData(dataAOITOPValidation);
                         setButton("AOITop");
                       }
                       setStation(AOITop);
@@ -1918,9 +1934,9 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataRVSTOPOthers);
                         setButton("RVSTop");
-                      } else if (StatusRVSTop === "QA" || StatusRVSTop === "QC" || StatusRVSTop === "Production Leader") {
-                        setIsOpenQuality(true);
-                        setOptionData(dataRVSTOPQuality);
+                      } else if (StatusRVSTop === "QA" || StatusRVSTop === "QC" || StatusRVSTop === "Production Leader" || StatusRVSTop === "Sub Leader") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataRVSTOPValidation);
                         setButton("RVSTop");
                       } else if (StatusRVSTop === "Return MAINTENANCE & IT") {
                         setIsOpenReturn(true);
@@ -1940,7 +1956,7 @@ const SmtTop = () => {
                         setButton("RVSTop");
                       } else if (StatusRVSTop === "Go") {
                         setIsOpenValidation(true);
-                        setOptionData(dataRVSTOPQuality);
+                        setOptionData(dataRVSTOPValidation);
                         setButton("RVSTop");
                       }
                       setStation(RVSTop);
@@ -2004,7 +2020,7 @@ const SmtTop = () => {
                         <svg fill="#B48900" class="mx-auto mb-4  animate-pulse w-14 h-14 dark:text-gray-200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M187.698 120.105c41.846-15.492 89.309-5.554 121.432 26.561 44.941 44.941 44.941 117.826-.002 162.769-44.953 44.953-117.828 44.953-162.781 0-32.25-32.25-42.125-79.975-26.367-121.934 3.977-10.589-1.383-22.396-11.972-26.373s-22.396 1.383-26.373 11.972c-21.357 56.869-7.968 121.581 35.749 165.298 60.949 60.949 159.758 60.949 220.707 0 60.939-60.939 60.939-159.758 0-220.697-43.541-43.53-107.898-57.005-164.614-36.008-10.607 3.927-16.023 15.709-12.096 26.316s15.709 16.023 26.316 12.096z" /><path d="M161.408 118.082l52.879 52.869c4.331 4.334 4.331 11.381-.001 15.713l-27.924 27.924c-4.341 4.341-11.373 4.341-15.714 0l-52.594-52.584c-7.999-7.997-20.966-7.996-28.963.003s-7.996 20.966.003 28.963l52.593 52.582c20.336 20.336 53.302 20.336 73.639-.001l27.924-27.924c20.326-20.326 20.326-53.297.006-73.634l-52.887-52.877c-7.999-7.997-20.966-7.996-28.963.003s-7.996 20.966.003 28.963zM836.42 904.635c-41.846 15.492-89.309 5.554-121.432-26.561-44.941-44.941-44.941-117.826.002-162.769 44.953-44.953 117.828-44.953 162.781 0 32.25 32.25 42.125 79.975 26.367 121.934-3.977 10.589 1.383 22.396 11.972 26.373s22.396-1.383 26.373-11.972c21.357-56.869 7.968-121.581-35.749-165.298-60.949-60.949-159.758-60.949-220.707 0-60.939 60.939-60.939 159.758 0 220.697 43.541 43.53 107.898 57.005 164.614 36.008 10.607-3.927 16.023-15.709 12.096-26.316s-15.709-16.023-26.316-12.096z" /><path d="M862.712 906.659l-52.869-52.869c-4.34-4.34-4.34-11.377-.006-15.708l27.923-27.933c4.339-4.339 11.37-4.339 15.711.003l52.594 52.584c7.999 7.997 20.966 7.996 28.963-.003s7.996-20.966-.003-28.963l-52.593-52.582c-20.336-20.336-53.302-20.336-73.639.001l-27.917 27.927c-20.335 20.319-20.335 53.299.003 73.638l52.869 52.869c7.998 7.998 20.965 7.998 28.963 0s7.998-20.965 0-28.963zM674.469 738.186l-391.26-391.26c-7.998-7.998-20.965-7.998-28.963 0s-7.998 20.965 0 28.963l391.26 391.26c7.998 7.998 20.965 7.998 28.963 0s7.998-20.965 0-28.963zM343.768 279.258l400.374 400.374c7.998 7.998 20.965 7.998 28.963 0s7.998-20.965 0-28.963L372.731 250.295c-7.998-7.998-20.965-7.998-28.963 0s-7.998 20.965 0 28.963zm255.917 112.52l176.732-176.732c7.998-7.998 7.998-20.965 0-28.963s-20.965-7.998-28.963 0L570.722 362.815c-7.998 7.998-7.998 20.965 0 28.963s20.965 7.998 28.963 0zm214.393-149.914L631.53 422.641c-8.037 7.959-8.1 20.926-.141 28.963s20.926 8.1 28.963.141L842.9 270.968c8.037-7.959 8.1-20.926.141-28.963s-20.926-8.1-28.963-.141z" /><path d="M945.721 131.005a20.48 20.48 0 014.873 21.176l-28.201 81.531a20.481 20.481 0 01-12.659 12.66l-81.541 28.211a20.48 20.48 0 01-21.179-4.874l-53.32-53.33a20.48 20.48 0 01-4.872-21.175l28.201-81.531a20.478 20.478 0 0112.658-12.659l81.531-28.211a20.478 20.478 0 0121.178 4.873l53.33 53.33zm-73.228-15.302l-60.012 20.765-20.758 60.014 35.194 35.201 60.021-20.766 20.758-60.012-35.202-35.202zm-421.165 544.57L208.763 902.838c-7.497 7.497-16.502 8.466-19.734 5.237l-74.541-74.541c-3.223-3.226-2.254-12.226 5.248-19.733l242.089-242.079c7.998-7.998 7.998-20.965.001-28.963s-20.965-7.998-28.963-.001L90.769 784.842c-22.28 22.295-26.003 56.877-5.249 77.648l74.553 74.553c20.778 20.76 55.375 17.036 77.654-5.243l242.565-242.565c7.998-7.998 7.998-20.965 0-28.963s-20.965-7.998-28.963 0z" /></svg>
 
                         <h3 class=" text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
-                          Permintaan Bantuan Perbaikan Oleh : {OptionData?.Requestor || ""} <br /> <span className="text-green-500"> Department : {OptionData?.Department || ""}</span>
+                          Permintaan Bantuan Perbaikan Oleh : {OptionData?.Requestor || ""} <br /> <span className="text-green-500"> To Department : {OptionData?.Department || ""}</span>
                         </h3>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full  px-3">
@@ -2022,7 +2038,7 @@ const SmtTop = () => {
                           </div>
                           <div class="w-full  px-3">
                             <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
-                              Date  :
+                              Request at  :
                             </label>
                             <input
                               type="text"
@@ -2168,11 +2184,10 @@ const SmtTop = () => {
                           </div>
                             </div>
                             <span className="font-mono mt-2 text-gray-500 ">PIC Repairment :  {OptionData?.ResponseName || ""} </span>
-                            <span className="font-mono mt-2 text-gray-500 ">Start AT :  {formatDateAPI(OptionData?.ResponseTime) || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Request at :  {formatDateAPI(OptionData?.Date) || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Start at :  {formatDateAPI(OptionData?.ResponseTime) || ""} </span>
                           </div>
-
                           <div class="flex justify-center mt-4">
-
                           </div>
                         </div>
                       </div>
@@ -2409,9 +2424,9 @@ const SmtTop = () => {
 
 
 
-      {/*Pop up Quality  */}
+      {/*Pop up Request Validation  */}
       <td>
-        {isOpenQuality ? (
+        {isOpenRequestValidation ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-start justify-center min-h-screen  px-4 pb-96 text-center sm:block sm:p-0">
@@ -2427,7 +2442,7 @@ const SmtTop = () => {
                         className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
                         onClick={() => {
 
-                          setIsOpenQuality(false);
+                          setIsOpenRequestValidation(false);
                         }}
                       >
                         <svg
@@ -2451,12 +2466,12 @@ const SmtTop = () => {
                         </svg>
 
                         <h3 class="mb-3 text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
-                          Perbaikan Di Teruskan ke {OptionData?.DepartTo || ""} Untuk Validation :
+                        Permintaan Untuk Validation {OptionData?.DepartTo || ""}  :
                         </h3>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full  px-3">
                             <label class="block  tracking-wide text-gray-700 text-xs font-bold ">
-                              Nama PIC {OptionData?.Requestor || ""} :
+                              PIC {OptionData?.Requestor || ""} :
                             </label>
                             <input
                               type="text"
@@ -2469,7 +2484,7 @@ const SmtTop = () => {
                           </div>
                           <div class="w-full  px-3">
                             <label class="block  tracking-wide text-gray-700 text-xs font-bold ">
-                              Date  :
+                              Request at  :
                             </label>
                             <input
                               type="text"
@@ -2543,17 +2558,6 @@ const SmtTop = () => {
           </>
         ) : null}
       </td>
-
-
-
-
-
-
-
-
-
-
-
 
       {/*Pop up leader  */}
       <td>
@@ -2657,7 +2661,7 @@ const SmtTop = () => {
                           </div>
                           <div class="w-full  px-3">
                             <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2">
-                              Date Call :
+                              Request at :
                             </label>
                             <input
                               type="text"

@@ -5,7 +5,7 @@ const PutDownTimePickNPlaceTOP = (req, res) => {
     const { TimePickNPlaceTop, PickNPlaceTop, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
+      "UPDATE validation SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
       [TimePickNPlaceTop, PickNPlaceTop, Area],
       (error, results) => {
         if (error) {
@@ -51,8 +51,8 @@ const getPickNPlaceTOPMaintenance = (req, res) => {
     });
 };
 
-const getPickNPlaceTOPQuality = (req, res) => {
-    const sqlSelect = "SELECT * FROM quality WHERE Station = 'Pick&Place (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getPickNPlaceTOPValidation = (req, res) => {
+    const sqlSelect = "SELECT * FROM validation WHERE Station = 'Pick&Place (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -66,6 +66,9 @@ const getPickNPlaceTOPQuality = (req, res) => {
         }
     });
 };
+
+
+
 
 const getPickNPlaceTOPOthers = (req, res) => {
     const sqlSelect = "SELECT * FROM Others WHERE Station = 'Pick&Place (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
@@ -124,7 +127,7 @@ module.exports = {
     getPickNPlaceTOPLeader,
     PutDownTimePickNPlaceTOP,
     getPickNPlaceTOPMaintenance,
-    getPickNPlaceTOPQuality,
+    getPickNPlaceTOPValidation,
     getPickNPlaceTOPOthers,
     getPickNPlaceTOPReturnMaintenance,
     getPickNPlaceTOPReturnOthers,

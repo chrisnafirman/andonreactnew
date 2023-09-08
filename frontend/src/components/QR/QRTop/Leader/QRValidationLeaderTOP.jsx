@@ -27,7 +27,7 @@ function QRValidationValidationLeaderTOP() {
   const [isQRValidation, setIsQRValidation] = useState(true);
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
-  const [Status, setStatus] = useState("Valid");
+  const [Status, setStatus] = useState("Running");
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
@@ -107,11 +107,10 @@ function QRValidationValidationLeaderTOP() {
     firebase.database().ref("StatusLine/SMTLine1").set("Running");
     alert("Validation Telah Berhasil ");
     setIsQRValidation(false);
-    window.location.reload();
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/PutValidationQuality`, {
+    fetch(`http://192.168.101.12:3001/api/PutValidation`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

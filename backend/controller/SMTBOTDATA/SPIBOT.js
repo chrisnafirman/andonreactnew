@@ -5,7 +5,7 @@ const PutDownTimeSPIBOT = (req, res) => {
     const { TimeSPIBot, SPIBot, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
+      "UPDATE validation SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
       [TimeSPIBot, SPIBot, Area],
       (error, results) => {
         if (error) {
@@ -51,8 +51,8 @@ const getSPIBOTMaintenance = (req, res) => {
     });
 };
 
-const getSPIBOTQuality = (req, res) => {
-    const sqlSelect = "SELECT * FROM quality WHERE Station = 'SPI (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
+const getSPIBOTValidation = (req, res) => {
+    const sqlSelect = "SELECT * FROM validation WHERE Station = 'SPI (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -66,6 +66,9 @@ const getSPIBOTQuality = (req, res) => {
         }
     });
 };
+
+
+
 
 const getSPIBOTOthers = (req, res) => {
     const sqlSelect = "SELECT * FROM Others WHERE Station = 'SPI (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
@@ -124,7 +127,7 @@ module.exports = {
     getSPIBOTLeader,
     PutDownTimeSPIBOT,
     getSPIBOTMaintenance,
-    getSPIBOTQuality,
+    getSPIBOTValidation,
     getSPIBOTOthers,
     getSPIBOTReturnMaintenance,
     getSPIBOTReturnOthers,

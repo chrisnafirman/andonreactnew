@@ -57,7 +57,7 @@ const ReuestLeader = () => {
     const tableData = [];
     
     // Header untuk tabel PDF
-    const headers = ["Nama Operator", "Line", "Area", "Station", "Status", "Forward To", "Date"];
+    const headers = ["Request At", "Nama Operator", "Line", "Area", "Station", "Forward To", "Forward Date"];
     
     // Warna teks header (abu-abu)
     const headerStyles = {
@@ -69,13 +69,13 @@ const ReuestLeader = () => {
     // Mengisi data tabel PDF dengan properti yang Anda inginkan
     filteredData.forEach((item) => {
       const rowData = [
+        item.Date,
         item.Nama,
         item.Line,
         item.Area,
         item.Station,
-        item.Status,
         item.DepartTo,
-        item.Date,
+        formatDateTimeAPI(item.Dateout),
       ];
       tableData.push(rowData);
     });
@@ -112,7 +112,7 @@ const ReuestLeader = () => {
         fontStyle: fontSize, // Teks header tebal
       },
       columnStyles: {
-        5: { // Indeks 4 adalah kolom "Date"
+        5: { 
           textColor: [5, 150, 27], // Warna teks merah dalam format RGB
         },
       },
@@ -127,6 +127,19 @@ const ReuestLeader = () => {
   
   
   
+  const formatDateTimeAPI = (dateString) => {
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+
+    return `${day}/${month}/${year} / ${hours}:${minutes} WIB`;
+  };
+
   
 
   //  fungsi mengambil data dari firebase
@@ -538,7 +551,7 @@ const ReuestLeader = () => {
                                 <div className="sm:flex sm:items-start">
                                   {/* Close button */}
                                   <button
-                                    className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
+                                    className="absolute top-0 right-0 p-2 text-gray-700 hover:text-gray-600"
                                     onClick={() => {
                                       setSelectedItem(false)
                                     }}
@@ -560,7 +573,7 @@ const ReuestLeader = () => {
                                   </button>
                                   <div className="w-full max-w-lg">
                                     <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
-                                      <span>Depart To </span>
+                                      <span>Forward To </span>
                                     </div>
                                     <div class="flex flex-wrap w-full -mx-3 ">
                                       <div class="w-full  px-3 mb-3 md:mb-0">
@@ -568,15 +581,30 @@ const ReuestLeader = () => {
                                           class="block uppercase tracking-wide w-full text-black text-xs font-bold mb-2"
                                           for="grid-city"
                                         >
-                                          Department
+                                          Department 
                                         </label>
                                         <div
                                           class="appearance-none block w-full  bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                           type="text"
                                         >
                                           {" "}
-                                          {selectedItem.DepartTo}{" "}
+                                          {selectedItem.DepartTo}  {" "}
                                         </div>
+
+                                        <label
+                                          class="block uppercase tracking-wide w-full text-black text-xs font-bold mb-2"
+                                          for="grid-city"
+                                        >
+                                          Forward At
+                                        </label>
+                                        <div
+                                          class="appearance-none block w-full  bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                          type="text"
+                                        >
+                                          {" "}
+                                         {formatDateTimeAPI(selectedItem.Dateout)}{" "}
+                                        </div>
+                                        
                                       </div>
 
 
@@ -601,12 +629,6 @@ const ReuestLeader = () => {
             </div>
           </div>
         </section>
-
-
-
-        
-
-
       </main>
     </body>
   );

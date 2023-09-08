@@ -22,7 +22,7 @@ const PutStatusLeader = (req, res) => {
   const { Status, Department, Station, Area } = req.body;
 
   db.query(
-    "UPDATE leader SET Status = ?, DepartTo = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    "UPDATE leader SET Status = ?, DepartTo = ?, Dateout = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
     [Status, Department, Station, Area],
     (error, results) => {
       if (error) {

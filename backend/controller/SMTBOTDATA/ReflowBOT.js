@@ -5,7 +5,7 @@ const PutDownTimeReflowBOT = (req, res) => {
     const { TimeReflowBot, ReflowBot, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
+      "UPDATE validation SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
       [TimeReflowBot, ReflowBot, Area],
       (error, results) => {
         if (error) {
@@ -51,8 +51,8 @@ const getReflowBOTMaintenance = (req, res) => {
     });
 };
 
-const getReflowBOTQuality = (req, res) => {
-    const sqlSelect = "SELECT * FROM quality WHERE Station = 'Reflow (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
+const getReflowBOTValidation = (req, res) => {
+    const sqlSelect = "SELECT * FROM validation WHERE Station = 'Reflow (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -66,6 +66,9 @@ const getReflowBOTQuality = (req, res) => {
         }
     });
 };
+
+
+
 
 const getReflowBOTOthers = (req, res) => {
     const sqlSelect = "SELECT * FROM Others WHERE Station = 'Reflow (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
@@ -124,7 +127,7 @@ module.exports = {
     getReflowBOTLeader,
     PutDownTimeReflowBOT,
     getReflowBOTMaintenance,
-    getReflowBOTQuality,
+    getReflowBOTValidation,
     getReflowBOTOthers,
     getReflowBOTReturnMaintenance,
     getReflowBOTReturnOthers,

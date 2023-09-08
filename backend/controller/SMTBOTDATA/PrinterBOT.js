@@ -5,7 +5,7 @@ const PutDownTimePrinterBOT = (req, res) => {
     const { TimePrinterBot, PrinterBot, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
+      "UPDATE validation SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
       [TimePrinterBot, PrinterBot, Area],
       (error, results) => {
         if (error) {
@@ -51,8 +51,8 @@ const getPrinterBOTMaintenance = (req, res) => {
     });
 };
 
-const getPrinterBOTQuality = (req, res) => {
-    const sqlSelect = "SELECT * FROM quality WHERE Station = 'Printer (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
+const getPrinterBOTValidation = (req, res) => {
+    const sqlSelect = "SELECT * FROM validation WHERE Station = 'Printer (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -66,6 +66,9 @@ const getPrinterBOTQuality = (req, res) => {
         }
     });
 };
+
+
+
 
 const getPrinterBOTOthers = (req, res) => {
     const sqlSelect = "SELECT * FROM Others WHERE Station = 'Printer (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
@@ -124,7 +127,7 @@ module.exports = {
     getPrinterBOTLeader,
     PutDownTimePrinterBOT,
     getPrinterBOTMaintenance,
-    getPrinterBOTQuality,
+    getPrinterBOTValidation,
     getPrinterBOTOthers,
     getPrinterBOTReturnMaintenance,
     getPrinterBOTReturnOthers,

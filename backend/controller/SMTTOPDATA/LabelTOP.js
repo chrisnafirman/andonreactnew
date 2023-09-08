@@ -5,7 +5,7 @@ const PutDownTimeLabelTOP = (req, res) => {
     const { TimeLabelTop, LabelTop, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
+      "UPDATE validation SET DownTime = ? WHERE Station = ? AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1",
       [TimeLabelTop, LabelTop, Area],
       (error, results) => {
         if (error) {
@@ -51,8 +51,8 @@ const getLabelTOPMaintenance = (req, res) => {
     });
 };
 
-const getLabelTOPQuality = (req, res) => {
-    const sqlSelect = "SELECT * FROM quality WHERE Station = 'Label (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getLabelTOPValidation = (req, res) => {
+    const sqlSelect = "SELECT * FROM validation WHERE Station = 'Label (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -66,6 +66,9 @@ const getLabelTOPQuality = (req, res) => {
         }
     });
 };
+
+
+
 
 const getLabelTOPOthers = (req, res) => {
     const sqlSelect = "SELECT * FROM Others WHERE Station = 'Label (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
@@ -124,7 +127,7 @@ module.exports = {
     getLabelTOPLeader,
     PutDownTimeLabelTOP,
     getLabelTOPMaintenance,
-    getLabelTOPQuality,
+    getLabelTOPValidation,
     getLabelTOPOthers,
     getLabelTOPReturnMaintenance,
     getLabelTOPReturnOthers,

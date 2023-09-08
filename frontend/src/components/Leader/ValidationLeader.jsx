@@ -248,7 +248,7 @@ const exportToPDFRequest = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Quality")
+    fetch("http://192.168.101.12:3001/api/Validation")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -489,7 +489,7 @@ const exportToPDFRequest = () => {
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
                     {filteredData.map((item, index) => {
-                      if (item.DepartTo === "Production Leader") {
+                      if (item.DepartTo === "Production Leader" || item.DepartTo === "Sub Leader" ) {
                         return (
                           <tr
                             key={item.id}
@@ -533,7 +533,7 @@ const exportToPDFRequest = () => {
                                   </span>
                                 </button>
                               )}
-                              {item.Status === "Valid" && (
+                              {item.Status === "Running" && (
                                 <button
                                   onClick={() => {
                                     setSelectedItem(item);
@@ -731,7 +731,7 @@ const exportToPDFRequest = () => {
                                       </button>
                                     )}
 
-                                    {selectedItem.Status === "Valid" && (
+                                    {selectedItem.Status === "Running" && (
                                       <div className="flex space-x-32">
                                         <button
                                           className="bg-green-700  text-white font-bold py-2 px-4 rounded mr-2"

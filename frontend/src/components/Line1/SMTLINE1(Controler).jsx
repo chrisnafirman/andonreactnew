@@ -2550,7 +2550,7 @@ const SMTLINE1CONTROLLER = () => {
       }
     });
 
-    return () => {};
+    return () => { };
   }, []);
   // ------------------------
 
@@ -2567,9 +2567,8 @@ const SMTLINE1CONTROLLER = () => {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
-  const formattedTime = `${currentTime.getDate()}/${
-    currentTime.getMonth() + 1
-  }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+  const formattedTime = `${currentTime.getDate()}/${currentTime.getMonth() + 1
+    }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
   // fungsi time di navbar
   function updateTime() {
@@ -2591,7 +2590,7 @@ const SMTLINE1CONTROLLER = () => {
   const updateStatusDestackerTop = (data) => {
     setStatusDestackerTop(data);
     setBackgroundColorStatusDestackerTop(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -2631,18 +2630,20 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
 
   const updateStatusLabelTop = (data) => {
     setStatusLabelTop(data);
     setBackgroundColorStatusLabelTop(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -2682,18 +2683,20 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
 
   const updateStatusPrinterTop = (data) => {
     setStatusPrinterTop(data);
     setBackgroundColorStatusPrinterTop(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -2733,18 +2736,20 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
 
   const updateStatusSPITop = (data) => {
     setStatusSPITop(data);
     setBackgroundColorStatusSPITop(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -2784,18 +2789,20 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
 
   const updateStatusPickNPlace = (data) => {
     setStatusPickNPlaceTop(data);
     setBackgroundColorStatusPickNPlaceTop(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -2835,18 +2842,20 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
 
   const updateStatusReflowTop = (data) => {
     setStatusReflowTop(data);
     setBackgroundColorStatusReflowTop(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -2886,18 +2895,20 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
 
   const updateStatusAOITop = (data) => {
     setStatusAOITop(data);
     setBackgroundColorStatusAOITop(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -2937,18 +2948,20 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
 
   const updateStatusRVSTop = (data) => {
     setStatusRVSTop(data);
     setBackgroundColorStatusRVSTop(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -2988,11 +3001,13 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
   // ------------------------------------
@@ -3001,7 +3016,7 @@ const SMTLINE1CONTROLLER = () => {
   const updateStatusPrinterBot = (data) => {
     setStatusPrinterBot(data);
     setBackgroundColorStatusPrinterBot(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -3041,17 +3056,19 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
   const updateStatusSPIBot = (data) => {
     setStatusSPIBot(data);
     setBackgroundColorStatusSPIBot(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -3091,18 +3108,20 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
 
   const updateStatusPickNPlaceBot = (data) => {
     setStatusPickNPlaceBot(data);
     setBackgroundColorStatusPickNPlaceBot(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -3142,18 +3161,20 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
 
   const updateStatusReflowBot = (data) => {
     setStatusReflowBot(data);
     setBackgroundColorStatusReflowBot(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -3193,18 +3214,20 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
 
   const updateStatusAOIBot = (data) => {
     setStatusAOIBot(data);
     setBackgroundColorStatusAOIBot(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -3244,18 +3267,20 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
 
   const updateStatusRVSBot = (data) => {
     setStatusRVSBot(data);
     setBackgroundColorStatusRVSBot(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Return Repair Maintenance"
           ? "#E9CE08"
@@ -3295,11 +3320,13 @@ const SMTLINE1CONTROLLER = () => {
                                             ? "#93c2c4"
                                             : data === "Production Leader"
                                               ? "#93c2c4"
-                                              : data === "MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : data === "Return MAINTENANCE & IT"
+                                              : data === "Sub Leader"
+                                                ? "#93c2c4"
+                                                : data === "MAINTENANCE & IT"
                                                   ? "#C00000"
-                                                  : "#565454"
+                                                  : data === "Return MAINTENANCE & IT"
+                                                    ? "#C00000"
+                                                    : "#565454"
     );
   };
   // --------------------------------
@@ -3312,7 +3339,7 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-      "Repair",
+            "Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -3326,12 +3353,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -3436,12 +3462,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -3543,12 +3568,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -3639,7 +3663,7 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-      "Repair",
+            "Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -3653,12 +3677,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -3742,7 +3765,7 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-      "Repair",
+            "Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -3756,12 +3779,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -3852,7 +3874,7 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-      "Repair",
+            "Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -3866,12 +3888,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -3959,7 +3980,7 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-      "Repair",
+            "Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -3973,12 +3994,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -4062,7 +4082,7 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-      "Repair",
+            "Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4076,12 +4096,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -4166,7 +4185,7 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-      "Repair",
+            "Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4180,12 +4199,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -4276,7 +4294,7 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-      "Repair",
+            "Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4290,12 +4308,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -4379,7 +4396,7 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-      "Repair",
+            "Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4393,12 +4410,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -4489,7 +4505,7 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-      "Repair",
+            "Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4503,12 +4519,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -4597,7 +4612,7 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-      "Repair",
+            "Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4611,12 +4626,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -4704,7 +4718,7 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-      "Repair",
+            "Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4718,12 +4732,11 @@ const SMTLINE1CONTROLLER = () => {
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "QA",
-      "Return QA",
       "QC",
-      "Return QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
+      "Sub Leader",
       "Repair Maintenance",
       "Return Repair Maintenance",
       "Repair Others",
@@ -4873,7 +4886,7 @@ const SMTLINE1CONTROLLER = () => {
         </div>
         <div>
 
-          
+
         </div>
 
         <div className="">
@@ -5044,9 +5057,9 @@ const SMTLINE1CONTROLLER = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <button 
-                  style={{ backgroundColor: backgroundColorStatusPrinterBot }}
-                  class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusPrinterBot }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
                         PRINTER BOT
@@ -5061,8 +5074,8 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                  style={{ backgroundColor: backgroundColorStatusSPIBot }}
-                  class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
+                    style={{ backgroundColor: backgroundColorStatusSPIBot }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">SPI BOT</div>
                     </header>
@@ -5074,9 +5087,9 @@ const SMTLINE1CONTROLLER = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <button 
-                  style={{ backgroundColor: backgroundColorStatusPickNPlaceBot }}
-                  class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusPickNPlaceBot }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
                         PICK & PLACE BOT
@@ -5090,9 +5103,9 @@ const SMTLINE1CONTROLLER = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <button 
-                  style={{ backgroundColor: backgroundColorStatusReflowBot }}
-                  class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusReflowBot }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
                         REFLOW BOT
@@ -5111,9 +5124,9 @@ const SMTLINE1CONTROLLER = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <button 
-                  style={{ backgroundColor: backgroundColorStatusAOIBot }}
-                  class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusAOIBot }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">AOI BOT</div>
                     </header>
@@ -5125,9 +5138,9 @@ const SMTLINE1CONTROLLER = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
-                  <button 
-                  style={{ backgroundColor: backgroundColorStatusRVSBot }}
-                  class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusRVSBot }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">RVS BOT</div>
                     </header>

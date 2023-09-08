@@ -58,7 +58,7 @@ const Quality = () => {
     const tableData = [];
     
     // Header untuk tabel PDF
-    const headers = ["Option", "Department Request", "Nama", "Line", "Area", "Station", "Status", "Problem", "Action", "Date", "Return"];
+    const headers = ["Requestor","Request at", "Nama", "Line", "Area", "Station", "Problem", "Action", "Validation To"];
     
     // Warna teks header (abu-abu)
     const headerStyles = {
@@ -71,17 +71,15 @@ const Quality = () => {
     filteredData.forEach((item) => {
       if (item.DepartTo === 'QA' || item.DepartTo === 'QC') {
       const rowData = [
-        item.DepartTo,
         item.Requestor,
+        item.Date,
         item.Nama,
         item.Line,
         item.Area,
         item.Station,
-        item.Status,
         item.Problem,
         item.Action,
-        item.Date,
-        item.ReturnDepartment,
+        item.DepartTo,
       ];
       tableData.push(rowData);
     }
@@ -119,8 +117,11 @@ const Quality = () => {
         fontStyle: fontSize, // Teks header tebal
       },
       columnStyles: {
-        7: { // Indeks 4 adalah kolom "Date"
+        8: { // Indeks 4 adalah kolom "Date"
           textColor: [5, 150, 27], // Warna teks merah dalam format RGB
+        },
+        0: { // Indeks 4 adalah kolom "Date"
+          textColor: [159, 0, 0], // Warna teks merah dalam format RGB
         },
       },
      
@@ -137,7 +138,7 @@ const Quality = () => {
       const tableData = [];
       
       // Header untuk tabel PDF
-      const headers = ["Department ", "Nama", "Line", "Area", "Station", "Status", "Description", "Downtime", "Date",];
+      const headers = ["Requestor ", "Request at", "Validation PIC", "Validation Department", "Line", "Area", "Station",  "Description", "Validation Status",  "DownTime", "Validation Date", "Return To" ];
       
       // Warna teks header (abu-abu)
       const headerStyles = {
@@ -150,15 +151,18 @@ const Quality = () => {
       filteredData.forEach((item )  => {
         if (item.DepartTo === 'QA' || item.DepartTo === 'QC') {
         const rowData = [
-          item.DepartTo,
+          item.Requestor,
+          item.Date,
           item.ValidationName,
+          item.DepartTo,
           item.Line,
           item.Area,
           item.Station,
-          item.Status,
           item.ValidationDescription,
+          item.Status,
           item.DownTime,
-          formatDateTimeAPI(item.ValidationDate)
+          formatDateTimeAPI(item.ValidationDate),
+          item.ReturnDepartment,
         ];
         tableData.push(rowData);
       }
@@ -196,10 +200,16 @@ const Quality = () => {
           fontStyle: fontSize, // Teks header tebal
         },
         columnStyles: {
-          6: { // Indeks 4 adalah kolom "Date"
+          3: { // Indeks 3 adalah kolom "Date"
             textColor: [5, 150, 27], // Warna teks merah dalam format RGB
           },
-        },
+          0: { // Indeks 0 adalah kolom "Date"
+            textColor: [159, 0, 0], // Warna teks merah dalam format RGB
+          },
+          8: { // Indeks 7 adalah kolom yang ingin Anda ubah menjadi huruf kapital dan bold
+            fontStyle: 'bold', // Mengatur teks menjadi bold
+          },
+        },   
       });
     
     
@@ -233,7 +243,7 @@ const Quality = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Quality")
+    fetch("http://192.168.101.12:3001/api/Validation")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -519,7 +529,7 @@ const Quality = () => {
                                   <span className="text-xs lg:text-sm">Open</span>
                                 </button>
                               )}
-                              {item.Status === "Valid" && (
+                              {item.Status === "Running" && (
                                 <button
                                   onClick={() => {
                                     setSelectedItem(item)
@@ -718,7 +728,7 @@ const Quality = () => {
                                       </button>
                                     )}
 
-                                    {selectedItem.Status === "Valid" && (
+                                    {selectedItem.Status === "Running" && (
                                       <div className="flex space-x-32">
                                         <button
                                           className="bg-green-700  text-white font-bold py-2 px-4 rounded mr-2"

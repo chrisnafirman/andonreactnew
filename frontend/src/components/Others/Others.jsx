@@ -29,7 +29,7 @@ const Others = () => {
   const [Kerusakan, setKerusakan] = useState("");
   const [Action, setAction] = useState("");
   const [Line, setLine] = useState("");
-  const [isOpenQuality, setisOpenQuality] = useState(false);
+  const [isOpenRequestValidation, setisOpenRequestValidation] = useState(false);
   const [Department, setDepartment] = useState("");
   const [Requestor, setRequestor] = useState("");
   const [DepartTo, setDepartTo] = useState("");
@@ -182,7 +182,7 @@ const Others = () => {
 
 
   // QR
-  const submitQuality = () => {
+  const submitRequestValidation = () => {
     if (!NamaPIC || !Line || !Area || !Requestor || !Kerusakan || !Station || !Action) {
       alert("Harap isi semua kolom!");
       return;
@@ -308,9 +308,10 @@ const Others = () => {
 
   const OptionsDepartment = [
     { value: "", label: "-- Pilih Depart --" },
-    { value: "QC", value2: "Quality", label: "QC" },
-    { value: "QA", value2: "Quality", label: "QA" },
-    { value: "Production Leader", value2: "Quality", label: "Production Leader" },
+    { value: "QC", value2: "Validation", label: "QC" },
+    { value: "QA", value2: "Validation", label: "QA" },
+    { value: "Production Leader", value2: "Validation", label: "Production Leader" },
+    { value: "Sub Leader", value2: "Validation", label: "Sub Leader" },
   ];
 
   const handleSelectDepartment = (selectedOptionDepartment) => {
@@ -321,8 +322,8 @@ const Others = () => {
 
   const handleButtonClick = () => {
     submitUpdate();
-    submitQuality();
-    setisOpenQuality(false)
+    submitRequestValidation();
+    setisOpenRequestValidation(false)
     setSelectedItem(false)
     setIsLoader(true);
 
@@ -706,7 +707,7 @@ const Others = () => {
 
                                         <button
                                           className="" onClick={() => {
-                                            setisOpenQuality(true)
+                                            setisOpenRequestValidation(true)
                                             setNamaPIC(selectedItem.Nama)
                                             setRequestor(selectedItem.Department)
                                             setArea(selectedItem.Area)
@@ -801,7 +802,7 @@ const Others = () => {
           </div>
         </section>
         <td class="">
-          {isOpenQuality ? (
+          {isOpenRequestValidation ? (
             <>
               <div className="fixed z-10 inset-0 overflow-y-auto">
                 <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-60 text-center sm:block sm:p-0">
@@ -822,7 +823,7 @@ const Others = () => {
                         <button
                           className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
                           onClick={() =>
-                            setisOpenQuality(false)
+                            setisOpenRequestValidation(false)
                           }
                         >
                           <svg

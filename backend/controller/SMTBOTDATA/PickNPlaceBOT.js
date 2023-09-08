@@ -5,7 +5,7 @@ const PutDownTimePickNPlaceBOT = (req, res) => {
     const { TimePickNPlaceBot, PickNPlaceBot, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
+      "UPDATE validation SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
       [TimePickNPlaceBot, PickNPlaceBot, Area],
       (error, results) => {
         if (error) {
@@ -51,8 +51,8 @@ const getPickNPlaceBOTMaintenance = (req, res) => {
     });
 };
 
-const getPickNPlaceBOTQuality = (req, res) => {
-    const sqlSelect = "SELECT * FROM quality WHERE Station = 'Pick&Place (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
+const getPickNPlaceBOTValidation = (req, res) => {
+    const sqlSelect = "SELECT * FROM validation WHERE Station = 'Pick&Place (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -66,6 +66,8 @@ const getPickNPlaceBOTQuality = (req, res) => {
         }
     });
 };
+
+
 
 const getPickNPlaceBOTOthers = (req, res) => {
     const sqlSelect = "SELECT * FROM Others WHERE Station = 'Pick&Place (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
@@ -124,7 +126,7 @@ module.exports = {
     getPickNPlaceBOTLeader,
     PutDownTimePickNPlaceBOT,
     getPickNPlaceBOTMaintenance,
-    getPickNPlaceBOTQuality,
+    getPickNPlaceBOTValidation,
     getPickNPlaceBOTOthers,
     getPickNPlaceBOTReturnMaintenance,
     getPickNPlaceBOTReturnOthers,

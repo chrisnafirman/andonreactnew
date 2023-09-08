@@ -24,7 +24,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-const PutFileValidationQuality = (req, res) => {
+const PutFileValidation = (req, res) => {
   upload.single("validation")(req, res, (error) => {
     if (error) {
       console.error(error);
@@ -41,7 +41,7 @@ const PutFileValidationQuality = (req, res) => {
     }
 
     db.query(
-      "UPDATE quality SET Status = ?, validation = ? WHERE No = ?",
+      "UPDATE validation SET Status = ?, validation = ? WHERE No = ?",
       [Status, Validation, No],
       (error, results) => {
         if (error) {
@@ -56,11 +56,11 @@ const PutFileValidationQuality = (req, res) => {
 
 
 
-const PutValidationQuality = (req, res) => {
+const PutValidation = (req, res) => {
   const { Status, NamaPIC, Desc, Station, Area } = req.body;
 
   db.query(
-    "UPDATE quality SET Status = ?, ValidationName = ?, ValidationDescription = ?, ValidationDate = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    "UPDATE validation SET Status = ?, ValidationName = ?, ValidationDescription = ?, ValidationDate = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
     [Status, NamaPIC, Desc, Station, Area],
     (error, results) => {
       if (error) {
@@ -74,11 +74,11 @@ const PutValidationQuality = (req, res) => {
 
 
 
-const postRequestQuality = (req, res) => {
+const postRequestValidation = (req, res) => {
   const { NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor } = req.body;
 
   db.query(
-    "INSERT INTO quality (Nama, Area, Line, Station, Problem, Action, DepartTo, Requestor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO validation (Nama, Area, Line, Station, Problem, Action, DepartTo, Requestor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
     [NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor],
     (error, results) => {
       if (error) {
@@ -91,11 +91,11 @@ const postRequestQuality = (req, res) => {
 };
 
 
-const PutReturnQuality = (req, res) => {
+const PutReturnValidation = (req, res) => {
   const { Status, Department, Station, Area } = req.body;
 
   db.query(
-    "UPDATE quality SET Status = ?, ReturnDepartment = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    "UPDATE validation SET Status = ?, ReturnDepartment = ?, ValidationDate = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
     [Status, Department, Station, Area],
     (error, results) => {
       if (error) {
@@ -111,15 +111,8 @@ const PutReturnQuality = (req, res) => {
 
 
 
-const getRequestQuality = (req, res) => {
-  const sqlSelect = "SELECT * FROM quality";
-  db.query(sqlSelect, (err, results) => {
-    res.send(results);
-  });
-};
-
-const getValidationQuality = (req, res) => {
-  const sqlSelect = "SELECT * FROM validationquality";
+const getRequestValidation = (req, res) => {
+  const sqlSelect = "SELECT * FROM validation";
   db.query(sqlSelect, (err, results) => {
     res.send(results);
   });
@@ -127,33 +120,15 @@ const getValidationQuality = (req, res) => {
 
 
 
-const PutRealTimeDestackerTOP = (req, res) => {
-  const { Line, Station, Area } = req.body;
-
-  db.query(
-    "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
-    [Line, Station, Area],
-    (error, results) => {
-      if (error) {
-        console.log(error);
-        return res.status(500).json({ message: 'Internal server error' });
-      }
-      res.status(200).json({ message: 'Data has been updated successfully' });
-    }
-  );
-};
 
 
 
 
 
 module.exports = {
-  postRequestQuality,
-  getRequestQuality,
-  getValidationQuality,
-  PutValidationQuality,
-  PutReturnQuality,
-  PutFileValidationQuality,
-  PutRealTimeDestackerTOP ,
-
+  postRequestValidation,
+  getRequestValidation,
+  PutValidation,
+  PutReturnValidation,
+  PutFileValidation,
 };

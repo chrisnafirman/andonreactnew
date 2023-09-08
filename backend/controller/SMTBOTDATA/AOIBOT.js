@@ -5,7 +5,7 @@ const PutDownTimeAOIBOT = (req, res) => {
     const { TimeAOIBot, AOIBot, Area } = req.body;
   
     db.query(
-      "UPDATE quality SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
+      "UPDATE validation SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
       [TimeAOIBot, AOIBot, Area],
       (error, results) => {
         if (error) {
@@ -51,8 +51,8 @@ const getAOIBOTMaintenance = (req, res) => {
     });
 };
 
-const getAOIBOTQuality = (req, res) => {
-    const sqlSelect = "SELECT * FROM quality WHERE Station = 'AOI (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
+const getAOIBOTValidation = (req, res) => {
+    const sqlSelect = "SELECT * FROM validation WHERE Station = 'AOI (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -66,6 +66,8 @@ const getAOIBOTQuality = (req, res) => {
         }
     });
 };
+
+
 
 const getAOIBOTOthers = (req, res) => {
     const sqlSelect = "SELECT * FROM Others WHERE Station = 'AOI (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
@@ -124,7 +126,7 @@ module.exports = {
     getAOIBOTLeader,
     PutDownTimeAOIBOT,
     getAOIBOTMaintenance,
-    getAOIBOTQuality,
+    getAOIBOTValidation,
     getAOIBOTOthers,
     getAOIBOTReturnMaintenance,
     getAOIBOTReturnOthers,
