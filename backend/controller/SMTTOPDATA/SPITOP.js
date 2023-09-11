@@ -35,21 +35,6 @@ const getSPITOPLeader = (req, res) => {
 };
 
 
-const getSPITOPMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM maintenance WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
 
 const getSPITOPValidation = (req, res) => {
     const sqlSelect = "SELECT * FROM validation WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
@@ -69,8 +54,9 @@ const getSPITOPValidation = (req, res) => {
 
 
 
-const getSPITOPOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM Others WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+
+const getSPITOPRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM repair WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -86,8 +72,8 @@ const getSPITOPOthers = (req, res) => {
 };
 
 
-const getSPITOPReturnMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnmaintenance WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getSPITOPReturnRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM returnrepair WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -104,30 +90,14 @@ const getSPITOPReturnMaintenance = (req, res) => {
 
 
 
-const getSPITOPReturnOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnothers WHERE Station = 'SPI (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
+
 
 
 module.exports = {
 
     getSPITOPLeader,
     PutDownTimeSPITOP,
-    getSPITOPMaintenance,
+    getSPITOPRepair,
     getSPITOPValidation,
-    getSPITOPOthers,
-    getSPITOPReturnMaintenance,
-    getSPITOPReturnOthers,
+    getSPITOPReturnRepair,
 };

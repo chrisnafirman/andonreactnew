@@ -369,10 +369,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -536,10 +534,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -703,10 +699,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -870,10 +864,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -1037,10 +1029,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -1204,10 +1194,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -1371,10 +1359,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -1538,10 +1524,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -1706,10 +1690,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -1873,10 +1855,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -2040,10 +2020,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -2207,10 +2185,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -2374,10 +2350,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -2541,10 +2515,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair Maintenance" ||
-        data === "Repair Others" ||
-        data === "Return Repair Maintenance" ||
-        data === "Return Repair Others"
+        data === "Repair" ||
+        data === "Return Repair"
       ) {
         audio.pause();
       }
@@ -2592,14 +2564,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusDestackerTop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -2645,14 +2613,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusLabelTop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -2698,14 +2662,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusPrinterTop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -2751,14 +2711,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusSPITop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -2804,14 +2760,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusPickNPlaceTop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -2857,14 +2809,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusReflowTop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -2910,14 +2858,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusAOITop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -2963,14 +2907,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusRVSTop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -3018,14 +2958,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusPrinterBot(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -3070,14 +3006,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusSPIBot(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -3123,14 +3055,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusPickNPlaceBot(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -3176,14 +3104,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusReflowBot(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -3229,14 +3153,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusAOIBot(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -3282,14 +3202,10 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusRVSBot(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -3339,7 +3255,8 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-            "Repair",
+      "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -3358,10 +3275,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusDestackerTop)) {
@@ -3449,6 +3362,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -3467,10 +3381,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusLabelTop)) {
@@ -3555,6 +3465,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -3573,10 +3484,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusPrinterTop)) {
@@ -3663,7 +3570,8 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-            "Repair",
+      "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -3682,10 +3590,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusSPITop)) {
@@ -3765,7 +3669,8 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-            "Repair",
+      "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -3784,10 +3689,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusPickNPlaceTop)) {
@@ -3874,7 +3775,8 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-            "Repair",
+      "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -3893,10 +3795,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusReflowTop)) {
@@ -3980,7 +3878,8 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-            "Repair",
+      "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -3999,10 +3898,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusAOITop)) {
@@ -4082,7 +3977,8 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-            "Repair",
+      "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4101,10 +3997,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusRVSTop)) {
@@ -4186,6 +4078,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
             "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4204,10 +4097,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusPrinterBot)) {
@@ -4295,6 +4184,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
             "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4313,10 +4203,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusSPIBot)) {
@@ -4396,7 +4282,8 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-            "Repair",
+      "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4415,10 +4302,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusPickNPlaceBot)) {
@@ -4505,7 +4388,8 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-            "Repair",
+      "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4524,10 +4408,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusReflowBot)) {
@@ -4612,7 +4492,8 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-            "Repair",
+      "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4631,10 +4512,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusAOIBot)) {
@@ -4718,7 +4595,8 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-            "Repair",
+      "Repair",
+      "Return Repair",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -4737,10 +4615,6 @@ const SMTLINE1CONTROLLER = () => {
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
-      "Repair Maintenance",
-      "Return Repair Maintenance",
-      "Repair Others",
-      "Return Repair Others",
     ];
 
     if (validStatuses.includes(StatusRVSBot)) {

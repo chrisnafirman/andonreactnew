@@ -18,7 +18,7 @@ const database = firebase.database();
 function QRLeaderTOP() {
 
 
-
+  const [Uid, setUid] = useState("");
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
@@ -61,7 +61,7 @@ function QRLeaderTOP() {
       Department: Department,
       Requestor: Requestor,
       Kerusakan: Kerusakan,
-
+      Uid: Uid,
     };
 
 
@@ -105,6 +105,7 @@ function QRLeaderTOP() {
       Line: Line,
       Department: Department,
       Kerusakan: Kerusakan,
+      Uid: Uid,
     };
 
     console.log("Sending data:", data);
@@ -164,15 +165,15 @@ function QRLeaderTOP() {
 
   const OptionsDepartment = [
     { value: "", label: "-- Pilih Depart --" },
-    { value: "PURCHASING,PPIC,MP&L", value2: "Others", label: "PURCHASING,PPIC,MP&L" },
-    { value: "PROCESS ENGINEERING", value2: "Others", label: "PROCESS ENGINEERING" },
-    { value: "PRODUCT DEVELOPMENT", value2: "Others", label: "PRODUCT DEVELOPMENT" },
+    { value: "PURCHASING,PPIC,MP&L", value2: "Repair", label: "PURCHASING,PPIC,MP&L" },
+    { value: "PROCESS ENGINEERING", value2: "Repair", label: "PROCESS ENGINEERING" },
+    { value: "PRODUCT DEVELOPMENT", value2: "Repair", label: "PRODUCT DEVELOPMENT" },
     {
-      value: "ADVANCED MANUFACTURING ENGINEERING", value2: "others",
+      value: "ADVANCED MANUFACTURING ENGINEERING", value2: "Repair",
       label: "ADVANCED MANUFACTURING ENGINEERING",
     },
-    { value: "HRGA & EHS", value2: "Others", label: "HRGA & EHS" },
-    { value: "MAINTENANCE & IT", value2: "Maintenance", label: "MAINTENANCE & IT" },
+    { value: "HRGA & EHS", value2: "Repair", label: "HRGA & EHS" },
+    { value: "MAINTENANCE & IT", value2: "Repair", label: "MAINTENANCE & IT" },
 
   ];
 
@@ -192,6 +193,31 @@ function QRLeaderTOP() {
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
 
+
+  useEffect(() => {
+    generateUniqueUid();
+  }, []);
+
+  const generateUniqueUid = () => {
+    const randomId = `INC${Math.floor(Math.random() * 1000).toString().padStart(3, "0")}`;
+
+    // Kirim permintaan ke API untuk memeriksa UID
+    fetch("http://192.168.101.12:3001/api/Repair")
+      .then((response) => response.json())
+      .then((data) => {
+        const uids = data.map((item) => item.Uid);
+        if (!uids.includes(randomId)) {
+          // Jika UID belum digunakan, set UID ke nilai randomId
+          setUid(randomId);
+        } else {
+          // Jika UID sudah digunakan, coba generate UID baru
+          generateUniqueUid();
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data from API:", error);
+      });
+  };
 
 
   return (

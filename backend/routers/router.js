@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const MTCcontrollers = require("../controller/Maintenance");
-const LDRcontrollers = require("../controller/Leader");
+const RepairControllers = require("../controller/Repair");
+const LDRControllers = require("../controller/Leader");
 const ValidationControllers = require("../controller/Validation");
 // const ProductionLeaderControllers = require("../controller/ProductionLeader");
 const TimeProductioncontrollers = require("../controller/TimeProduction")
@@ -33,22 +33,32 @@ const AOIBOT = require("../controller/SMTBOTDATA/AOIBOT")
 const RVSBOT = require("../controller/SMTBOTDATA/RVSBOT")
 
 // lDR
-router.post("/Leader", LDRcontrollers.postRequestLeader);
-router.get("/Leader", LDRcontrollers.getRequestLeader);
-router.put("/PutStatusLeader", LDRcontrollers.PutStatusLeader);
-router.delete("/leader/:id", LDRcontrollers.DeleteReject);
+router.post("/Leader", LDRControllers.postRequestLeader);
+router.get("/Leader", LDRControllers.getRequestLeader);
+router.put("/PutStatusLeader", LDRControllers.PutStatusLeader);
+router.delete("/leader/:id", LDRControllers.DeleteReject);
+
+router.put("/PutUidLeader", LDRControllers.PutUidLeader);
+
+
 
 // MTC
-router.post("/Maintenance", MTCcontrollers.postRequestMaintenance);
-router.get("/Maintenance", MTCcontrollers.getRequestMaintenance);
-router.post("/ReturnMaintenance", MTCcontrollers.postReturnMaintenance);
-router.get("/ReturnMaintenance", MTCcontrollers.getReturnMaintenance);
+router.post("/Repair", RepairControllers.postRequestRepair);
+router.get("/Repair", RepairControllers.getRequestRepair);
+router.post("/ReturnRepair", RepairControllers.postReturnRepair);
+router.get("/ReturnRepair", RepairControllers.getReturnRepair);
 
-router.put("/PutResponseMaintenance", MTCcontrollers.PutResponseMaintenance);
-router.put("/PutRepairDoneMaintenance", MTCcontrollers.PutRepairDoneMaintenance);
+router.put("/PutResponseRepair", RepairControllers.PutResponseRepair);
+router.put("/PutRepairDone", RepairControllers.PutRepairDone);
 
-router.put("/PutReturnResponseMaintenance", MTCcontrollers.PutReturnResponseMaintenance);
-router.put("/PutReturnRepairDoneMaintenance", MTCcontrollers.PutReturnRepairDoneMaintenance);
+router.put("/PutReturnResponseRepair", RepairControllers.PutReturnResponseRepair);
+router.put("/PutReturnRepairDone", RepairControllers.PutReturnRepairDone);
+
+router.put("/PutUidRepair", RepairControllers.PutUidRepair);
+router.put("/PutUidReturnRepair", RepairControllers.PutUidReturnRepair);
+
+
+
 
 // Others
 router.post("/Others", Otherscontrollers.postRequestOthers);
@@ -68,10 +78,24 @@ router.put("/PutReturnRepairDoneOthers", Otherscontrollers.PutReturnRepairDoneOt
 
 // Validation
 router.post("/Validation", ValidationControllers.postRequestValidation);
+router.post("/ReturnValidation", ValidationControllers.PostReturnRequestValidation);
+
 router.put("/PutValidation", ValidationControllers.PutValidation);
 router.put("/PutReturnValidation", ValidationControllers.PutReturnValidation);
-router.put("/PutFileValidation", ValidationControllers.PutFileValidation);
+
+
+router.put("/PutStatusReturnValidation", ValidationControllers.PutStatusReturnValidation);
+router.put("/PutUidValidation", ValidationControllers.PutUidValidation);
+
+
 router.get("/Validation", ValidationControllers.getRequestValidation);
+
+
+router.get("/ReturnValidation", ValidationControllers.getRequestReturnValidation);
+
+
+
+router.put("/PutFileValidation", ValidationControllers.PutFileValidation);
 
 
 // router.post("/ProductionLeader", ProductionLeaderControllers.postRequestProductionLeader);
@@ -99,76 +123,61 @@ router.get("/ScheduleProduction", TimeProductioncontrollers.getTimeProduction);
 // Destacker
 router.put("/PutDownTimeDestackerTOP", DestackerTOP.PutDownTimeDestackerTOP);
 router.get("/getDestackerTOPLeader", DestackerTOP.getDestackerTOPLeader);
-router.get("/getDestackerTOPMaintenance", DestackerTOP.getDestackerTOPMaintenance);
+router.get("/getDestackerTOPRepair", DestackerTOP.getDestackerTOPRepair);
 router.get("/getDestackerTOPValidation", DestackerTOP.getDestackerTOPValidation);
-router.get("/getDestackerTOPOthers", DestackerTOP.getDestackerTOPOthers);
-router.get("/getDestackerTOPReturnMaintenance", DestackerTOP.getDestackerTOPReturnMaintenance);
-router.get("/getDestackerTOPReturnOthers", DestackerTOP.getDestackerTOPReturnOthers);
+router.get("/getDestackerTOPReturnRepair", DestackerTOP.getDestackerTOPReturnRepair);
 
 // Label
 router.put("/PutDownTimeLabelTOP", LabelTOP.PutDownTimeLabelTOP);
 router.get("/getLabelTOPLeader", LabelTOP.getLabelTOPLeader);
-router.get("/getLabelTOPMaintenance", LabelTOP.getLabelTOPMaintenance);
+router.get("/getLabelTOPRepair", LabelTOP.getLabelTOPRepair);
 router.get("/getLabelTOPValidation", LabelTOP.getLabelTOPValidation);
-router.get("/getLabelTOPOthers", LabelTOP.getLabelTOPOthers);
-router.get("/getLabelTOPReturnMaintenance", LabelTOP.getLabelTOPReturnMaintenance);
-router.get("/getLabelTOPReturnOthers", LabelTOP.getLabelTOPReturnOthers);
+router.get("/getLabelTOPReturnRepair", LabelTOP.getLabelTOPReturnRepair);
 
 // Printer
 router.put("/PutDownTimePrinterTOP", PrinterTOP.PutDownTimePrinterTOP);
 router.get("/getPrinterTOPLeader", PrinterTOP.getPrinterTOPLeader);
-router.get("/getPrinterTOPMaintenance", PrinterTOP.getPrinterTOPMaintenance);
+router.get("/getPrinterTOPRepair", PrinterTOP.getPrinterTOPRepair);
 router.get("/getPrinterTOPValidation", PrinterTOP.getPrinterTOPValidation);
-router.get("/getPrinterTOPOthers", PrinterTOP.getPrinterTOPOthers);
-router.get("/getPrinterTOPReturnMaintenance", PrinterTOP.getPrinterTOPReturnMaintenance);
-router.get("/getPrinterTOPReturnOthers", PrinterTOP.getPrinterTOPReturnOthers);
+router.get("/getPrinterTOPReturnRepair", PrinterTOP.getPrinterTOPReturnRepair);
 
 // SPI
 router.put("/PutDownTimeSPITOP", SPITOP.PutDownTimeSPITOP);
 router.get("/getSPITOPLeader", SPITOP.getSPITOPLeader);
-router.get("/getSPITOPMaintenance", SPITOP.getSPITOPMaintenance);
+router.get("/getSPITOPRepair", SPITOP.getSPITOPRepair);
 router.get("/getSPITOPValidation", SPITOP.getSPITOPValidation);
-router.get("/getSPITOPOthers", SPITOP.getSPITOPOthers);
-router.get("/getSPITOPReturnMaintenance", SPITOP.getSPITOPReturnMaintenance);
-router.get("/getSPITOPReturnOthers", SPITOP.getSPITOPReturnOthers);
+router.get("/getSPITOPReturnRepair", SPITOP.getSPITOPReturnRepair);
 
 
 // PickNPlace
 router.put("/PutDownTimePickNPlaceTOP", PickNPlaceTOP.PutDownTimePickNPlaceTOP);
 router.get("/getPickNPlaceTOPLeader", PickNPlaceTOP.getPickNPlaceTOPLeader);
-router.get("/getPickNPlaceTOPMaintenance", PickNPlaceTOP.getPickNPlaceTOPMaintenance);
+router.get("/getPickNPlaceTOPRepair", PickNPlaceTOP.getPickNPlaceTOPRepair);
 router.get("/getPickNPlaceTOPValidation", PickNPlaceTOP.getPickNPlaceTOPValidation);
-router.get("/getPickNPlaceTOPOthers", PickNPlaceTOP.getPickNPlaceTOPOthers);
-router.get("/getPickNPlaceTOPReturnMaintenance", PickNPlaceTOP.getPickNPlaceTOPReturnMaintenance);
-router.get("/getPickNPlaceTOPReturnOthers", PickNPlaceTOP.getPickNPlaceTOPReturnOthers);
+router.get("/getPickNPlaceTOPReturnRepair", PickNPlaceTOP.getPickNPlaceTOPReturnRepair);
 
 // Reflow
 router.put("/PutDownTimeReflowTOP", ReflowTOP.PutDownTimeReflowTOP);
 router.get("/getReflowTOPLeader", ReflowTOP.getReflowTOPLeader);
-router.get("/getReflowTOPMaintenance", ReflowTOP.getReflowTOPMaintenance);
+router.get("/getReflowTOPRepair", ReflowTOP.getReflowTOPRepair);
 router.get("/getReflowTOPValidation", ReflowTOP.getReflowTOPValidation);
-router.get("/getReflowTOPOthers", ReflowTOP.getReflowTOPOthers);
-router.get("/getReflowTOPReturnMaintenance", ReflowTOP.getReflowTOPReturnMaintenance);
-router.get("/getReflowTOPReturnOthers", ReflowTOP.getReflowTOPReturnOthers);
+router.get("/getReflowTOPReturnRepair", ReflowTOP.getReflowTOPReturnRepair);
 
 
 // AOI
 router.put("/PutDownTimeAOITOP", AOITOP.PutDownTimeAOITOP);
 router.get("/getAOITOPLeader", AOITOP.getAOITOPLeader);
-router.get("/getAOITOPMaintenance", AOITOP.getAOITOPMaintenance);
+router.get("/getAOITOPRepair", AOITOP.getAOITOPRepair);
 router.get("/getAOITOPValidation", AOITOP.getAOITOPValidation);
-router.get("/getAOITOPOthers", AOITOP.getAOITOPOthers);
-router.get("/getAOITOPReturnMaintenance", AOITOP.getAOITOPReturnMaintenance);
-router.get("/getAOITOPReturnOthers", AOITOP.getAOITOPReturnOthers);
+router.get("/getAOITOPReturnRepair", AOITOP.getAOITOPReturnRepair);
 
 // RVS
 router.put("/PutDownTimeRVSTOP", RVSTOP.PutDownTimeRVSTOP);
 router.get("/getRVSTOPLeader", RVSTOP.getRVSTOPLeader);
-router.get("/getRVSTOPMaintenance", RVSTOP.getRVSTOPMaintenance);
+router.get("/getRVSTOPRepair", RVSTOP.getRVSTOPRepair);
 router.get("/getRVSTOPValidation", RVSTOP.getRVSTOPValidation);
-router.get("/getRVSTOPOthers", RVSTOP.getRVSTOPOthers);
-router.get("/getRVSTOPReturnMaintenance", RVSTOP.getRVSTOPReturnMaintenance);
-router.get("/getRVSTOPReturnOthers", RVSTOP.getRVSTOPReturnOthers);
+router.get("/getRVSTOPReturnRepair", RVSTOP.getRVSTOPReturnRepair);
+
 // ..........................................
 
 

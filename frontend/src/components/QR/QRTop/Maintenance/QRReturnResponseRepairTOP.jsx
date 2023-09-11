@@ -47,11 +47,11 @@ function QRReturnResponseMTCTOP() {
 
     alert("Response Telah Di Terima Selamat Bekerja");
 
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Return Repair Maintenance");
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Return Repair");
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.12:3001/api/PutReturnResponseMaintenance`, {
+    fetch(`http://192.168.101.12:3001/api/PutReturnResponseRepair`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

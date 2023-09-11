@@ -13,13 +13,12 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRResponseMTCTOP() {
+function QRReturnResponseMTCTOP() {
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
-  // const [Area, setArea] = useState("SMT TOP");
-  const [isQRResponses, setIsQRResponses] = useState(true);
   const [isLoader, setIsLoader] = useState(false);
+  const [isQRReturn, setIsQRReturn] = useState(true);
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
   const [Status, setStatus] = useState("Repair");
@@ -28,7 +27,7 @@ function QRResponseMTCTOP() {
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
 
-
+ 
 
  
 
@@ -48,11 +47,11 @@ function QRResponseMTCTOP() {
 
     alert("Response Telah Di Terima Selamat Bekerja");
 
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Repair Maintenance");
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Return Repair");
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.12:3001/api/PutResponseMaintenance`, {
+    fetch(`http://192.168.101.12:3001/api/PutReturnResponseRepair`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -79,25 +78,25 @@ function QRResponseMTCTOP() {
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
-    setIsQRResponses(false);
+    setIsQRReturn(false);
   };
 
   const togglePopupMesin = () => {
     setShowPopupMesin(!showPopupMesin);
-    setIsQRResponses(false);
+    setIsQRReturn(false);
   };
 
   const handleScanSuccessNama = (data) => {
     setNamaPIC(data);
     setShowPopupNama(false);
     setShowPopupMesin(false);
-    setIsQRResponses(true);
+    setIsQRReturn(true);
   };
 
   const handleScanSuccessMesin = (data) => {
     setStation(data);
     setShowPopupMesin(false);
-    setIsQRResponses(true);
+    setIsQRReturn(true);
   };
 
 
@@ -107,14 +106,13 @@ function QRResponseMTCTOP() {
     // Mengalihkan pengguna ke halaman yang diinginkan
     setIsLoader(true);
     setTimeout(() => {
-      window.location.href = '/Maintenance'; // Ganti dengan URL halaman tujuan
+      window.location.href = '/ReturnOthers'; // Ganti dengan URL halaman tujuan
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
-
   return (
     <body style={styles}>
       <td class="">
-        {isQRResponses ? (
+        {isQRReturn ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-[500px] text-center sm:block sm:p-0">
@@ -139,7 +137,7 @@ function QRResponseMTCTOP() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Repair</span>
+                          <span>Return Respon</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div className="w-full mt-1 px-3 mb-3 md:mb-0">
@@ -161,7 +159,7 @@ function QRResponseMTCTOP() {
                               </span>
                               <button onClick={() => {
                                 togglePopupNama();
-                                setIsQRResponses(false);
+                                setIsQRReturn(false);
                               }}>
                                 {showPopupNama ? (
                                   <svg
@@ -291,7 +289,7 @@ function QRResponseMTCTOP() {
                               <button
                                 onClick={() => {
                                   togglePopupMesin();
-                                  setIsQRResponses(false);
+                                  setIsQRReturn(false);
                                 }}
                               >
                                 {showPopupMesin ? (
@@ -413,11 +411,11 @@ function QRResponseMTCTOP() {
                             type="button"
                             onClick={handleButtonClick}
                           >
-                            Repair
+                            Repair 
                           </button>
                         </div>
                       </form>
-                      <a href="/Maintenance">
+                      <a href="/ReturnOthers">
                         <button class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                           <svg width="20px" viewBox="0 0 1024 1024">
                             <path
@@ -439,6 +437,7 @@ function QRResponseMTCTOP() {
           </>
         ) : null}
       </td>
+
       <td class="">
         {isLoader ? (
           <>
@@ -480,7 +479,7 @@ function QRResponseMTCTOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupMesin();
-              setIsQRResponses(true);
+              setIsQRReturn(true);
             }}
             onScanSuccess={handleScanSuccessMesin}
           />
@@ -489,7 +488,7 @@ function QRResponseMTCTOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupNama();
-              setIsQRResponses(true);
+              setIsQRReturn(true);
             }}
             onScanSuccess={handleScanSuccessNama}
           />
@@ -499,4 +498,4 @@ function QRResponseMTCTOP() {
   );
 }
 
-export default QRResponseMTCTOP;
+export default QRReturnResponseMTCTOP;

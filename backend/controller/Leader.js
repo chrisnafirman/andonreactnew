@@ -19,11 +19,11 @@ const postRequestLeader = (req, res) => {
 
 
 const PutStatusLeader = (req, res) => {
-  const { Status, Department, Station, Area } = req.body;
+  const { Uid, Status, Department, Station, Area } = req.body;
 
   db.query(
-    "UPDATE leader SET Status = ?, DepartTo = ?, Dateout = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
-    [Status, Department, Station, Area],
+    "UPDATE leader SET Uid = ?, Status = ?, DepartTo = ?, Dateout = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [Uid, Status, Department, Station, Area],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -33,6 +33,26 @@ const PutStatusLeader = (req, res) => {
     }
   );
 };
+
+
+
+const PutUidLeader = (req, res) => {
+  const { Uid, Station, Area } = req.body;
+
+  db.query(
+    "UPDATE leader SET Uid = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [Uid, Station, Area],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been updated successfully' });
+    }
+  );
+};
+
+
 
 
 
@@ -71,5 +91,6 @@ module.exports = {
   getRequestLeader,
   PutStatusLeader,
   DeleteReject,
+  PutUidLeader,
 
 };

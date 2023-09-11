@@ -35,21 +35,7 @@ const getReflowTOPLeader = (req, res) => {
 };
 
 
-const getReflowTOPMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM maintenance WHERE Station = 'Reflow (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
+
 
 const getReflowTOPValidation = (req, res) => {
     const sqlSelect = "SELECT * FROM validation WHERE Station = 'Reflow (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
@@ -69,8 +55,24 @@ const getReflowTOPValidation = (req, res) => {
 
 
 
-const getReflowTOPOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM Others WHERE Station = 'Reflow (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getReflowTOPRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM repair WHERE Station = 'Reflow (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+    db.query(sqlSelect, (err, results) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Error fetching data from the database.");
+        } else {
+            if (results.length > 0) {
+                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
+            } else {
+                res.status(404).send("No data found.");
+            }
+        }
+    });
+};
+
+const getReflowTOPReturnRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM returnrepair WHERE Station = 'Reflow (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -86,48 +88,15 @@ const getReflowTOPOthers = (req, res) => {
 };
 
 
-const getReflowTOPReturnMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnmaintenance WHERE Station = 'Reflow (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
 
 
-
-const getReflowTOPReturnOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnothers WHERE Station = 'Reflow (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
 
 
 module.exports = {
 
     getReflowTOPLeader,
     PutDownTimeReflowTOP,
-    getReflowTOPMaintenance,
+    getReflowTOPRepair,
     getReflowTOPValidation,
-    getReflowTOPOthers,
-    getReflowTOPReturnMaintenance,
-    getReflowTOPReturnOthers,
+    getReflowTOPReturnRepair,
 };

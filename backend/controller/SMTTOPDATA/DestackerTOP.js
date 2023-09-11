@@ -35,21 +35,7 @@ const getDestackerTOPLeader = (req, res) => {
 };
 
 
-const getDestackerTOPMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM maintenance WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
+
 
 const getDestackerTOPValidation = (req, res) => {
     const sqlSelect = "SELECT * FROM validation WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
@@ -68,9 +54,8 @@ const getDestackerTOPValidation = (req, res) => {
 };
 
 
-
-const getDestackerTOPOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM Others WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getDestackerTOPRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM repair WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -86,8 +71,8 @@ const getDestackerTOPOthers = (req, res) => {
 };
 
 
-const getDestackerTOPReturnMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnmaintenance WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getDestackerTOPReturnRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM returnrepair WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -103,31 +88,13 @@ const getDestackerTOPReturnMaintenance = (req, res) => {
 };
 
 
-
-const getDestackerTOPReturnOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnothers WHERE Station = 'Destacker (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
 
 
 module.exports = {
 
     getDestackerTOPLeader,
     PutDownTimeDestackerTOP,
-    getDestackerTOPMaintenance,
+    getDestackerTOPRepair,
     getDestackerTOPValidation,
-    getDestackerTOPOthers,
-    getDestackerTOPReturnMaintenance,
-    getDestackerTOPReturnOthers,
+    getDestackerTOPReturnRepair,
 };

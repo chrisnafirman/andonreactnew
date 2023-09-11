@@ -248,7 +248,7 @@ const exportToPDFRequest = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Validation")
+    fetch("http://192.168.101.12:3001/api/ReturnValidation")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -306,25 +306,16 @@ const exportToPDFRequest = () => {
 
   const QRValidationLink = () => {
     if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRValidationLeaderTOP";
+      return "/QRReturnValidationLeaderTOP";
     } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRValidationLeaderBOT";
+      return "/QRReturnValidationLeaderBOT";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRValidationLeaderBE";
+      return "/QRReturnValidationLeaderBE";
     } else {
     }
   };
 
-  const QRReturnLink = () => {
-    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRReturnLeaderTOP";
-    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRReturnLeaderBOT";
-    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRReturnLeaderBE";
-    } else {
-    }
-  };
+
 
   const styles = {
     background: "linear-gradient(45deg, #BCC6CC, #8a8b90, #8D918D)",
@@ -355,7 +346,7 @@ const exportToPDFRequest = () => {
           <div>
             <div class="flex items-center">
               <h1 class="text-base lg:text-xl font-sans tracking-tight text-gray-900">
-                | Request Validation Leader |
+                | Request Return Validation Leader |
               </h1>
               <h1 class="text-base lg:text-xl  font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
@@ -444,7 +435,7 @@ const exportToPDFRequest = () => {
 
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-mono text-center text-gray-800">
-                  Request Validation Leader
+                  Request Return Validation Leader
                 </div>
                 <button className="flex text-sm" onClick={()=> setisExportOption(true)}>
                   <img
@@ -1001,18 +992,7 @@ const exportToPDFRequest = () => {
                               </button>
                             )}
                           </a>
-                          <a href={QRReturnLink()} >
-                            {selectedItem.Status === "" && (
-                              <button
-                                className="bg-red-500  w-36 h-12 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                                onClick={() => {
-                                  //  handleDelete();
-                                }}
-                              >
-                                Return
-                              </button>
-                            )}
-                          </a>
+                         
                         </div>
                       </div>
                     </div>

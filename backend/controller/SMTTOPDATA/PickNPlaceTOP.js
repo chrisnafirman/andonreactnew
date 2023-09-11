@@ -35,21 +35,7 @@ const getPickNPlaceTOPLeader = (req, res) => {
 };
 
 
-const getPickNPlaceTOPMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM maintenance WHERE Station = 'Pick&Place (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
+
 
 const getPickNPlaceTOPValidation = (req, res) => {
     const sqlSelect = "SELECT * FROM validation WHERE Station = 'Pick&Place (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
@@ -70,8 +56,8 @@ const getPickNPlaceTOPValidation = (req, res) => {
 
 
 
-const getPickNPlaceTOPOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM Others WHERE Station = 'Pick&Place (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getPickNPlaceTOPRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM repair WHERE Station = 'Pick&Place (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -87,8 +73,8 @@ const getPickNPlaceTOPOthers = (req, res) => {
 };
 
 
-const getPickNPlaceTOPReturnMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnmaintenance WHERE Station = 'Pick&Place (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getPickNPlaceTOPReturnRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM returnrepair WHERE Station = 'Pick&Place (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -105,30 +91,13 @@ const getPickNPlaceTOPReturnMaintenance = (req, res) => {
 
 
 
-const getPickNPlaceTOPReturnOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnothers WHERE Station = 'Pick&Place (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
 
 
 module.exports = {
 
     getPickNPlaceTOPLeader,
     PutDownTimePickNPlaceTOP,
-    getPickNPlaceTOPMaintenance,
+    getPickNPlaceTOPRepair,
     getPickNPlaceTOPValidation,
-    getPickNPlaceTOPOthers,
-    getPickNPlaceTOPReturnMaintenance,
-    getPickNPlaceTOPReturnOthers,
+    getPickNPlaceTOPReturnRepair,
 };

@@ -15,23 +15,23 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRReturnQualityTOP() {
-
+function QRValidationQualityTOP() {
 
   const [Uid, setUid] = useState("");
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT TOP");
-  const [isQRReturn, setIsQRReturn] = useState(true);
-  const [isLoader, setIsLoader] = useState(false);
+  const [isQRValidationQuality, setIsQRValidationQuality] = useState(true);
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
-  const [Status, setStatus] = useState("Return");
-  const [Requestor, setRequestor] = useState("Quality");
+  const [Status, setStatus] = useState("Running");
+  const [isLoader, setIsLoader] = useState(false);
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
+  const [file, setFile] = useState(null);
+  const [Desc, setDesc] = useState("");
 
 
 
@@ -43,62 +43,104 @@ function QRReturnQualityTOP() {
 
 
 
-  // QR
-  const submitReturnRequest = () => {
-    if (!NamaPIC || !Line || !Area || !Department || !Kerusakan) {
+
+
+
+  const submitUpdate = () => {
+    if (!NamaPIC || !Desc || !Area || !Station) {
       alert("Harap isi semua kolom!");
       return;
     }
 
     const data = {
       NamaPIC: NamaPIC,
-      Area: Area,
-      Line: Line,
       Station: Station,
-      Department: Department,
-      Requestor: Requestor,
-      Kerusakan: Kerusakan,
+      Status: Status,
+      Area: Area,
+      Desc: Desc,
       Uid: Uid,
     };
 
-    alert("Return Telah Berhasil Di Kirim Ke Team Terkait");
-
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set(`Return ${Department}`);
-    firebase.database().ref("StatusLine/SMTLine1").set("Down");
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Go (Return)");
+    firebase.database().ref("StatusLine/SMTLine1").set("Running");
+    alert("Validation Telah Berhasil ");
+    setIsQRValidationQuality(false);
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/Return${DepartTo}`, {
-      method: "POST",
+    fetch(`http://192.168.101.12:3001/api/PutReturnValidation`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
       .then((response) => {
+        console.log("Response status:", response.status);
         if (response.status === 200) {
-          // Handle success if needed
+          console.log("PUT request successful");
         } else {
-          throw new Error("Error adding data");
+          throw new Error("Error updating data");
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log("Error:", err);
       });
   };
 
+  const submitUidLeader = () => {
+    if (!NamaPIC || !Desc || !Area || !Station) {
+      alert("Harap isi semua kolom!");
+      return;
+    }
 
-  const submitUpdate = () => {
     const data = {
+      NamaPIC: NamaPIC,
       Station: Station,
       Status: Status,
       Area: Area,
-      Department: Department,
+      Desc: Desc,
+      Uid: Uid,
     };
 
-    console.log("Sending data:", data);
+   
 
-    fetch(`http://192.168.101.12:3001/api/PutStatusReturnValidation`, {
+    fetch(`http://192.168.101.12:3001/api/PutUidLeader`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        console.log("Response status:", response.status);
+        if (response.status === 200) {
+          console.log("PUT request successful");
+        } else {
+          throw new Error("Error updating data");
+        }
+      })
+      .catch((err) => {
+        console.log("Error:", err);
+      });
+  };
+
+  const submitUidRepair = () => {
+    if (!NamaPIC || !Desc || !Area || !Station) {
+      alert("Harap isi semua kolom!");
+      return;
+    }
+
+    const data = {
+      NamaPIC: NamaPIC,
+      Station: Station,
+      Status: Status,
+      Area: Area,
+      Desc: Desc,
+      Uid: Uid,
+    };
+
+    fetch(`http://192.168.101.12:3001/api/PutUidRepair`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -119,7 +161,82 @@ function QRReturnQualityTOP() {
   };
 
 
+  const submitUidReturnRepair = () => {
+    if (!NamaPIC || !Desc || !Area || !Station) {
+      alert("Harap isi semua kolom!");
+      return;
+    }
 
+    const data = {
+      NamaPIC: NamaPIC,
+      Station: Station,
+      Status: Status,
+      Area: Area,
+      Desc: Desc,
+      Uid: Uid,
+    };
+
+    fetch(`http://192.168.101.12:3001/api/PutUidReturnRepair`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        console.log("Response status:", response.status);
+        if (response.status === 200) {
+          console.log("PUT request successful");
+        } else {
+          throw new Error("Error updating data");
+        }
+      })
+      .catch((err) => {
+        console.log("Error:", err);
+      });
+  };
+
+
+  const submitUidValidation = () => {
+    if (!NamaPIC || !Desc || !Area || !Station) {
+      alert("Harap isi semua kolom!");
+      return;
+    }
+
+    const data = {
+      NamaPIC: NamaPIC,
+      Station: Station,
+      Status: Status,
+      Area: Area,
+      Desc: Desc,
+      Uid: Uid,
+    };
+
+    fetch(`http://192.168.101.12:3001/api/PutUidValidation`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        console.log("Response status:", response.status);
+        if (response.status === 200) {
+          console.log("PUT request successful");
+        } else {
+          throw new Error("Error updating data");
+        }
+      })
+      .catch((err) => {
+        console.log("Error:", err);
+      });
+  };
+
+
+  // SUBMIT FILE
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
   const styles = {
     background: "linear-gradient(45deg, #000, #768087, #87CEEB)",
@@ -128,95 +245,55 @@ function QRReturnQualityTOP() {
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
-    setIsQRReturn(false);
+    setIsQRValidationQuality(false);
   };
 
   const togglePopupMesin = () => {
     setShowPopupMesin(!showPopupMesin);
-    setIsQRReturn(false);
+    setIsQRValidationQuality(false);
   };
 
   const handleScanSuccessNama = (data) => {
     setNamaPIC(data);
     setShowPopupNama(false)
     setShowPopupMesin(false)
-    setIsQRReturn(true);
+    setIsQRValidationQuality(true);
 
   };
 
   const handleScanSuccessMesin = (data) => {
     setStation(data);
     setShowPopupMesin(false)
-    setIsQRReturn(true);
+    setIsQRValidationQuality(true);
   };
 
 
-  const OptionsDepartment = [
-    { value: "", label: "-- Pilih Depart --" },
-    { value: "PURCHASING,PPIC,MP&L", value2: "Repair", label: "PURCHASING,PPIC,MP&L" },
-    { value: "PROCESS ENGINEERING", value2: "Repair", label: "PROCESS ENGINEERING" },
-    { value: "PRODUCT DEVELOPMENT", value2: "Repair", label: "PRODUCT DEVELOPMENT" },
-    {
-      value: "ADVANCED MANUFACTURING ENGINEERING", value2: "Repair",
-      label: "ADVANCED MANUFACTURING ENGINEERING",
-    },
-    { value: "HRGA & EHS", value2: "Repair", label: "HRGA & EHS" },
-    { value: "MAINTENANCE & IT", value2: "Repair", label: "MAINTENANCE & IT" },
-
-  ];
-
-  const handleSelectDepartment = (selectedOptionDepartment) => {
-    setSelectedOptionDepartment(selectedOptionDepartment);
-    setDepartment(selectedOptionDepartment.value);
-    setDepartTo(selectedOptionDepartment.value2);
-  };
 
   const handleButtonClick = () => {
     submitUpdate();
-    submitReturnRequest();
+    submitUidRepair();
+    submitUidLeader();
+    submitUidValidation();
+    submitUidReturnRepair();
     setIsLoader(true);
 
     setTimeout(() => {
-      window.location.href = '/ValidationQuality'; // Ganti dengan URL halaman tujuan
+      window.location.href = '/ReturnValidationQuality'; // Ganti dengan URL halaman tujuan
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
 
 
 
-  useEffect(() => {
-    fetchLatestUidByStation();
-  }, [Station]);
-
   
-const fetchLatestUidByStation = () => {
-  fetch("http://192.168.101.12:3001/api/Repair")
-    .then((response) => response.json())
-    .then((data) => {
-      // Filter objek yang memiliki Station sesuai dengan yang Anda inginkan, misalnya "SPI (TOP)"
-      const matchingObjects = data.filter((item) => item.Station === Station);
 
-      // Jika ada objek yang sesuai, ambil UID dari objek terbaru
-      if (matchingObjects.length > 0) {
-        const latestObject = matchingObjects[matchingObjects.length - 1];
-        const latestUid = latestObject.Uid;
-        setUid(latestUid);
-      } else {
-        // Jika tidak ada objek yang sesuai, atur UID menjadi kosong atau nilai default yang sesuai
-        setUid("");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data from API:", error);
-    });
-};
 
   return (
     <body style={styles}>
       <td class="">
-        {isQRReturn ? (
+        {isQRValidationQuality ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-72 text-center sm:block sm:p-0">
+              <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-96 text-center sm:block sm:p-0">
                 <div className="fixed inset-0 transition-opacity">
                   <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
                 </div>
@@ -238,26 +315,10 @@ const fetchLatestUidByStation = () => {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Return For Repairment {Uid}</span>
+                          <span>Validation Quality (Return){Uid}</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
-                          <div className="w-full mt-3 px-3 mb-2 md:mb-0">
-                            <label
-                              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                              htmlFor="grid-city"
-                            >
-                              Depart To
-                            </label>
-                            <Select
-                              value={selectedOptionDepartment}
-                              onChange={handleSelectDepartment}
-                              options={OptionsDepartment}
-                              isSearchable
-                              required
-                              placeholder="Pilih Department"
-                              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            />
-                          </div>
+
                           <div className="w-full mt-1 px-3 mb-3 md:mb-0">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
                               Nama
@@ -268,13 +329,13 @@ const fetchLatestUidByStation = () => {
                                 id="grid-city"
                                 type="text"
                                 placeholder="ICT"
-                                name="MachineName"
+                                name="NamaPIC"
                               >
                                 {NamaPIC}
                               </span>
                               <button onClick={() => {
                                 togglePopupNama();
-                                setIsQRReturn(false);
+                                setIsQRValidationQuality(false);
                               }}>
                                 {showPopupNama ? (
                                   <svg width="60px" height="40px" viewBox="0 0 24 24" fill="none" >
@@ -317,13 +378,13 @@ const fetchLatestUidByStation = () => {
                                 id="grid-city"
                                 type="text"
                                 placeholder="ICT"
-                                name="MachineName"
+                                name="Station"
                               >
                                 {Station}
                               </span>
                               <button onClick={() => {
                                 togglePopupMesin();
-                                setIsQRReturn(false);
+                                setIsQRValidationQuality(false);
                               }}
                               >
                                 {showPopupMesin ? (
@@ -375,7 +436,7 @@ const fetchLatestUidByStation = () => {
                               id="grid-city"
                               type="text"
                               placeholder="ICT"
-                              name="MachineName"
+                              name="Area"
                             >
                               {Area}
                             </span>
@@ -392,7 +453,7 @@ const fetchLatestUidByStation = () => {
                               id="grid-city"
                               type="text"
                               placeholder="ICT"
-                              name="MachineName"
+                              name="Line"
                             >
                               {Line}
                             </span>
@@ -403,25 +464,24 @@ const fetchLatestUidByStation = () => {
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                             for="grid-password"
                           >
-                            Description
+                            Validation Description
                           </label>
                           <input
                             class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             id="grid-password"
                             type="text"
                             placeholder=""
-                            name="Kerusakan"
+                            name="Desc"
                             onChange={(e) => {
-                              setKerusakan(e.target.value);
+                              setDesc(e.target.value);
                             }}
                             required
                           />
-                         
                         </div>
+                        <div class="w-full px-1">
 
-
-
-                        <div className="flex justify-end">
+                        </div>
+                        <div className="flex justify-end mt-4">
 
                           <button
                             class="text-white bg-emerald-600 ml-2 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg hover:text-gray-900 text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
@@ -432,24 +492,24 @@ const fetchLatestUidByStation = () => {
                             Yes, I'm sure
                           </button>
                         </div>
-                      </form>  
-                      <a href="/ValidationQuality">  
-                      <button
-                            class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                          
-                          >
-                            <svg width="20px" viewBox="0 0 1024 1024">
-                              <path fill="#F7F7F7" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" />
-                              <path fill="#F7F7F7" d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" />
-                            </svg>
-                          </button>
-                          </a>
+                      </form>
+                      <a href="/ReturnValidationQuality">
+                        <button
+                          class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+
+                        >
+                          <svg width="20px" viewBox="0 0 1024 1024">
+                            <path fill="#F7F7F7" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" />
+                            <path fill="#F7F7F7" d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" />
+                          </svg>
+                        </button>
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            
+
           </>
         ) : null}
       </td>
@@ -490,13 +550,12 @@ const fetchLatestUidByStation = () => {
         ) : null}
       </td>
 
-
       <div className="relative">
         {showPopupMesin && (
           <QRScannerPopup
             onClose={() => {
               togglePopupMesin();
-              setIsQRReturn(true);
+              setIsQRValidationQuality(true);
             }}
             onScanSuccess={handleScanSuccessMesin}
           />
@@ -506,7 +565,7 @@ const fetchLatestUidByStation = () => {
           <QRScannerPopup
             onClose={() => {
               togglePopupNama();
-              setIsQRReturn(true);
+              setIsQRValidationQuality(true);
             }}
             onScanSuccess={handleScanSuccessNama}
           />
@@ -517,4 +576,4 @@ const fetchLatestUidByStation = () => {
   )
 }
 
-export default QRReturnQualityTOP
+export default QRValidationQualityTOP;

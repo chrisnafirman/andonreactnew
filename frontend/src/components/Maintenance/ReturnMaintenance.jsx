@@ -35,7 +35,7 @@ const ReturnMaintenance = () => {
  const [DepartTo, setDepartTo] = useState("");
   const [StatusLine, setStatusLine] = useState("");
   const [Status, setStatus] = useState("Solved");
-
+  const [Uid, setUid] = useState("");
   const [Area, setArea] = useState("");
   const [AreaFirebase, setAreaFirebase] = useState("");
   const [isLoader, setIsLoader] = useState(false);
@@ -108,7 +108,7 @@ const ReturnMaintenance = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/ReturnMaintenance")
+    fetch("http://192.168.101.12:3001/api/ReturnRepair")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -139,7 +139,7 @@ const ReturnMaintenance = () => {
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
     fetch(
-      `http://192.168.101.12:3001/api/ReturnMaintenance?date=${selectedDate}`
+      `http://192.168.101.12:3001/api/ReturnRepair?date=${selectedDate}`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -200,16 +200,17 @@ const ReturnMaintenance = () => {
     DepartTo: DepartTo,
     Department: Department,
     AreaFirebase: AreaFirebase,
+    Uid: Uid,
   };
 
   alert("Laporan Telah Berhasil Di Kirim Ke Team Validation ");
 
-  firebase.database().ref(`SMTLine1${AreaFirebase}/${Station}`).set(`${Department}`);
+  firebase.database().ref(`SMTLine1${AreaFirebase}/${Station}`).set(`Return ${Department}`);
   firebase.database().ref("StatusLine/SMTLine1").set("Down");
   setStation(null);
   setNamaPIC(null);
 
-  fetch(`http://192.168.101.12:3001/api/${DepartTo}`, {
+  fetch(`http://192.168.101.12:3001/api/Return${DepartTo}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -250,7 +251,7 @@ const submitUpdate = () => {
 
   console.log("Sending data:", data);
 
-  fetch(`http://192.168.101.12:3001/api/PutReturnRepairDoneMaintenance`, {
+  fetch(`http://192.168.101.12:3001/api/PutReturnRepairDone`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -275,11 +276,11 @@ const submitUpdate = () => {
 
   const QRResponseLink = () => {
     if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRReturnResponseMaintenanceTop";
+      return "/QRReturnResponseRepairTopMTC";
     } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRReturnResponseMaintenanceBot";
+      return "/QRReturnResponseRepairBotMTC";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRReturnResponseMaintenanceBe";
+      return "/QRReturnResponseRepairBeMTC";
     }else {
     }
   };
@@ -449,7 +450,7 @@ const submitUpdate = () => {
               </button> */}
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-semibold text-center text-gray-800">
-                  Return Request For Maintenance
+                  Return Request Maintenance
                 </div>
               </header>
 
@@ -457,9 +458,12 @@ const submitUpdate = () => {
                 className="overflow-x-auto p-3"
                 style={{ height: "300px", overflowY: "scroll" }}
               >
-                <table id="data-table" className="table-auto w-full">
+                 <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
+                    <th className="p-1 w-10 lg:w-32">
+                        <div className="font-sans lg:font-semibold text-left">Uid</div>
+                      </th>
                       <th className="p-1 w-10 lg:w-32">
                         <div className="font-sans lg:font-semibold text-left">Requestor</div>
                       </th>
@@ -469,23 +473,30 @@ const submitUpdate = () => {
                       <th className="p-1  w-20 lg:w-24">
                         <div className="font-semibold text-left">Area</div>
                       </th>
-                      <th className="p-1  w-15 lg:w-40">
+                      <th className="p-1  w-32 lg:w-40">
                         <div className="font-semibold text-left">Station</div>
                       </th>
                       <th className="p-1 w-10">
                         <div className="font-semibold text-center">Status</div>
                       </th>
-                      <th className="p-1 w-26">
+                      <th className="p-1 w-56">
                         <div className="font-semibold text-center">Date</div>
                       </th>
                     </tr>
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
-                    {filteredData.map((item, index) => (
+                  {filteredData.map((item, index) => {
+                      if (item.Department === "MAINTENANCE & IT") {
+                        return (
                       <tr
                         key={item.id}
                         className={index === 0 ? "bg-green-400" : ""}
                       >
+                         <td className="p-2">
+                          <div className="font-medium text-xs lg:text-sm text-gray-800">
+                            {item.Uid}
+                          </div>
+                        </td>
                         <td className="p-2">
                           <div className="font-medium text-xs lg:text-sm text-gray-800">
                             {item.Requestor}
@@ -510,15 +521,15 @@ const submitUpdate = () => {
                           {item.Status === "" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-red-600 w-16  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out"
+                              className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out"
                             >
-                              <span className="text-xs lg:text-sm">Open</span>
+                              <span className="text-xs  lg:text-sm">Open</span>
                             </button>
                           )}
                           {item.Status === "Solved" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-green-600  w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                              className="bg-green-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Solved</span>
                             </button>
@@ -526,7 +537,7 @@ const submitUpdate = () => {
                           {item.Status === "Repair" && (
                             <button
                               onClick={() => setSelectedItem(item)}
-                              className="bg-yellow-500 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                              className="bg-yellow-500 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                             >
                               <span className="text-xs lg:text-sm">Repair</span>
                             </button>
@@ -555,10 +566,11 @@ const submitUpdate = () => {
                             {item.Date} WIB
                           </div>
                         </td>
-                      </tr>
-
-
-                    ))}
+                        </tr>
+                        );
+                      }
+                      return null;
+                    })}
                   </tbody>
                 </table>
                 {selectedItem && (
@@ -710,7 +722,8 @@ const submitUpdate = () => {
                                         <button
                                           className="" onClick= {()=>{
                                             setisOpenRequestValidation(true)
-                                            setNamaPIC(selectedItem.Nama)                 
+                                            setNamaPIC(selectedItem.ResponseName)
+                                            setUid(selectedItem.Uid)            
                                             setRequestor(selectedItem.Department + ' [Return]');
                                             setArea(selectedItem.Area)
                                             setLine(selectedItem.Line)
@@ -850,7 +863,7 @@ const submitUpdate = () => {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Request Validation</span>
+                          <span>Request Return Validation {Uid}</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div className="w-full mt-3 px-3 mb-2 md:mb-0">

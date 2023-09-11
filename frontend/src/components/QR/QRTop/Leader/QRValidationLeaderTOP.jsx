@@ -18,7 +18,6 @@ const database = firebase.database();
 function QRValidationValidationLeaderTOP() {
 
 
-
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
@@ -130,6 +129,8 @@ function QRValidationValidationLeaderTOP() {
       });
   };
 
+ 
+
 
   // SUBMIT FILE
   const handleFileChange = (e) => {
@@ -169,13 +170,13 @@ function QRValidationValidationLeaderTOP() {
 
   const handleButtonClick = () => {
     submitUpdate();
-
     setIsLoader(true);
 
     setTimeout(() => {
       window.location.href = '/ValidationLeader'; // Ganti dengan URL halaman tujuan
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
+
 
 
   return (

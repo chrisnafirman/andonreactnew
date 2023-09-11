@@ -38,7 +38,7 @@ const Others = () => {
   const [Area, setArea] = useState("");
   const [AreaFirebase, setAreaFirebase] = useState("");
   const [isLoader, setIsLoader] = useState(false);
-
+  const [Uid, setUid] = useState("");
 
   const [selectedOptionDepartment, setSelectedOptionDepartment] =
     useState(null);
@@ -107,7 +107,7 @@ const Others = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Others")
+    fetch("http://192.168.101.12:3001/api/Repair")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -138,7 +138,7 @@ const Others = () => {
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
     fetch(
-      `http://192.168.101.12:3001/api/Others?date=${selectedDate}`
+      `http://192.168.101.12:3001/api/Repair?date=${selectedDate}`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -199,6 +199,7 @@ const Others = () => {
       DepartTo: DepartTo,
       Department: Department,
       AreaFirebase: AreaFirebase,
+      Uid: Uid,
     };
 
     alert("Laporan Telah Berhasil Di Kirim Ke Team Validation ");
@@ -249,7 +250,7 @@ const Others = () => {
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.12:3001/api/PutRepairDoneOthers`, {
+    fetch(`http://192.168.101.12:3001/api/PutRepairDone`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -274,11 +275,11 @@ const Others = () => {
 
   const QRResponseLink = () => {
     if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRResponseOthersTop";
+      return "/QRResponseRepairTopOTH";
     } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRResponseOthersBot";
+      return "/QRResponseRepairBotOTH";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRResponseOthersBe";
+      return "/QRResponseRepairBeOTH";
     } else {
 
     }
@@ -460,7 +461,10 @@ const Others = () => {
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
                       <th className="p-1 w-10 lg:w-30">
-                        <div className="font-sans lg:font-semibold text-left">Department</div>
+                        <div className="font-sans lg:font-semibold text-left">Uid</div>
+                      </th>
+                      <th className="p-1 w-10 lg:w-30">
+                        <div className="font-sans lg:font-semibold text-left">To Department</div>
                       </th>
                       <th className="p-1  w-20 lg:w-24">
                         <div className="font-semibold text-left">Line</div>
@@ -474,74 +478,83 @@ const Others = () => {
                       <th className="p-1 w-10">
                         <div className="font-semibold text-center">Status</div>
                       </th>
-                      <th className="p-1 w-26">
+                      <th className="p-1 w-56">
                         <div className="font-semibold text-center">Date</div>
                       </th>
                     </tr>
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
-                    {filteredData.map((item, index) => (
-                      <tr
-                        key={item.id}
-                        className={index === 0 ? "bg-green-400" : ""}
-                      >
+                    {filteredData.map((item, index) => {
+                      if (item.Department === "PURCHASING,PPIC,MP&L" || item.Department === "PROCESS ENGINEERING" || item.Department === "PRODUCT DEVELOPMENT" || item.Department === "ADVANCED MANUFACTURING ENGINEERING" || item.Department === "HRGA & EHS") {
+                        return (
+                          <tr
+                            key={item.id}
+                            className={index === 0 ? "bg-green-400" : ""}
+                          >
+                            <td className="p-2">
+                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                                {item.Uid}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                                {item.Department}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                                {item.Line}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                                {item.Area}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-gray-800">
+                                {item.Station}
+                              </div>
+                            </td>
+                            <td className="p-2 ">
+                              {item.Status === "" && (
+                                <button
+                                  onClick={() => setSelectedItem(item)}
+                                  className="bg-red-600 w-16  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out"
+                                >
+                                  <span className="text-xs lg:text-sm">Open</span>
+                                </button>
+                              )}
+                              {item.Status === "Solved" && (
+                                <button
+                                  onClick={() => setSelectedItem(item)}
+                                  className="bg-green-600 flex w-16 items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                                >
+                                  <span className="text-xs  lg:text-sm">Solved</span>
+                                </button>
+                              )}
+                              {item.Status === "Repair" && (
+                                <button
+                                  onClick={() => setSelectedItem(item)}
+                                  className="bg-yellow-500  flex items-center w-16 justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                                >
+                                  <span className="text-xs lg:text-sm">Repair</span>
+                                </button>
+                              )}
+                            </td>
 
-                        <td className="p-2">
-                          <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.Department}
-                          </div>
-                        </td>
-                        <td className="p-2">
-                          <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.Line}
-                          </div>
-                        </td>
-                        <td className="p-2">
-                          <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.Area}
-                          </div>
-                        </td>
-                        <td className="p-2">
-                          <div className="font-medium text-gray-800">
-                            {item.Station}
-                          </div>
-                        </td>
-                        <td className="p-2 ">
-                          {item.Status === "" && (
-                            <button
-                              onClick={() => setSelectedItem(item)}
-                              className="bg-red-600 w-16  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out"
-                            >
-                              <span className="text-xs lg:text-sm">Open</span>
-                            </button>
-                          )}
-                          {item.Status === "Solved" && (
-                            <button
-                              onClick={() => setSelectedItem(item)}
-                              className="bg-green-600 flex w-16 items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
-                            >
-                              <span className="text-xs  lg:text-sm">Solved</span>
-                            </button>
-                          )}
-                          {item.Status === "Repair" && (
-                            <button
-                              onClick={() => setSelectedItem(item)}
-                              className="bg-yellow-500  flex items-center w-16 justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
-                            >
-                              <span className="text-xs lg:text-sm">Repair</span>
-                            </button>
-                          )}
-                        </td>
 
 
-
-                        <td className="p-2">
-                          <div className="text-center h-6 text-black">
-                            {item.Date} WIB
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
+                            <td className="p-2">
+                              <div className="text-center h-6 text-black">
+                                {item.Date} WIB
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      }
+                      return null;
+                    })}
                   </tbody>
                 </table>
                 {selectedItem && (
@@ -708,7 +721,8 @@ const Others = () => {
                                         <button
                                           className="" onClick={() => {
                                             setisOpenRequestValidation(true)
-                                            setNamaPIC(selectedItem.Nama)
+                                            setNamaPIC(selectedItem.ResponseName)
+                                            setUid(selectedItem.Uid)
                                             setRequestor(selectedItem.Department)
                                             setArea(selectedItem.Area)
                                             setLine(selectedItem.Line)
@@ -859,14 +873,14 @@ const Others = () => {
                                 Depart To
                               </label>
                               <Select
-                              value={selectedOptionDepartment}
-                              onChange={handleSelectDepartment}
-                              options={OptionsDepartment}
-                              isSearchable
-                              required
-                              placeholder="Pilih Department"
-                              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            />
+                                value={selectedOptionDepartment}
+                                onChange={handleSelectDepartment}
+                                options={OptionsDepartment}
+                                isSearchable
+                                required
+                                placeholder="Pilih Department"
+                                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              />
                             </div>
                             <div className="w-full mt-1 px-3 mb-3 md:mb-0">
                               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">

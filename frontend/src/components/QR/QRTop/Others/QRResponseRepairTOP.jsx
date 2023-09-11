@@ -13,12 +13,13 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRReturnResponseMTCTOP() {
+function QRResponseMTCTOP() {
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
   const [isLoader, setIsLoader] = useState(false);
-  const [isQRReturn, setIsQRReturn] = useState(true);
+  
+  const [isQRResponse, setIsQRResponse] = useState(true);
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
   const [Status, setStatus] = useState("Repair");
@@ -27,7 +28,6 @@ function QRReturnResponseMTCTOP() {
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
 
- 
 
  
 
@@ -47,11 +47,11 @@ function QRReturnResponseMTCTOP() {
 
     alert("Response Telah Di Terima Selamat Bekerja");
 
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Return Repair Others");
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Repair");
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.12:3001/api/PutReturnResponseOthers`, {
+    fetch(`http://192.168.101.12:3001/api/PutResponseRepair`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -78,25 +78,25 @@ function QRReturnResponseMTCTOP() {
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
-    setIsQRReturn(false);
+    setIsQRResponse(false);
   };
 
   const togglePopupMesin = () => {
     setShowPopupMesin(!showPopupMesin);
-    setIsQRReturn(false);
+    setIsQRResponse(false);
   };
 
   const handleScanSuccessNama = (data) => {
     setNamaPIC(data);
     setShowPopupNama(false);
     setShowPopupMesin(false);
-    setIsQRReturn(true);
+    setIsQRResponse(true);
   };
 
   const handleScanSuccessMesin = (data) => {
     setStation(data);
     setShowPopupMesin(false);
-    setIsQRReturn(true);
+    setIsQRResponse(true);
   };
 
 
@@ -105,14 +105,15 @@ function QRReturnResponseMTCTOP() {
     submitResponse();
     // Mengalihkan pengguna ke halaman yang diinginkan
     setIsLoader(true);
-    setTimeout(() => {
-      window.location.href = '/ReturnOthers'; // Ganti dengan URL halaman tujuan
+      setTimeout(() => {
+      window.location.href = '/Others'; // Ganti dengan URL halaman tujuan
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
+
   return (
     <body style={styles}>
       <td class="">
-        {isQRReturn ? (
+        {isQRResponse ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-[500px] text-center sm:block sm:p-0">
@@ -137,7 +138,7 @@ function QRReturnResponseMTCTOP() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Return Respon</span>
+                          <span>Repair</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div className="w-full mt-1 px-3 mb-3 md:mb-0">
@@ -159,7 +160,7 @@ function QRReturnResponseMTCTOP() {
                               </span>
                               <button onClick={() => {
                                 togglePopupNama();
-                                setIsQRReturn(false);
+                                setIsQRResponse(false);
                               }}>
                                 {showPopupNama ? (
                                   <svg
@@ -289,7 +290,7 @@ function QRReturnResponseMTCTOP() {
                               <button
                                 onClick={() => {
                                   togglePopupMesin();
-                                  setIsQRReturn(false);
+                                  setIsQRResponse(false);
                                 }}
                               >
                                 {showPopupMesin ? (
@@ -411,11 +412,11 @@ function QRReturnResponseMTCTOP() {
                             type="button"
                             onClick={handleButtonClick}
                           >
-                            Repair 
+                            Repair
                           </button>
                         </div>
                       </form>
-                      <a href="/ReturnOthers">
+                      <a href="/Others">
                         <button class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                           <svg width="20px" viewBox="0 0 1024 1024">
                             <path
@@ -437,7 +438,6 @@ function QRReturnResponseMTCTOP() {
           </>
         ) : null}
       </td>
-
       <td class="">
         {isLoader ? (
           <>
@@ -473,13 +473,12 @@ function QRReturnResponseMTCTOP() {
           </>
         ) : null}
       </td>
-
       <div className="relative">
         {showPopupMesin && (
           <QRScannerPopup
             onClose={() => {
               togglePopupMesin();
-              setIsQRReturn(true);
+              setIsQRResponse(true);
             }}
             onScanSuccess={handleScanSuccessMesin}
           />
@@ -488,7 +487,7 @@ function QRReturnResponseMTCTOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupNama();
-              setIsQRReturn(true);
+              setIsQRResponse(true);
             }}
             onScanSuccess={handleScanSuccessNama}
           />
@@ -498,4 +497,4 @@ function QRReturnResponseMTCTOP() {
   );
 }
 
-export default QRReturnResponseMTCTOP;
+export default QRResponseMTCTOP;

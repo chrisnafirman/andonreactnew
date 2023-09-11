@@ -155,63 +155,47 @@ const SmtTop = () => {
   const [OptionData, setOptionData] = useState(null);
 
   const [dataDestackerTOPLeader, setDataDestackerTOPLeader] = useState(null);
-  const [dataDestackerTOPMaintenance, setDataDestackerTOPMaintenance] = useState(null);
+  const [dataDestackerTOPRepair, setDataDestackerTOPRepair] = useState(null);
   const [dataDestackerTOPValidation, setDataDestackerTOPValidation] = useState(null);
-  const [dataDestackerTOPOthers, setDataDestackerTOPOthers] = useState(null);
-  const [dataDestackerTOPReturnOthers, setDataDestackerTOPReturnOthers] = useState(null);
-  const [dataDestackerTOPReturnMaintenance, setDataDestackerTOPReturnMaintenance] = useState(null);
+  const [dataDestackerTOPReturnRepair, setDataDestackerTOPReturnRepair] = useState(null);
 
 
   const [dataLabelTOPLeader, setDataLabelTOPLeader] = useState(null);
-  const [dataLabelTOPMaintenance, setDataLabelTOPMaintenance] = useState(null);
+  const [dataLabelTOPRepair, setDataLabelTOPRepair] = useState(null);
   const [dataLabelTOPValidation, setDataLabelTOPValidation] = useState(null);
-  const [dataLabelTOPOthers, setDataLabelTOPOthers] = useState(null);
-  const [dataLabelTOPReturnOthers, setDataLabelTOPReturnOthers] = useState(null);
-  const [dataLabelTOPReturnMaintenance, setDataLabelTOPReturnMaintenance] = useState(null);
+  const [dataLabelTOPReturnRepair, setDataLabelTOPReturnRepair] = useState(null);
 
 
   const [dataPrinterTOPLeader, setDataPrinterTOPLeader] = useState(null);
-  const [dataPrinterTOPMaintenance, setDataPrinterTOPMaintenance] = useState(null);
+  const [dataPrinterTOPRepair, setDataPrinterTOPRepair] = useState(null);
   const [dataPrinterTOPValidation, setDataPrinterTOPValidation] = useState(null);
-  const [dataPrinterTOPOthers, setDataPrinterTOPOthers] = useState(null);
-  const [dataPrinterTOPReturnOthers, setDataPrinterTOPReturnOthers] = useState(null);
-  const [dataPrinterTOPReturnMaintenance, setDataPrinterTOPReturnMaintenance] = useState(null);
+  const [dataPrinterTOPReturnRepair, setDataPrinterTOPReturnRepair] = useState(null);
 
   const [dataSPITOPLeader, setDataSPITOPLeader] = useState(null);
-  const [dataSPITOPMaintenance, setDataSPITOPMaintenance] = useState(null);
+  const [dataSPITOPRepair, setDataSPITOPRepair] = useState(null);
   const [dataSPITOPValidation, setDataSPITOPValidation] = useState(null);
-  const [dataSPITOPOthers, setDataSPITOPOthers] = useState(null);
-  const [dataSPITOPReturnOthers, setDataSPITOPReturnOthers] = useState(null);
-  const [dataSPITOPReturnMaintenance, setDataSPITOPReturnMaintenance] = useState(null);
+  const [dataSPITOPReturnRepair, setDataSPITOPReturnRepair] = useState(null);
 
   const [dataPickNPlaceTOPLeader, setDataPickNPlaceTOPLeader] = useState(null);
-  const [dataPickNPlaceTOPMaintenance, setDataPickNPlaceTOPMaintenance] = useState(null);
+  const [dataPickNPlaceTOPRepair, setDataPickNPlaceTOPRepair] = useState(null);
   const [dataPickNPlaceTOPValidation, setDataPickNPlaceTOPValidation] = useState(null);
-  const [dataPickNPlaceTOPOthers, setDataPickNPlaceTOPOthers] = useState(null);
-  const [dataPickNPlaceTOPReturnOthers, setDataPickNPlaceTOPReturnOthers] = useState(null);
-  const [dataPickNPlaceTOPReturnMaintenance, setDataPickNPlaceTOPReturnMaintenance] = useState(null);
+  const [dataPickNPlaceTOPReturnRepair, setDataPickNPlaceTOPReturnRepair] = useState(null);
 
   const [dataReflowTOPLeader, setDataReflowTOPLeader] = useState(null);
-  const [dataReflowTOPMaintenance, setDataReflowTOPMaintenance] = useState(null);
+  const [dataReflowTOPRepair, setDataReflowTOPRepair] = useState(null);
   const [dataReflowTOPValidation, setDataReflowTOPValidation] = useState(null);
-  const [dataReflowTOPOthers, setDataReflowTOPOthers] = useState(null);
-  const [dataReflowTOPReturnOthers, setDataReflowTOPReturnOthers] = useState(null);
-  const [dataReflowTOPReturnMaintenance, setDataReflowTOPReturnMaintenance] = useState(null);
+  const [dataReflowTOPReturnRepair, setDataReflowTOPReturnRepair] = useState(null);
 
 
   const [dataAOITOPLeader, setDataAOITOPLeader] = useState(null);
-  const [dataAOITOPMaintenance, setDataAOITOPMaintenance] = useState(null);
+  const [dataAOITOPRepair, setDataAOITOPRepair] = useState(null);
   const [dataAOITOPValidation, setDataAOITOPValidation] = useState(null);
-  const [dataAOITOPOthers, setDataAOITOPOthers] = useState(null);
-  const [dataAOITOPReturnOthers, setDataAOITOPReturnOthers] = useState(null);
-  const [dataAOITOPReturnMaintenance, setDataAOITOPReturnMaintenance] = useState(null);
+  const [dataAOITOPReturnRepair, setDataAOITOPReturnRepair] = useState(null);
 
   const [dataRVSTOPLeader, setDataRVSTOPLeader] = useState(null);
-  const [dataRVSTOPMaintenance, setDataRVSTOPMaintenance] = useState(null);
+  const [dataRVSTOPRepair, setDataRVSTOPRepair] = useState(null);
   const [dataRVSTOPValidation, setDataRVSTOPValidation] = useState(null);
-  const [dataRVSTOPOthers, setDataRVSTOPOthers] = useState(null);
-  const [dataRVSTOPReturnOthers, setDataRVSTOPReturnOthers] = useState(null);
-  const [dataRVSTOPReturnMaintenance, setDataRVSTOPReturnMaintenance] = useState(null);
+  const [dataRVSTOPReturnRepair, setDataRVSTOPReturnRepair] = useState(null);
   // ..............
 
 
@@ -659,14 +643,10 @@ const SmtTop = () => {
     setBackgroundColorStatusDestackerTop(
    data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -713,14 +693,10 @@ const SmtTop = () => {
     setBackgroundColorStatusLabelTop(
   data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -767,14 +743,10 @@ const SmtTop = () => {
     setBackgroundColorStatusPrinterTop(
    data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -821,14 +793,10 @@ const SmtTop = () => {
     setBackgroundColorStatusSPITop(
    data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -875,14 +843,10 @@ const SmtTop = () => {
     setBackgroundColorStatusPickNPlaceTop(
    data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -929,14 +893,10 @@ const SmtTop = () => {
     setBackgroundColorStatusReflowTop(
    data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -983,14 +943,10 @@ const SmtTop = () => {
     setBackgroundColorStatusAOITop(
    data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -1037,14 +993,10 @@ const SmtTop = () => {
     setBackgroundColorStatusRVSTop(
    data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
+        : data === "Return Repair"
           ? "#E9CE08"
-          : data === "Repair Maintenance"
+          : data === "Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
-              ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
                 : data === "Leader"
                   ? "#C00000"
                   : data === "Return Leader"
@@ -1139,67 +1091,51 @@ const SmtTop = () => {
 
   // Destacker
   const fetchDestackerTOPLeader = () => fetchData("/getDestackerTOPLeader", setDataDestackerTOPLeader);
-  const fetchDestackerTOPMaintenance = () => fetchData("/getDestackerTOPMaintenance", setDataDestackerTOPMaintenance);
+  const fetchDestackerTOPRepair = () => fetchData("/getDestackerTOPRepair", setDataDestackerTOPRepair);
   const fetchDestackerTOPValidation = () => fetchData("/getDestackerTOPValidation", setDataDestackerTOPValidation);
-  const fetchDestackerTOPOthers = () => fetchData("/getDestackerTOPOthers", setDataDestackerTOPOthers);
-  const fetchDestackerTOPReturnMaintenance = () => fetchData("/getDestackerTOPReturnMaintenance", setDataDestackerTOPReturnMaintenance);
-  const fetchDestackerTOPReturnOthers = () => fetchData("/getDestackerTOPReturnOthers", setDataDestackerTOPReturnOthers);
+  const fetchDestackerTOPReturnRepair = () => fetchData("/getDestackerTOPReturnRepair", setDataDestackerTOPReturnRepair);
 
   // Label
   const fetchLabelTOPLeader = () => fetchData("/getLabelTOPLeader", setDataLabelTOPLeader);
-  const fetchLabelTOPMaintenance = () => fetchData("/getLabelTOPMaintenance", setDataLabelTOPMaintenance);
+  const fetchLabelTOPRepair = () => fetchData("/getLabelTOPRepair", setDataLabelTOPRepair);
   const fetchLabelTOPValidation = () => fetchData("/getLabelTOPValidation", setDataLabelTOPValidation);
-  const fetchLabelTOPOthers = () => fetchData("/getLabelTOPOthers", setDataLabelTOPOthers);
-  const fetchLabelTOPReturnMaintenance = () => fetchData("/getLabelTOPReturnMaintenance", setDataLabelTOPReturnMaintenance);
-  const fetchLabelTOPReturnOthers = () => fetchData("/getLabelTOPReturnOthers", setDataLabelTOPReturnOthers);
+  const fetchLabelTOPReturnRepair = () => fetchData("/getLabelTOPReturnRepair", setDataLabelTOPReturnRepair);
 
   // Printer
   const fetchPrinterTOPLeader = () => fetchData("/getPrinterTOPLeader", setDataPrinterTOPLeader);
-  const fetchPrinterTOPMaintenance = () => fetchData("/getPrinterTOPMaintenance", setDataPrinterTOPMaintenance);
+  const fetchPrinterTOPRepair = () => fetchData("/getPrinterTOPRepair", setDataPrinterTOPRepair);
   const fetchPrinterTOPValidation = () => fetchData("/getPrinterTOPValidation", setDataPrinterTOPValidation);
-  const fetchPrinterTOPOthers = () => fetchData("/getPrinterTOPOthers", setDataPrinterTOPOthers);
-  const fetchPrinterTOPReturnMaintenance = () => fetchData("/getPrinterTOPReturnMaintenance", setDataPrinterTOPReturnMaintenance);
-  const fetchPrinterTOPReturnOthers = () => fetchData("/getPrinterTOPReturnOthers", setDataPrinterTOPReturnOthers);
+  const fetchPrinterTOPReturnRepair = () => fetchData("/getPrinterTOPReturnRepair", setDataPrinterTOPReturnRepair);
 
   // SPI
   const fetchSPITOPLeader = () => fetchData("/getSPITOPLeader", setDataSPITOPLeader);
-  const fetchSPITOPMaintenance = () => fetchData("/getSPITOPMaintenance", setDataSPITOPMaintenance);
+  const fetchSPITOPRepair = () => fetchData("/getSPITOPRepair", setDataSPITOPRepair);
   const fetchSPITOPValidation = () => fetchData("/getSPITOPValidation", setDataSPITOPValidation);
-  const fetchSPITOPOthers = () => fetchData("/getSPITOPOthers", setDataSPITOPOthers);
-  const fetchSPITOPReturnMaintenance = () => fetchData("/getSPITOPReturnMaintenance", setDataSPITOPReturnMaintenance);
-  const fetchSPITOPReturnOthers = () => fetchData("/getSPITOPReturnOthers", setDataSPITOPReturnOthers);
+  const fetchSPITOPReturnRepair = () => fetchData("/getSPITOPReturnRepair", setDataSPITOPReturnRepair);
 
   // PickNPlace
   const fetchPickNPlaceTOPLeader = () => fetchData("/getPickNPlaceTOPLeader", setDataPickNPlaceTOPLeader);
-  const fetchPickNPlaceTOPMaintenance = () => fetchData("/getPickNPlaceTOPMaintenance", setDataPickNPlaceTOPMaintenance);
+  const fetchPickNPlaceTOPRepair = () => fetchData("/getPickNPlaceTOPRepair", setDataPickNPlaceTOPRepair);
   const fetchPickNPlaceTOPValidation = () => fetchData("/getPickNPlaceTOPValidation", setDataPickNPlaceTOPValidation);
-  const fetchPickNPlaceTOPOthers = () => fetchData("/getPickNPlaceTOPOthers", setDataPickNPlaceTOPOthers);
-  const fetchPickNPlaceTOPReturnMaintenance = () => fetchData("/getPickNPlaceTOPReturnMaintenance", setDataPickNPlaceTOPReturnMaintenance);
-  const fetchPickNPlaceTOPReturnOthers = () => fetchData("/getPickNPlaceTOPReturnOthers", setDataPickNPlaceTOPReturnOthers);
+  const fetchPickNPlaceTOPReturnRepair = () => fetchData("/getPickNPlaceTOPReturnRepair", setDataPickNPlaceTOPReturnRepair);
 
   // Reflow
   const fetchReflowTOPLeader = () => fetchData("/getReflowTOPLeader", setDataReflowTOPLeader);
-  const fetchReflowTOPMaintenance = () => fetchData("/getReflowTOPMaintenance", setDataReflowTOPMaintenance);
+  const fetchReflowTOPRepair = () => fetchData("/getReflowTOPRepair", setDataReflowTOPRepair);
   const fetchReflowTOPValidation = () => fetchData("/getReflowTOPValidation", setDataReflowTOPValidation);
-  const fetchReflowTOPOthers = () => fetchData("/getReflowTOPOthers", setDataReflowTOPOthers);
-  const fetchReflowTOPReturnMaintenance = () => fetchData("/getReflowTOPReturnMaintenance", setDataReflowTOPReturnMaintenance);
-  const fetchReflowTOPReturnOthers = () => fetchData("/getReflowTOPReturnOthers", setDataReflowTOPReturnOthers);
+  const fetchReflowTOPReturnRepair = () => fetchData("/getReflowTOPReturnRepair", setDataReflowTOPReturnRepair);
 
   // SPI
   const fetchAOITOPLeader = () => fetchData("/getAOITOPLeader", setDataAOITOPLeader);
-  const fetchAOITOPMaintenance = () => fetchData("/getAOITOPMaintenance", setDataAOITOPMaintenance);
+  const fetchAOITOPRepair = () => fetchData("/getAOITOPRepair", setDataAOITOPRepair);
   const fetchAOITOPValidation = () => fetchData("/getAOITOPValidation", setDataAOITOPValidation);
-  const fetchAOITOPOthers = () => fetchData("/getAOITOPOthers", setDataAOITOPOthers);
-  const fetchAOITOPReturnMaintenance = () => fetchData("/getAOITOPReturnMaintenance", setDataAOITOPReturnMaintenance);
-  const fetchAOITOPReturnOthers = () => fetchData("/getAOITOPReturnOthers", setDataAOITOPReturnOthers);
+  const fetchAOITOPReturnRepair = () => fetchData("/getAOITOPReturnRepair", setDataAOITOPReturnRepair);
 
   // RVS
   const fetchRVSTOPLeader = () => fetchData("/getRVSTOPLeader", setDataRVSTOPLeader);
-  const fetchRVSTOPMaintenance = () => fetchData("/getRVSTOPMaintenance", setDataRVSTOPMaintenance);
+  const fetchRVSTOPRepair = () => fetchData("/getRVSTOPRepair", setDataRVSTOPRepair);
   const fetchRVSTOPValidation = () => fetchData("/getRVSTOPValidation", setDataRVSTOPValidation);
-  const fetchRVSTOPOthers = () => fetchData("/getRVSTOPOthers", setDataRVSTOPOthers);
-  const fetchRVSTOPReturnMaintenance = () => fetchData("/getRVSTOPReturnMaintenance", setDataRVSTOPReturnMaintenance);
-  const fetchRVSTOPReturnOthers = () => fetchData("/getRVSTOPReturnOthers", setDataRVSTOPReturnOthers);
+  const fetchRVSTOPReturnRepair = () => fetchData("/getRVSTOPReturnRepair", setDataRVSTOPReturnRepair);
 
 
   const fetchData = (endpoint, setDataFunction) => {
@@ -1217,60 +1153,44 @@ const SmtTop = () => {
   useEffect(() => {
     const fetchDataFunctions = [
       fetchDestackerTOPLeader,
-      fetchDestackerTOPMaintenance,
+      fetchDestackerTOPRepair,
       fetchDestackerTOPValidation,
-      fetchDestackerTOPOthers,
-      fetchDestackerTOPReturnMaintenance,
-      fetchDestackerTOPReturnOthers,
+      fetchDestackerTOPReturnRepair,
 
       fetchLabelTOPLeader,
-      fetchLabelTOPMaintenance,
+      fetchLabelTOPRepair,
       fetchLabelTOPValidation,
-      fetchLabelTOPOthers,
-      fetchLabelTOPReturnMaintenance,
-      fetchLabelTOPReturnOthers,
+      fetchLabelTOPReturnRepair,
 
       fetchPrinterTOPLeader,
-      fetchPrinterTOPMaintenance,
+      fetchPrinterTOPRepair,
       fetchPrinterTOPValidation,
-      fetchPrinterTOPOthers,
-      fetchPrinterTOPReturnMaintenance,
-      fetchPrinterTOPReturnOthers,
+      fetchPrinterTOPReturnRepair,
 
       fetchSPITOPLeader,
-      fetchSPITOPMaintenance,
+      fetchSPITOPRepair,
       fetchSPITOPValidation,
-      fetchSPITOPOthers,
-      fetchSPITOPReturnMaintenance,
-      fetchSPITOPReturnOthers,
+      fetchSPITOPReturnRepair,
 
       fetchPickNPlaceTOPLeader,
-      fetchPickNPlaceTOPMaintenance,
+      fetchPickNPlaceTOPRepair,
       fetchPickNPlaceTOPValidation,
-      fetchPickNPlaceTOPOthers,
-      fetchPickNPlaceTOPReturnMaintenance,
-      fetchPickNPlaceTOPReturnOthers,
+      fetchPickNPlaceTOPReturnRepair,
 
       fetchReflowTOPLeader,
-      fetchReflowTOPMaintenance,
+      fetchReflowTOPRepair,
       fetchReflowTOPValidation,
-      fetchReflowTOPOthers,
-      fetchReflowTOPReturnMaintenance,
-      fetchReflowTOPReturnOthers,
+      fetchReflowTOPReturnRepair,
 
       fetchAOITOPLeader,
-      fetchAOITOPMaintenance,
+      fetchAOITOPRepair,
       fetchAOITOPValidation,
-      fetchAOITOPOthers,
-      fetchAOITOPReturnMaintenance,
-      fetchAOITOPReturnOthers,
+      fetchAOITOPReturnRepair,
 
       fetchRVSTOPLeader,
-      fetchRVSTOPMaintenance,
+      fetchRVSTOPRepair,
       fetchRVSTOPValidation,
-      fetchRVSTOPOthers,
-      fetchRVSTOPReturnMaintenance,
-      fetchRVSTOPReturnOthers,
+      fetchRVSTOPReturnRepair,
     ];
 
     const intervalIds = fetchDataFunctions.map((func) => setInterval(func, 3000));
@@ -1430,41 +1350,25 @@ const SmtTop = () => {
                         setIsOpenLeader(true);
                         setOptionData(dataDestackerTOPLeader);
                         setButton("DestackerTop");
-                      } else if (StatusDestackerTop === "MAINTENANCE & IT") {
+                      } else if (StatusDestackerTop === "MAINTENANCE & IT" || StatusDestackerTop === "HRGA & EHS" || StatusDestackerTop === "PURCHASING,PPIC,MP&L" || StatusDestackerTop === "PROCESS ENGINEERING" || StatusDestackerTop === "PRODUCT DEVELOPMENT" || StatusDestackerTop === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataDestackerTOPMaintenance);
+                        setOptionData(dataDestackerTOPRepair);
                         setButton("DestackerTop");
-                      } else if (StatusDestackerTop === "HRGA & EHS" || StatusDestackerTop === "PURCHASING,PPIC,MP&L" || StatusDestackerTop === "PROCESS ENGINEERING" || StatusDestackerTop === "PRODUCT DEVELOPMENT" || StatusDestackerTop === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataDestackerTOPOthers);
-                        setButton("DestackerTop");
-                      } else if (StatusDestackerTop === "Repair Maintenance") {
+                      } else if (StatusDestackerTop === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataDestackerTOPMaintenance);
-                        setButton("DestackerTop");
-                      } else if (StatusDestackerTop === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataDestackerTOPOthers);
+                        setOptionData(dataDestackerTOPRepair);
                         setButton("DestackerTop");
                       } else if (StatusDestackerTop === "QA" || StatusDestackerTop === "QC" || StatusDestackerTop === "Production Leader" || StatusDestackerTop === "Sub Leader") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataDestackerTOPValidation);
                         setButton("DestackerTop");
-                      } else if (StatusDestackerTop === "Return MAINTENANCE & IT") {
+                      } else if (StatusDestackerTop === "Return MAINTENANCE & IT" || StatusDestackerTop === "Return HRGA & EHS" || StatusDestackerTop === "Return PURCHASING,PPIC,MP&L" || StatusDestackerTop === "Return PROCESS ENGINEERING" || StatusDestackerTop === "Return PRODUCT DEVELOPMENT" || StatusDestackerTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataDestackerTOPReturnMaintenance);
+                        setOptionData(dataDestackerTOPReturnRepair);
                         setButton("DestackerTop");
-                      } else if (StatusDestackerTop === "Return HRGA & EHS" || StatusDestackerTop === "Return PURCHASING,PPIC,MP&L" || StatusDestackerTop === "Return PROCESS ENGINEERING" || StatusDestackerTop === "Return PRODUCT DEVELOPMENT" || StatusDestackerTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataDestackerTOPReturnOthers);
-                        setButton("DestackerTop");
-                      } else if (StatusDestackerTop === "Return Repair Maintenance") {
+                      }  else if (StatusDestackerTop === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataDestackerTOPReturnMaintenance);
-                        setButton("DestackerTop");
-                      } else if (StatusDestackerTop === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataDestackerTOPReturnOthers);
+                        setOptionData(dataDestackerTOPReturnRepair);
                         setButton("DestackerTop");
                       } else if (StatusDestackerTop === "Go") {
                         setIsOpenValidation(true);
@@ -1499,41 +1403,25 @@ const SmtTop = () => {
                         setIsOpenLeader(true);
                         setOptionData(dataLabelTOPLeader);
                         setButton("LabelTop");
-                      } else if (StatusLabelTop === "MAINTENANCE & IT") {
+                      } else if (StatusLabelTop === "MAINTENANCE & IT" || StatusLabelTop === "HRGA & EHS" || StatusLabelTop === "PURCHASING,PPIC,MP&L" || StatusLabelTop === "PROCESS ENGINEERING" || StatusLabelTop === "PRODUCT DEVELOPMENT" || StatusLabelTop === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataLabelTOPMaintenance);
+                        setOptionData(dataLabelTOPRepair);
                         setButton("LabelTop");
-                      } else if (StatusLabelTop === "HRGA & EHS" || StatusLabelTop === "PURCHASING,PPIC,MP&L" || StatusLabelTop === "PROCESS ENGINEERING" || StatusLabelTop === "PRODUCT DEVELOPMENT" || StatusLabelTop === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataLabelTOPOthers);
-                        setButton("LabelTop");
-                      } else if (StatusLabelTop === "Repair Maintenance") {
+                      } else if (StatusLabelTop === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataLabelTOPMaintenance);
-                        setButton("LabelTop");
-                      } else if (StatusLabelTop === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataLabelTOPOthers);
+                        setOptionData(dataLabelTOPRepair);
                         setButton("LabelTop");
                       } else if (StatusLabelTop === "QA" || StatusLabelTop === "QC" || StatusLabelTop === "Production Leader" || StatusLabelTop === "Sub Leader") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataLabelTOPValidation);
                         setButton("LabelTop");
-                      } else if (StatusLabelTop === "Return MAINTENANCE & IT") {
+                      } else if (StatusLabelTop === "Return MAINTENANCE & IT" || StatusLabelTop === "Return HRGA & EHS" || StatusLabelTop === "Return PURCHASING,PPIC,MP&L" || StatusLabelTop === "Return PROCESS ENGINEERING" || StatusLabelTop === "Return PRODUCT DEVELOPMENT" || StatusLabelTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataLabelTOPReturnMaintenance);
+                        setOptionData(dataLabelTOPReturnRepair);
                         setButton("LabelTop");
-                      } else if (StatusLabelTop === "Return HRGA & EHS" || StatusLabelTop === "Return PURCHASING,PPIC,MP&L" || StatusLabelTop === "Return PROCESS ENGINEERING" || StatusLabelTop === "Return PRODUCT DEVELOPMENT" || StatusLabelTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataLabelTOPReturnOthers);
-                        setButton("LabelTop");
-                      } else if (StatusLabelTop === "Return Repair Maintenance") {
+                      }  else if (StatusLabelTop === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataLabelTOPReturnMaintenance);
-                        setButton("LabelTop");
-                      } else if (StatusLabelTop === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataLabelTOPReturnOthers);
+                        setOptionData(dataLabelTOPReturnRepair);
                         setButton("LabelTop");
                       } else if (StatusLabelTop === "Go") {
                         setIsOpenValidation(true);
@@ -1568,41 +1456,25 @@ const SmtTop = () => {
                         setIsOpenLeader(true);
                         setOptionData(dataPrinterTOPLeader);
                         setButton("PrinterTop");
-                      } else if (StatusPrinterTop === "MAINTENANCE & IT") {
+                      } else if (StatusPrinterTop === "MAINTENANCE & IT" || StatusPrinterTop === "HRGA & EHS" || StatusPrinterTop === "PURCHASING,PPIC,MP&L" || StatusPrinterTop === "PROCESS ENGINEERING" || StatusPrinterTop === "PRODUCT DEVELOPMENT" || StatusPrinterTop === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataPrinterTOPMaintenance);
+                        setOptionData(dataPrinterTOPRepair);
                         setButton("PrinterTop");
-                      } else if (StatusPrinterTop === "HRGA & EHS" || StatusPrinterTop === "PURCHASING,PPIC,MP&L" || StatusPrinterTop === "PROCESS ENGINEERING" || StatusPrinterTop === "PRODUCT DEVELOPMENT" || StatusPrinterTop === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataPrinterTOPOthers);
-                        setButton("PrinterTop");
-                      } else if (StatusPrinterTop === "Repair Maintenance") {
+                      } else if (StatusPrinterTop === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataPrinterTOPMaintenance);
-                        setButton("PrinterTop");
-                      } else if (StatusPrinterTop === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataPrinterTOPOthers);
+                        setOptionData(dataPrinterTOPRepair);
                         setButton("PrinterTop");
                       } else if (StatusPrinterTop === "QA" || StatusPrinterTop === "QC" || StatusPrinterTop === "Production Leader" || StatusPrinterTop === "Sub Leader") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataPrinterTOPValidation);
                         setButton("PrinterTop");
-                      } else if (StatusPrinterTop === "Return MAINTENANCE & IT") {
+                      } else if (StatusPrinterTop === "Return MAINTENANCE & IT" || StatusPrinterTop === "Return HRGA & EHS" || StatusPrinterTop === "Return PURCHASING,PPIC,MP&L" || StatusPrinterTop === "Return PROCESS ENGINEERING" || StatusPrinterTop === "Return PRODUCT DEVELOPMENT" || StatusPrinterTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataPrinterTOPReturnMaintenance);
+                        setOptionData(dataPrinterTOPReturnRepair);
                         setButton("PrinterTop");
-                      } else if (StatusPrinterTop === "Return HRGA & EHS" || StatusPrinterTop === "Return PURCHASING,PPIC,MP&L" || StatusPrinterTop === "Return PROCESS ENGINEERING" || StatusPrinterTop === "Return PRODUCT DEVELOPMENT" || StatusPrinterTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataPrinterTOPReturnOthers);
-                        setButton("PrinterTop");
-                      } else if (StatusPrinterTop === "Return Repair Maintenance") {
+                      }  else if (StatusPrinterTop === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataPrinterTOPReturnMaintenance);
-                        setButton("PrinterTop");
-                      } else if (StatusPrinterTop === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataPrinterTOPReturnOthers);
+                        setOptionData(dataPrinterTOPReturnRepair);
                         setButton("PrinterTop");
                       } else if (StatusPrinterTop === "Go") {
                         setIsOpenValidation(true);
@@ -1638,41 +1510,25 @@ const SmtTop = () => {
                         setIsOpenLeader(true);
                         setOptionData(dataSPITOPLeader);
                         setButton("SPITop");
-                      } else if (StatusSPITop === "MAINTENANCE & IT") {
+                      } else if (StatusSPITop === "MAINTENANCE & IT" || StatusSPITop === "HRGA & EHS" || StatusSPITop === "PURCHASING,PPIC,MP&L" || StatusSPITop === "PROCESS ENGINEERING" || StatusSPITop === "PRODUCT DEVELOPMENT" || StatusSPITop === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataSPITOPMaintenance);
+                        setOptionData(dataSPITOPRepair);
                         setButton("SPITop");
-                      } else if (StatusSPITop === "HRGA & EHS" || StatusSPITop === "PURCHASING,PPIC,MP&L" || StatusSPITop === "PROCESS ENGINEERING" || StatusSPITop === "PRODUCT DEVELOPMENT" || StatusSPITop === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataSPITOPOthers);
-                        setButton("SPITop");
-                      } else if (StatusSPITop === "Repair Maintenance") {
+                      } else if (StatusSPITop === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataSPITOPMaintenance);
-                        setButton("SPITop");
-                      } else if (StatusSPITop === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataSPITOPOthers);
+                        setOptionData(dataSPITOPRepair);
                         setButton("SPITop");
                       } else if (StatusSPITop === "QA" || StatusSPITop === "QC" || StatusSPITop === "Production Leader" || StatusSPITop === "Sub Leader") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataSPITOPValidation);
                         setButton("SPITop");
-                      } else if (StatusSPITop === "Return MAINTENANCE & IT") {
+                      } else if (StatusSPITop === "Return MAINTENANCE & IT" || StatusSPITop === "Return HRGA & EHS" || StatusSPITop === "Return PURCHASING,PPIC,MP&L" || StatusSPITop === "Return PROCESS ENGINEERING" || StatusSPITop === "Return PRODUCT DEVELOPMENT" || StatusSPITop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataSPITOPReturnMaintenance);
+                        setOptionData(dataSPITOPReturnRepair);
                         setButton("SPITop");
-                      } else if (StatusSPITop === "Return HRGA & EHS" || StatusSPITop === "Return PURCHASING,PPIC,MP&L" || StatusSPITop === "Return PROCESS ENGINEERING" || StatusSPITop === "Return PRODUCT DEVELOPMENT" || StatusSPITop === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataSPITOPReturnOthers);
-                        setButton("SPITop");
-                      } else if (StatusSPITop === "Return Repair Maintenance") {
+                      }  else if (StatusSPITop === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataSPITOPReturnMaintenance);
-                        setButton("SPITop");
-                      } else if (StatusSPITop === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataSPITOPReturnOthers);
+                        setOptionData(dataSPITOPReturnRepair);
                         setButton("SPITop");
                       } else if (StatusSPITop === "Go") {
                         setIsOpenValidation(true);
@@ -1710,41 +1566,25 @@ const SmtTop = () => {
                         setIsOpenLeader(true);
                         setOptionData(dataPickNPlaceTOPLeader);
                         setButton("PickNPlaceTop");
-                      } else if (StatusPickNPlaceTop === "MAINTENANCE & IT") {
+                      } else if (StatusPickNPlaceTop === "MAINTENANCE & IT" || StatusPickNPlaceTop === "HRGA & EHS" || StatusPickNPlaceTop === "PURCHASING,PPIC,MP&L" || StatusPickNPlaceTop === "PROCESS ENGINEERING" || StatusPickNPlaceTop === "PRODUCT DEVELOPMENT" || StatusPickNPlaceTop === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataPickNPlaceTOPMaintenance);
+                        setOptionData(dataPickNPlaceTOPRepair);
                         setButton("PickNPlaceTop");
-                      } else if (StatusPickNPlaceTop === "HRGA & EHS" || StatusPickNPlaceTop === "PURCHASING,PPIC,MP&L" || StatusPickNPlaceTop === "PROCESS ENGINEERING" || StatusPickNPlaceTop === "PRODUCT DEVELOPMENT" || StatusPickNPlaceTop === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataPickNPlaceTOPOthers);
-                        setButton("PickNPlaceTop");
-                      } else if (StatusPickNPlaceTop === "Repair Maintenance") {
+                      } else if (StatusPickNPlaceTop === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataPickNPlaceTOPMaintenance);
-                        setButton("PickNPlaceTop");
-                      } else if (StatusPickNPlaceTop === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataPickNPlaceTOPOthers);
+                        setOptionData(dataPickNPlaceTOPRepair);
                         setButton("PickNPlaceTop");
                       } else if (StatusPickNPlaceTop === "QA" || StatusPickNPlaceTop === "QC" || StatusPickNPlaceTop === "Production Leader" || StatusPickNPlaceTop === "Sub Leader") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataPickNPlaceTOPValidation);
                         setButton("PickNPlaceTop");
-                      } else if (StatusPickNPlaceTop === "Return MAINTENANCE & IT") {
+                      } else if (StatusPickNPlaceTop === "Return MAINTENANCE & IT" || StatusPickNPlaceTop === "Return HRGA & EHS" || StatusPickNPlaceTop === "Return PURCHASING,PPIC,MP&L" || StatusPickNPlaceTop === "Return PROCESS ENGINEERING" || StatusPickNPlaceTop === "Return PRODUCT DEVELOPMENT" || StatusPickNPlaceTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataPickNPlaceTOPReturnMaintenance);
+                        setOptionData(dataPickNPlaceTOPReturnRepair);
                         setButton("PickNPlaceTop");
-                      } else if (StatusPickNPlaceTop === "Return HRGA & EHS" || StatusPickNPlaceTop === "Return PURCHASING,PPIC,MP&L" || StatusPickNPlaceTop === "Return PROCESS ENGINEERING" || StatusPickNPlaceTop === "Return PRODUCT DEVELOPMENT" || StatusPickNPlaceTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataPickNPlaceTOPReturnOthers);
-                        setButton("PickNPlaceTop");
-                      } else if (StatusPickNPlaceTop === "Return Repair Maintenance") {
+                      }  else if (StatusPickNPlaceTop === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataPickNPlaceTOPReturnMaintenance);
-                        setButton("PickNPlaceTop");
-                      } else if (StatusPickNPlaceTop === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataPickNPlaceTOPReturnOthers);
+                        setOptionData(dataPickNPlaceTOPReturnRepair);
                         setButton("PickNPlaceTop");
                       } else if (StatusPickNPlaceTop === "Go") {
                         setIsOpenValidation(true);
@@ -1780,41 +1620,25 @@ const SmtTop = () => {
                         setIsOpenLeader(true);
                         setOptionData(dataReflowTOPLeader);
                         setButton("ReflowTop");
-                      } else if (StatusReflowTop === "MAINTENANCE & IT") {
+                      } else if (StatusReflowTop === "MAINTENANCE & IT" || StatusReflowTop === "HRGA & EHS" || StatusReflowTop === "PURCHASING,PPIC,MP&L" || StatusReflowTop === "PROCESS ENGINEERING" || StatusReflowTop === "PRODUCT DEVELOPMENT" || StatusReflowTop === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataReflowTOPMaintenance);
+                        setOptionData(dataReflowTOPRepair);
                         setButton("ReflowTop");
-                      } else if (StatusReflowTop === "HRGA & EHS" || StatusReflowTop === "PURCHASING,PPIC,MP&L" || StatusReflowTop === "PROCESS ENGINEERING" || StatusReflowTop === "PRODUCT DEVELOPMENT" || StatusReflowTop === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataReflowTOPOthers);
-                        setButton("ReflowTop");
-                      } else if (StatusReflowTop === "Repair Maintenance") {
+                      } else if (StatusReflowTop === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataReflowTOPMaintenance);
-                        setButton("ReflowTop");
-                      } else if (StatusReflowTop === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataReflowTOPOthers);
+                        setOptionData(dataReflowTOPRepair);
                         setButton("ReflowTop");
                       } else if (StatusReflowTop === "QA" || StatusReflowTop === "QC" || StatusReflowTop === "Production Leader" || StatusReflowTop === "Sub Leader") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataReflowTOPValidation);
                         setButton("ReflowTop");
-                      } else if (StatusReflowTop === "Return MAINTENANCE & IT") {
+                      } else if (StatusReflowTop === "Return MAINTENANCE & IT" || StatusReflowTop === "Return HRGA & EHS" || StatusReflowTop === "Return PURCHASING,PPIC,MP&L" || StatusReflowTop === "Return PROCESS ENGINEERING" || StatusReflowTop === "Return PRODUCT DEVELOPMENT" || StatusReflowTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataReflowTOPReturnMaintenance);
+                        setOptionData(dataReflowTOPReturnRepair);
                         setButton("ReflowTop");
-                      } else if (StatusReflowTop === "Return HRGA & EHS" || StatusReflowTop === "Return PURCHASING,PPIC,MP&L" || StatusReflowTop === "Return PROCESS ENGINEERING" || StatusReflowTop === "Return PRODUCT DEVELOPMENT" || StatusReflowTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataReflowTOPReturnOthers);
-                        setButton("ReflowTop");
-                      } else if (StatusReflowTop === "Return Repair Maintenance") {
+                      }  else if (StatusReflowTop === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataReflowTOPReturnMaintenance);
-                        setButton("ReflowTop");
-                      } else if (StatusReflowTop === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataReflowTOPReturnOthers);
+                        setOptionData(dataReflowTOPReturnRepair);
                         setButton("ReflowTop");
                       } else if (StatusReflowTop === "Go") {
                         setIsOpenValidation(true);
@@ -1850,41 +1674,25 @@ const SmtTop = () => {
                         setIsOpenLeader(true);
                         setOptionData(dataAOITOPLeader);
                         setButton("AOITop");
-                      } else if (StatusAOITop === "MAINTENANCE & IT") {
+                      } else if (StatusAOITop === "MAINTENANCE & IT" || StatusAOITop === "HRGA & EHS" || StatusAOITop === "PURCHASING,PPIC,MP&L" || StatusAOITop === "PROCESS ENGINEERING" || StatusAOITop === "PRODUCT DEVELOPMENT" || StatusAOITop === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataAOITOPMaintenance);
+                        setOptionData(dataAOITOPRepair);
                         setButton("AOITop");
-                      } else if (StatusAOITop === "HRGA & EHS" || StatusAOITop === "PURCHASING,PPIC,MP&L" || StatusAOITop === "PROCESS ENGINEERING" || StatusAOITop === "PRODUCT DEVELOPMENT" || StatusAOITop === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataAOITOPOthers);
-                        setButton("AOITop");
-                      } else if (StatusAOITop === "Repair Maintenance") {
+                      } else if (StatusAOITop === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataAOITOPMaintenance);
-                        setButton("AOITop");
-                      } else if (StatusAOITop === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataAOITOPOthers);
+                        setOptionData(dataAOITOPRepair);
                         setButton("AOITop");
                       } else if (StatusAOITop === "QA" || StatusAOITop === "QC" || StatusAOITop === "Production Leader" || StatusAOITop === "Sub Leader") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataAOITOPValidation);
                         setButton("AOITop");
-                      } else if (StatusAOITop === "Return MAINTENANCE & IT") {
+                      } else if (StatusAOITop === "Return MAINTENANCE & IT" || StatusAOITop === "Return HRGA & EHS" || StatusAOITop === "Return PURCHASING,PPIC,MP&L" || StatusAOITop === "Return PROCESS ENGINEERING" || StatusAOITop === "Return PRODUCT DEVELOPMENT" || StatusAOITop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataAOITOPReturnMaintenance);
+                        setOptionData(dataAOITOPReturnRepair);
                         setButton("AOITop");
-                      } else if (StatusAOITop === "Return HRGA & EHS" || StatusAOITop === "Return PURCHASING,PPIC,MP&L" || StatusAOITop === "Return PROCESS ENGINEERING" || StatusAOITop === "Return PRODUCT DEVELOPMENT" || StatusAOITop === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataAOITOPReturnOthers);
-                        setButton("AOITop");
-                      } else if (StatusAOITop === "Return Repair Maintenance") {
+                      }  else if (StatusAOITop === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataAOITOPReturnMaintenance);
-                        setButton("AOITop");
-                      } else if (StatusAOITop === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataAOITOPReturnOthers);
+                        setOptionData(dataAOITOPReturnRepair);
                         setButton("AOITop");
                       } else if (StatusAOITop === "Go") {
                         setIsOpenValidation(true);
@@ -1918,41 +1726,25 @@ const SmtTop = () => {
                         setIsOpenLeader(true);
                         setOptionData(dataRVSTOPLeader);
                         setButton("RVSTop");
-                      } else if (StatusRVSTop === "MAINTENANCE & IT") {
+                      } else if (StatusRVSTop === "MAINTENANCE & IT" || StatusRVSTop === "HRGA & EHS" || StatusRVSTop === "PURCHASING,PPIC,MP&L" || StatusRVSTop === "PROCESS ENGINEERING" || StatusRVSTop === "PRODUCT DEVELOPMENT" || StatusRVSTop === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataRVSTOPMaintenance);
+                        setOptionData(dataRVSTOPRepair);
                         setButton("RVSTop");
-                      } else if (StatusRVSTop === "HRGA & EHS" || StatusRVSTop === "PURCHASING,PPIC,MP&L" || StatusRVSTop === "PROCESS ENGINEERING" || StatusRVSTop === "PRODUCT DEVELOPMENT" || StatusRVSTop === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataRVSTOPOthers);
-                        setButton("RVSTop");
-                      } else if (StatusRVSTop === "Repair Maintenance") {
+                      } else if (StatusRVSTop === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataRVSTOPMaintenance);
-                        setButton("RVSTop");
-                      } else if (StatusRVSTop === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataRVSTOPOthers);
+                        setOptionData(dataRVSTOPRepair);
                         setButton("RVSTop");
                       } else if (StatusRVSTop === "QA" || StatusRVSTop === "QC" || StatusRVSTop === "Production Leader" || StatusRVSTop === "Sub Leader") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataRVSTOPValidation);
                         setButton("RVSTop");
-                      } else if (StatusRVSTop === "Return MAINTENANCE & IT") {
+                      } else if (StatusRVSTop === "Return MAINTENANCE & IT" || StatusRVSTop === "Return HRGA & EHS" || StatusRVSTop === "Return PURCHASING,PPIC,MP&L" || StatusRVSTop === "Return PROCESS ENGINEERING" || StatusRVSTop === "Return PRODUCT DEVELOPMENT" || StatusRVSTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataRVSTOPReturnMaintenance);
+                        setOptionData(dataRVSTOPReturnRepair);
                         setButton("RVSTop");
-                      } else if (StatusRVSTop === "Return HRGA & EHS" || StatusRVSTop === "Return PURCHASING,PPIC,MP&L" || StatusRVSTop === "Return PROCESS ENGINEERING" || StatusRVSTop === "Return PRODUCT DEVELOPMENT" || StatusRVSTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataRVSTOPReturnOthers);
-                        setButton("RVSTop");
-                      } else if (StatusRVSTop === "Return Repair Maintenance") {
+                      }  else if (StatusRVSTop === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataRVSTOPReturnMaintenance);
-                        setButton("RVSTop");
-                      } else if (StatusRVSTop === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataRVSTOPReturnOthers);
+                        setOptionData(dataRVSTOPReturnRepair);
                         setButton("RVSTop");
                       } else if (StatusRVSTop === "Go") {
                         setIsOpenValidation(true);
@@ -2280,7 +2072,8 @@ const SmtTop = () => {
                               )}
                             </div>
                             <span className="font-mono mt-2 text-gray-500 ">PIC Repairment :  {OptionData?.ResponseName || ""} </span>
-                            <span className="font-mono mt-2 text-gray-500 ">Start AT :  {formatDateAPI(OptionData?.ResponseTime) || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Request at :  {formatDateAPI(OptionData?.Date) || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Start at :  {formatDateAPI(OptionData?.ResponseTime) || ""} </span>
                           </div>
 
                           <div class="flex justify-center mt-4">

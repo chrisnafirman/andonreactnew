@@ -35,21 +35,7 @@ const getRVSTOPLeader = (req, res) => {
 };
 
 
-const getRVSTOPMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM maintenance WHERE Station = 'RVS (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
+
 
 const getRVSTOPValidation = (req, res) => {
     const sqlSelect = "SELECT * FROM validation WHERE Station = 'RVS (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
@@ -69,8 +55,8 @@ const getRVSTOPValidation = (req, res) => {
 
 
 
-const getRVSTOPOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM Others WHERE Station = 'RVS (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getRVSTOPRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM repair WHERE Station = 'RVS (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -86,8 +72,8 @@ const getRVSTOPOthers = (req, res) => {
 };
 
 
-const getRVSTOPReturnMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnmaintenance WHERE Station = 'RVS (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getRVSTOPReturnRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM returnrepair WHERE Station = 'RVS (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -104,30 +90,13 @@ const getRVSTOPReturnMaintenance = (req, res) => {
 
 
 
-const getRVSTOPReturnOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnothers WHERE Station = 'RVS (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
 
 
 module.exports = {
 
     getRVSTOPLeader,
     PutDownTimeRVSTOP,
-    getRVSTOPMaintenance,
+    getRVSTOPRepair,
     getRVSTOPValidation,
-    getRVSTOPOthers,
-    getRVSTOPReturnMaintenance,
-    getRVSTOPReturnOthers,
+    getRVSTOPReturnRepair,
 };

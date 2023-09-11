@@ -12,7 +12,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-const ValidationLeader = () => {
+const Quality = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -25,11 +25,10 @@ const ValidationLeader = () => {
   const [showDatePicker, setShowDatePicker] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [StatusLine, setStatusLine] = useState("");
+  const [isExportOption, setisExportOption] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpenSearch, setisOpenSearch] = useState(false);
   const [isButtonSearch, setisButtonSearch] = useState(true);
-  const [isExportOption, setisExportOption] = useState(false);
-
 
   useEffect(() => {
     const ref3 = firebase.database().ref("StatusLine/SMTLine1");
@@ -53,91 +52,85 @@ const ValidationLeader = () => {
 
 
 
-
-const exportToPDFRequest = () => {
-  const doc = new jsPDF("landscape");
-  const tableData = [];
+  //  fungsi export to pdf
+  const exportToPDFRequest = () => {
+    const doc = new jsPDF("landscape");
+    const tableData = [];
+    
+    // Header untuk tabel PDF
+    const headers = ["Requestor","Request at", "Nama", "Line", "Area", "Station", "Problem", "Action", "Validation To"];
+    
+    // Warna teks header (abu-abu)
+    const headerStyles = {
+      fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
+      textColor: 0, // Warna teks hitam (0)
+      fontStyle: "bold", // Teks header tebal
+    };
   
-  // Header untuk tabel PDF
-  const headers = ["Option", "Department Request", "Nama", "Line", "Area", "Station", "Status", "Problem", "Action", "Date", "Return"];
-  
-  // Warna teks header (abu-abu)
-  const headerStyles = {
-    fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-    textColor: 0, // Warna teks hitam (0)
-    fontStyle: "bold", // Teks header tebal
-  };
-
-  // Mengisi data tabel PDF dengan properti yang Anda inginkan
-  filteredData.forEach((item) => {
-    if (item.DepartTo === 'Production Leader' || item.DepartTo === 'Sub Leader') {
+    // Mengisi data tabel PDF dengan properti yang Anda inginkan
+    filteredData.forEach((item) => {
+      if (item.DepartTo === 'QA' || item.DepartTo === 'QC') {
       const rowData = [
-        item.DepartTo,
         item.Requestor,
+        item.Date,
         item.Nama,
         item.Line,
         item.Area,
         item.Station,
-        item.Status,
         item.Problem,
         item.Action,
-        item.Date,
-        item.ReturnDepartment,
+        item.DepartTo,
       ];
       tableData.push(rowData);
     }
-  });
-
-  // Menambahkan logo perusahaan ke file PDF
-  const logoImg = new Image();
-  logoImg.src = process.env.PUBLIC_URL + "/avi.png";
+    });
   
-  // Mengukur logo sesuai dengan yang Anda inginkan
-  const logoWidth = 30; // Lebar logo yang lebih kecil
-  const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
-  
-  doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
-  
-  // Menambahkan teks di atas tabel dan di tengah-tengah
-  const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
-  const text = "Request Validation Leader [Andon Data]";
-  const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
-  
-  const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
-  const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 10 satuan
-  
-  doc.text(text, textX, textY);
-  
-  // Mengatur ukuran font teks dalam tabel
-  const fontSize = 6; // Ukuran font teks yang lebih kecil
-  
-  // Membuat tabel PDF dengan menggunakan autotable
-  doc.autoTable({
-    head: [headers],
-    body: tableData,
-    startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
-    headStyles: {
-      fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-      textColor: 0, // Warna teks hitam (0)
-      fontStyle: "bold", // Teks header tebal
-      fontSize: fontSize, // Mengatur ukuran font teks header
-    },
-    styles: {
-      fontSize: fontSize, // Mengatur ukuran font teks seluruh tabel
-    },
-    columnStyles: {
-      7: { // Indeks 4 adalah kolom "Date"
-        textColor: [5, 150, 27], // Warna teks merah dalam format RGB
+    // Menambahkan logo perusahaan ke file PDF
+    const logoImg = new Image();
+    logoImg.src = process.env.PUBLIC_URL + "/avi.png";
+    
+    // Mengukur logo sesuai dengan yang Anda inginkan
+    const logoWidth = 50; // Lebar logo
+    const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
+    
+    doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
+    
+    // Menambahkan teks di atas tabel dan di tengah-tengah
+    const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
+    const text = "Request Validation Quality [Andon Data]";
+    const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
+    
+    const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
+    const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
+    
+    doc.text(text, textX, textY);
+    
+    const fontSize = 6; 
+    // Membuat tabel PDF dengan menggunakan autotable
+    doc.autoTable({
+      head: [headers],
+      body: tableData,
+      startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
+      headStyles: {
+        fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
+        textColor: 0, // Warna teks hitam (0)
+        fontStyle: fontSize, // Teks header tebal
       },
-    },
-    
-    
-  });
-
-  // Menyimpan file PDF
-  doc.save(`Request Validation Leader [Andon Data].pdf`);
-};
-
+      columnStyles: {
+        8: { // Indeks 4 adalah kolom "Date"
+          textColor: [5, 150, 27], // Warna teks merah dalam format RGB
+        },
+        0: { // Indeks 4 adalah kolom "Date"
+          textColor: [159, 0, 0], // Warna teks merah dalam format RGB
+        },
+      },
+     
+    });
+  
+  
+    // Menyimpan file PDF
+    doc.save(`Request Validation Quality [Andon Data].pdf`);
+  };
 
     //  fungsi export to pdf
     const exportToPDFValidation = () => {
@@ -145,7 +138,7 @@ const exportToPDFRequest = () => {
       const tableData = [];
       
       // Header untuk tabel PDF
-      const headers = ["Department", "Nama", "Line", "Area", "Station", "Status", "Description", "Downtime", "Date",];
+      const headers = ["Requestor ", "Request at", "Validation PIC", "Validation Department", "Line", "Area", "Station",  "Description", "Validation Status",  "DownTime", "Validation Date", "Return To" ];
       
       // Warna teks header (abu-abu)
       const headerStyles = {
@@ -155,18 +148,21 @@ const exportToPDFRequest = () => {
       };
     
       // Mengisi data tabel PDF dengan properti yang Anda inginkan
-      filteredData.forEach((item) => {
-        if (item.DepartTo === 'Production Leader' || item.DepartTo === 'Sub Leader') {
+      filteredData.forEach((item )  => {
+        if (item.DepartTo === 'QA' || item.DepartTo === 'QC') {
         const rowData = [
-          item.DepartTo,
+          item.Requestor,
+          item.Date,
           item.ValidationName,
+          item.DepartTo,
           item.Line,
           item.Area,
           item.Station,
-          item.Status,
           item.ValidationDescription,
+          item.Status,
           item.DownTime,
-          formatDateTimeAPI(item.ValidationDate)
+          formatDateTimeAPI(item.ValidationDate),
+          item.ReturnDepartment,
         ];
         tableData.push(rowData);
       }
@@ -184,16 +180,15 @@ const exportToPDFRequest = () => {
       
       // Menambahkan teks di atas tabel dan di tengah-tengah
       const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
-      const text = "Validation Leader [Andon Data]";
+      const text = "Validation Quality [Andon Data]";
       const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
       
       const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
       const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
       
       doc.text(text, textX, textY);
-      
-      const fontSize = 6;
 
+      const fontSize = 6; 
       // Membuat tabel PDF dengan menggunakan autotable
       doc.autoTable({
         head: [headers],
@@ -202,27 +197,27 @@ const exportToPDFRequest = () => {
         headStyles: {
           fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
           textColor: 0, // Warna teks hitam (0)
-          fontStyle: fontSize, 
+          fontStyle: fontSize, // Teks header tebal
         },
         columnStyles: {
-          6: { // Indeks 4 adalah kolom "Date"
+          3: { // Indeks 3 adalah kolom "Date"
             textColor: [5, 150, 27], // Warna teks merah dalam format RGB
           },
-        },
+          0: { // Indeks 0 adalah kolom "Date"
+            textColor: [159, 0, 0], // Warna teks merah dalam format RGB
+          },
+          8: { // Indeks 7 adalah kolom yang ingin Anda ubah menjadi huruf kapital dan bold
+            fontStyle: 'bold', // Mengatur teks menjadi bold
+          },
+        },   
       });
     
     
       // Menyimpan file PDF
-      doc.save(`Validation Leader [Andon Data].pdf`);
+      doc.save(`Validation Quality [Andon Data].pdf`);
     };
 
 
-
-
-
-
-
-    
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
@@ -255,7 +250,7 @@ const exportToPDFRequest = () => {
         // mengubah properti timestamp menjadi tanggal dan Date
         json.forEach((item) => {
           const date = new Date(item.Date);
-          const day = date.getDate();
+          const day = date.getDate()
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
           const hours = date.getHours();
@@ -280,7 +275,7 @@ const exportToPDFRequest = () => {
     // Lakukan pencarian dengan kata kunci yang telah dimasukkan
     const searchTermLower = searchTerm.toLowerCase();
     const filteredResults = data.filter((item) =>
-      ` ${item.DepartTo} ${item.Problem} ${item.Line} ${item.Area} ${item.Nama} ${item.ValidationName} ${item.Station} ${item.Date} ${item.Requestor}  ${item.Status}`
+      ` ${item.DepartTo} ${item.Problem} ${item.Line} ${item.Nama} ${item.ValidationName} ${item.Area} ${item.Station} ${item.Date} ${item.Requestor}  ${item.Status}`
         .toLowerCase()
         .includes(searchTermLower)
     );
@@ -290,6 +285,9 @@ const exportToPDFRequest = () => {
 
   };
 
+
+
+
   const formatDateTimeAPI = (dateString) => {
     if (!dateString) return "";
 
@@ -297,8 +295,8 @@ const exportToPDFRequest = () => {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    const hours = date.getHours().toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
 
     return `${day}/${month}/${year} / ${hours}:${minutes} WIB`;
   };
@@ -306,37 +304,38 @@ const exportToPDFRequest = () => {
 
   const QRValidationLink = () => {
     if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRValidationLeaderTOP";
+      return "/QRValidationQualityTOP";
     } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRValidationLeaderBOT";
+      return "/QRValidationQualityBOT";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRValidationLeaderBE";
+      return "/QRValidationQualityBE";
     } else {
     }
   };
 
   const QRReturnLink = () => {
     if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRReturnLeaderTOP";
+      return "/QRReturnQualityTOP";
     } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRReturnLeaderBOT";
+      return "/QRReturnQualityBOT";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRReturnLeaderBE";
+      return "/QRReturnQualityBE";
     } else {
     }
   };
 
   const styles = {
-    background: "linear-gradient(45deg, #BCC6CC, #8a8b90, #8D918D)",
+    background: "linear-gradient(45deg, #4E86B0, #8a8b90, #0183E8)",
     height: "1000px",
   };
+
 
   return (
     <body style={styles}>
       <nav class="bg-slate px-3 sm:px-4 dark:bg-gray-900 bg-gray-900   w-full z-20 top-0 left-0  dark:border-gray-600">
         <div class="flex h-14 items-center justify-between">
           <div class="flex items-center">
-            <a href="/PortalLeader">
+            <a href="/PortalQuality">
               <div class="flex-shrink-0">
                 <img
                   src={process.env.PUBLIC_URL + "/smt.jpeg"}
@@ -355,7 +354,7 @@ const exportToPDFRequest = () => {
           <div>
             <div class="flex items-center">
               <h1 class="text-base lg:text-xl font-sans tracking-tight text-gray-900">
-                | Request Validation Leader |
+                | Request Quality |
               </h1>
               <h1 class="text-base lg:text-xl  font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
@@ -379,13 +378,16 @@ const exportToPDFRequest = () => {
         </div>
       </header>
 
+
+
+
       <main>
         <section
           className="antialiased  text-gray-600 h-screen px-4"
           x-data="app"
         >
           <div className="flex flex-col mt-1 h-full">
-            {isOpenSearch && (
+          {isOpenSearch && (
               <>
                 <div className="w-96">
                   <form onSubmit={handleSubmit}>
@@ -431,7 +433,7 @@ const exportToPDFRequest = () => {
               </>
             )}
             {/* <!-- Table --> */}
-            <div className="w-full max-w-4xl mt-24 lg:mt-2 mx-auto bg-white shadow-lg rounded-2xl border border-gray-200">
+            <div className="w-full max-w-4xl mt-24 lg:mt-1 mx-auto bg-white shadow-lg rounded-2xl border border-gray-200">
               {/* <button className="flex" onClick={exportToPDF}>
                 Export To:
                 <img
@@ -440,11 +442,9 @@ const exportToPDFRequest = () => {
                   alt=""
                 />
               </button> */}
-
-
-              <header className="px-5 py-4 border-b border-gray-100">
+               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-mono text-center text-gray-800">
-                  Request Validation Leader
+                  Request Validation Quality
                 </div>
                 <button className="flex text-sm" onClick={()=> setisExportOption(true)}>
                   <img
@@ -461,38 +461,37 @@ const exportToPDFRequest = () => {
               >
                 <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                    <tr>
-                    <th className="p-1 w-0 lg:w-20">
+                  <tr>
+                      <th className="p-1 w-10 lg:w-20">
                         <div className="font-sans lg:font-semibold text-left">Uid</div>
                       </th>
-                      <th className="p-1 w-0 lg:w-20">
+                    
+                      <th className="p-1 w-10 lg:w-20">
                         <div className="font-sans lg:font-semibold text-left">Option</div>
                       </th>
-                      <th className="p-1 w-0 lg:w-36">
-                        <div className="font-sans lg:font-mono text-left">
-                          Department
-                        </div>
+                      <th className="p-1 w-10 lg:w-32">
+                        <div className="font-sans lg:font-semibold text-left">Department</div>
                       </th>
-                      <th className="p-1  w-0 lg:w-28">
-                        <div className="font-mono text-left">Line</div>
+                      <th className="p-1  w-14 lg:w-28">
+                        <div className="font-semibold text-left">Line</div>
                       </th>
-                      <th className="p-1  w-0 lg:w-24">
-                        <div className="font-mono text-left">Area</div>
+                      <th className="p-1  w-10 lg:w-24">
+                        <div className="font-semibold text-left">Area</div>
                       </th>
-                      <th className="p-1  w-0 lg:w-40 ">
-                        <div className="font-mono text-left">Station</div>
+                      <th className="p-1  w-10 lg:w-32">
+                        <div className="font-semibold text-left">Station</div>
                       </th>
-                      <th className="p-1 w-0">
-                        <div className="font-mono text-center">Status</div>
+                      <th className="p-1 w-10">
+                        <div className="font-semibold text-center">Status</div>
                       </th>
-                      <th className="p-1 w-56">
-                        <div className="font-mono text-center">Date</div>
+                      <th className="p-1 w-26">
+                        <div className="font-semibold text-center">Date</div>
                       </th>
                     </tr>
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
                     {filteredData.map((item, index) => {
-                      if (item.DepartTo === "Production Leader" || item.DepartTo === "Sub Leader" ) {
+                      if (item.DepartTo === 'QA' || item.DepartTo === 'QC') {
                         return (
                           <tr
                             key={item.id}
@@ -532,38 +531,32 @@ const exportToPDFRequest = () => {
                               {item.Status === "" && (
                                 <button
                                   onClick={() => {
-                                    setSelectedItem(item);
+                                    setSelectedItem(item)
                                   }}
                                   className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out"
                                 >
-                                  <span className="text-xs lg:text-sm">
-                                    Open
-                                  </span>
+                                  <span className="text-xs lg:text-sm">Open</span>
                                 </button>
                               )}
                               {item.Status === "Running" && (
                                 <button
                                   onClick={() => {
-                                    setSelectedItem(item);
+                                    setSelectedItem(item)
                                   }}
-                                  className="bg-green-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-green-400 focus:outline-none focus:bg-green-400 transition duration-300 ease-in-out"
+                                  className="bg-green-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-green-300 focus:outline-none focus:green-300 transition duration-300 ease-in-out"
                                 >
-                                  <span className="text-xs lg:text-sm">
-                                    Running
-                                  </span>
+                                  <span className="text-xs lg:text-sm">Running</span>
                                 </button>
                               )}
                               {item.Status === "Return" && (
                                 <button
                                   onClick={() => {
-                                    setSelectedItem(item);
-                                    setIsOpenReturn(item);
+                                    setSelectedItem(item)
+                                    setIsOpenReturn(item)
                                   }}
                                   className="bg-orange-400 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                                 >
-                                  <span className="text-xs lg:text-sm">
-                                    Return
-                                  </span>
+                                  <span className="text-xs lg:text-sm">Return</span>
                                 </button>
                               )}
                             </td>
@@ -578,6 +571,7 @@ const exportToPDFRequest = () => {
                       return null;
                     })}
                   </tbody>
+
                 </table>
                 {selectedItem && (
                   <>
@@ -595,7 +589,9 @@ const exportToPDFRequest = () => {
                               {/* Close button */}
                               <button
                                 className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
-                                onClick={() => setSelectedItem(false)}
+                                onClick={() =>
+                                  setSelectedItem(false)
+                                }
                               >
                                 <svg
                                   className="w-6 h-6"
@@ -726,11 +722,13 @@ const exportToPDFRequest = () => {
                                   </div>
                                 </div>
 
+
+
                                 <div className="flex justify-end ">
                                   <a>
                                     {selectedItem.Status === "" && (
                                       <button
-                                        className="bg-red-600 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded mr-2"
+                                        className="bg-blue-900 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded mr-2"
                                         onClick={() => {
                                           setisOpenAction(true);
                                         }}
@@ -747,13 +745,25 @@ const exportToPDFRequest = () => {
                                             setIsOpenValidation(true);
                                           }}
                                         >
-                                          Validation Leader
+                                          Validation Quality
                                         </button>
-                                      </div>
+                                      </div >
+
                                     )}
+
+
+
+
+
+
+
+
+
                                   </a>
                                 </div>
-                                <div className="flex justify-end"></div>
+                                <div className="flex justify-end" >
+
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -776,7 +786,9 @@ const exportToPDFRequest = () => {
                                   {/* Close button */}
                                   <button
                                     className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
-                                    onClick={() => setIsOpenValidation(false)}
+                                    onClick={() =>
+                                      setIsOpenValidation(false)
+                                    }
                                   >
                                     <svg
                                       className="w-6 h-6"
@@ -814,6 +826,9 @@ const exportToPDFRequest = () => {
                                         </div>
                                       </div>
 
+
+
+
                                       <div class="w-full px-3 mb-2 md:mb-0">
                                         <label
                                           class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
@@ -826,9 +841,7 @@ const exportToPDFRequest = () => {
                                           type="text"
                                         >
                                           {" "}
-                                          {formatDateTimeAPI(
-                                            selectedItem?.ValidationDate
-                                          ) || ""}
+                                          {formatDateTimeAPI(selectedItem?.ValidationDate) || ""}
                                         </div>
                                       </div>
                                       <div class="w-full px-3 mb-2 md:mb-0">
@@ -854,7 +867,7 @@ const exportToPDFRequest = () => {
                                           Total DownTime
                                         </label>
                                         <div
-                                          className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-2 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                         className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-2 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                                         >
                                           {" "}
                                           {selectedItem.DownTime}
@@ -862,7 +875,11 @@ const exportToPDFRequest = () => {
                                       </div>
                                     </div>
 
-                                    <div className="flex justify-end"></div>
+
+                                    <div className="flex justify-end" >
+
+
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -889,7 +906,8 @@ const exportToPDFRequest = () => {
                                   <button
                                     className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
                                     onClick={() => {
-                                      setIsOpenReturn(false);
+
+                                      setIsOpenReturn(false)
                                     }}
                                   >
                                     <svg
@@ -927,9 +945,15 @@ const exportToPDFRequest = () => {
                                           {selectedItem.ReturnDepartment}{" "}
                                         </div>
                                       </div>
+
+
                                     </div>
 
-                                    <div className="flex justify-end"></div>
+
+                                    <div className="flex justify-end" >
+
+
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -938,8 +962,10 @@ const exportToPDFRequest = () => {
                         </div>
                       </>
                     )}
+
                   </>
                 )}
+
               </div>
             </div>
           </div>
@@ -955,6 +981,7 @@ const exportToPDFRequest = () => {
                   aria-modal="true"
                   aria-labelledby="modal-headline"
                 >
+
                   <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
                     <div className="flex justify-end">
                       <button
@@ -986,32 +1013,32 @@ const exportToPDFRequest = () => {
 
                         {/* Add Validation and Reject buttons */}
                         <div className="flex justify-between space-x-6 mt-4">
-                          <a href={QRValidationLink()} >
-                            {selectedItem.Status === "" && (
-                              <button className="bg-green-500 flex  hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                <svg
-                                  fill="#000000"
-                                  width="30px"
-                                  className="mr-2"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path d="M16.1666667,6 C16.0746192,6 16,6.07461921 16,6.16666667 L16,7.83333333 C16,7.92538079 16.0746192,8 16.1666667,8 L17.8333333,8 C17.9253808,8 18,7.92538079 18,7.83333333 L18,6.16666667 C18,6.07461921 17.9253808,6 17.8333333,6 L16.1666667,6 Z M16,18 L16,17.5 C16,17.2238576 16.2238576,17 16.5,17 C16.7761424,17 17,17.2238576 17,17.5 L17,18 L18,18 L18,17.5 C18,17.2238576 18.2238576,17 18.5,17 C18.7761424,17 19,17.2238576 19,17.5 L19,18.5 C19,18.7761424 18.7761424,19 18.5,19 L14.5,19 C14.2238576,19 14,18.7761424 14,18.5 L14,17.5 C14,17.2238576 14.2238576,17 14.5,17 C14.7761424,17 15,17.2238576 15,17.5 L15,18 L16,18 L16,18 Z M13,11 L13.5,11 C13.7761424,11 14,11.2238576 14,11.5 C14,11.7761424 13.7761424,12 13.5,12 L11.5,12 C11.2238576,12 11,11.7761424 11,11.5 C11,11.2238576 11.2238576,11 11.5,11 L12,11 L12,10 L10.5,10 C10.2238576,10 10,9.77614237 10,9.5 C10,9.22385763 10.2238576,9 10.5,9 L13.5,9 C13.7761424,9 14,9.22385763 14,9.5 C14,9.77614237 13.7761424,10 13.5,10 L13,10 L13,11 Z M18,12 L17.5,12 C17.2238576,12 17,11.7761424 17,11.5 C17,11.2238576 17.2238576,11 17.5,11 L18,11 L18,10.5 C18,10.2238576 18.2238576,10 18.5,10 C18.7761424,10 19,10.2238576 19,10.5 L19,12.5 C19,12.7761424 18.7761424,13 18.5,13 C18.2238576,13 18,12.7761424 18,12.5 L18,12 Z M13,14 L12.5,14 C12.2238576,14 12,13.7761424 12,13.5 C12,13.2238576 12.2238576,13 12.5,13 L13.5,13 C13.7761424,13 14,13.2238576 14,13.5 L14,15.5 C14,15.7761424 13.7761424,16 13.5,16 L10.5,16 C10.2238576,16 10,15.7761424 10,15.5 C10,15.2238576 10.2238576,15 10.5,15 L13,15 L13,14 L13,14 Z M16.1666667,5 L17.8333333,5 C18.4776655,5 19,5.52233446 19,6.16666667 L19,7.83333333 C19,8.47766554 18.4776655,9 17.8333333,9 L16.1666667,9 C15.5223345,9 15,8.47766554 15,7.83333333 L15,6.16666667 C15,5.52233446 15.5223345,5 16.1666667,5 Z M6.16666667,5 L7.83333333,5 C8.47766554,5 9,5.52233446 9,6.16666667 L9,7.83333333 C9,8.47766554 8.47766554,9 7.83333333,9 L6.16666667,9 C5.52233446,9 5,8.47766554 5,7.83333333 L5,6.16666667 C5,5.52233446 5.52233446,5 6.16666667,5 Z M6.16666667,6 C6.07461921,6 6,6.07461921 6,6.16666667 L6,7.83333333 C6,7.92538079 6.07461921,8 6.16666667,8 L7.83333333,8 C7.92538079,8 8,7.92538079 8,7.83333333 L8,6.16666667 C8,6.07461921 7.92538079,6 7.83333333,6 L6.16666667,6 Z M6.16666667,15 L7.83333333,15 C8.47766554,15 9,15.5223345 9,16.1666667 L9,17.8333333 C9,18.4776655 8.47766554,19 7.83333333,19 L6.16666667,19 C5.52233446,19 5,18.4776655 5,17.8333333 L5,16.1666667 C5,15.5223345 5.52233446,15 6.16666667,15 Z M6.16666667,16 C6.07461921,16 6,16.0746192 6,16.1666667 L6,17.8333333 C6,17.9253808 6.07461921,18 6.16666667,18 L7.83333333,18 C7.92538079,18 8,17.9253808 8,17.8333333 L8,16.1666667 C8,16.0746192 7.92538079,16 7.83333333,16 L6.16666667,16 Z M13,6 L10.5,6 C10.2238576,6 10,5.77614237 10,5.5 C10,5.22385763 10.2238576,5 10.5,5 L13.5,5 C13.7761424,5 14,5.22385763 14,5.5 L14,7.5 C14,7.77614237 13.7761424,8 13.5,8 C13.2238576,8 13,7.77614237 13,7.5 L13,6 Z M10.5,8 C10.2238576,8 10,7.77614237 10,7.5 C10,7.22385763 10.2238576,7 10.5,7 L11.5,7 C11.7761424,7 12,7.22385763 12,7.5 C12,7.77614237 11.7761424,8 11.5,8 L10.5,8 Z M5.5,14 C5.22385763,14 5,13.7761424 5,13.5 C5,13.2238576 5.22385763,13 5.5,13 L7.5,13 C7.77614237,13 8,13.2238576 8,13.5 C8,13.7761424 7.77614237,14 7.5,14 L5.5,14 Z M9.5,14 C9.22385763,14 9,13.7761424 9,13.5 C9,13.2238576 9.22385763,13 9.5,13 L10.5,13 C10.7761424,13 11,13.2238576 11,13.5 C11,13.7761424 10.7761424,14 10.5,14 L9.5,14 Z M11,18 L11,18.5 C11,18.7761424 10.7761424,19 10.5,19 C10.2238576,19 10,18.7761424 10,18.5 L10,17.5 C10,17.2238576 10.2238576,17 10.5,17 L12.5,17 C12.7761424,17 13,17.2238576 13,17.5 C13,17.7761424 12.7761424,18 12.5,18 L11,18 Z M9,11 L9.5,11 C9.77614237,11 10,11.2238576 10,11.5 C10,11.7761424 9.77614237,12 9.5,12 L8.5,12 C8.22385763,12 8,11.7761424 8,11.5 L8,11 L7.5,11 C7.22385763,11 7,10.7761424 7,10.5 C7,10.2238576 7.22385763,10 7.5,10 L8.5,10 C8.77614237,10 9,10.2238576 9,10.5 L9,11 Z M5,10.5 C5,10.2238576 5.22385763,10 5.5,10 C5.77614237,10 6,10.2238576 6,10.5 L6,11.5 C6,11.7761424 5.77614237,12 5.5,12 C5.22385763,12 5,11.7761424 5,11.5 L5,10.5 Z M15,10.5 C15,10.2238576 15.2238576,10 15.5,10 C15.7761424,10 16,10.2238576 16,10.5 L16,12.5 C16,12.7761424 15.7761424,13 15.5,13 C15.2238576,13 15,12.7761424 15,12.5 L15,10.5 Z M17,15 L17,14.5 C17,14.2238576 17.2238576,14 17.5,14 L18.5,14 C18.7761424,14 19,14.2238576 19,14.5 C19,14.7761424 18.7761424,15 18.5,15 L18,15 L18,15.5 C18,15.7761424 17.7761424,16 17.5,16 L15.5,16 C15.2238576,16 15,15.7761424 15,15.5 L15,14.5 C15,14.2238576 15.2238576,14 15.5,14 C15.7761424,14 16,14.2238576 16,14.5 L16,15 L17,15 Z M3,6.5 C3,6.77614237 2.77614237,7 2.5,7 C2.22385763,7 2,6.77614237 2,6.5 L2,4.5 C2,3.11928813 3.11928813,2 4.5,2 L6.5,2 C6.77614237,2 7,2.22385763 7,2.5 C7,2.77614237 6.77614237,3 6.5,3 L4.5,3 C3.67157288,3 3,3.67157288 3,4.5 L3,6.5 Z M17.5,3 C17.2238576,3 17,2.77614237 17,2.5 C17,2.22385763 17.2238576,2 17.5,2 L19.5,2 C20.8807119,2 22,3.11928813 22,4.5 L22,6.5 C22,6.77614237 21.7761424,7 21.5,7 C21.2238576,7 21,6.77614237 21,6.5 L21,4.5 C21,3.67157288 20.3284271,3 19.5,3 L17.5,3 Z M6.5,21 C6.77614237,21 7,21.2238576 7,21.5 C7,21.7761424 6.77614237,22 6.5,22 L4.5,22 C3.11928813,22 2,20.8807119 2,19.5 L2,17.5 C2,17.2238576 2.22385763,17 2.5,17 C2.77614237,17 3,17.2238576 3,17.5 L3,19.5 C3,20.3284271 3.67157288,21 4.5,21 L6.5,21 Z M21,17.5 C21,17.2238576 21.2238576,17 21.5,17 C21.7761424,17 22,17.2238576 22,17.5 L22,19.5 C22,20.8807119 20.8807119,22 19.5,22 L17.5,22 C17.2238576,22 17,21.7761424 17,21.5 C17,21.2238576 17.2238576,21 17.5,21 L19.5,21 C20.3284271,21 21,20.3284271 21,19.5 L21,17.5 Z" />
-                                </svg>
-                                <span className="text-2xl ">Validation</span>
-                              </button>
-                            )}
+                        <a href={QRValidationLink()} >
+                        {selectedItem.Status === "" && (
+                            <button
+                              className="bg-green-500 flex  hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+
+                            >
+                              <svg fill="#000000" width="30px" className="mr-2" viewBox="0 0 24 24" >
+                                <path d="M16.1666667,6 C16.0746192,6 16,6.07461921 16,6.16666667 L16,7.83333333 C16,7.92538079 16.0746192,8 16.1666667,8 L17.8333333,8 C17.9253808,8 18,7.92538079 18,7.83333333 L18,6.16666667 C18,6.07461921 17.9253808,6 17.8333333,6 L16.1666667,6 Z M16,18 L16,17.5 C16,17.2238576 16.2238576,17 16.5,17 C16.7761424,17 17,17.2238576 17,17.5 L17,18 L18,18 L18,17.5 C18,17.2238576 18.2238576,17 18.5,17 C18.7761424,17 19,17.2238576 19,17.5 L19,18.5 C19,18.7761424 18.7761424,19 18.5,19 L14.5,19 C14.2238576,19 14,18.7761424 14,18.5 L14,17.5 C14,17.2238576 14.2238576,17 14.5,17 C14.7761424,17 15,17.2238576 15,17.5 L15,18 L16,18 L16,18 Z M13,11 L13.5,11 C13.7761424,11 14,11.2238576 14,11.5 C14,11.7761424 13.7761424,12 13.5,12 L11.5,12 C11.2238576,12 11,11.7761424 11,11.5 C11,11.2238576 11.2238576,11 11.5,11 L12,11 L12,10 L10.5,10 C10.2238576,10 10,9.77614237 10,9.5 C10,9.22385763 10.2238576,9 10.5,9 L13.5,9 C13.7761424,9 14,9.22385763 14,9.5 C14,9.77614237 13.7761424,10 13.5,10 L13,10 L13,11 Z M18,12 L17.5,12 C17.2238576,12 17,11.7761424 17,11.5 C17,11.2238576 17.2238576,11 17.5,11 L18,11 L18,10.5 C18,10.2238576 18.2238576,10 18.5,10 C18.7761424,10 19,10.2238576 19,10.5 L19,12.5 C19,12.7761424 18.7761424,13 18.5,13 C18.2238576,13 18,12.7761424 18,12.5 L18,12 Z M13,14 L12.5,14 C12.2238576,14 12,13.7761424 12,13.5 C12,13.2238576 12.2238576,13 12.5,13 L13.5,13 C13.7761424,13 14,13.2238576 14,13.5 L14,15.5 C14,15.7761424 13.7761424,16 13.5,16 L10.5,16 C10.2238576,16 10,15.7761424 10,15.5 C10,15.2238576 10.2238576,15 10.5,15 L13,15 L13,14 L13,14 Z M16.1666667,5 L17.8333333,5 C18.4776655,5 19,5.52233446 19,6.16666667 L19,7.83333333 C19,8.47766554 18.4776655,9 17.8333333,9 L16.1666667,9 C15.5223345,9 15,8.47766554 15,7.83333333 L15,6.16666667 C15,5.52233446 15.5223345,5 16.1666667,5 Z M6.16666667,5 L7.83333333,5 C8.47766554,5 9,5.52233446 9,6.16666667 L9,7.83333333 C9,8.47766554 8.47766554,9 7.83333333,9 L6.16666667,9 C5.52233446,9 5,8.47766554 5,7.83333333 L5,6.16666667 C5,5.52233446 5.52233446,5 6.16666667,5 Z M6.16666667,6 C6.07461921,6 6,6.07461921 6,6.16666667 L6,7.83333333 C6,7.92538079 6.07461921,8 6.16666667,8 L7.83333333,8 C7.92538079,8 8,7.92538079 8,7.83333333 L8,6.16666667 C8,6.07461921 7.92538079,6 7.83333333,6 L6.16666667,6 Z M6.16666667,15 L7.83333333,15 C8.47766554,15 9,15.5223345 9,16.1666667 L9,17.8333333 C9,18.4776655 8.47766554,19 7.83333333,19 L6.16666667,19 C5.52233446,19 5,18.4776655 5,17.8333333 L5,16.1666667 C5,15.5223345 5.52233446,15 6.16666667,15 Z M6.16666667,16 C6.07461921,16 6,16.0746192 6,16.1666667 L6,17.8333333 C6,17.9253808 6.07461921,18 6.16666667,18 L7.83333333,18 C7.92538079,18 8,17.9253808 8,17.8333333 L8,16.1666667 C8,16.0746192 7.92538079,16 7.83333333,16 L6.16666667,16 Z M13,6 L10.5,6 C10.2238576,6 10,5.77614237 10,5.5 C10,5.22385763 10.2238576,5 10.5,5 L13.5,5 C13.7761424,5 14,5.22385763 14,5.5 L14,7.5 C14,7.77614237 13.7761424,8 13.5,8 C13.2238576,8 13,7.77614237 13,7.5 L13,6 Z M10.5,8 C10.2238576,8 10,7.77614237 10,7.5 C10,7.22385763 10.2238576,7 10.5,7 L11.5,7 C11.7761424,7 12,7.22385763 12,7.5 C12,7.77614237 11.7761424,8 11.5,8 L10.5,8 Z M5.5,14 C5.22385763,14 5,13.7761424 5,13.5 C5,13.2238576 5.22385763,13 5.5,13 L7.5,13 C7.77614237,13 8,13.2238576 8,13.5 C8,13.7761424 7.77614237,14 7.5,14 L5.5,14 Z M9.5,14 C9.22385763,14 9,13.7761424 9,13.5 C9,13.2238576 9.22385763,13 9.5,13 L10.5,13 C10.7761424,13 11,13.2238576 11,13.5 C11,13.7761424 10.7761424,14 10.5,14 L9.5,14 Z M11,18 L11,18.5 C11,18.7761424 10.7761424,19 10.5,19 C10.2238576,19 10,18.7761424 10,18.5 L10,17.5 C10,17.2238576 10.2238576,17 10.5,17 L12.5,17 C12.7761424,17 13,17.2238576 13,17.5 C13,17.7761424 12.7761424,18 12.5,18 L11,18 Z M9,11 L9.5,11 C9.77614237,11 10,11.2238576 10,11.5 C10,11.7761424 9.77614237,12 9.5,12 L8.5,12 C8.22385763,12 8,11.7761424 8,11.5 L8,11 L7.5,11 C7.22385763,11 7,10.7761424 7,10.5 C7,10.2238576 7.22385763,10 7.5,10 L8.5,10 C8.77614237,10 9,10.2238576 9,10.5 L9,11 Z M5,10.5 C5,10.2238576 5.22385763,10 5.5,10 C5.77614237,10 6,10.2238576 6,10.5 L6,11.5 C6,11.7761424 5.77614237,12 5.5,12 C5.22385763,12 5,11.7761424 5,11.5 L5,10.5 Z M15,10.5 C15,10.2238576 15.2238576,10 15.5,10 C15.7761424,10 16,10.2238576 16,10.5 L16,12.5 C16,12.7761424 15.7761424,13 15.5,13 C15.2238576,13 15,12.7761424 15,12.5 L15,10.5 Z M17,15 L17,14.5 C17,14.2238576 17.2238576,14 17.5,14 L18.5,14 C18.7761424,14 19,14.2238576 19,14.5 C19,14.7761424 18.7761424,15 18.5,15 L18,15 L18,15.5 C18,15.7761424 17.7761424,16 17.5,16 L15.5,16 C15.2238576,16 15,15.7761424 15,15.5 L15,14.5 C15,14.2238576 15.2238576,14 15.5,14 C15.7761424,14 16,14.2238576 16,14.5 L16,15 L17,15 Z M3,6.5 C3,6.77614237 2.77614237,7 2.5,7 C2.22385763,7 2,6.77614237 2,6.5 L2,4.5 C2,3.11928813 3.11928813,2 4.5,2 L6.5,2 C6.77614237,2 7,2.22385763 7,2.5 C7,2.77614237 6.77614237,3 6.5,3 L4.5,3 C3.67157288,3 3,3.67157288 3,4.5 L3,6.5 Z M17.5,3 C17.2238576,3 17,2.77614237 17,2.5 C17,2.22385763 17.2238576,2 17.5,2 L19.5,2 C20.8807119,2 22,3.11928813 22,4.5 L22,6.5 C22,6.77614237 21.7761424,7 21.5,7 C21.2238576,7 21,6.77614237 21,6.5 L21,4.5 C21,3.67157288 20.3284271,3 19.5,3 L17.5,3 Z M6.5,21 C6.77614237,21 7,21.2238576 7,21.5 C7,21.7761424 6.77614237,22 6.5,22 L4.5,22 C3.11928813,22 2,20.8807119 2,19.5 L2,17.5 C2,17.2238576 2.22385763,17 2.5,17 C2.77614237,17 3,17.2238576 3,17.5 L3,19.5 C3,20.3284271 3.67157288,21 4.5,21 L6.5,21 Z M21,17.5 C21,17.2238576 21.2238576,17 21.5,17 C21.7761424,17 22,17.2238576 22,17.5 L22,19.5 C22,20.8807119 20.8807119,22 19.5,22 L17.5,22 C17.2238576,22 17,21.7761424 17,21.5 C17,21.2238576 17.2238576,21 17.5,21 L19.5,21 C20.3284271,21 21,20.3284271 21,19.5 L21,17.5 Z" />
+                              </svg>
+                              <span className="text-2xl ">
+                                Validation
+                              </span>
+                            </button>
+                              )}
                           </a>
                           <a href={QRReturnLink()} >
-                            {selectedItem.Status === "" && (
-                              <button
-                                className="bg-red-500  w-36 h-12 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                                onClick={() => {
-                                  //  handleDelete();
-                                }}
-                              >
-                                Return
-                              </button>
-                            )}
+                          {selectedItem.Status === "" && (
+                            <button
+                              className="bg-red-500  w-36 h-12 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                              onClick={() => {
+                                //  handleDelete();
+                              }}
+                            >
+                              Return
+                            </button>
+                              )}
                           </a>
                         </div>
                       </div>
@@ -1024,6 +1051,7 @@ const exportToPDFRequest = () => {
         )}
         
       </main>
+
       <td class="">
         {isExportOption ? (
           <>
@@ -1098,4 +1126,4 @@ const exportToPDFRequest = () => {
   );
 };
 
-export default ValidationLeader;
+export default Quality;

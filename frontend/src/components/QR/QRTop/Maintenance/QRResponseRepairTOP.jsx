@@ -17,9 +17,9 @@ function QRResponseMTCTOP() {
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
+  // const [Area, setArea] = useState("SMT TOP");
+  const [isQRResponses, setIsQRResponses] = useState(true);
   const [isLoader, setIsLoader] = useState(false);
-  
-  const [isQRResponse, setIsQRResponse] = useState(true);
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
   const [Status, setStatus] = useState("Repair");
@@ -27,6 +27,7 @@ function QRResponseMTCTOP() {
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
+
 
 
  
@@ -47,11 +48,11 @@ function QRResponseMTCTOP() {
 
     alert("Response Telah Di Terima Selamat Bekerja");
 
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Repair Others");
+    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Repair");
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.12:3001/api/PutResponseOthers`, {
+    fetch(`http://192.168.101.12:3001/api/PutResponseRepair`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -78,25 +79,25 @@ function QRResponseMTCTOP() {
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
-    setIsQRResponse(false);
+    setIsQRResponses(false);
   };
 
   const togglePopupMesin = () => {
     setShowPopupMesin(!showPopupMesin);
-    setIsQRResponse(false);
+    setIsQRResponses(false);
   };
 
   const handleScanSuccessNama = (data) => {
     setNamaPIC(data);
     setShowPopupNama(false);
     setShowPopupMesin(false);
-    setIsQRResponse(true);
+    setIsQRResponses(true);
   };
 
   const handleScanSuccessMesin = (data) => {
     setStation(data);
     setShowPopupMesin(false);
-    setIsQRResponse(true);
+    setIsQRResponses(true);
   };
 
 
@@ -105,15 +106,15 @@ function QRResponseMTCTOP() {
     submitResponse();
     // Mengalihkan pengguna ke halaman yang diinginkan
     setIsLoader(true);
-      setTimeout(() => {
-      window.location.href = '/Others'; // Ganti dengan URL halaman tujuan
+    setTimeout(() => {
+      window.location.href = '/Maintenance'; // Ganti dengan URL halaman tujuan
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
 
   return (
     <body style={styles}>
       <td class="">
-        {isQRResponse ? (
+        {isQRResponses ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-[500px] text-center sm:block sm:p-0">
@@ -160,7 +161,7 @@ function QRResponseMTCTOP() {
                               </span>
                               <button onClick={() => {
                                 togglePopupNama();
-                                setIsQRResponse(false);
+                                setIsQRResponses(false);
                               }}>
                                 {showPopupNama ? (
                                   <svg
@@ -290,7 +291,7 @@ function QRResponseMTCTOP() {
                               <button
                                 onClick={() => {
                                   togglePopupMesin();
-                                  setIsQRResponse(false);
+                                  setIsQRResponses(false);
                                 }}
                               >
                                 {showPopupMesin ? (
@@ -416,7 +417,7 @@ function QRResponseMTCTOP() {
                           </button>
                         </div>
                       </form>
-                      <a href="/Others">
+                      <a href="/Maintenance">
                         <button class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                           <svg width="20px" viewBox="0 0 1024 1024">
                             <path
@@ -473,12 +474,13 @@ function QRResponseMTCTOP() {
           </>
         ) : null}
       </td>
+
       <div className="relative">
         {showPopupMesin && (
           <QRScannerPopup
             onClose={() => {
               togglePopupMesin();
-              setIsQRResponse(true);
+              setIsQRResponses(true);
             }}
             onScanSuccess={handleScanSuccessMesin}
           />
@@ -487,7 +489,7 @@ function QRResponseMTCTOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupNama();
-              setIsQRResponse(true);
+              setIsQRResponses(true);
             }}
             onScanSuccess={handleScanSuccessNama}
           />

@@ -20,7 +20,7 @@ const Maintenance = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
-
+  const [Uid, setUid] = useState("");
   const [currentTime, setCurrentTime] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState(null);
   const [Station, setStation] = useState("");
@@ -259,7 +259,7 @@ const Maintenance = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Maintenance")
+    fetch("http://192.168.101.12:3001/api/Repair")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -321,6 +321,7 @@ const Maintenance = () => {
       DepartTo: DepartTo,
       Department: Department,
       AreaFirebase: AreaFirebase,
+      Uid: Uid,
     };
 
     alert("Laporan Telah Berhasil Di Kirim Ke Team Validation ");
@@ -371,7 +372,7 @@ const Maintenance = () => {
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.12:3001/api/PutRepairDoneMaintenance`, {
+    fetch(`http://192.168.101.12:3001/api/PutRepairDone`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -449,11 +450,11 @@ const Maintenance = () => {
 
   const QRResponseLink = () => {
     if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRResponseMaintenanceTop";
+      return "/QRResponseRepairTopMTC";
     } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRResponseMaintenanceBot";
+      return "/QRResponseRepairBotMTC";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRResponseMaintenanceBe";
+      return "/QRResponseRepairBeMTC";
     } else {
     }
   };
@@ -590,6 +591,9 @@ const Maintenance = () => {
                 <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
+                    <th className="p-1 w-10 lg:w-32">
+                        <div className="font-sans lg:font-semibold text-left">Uid</div>
+                      </th>
                       <th className="p-1 w-10 lg:w-32">
                         <div className="font-sans lg:font-semibold text-left">Requestor</div>
                       </th>
@@ -605,17 +609,24 @@ const Maintenance = () => {
                       <th className="p-1 w-10">
                         <div className="font-semibold text-center">Status</div>
                       </th>
-                      <th className="p-1 w-26">
+                      <th className="p-1 w-56">
                         <div className="font-semibold text-center">Date</div>
                       </th>
                     </tr>
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
-                    {filteredData.map((item, index) => (
+                  {filteredData.map((item, index) => {
+                      if (item.Department === "MAINTENANCE & IT") {
+                        return (
                       <tr
                         key={item.id}
                         className={index === 0 ? "bg-green-400" : ""}
                       >
+                         <td className="p-2">
+                          <div className="font-medium text-xs lg:text-sm text-gray-800">
+                            {item.Uid}
+                          </div>
+                        </td>
                         <td className="p-2">
                           <div className="font-medium text-xs lg:text-sm text-gray-800">
                             {item.Requestor}
@@ -685,10 +696,11 @@ const Maintenance = () => {
                             {item.Date} WIB
                           </div>
                         </td>
-                      </tr>
-
-
-                    ))}
+                        </tr>
+                        );
+                      }
+                      return null;
+                    })}
                   </tbody>
                 </table>
                 {selectedItem && (
@@ -841,6 +853,7 @@ const Maintenance = () => {
                                           className="" onClick={() => {
                                             setisOpenRequestValidation(true)
                                             setNamaPIC(selectedItem.ResponseName)
+                                            setUid(selectedItem.Uid)
                                             setRequestor(selectedItem.Department)
                                             setArea(selectedItem.Area)
                                             setLine(selectedItem.Line)
@@ -981,7 +994,7 @@ const Maintenance = () => {
                           }}
                         >
                           <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                            <span>Request Validation </span>
+                            <span>Request Validation {Uid} </span>
                           </div>
                           <div class="flex flex-wrap -mx-3 ">
                             <div className="w-full mt-3 px-3 mb-2 md:mb-0">

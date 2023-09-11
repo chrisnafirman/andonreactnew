@@ -35,21 +35,6 @@ const getLabelTOPLeader = (req, res) => {
 };
 
 
-const getLabelTOPMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM maintenance WHERE Station = 'Label (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
 
 const getLabelTOPValidation = (req, res) => {
     const sqlSelect = "SELECT * FROM validation WHERE Station = 'Label (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
@@ -70,8 +55,8 @@ const getLabelTOPValidation = (req, res) => {
 
 
 
-const getLabelTOPOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM Others WHERE Station = 'Label (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getLabelTOPRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM repair WHERE Station = 'Label (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -87,8 +72,8 @@ const getLabelTOPOthers = (req, res) => {
 };
 
 
-const getLabelTOPReturnMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnmaintenance WHERE Station = 'Label (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
+const getLabelTOPReturnRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM returnrepair WHERE Station = 'Label (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -105,30 +90,13 @@ const getLabelTOPReturnMaintenance = (req, res) => {
 
 
 
-const getLabelTOPReturnOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnothers WHERE Station = 'Label (TOP)' AND Line = 'SMT LINE 1' AND Area = 'SMT TOP' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
 
 
 module.exports = {
 
     getLabelTOPLeader,
     PutDownTimeLabelTOP,
-    getLabelTOPMaintenance,
+    getLabelTOPRepair,
     getLabelTOPValidation,
-    getLabelTOPOthers,
-    getLabelTOPReturnMaintenance,
-    getLabelTOPReturnOthers,
+    getLabelTOPReturnRepair,
 };

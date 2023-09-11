@@ -6,8 +6,8 @@ import BP from "./components/Broken/BrokenPage.jsx"
 import Line from "./components/Line.jsx"
 import Line1 from "./components/Line1/Line1.jsx"
 
-import Quality from "./components/Quality/Quality.jsx"
-
+import ValidationQuality from "./components/Quality/ValidationQuality.jsx"
+import ReturnValidationQuality from "./components/Quality/ReturnValidationQuality.jsx"
 
 
 import AndonLine1 from "./components/Line1/AndonLine1.jsx";
@@ -32,7 +32,7 @@ import Leader from "./components/Leader/Leader.jsx"
 
 
 import ValidationLeader from "./components/Leader/ValidationLeader.jsx"
-
+import ReturnValidationLeader from "./components/Leader/ReturnValidationLeader.jsx"
 
 import UserMobile from "./components/User/UserMobile.jsx"
 import UserSMTTop from "./components/User/SmtTop.jsx"
@@ -46,17 +46,22 @@ import QROperatorTop from "./components/QR/QRTop/QROperatorTOP.jsx"
 import QRLeaderTop from "./components/QR/QRTop/Leader/QRLeaderTOP.jsx"
 
 
-import QRReturnResponseMaintenanceTop from "./components/QR/QRTop/MTC/QRReturnResponseMTCTOP.jsx"
-import QRResponseMaintenanceTop from "./components/QR/QRTop/MTC/QRResponseMTCTOP.jsx"
+import QRReturnResponseRepairTopMTC from "./components/QR/QRTop/Maintenance/QRReturnResponseRepairTOP.jsx"
+import QRResponseRepairTopMTC from "./components/QR/QRTop/Maintenance/QRResponseRepairTOP.jsx"
+
+import QRReturnResponseRepairTopOTH from "./components/QR/QRTop/Others/QRReturnResponseRepairTOP.jsx"
+import QRResponseRepairTopOTH from "./components/QR/QRTop/Others/QRResponseRepairTOP.jsx"
+
 
 import QRReturnQualityTop from "./components/QR/QRTop/Quality/QRReturnQualityTOP.jsx"
 import QRValidationQualityTOP from "./components/QR/QRTop/Quality/QRValidationQualityTOP.jsx"
+import QRReturnValidationQualityTOP from "./components/QR/QRTop/Quality/QRReturnValidationQualityTOP.jsx"
 
 import QRReturnLeaderTop from "./components/QR/QRTop/Leader/QRReturnLeaderTOP.jsx"
 import QRValidationLeaderTOP from "./components/QR/QRTop/Leader/QRValidationLeaderTOP.jsx"
+import QRReturnValidationLeaderTOP from "./components/QR/QRTop/Leader/QRReturnValidationLeaderTOP.jsx"
 
-import QRReturnResponseOthersTop from "./components/QR/QRTop/Others/QRReturnResponseOTHERSTOP.jsx"
-import QRResponseOthersTop from "./components/QR/QRTop/Others/QRResponseOTHERSTOP.jsx"
+
 // 
 
 
@@ -125,7 +130,8 @@ function App() {
 
 
 
-        <Route path="Quality" element={<Quality />} />
+        <Route path="ValidationQuality" element={<ValidationQuality />} />
+        <Route path="ReturnValidationQuality" element={<ReturnValidationQuality />} />
 
         <Route path="Maintenance" element={<Maintenance />} />
         <Route path="ReturnMaintenance" element={<ReturnMaintenance />} />
@@ -136,7 +142,7 @@ function App() {
 
 
         <Route path="ValidationLeader" element={<ValidationLeader />} />
-
+        <Route path="ReturnValidationLeader" element={<ReturnValidationLeader />} />
 
 
         {/* QR Top*/}
@@ -145,17 +151,25 @@ function App() {
 
         <Route path="QROperatorTop" element={<QROperatorTop />} />
 
-        <Route path="QRResponseMaintenanceTop" element={<QRResponseMaintenanceTop />} />
-        <Route path="QRReturnResponseMaintenanceTop" element={<QRReturnResponseMaintenanceTop />} />
+
+
+        <Route path="QRResponseRepairTopMTC" element={<QRResponseRepairTopMTC />} />
+        <Route path="QRReturnResponseRepairTopMTC" element={<QRReturnResponseRepairTopMTC />} />
+
+        <Route path="QRResponseRepairTopOTH" element={<QRResponseRepairTopOTH />} />
+        <Route path="QRReturnResponseRepairTopOTH" element={<QRReturnResponseRepairTopOTH />} />
+
+
+        
 
         <Route path="QRReturnQualityTop" element={<QRReturnQualityTop />} />
         <Route path="QRValidationQualityTop" element={<QRValidationQualityTOP />} />
+        <Route path="QRReturnValidationQualityTop" element={<QRReturnValidationQualityTOP />} />
 
         <Route path="QRReturnLeaderTop" element={<QRReturnLeaderTop />} />
         <Route path="QRValidationLeaderTop" element={<QRValidationLeaderTOP />} />
-
-        <Route path="QRResponseOthersTop" element={<QRResponseOthersTop />} />
-        <Route path="QRReturnResponseOthersTop" element={<QRReturnResponseOthersTop />} />
+        <Route path="QRReturnValidationLeaderTop" element={<QRReturnValidationLeaderTOP />} />
+  
         {/*  */}
 
         {/* QR Bot*/}

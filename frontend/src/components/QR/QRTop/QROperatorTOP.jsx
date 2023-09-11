@@ -20,6 +20,7 @@ function QROperatorTOP() {
     const [NamaPIC, setNamaPIC] = useState("");
     const [Line, setLine] = useState("SMT LINE 1");
     const [Area, setArea] = useState("SMT TOP");
+    const [Uid, setUid] = useState("");
     // Khusus Req Maintenance
     const [Requestor, setRequestor] = useState("Operator");
     const [Department, setDepartment] = useState("MAINTENANCE & IT");
@@ -190,7 +191,7 @@ function QROperatorTOP() {
             Department: Department,
             Requestor: Requestor,
             Kerusakan: Kerusakan,
-      
+            Uid: Uid,
           };
         alert(`Laporan Telah Berhasil Di Kirim Ke Team MAINTENANCE & IT `);
 
@@ -204,7 +205,7 @@ function QROperatorTOP() {
         setStation(null);
         setNamaPIC(null);
 
-        fetch(`http://192.168.101.12:3001/api/Maintenance`, {
+        fetch(`http://192.168.101.12:3001/api/Repair`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -460,6 +461,33 @@ function QROperatorTOP() {
     const handleCall2 = () => {
         window.location.href = "https://api.whatsapp.com/send?phone=6281929749600";
     };
+
+
+    useEffect(() => {
+        generateUniqueUid();
+      }, []);
+    
+      const generateUniqueUid = () => {
+        const randomId = `INC${Math.floor(Math.random() * 1000).toString().padStart(3, "0")}`;
+    
+        // Kirim permintaan ke API untuk memeriksa UID
+        fetch("http://192.168.101.12:3001/api/Repair")
+          .then((response) => response.json())
+          .then((data) => {
+            const uids = data.map((item) => item.Uid);
+            if (!uids.includes(randomId)) {
+              // Jika UID belum digunakan, set UID ke nilai randomId
+              setUid(randomId);
+            } else {
+              // Jika UID sudah digunakan, coba generate UID baru
+              generateUniqueUid();
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching data from API:", error);
+          });
+      };
+    
 
     return (
         <body style={styles}>
@@ -924,7 +952,7 @@ function QROperatorTOP() {
                                                 }}
                                             >
                                                 <div className="justify-center mb-3 w-96 items-center flex font-bold uppercase text-black ">
-                                                    <span>Request Maintenance</span>
+                                                    <span>Request Maintenance </span>
                                                 </div>
                                                 <div class="flex flex-wrap -mx-3 ">
                                                     <div className="w-full mt-3 px-3 mb-3 md:mb-0">

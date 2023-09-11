@@ -74,12 +74,34 @@ const PutValidation = (req, res) => {
 
 
 
-const postRequestValidation = (req, res) => {
-  const { NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor } = req.body;
+
+const PutReturnValidation = (req, res) => {
+  const { Status, NamaPIC, Desc, Station, Area } = req.body;
 
   db.query(
-    "INSERT INTO validation (Nama, Area, Line, Station, Problem, Action, DepartTo, Requestor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-    [NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor],
+    "UPDATE returnvalidation SET Status = ?, ValidationName = ?, ValidationDescription = ?, ValidationDate = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [Status, NamaPIC, Desc, Station, Area],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been updated successfully' });
+    }
+  );
+};
+
+
+
+
+
+
+const postRequestValidation = (req, res) => {
+  const { Uid, NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor } = req.body;
+
+  db.query(
+    "INSERT INTO validation (Uid, Nama, Area, Line, Station, Problem, Action, DepartTo, Requestor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [Uid, NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -91,12 +113,54 @@ const postRequestValidation = (req, res) => {
 };
 
 
-const PutReturnValidation = (req, res) => {
+const PostReturnRequestValidation = (req, res) => {
+  const { Uid, NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor } = req.body;
+  db.query(
+    "INSERT INTO returnvalidation (Uid, Nama, Area, Line, Station, Problem, Action, DepartTo, Requestor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [Uid, NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been added successfully' });
+    }
+  );
+};
+
+
+
+
+
+
+
+const PutStatusReturnValidation = (req, res) => {
   const { Status, Department, Station, Area } = req.body;
 
   db.query(
     "UPDATE validation SET Status = ?, ReturnDepartment = ?, ValidationDate = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
     [Status, Department, Station, Area],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been updated successfully' });
+    }
+  );
+};
+
+
+
+
+
+
+const PutUidValidation = (req, res) => {
+  const { Uid, Station, Area } = req.body;
+
+  db.query(
+    "UPDATE validation SET Uid = ? WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [Uid, Station, Area],
     (error, results) => {
       if (error) {
         console.log(error);
@@ -120,6 +184,15 @@ const getRequestValidation = (req, res) => {
 
 
 
+const getRequestReturnValidation = (req, res) => {
+  const sqlSelect = "SELECT * FROM returnvalidation";
+  db.query(sqlSelect, (err, results) => {
+    res.send(results);
+  });
+};
+
+
+
 
 
 
@@ -129,6 +202,10 @@ module.exports = {
   postRequestValidation,
   getRequestValidation,
   PutValidation,
+  PostReturnRequestValidation,
   PutReturnValidation,
   PutFileValidation,
+  getRequestReturnValidation,
+  PutUidValidation,
+  PutStatusReturnValidation,
 };

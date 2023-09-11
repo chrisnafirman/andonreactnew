@@ -364,6 +364,9 @@ const ReuestLeader = () => {
                 <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-font-mono uppercase text-gray-400 bg-gray-50">
                     <tr>
+                    <th className="p-1 w-0 lg:w-32">
+                        <div className="font-sans lg:font-font-mono text-left">Uid</div>
+                      </th>
                       <th className="p-1 w-32 lg:w-32">
                         <div className="font-sans lg:font-font-mono text-left">Operator</div>
                       </th>
@@ -379,7 +382,7 @@ const ReuestLeader = () => {
                       <th className="p-1 w-10">
                         <div className="font-font-mono text-center">Status</div>
                       </th>
-                      <th className="p-1 w-26">
+                      <th className="p-1 w-56">
                         <div className="font-font-mono text-center">Date</div>
                       </th>
                     </tr>
@@ -390,6 +393,11 @@ const ReuestLeader = () => {
                         key={item.id}
                         className={index === 0 ? "bg-green-400" : ""}
                       >
+                        <td className="p-2">
+                          <div className="font-medium text-xs lg:text-sm text-gray-800">
+                            {item.Uid}
+                          </div>
+                        </td>
                         <td className="p-2">
                           <div className="font-medium text-xs lg:text-sm text-gray-800">
                             {item.Nama}

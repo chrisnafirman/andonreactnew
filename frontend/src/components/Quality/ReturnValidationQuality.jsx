@@ -243,7 +243,7 @@ const Quality = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Validation")
+    fetch("http://192.168.101.12:3001/api/ReturnValidation")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -304,25 +304,16 @@ const Quality = () => {
 
   const QRValidationLink = () => {
     if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRValidationQualityTOP";
+      return "/QRReturnValidationQualityTOP";
     } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRValidationQualityBOT";
+      return "/QRReturnValidationQualityBOT";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRValidationQualityBE";
+      return "/QRReturnValidationQualityBE";
     } else {
     }
   };
 
-  const QRReturnLink = () => {
-    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRReturnQualityTOP";
-    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRReturnQualityBOT";
-    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRReturnQualityBE";
-    } else {
-    }
-  };
+
 
   const styles = {
     background: "linear-gradient(45deg, #4E86B0, #8a8b90, #0183E8)",
@@ -459,9 +450,13 @@ const Quality = () => {
                 className="overflow-x-auto p-3"
                 style={{ height: "300px", overflowY: "scroll" }}
               >
-                <table id="data-table" className="table-auto w-full">
+                 <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                    <tr>
+                  <tr>
+                      <th className="p-1 w-10 lg:w-20">
+                        <div className="font-sans lg:font-semibold text-left">Uid</div>
+                      </th>
+                    
                       <th className="p-1 w-10 lg:w-20">
                         <div className="font-sans lg:font-semibold text-left">Option</div>
                       </th>
@@ -493,6 +488,11 @@ const Quality = () => {
                             key={item.id}
                             className={index === 0 ? "bg-green-400" : ""}
                           >
+                             <td className="p-2">
+                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                                {item.Uid}
+                              </div>
+                            </td>
                             <td className="p-2">
                               <div className="font-medium text-xs lg:text-sm text-gray-800">
                                 {item.DepartTo}
@@ -1016,18 +1016,6 @@ const Quality = () => {
                               <span className="text-2xl ">
                                 Validation
                               </span>
-                            </button>
-                              )}
-                          </a>
-                          <a href={QRReturnLink()} >
-                          {selectedItem.Status === "" && (
-                            <button
-                              className="bg-red-500  w-36 h-12 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                              onClick={() => {
-                                //  handleDelete();
-                              }}
-                            >
-                              Return
                             </button>
                               )}
                           </a>
