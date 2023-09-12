@@ -209,7 +209,7 @@ const Others = () => {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/${DepartTo}`, {
+    fetch(`http://192.168.101.12:3001/api/Validation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -273,17 +273,7 @@ const Others = () => {
 
 
 
-  const QRResponseLink = () => {
-    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRResponseRepairTopOTH";
-    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRResponseRepairBotOTH";
-    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRResponseRepairBeOTH";
-    } else {
 
-    }
-  };
 
 
 
@@ -333,6 +323,17 @@ const Others = () => {
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
 
+  const QRResponseLink = () => {
+    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
+      return "/QRResponseRepairTopOTH";
+    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
+      return "/QRResponseRepairBotOTH";
+    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
+      return "/QRResponseRepairBeOTH";
+    } else {
+
+    }
+  };
 
   return (
     <body style={styles}>

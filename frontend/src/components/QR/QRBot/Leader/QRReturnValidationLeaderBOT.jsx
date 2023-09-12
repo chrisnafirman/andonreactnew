@@ -15,13 +15,13 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRValidationQualityTOP() {
+function QRValidationLeaderBOT() {
 
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
-  const [Area, setArea] = useState("SMT TOP");
-  const [isQRValidationQuality, setIsQRValidationQuality] = useState(true);
+  const [Area, setArea] = useState("SMT BOT");
+  const [isQRValidationLeader, setIsQRValidationLeader] = useState(true);
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
   const [Status, setStatus] = useState("Running");
@@ -59,10 +59,10 @@ function QRValidationQualityTOP() {
       Desc: Desc,
     };
 
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Go (Return)");
+    firebase.database().ref(`SMTLine1BOT/${Station}`).set("Go (Return)");
     firebase.database().ref("StatusLine/SMTLine1").set("Running");
     alert("Validation Telah Berhasil ");
-    setIsQRValidationQuality(false);
+    setIsQRValidationLeader(false);
     setStation(null);
     setNamaPIC(null);
 
@@ -86,7 +86,7 @@ function QRValidationQualityTOP() {
       });
   };
 
-  
+
 
   // SUBMIT FILE
   const handleFileChange = (e) => {
@@ -94,32 +94,32 @@ function QRValidationQualityTOP() {
   };
 
   const styles = {
-    background: "linear-gradient(45deg, #000, #768087, #87CEEB)",
-    height: "1500px",
-  };
+    background: "linear-gradient(45deg, #000, #626658, #292d1f)",
+    height: "1000px",
+};
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
-    setIsQRValidationQuality(false);
+    setIsQRValidationLeader(false);
   };
 
   const togglePopupMesin = () => {
     setShowPopupMesin(!showPopupMesin);
-    setIsQRValidationQuality(false);
+    setIsQRValidationLeader(false);
   };
 
   const handleScanSuccessNama = (data) => {
     setNamaPIC(data);
     setShowPopupNama(false)
     setShowPopupMesin(false)
-    setIsQRValidationQuality(true);
+    setIsQRValidationLeader(true);
 
   };
 
   const handleScanSuccessMesin = (data) => {
     setStation(data);
     setShowPopupMesin(false)
-    setIsQRValidationQuality(true);
+    setIsQRValidationLeader(true);
   };
 
 
@@ -129,19 +129,19 @@ function QRValidationQualityTOP() {
     setIsLoader(true);
 
     setTimeout(() => {
-      window.location.href = '/ReturnValidationQuality'; // Ganti dengan URL halaman tujuan
+      window.location.href = '/ReturnValidationLeader'; // Ganti dengan URL halaman tujuan
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
 
 
 
-  
+
 
 
   return (
     <body style={styles}>
       <td class="">
-        {isQRValidationQuality ? (
+        {isQRValidationLeader ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-96 text-center sm:block sm:p-0">
@@ -166,7 +166,7 @@ function QRValidationQualityTOP() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Validation Quality (Return)</span>
+                          <span>Validation Leader (Return)</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
 
@@ -186,7 +186,7 @@ function QRValidationQualityTOP() {
                               </span>
                               <button onClick={() => {
                                 togglePopupNama();
-                                setIsQRValidationQuality(false);
+                                setIsQRValidationLeader(false);
                               }}>
                                 {showPopupNama ? (
                                   <svg width="60px" height="40px" viewBox="0 0 24 24" fill="none" >
@@ -235,7 +235,7 @@ function QRValidationQualityTOP() {
                               </span>
                               <button onClick={() => {
                                 togglePopupMesin();
-                                setIsQRValidationQuality(false);
+                                setIsQRValidationLeader(false);
                               }}
                               >
                                 {showPopupMesin ? (
@@ -344,7 +344,7 @@ function QRValidationQualityTOP() {
                           </button>
                         </div>
                       </form>
-                      <a href="/ReturnValidationQuality">
+                      <a href="/ReturnValidationLeader">
                         <button
                           class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
 
@@ -406,7 +406,7 @@ function QRValidationQualityTOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupMesin();
-              setIsQRValidationQuality(true);
+              setIsQRValidationLeader(true);
             }}
             onScanSuccess={handleScanSuccessMesin}
           />
@@ -416,7 +416,7 @@ function QRValidationQualityTOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupNama();
-              setIsQRValidationQuality(true);
+              setIsQRValidationLeader(true);
             }}
             onScanSuccess={handleScanSuccessNama}
           />
@@ -427,4 +427,4 @@ function QRValidationQualityTOP() {
   )
 }
 
-export default QRValidationQualityTOP;
+export default QRValidationLeaderBOT;

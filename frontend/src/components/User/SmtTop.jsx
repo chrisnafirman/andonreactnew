@@ -123,8 +123,9 @@ const SmtTop = () => {
   const [isOpenReturnRepair, setIsOpenReturnRepair] = useState(false);
   const [isOpenRepair, setIsOpenRepair] = useState(false);
   const [isOpenRequestValidation, setIsOpenRequestValidation] = useState(false);
+  const [isOpenRequestValidationReturn, setIsOpenRequestValidationReturn] = useState(false);
   const [isOpenValidation, setIsOpenValidation] = useState(false);
-
+  const [isOpenValidationReturn, setIsOpenValidationReturn] = useState(false);
   // ----------------------
 
 
@@ -157,44 +158,52 @@ const SmtTop = () => {
   const [dataDestackerTOPLeader, setDataDestackerTOPLeader] = useState(null);
   const [dataDestackerTOPRepair, setDataDestackerTOPRepair] = useState(null);
   const [dataDestackerTOPValidation, setDataDestackerTOPValidation] = useState(null);
+  const [dataDestackerTOPValidationReturn, setDataDestackerTOPValidationReturn] = useState(null);
   const [dataDestackerTOPReturnRepair, setDataDestackerTOPReturnRepair] = useState(null);
 
 
   const [dataLabelTOPLeader, setDataLabelTOPLeader] = useState(null);
   const [dataLabelTOPRepair, setDataLabelTOPRepair] = useState(null);
   const [dataLabelTOPValidation, setDataLabelTOPValidation] = useState(null);
+  const [dataLabelTOPValidationReturn, setDataLabelTOPValidationReturn] = useState(null);
   const [dataLabelTOPReturnRepair, setDataLabelTOPReturnRepair] = useState(null);
 
 
   const [dataPrinterTOPLeader, setDataPrinterTOPLeader] = useState(null);
   const [dataPrinterTOPRepair, setDataPrinterTOPRepair] = useState(null);
   const [dataPrinterTOPValidation, setDataPrinterTOPValidation] = useState(null);
+  const [dataPrinterTOPValidationReturn, setDataPrinterTOPValidationReturn] = useState(null);
   const [dataPrinterTOPReturnRepair, setDataPrinterTOPReturnRepair] = useState(null);
 
   const [dataSPITOPLeader, setDataSPITOPLeader] = useState(null);
   const [dataSPITOPRepair, setDataSPITOPRepair] = useState(null);
   const [dataSPITOPValidation, setDataSPITOPValidation] = useState(null);
+  const [dataSPITOPValidationReturn, setDataSPITOPValidationReturn] = useState(null);
   const [dataSPITOPReturnRepair, setDataSPITOPReturnRepair] = useState(null);
 
   const [dataPickNPlaceTOPLeader, setDataPickNPlaceTOPLeader] = useState(null);
   const [dataPickNPlaceTOPRepair, setDataPickNPlaceTOPRepair] = useState(null);
   const [dataPickNPlaceTOPValidation, setDataPickNPlaceTOPValidation] = useState(null);
+  const [dataPickNPlaceTOPValidationReturn, setDataPickNPlaceTOPValidationReturn] = useState(null);
   const [dataPickNPlaceTOPReturnRepair, setDataPickNPlaceTOPReturnRepair] = useState(null);
 
   const [dataReflowTOPLeader, setDataReflowTOPLeader] = useState(null);
   const [dataReflowTOPRepair, setDataReflowTOPRepair] = useState(null);
   const [dataReflowTOPValidation, setDataReflowTOPValidation] = useState(null);
+  const [dataReflowTOPValidationReturn, setDataReflowTOPValidationReturn] = useState(null);
   const [dataReflowTOPReturnRepair, setDataReflowTOPReturnRepair] = useState(null);
 
 
   const [dataAOITOPLeader, setDataAOITOPLeader] = useState(null);
   const [dataAOITOPRepair, setDataAOITOPRepair] = useState(null);
   const [dataAOITOPValidation, setDataAOITOPValidation] = useState(null);
+  const [dataAOITOPValidationReturn, setDataAOITOPValidationReturn] = useState(null);
   const [dataAOITOPReturnRepair, setDataAOITOPReturnRepair] = useState(null);
 
   const [dataRVSTOPLeader, setDataRVSTOPLeader] = useState(null);
   const [dataRVSTOPRepair, setDataRVSTOPRepair] = useState(null);
   const [dataRVSTOPValidation, setDataRVSTOPValidation] = useState(null);
+  const [dataRVSTOPValidationReturn, setDataRVSTOPValidationReturn] = useState(null);
   const [dataRVSTOPReturnRepair, setDataRVSTOPReturnRepair] = useState(null);
   // ..............
 
@@ -641,49 +650,59 @@ const SmtTop = () => {
   const updateStatusDestackerTop = (data) => {
     setStatusDestackerTop(data);
     setBackgroundColorStatusDestackerTop(
-   data === "Go"
+           data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
 
     );
   };
@@ -691,49 +710,59 @@ const SmtTop = () => {
   const updateStatusLabelTop = (data) => {
     setStatusLabelTop(data);
     setBackgroundColorStatusLabelTop(
-  data === "Go"
+           data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
 
     );
   };
@@ -741,49 +770,59 @@ const SmtTop = () => {
   const updateStatusPrinterTop = (data) => {
     setStatusPrinterTop(data);
     setBackgroundColorStatusPrinterTop(
-   data === "Go"
+           data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
 
     );
   };
@@ -791,49 +830,59 @@ const SmtTop = () => {
   const updateStatusSPITop = (data) => {
     setStatusSPITop(data);
     setBackgroundColorStatusSPITop(
-   data === "Go"
+           data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
 
     );
   };
@@ -841,49 +890,59 @@ const SmtTop = () => {
   const updateStatusPickNPlaceTop = (data) => {
     setStatusPickNPlaceTop(data);
     setBackgroundColorStatusPickNPlaceTop(
-   data === "Go"
+           data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
 
     );
   };
@@ -891,49 +950,59 @@ const SmtTop = () => {
   const updateStatusReflowTop = (data) => {
     setStatusReflowTop(data);
     setBackgroundColorStatusReflowTop(
-   data === "Go"
+           data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
 
     );
   };
@@ -941,49 +1010,59 @@ const SmtTop = () => {
   const updateStatusAOITop = (data) => {
     setStatusAOITop(data);
     setBackgroundColorStatusAOITop(
-   data === "Go"
+           data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
 
     );
   };
@@ -991,49 +1070,59 @@ const SmtTop = () => {
   const updateStatusRVSTop = (data) => {
     setStatusRVSTop(data);
     setBackgroundColorStatusRVSTop(
-   data === "Go"
+           data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
 
     );
   };
@@ -1093,48 +1182,56 @@ const SmtTop = () => {
   const fetchDestackerTOPLeader = () => fetchData("/getDestackerTOPLeader", setDataDestackerTOPLeader);
   const fetchDestackerTOPRepair = () => fetchData("/getDestackerTOPRepair", setDataDestackerTOPRepair);
   const fetchDestackerTOPValidation = () => fetchData("/getDestackerTOPValidation", setDataDestackerTOPValidation);
+  const fetchDestackerTOPValidationReturn = () => fetchData("/getDestackerTOPValidationReturn", setDataDestackerTOPValidationReturn);
   const fetchDestackerTOPReturnRepair = () => fetchData("/getDestackerTOPReturnRepair", setDataDestackerTOPReturnRepair);
 
   // Label
   const fetchLabelTOPLeader = () => fetchData("/getLabelTOPLeader", setDataLabelTOPLeader);
   const fetchLabelTOPRepair = () => fetchData("/getLabelTOPRepair", setDataLabelTOPRepair);
   const fetchLabelTOPValidation = () => fetchData("/getLabelTOPValidation", setDataLabelTOPValidation);
+  const fetchLabelTOPValidationReturn = () => fetchData("/getLabelTOPValidationReturn", setDataLabelTOPValidationReturn);
   const fetchLabelTOPReturnRepair = () => fetchData("/getLabelTOPReturnRepair", setDataLabelTOPReturnRepair);
 
   // Printer
   const fetchPrinterTOPLeader = () => fetchData("/getPrinterTOPLeader", setDataPrinterTOPLeader);
   const fetchPrinterTOPRepair = () => fetchData("/getPrinterTOPRepair", setDataPrinterTOPRepair);
   const fetchPrinterTOPValidation = () => fetchData("/getPrinterTOPValidation", setDataPrinterTOPValidation);
+  const fetchPrinterTOPValidationReturn = () => fetchData("/getPrinterTOPValidationReturn", setDataPrinterTOPValidationReturn);
   const fetchPrinterTOPReturnRepair = () => fetchData("/getPrinterTOPReturnRepair", setDataPrinterTOPReturnRepair);
 
   // SPI
   const fetchSPITOPLeader = () => fetchData("/getSPITOPLeader", setDataSPITOPLeader);
   const fetchSPITOPRepair = () => fetchData("/getSPITOPRepair", setDataSPITOPRepair);
   const fetchSPITOPValidation = () => fetchData("/getSPITOPValidation", setDataSPITOPValidation);
+  const fetchSPITOPValidationReturn = () => fetchData("/getSPITOPValidationReturn", setDataSPITOPValidationReturn);
   const fetchSPITOPReturnRepair = () => fetchData("/getSPITOPReturnRepair", setDataSPITOPReturnRepair);
 
   // PickNPlace
   const fetchPickNPlaceTOPLeader = () => fetchData("/getPickNPlaceTOPLeader", setDataPickNPlaceTOPLeader);
   const fetchPickNPlaceTOPRepair = () => fetchData("/getPickNPlaceTOPRepair", setDataPickNPlaceTOPRepair);
   const fetchPickNPlaceTOPValidation = () => fetchData("/getPickNPlaceTOPValidation", setDataPickNPlaceTOPValidation);
+  const fetchPickNPlaceTOPValidationReturn = () => fetchData("/getPickNPlaceTOPValidationReturn", setDataPickNPlaceTOPValidationReturn);
   const fetchPickNPlaceTOPReturnRepair = () => fetchData("/getPickNPlaceTOPReturnRepair", setDataPickNPlaceTOPReturnRepair);
 
   // Reflow
   const fetchReflowTOPLeader = () => fetchData("/getReflowTOPLeader", setDataReflowTOPLeader);
   const fetchReflowTOPRepair = () => fetchData("/getReflowTOPRepair", setDataReflowTOPRepair);
   const fetchReflowTOPValidation = () => fetchData("/getReflowTOPValidation", setDataReflowTOPValidation);
+  const fetchReflowTOPValidationReturn = () => fetchData("/getReflowTOPValidationReturn", setDataReflowTOPValidationReturn);
   const fetchReflowTOPReturnRepair = () => fetchData("/getReflowTOPReturnRepair", setDataReflowTOPReturnRepair);
 
   // SPI
   const fetchAOITOPLeader = () => fetchData("/getAOITOPLeader", setDataAOITOPLeader);
   const fetchAOITOPRepair = () => fetchData("/getAOITOPRepair", setDataAOITOPRepair);
   const fetchAOITOPValidation = () => fetchData("/getAOITOPValidation", setDataAOITOPValidation);
+  const fetchAOITOPValidationReturn = () => fetchData("/getAOITOPValidationReturn", setDataAOITOPValidationReturn);
   const fetchAOITOPReturnRepair = () => fetchData("/getAOITOPReturnRepair", setDataAOITOPReturnRepair);
 
   // RVS
   const fetchRVSTOPLeader = () => fetchData("/getRVSTOPLeader", setDataRVSTOPLeader);
   const fetchRVSTOPRepair = () => fetchData("/getRVSTOPRepair", setDataRVSTOPRepair);
   const fetchRVSTOPValidation = () => fetchData("/getRVSTOPValidation", setDataRVSTOPValidation);
+  const fetchRVSTOPValidationReturn = () => fetchData("/getRVSTOPValidationReturn", setDataRVSTOPValidationReturn);
   const fetchRVSTOPReturnRepair = () => fetchData("/getRVSTOPReturnRepair", setDataRVSTOPReturnRepair);
 
 
@@ -1155,41 +1252,49 @@ const SmtTop = () => {
       fetchDestackerTOPLeader,
       fetchDestackerTOPRepair,
       fetchDestackerTOPValidation,
+      fetchDestackerTOPValidationReturn,
       fetchDestackerTOPReturnRepair,
 
       fetchLabelTOPLeader,
       fetchLabelTOPRepair,
       fetchLabelTOPValidation,
+      fetchLabelTOPValidationReturn,
       fetchLabelTOPReturnRepair,
 
       fetchPrinterTOPLeader,
       fetchPrinterTOPRepair,
       fetchPrinterTOPValidation,
+      fetchPrinterTOPValidationReturn,
       fetchPrinterTOPReturnRepair,
 
       fetchSPITOPLeader,
       fetchSPITOPRepair,
       fetchSPITOPValidation,
+      fetchSPITOPValidationReturn,
       fetchSPITOPReturnRepair,
 
       fetchPickNPlaceTOPLeader,
       fetchPickNPlaceTOPRepair,
       fetchPickNPlaceTOPValidation,
+      fetchPickNPlaceTOPValidationReturn,
       fetchPickNPlaceTOPReturnRepair,
 
       fetchReflowTOPLeader,
       fetchReflowTOPRepair,
       fetchReflowTOPValidation,
+      fetchReflowTOPValidationReturn,
       fetchReflowTOPReturnRepair,
 
       fetchAOITOPLeader,
       fetchAOITOPRepair,
       fetchAOITOPValidation,
+      fetchAOITOPValidationReturn,
       fetchAOITOPReturnRepair,
 
       fetchRVSTOPLeader,
       fetchRVSTOPRepair,
       fetchRVSTOPValidation,
+      fetchRVSTOPValidationReturn,
       fetchRVSTOPReturnRepair,
     ];
 
@@ -1362,17 +1467,25 @@ const SmtTop = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataDestackerTOPValidation);
                         setButton("DestackerTop");
+                      } else if (StatusDestackerTop === "Return QA" || StatusDestackerTop === "Return QC" || StatusDestackerTop === "Return Production Leader" || StatusDestackerTop === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataDestackerTOPValidationReturn);
+                        setButton("DestackerTop");
                       } else if (StatusDestackerTop === "Return MAINTENANCE & IT" || StatusDestackerTop === "Return HRGA & EHS" || StatusDestackerTop === "Return PURCHASING,PPIC,MP&L" || StatusDestackerTop === "Return PROCESS ENGINEERING" || StatusDestackerTop === "Return PRODUCT DEVELOPMENT" || StatusDestackerTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataDestackerTOPReturnRepair);
                         setButton("DestackerTop");
-                      }  else if (StatusDestackerTop === "Return Repair") {
+                      } else if (StatusDestackerTop === "Return Repair") {
                         setIsOpenReturnRepair(true);
                         setOptionData(dataDestackerTOPReturnRepair);
                         setButton("DestackerTop");
                       } else if (StatusDestackerTop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataDestackerTOPValidation);
+                        setButton("DestackerTop");
+                      } else if (StatusDestackerTop === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataDestackerTOPValidationReturn);
                         setButton("DestackerTop");
                       }
                       setStation(DestackerTop);
@@ -1415,17 +1528,25 @@ const SmtTop = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataLabelTOPValidation);
                         setButton("LabelTop");
+                      } else if (StatusLabelTop === "Return QA" || StatusLabelTop === "Return QC" || StatusLabelTop === "Return Production Leader" || StatusLabelTop === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataLabelTOPValidationReturn);
+                        setButton("LabelTop");
                       } else if (StatusLabelTop === "Return MAINTENANCE & IT" || StatusLabelTop === "Return HRGA & EHS" || StatusLabelTop === "Return PURCHASING,PPIC,MP&L" || StatusLabelTop === "Return PROCESS ENGINEERING" || StatusLabelTop === "Return PRODUCT DEVELOPMENT" || StatusLabelTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataLabelTOPReturnRepair);
                         setButton("LabelTop");
-                      }  else if (StatusLabelTop === "Return Repair") {
+                      } else if (StatusLabelTop === "Return Repair") {
                         setIsOpenReturnRepair(true);
                         setOptionData(dataLabelTOPReturnRepair);
                         setButton("LabelTop");
                       } else if (StatusLabelTop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataLabelTOPValidation);
+                        setButton("LabelTop");
+                      } else if (StatusLabelTop === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataLabelTOPValidationReturn);
                         setButton("LabelTop");
                       }
                       setStation(LabelTop);
@@ -1468,17 +1589,25 @@ const SmtTop = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataPrinterTOPValidation);
                         setButton("PrinterTop");
+                      } else if (StatusPrinterTop === "Return QA" || StatusPrinterTop === "Return QC" || StatusPrinterTop === "Return Production Leader" || StatusPrinterTop === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataPrinterTOPValidationReturn);
+                        setButton("PrinterTop");
                       } else if (StatusPrinterTop === "Return MAINTENANCE & IT" || StatusPrinterTop === "Return HRGA & EHS" || StatusPrinterTop === "Return PURCHASING,PPIC,MP&L" || StatusPrinterTop === "Return PROCESS ENGINEERING" || StatusPrinterTop === "Return PRODUCT DEVELOPMENT" || StatusPrinterTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataPrinterTOPReturnRepair);
                         setButton("PrinterTop");
-                      }  else if (StatusPrinterTop === "Return Repair") {
+                      } else if (StatusPrinterTop === "Return Repair") {
                         setIsOpenReturnRepair(true);
                         setOptionData(dataPrinterTOPReturnRepair);
                         setButton("PrinterTop");
                       } else if (StatusPrinterTop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataPrinterTOPValidation);
+                        setButton("PrinterTop");
+                      } else if (StatusPrinterTop === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataPrinterTOPValidationReturn);
                         setButton("PrinterTop");
                       }
                       setStation(PrinterTop);
@@ -1522,17 +1651,25 @@ const SmtTop = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataSPITOPValidation);
                         setButton("SPITop");
+                      } else if (StatusSPITop === "Return QA" || StatusSPITop === "Return QC" || StatusSPITop === "Return Production Leader" || StatusSPITop === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataSPITOPValidationReturn);
+                        setButton("SPITop");
                       } else if (StatusSPITop === "Return MAINTENANCE & IT" || StatusSPITop === "Return HRGA & EHS" || StatusSPITop === "Return PURCHASING,PPIC,MP&L" || StatusSPITop === "Return PROCESS ENGINEERING" || StatusSPITop === "Return PRODUCT DEVELOPMENT" || StatusSPITop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataSPITOPReturnRepair);
                         setButton("SPITop");
-                      }  else if (StatusSPITop === "Return Repair") {
+                      } else if (StatusSPITop === "Return Repair") {
                         setIsOpenReturnRepair(true);
                         setOptionData(dataSPITOPReturnRepair);
                         setButton("SPITop");
                       } else if (StatusSPITop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataSPITOPValidation);
+                        setButton("SPITop");
+                      } else if (StatusSPITop === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataSPITOPValidationReturn);
                         setButton("SPITop");
                       }
                       setStation(SPITop);
@@ -1578,17 +1715,25 @@ const SmtTop = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataPickNPlaceTOPValidation);
                         setButton("PickNPlaceTop");
+                      } else if (StatusPickNPlaceTop === "Return QA" || StatusPickNPlaceTop === "Return QC" || StatusPickNPlaceTop === "Return Production Leader" || StatusPickNPlaceTop === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataPickNPlaceTOPValidationReturn);
+                        setButton("PickNPlaceTop");
                       } else if (StatusPickNPlaceTop === "Return MAINTENANCE & IT" || StatusPickNPlaceTop === "Return HRGA & EHS" || StatusPickNPlaceTop === "Return PURCHASING,PPIC,MP&L" || StatusPickNPlaceTop === "Return PROCESS ENGINEERING" || StatusPickNPlaceTop === "Return PRODUCT DEVELOPMENT" || StatusPickNPlaceTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataPickNPlaceTOPReturnRepair);
                         setButton("PickNPlaceTop");
-                      }  else if (StatusPickNPlaceTop === "Return Repair") {
+                      } else if (StatusPickNPlaceTop === "Return Repair") {
                         setIsOpenReturnRepair(true);
                         setOptionData(dataPickNPlaceTOPReturnRepair);
                         setButton("PickNPlaceTop");
                       } else if (StatusPickNPlaceTop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataPickNPlaceTOPValidation);
+                        setButton("PickNPlaceTop");
+                      } else if (StatusPickNPlaceTop === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataPickNPlaceTOPValidationReturn);
                         setButton("PickNPlaceTop");
                       }
                       setStation(PickNPlaceTop);
@@ -1632,17 +1777,25 @@ const SmtTop = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataReflowTOPValidation);
                         setButton("ReflowTop");
+                      } else if (StatusReflowTop === "Return QA" || StatusReflowTop === "Return QC" || StatusReflowTop === "Return Production Leader" || StatusReflowTop === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataReflowTOPValidationReturn);
+                        setButton("ReflowTop");
                       } else if (StatusReflowTop === "Return MAINTENANCE & IT" || StatusReflowTop === "Return HRGA & EHS" || StatusReflowTop === "Return PURCHASING,PPIC,MP&L" || StatusReflowTop === "Return PROCESS ENGINEERING" || StatusReflowTop === "Return PRODUCT DEVELOPMENT" || StatusReflowTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataReflowTOPReturnRepair);
                         setButton("ReflowTop");
-                      }  else if (StatusReflowTop === "Return Repair") {
+                      } else if (StatusReflowTop === "Return Repair") {
                         setIsOpenReturnRepair(true);
                         setOptionData(dataReflowTOPReturnRepair);
                         setButton("ReflowTop");
                       } else if (StatusReflowTop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataReflowTOPValidation);
+                        setButton("ReflowTop");
+                      } else if (StatusReflowTop === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataReflowTOPValidationReturn);
                         setButton("ReflowTop");
                       }
                       setStation(ReflowTop);
@@ -1686,17 +1839,25 @@ const SmtTop = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataAOITOPValidation);
                         setButton("AOITop");
+                      } else if (StatusAOITop === "Return QA" || StatusAOITop === "Return QC" || StatusAOITop === "Return Production Leader" || StatusAOITop === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataAOITOPValidationReturn);
+                        setButton("AOITop");
                       } else if (StatusAOITop === "Return MAINTENANCE & IT" || StatusAOITop === "Return HRGA & EHS" || StatusAOITop === "Return PURCHASING,PPIC,MP&L" || StatusAOITop === "Return PROCESS ENGINEERING" || StatusAOITop === "Return PRODUCT DEVELOPMENT" || StatusAOITop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataAOITOPReturnRepair);
                         setButton("AOITop");
-                      }  else if (StatusAOITop === "Return Repair") {
+                      } else if (StatusAOITop === "Return Repair") {
                         setIsOpenReturnRepair(true);
                         setOptionData(dataAOITOPReturnRepair);
                         setButton("AOITop");
                       } else if (StatusAOITop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataAOITOPValidation);
+                        setButton("AOITop");
+                      } else if (StatusAOITop === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataAOITOPValidationReturn);
                         setButton("AOITop");
                       }
                       setStation(AOITop);
@@ -1738,17 +1899,25 @@ const SmtTop = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataRVSTOPValidation);
                         setButton("RVSTop");
+                      } else if (StatusRVSTop === "Return QA" || StatusRVSTop === "Return QC" || StatusRVSTop === "Return Production Leader" || StatusRVSTop === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataRVSTOPValidationReturn);
+                        setButton("RVSTop");
                       } else if (StatusRVSTop === "Return MAINTENANCE & IT" || StatusRVSTop === "Return HRGA & EHS" || StatusRVSTop === "Return PURCHASING,PPIC,MP&L" || StatusRVSTop === "Return PROCESS ENGINEERING" || StatusRVSTop === "Return PRODUCT DEVELOPMENT" || StatusRVSTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataRVSTOPReturnRepair);
                         setButton("RVSTop");
-                      }  else if (StatusRVSTop === "Return Repair") {
+                      } else if (StatusRVSTop === "Return Repair") {
                         setIsOpenReturnRepair(true);
                         setOptionData(dataRVSTOPReturnRepair);
                         setButton("RVSTop");
                       } else if (StatusRVSTop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataRVSTOPValidation);
+                        setButton("RVSTop");
+                      } else if (StatusRVSTop === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataRVSTOPValidationReturn);
                         setButton("RVSTop");
                       }
                       setStation(RVSTop);
@@ -1770,8 +1939,7 @@ const SmtTop = () => {
 
 
 
-
-
+{/* Status Request Perbaikan  */}
       {/*Pop up Request */}
       <td>
         {isOpenRequest ? (
@@ -1812,7 +1980,7 @@ const SmtTop = () => {
                         <svg fill="#B48900" class="mx-auto mb-4  animate-pulse w-14 h-14 dark:text-gray-200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M187.698 120.105c41.846-15.492 89.309-5.554 121.432 26.561 44.941 44.941 44.941 117.826-.002 162.769-44.953 44.953-117.828 44.953-162.781 0-32.25-32.25-42.125-79.975-26.367-121.934 3.977-10.589-1.383-22.396-11.972-26.373s-22.396 1.383-26.373 11.972c-21.357 56.869-7.968 121.581 35.749 165.298 60.949 60.949 159.758 60.949 220.707 0 60.939-60.939 60.939-159.758 0-220.697-43.541-43.53-107.898-57.005-164.614-36.008-10.607 3.927-16.023 15.709-12.096 26.316s15.709 16.023 26.316 12.096z" /><path d="M161.408 118.082l52.879 52.869c4.331 4.334 4.331 11.381-.001 15.713l-27.924 27.924c-4.341 4.341-11.373 4.341-15.714 0l-52.594-52.584c-7.999-7.997-20.966-7.996-28.963.003s-7.996 20.966.003 28.963l52.593 52.582c20.336 20.336 53.302 20.336 73.639-.001l27.924-27.924c20.326-20.326 20.326-53.297.006-73.634l-52.887-52.877c-7.999-7.997-20.966-7.996-28.963.003s-7.996 20.966.003 28.963zM836.42 904.635c-41.846 15.492-89.309 5.554-121.432-26.561-44.941-44.941-44.941-117.826.002-162.769 44.953-44.953 117.828-44.953 162.781 0 32.25 32.25 42.125 79.975 26.367 121.934-3.977 10.589 1.383 22.396 11.972 26.373s22.396-1.383 26.373-11.972c21.357-56.869 7.968-121.581-35.749-165.298-60.949-60.949-159.758-60.949-220.707 0-60.939 60.939-60.939 159.758 0 220.697 43.541 43.53 107.898 57.005 164.614 36.008 10.607-3.927 16.023-15.709 12.096-26.316s-15.709-16.023-26.316-12.096z" /><path d="M862.712 906.659l-52.869-52.869c-4.34-4.34-4.34-11.377-.006-15.708l27.923-27.933c4.339-4.339 11.37-4.339 15.711.003l52.594 52.584c7.999 7.997 20.966 7.996 28.963-.003s7.996-20.966-.003-28.963l-52.593-52.582c-20.336-20.336-53.302-20.336-73.639.001l-27.917 27.927c-20.335 20.319-20.335 53.299.003 73.638l52.869 52.869c7.998 7.998 20.965 7.998 28.963 0s7.998-20.965 0-28.963zM674.469 738.186l-391.26-391.26c-7.998-7.998-20.965-7.998-28.963 0s-7.998 20.965 0 28.963l391.26 391.26c7.998 7.998 20.965 7.998 28.963 0s7.998-20.965 0-28.963zM343.768 279.258l400.374 400.374c7.998 7.998 20.965 7.998 28.963 0s7.998-20.965 0-28.963L372.731 250.295c-7.998-7.998-20.965-7.998-28.963 0s-7.998 20.965 0 28.963zm255.917 112.52l176.732-176.732c7.998-7.998 7.998-20.965 0-28.963s-20.965-7.998-28.963 0L570.722 362.815c-7.998 7.998-7.998 20.965 0 28.963s20.965 7.998 28.963 0zm214.393-149.914L631.53 422.641c-8.037 7.959-8.1 20.926-.141 28.963s20.926 8.1 28.963.141L842.9 270.968c8.037-7.959 8.1-20.926.141-28.963s-20.926-8.1-28.963-.141z" /><path d="M945.721 131.005a20.48 20.48 0 014.873 21.176l-28.201 81.531a20.481 20.481 0 01-12.659 12.66l-81.541 28.211a20.48 20.48 0 01-21.179-4.874l-53.32-53.33a20.48 20.48 0 01-4.872-21.175l28.201-81.531a20.478 20.478 0 0112.658-12.659l81.531-28.211a20.478 20.478 0 0121.178 4.873l53.33 53.33zm-73.228-15.302l-60.012 20.765-20.758 60.014 35.194 35.201 60.021-20.766 20.758-60.012-35.202-35.202zm-421.165 544.57L208.763 902.838c-7.497 7.497-16.502 8.466-19.734 5.237l-74.541-74.541c-3.223-3.226-2.254-12.226 5.248-19.733l242.089-242.079c7.998-7.998 7.998-20.965.001-28.963s-20.965-7.998-28.963-.001L90.769 784.842c-22.28 22.295-26.003 56.877-5.249 77.648l74.553 74.553c20.778 20.76 55.375 17.036 77.654-5.243l242.565-242.565c7.998-7.998 7.998-20.965 0-28.963s-20.965-7.998-28.963 0z" /></svg>
 
                         <h3 class=" text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
-                          Permintaan Bantuan Perbaikan Oleh : {OptionData?.Requestor || ""} <br /> <span className="text-green-500"> To Department : {OptionData?.Department || ""}</span>
+                          <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong> Permintaan Bantuan Perbaikan Oleh : {OptionData?.Requestor || ""} <br /> <span className="text-green-500"> To Department : {OptionData?.Department || ""}</span>
                         </h3>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full  px-3">
@@ -1856,7 +2024,7 @@ const SmtTop = () => {
                             <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                               Down Time:
                             </label>
-                             {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
+                            {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
                               <input
                                 type="text"
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -1865,13 +2033,13 @@ const SmtTop = () => {
                                 value={
                                   Button === "DestackerTop" ? TimeDestackerTop :
                                     Button === "LabelTop" ? TimeLabelTop :
-                                    Button === "PrinterTop" ? TimePrinterTop :
-                                    Button === "SPITop" ? TimeSPITop :
-                                    Button === "PickNPlaceTop" ? TimePickNPlaceTop :
-                                    Button === "ReflowTop" ? TimeReflowTop :
-                                    Button === "AOITop" ? TimeAOITop :
-                                    Button === "RVSTop" ? TimeRVSTop :
-                                      ""
+                                      Button === "PrinterTop" ? TimePrinterTop :
+                                        Button === "SPITop" ? TimeSPITop :
+                                          Button === "PickNPlaceTop" ? TimePickNPlaceTop :
+                                            Button === "ReflowTop" ? TimeReflowTop :
+                                              Button === "AOITop" ? TimeAOITop :
+                                                Button === "RVSTop" ? TimeRVSTop :
+                                                  ""
                                 }
                               />
                             )}
@@ -1896,6 +2064,9 @@ const SmtTop = () => {
         ) : null}
       </td>
 
+{/* ---------------------- */}
+
+{/* Status Repair  */}
       {/*Pop up Repair  */}
       <td>
         {isOpenRepair ? (
@@ -1945,35 +2116,35 @@ const SmtTop = () => {
                             <path d="M27.472 25.67l3.511 2.664c0.764-1.983 0.2-4.311-1.579-5.661-1.368-1.038-3.108-1.248-4.61-0.713l-0.532-0.403-0.070-0.132c0.37-0.526 0.691-1.076 0.961-1.644l2.417-0.067 0.495-1.58-1.953-1.438c0.095-0.591 0.142-1.189 0.143-1.786l2.167-1.1-0.229-1.64-2.392-0.468c-0.2-0.688-0.466-1.362-0.798-2.011l1.426-1.973-0.954-1.354-2.347 0.682c-0.029-0.031-0.058-0.062-0.088-0.093-0.375-0.388-0.771-0.743-1.184-1.066l0.451-2.321-1.435-0.827-1.781 1.551c-0.577-0.232-1.169-0.415-1.769-0.549l-0.584-2.291-1.651-0.135-0.951 2.172c-0.492 0.030-0.982 0.091-1.468 0.185l-1.454-1.877-1.568 0.533-0.008 2.39c-0.664 0.342-1.303 0.753-1.904 1.236l-2.215-0.998-1.134 1.207 1.134 2.151c-0.366 0.521-0.683 1.067-0.951 1.63l-2.433 0.067-0.495 1.58 1.966 1.448c-0.094 0.586-0.142 1.179-0.144 1.772l-2.18 1.106 0.229 1.64 2.394 0.468c0.143 0.498 0.319 0.989 0.531 1.468l-1.58 1.959 0.881 1.402 2.453-0.573c0.154 0.181 0.315 0.359 0.482 0.532 0.353 0.365 0.723 0.701 1.107 1.008l-0.477 2.459 1.435 0.827 1.873-1.632c0.538 0.216 1.089 0.389 1.649 0.519l0.612 2.401 1.651 0.135 0.991-2.263c0.686-0.041 1.369-0.144 2.041-0.308l1.576 1.825 1.538-0.616-0.083-1.685 0.974 0.739c-0.115 1.597 0.543 3.233 1.909 4.271 1.778 1.349 4.172 1.266 5.877-0.004l-3.51-2.663c-0.619-0.469-0.762-1.358-0.312-1.952s1.328-0.672 1.946-0.202zM13.845 23.736c-1.985-0.224-3.892-1.12-5.388-2.669-3.421-3.538-3.323-9.167 0.216-12.587s9.17-3.36 12.59 0.178c3.012 3.115 3.293 7.878 0.903 11.308l-5.822-4.417c0.11-1.589-0.561-3.21-1.928-4.247-1.778-1.349-4.172-1.266-5.877 0.004l3.51 2.663c0.618 0.469 0.78 1.334 0.33 1.929s-1.346 0.696-1.964 0.226l-3.51-2.663c-0.763 1.983-0.2 4.311 1.579 5.661 1.367 1.036 3.121 1.229 4.628 0.688l4.617 3.503c-1.254 0.428-2.582 0.569-3.883 0.422z"></path>
                           </svg>
                           <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-serif text-gray-500 dark:text-gray-400">
-                            Sedang Dalam Perbaikan Oleh Team  {OptionData?.Department || ""}
+                            <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong> Sedang Dalam Perbaikan Oleh Team  {OptionData?.Department || ""}
                           </h3>
 
                           <div className="flex flex-col mt-2">
                             <div class="w-full px-3">
-                            <div className="w-full px-3">
-                            <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
-                              Down Time:
-                            </label>
-                             {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
-                              <input
-                                type="text"
-                                className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                                name="NamaPIC"
-                                readOnly
-                                value={
-                                  Button === "DestackerTop" ? TimeDestackerTop :
-                                    Button === "LabelTop" ? TimeLabelTop :
-                                    Button === "PrinterTop" ? TimePrinterTop :
-                                    Button === "SPITop" ? TimeSPITop :
-                                    Button === "PickNPlaceTop" ? TimePickNPlaceTop :
-                                    Button === "ReflowTop" ? TimeReflowTop :
-                                    Button === "AOITop" ? TimeAOITop :
-                                    Button === "RVSTop" ? TimeRVSTop :
-                                      ""
-                                }
-                              />
-                            )}
-                          </div>
+                              <div className="w-full px-3">
+                                <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                  Down Time:
+                                </label>
+                                {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
+                                  <input
+                                    type="text"
+                                    className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                    name="NamaPIC"
+                                    readOnly
+                                    value={
+                                      Button === "DestackerTop" ? TimeDestackerTop :
+                                        Button === "LabelTop" ? TimeLabelTop :
+                                          Button === "PrinterTop" ? TimePrinterTop :
+                                            Button === "SPITop" ? TimeSPITop :
+                                              Button === "PickNPlaceTop" ? TimePickNPlaceTop :
+                                                Button === "ReflowTop" ? TimeReflowTop :
+                                                  Button === "AOITop" ? TimeAOITop :
+                                                    Button === "RVSTop" ? TimeRVSTop :
+                                                      ""
+                                    }
+                                  />
+                                )}
+                              </div>
                             </div>
                             <span className="font-mono mt-2 text-gray-500 ">PIC Repairment :  {OptionData?.ResponseName || ""} </span>
                             <span className="font-mono mt-2 text-gray-500 ">Request at :  {formatDateAPI(OptionData?.Date) || ""} </span>
@@ -2043,7 +2214,7 @@ const SmtTop = () => {
                             <path d="M27.472 25.67l3.511 2.664c0.764-1.983 0.2-4.311-1.579-5.661-1.368-1.038-3.108-1.248-4.61-0.713l-0.532-0.403-0.070-0.132c0.37-0.526 0.691-1.076 0.961-1.644l2.417-0.067 0.495-1.58-1.953-1.438c0.095-0.591 0.142-1.189 0.143-1.786l2.167-1.1-0.229-1.64-2.392-0.468c-0.2-0.688-0.466-1.362-0.798-2.011l1.426-1.973-0.954-1.354-2.347 0.682c-0.029-0.031-0.058-0.062-0.088-0.093-0.375-0.388-0.771-0.743-1.184-1.066l0.451-2.321-1.435-0.827-1.781 1.551c-0.577-0.232-1.169-0.415-1.769-0.549l-0.584-2.291-1.651-0.135-0.951 2.172c-0.492 0.030-0.982 0.091-1.468 0.185l-1.454-1.877-1.568 0.533-0.008 2.39c-0.664 0.342-1.303 0.753-1.904 1.236l-2.215-0.998-1.134 1.207 1.134 2.151c-0.366 0.521-0.683 1.067-0.951 1.63l-2.433 0.067-0.495 1.58 1.966 1.448c-0.094 0.586-0.142 1.179-0.144 1.772l-2.18 1.106 0.229 1.64 2.394 0.468c0.143 0.498 0.319 0.989 0.531 1.468l-1.58 1.959 0.881 1.402 2.453-0.573c0.154 0.181 0.315 0.359 0.482 0.532 0.353 0.365 0.723 0.701 1.107 1.008l-0.477 2.459 1.435 0.827 1.873-1.632c0.538 0.216 1.089 0.389 1.649 0.519l0.612 2.401 1.651 0.135 0.991-2.263c0.686-0.041 1.369-0.144 2.041-0.308l1.576 1.825 1.538-0.616-0.083-1.685 0.974 0.739c-0.115 1.597 0.543 3.233 1.909 4.271 1.778 1.349 4.172 1.266 5.877-0.004l-3.51-2.663c-0.619-0.469-0.762-1.358-0.312-1.952s1.328-0.672 1.946-0.202zM13.845 23.736c-1.985-0.224-3.892-1.12-5.388-2.669-3.421-3.538-3.323-9.167 0.216-12.587s9.17-3.36 12.59 0.178c3.012 3.115 3.293 7.878 0.903 11.308l-5.822-4.417c0.11-1.589-0.561-3.21-1.928-4.247-1.778-1.349-4.172-1.266-5.877 0.004l3.51 2.663c0.618 0.469 0.78 1.334 0.33 1.929s-1.346 0.696-1.964 0.226l-3.51-2.663c-0.763 1.983-0.2 4.311 1.579 5.661 1.367 1.036 3.121 1.229 4.628 0.688l4.617 3.503c-1.254 0.428-2.582 0.569-3.883 0.422z"></path>
                           </svg>
                           <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-serif text-gray-500 dark:text-gray-400">
-                            Sedang Dalam Return Perbaikan Oleh Team : {OptionData?.Department || ""}
+                            <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong>  Sedang Dalam Return Perbaikan Oleh Team : {OptionData?.Department || ""}
                           </h3>
 
                           <div className="flex flex-col mt-2">
@@ -2052,22 +2223,22 @@ const SmtTop = () => {
                                 Down Time:
                               </label>
                               {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
-                              <input
-                                type="text"
-                                className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                                name="NamaPIC"
-                                readOnly
-                                value={
-                                  Button === "DestackerTop" ? TimeDestackerTop :
-                                    Button === "LabelTop" ? TimeLabelTop :
-                                    Button === "PrinterTop" ? TimePrinterTop :
-                                    Button === "SPITop" ? TimeSPITop :
-                                    Button === "PickNPlaceTop" ? TimePickNPlaceTop :
-                                    Button === "ReflowTop" ? TimeReflowTop :
-                                    Button === "AOITop" ? TimeAOITop :
-                                    Button === "RVSTop" ? TimeRVSTop :
-                                      ""
-                                }
+                                <input
+                                  type="text"
+                                  className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                  name="NamaPIC"
+                                  readOnly
+                                  value={
+                                    Button === "DestackerTop" ? TimeDestackerTop :
+                                      Button === "LabelTop" ? TimeLabelTop :
+                                        Button === "PrinterTop" ? TimePrinterTop :
+                                          Button === "SPITop" ? TimeSPITop :
+                                            Button === "PickNPlaceTop" ? TimePickNPlaceTop :
+                                              Button === "ReflowTop" ? TimeReflowTop :
+                                                Button === "AOITop" ? TimeAOITop :
+                                                  Button === "RVSTop" ? TimeRVSTop :
+                                                    ""
+                                  }
                                 />
                               )}
                             </div>
@@ -2091,7 +2262,10 @@ const SmtTop = () => {
           </>
         ) : null}
       </td>
+{/* ---------------------- */}
 
+
+{/* Status Return  */}
       {/*Pop up Return */}
       <td>
         {isOpenReturn ? (
@@ -2134,7 +2308,7 @@ const SmtTop = () => {
                         <svg fill="#801818" class="mx-auto mb-4  animate-pulse w-14 h-14 dark:text-gray-200" viewBox="0 0 24 24" id="Layer_1" version="1.1" ><path d="M18,18c-0.55,0-1,0.45-1,1v1H6V4h6v5c0,0.55,0.45,1,1,1h4v1c0,0.55,0.45,1,1,1s1-0.45,1-1V9c0-0.13-0.03-0.25-0.07-0.37  c-0.02-0.04-0.04-0.08-0.07-0.11c-0.03-0.05-0.05-0.11-0.09-0.16l-5-6c-0.01-0.01-0.02-0.02-0.03-0.03  c-0.07-0.07-0.15-0.13-0.23-0.18c-0.03-0.02-0.06-0.05-0.1-0.06C13.28,2.03,13.15,2,13,2H5C4.45,2,4,2.45,4,3v18c0,0.55,0.45,1,1,1  h13c0.55,0,1-0.45,1-1v-2C19,18.45,18.55,18,18,18z M14,5.76L15.86,8H14V5.76z" /><path d="M8,10h2c0.55,0,1-0.45,1-1s-0.45-1-1-1H8C7.45,8,7,8.45,7,9S7.45,10,8,10z" /><path d="M13,11H8c-0.55,0-1,0.45-1,1s0.45,1,1,1h5c0.55,0,1-0.45,1-1S13.55,11,13,11z" /><path d="M13,14H8c-0.55,0-1,0.45-1,1s0.45,1,1,1h5c0.55,0,1-0.45,1-1S13.55,14,13,14z" /><path d="M13,17H8c-0.55,0-1,0.45-1,1s0.45,1,1,1h5c0.55,0,1-0.45,1-1S13.55,17,13,17z" /><path d="M20.71,12.29c-0.39-0.39-1.02-0.39-1.41,0L18,13.59l-1.29-1.29c-0.39-0.39-1.02-0.39-1.41,0s-0.39,1.02,0,1.41L16.59,15  l-1.29,1.29c-0.39,0.39-0.39,1.02,0,1.41s1.02,0.39,1.41,0L18,16.41l1.29,1.29C19.49,17.9,19.74,18,20,18s0.51-0.1,0.71-0.29  c0.39-0.39,0.39-1.02,0-1.41L19.41,15l1.29-1.29C21.1,13.32,21.1,12.68,20.71,12.29z" /></svg>
 
                         <h3 class=" text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
-                          Validation Telah Di Tolak / Di kembalikan Oleh : {OptionData?.Requestor || ""} <br /> <span className="text-green-500"> Department : {OptionData?.Department || ""}</span>
+                          <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong> Validation Telah Di Tolak / Di kembalikan Oleh : {OptionData?.Requestor || ""} <br /> <span className="text-green-500"> Department : {OptionData?.Department || ""}</span>
                         </h3>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full  px-3">
@@ -2178,7 +2352,7 @@ const SmtTop = () => {
                             <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                               Down Time:
                             </label>
-                             {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
+                            {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
                               <input
                                 type="text"
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -2187,13 +2361,13 @@ const SmtTop = () => {
                                 value={
                                   Button === "DestackerTop" ? TimeDestackerTop :
                                     Button === "LabelTop" ? TimeLabelTop :
-                                    Button === "PrinterTop" ? TimePrinterTop :
-                                    Button === "SPITop" ? TimeSPITop :
-                                    Button === "PickNPlaceTop" ? TimePickNPlaceTop :
-                                    Button === "ReflowTop" ? TimeReflowTop :
-                                    Button === "AOITop" ? TimeAOITop :
-                                    Button === "RVSTop" ? TimeRVSTop :
-                                      ""
+                                      Button === "PrinterTop" ? TimePrinterTop :
+                                        Button === "SPITop" ? TimeSPITop :
+                                          Button === "PickNPlaceTop" ? TimePickNPlaceTop :
+                                            Button === "ReflowTop" ? TimeReflowTop :
+                                              Button === "AOITop" ? TimeAOITop :
+                                                Button === "RVSTop" ? TimeRVSTop :
+                                                  ""
                                 }
                               />
                             )}
@@ -2213,10 +2387,11 @@ const SmtTop = () => {
           </>
         ) : null}
       </td>
+{/* ---------------------- */}
 
 
 
-
+{/* Status Request Validation */}
       {/*Pop up Request Validation  */}
       <td>
         {isOpenRequestValidation ? (
@@ -2259,7 +2434,7 @@ const SmtTop = () => {
                         </svg>
 
                         <h3 class="mb-3 text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
-                        Permintaan Untuk Validation {OptionData?.DepartTo || ""}  :
+                          <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong> Permintaan Untuk Validation {OptionData?.DepartTo || ""}  :
                         </h3>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full  px-3">
@@ -2315,7 +2490,7 @@ const SmtTop = () => {
                             <label class="block tracking-wide text-gray-700 text-xs font-bold ">
                               Down Time:
                             </label>
-                             {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
+                            {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
                               <input
                                 type="text"
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -2324,13 +2499,13 @@ const SmtTop = () => {
                                 value={
                                   Button === "DestackerTop" ? TimeDestackerTop :
                                     Button === "LabelTop" ? TimeLabelTop :
-                                    Button === "PrinterTop" ? TimePrinterTop :
-                                    Button === "SPITop" ? TimeSPITop :
-                                    Button === "PickNPlaceTop" ? TimePickNPlaceTop :
-                                    Button === "ReflowTop" ? TimeReflowTop :
-                                    Button === "AOITop" ? TimeAOITop :
-                                    Button === "RVSTop" ? TimeRVSTop :
-                                      ""
+                                      Button === "PrinterTop" ? TimePrinterTop :
+                                        Button === "SPITop" ? TimeSPITop :
+                                          Button === "PickNPlaceTop" ? TimePickNPlaceTop :
+                                            Button === "ReflowTop" ? TimeReflowTop :
+                                              Button === "AOITop" ? TimeAOITop :
+                                                Button === "RVSTop" ? TimeRVSTop :
+                                                  ""
                                 }
                               />
                             )}
@@ -2351,6 +2526,145 @@ const SmtTop = () => {
           </>
         ) : null}
       </td>
+
+       {/*Pop up Request Validation  */}
+       <td>
+        {isOpenRequestValidationReturn ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen  px-4 pb-96 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <button
+                        className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
+                        onClick={() => {
+
+                          setIsOpenRequestValidationReturn(false);
+                        }}
+                      >
+                        <svg
+                          className="w-6 h-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                      <div class="p-6 text-center">
+                        <svg class="mx-auto mb-4  animate-pulse w-14 h-14 dark:text-gray-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8.0001 10.1308C9.61344 8.97671 11.4547 8.57075 13 8.57075V6.22616C13 5.26817 13 4.78917 13.2952 4.65662C13.5903 4.52407 13.9484 4.8423 14.6644 5.47875L18.6367 9.00968C20.2053 10.404 20.9896 11.1012 20.9896 11.9993C20.9896 12.8975 20.2053 13.5946 18.6367 14.989L14.6644 18.5199C13.9484 19.1563 13.5903 19.4746 13.2952 19.342C13 19.2095 13 18.7305 13 17.7725V15.4279C9.4 15.4279 5.5 17.1422 4 19.9993C4 17.5676 4.37726 15.621 5.0001 14.0735" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+
+                        <h3 class="mb-3 text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
+                          <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong> Permintaan Untuk Return Validation {OptionData?.DepartTo || ""}  Oleh :
+                        </h3>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold ">
+                              PIC {OptionData?.Requestor || ""} :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={OptionData?.Nama || ""}
+
+                            />
+                          </div>
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold ">
+                              Request at  :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={formatDateAPI(OptionData?.Date) || ""}
+                            />
+                          </div>
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold ">
+                              Problem :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={OptionData?.Problem || ""}
+                            />
+                          </div>
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold ">
+                              Action :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={OptionData?.Action || ""}
+                            />
+                          </div>
+                          <div class="w-full px-3">
+                            <label class="block tracking-wide text-gray-700 text-xs font-bold ">
+                              Down Time:
+                            </label>
+                            {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
+                              <input
+                                type="text"
+                                className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                name="NamaPIC"
+                                readOnly
+                                value={
+                                  Button === "DestackerTop" ? TimeDestackerTop :
+                                    Button === "LabelTop" ? TimeLabelTop :
+                                      Button === "PrinterTop" ? TimePrinterTop :
+                                        Button === "SPITop" ? TimeSPITop :
+                                          Button === "PickNPlaceTop" ? TimePickNPlaceTop :
+                                            Button === "ReflowTop" ? TimeReflowTop :
+                                              Button === "AOITop" ? TimeAOITop :
+                                                Button === "RVSTop" ? TimeRVSTop :
+                                                  ""
+                                }
+                              />
+                            )}
+                          </div>
+
+                        </div>
+
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
+{/* ------------------------------------- */}
+
+{/* Status Request Leader */}
 
       {/*Pop up leader  */}
       <td>
@@ -2436,7 +2750,7 @@ const SmtTop = () => {
                         </svg>
 
                         <h3 class="mb-5 text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
-                          Permintaan Bantuan Leader Oleh : 
+                           Permintaan Bantuan Leader Oleh :
                         </h3>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full  px-3">
@@ -2468,7 +2782,7 @@ const SmtTop = () => {
                             <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                               Down Time:
                             </label>
-                             {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
+                            {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
                               <input
                                 type="text"
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -2477,13 +2791,13 @@ const SmtTop = () => {
                                 value={
                                   Button === "DestackerTop" ? TimeDestackerTop :
                                     Button === "LabelTop" ? TimeLabelTop :
-                                    Button === "PrinterTop" ? TimePrinterTop :
-                                    Button === "SPITop" ? TimeSPITop :
-                                    Button === "PickNPlaceTop" ? TimePickNPlaceTop :
-                                    Button === "ReflowTop" ? TimeReflowTop :
-                                    Button === "AOITop" ? TimeAOITop :
-                                    Button === "RVSTop" ? TimeRVSTop :
-                                      ""
+                                      Button === "PrinterTop" ? TimePrinterTop :
+                                        Button === "SPITop" ? TimeSPITop :
+                                          Button === "PickNPlaceTop" ? TimePickNPlaceTop :
+                                            Button === "ReflowTop" ? TimeReflowTop :
+                                              Button === "AOITop" ? TimeAOITop :
+                                                Button === "RVSTop" ? TimeRVSTop :
+                                                  ""
                                 }
                               />
                             )}
@@ -2505,9 +2819,86 @@ const SmtTop = () => {
         ) : null}
       </td>
 
+{/* -------------- */}
 
+{/* Status GO Atau Valid */}
 
+      {/*Pop up Validation  */}
+      <td>
+        {isOpenValidationReturn ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen pt-32 px-4 pb-20 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg  "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <form>
+                      <div class="relative bg-white 2xl:w-[500px] rounded-lg shadow dark:bg-gray-700">
+                        <button
+                          className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
+                          onClick={() => {
 
+                            setIsOpenValidationReturn(false);
+                          }}
+                        >
+                          <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
+                        <div class="p-6 text-center">
+                          <svg fill="#27AE60" class="mx-auto mb-4 animate-bounce w-32 h-14 " viewBox="0 0 64 64" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"><defs></defs><title /><path class="cls-1" d="M24.64,52.06a5.55,5.55,0,0,1-3.94-1.63L6.43,36.16a5.57,5.57,0,0,1,0-7.87,5.58,5.58,0,0,1,7.88,0L24.64,38.62l1.85-1.85a2,2,0,1,1,2.83,2.83l-3.26,3.26a2,2,0,0,1-2.83,0L11.48,31.11a1.57,1.57,0,0,0-2.22,2.22L23.53,47.6a1.59,1.59,0,0,0,2.22,0l29-29a1.57,1.57,0,0,0-2.22-2.21L36.63,32.29a2,2,0,0,1-2.83-2.83L49.69,13.57a5.57,5.57,0,0,1,7.88,7.87l-29,29A5.54,5.54,0,0,1,24.64,52.06Z" fill /></svg>
+                          <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-serif text-gray-500 dark:text-gray-400">
+                            <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong>  Return Validation Telah di lakukan
+                          </h3>
+
+                          <div className="flex flex-col mt-2">
+                            <div class="w-full px-3">
+                              <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                Last Down Time Total:
+                              </label>
+
+                              <input
+                                type="text"
+                                class="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                name="NamaPIC"
+                                readOnly
+                                value={OptionData?.DownTime || ""}
+                              />
+
+                            </div>
+                            <span className="font-mono mt-2 text-gray-500 ">PIC Validation :  {OptionData?.ValidationName || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Department :  {OptionData?.DepartTo || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Requestor Validation :  {OptionData?.Requestor || ""}</span>
+                            <span className="font-mono mt-2 text-gray-500 ">Validation AT :  {formatDateAPI(OptionData?.ValidationDate) || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Validation Desc :  {OptionData?.ValidationDescription || ""} </span>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
 
       {/*Pop up Validation  */}
       <td>
@@ -2549,7 +2940,7 @@ const SmtTop = () => {
                         <div class="p-6 text-center">
                           <svg fill="#27AE60" class="mx-auto mb-4 animate-bounce w-32 h-14 " viewBox="0 0 64 64" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"><defs></defs><title /><path class="cls-1" d="M24.64,52.06a5.55,5.55,0,0,1-3.94-1.63L6.43,36.16a5.57,5.57,0,0,1,0-7.87,5.58,5.58,0,0,1,7.88,0L24.64,38.62l1.85-1.85a2,2,0,1,1,2.83,2.83l-3.26,3.26a2,2,0,0,1-2.83,0L11.48,31.11a1.57,1.57,0,0,0-2.22,2.22L23.53,47.6a1.59,1.59,0,0,0,2.22,0l29-29a1.57,1.57,0,0,0-2.22-2.21L36.63,32.29a2,2,0,0,1-2.83-2.83L49.69,13.57a5.57,5.57,0,0,1,7.88,7.87l-29,29A5.54,5.54,0,0,1,24.64,52.06Z" fill /></svg>
                           <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-serif text-gray-500 dark:text-gray-400">
-                            Validation Telah di lakukan
+                            <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong>  Validation Telah di lakukan
                           </h3>
 
                           <div className="flex flex-col mt-2">
@@ -2569,7 +2960,7 @@ const SmtTop = () => {
                             </div>
                             <span className="font-mono mt-2 text-gray-500 ">PIC Validation :  {OptionData?.ValidationName || ""} </span>
                             <span className="font-mono mt-2 text-gray-500 ">Department :  {OptionData?.DepartTo || ""} </span>
-                            <span className="font-mono mt-2 text-gray-500 ">Requestor Validation :  {OptionData?.Requestor || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Requestor Validation :  {OptionData?.Requestor || ""}</span>
                             <span className="font-mono mt-2 text-gray-500 ">Validation AT :  {formatDateAPI(OptionData?.ValidationDate) || ""} </span>
                             <span className="font-mono mt-2 text-gray-500 ">Validation Desc :  {OptionData?.ValidationDescription || ""} </span>
                           </div>
@@ -2586,7 +2977,7 @@ const SmtTop = () => {
         ) : null}
       </td>
 
-
+{/* -------- */}
 
 
 

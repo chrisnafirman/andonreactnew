@@ -188,7 +188,7 @@ const ReuestLeader = () => {
     // Lakukan pencarian dengan kata kunci yang telah dimasukkan
     const searchTermLower = searchTerm.toLowerCase();
     const filteredResults = data.filter((item) =>
-      `${item.Nama} ${item.Problem} ${item.Line} ${item.Area} ${item.Station} ${item.Date}`
+      `${item.Nama} ${item.Problem} ${item.Uid} ${item.Line} ${item.Area} ${item.Station} ${item.Date}`
         .toLowerCase()
         .includes(searchTermLower)
     );

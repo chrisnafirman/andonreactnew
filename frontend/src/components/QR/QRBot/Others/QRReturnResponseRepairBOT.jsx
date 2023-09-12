@@ -13,11 +13,10 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRReturnResponseMTCBOT() {
+function QRReturnResponseOTHBOT() {
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
-  // const [Area, setArea] = useState("SMT BOT");
   const [isLoader, setIsLoader] = useState(false);
   const [isQRReturn, setIsQRReturn] = useState(true);
   const [showPopupNama, setShowPopupNama] = useState(false);
@@ -28,10 +27,8 @@ function QRReturnResponseMTCBOT() {
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
 
-
-
-
  
+
  
 
   const submitResponse = () => {
@@ -50,11 +47,11 @@ function QRReturnResponseMTCBOT() {
 
     alert("Response Telah Di Terima Selamat Bekerja");
 
-    firebase.database().ref(`SMTLine1BOT/${Station}`).set("Return Repair Maintenance");
+    firebase.database().ref(`SMTLine1BOT/${Station}`).set("Return Repair");
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.12:3001/api/PutReturnResponseMaintenance`, {
+    fetch(`http://192.168.101.12:3001/api/PutReturnResponseRepair`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -75,9 +72,9 @@ function QRReturnResponseMTCBOT() {
   };
 
   const styles = {
-    background: "linear-gradient(45deg, #000, #626658, #292d1f)",
-    height: "1000px",
-};
+        background: "linear-gradient(45deg, #000, #626658, #292d1f)",
+        height: "1000px",
+    };
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
@@ -106,14 +103,12 @@ function QRReturnResponseMTCBOT() {
 
   const handleButtonClick = () => {
     submitResponse();
+    // Mengalihkan pengguna ke halaman yang diinginkan
     setIsLoader(true);
-    
     setTimeout(() => {
-      window.location.href = '/ReturnMaintenance'; 
-    }, 3000); 
-  }; 
-
-
+      window.location.href = '/ReturnOthers'; // Ganti dengan URL halaman tujuan
+    }, 3000); // 5000 milidetik sama dengan 5 detik
+  };
   return (
     <body style={styles}>
       <td class="">
@@ -164,7 +159,7 @@ function QRReturnResponseMTCBOT() {
                               </span>
                               <button onClick={() => {
                                 togglePopupNama();
-                              setIsQRReturn(false);
+                                setIsQRReturn(false);
                               }}>
                                 {showPopupNama ? (
                                   <svg
@@ -420,7 +415,7 @@ function QRReturnResponseMTCBOT() {
                           </button>
                         </div>
                       </form>
-                      <a href="/ReturnMaintenance">
+                      <a href="/ReturnOthers">
                         <button class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                           <svg width="20px" viewBox="0 0 1024 1024">
                             <path
@@ -442,6 +437,7 @@ function QRReturnResponseMTCBOT() {
           </>
         ) : null}
       </td>
+
       <td class="">
         {isLoader ? (
           <>
@@ -477,6 +473,7 @@ function QRReturnResponseMTCBOT() {
           </>
         ) : null}
       </td>
+
       <div className="relative">
         {showPopupMesin && (
           <QRScannerPopup
@@ -501,4 +498,4 @@ function QRReturnResponseMTCBOT() {
   );
 }
 
-export default QRReturnResponseMTCBOT;
+export default QRReturnResponseOTHBOT;

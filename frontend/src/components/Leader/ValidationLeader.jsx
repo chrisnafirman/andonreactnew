@@ -280,7 +280,7 @@ const exportToPDFRequest = () => {
     // Lakukan pencarian dengan kata kunci yang telah dimasukkan
     const searchTermLower = searchTerm.toLowerCase();
     const filteredResults = data.filter((item) =>
-      ` ${item.DepartTo} ${item.Problem} ${item.Line} ${item.Area} ${item.Nama} ${item.ValidationName} ${item.Station} ${item.Date} ${item.Requestor}  ${item.Status}`
+      ` ${item.DepartTo} ${item.Problem} ${item.Line} ${item.Uid} ${item.Area} ${item.Nama} ${item.ValidationName} ${item.Station} ${item.Date} ${item.Requestor}  ${item.Status}`
         .toLowerCase()
         .includes(searchTermLower)
     );

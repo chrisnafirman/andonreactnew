@@ -17,8 +17,7 @@ const database = firebase.database();
 
 function QRReturnValidationLeaderBOT() {
 
-
-
+  const [Uid, setUid] = useState("");
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
@@ -28,10 +27,12 @@ function QRReturnValidationLeaderBOT() {
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
   const [Status, setStatus] = useState("Return");
-  const [Requestor, setRequestor] = useState("Production Leader");
+  const [Requestor, setRequestor] = useState("Leader");
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
+
+
 
 
 
@@ -41,14 +42,12 @@ function QRReturnValidationLeaderBOT() {
 
 
 
- 
- 
-
+  
 
 
 
   // QR
-  const submitMaintenance = () => {
+  const submitReturnRequest = () => {
     if (!NamaPIC || !Line || !Area || !Department || !Kerusakan) {
       alert("Harap isi semua kolom!");
       return;
@@ -62,16 +61,17 @@ function QRReturnValidationLeaderBOT() {
       Department: Department,
       Requestor: Requestor,
       Kerusakan: Kerusakan,
-
+      Uid: Uid,
     };
 
     alert("Return Telah Berhasil Di Kirim Ke Team Terkait");
+
     firebase.database().ref(`SMTLine1BOT/${Station}`).set(`Return ${Department}`);
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/Return${DepartTo}`, {
+    fetch(`http://192.168.101.12:3001/api/ReturnRepair`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,15 +79,14 @@ function QRReturnValidationLeaderBOT() {
       body: JSON.stringify(data),
     })
       .then((response) => {
-        console.log("Response status:", response.status);
         if (response.status === 200) {
-          console.log("PUT request successful");
+          // Handle success if needed
         } else {
-          throw new Error("Error updating data");
+          throw new Error("Error adding data");
         }
       })
       .catch((err) => {
-        console.log("Error:", err);
+        console.log(err);
       });
   };
 
@@ -102,7 +101,7 @@ function QRReturnValidationLeaderBOT() {
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.12:3001/api/PutReturnRequestValidation`, {
+    fetch(`http://192.168.101.12:3001/api/PutStatusReturnValidation`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -125,10 +124,10 @@ function QRReturnValidationLeaderBOT() {
 
 
 
-    const styles = {
-        background: "linear-gradient(45deg, #000, #626658, #292d1f)",
-        height: "1000px",
-    };
+  const styles = {
+    background: "linear-gradient(45deg, #000, #626658, #292d1f)",
+    height: "1000px",
+};
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
@@ -157,15 +156,15 @@ function QRReturnValidationLeaderBOT() {
 
   const OptionsDepartment = [
     { value: "", label: "-- Pilih Depart --" },
-    { value: "PURCHASING,PPIC,MP&L", value2: "Others", label: "PURCHASING,PPIC,MP&L" },
-    { value: "PROCESS ENGINEERING", value2: "Others", label: "PROCESS ENGINEERING" },
-    { value: "PRODUCT DEVELOPMENT", value2: "Others", label: "PRODUCT DEVELOPMENT" },
+    { value: "PURCHASING,PPIC,MP&L", value2: "Repair", label: "PURCHASING,PPIC,MP&L" },
+    { value: "PROCESS ENGINEERING", value2: "Repair", label: "PROCESS ENGINEERING" },
+    { value: "PRODUCT DEVELOPMENT", value2: "Repair", label: "PRODUCT DEVELOPMENT" },
     {
-      value: "ADVANCED MANUFACTURING ENGINEERING", value2: "others",
+      value: "ADVANCED MANUFACTURING ENGINEERING", value2: "Repair",
       label: "ADVANCED MANUFACTURING ENGINEERING",
     },
-    { value: "HRGA & EHS", value2: "Others", label: "HRGA & EHS" },
-    { value: "MAINTENANCE & IT", value2: "Maintenance", label: "MAINTENANCE & IT" },
+    { value: "HRGA & EHS", value2: "Repair", label: "HRGA & EHS" },
+    { value: "MAINTENANCE & IT", value2: "Repair", label: "MAINTENANCE & IT" },
 
   ];
 
@@ -177,7 +176,7 @@ function QRReturnValidationLeaderBOT() {
 
   const handleButtonClick = () => {
     submitUpdate();
-    submitMaintenance();
+    submitReturnRequest();
     setIsLoader(true);
     // Mengalihkan pengguna ke halaman yang diinginkan
     setTimeout(() => {
@@ -185,6 +184,33 @@ function QRReturnValidationLeaderBOT() {
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
 
+
+  useEffect(() => {
+    fetchLatestUidByStation();
+  }, [Station]);
+
+  
+const fetchLatestUidByStation = () => {
+  fetch("http://192.168.101.12:3001/api/Repair")
+    .then((response) => response.json())
+    .then((data) => {
+      // Filter objek yang memiliki Station sesuai dengan yang Anda inginkan, misalnya "SPI (BOT)"
+      const matchingObjects = data.filter((item) => item.Station === Station);
+
+      // Jika ada objek yang sesuai, ambil UID dari objek terbaru
+      if (matchingObjects.length > 0) {
+        const latestObject = matchingObjects[matchingObjects.length - 1];
+        const latestUid = latestObject.Uid;
+        setUid(latestUid);
+      } else {
+        // Jika tidak ada objek yang sesuai, atur UID menjadi kosong atau nilai default yang sesuai
+        setUid("");
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching data from API:", error);
+    });
+};
 
   return (
     <body style={styles}>
@@ -429,7 +455,6 @@ function QRReturnValidationLeaderBOT() {
           </>
         ) : null}
       </td>
-
       <td class="">
         {isLoader ? (
           <>
@@ -465,6 +490,7 @@ function QRReturnValidationLeaderBOT() {
           </>
         ) : null}
       </td>
+
 
       <div className="relative">
         {showPopupMesin && (

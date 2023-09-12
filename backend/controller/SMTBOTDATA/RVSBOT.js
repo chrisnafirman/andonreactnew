@@ -17,7 +17,23 @@ const PutDownTimeRVSBOT = (req, res) => {
     );
   }
 
-// RVSBOT
+  const PutDownTimeRVSBOTReturn = (req, res) => {
+    const { TimeRVSBot, RVSBot, Area } = req.body;
+  
+    db.query(
+      "UPDATE returnvalidation SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
+      [TimeRVSBot, RVSBot, Area],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          return res.status(500).json({ message: 'Internal server error' });
+        }
+        res.status(200).json({ message: 'Data has been updated successfully' });
+      }
+    );
+  }
+
+// RVSBot
 const getRVSBOTLeader = (req, res) => {
     const sqlSelect = "SELECT * FROM leader WHERE Station = 'RVS (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
@@ -35,21 +51,6 @@ const getRVSBOTLeader = (req, res) => {
 };
 
 
-const getRVSBOTMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM maintenance WHERE Station = 'RVS (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
 
 const getRVSBOTValidation = (req, res) => {
     const sqlSelect = "SELECT * FROM validation WHERE Station = 'RVS (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
@@ -67,27 +68,8 @@ const getRVSBOTValidation = (req, res) => {
     });
 };
 
-
-
-const getRVSBOTOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM Others WHERE Station = 'RVS (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
-
-
-const getRVSBOTReturnMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnmaintenance WHERE Station = 'RVS (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
+const getRVSBOTValidationReturn = (req, res) => {
+    const sqlSelect = "SELECT * FROM returnvalidation WHERE Station = 'RVS (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -104,8 +86,8 @@ const getRVSBOTReturnMaintenance = (req, res) => {
 
 
 
-const getRVSBOTReturnOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnothers WHERE Station = 'RVS (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
+const getRVSBOTRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM repair WHERE Station = 'RVS (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -119,15 +101,34 @@ const getRVSBOTReturnOthers = (req, res) => {
         }
     });
 };
+
+
+const getRVSBOTReturnRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM returnrepair WHERE Station = 'RVS (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
+    db.query(sqlSelect, (err, results) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Error fetching data from the database.");
+        } else {
+            if (results.length > 0) {
+                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
+            } else {
+                res.status(404).send("No data found.");
+            }
+        }
+    });
+};
+
+
 
 
 module.exports = {
 
     getRVSBOTLeader,
     PutDownTimeRVSBOT,
-    getRVSBOTMaintenance,
+    getRVSBOTRepair,
     getRVSBOTValidation,
-    getRVSBOTOthers,
-    getRVSBOTReturnMaintenance,
-    getRVSBOTReturnOthers,
+    getRVSBOTReturnRepair,
+    PutDownTimeRVSBOTReturn,
+    getRVSBOTValidationReturn,
 };

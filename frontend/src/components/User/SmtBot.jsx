@@ -97,8 +97,10 @@ const SmtBot = () => {
   const [isOpenReturn, setIsOpenReturn] = useState(false);
   const [isOpenReturnRepair, setIsOpenReturnRepair] = useState(false);
   const [isOpenRepair, setIsOpenRepair] = useState(false);
-  const [isRequestValidation, setIsRequestValidation] = useState(false);
+  const [isOpenRequestValidation, setIsOpenRequestValidation] = useState(false);
+  const [isOpenRequestValidationReturn, setIsOpenRequestValidationReturn] = useState(false);
   const [isOpenValidation, setIsOpenValidation] = useState(false);
+  const [isOpenValidationReturn, setIsOpenValidationReturn] = useState(false);
 
   // ----------------------
 
@@ -124,49 +126,43 @@ const SmtBot = () => {
   const [OptionData, setOptionData] = useState(null);
 
   const [dataPrinterBOTLeader, setDataPrinterBOTLeader] = useState(null);
-  const [dataPrinterBOTMaintenance, setDataPrinterBOTMaintenance] = useState(null);
+  const [dataPrinterBOTRepair, setDataPrinterBOTRepair] = useState(null);
   const [dataPrinterBOTValidation, setDataPrinterBOTValidation] = useState(null);
-  const [dataPrinterBOTOthers, setDataPrinterBOTOthers] = useState(null);
-  const [dataPrinterBOTReturnOthers, setDataPrinterBOTReturnOthers] = useState(null);
-  const [dataPrinterBOTReturnMaintenance, setDataPrinterBOTReturnMaintenance] = useState(null);
+  const [dataPrinterBOTValidationReturn, setDataPrinterBOTValidationReturn] = useState(null);
+  const [dataPrinterBOTReturnRepair, setDataPrinterBOTReturnRepair] = useState(null);
 
   const [dataSPIBOTLeader, setDataSPIBOTLeader] = useState(null);
-  const [dataSPIBOTMaintenance, setDataSPIBOTMaintenance] = useState(null);
+  const [dataSPIBOTRepair, setDataSPIBOTRepair] = useState(null);
   const [dataSPIBOTValidation, setDataSPIBOTValidation] = useState(null);
-  const [dataSPIBOTOthers, setDataSPIBOTOthers] = useState(null);
-  const [dataSPIBOTReturnOthers, setDataSPIBOTReturnOthers] = useState(null);
-  const [dataSPIBOTReturnMaintenance, setDataSPIBOTReturnMaintenance] = useState(null);
+  const [dataSPIBOTValidationReturn, setDataSPIBOTValidationReturn] = useState(null);
+  const [dataSPIBOTReturnRepair, setDataSPIBOTReturnRepair] = useState(null);
 
 
   const [dataPickNPlaceBOTLeader, setDataPickNPlaceBOTLeader] = useState(null);
-  const [dataPickNPlaceBOTMaintenance, setDataPickNPlaceBOTMaintenance] = useState(null);
+  const [dataPickNPlaceBOTRepair, setDataPickNPlaceBOTRepair] = useState(null);
   const [dataPickNPlaceBOTValidation, setDataPickNPlaceBOTValidation] = useState(null);
-  const [dataPickNPlaceBOTOthers, setDataPickNPlaceBOTOthers] = useState(null);
-  const [dataPickNPlaceBOTReturnOthers, setDataPickNPlaceBOTReturnOthers] = useState(null);
-  const [dataPickNPlaceBOTReturnMaintenance, setDataPickNPlaceBOTReturnMaintenance] = useState(null);
+  const [dataPickNPlaceBOTValidationReturn, setDataPickNPlaceBOTValidationReturn] = useState(null);
+  const [dataPickNPlaceBOTReturnRepair, setDataPickNPlaceBOTReturnRepair] = useState(null);
 
 
   const [dataReflowBOTLeader, setDataReflowBOTLeader] = useState(null);
-  const [dataReflowBOTMaintenance, setDataReflowBOTMaintenance] = useState(null);
+  const [dataReflowBOTRepair, setDataReflowBOTRepair] = useState(null);
   const [dataReflowBOTValidation, setDataReflowBOTValidation] = useState(null);
-  const [dataReflowBOTOthers, setDataReflowBOTOthers] = useState(null);
-  const [dataReflowBOTReturnOthers, setDataReflowBOTReturnOthers] = useState(null);
-  const [dataReflowBOTReturnMaintenance, setDataReflowBOTReturnMaintenance] = useState(null);
+  const [dataReflowBOTValidationReturn, setDataReflowBOTValidationReturn] = useState(null);
+  const [dataReflowBOTReturnRepair, setDataReflowBOTReturnRepair] = useState(null);
 
   const [dataAOIBOTLeader, setDataAOIBOTLeader] = useState(null);
-  const [dataAOIBOTMaintenance, setDataAOIBOTMaintenance] = useState(null);
+  const [dataAOIBOTRepair, setDataAOIBOTRepair] = useState(null);
   const [dataAOIBOTValidation, setDataAOIBOTValidation] = useState(null);
-  const [dataAOIBOTOthers, setDataAOIBOTOthers] = useState(null);
-  const [dataAOIBOTReturnOthers, setDataAOIBOTReturnOthers] = useState(null);
-  const [dataAOIBOTReturnMaintenance, setDataAOIBOTReturnMaintenance] = useState(null);
+  const [dataAOIBOTValidationReturn, setDataAOIBOTValidationReturn] = useState(null);
+  const [dataAOIBOTReturnRepair, setDataAOIBOTReturnRepair] = useState(null);
 
 
   const [dataRVSBOTLeader, setDataRVSBOTLeader] = useState(null);
-  const [dataRVSBOTMaintenance, setDataRVSBOTMaintenance] = useState(null);
+  const [dataRVSBOTRepair, setDataRVSBOTRepair] = useState(null);
   const [dataRVSBOTValidation, setDataRVSBOTValidation] = useState(null);
-  const [dataRVSBOTOthers, setDataRVSBOTOthers] = useState(null);
-  const [dataRVSBOTReturnOthers, setDataRVSBOTReturnOthers] = useState(null);
-  const [dataRVSBOTReturnMaintenance, setDataRVSBOTReturnMaintenance] = useState(null);
+  const [dataRVSBOTValidationReturn, setDataRVSBOTValidationReturn] = useState(null);
+  const [dataRVSBOTReturnRepair, setDataRVSBOTReturnRepair] = useState(null);
   // -----------------
 
 
@@ -658,324 +654,354 @@ const SmtBot = () => {
   const updateStatusPrinterBot = (data) => {
     setStatusPrinterBot(data);
     setBackgroundColorStatusPrinterBot(
-   data === "Go"
+       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
-          ? "#E9CE08"
-          : data === "Repair Maintenance"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
+            : data === "Repair"
               ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
-                : data === "Leader"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
-
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
   const updateStatusSPIBot = (data) => {
     setStatusSPIBot(data);
     setBackgroundColorStatusSPIBot(
-   data === "Go"
+       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
-          ? "#E9CE08"
-          : data === "Repair Maintenance"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
+            : data === "Repair"
               ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
-                : data === "Leader"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
-
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
   const updateStatusPickNPlaceBot = (data) => {
     setStatusPickNPlaceBot(data);
     setBackgroundColorStatusPickNPlaceBot(
-   data === "Go"
+       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
-          ? "#E9CE08"
-          : data === "Repair Maintenance"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
+            : data === "Repair"
               ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
-                : data === "Leader"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
-
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
   const updateStatusReflowBot = (data) => {
     setStatusReflowBot(data);
     setBackgroundColorStatusReflowBot(
-   data === "Go"
+       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
-          ? "#E9CE08"
-          : data === "Repair Maintenance"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
+            : data === "Repair"
               ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
-                : data === "Leader"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
-
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
   const updateStatusAOIBot = (data) => {
     setStatusAOIBot(data);
     setBackgroundColorStatusAOIBot(
-   data === "Go"
+       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
-          ? "#E9CE08"
-          : data === "Repair Maintenance"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
+            : data === "Repair"
               ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
-                : data === "Leader"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
-
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
   const updateStatusRVSBot = (data) => {
     setStatusRVSBot(data);
     setBackgroundColorStatusRVSBot(
-   data === "Go"
+       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair Maintenance"
-          ? "#E9CE08"
-          : data === "Repair Maintenance"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-            : data === "Repair Others"
+            : data === "Repair"
               ? "#E9CE08"
-              : data === "Return Repair Others"
-                ? "#E9CE08"
-                : data === "Leader"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
-
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
   // ---------------------------------------
@@ -1036,52 +1062,46 @@ const SmtBot = () => {
 
   // Printer
   const fetchPrinterBOTLeader = () => fetchData("/getPrinterBOTLeader", setDataPrinterBOTLeader);
-  const fetchPrinterBOTMaintenance = () => fetchData("/getPrinterBOTMaintenance", setDataPrinterBOTMaintenance);
+  const fetchPrinterBOTRepair = () => fetchData("/getPrinterBOTRepair", setDataPrinterBOTRepair);
   const fetchPrinterBOTValidation = () => fetchData("/getPrinterBOTValidation", setDataPrinterBOTValidation);
-  const fetchPrinterBOTOthers = () => fetchData("/getPrinterBOTOthers", setDataPrinterBOTOthers);
-  const fetchPrinterBOTReturnMaintenance = () => fetchData("/getPrinterBOTReturnMaintenance", setDataPrinterBOTReturnMaintenance);
-  const fetchPrinterBOTReturnOthers = () => fetchData("/getPrinterBOTReturnOthers", setDataPrinterBOTReturnOthers);
+  const fetchPrinterBOTValidationReturn = () => fetchData("/getPrinterBOTValidationReturn", setDataPrinterBOTValidationReturn);
+  const fetchPrinterBOTReturnRepair = () => fetchData("/getPrinterBOTReturnRepair", setDataPrinterBOTReturnRepair);
 
 
   // SPI
   const fetchSPIBOTLeader = () => fetchData("/getSPIBOTLeader", setDataSPIBOTLeader);
-  const fetchSPIBOTMaintenance = () => fetchData("/getSPIBOTMaintenance", setDataSPIBOTMaintenance);
+  const fetchSPIBOTRepair = () => fetchData("/getSPIBOTRepair", setDataSPIBOTRepair);
   const fetchSPIBOTValidation = () => fetchData("/getSPIBOTValidation", setDataSPIBOTValidation);
-  const fetchSPIBOTOthers = () => fetchData("/getSPIBOTOthers", setDataSPIBOTOthers);
-  const fetchSPIBOTReturnMaintenance = () => fetchData("/getSPIBOTReturnMaintenance", setDataSPIBOTReturnMaintenance);
-  const fetchSPIBOTReturnOthers = () => fetchData("/getSPIBOTReturnOthers", setDataSPIBOTReturnOthers);
+  const fetchSPIBOTValidationReturn = () => fetchData("/getSPIBOTValidationReturn", setDataSPIBOTValidationReturn);
+  const fetchSPIBOTReturnRepair = () => fetchData("/getSPIBOTReturnRepair", setDataSPIBOTReturnRepair);
 
   // PickNPlace
   const fetchPickNPlaceBOTLeader = () => fetchData("/getPickNPlaceBOTLeader", setDataPickNPlaceBOTLeader);
-  const fetchPickNPlaceBOTMaintenance = () => fetchData("/getPickNPlaceBOTMaintenance", setDataPickNPlaceBOTMaintenance);
+  const fetchPickNPlaceBOTRepair = () => fetchData("/getPickNPlaceBOTRepair", setDataPickNPlaceBOTRepair);
   const fetchPickNPlaceBOTValidation = () => fetchData("/getPickNPlaceBOTValidation", setDataPickNPlaceBOTValidation);
-  const fetchPickNPlaceBOTOthers = () => fetchData("/getPickNPlaceBOTOthers", setDataPickNPlaceBOTOthers);
-  const fetchPickNPlaceBOTReturnMaintenance = () => fetchData("/getPickNPlaceBOTReturnMaintenance", setDataPickNPlaceBOTReturnMaintenance);
-  const fetchPickNPlaceBOTReturnOthers = () => fetchData("/getPickNPlaceBOTReturnOthers", setDataPickNPlaceBOTReturnOthers);
+  const fetchPickNPlaceBOTValidationReturn = () => fetchData("/getPickNPlaceBOTValidationReturn", setDataPickNPlaceBOTValidationReturn);
+  const fetchPickNPlaceBOTReturnRepair = () => fetchData("/getPickNPlaceBOTReturnRepair", setDataPickNPlaceBOTReturnRepair);
 
   // Reflow
   const fetchReflowBOTLeader = () => fetchData("/getReflowBOTLeader", setDataReflowBOTLeader);
-  const fetchReflowBOTMaintenance = () => fetchData("/getReflowBOTMaintenance", setDataReflowBOTMaintenance);
+  const fetchReflowBOTRepair = () => fetchData("/getReflowBOTRepair", setDataReflowBOTRepair);
   const fetchReflowBOTValidation = () => fetchData("/getReflowBOTValidation", setDataReflowBOTValidation);
-  const fetchReflowBOTOthers = () => fetchData("/getReflowBOTOthers", setDataReflowBOTOthers);
-  const fetchReflowBOTReturnMaintenance = () => fetchData("/getReflowBOTReturnMaintenance", setDataReflowBOTReturnMaintenance);
-  const fetchReflowBOTReturnOthers = () => fetchData("/getReflowBOTReturnOthers", setDataReflowBOTReturnOthers);
+  const fetchReflowBOTValidationReturn = () => fetchData("/getReflowBOTValidationReturn", setDataReflowBOTValidationReturn);
+  const fetchReflowBOTReturnRepair = () => fetchData("/getReflowBOTReturnRepair", setDataReflowBOTReturnRepair);
 
   // AOI
   const fetchAOIBOTLeader = () => fetchData("/getAOIBOTLeader", setDataAOIBOTLeader);
-  const fetchAOIBOTMaintenance = () => fetchData("/getAOIBOTMaintenance", setDataAOIBOTMaintenance);
+  const fetchAOIBOTRepair = () => fetchData("/getAOIBOTRepair", setDataAOIBOTRepair);
   const fetchAOIBOTValidation = () => fetchData("/getAOIBOTValidation", setDataAOIBOTValidation);
-  const fetchAOIBOTOthers = () => fetchData("/getAOIBOTOthers", setDataAOIBOTOthers);
-  const fetchAOIBOTReturnMaintenance = () => fetchData("/getAOIBOTReturnMaintenance", setDataAOIBOTReturnMaintenance);
-  const fetchAOIBOTReturnOthers = () => fetchData("/getAOIBOTReturnOthers", setDataAOIBOTReturnOthers);
+  const fetchAOIBOTValidationReturn = () => fetchData("/getAOIBOTValidationReturn", setDataAOIBOTValidationReturn);
+  const fetchAOIBOTReturnRepair = () => fetchData("/getAOIBOTReturnRepair", setDataAOIBOTReturnRepair);
 
   // RVS
   const fetchRVSBOTLeader = () => fetchData("/getRVSBOTLeader", setDataRVSBOTLeader);
-  const fetchRVSBOTMaintenance = () => fetchData("/getRVSBOTMaintenance", setDataRVSBOTMaintenance);
+  const fetchRVSBOTRepair = () => fetchData("/getRVSBOTRepair", setDataRVSBOTRepair);
   const fetchRVSBOTValidation = () => fetchData("/getRVSBOTValidation", setDataRVSBOTValidation);
-  const fetchRVSBOTOthers = () => fetchData("/getRVSBOTOthers", setDataRVSBOTOthers);
-  const fetchRVSBOTReturnMaintenance = () => fetchData("/getRVSBOTReturnMaintenance", setDataRVSBOTReturnMaintenance);
-  const fetchRVSBOTReturnOthers = () => fetchData("/getRVSBOTReturnOthers", setDataRVSBOTReturnOthers);
+  const fetchRVSBOTValidationReturn = () => fetchData("/getRVSBOTValidationReturn", setDataRVSBOTValidationReturn);
+  const fetchRVSBOTReturnRepair = () => fetchData("/getRVSBOTReturnRepair", setDataRVSBOTReturnRepair);
 
 
 
@@ -1101,46 +1121,40 @@ const SmtBot = () => {
   useEffect(() => {
     const fetchDataFunctions = [
       fetchPrinterBOTLeader,
-      fetchPrinterBOTMaintenance,
+      fetchPrinterBOTRepair,
       fetchPrinterBOTValidation,
-      fetchPrinterBOTOthers,
-      fetchPrinterBOTReturnMaintenance,
-      fetchPrinterBOTReturnOthers,
+      fetchPrinterBOTValidationReturn,
+      fetchPrinterBOTReturnRepair,
 
       fetchSPIBOTLeader,
-      fetchSPIBOTMaintenance,
+      fetchSPIBOTRepair,
       fetchSPIBOTValidation,
-      fetchSPIBOTOthers,
-      fetchSPIBOTReturnMaintenance,
-      fetchSPIBOTReturnOthers,
+      fetchSPIBOTValidationReturn,
+      fetchSPIBOTReturnRepair,
 
       fetchPickNPlaceBOTLeader,
-      fetchPickNPlaceBOTMaintenance,
+      fetchPickNPlaceBOTRepair,
       fetchPickNPlaceBOTValidation,
-      fetchPickNPlaceBOTOthers,
-      fetchPickNPlaceBOTReturnMaintenance,
-      fetchPickNPlaceBOTReturnOthers,
+      fetchPickNPlaceBOTValidationReturn,
+      fetchPickNPlaceBOTReturnRepair,
 
       fetchReflowBOTLeader,
-      fetchReflowBOTMaintenance,
+      fetchReflowBOTRepair,
       fetchReflowBOTValidation,
-      fetchReflowBOTOthers,
-      fetchReflowBOTReturnMaintenance,
-      fetchReflowBOTReturnOthers,
+      fetchReflowBOTValidationReturn,
+      fetchReflowBOTReturnRepair,
 
       fetchAOIBOTLeader,
-      fetchAOIBOTMaintenance,
+      fetchAOIBOTRepair,
       fetchAOIBOTValidation,
-      fetchAOIBOTOthers,
-      fetchAOIBOTReturnMaintenance,
-      fetchAOIBOTReturnOthers,
+      fetchAOIBOTValidationReturn,
+      fetchAOIBOTReturnRepair,
 
       fetchRVSBOTLeader,
-      fetchRVSBOTMaintenance,
+      fetchRVSBOTRepair,
       fetchRVSBOTValidation,
-      fetchRVSBOTOthers,
-      fetchRVSBOTReturnMaintenance,
-      fetchRVSBOTReturnOthers,
+      fetchRVSBOTValidationReturn,
+      fetchRVSBOTReturnRepair,
 
     ];
 
@@ -1290,7 +1304,7 @@ const SmtBot = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
-                <button
+                  <button
                     style={{
                       backgroundColor: backgroundColorStatusPrinterBot,
                     }}
@@ -1301,45 +1315,37 @@ const SmtBot = () => {
                         setIsOpenLeader(true);
                         setOptionData(dataPrinterBOTLeader);
                         setButton("PrinterBot");
-                      } else if (StatusPrinterBot === "MAINTENANCE & IT") {
+                      } else if (StatusPrinterBot === "MAINTENANCE & IT" || StatusPrinterBot === "HRGA & EHS" || StatusPrinterBot === "PURCHASING,PPIC,MP&L" || StatusPrinterBot === "PROCESS ENGINEERING" || StatusPrinterBot === "PRODUCT DEVELOPMENT" || StatusPrinterBot === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataPrinterBOTMaintenance);
+                        setOptionData(dataPrinterBOTRepair);
                         setButton("PrinterBot");
-                      } else if (StatusPrinterBot === "HRGA & EHS" || StatusPrinterBot === "PURCHASING,PPIC,MP&L" || StatusPrinterBot === "PROCESS ENGINEERING" || StatusPrinterBot === "PRODUCT DEVELOPMENT" || StatusPrinterBot === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataPrinterBOTOthers);
-                        setButton("PrinterBot");
-                      } else if (StatusPrinterBot === "Repair Maintenance") {
+                      } else if (StatusPrinterBot === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataPrinterBOTMaintenance);
-                        setButton("PrinterBot");
-                      } else if (StatusPrinterBot === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataPrinterBOTOthers);
+                        setOptionData(dataPrinterBOTRepair);
                         setButton("PrinterBot");
                       } else if (StatusPrinterBot === "QA" || StatusPrinterBot === "QC" || StatusPrinterBot === "Production Leader" || StatusPrinterBot === "Sub Leader") {
-                        setIsRequestValidation(true);
+                        setIsOpenRequestValidation(true);
                         setOptionData(dataPrinterBOTValidation);
                         setButton("PrinterBot");
-                      } else if (StatusPrinterBot === "Return MAINTENANCE & IT") {
+                      } else if (StatusPrinterBot === "Return QA" || StatusPrinterBot === "Return QC" || StatusPrinterBot === "Return Production Leader" || StatusPrinterBot === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataPrinterBOTValidationReturn);
+                        setButton("PrinterBot");
+                      } else if (StatusPrinterBot === "Return MAINTENANCE & IT" || StatusPrinterBot === "Return HRGA & EHS" || StatusPrinterBot === "Return PURCHASING,PPIC,MP&L" || StatusPrinterBot === "Return PROCESS ENGINEERING" || StatusPrinterBot === "Return PRODUCT DEVELOPMENT" || StatusPrinterBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataPrinterBOTReturnMaintenance);
+                        setOptionData(dataPrinterBOTReturnRepair);
                         setButton("PrinterBot");
-                      } else if (StatusPrinterBot === "Return HRGA & EHS" || StatusPrinterBot === "Return PURCHASING,PPIC,MP&L" || StatusPrinterBot === "Return PROCESS ENGINEERING" || StatusPrinterBot === "Return PRODUCT DEVELOPMENT" || StatusPrinterBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataPrinterBOTReturnOthers);
-                        setButton("PrinterBot");
-                      } else if (StatusPrinterBot === "Return Repair Maintenance") {
+                      } else if (StatusPrinterBot === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataPrinterBOTReturnMaintenance);
-                        setButton("PrinterBot");
-                      } else if (StatusPrinterBot === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataPrinterBOTReturnOthers);
+                        setOptionData(dataPrinterBOTReturnRepair);
                         setButton("PrinterBot");
                       } else if (StatusPrinterBot === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataPrinterBOTValidation);
+                        setButton("PrinterBot");
+                      } else if (StatusPrinterBot === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataPrinterBOTValidationReturn);
                         setButton("PrinterBot");
                       }
                       setStation(PrinterBot);
@@ -1359,55 +1365,48 @@ const SmtBot = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
-                <button
+                  <button
                     style={{
                       backgroundColor: backgroundColorStatusSPIBot,
                     }}
                     value={SPIBot}
                     onClick={() => {
                       if (StatusSPIBot === "Leader") {
+
                         setIsOpenLeader(true);
                         setOptionData(dataSPIBOTLeader);
                         setButton("SPIBot");
-                      } else if (StatusSPIBot === "MAINTENANCE & IT") {
+                      } else if (StatusSPIBot === "MAINTENANCE & IT" || StatusSPIBot === "HRGA & EHS" || StatusSPIBot === "PURCHASING,PPIC,MP&L" || StatusSPIBot === "PROCESS ENGINEERING" || StatusSPIBot === "PRODUCT DEVELOPMENT" || StatusSPIBot === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataSPIBOTMaintenance);
+                        setOptionData(dataSPIBOTRepair);
                         setButton("SPIBot");
-                      } else if (StatusSPIBot === "HRGA & EHS" || StatusSPIBot === "PURCHASING,PPIC,MP&L" || StatusSPIBot === "PROCESS ENGINEERING" || StatusSPIBot === "PRODUCT DEVELOPMENT" || StatusSPIBot === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataSPIBOTOthers);
-                        setButton("SPIBot");
-                      } else if (StatusSPIBot === "Repair Maintenance") {
+                      } else if (StatusSPIBot === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataSPIBOTMaintenance);
-                        setButton("SPIBot");
-                      } else if (StatusSPIBot === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataSPIBOTOthers);
+                        setOptionData(dataSPIBOTRepair);
                         setButton("SPIBot");
                       } else if (StatusSPIBot === "QA" || StatusSPIBot === "QC" || StatusSPIBot === "Production Leader" || StatusSPIBot === "Sub Leader") {
-                        setIsRequestValidation(true);
+                        setIsOpenRequestValidation(true);
                         setOptionData(dataSPIBOTValidation);
                         setButton("SPIBot");
-                      } else if (StatusSPIBot === "Return MAINTENANCE & IT") {
+                      } else if (StatusSPIBot === "Return QA" || StatusSPIBot === "Return QC" || StatusSPIBot === "Return Production Leader" || StatusSPIBot === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataSPIBOTValidationReturn);
+                        setButton("SPIBot");
+                      } else if (StatusSPIBot === "Return MAINTENANCE & IT" || StatusSPIBot === "Return HRGA & EHS" || StatusSPIBot === "Return PURCHASING,PPIC,MP&L" || StatusSPIBot === "Return PROCESS ENGINEERING" || StatusSPIBot === "Return PRODUCT DEVELOPMENT" || StatusSPIBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataSPIBOTReturnMaintenance);
+                        setOptionData(dataSPIBOTReturnRepair);
                         setButton("SPIBot");
-                      } else if (StatusSPIBot === "Return HRGA & EHS" || StatusSPIBot === "Return PURCHASING,PPIC,MP&L" || StatusSPIBot === "Return PROCESS ENGINEERING" || StatusSPIBot === "Return PRODUCT DEVELOPMENT" || StatusSPIBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataSPIBOTReturnOthers);
-                        setButton("SPIBot");
-                      } else if (StatusSPIBot === "Return Repair Maintenance") {
+                      } else if (StatusSPIBot === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataSPIBOTReturnMaintenance);
-                        setButton("SPIBot");
-                      } else if (StatusSPIBot === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataSPIBOTReturnOthers);
+                        setOptionData(dataSPIBOTReturnRepair);
                         setButton("SPIBot");
                       } else if (StatusSPIBot === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataSPIBOTValidation);
+                        setButton("SPIBot");
+                      } else if (StatusSPIBot === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataSPIBOTValidationReturn);
                         setButton("SPIBot");
                       }
                       setStation(SPIBot);
@@ -1425,55 +1424,48 @@ const SmtBot = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
-                <button
+                  <button
                     style={{
                       backgroundColor: backgroundColorStatusPickNPlaceBot,
                     }}
                     value={PickNPlaceBot}
                     onClick={() => {
                       if (StatusPickNPlaceBot === "Leader") {
+
                         setIsOpenLeader(true);
                         setOptionData(dataPickNPlaceBOTLeader);
                         setButton("PickNPlaceBot");
-                      } else if (StatusPickNPlaceBot === "MAINTENANCE & IT") {
+                      } else if (StatusPickNPlaceBot === "MAINTENANCE & IT" || StatusPickNPlaceBot === "HRGA & EHS" || StatusPickNPlaceBot === "PURCHASING,PPIC,MP&L" || StatusPickNPlaceBot === "PROCESS ENGINEERING" || StatusPickNPlaceBot === "PRODUCT DEVELOPMENT" || StatusPickNPlaceBot === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataPickNPlaceBOTMaintenance);
+                        setOptionData(dataPickNPlaceBOTRepair);
                         setButton("PickNPlaceBot");
-                      } else if (StatusPickNPlaceBot === "HRGA & EHS" || StatusPickNPlaceBot === "PURCHASING,PPIC,MP&L" || StatusPickNPlaceBot === "PROCESS ENGINEERING" || StatusPickNPlaceBot === "PRODUCT DEVELOPMENT" || StatusPickNPlaceBot === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataPickNPlaceBOTOthers);
-                        setButton("PickNPlaceBot");
-                      } else if (StatusPickNPlaceBot === "Repair Maintenance") {
+                      } else if (StatusPickNPlaceBot === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataPickNPlaceBOTMaintenance);
-                        setButton("PickNPlaceBot");
-                      } else if (StatusPickNPlaceBot === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataPickNPlaceBOTOthers);
+                        setOptionData(dataPickNPlaceBOTRepair);
                         setButton("PickNPlaceBot");
                       } else if (StatusPickNPlaceBot === "QA" || StatusPickNPlaceBot === "QC" || StatusPickNPlaceBot === "Production Leader" || StatusPickNPlaceBot === "Sub Leader") {
-                        setIsRequestValidation(true);
+                        setIsOpenRequestValidation(true);
                         setOptionData(dataPickNPlaceBOTValidation);
                         setButton("PickNPlaceBot");
-                      } else if (StatusPickNPlaceBot === "Return MAINTENANCE & IT") {
+                      } else if (StatusPickNPlaceBot === "Return QA" || StatusPickNPlaceBot === "Return QC" || StatusPickNPlaceBot === "Return Production Leader" || StatusPickNPlaceBot === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataPickNPlaceBOTValidationReturn);
+                        setButton("PickNPlaceBot");
+                      } else if (StatusPickNPlaceBot === "Return MAINTENANCE & IT" || StatusPickNPlaceBot === "Return HRGA & EHS" || StatusPickNPlaceBot === "Return PURCHASING,PPIC,MP&L" || StatusPickNPlaceBot === "Return PROCESS ENGINEERING" || StatusPickNPlaceBot === "Return PRODUCT DEVELOPMENT" || StatusPickNPlaceBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataPickNPlaceBOTReturnMaintenance);
+                        setOptionData(dataPickNPlaceBOTReturnRepair);
                         setButton("PickNPlaceBot");
-                      } else if (StatusPickNPlaceBot === "Return HRGA & EHS" || StatusPickNPlaceBot === "Return PURCHASING,PPIC,MP&L" || StatusPickNPlaceBot === "Return PROCESS ENGINEERING" || StatusPickNPlaceBot === "Return PRODUCT DEVELOPMENT" || StatusPickNPlaceBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataPickNPlaceBOTReturnOthers);
-                        setButton("PickNPlaceBot");
-                      } else if (StatusPickNPlaceBot === "Return Repair Maintenance") {
+                      } else if (StatusPickNPlaceBot === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataPickNPlaceBOTReturnMaintenance);
-                        setButton("PickNPlaceBot");
-                      } else if (StatusPickNPlaceBot === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataPickNPlaceBOTReturnOthers);
+                        setOptionData(dataPickNPlaceBOTReturnRepair);
                         setButton("PickNPlaceBot");
                       } else if (StatusPickNPlaceBot === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataPickNPlaceBOTValidation);
+                        setButton("PickNPlaceBot");
+                      } else if (StatusPickNPlaceBot === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataPickNPlaceBOTValidationReturn);
                         setButton("PickNPlaceBot");
                       }
                       setStation(PickNPlaceBot);
@@ -1493,55 +1485,48 @@ const SmtBot = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
-                <button
+                  <button
                     style={{
                       backgroundColor: backgroundColorStatusReflowBot,
                     }}
                     value={ReflowBot}
                     onClick={() => {
                       if (StatusReflowBot === "Leader") {
+
                         setIsOpenLeader(true);
                         setOptionData(dataReflowBOTLeader);
                         setButton("ReflowBot");
-                      } else if (StatusReflowBot === "MAINTENANCE & IT") {
+                      } else if (StatusReflowBot === "MAINTENANCE & IT" || StatusReflowBot === "HRGA & EHS" || StatusReflowBot === "PURCHASING,PPIC,MP&L" || StatusReflowBot === "PROCESS ENGINEERING" || StatusReflowBot === "PRODUCT DEVELOPMENT" || StatusReflowBot === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataReflowBOTMaintenance);
+                        setOptionData(dataReflowBOTRepair);
                         setButton("ReflowBot");
-                      } else if (StatusReflowBot === "HRGA & EHS" || StatusReflowBot === "PURCHASING,PPIC,MP&L" || StatusReflowBot === "PROCESS ENGINEERING" || StatusReflowBot === "PRODUCT DEVELOPMENT" || StatusReflowBot === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataReflowBOTOthers);
-                        setButton("ReflowBot");
-                      } else if (StatusReflowBot === "Repair Maintenance") {
+                      } else if (StatusReflowBot === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataReflowBOTMaintenance);
-                        setButton("ReflowBot");
-                      } else if (StatusReflowBot === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataReflowBOTOthers);
+                        setOptionData(dataReflowBOTRepair);
                         setButton("ReflowBot");
                       } else if (StatusReflowBot === "QA" || StatusReflowBot === "QC" || StatusReflowBot === "Production Leader" || StatusReflowBot === "Sub Leader") {
-                        setIsRequestValidation(true);
+                        setIsOpenRequestValidation(true);
                         setOptionData(dataReflowBOTValidation);
                         setButton("ReflowBot");
-                      } else if (StatusReflowBot === "Return MAINTENANCE & IT") {
+                      } else if (StatusReflowBot === "Return QA" || StatusReflowBot === "Return QC" || StatusReflowBot === "Return Production Leader" || StatusReflowBot === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataReflowBOTValidationReturn);
+                        setButton("ReflowBot");
+                      } else if (StatusReflowBot === "Return MAINTENANCE & IT" || StatusReflowBot === "Return HRGA & EHS" || StatusReflowBot === "Return PURCHASING,PPIC,MP&L" || StatusReflowBot === "Return PROCESS ENGINEERING" || StatusReflowBot === "Return PRODUCT DEVELOPMENT" || StatusReflowBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataReflowBOTReturnMaintenance);
+                        setOptionData(dataReflowBOTReturnRepair);
                         setButton("ReflowBot");
-                      } else if (StatusReflowBot === "Return HRGA & EHS" || StatusReflowBot === "Return PURCHASING,PPIC,MP&L" || StatusReflowBot === "Return PROCESS ENGINEERING" || StatusReflowBot === "Return PRODUCT DEVELOPMENT" || StatusReflowBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataReflowBOTReturnOthers);
-                        setButton("ReflowBot");
-                      } else if (StatusReflowBot === "Return Repair Maintenance") {
+                      } else if (StatusReflowBot === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataReflowBOTReturnMaintenance);
-                        setButton("ReflowBot");
-                      } else if (StatusReflowBot === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataReflowBOTReturnOthers);
+                        setOptionData(dataReflowBOTReturnRepair);
                         setButton("ReflowBot");
                       } else if (StatusReflowBot === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataReflowBOTValidation);
+                        setButton("ReflowBot");
+                      } else if (StatusReflowBot === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataReflowBOTValidationReturn);
                         setButton("ReflowBot");
                       }
                       setStation(ReflowBot);
@@ -1566,55 +1551,48 @@ const SmtBot = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
-                <button
+                  <button
                     style={{
                       backgroundColor: backgroundColorStatusAOIBot,
                     }}
                     value={AOIBot}
                     onClick={() => {
                       if (StatusAOIBot === "Leader") {
+
                         setIsOpenLeader(true);
                         setOptionData(dataAOIBOTLeader);
                         setButton("AOIBot");
-                      } else if (StatusAOIBot === "MAINTENANCE & IT") {
+                      } else if (StatusAOIBot === "MAINTENANCE & IT" || StatusAOIBot === "HRGA & EHS" || StatusAOIBot === "PURCHASING,PPIC,MP&L" || StatusAOIBot === "PROCESS ENGINEERING" || StatusAOIBot === "PRODUCT DEVELOPMENT" || StatusAOIBot === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataAOIBOTMaintenance);
+                        setOptionData(dataAOIBOTRepair);
                         setButton("AOIBot");
-                      } else if (StatusAOIBot === "HRGA & EHS" || StatusAOIBot === "PURCHASING,PPIC,MP&L" || StatusAOIBot === "PROCESS ENGINEERING" || StatusAOIBot === "PRODUCT DEVELOPMENT" || StatusAOIBot === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataAOIBOTOthers);
-                        setButton("AOIBot");
-                      } else if (StatusAOIBot === "Repair Maintenance") {
+                      } else if (StatusAOIBot === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataAOIBOTMaintenance);
-                        setButton("AOIBot");
-                      } else if (StatusAOIBot === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataAOIBOTOthers);
+                        setOptionData(dataAOIBOTRepair);
                         setButton("AOIBot");
                       } else if (StatusAOIBot === "QA" || StatusAOIBot === "QC" || StatusAOIBot === "Production Leader" || StatusAOIBot === "Sub Leader") {
-                        setIsRequestValidation(true);
+                        setIsOpenRequestValidation(true);
                         setOptionData(dataAOIBOTValidation);
                         setButton("AOIBot");
-                      } else if (StatusAOIBot === "Return MAINTENANCE & IT") {
+                      } else if (StatusAOIBot === "Return QA" || StatusAOIBot === "Return QC" || StatusAOIBot === "Return Production Leader" || StatusAOIBot === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataAOIBOTValidationReturn);
+                        setButton("AOIBot");
+                      } else if (StatusAOIBot === "Return MAINTENANCE & IT" || StatusAOIBot === "Return HRGA & EHS" || StatusAOIBot === "Return PURCHASING,PPIC,MP&L" || StatusAOIBot === "Return PROCESS ENGINEERING" || StatusAOIBot === "Return PRODUCT DEVELOPMENT" || StatusAOIBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataAOIBOTReturnMaintenance);
+                        setOptionData(dataAOIBOTReturnRepair);
                         setButton("AOIBot");
-                      } else if (StatusAOIBot === "Return HRGA & EHS" || StatusAOIBot === "Return PURCHASING,PPIC,MP&L" || StatusAOIBot === "Return PROCESS ENGINEERING" || StatusAOIBot === "Return PRODUCT DEVELOPMENT" || StatusAOIBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataAOIBOTReturnOthers);
-                        setButton("AOIBot");
-                      } else if (StatusAOIBot === "Return Repair Maintenance") {
+                      } else if (StatusAOIBot === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataAOIBOTReturnMaintenance);
-                        setButton("AOIBot");
-                      } else if (StatusAOIBot === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataAOIBOTReturnOthers);
+                        setOptionData(dataAOIBOTReturnRepair);
                         setButton("AOIBot");
                       } else if (StatusAOIBot === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataAOIBOTValidation);
+                        setButton("AOIBot");
+                      } else if (StatusAOIBot === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataAOIBOTValidationReturn);
                         setButton("AOIBot");
                       }
                       setStation(AOIBot);
@@ -1632,55 +1610,48 @@ const SmtBot = () => {
               <div class="flex flex-col ">
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72 2xl:w-96">
-                <button
+                  <button
                     style={{
                       backgroundColor: backgroundColorStatusRVSBot,
                     }}
                     value={RVSBot}
                     onClick={() => {
                       if (StatusRVSBot === "Leader") {
+
                         setIsOpenLeader(true);
                         setOptionData(dataRVSBOTLeader);
                         setButton("RVSBot");
-                      } else if (StatusRVSBot === "MAINTENANCE & IT") {
+                      } else if (StatusRVSBot === "MAINTENANCE & IT" || StatusRVSBot === "HRGA & EHS" || StatusRVSBot === "PURCHASING,PPIC,MP&L" || StatusRVSBot === "PROCESS ENGINEERING" || StatusRVSBot === "PRODUCT DEVELOPMENT" || StatusRVSBot === "ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenRequest(true);
-                        setOptionData(dataRVSBOTMaintenance);
+                        setOptionData(dataRVSBOTRepair);
                         setButton("RVSBot");
-                      } else if (StatusRVSBot === "HRGA & EHS" || StatusRVSBot === "PURCHASING,PPIC,MP&L" || StatusRVSBot === "PROCESS ENGINEERING" || StatusRVSBot === "PRODUCT DEVELOPMENT" || StatusRVSBot === "ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenRequest(true);
-                        setOptionData(dataRVSBOTOthers);
-                        setButton("RVSBot");
-                      } else if (StatusRVSBot === "Repair Maintenance") {
+                      } else if (StatusRVSBot === "Repair") {
                         setIsOpenRepair(true);
-                        setOptionData(dataRVSBOTMaintenance);
-                        setButton("RVSBot");
-                      } else if (StatusRVSBot === "Repair Others") {
-                        setIsOpenRepair(true);
-                        setOptionData(dataRVSBOTOthers);
+                        setOptionData(dataRVSBOTRepair);
                         setButton("RVSBot");
                       } else if (StatusRVSBot === "QA" || StatusRVSBot === "QC" || StatusRVSBot === "Production Leader" || StatusRVSBot === "Sub Leader") {
-                        setIsRequestValidation(true);
+                        setIsOpenRequestValidation(true);
                         setOptionData(dataRVSBOTValidation);
                         setButton("RVSBot");
-                      } else if (StatusRVSBot === "Return MAINTENANCE & IT") {
+                      } else if (StatusRVSBot === "Return QA" || StatusRVSBot === "Return QC" || StatusRVSBot === "Return Production Leader" || StatusRVSBot === "Return Sub Leader") {
+                        setIsOpenRequestValidationReturn(true);
+                        setOptionData(dataRVSBOTValidationReturn);
+                        setButton("RVSBot");
+                      } else if (StatusRVSBot === "Return MAINTENANCE & IT" || StatusRVSBot === "Return HRGA & EHS" || StatusRVSBot === "Return PURCHASING,PPIC,MP&L" || StatusRVSBot === "Return PROCESS ENGINEERING" || StatusRVSBot === "Return PRODUCT DEVELOPMENT" || StatusRVSBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
-                        setOptionData(dataRVSBOTReturnMaintenance);
+                        setOptionData(dataRVSBOTReturnRepair);
                         setButton("RVSBot");
-                      } else if (StatusRVSBot === "Return HRGA & EHS" || StatusRVSBot === "Return PURCHASING,PPIC,MP&L" || StatusRVSBot === "Return PROCESS ENGINEERING" || StatusRVSBot === "Return PRODUCT DEVELOPMENT" || StatusRVSBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
-                        setIsOpenReturn(true);
-                        setOptionData(dataRVSBOTReturnOthers);
-                        setButton("RVSBot");
-                      } else if (StatusRVSBot === "Return Repair Maintenance") {
+                      } else if (StatusRVSBot === "Return Repair") {
                         setIsOpenReturnRepair(true);
-                        setOptionData(dataRVSBOTReturnMaintenance);
-                        setButton("RVSBot");
-                      } else if (StatusRVSBot === "Return Repair Others") {
-                        setIsOpenReturnRepair(true);
-                        setOptionData(dataRVSBOTReturnOthers);
+                        setOptionData(dataRVSBOTReturnRepair);
                         setButton("RVSBot");
                       } else if (StatusRVSBot === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataRVSBOTValidation);
+                        setButton("RVSBot");
+                      } else if (StatusRVSBot === "Go (Return)") {
+                        setIsOpenValidationReturn(true);
+                        setOptionData(dataRVSBOTValidationReturn);
                         setButton("RVSBot");
                       }
                       setStation(RVSBot);
@@ -1698,6 +1669,7 @@ const SmtBot = () => {
         </div>
       </main>
 
+{/* Status Request Perbaikan  */}
       {/*Pop up Request */}
       <td>
         {isOpenRequest ? (
@@ -1738,7 +1710,7 @@ const SmtBot = () => {
                         <svg fill="#B48900" class="mx-auto mb-4  animate-pulse w-14 h-14 dark:text-gray-200" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M187.698 120.105c41.846-15.492 89.309-5.554 121.432 26.561 44.941 44.941 44.941 117.826-.002 162.769-44.953 44.953-117.828 44.953-162.781 0-32.25-32.25-42.125-79.975-26.367-121.934 3.977-10.589-1.383-22.396-11.972-26.373s-22.396 1.383-26.373 11.972c-21.357 56.869-7.968 121.581 35.749 165.298 60.949 60.949 159.758 60.949 220.707 0 60.939-60.939 60.939-159.758 0-220.697-43.541-43.53-107.898-57.005-164.614-36.008-10.607 3.927-16.023 15.709-12.096 26.316s15.709 16.023 26.316 12.096z" /><path d="M161.408 118.082l52.879 52.869c4.331 4.334 4.331 11.381-.001 15.713l-27.924 27.924c-4.341 4.341-11.373 4.341-15.714 0l-52.594-52.584c-7.999-7.997-20.966-7.996-28.963.003s-7.996 20.966.003 28.963l52.593 52.582c20.336 20.336 53.302 20.336 73.639-.001l27.924-27.924c20.326-20.326 20.326-53.297.006-73.634l-52.887-52.877c-7.999-7.997-20.966-7.996-28.963.003s-7.996 20.966.003 28.963zM836.42 904.635c-41.846 15.492-89.309 5.554-121.432-26.561-44.941-44.941-44.941-117.826.002-162.769 44.953-44.953 117.828-44.953 162.781 0 32.25 32.25 42.125 79.975 26.367 121.934-3.977 10.589 1.383 22.396 11.972 26.373s22.396-1.383 26.373-11.972c21.357-56.869 7.968-121.581-35.749-165.298-60.949-60.949-159.758-60.949-220.707 0-60.939 60.939-60.939 159.758 0 220.697 43.541 43.53 107.898 57.005 164.614 36.008 10.607-3.927 16.023-15.709 12.096-26.316s-15.709-16.023-26.316-12.096z" /><path d="M862.712 906.659l-52.869-52.869c-4.34-4.34-4.34-11.377-.006-15.708l27.923-27.933c4.339-4.339 11.37-4.339 15.711.003l52.594 52.584c7.999 7.997 20.966 7.996 28.963-.003s7.996-20.966-.003-28.963l-52.593-52.582c-20.336-20.336-53.302-20.336-73.639.001l-27.917 27.927c-20.335 20.319-20.335 53.299.003 73.638l52.869 52.869c7.998 7.998 20.965 7.998 28.963 0s7.998-20.965 0-28.963zM674.469 738.186l-391.26-391.26c-7.998-7.998-20.965-7.998-28.963 0s-7.998 20.965 0 28.963l391.26 391.26c7.998 7.998 20.965 7.998 28.963 0s7.998-20.965 0-28.963zM343.768 279.258l400.374 400.374c7.998 7.998 20.965 7.998 28.963 0s7.998-20.965 0-28.963L372.731 250.295c-7.998-7.998-20.965-7.998-28.963 0s-7.998 20.965 0 28.963zm255.917 112.52l176.732-176.732c7.998-7.998 7.998-20.965 0-28.963s-20.965-7.998-28.963 0L570.722 362.815c-7.998 7.998-7.998 20.965 0 28.963s20.965 7.998 28.963 0zm214.393-149.914L631.53 422.641c-8.037 7.959-8.1 20.926-.141 28.963s20.926 8.1 28.963.141L842.9 270.968c8.037-7.959 8.1-20.926.141-28.963s-20.926-8.1-28.963-.141z" /><path d="M945.721 131.005a20.48 20.48 0 014.873 21.176l-28.201 81.531a20.481 20.481 0 01-12.659 12.66l-81.541 28.211a20.48 20.48 0 01-21.179-4.874l-53.32-53.33a20.48 20.48 0 01-4.872-21.175l28.201-81.531a20.478 20.478 0 0112.658-12.659l81.531-28.211a20.478 20.478 0 0121.178 4.873l53.33 53.33zm-73.228-15.302l-60.012 20.765-20.758 60.014 35.194 35.201 60.021-20.766 20.758-60.012-35.202-35.202zm-421.165 544.57L208.763 902.838c-7.497 7.497-16.502 8.466-19.734 5.237l-74.541-74.541c-3.223-3.226-2.254-12.226 5.248-19.733l242.089-242.079c7.998-7.998 7.998-20.965.001-28.963s-20.965-7.998-28.963-.001L90.769 784.842c-22.28 22.295-26.003 56.877-5.249 77.648l74.553 74.553c20.778 20.76 55.375 17.036 77.654-5.243l242.565-242.565c7.998-7.998 7.998-20.965 0-28.963s-20.965-7.998-28.963 0z" /></svg>
 
                         <h3 class=" text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
-                          Permintaan Bantuan Perbaikan Oleh : {OptionData?.Requestor || ""} <br /> <span className="text-green-500"> To Department : {OptionData?.Department || ""}</span>
+                          <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong> Permintaan Bantuan Perbaikan Oleh : {OptionData?.Requestor || ""} <br /> <span className="text-green-500"> To Department : {OptionData?.Department || ""}</span>
                         </h3>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full  px-3">
@@ -1788,15 +1760,15 @@ const SmtBot = () => {
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                                 name="NamaPIC"
                                 readOnly
-                              value={
-                                 Button === "PrinterBot" ? TimePrinterBot :
-                                  Button === "SPIBot" ? TimeSPIBot :
-                                  Button === "PickNPlaceBot" ? TimePickNPlaceBot :
-                                  Button === "ReflowBot" ? TimeReflowBot :
-                                  Button === "AOIBot" ? TimeAOIBot :
-                                  Button === "RVSBot" ? TimeRVSBot :
-                                    ""
-                              }
+                                value={
+                                  Button === "PrinterBot" ? TimePrinterBot :
+                                    Button === "SPIBot" ? TimeSPIBot :
+                                      Button === "PickNPlaceBot" ? TimePickNPlaceBot :
+                                        Button === "ReflowBot" ? TimeReflowBot :
+                                          Button === "AOIBot" ? TimeAOIBot :
+                                            Button === "RVSBot" ? TimeRVSBot :
+                                              ""
+                                }
                               />
                             )}
                           </div>
@@ -1819,7 +1791,12 @@ const SmtBot = () => {
           </>
         ) : null}
       </td>
+{/* ---------------------- */}
 
+
+
+
+{/* Status Repair  */}
       {/*Pop up Repair  */}
       <td>
         {isOpenRepair ? (
@@ -1869,7 +1846,7 @@ const SmtBot = () => {
                             <path d="M27.472 25.67l3.511 2.664c0.764-1.983 0.2-4.311-1.579-5.661-1.368-1.038-3.108-1.248-4.61-0.713l-0.532-0.403-0.070-0.132c0.37-0.526 0.691-1.076 0.961-1.644l2.417-0.067 0.495-1.58-1.953-1.438c0.095-0.591 0.142-1.189 0.143-1.786l2.167-1.1-0.229-1.64-2.392-0.468c-0.2-0.688-0.466-1.362-0.798-2.011l1.426-1.973-0.954-1.354-2.347 0.682c-0.029-0.031-0.058-0.062-0.088-0.093-0.375-0.388-0.771-0.743-1.184-1.066l0.451-2.321-1.435-0.827-1.781 1.551c-0.577-0.232-1.169-0.415-1.769-0.549l-0.584-2.291-1.651-0.135-0.951 2.172c-0.492 0.030-0.982 0.091-1.468 0.185l-1.454-1.877-1.568 0.533-0.008 2.39c-0.664 0.342-1.303 0.753-1.904 1.236l-2.215-0.998-1.134 1.207 1.134 2.151c-0.366 0.521-0.683 1.067-0.951 1.63l-2.433 0.067-0.495 1.58 1.966 1.448c-0.094 0.586-0.142 1.179-0.144 1.772l-2.18 1.106 0.229 1.64 2.394 0.468c0.143 0.498 0.319 0.989 0.531 1.468l-1.58 1.959 0.881 1.402 2.453-0.573c0.154 0.181 0.315 0.359 0.482 0.532 0.353 0.365 0.723 0.701 1.107 1.008l-0.477 2.459 1.435 0.827 1.873-1.632c0.538 0.216 1.089 0.389 1.649 0.519l0.612 2.401 1.651 0.135 0.991-2.263c0.686-0.041 1.369-0.144 2.041-0.308l1.576 1.825 1.538-0.616-0.083-1.685 0.974 0.739c-0.115 1.597 0.543 3.233 1.909 4.271 1.778 1.349 4.172 1.266 5.877-0.004l-3.51-2.663c-0.619-0.469-0.762-1.358-0.312-1.952s1.328-0.672 1.946-0.202zM13.845 23.736c-1.985-0.224-3.892-1.12-5.388-2.669-3.421-3.538-3.323-9.167 0.216-12.587s9.17-3.36 12.59 0.178c3.012 3.115 3.293 7.878 0.903 11.308l-5.822-4.417c0.11-1.589-0.561-3.21-1.928-4.247-1.778-1.349-4.172-1.266-5.877 0.004l3.51 2.663c0.618 0.469 0.78 1.334 0.33 1.929s-1.346 0.696-1.964 0.226l-3.51-2.663c-0.763 1.983-0.2 4.311 1.579 5.661 1.367 1.036 3.121 1.229 4.628 0.688l4.617 3.503c-1.254 0.428-2.582 0.569-3.883 0.422z"></path>
                           </svg>
                           <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-serif text-gray-500 dark:text-gray-400">
-                            Sedang Dalam Perbaikan Oleh Team  {OptionData?.Department || ""}
+                            <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong> Sedang Dalam Perbaikan Oleh Team  {OptionData?.Department || ""}
                           </h3>
 
                           <div className="flex flex-col mt-2">
@@ -1879,20 +1856,20 @@ const SmtBot = () => {
                                   Down Time:
                                 </label>
                                 {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "PickNPlaceBotTop" || Button === "ReflowTop" || Button === "AOIBot" || Button === "RVSBot") && (
-                              <input
-                                type="text"
-                                className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                                name="NamaPIC"
-                                readOnly
-                              value={
-                                 Button === "PrinterBot" ? TimePrinterBot :
-                                  Button === "SPIBot" ? TimeSPIBot :
-                                  Button === "PickNPlaceBot" ? TimePickNPlaceBot :
-                                  Button === "ReflowBot" ? TimeReflowBot :
-                                  Button === "AOIBot" ? TimeAOIBot :
-                                  Button === "RVSBot" ? TimeRVSBot :
-                                    ""
-                              }
+                                  <input
+                                    type="text"
+                                    className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                    name="NamaPIC"
+                                    readOnly
+                                    value={
+                                      Button === "PrinterBot" ? TimePrinterBot :
+                                        Button === "SPIBot" ? TimeSPIBot :
+                                          Button === "PickNPlaceBot" ? TimePickNPlaceBot :
+                                            Button === "ReflowBot" ? TimeReflowBot :
+                                              Button === "AOIBot" ? TimeAOIBot :
+                                                Button === "RVSBot" ? TimeRVSBot :
+                                                  ""
+                                    }
                                   />
                                 )}
                               </div>
@@ -1967,7 +1944,7 @@ const SmtBot = () => {
                             <path d="M27.472 25.67l3.511 2.664c0.764-1.983 0.2-4.311-1.579-5.661-1.368-1.038-3.108-1.248-4.61-0.713l-0.532-0.403-0.070-0.132c0.37-0.526 0.691-1.076 0.961-1.644l2.417-0.067 0.495-1.58-1.953-1.438c0.095-0.591 0.142-1.189 0.143-1.786l2.167-1.1-0.229-1.64-2.392-0.468c-0.2-0.688-0.466-1.362-0.798-2.011l1.426-1.973-0.954-1.354-2.347 0.682c-0.029-0.031-0.058-0.062-0.088-0.093-0.375-0.388-0.771-0.743-1.184-1.066l0.451-2.321-1.435-0.827-1.781 1.551c-0.577-0.232-1.169-0.415-1.769-0.549l-0.584-2.291-1.651-0.135-0.951 2.172c-0.492 0.030-0.982 0.091-1.468 0.185l-1.454-1.877-1.568 0.533-0.008 2.39c-0.664 0.342-1.303 0.753-1.904 1.236l-2.215-0.998-1.134 1.207 1.134 2.151c-0.366 0.521-0.683 1.067-0.951 1.63l-2.433 0.067-0.495 1.58 1.966 1.448c-0.094 0.586-0.142 1.179-0.144 1.772l-2.18 1.106 0.229 1.64 2.394 0.468c0.143 0.498 0.319 0.989 0.531 1.468l-1.58 1.959 0.881 1.402 2.453-0.573c0.154 0.181 0.315 0.359 0.482 0.532 0.353 0.365 0.723 0.701 1.107 1.008l-0.477 2.459 1.435 0.827 1.873-1.632c0.538 0.216 1.089 0.389 1.649 0.519l0.612 2.401 1.651 0.135 0.991-2.263c0.686-0.041 1.369-0.144 2.041-0.308l1.576 1.825 1.538-0.616-0.083-1.685 0.974 0.739c-0.115 1.597 0.543 3.233 1.909 4.271 1.778 1.349 4.172 1.266 5.877-0.004l-3.51-2.663c-0.619-0.469-0.762-1.358-0.312-1.952s1.328-0.672 1.946-0.202zM13.845 23.736c-1.985-0.224-3.892-1.12-5.388-2.669-3.421-3.538-3.323-9.167 0.216-12.587s9.17-3.36 12.59 0.178c3.012 3.115 3.293 7.878 0.903 11.308l-5.822-4.417c0.11-1.589-0.561-3.21-1.928-4.247-1.778-1.349-4.172-1.266-5.877 0.004l3.51 2.663c0.618 0.469 0.78 1.334 0.33 1.929s-1.346 0.696-1.964 0.226l-3.51-2.663c-0.763 1.983-0.2 4.311 1.579 5.661 1.367 1.036 3.121 1.229 4.628 0.688l4.617 3.503c-1.254 0.428-2.582 0.569-3.883 0.422z"></path>
                           </svg>
                           <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-serif text-gray-500 dark:text-gray-400">
-                            Sedang Dalam Return Perbaikan Oleh Team : {OptionData?.Department || ""}
+                            <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong>  Sedang Dalam Return Perbaikan Oleh Team : {OptionData?.Department || ""}
                           </h3>
 
                           <div className="flex flex-col mt-2">
@@ -1976,20 +1953,20 @@ const SmtBot = () => {
                                 Down Time:
                               </label>
                               {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "PickNPlaceBotTop" || Button === "ReflowTop" || Button === "AOIBot" || Button === "RVSBot") && (
-                              <input
-                                type="text"
-                                className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                                name="NamaPIC"
-                                readOnly
-                              value={
-                                 Button === "PrinterBot" ? TimePrinterBot :
-                                  Button === "SPIBot" ? TimeSPIBot :
-                                  Button === "PickNPlaceBot" ? TimePickNPlaceBot :
-                                  Button === "ReflowBot" ? TimeReflowBot :
-                                  Button === "AOIBot" ? TimeAOIBot :
-                                  Button === "RVSBot" ? TimeRVSBot :
-                                    ""
-                              }
+                                <input
+                                  type="text"
+                                  className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                  name="NamaPIC"
+                                  readOnly
+                                  value={
+                                    Button === "PrinterBot" ? TimePrinterBot :
+                                      Button === "SPIBot" ? TimeSPIBot :
+                                        Button === "PickNPlaceBot" ? TimePickNPlaceBot :
+                                          Button === "ReflowBot" ? TimeReflowBot :
+                                            Button === "AOIBot" ? TimeAOIBot :
+                                              Button === "RVSBot" ? TimeRVSBot :
+                                                ""
+                                  }
                                 />
                               )}
                             </div>
@@ -2012,7 +1989,12 @@ const SmtBot = () => {
           </>
         ) : null}
       </td>
+{/* ---------------------- */}
 
+
+
+
+{/* Status Return  */}
       {/*Pop up Return */}
       <td>
         {isOpenReturn ? (
@@ -2055,7 +2037,7 @@ const SmtBot = () => {
                         <svg fill="#801818" class="mx-auto mb-4  animate-pulse w-14 h-14 dark:text-gray-200" viewBox="0 0 24 24" id="Layer_1" version="1.1" ><path d="M18,18c-0.55,0-1,0.45-1,1v1H6V4h6v5c0,0.55,0.45,1,1,1h4v1c0,0.55,0.45,1,1,1s1-0.45,1-1V9c0-0.13-0.03-0.25-0.07-0.37  c-0.02-0.04-0.04-0.08-0.07-0.11c-0.03-0.05-0.05-0.11-0.09-0.16l-5-6c-0.01-0.01-0.02-0.02-0.03-0.03  c-0.07-0.07-0.15-0.13-0.23-0.18c-0.03-0.02-0.06-0.05-0.1-0.06C13.28,2.03,13.15,2,13,2H5C4.45,2,4,2.45,4,3v18c0,0.55,0.45,1,1,1  h13c0.55,0,1-0.45,1-1v-2C19,18.45,18.55,18,18,18z M14,5.76L15.86,8H14V5.76z" /><path d="M8,10h2c0.55,0,1-0.45,1-1s-0.45-1-1-1H8C7.45,8,7,8.45,7,9S7.45,10,8,10z" /><path d="M13,11H8c-0.55,0-1,0.45-1,1s0.45,1,1,1h5c0.55,0,1-0.45,1-1S13.55,11,13,11z" /><path d="M13,14H8c-0.55,0-1,0.45-1,1s0.45,1,1,1h5c0.55,0,1-0.45,1-1S13.55,14,13,14z" /><path d="M13,17H8c-0.55,0-1,0.45-1,1s0.45,1,1,1h5c0.55,0,1-0.45,1-1S13.55,17,13,17z" /><path d="M20.71,12.29c-0.39-0.39-1.02-0.39-1.41,0L18,13.59l-1.29-1.29c-0.39-0.39-1.02-0.39-1.41,0s-0.39,1.02,0,1.41L16.59,15  l-1.29,1.29c-0.39,0.39-0.39,1.02,0,1.41s1.02,0.39,1.41,0L18,16.41l1.29,1.29C19.49,17.9,19.74,18,20,18s0.51-0.1,0.71-0.29  c0.39-0.39,0.39-1.02,0-1.41L19.41,15l1.29-1.29C21.1,13.32,21.1,12.68,20.71,12.29z" /></svg>
 
                         <h3 class=" text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
-                          Validation Telah Di Tolak / Di kembalikan Oleh : {OptionData?.Requestor || ""} <br /> <span className="text-green-500"> Department : {OptionData?.Department || ""}</span>
+                          <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong> Validation Telah Di Tolak / Di kembalikan Oleh : {OptionData?.Requestor || ""} <br /> <span className="text-green-500"> Department : {OptionData?.Department || ""}</span>
                         </h3>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full  px-3">
@@ -2105,15 +2087,15 @@ const SmtBot = () => {
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                                 name="NamaPIC"
                                 readOnly
-                              value={
-                                 Button === "PrinterBot" ? TimePrinterBot :
-                                  Button === "SPIBot" ? TimeSPIBot :
-                                  Button === "PickNPlaceBot" ? TimePickNPlaceBot :
-                                  Button === "ReflowBot" ? TimeReflowBot :
-                                  Button === "AOIBot" ? TimeAOIBot :
-                                  Button === "RVSBot" ? TimeRVSBot :
-                                    ""
-                              }
+                                value={
+                                  Button === "PrinterBot" ? TimePrinterBot :
+                                    Button === "SPIBot" ? TimeSPIBot :
+                                      Button === "PickNPlaceBot" ? TimePickNPlaceBot :
+                                        Button === "ReflowBot" ? TimeReflowBot :
+                                          Button === "AOIBot" ? TimeAOIBot :
+                                            Button === "RVSBot" ? TimeRVSBot :
+                                              ""
+                                }
                               />
                             )}
                           </div>
@@ -2132,13 +2114,15 @@ const SmtBot = () => {
           </>
         ) : null}
       </td>
+{/* ---------------------- */}
 
 
 
 
+{/* Status Request Validation */}
       {/*Pop up Request Validation  */}
       <td>
-        {isRequestValidation ? (
+        {isOpenRequestValidation ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-start justify-center min-h-screen  px-4 pb-96 text-center sm:block sm:p-0">
@@ -2154,7 +2138,7 @@ const SmtBot = () => {
                         className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
                         onClick={() => {
 
-                          setIsRequestValidation(false);
+                          setIsOpenRequestValidation(false);
                         }}
                       >
                         <svg
@@ -2178,7 +2162,7 @@ const SmtBot = () => {
                         </svg>
 
                         <h3 class="mb-3 text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
-                         Permintaan Untuk Validation {OptionData?.DepartTo || ""}  :
+                          Permintaan Untuk Validation {OptionData?.DepartTo || ""}  :
                         </h3>
                         <div class="flex flex-wrap -mx-3 ">
                           <div class="w-full  px-3">
@@ -2240,15 +2224,15 @@ const SmtBot = () => {
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                                 name="NamaPIC"
                                 readOnly
-                              value={
-                                 Button === "PrinterBot" ? TimePrinterBot :
-                                  Button === "SPIBot" ? TimeSPIBot :
-                                  Button === "PickNPlaceBot" ? TimePickNPlaceBot :
-                                  Button === "ReflowBot" ? TimeReflowBot :
-                                  Button === "AOIBot" ? TimeAOIBot :
-                                  Button === "RVSBot" ? TimeRVSBot :
-                                    ""
-                              }
+                                value={
+                                  Button === "PrinterBot" ? TimePrinterBot :
+                                    Button === "SPIBot" ? TimeSPIBot :
+                                      Button === "PickNPlaceBot" ? TimePickNPlaceBot :
+                                        Button === "ReflowBot" ? TimeReflowBot :
+                                          Button === "AOIBot" ? TimeAOIBot :
+                                            Button === "RVSBot" ? TimeRVSBot :
+                                              ""
+                                }
                               />
                             )}
                           </div>
@@ -2270,9 +2254,142 @@ const SmtBot = () => {
       </td>
 
 
+      {/*Pop up Request Return Validation  */}
+      <td>
+        {isOpenRequestValidationReturn ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen  px-4 pb-96 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <button
+                        className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
+                        onClick={() => {
+
+                          setIsOpenRequestValidationReturn(false);
+                        }}
+                      >
+                        <svg
+                          className="w-6 h-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                      <div class="p-6 text-center">
+                        <svg class="mx-auto mb-4  animate-pulse w-14 h-14 dark:text-gray-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8.0001 10.1308C9.61344 8.97671 11.4547 8.57075 13 8.57075V6.22616C13 5.26817 13 4.78917 13.2952 4.65662C13.5903 4.52407 13.9484 4.8423 14.6644 5.47875L18.6367 9.00968C20.2053 10.404 20.9896 11.1012 20.9896 11.9993C20.9896 12.8975 20.2053 13.5946 18.6367 14.989L14.6644 18.5199C13.9484 19.1563 13.5903 19.4746 13.2952 19.342C13 19.2095 13 18.7305 13 17.7725V15.4279C9.4 15.4279 5.5 17.1422 4 19.9993C4 17.5676 4.37726 15.621 5.0001 14.0735" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+
+                        <h3 class="mb-3 text-base sm:text-base lg:text-base font-serif text-gray-500 dark:text-gray-400">
+                          <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong> Permintaan Untuk Return Validation {OptionData?.DepartTo || ""}  Oleh :
+                        </h3>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold ">
+                              PIC {OptionData?.Requestor || ""} :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={OptionData?.Nama || ""}
+
+                            />
+                          </div>
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold ">
+                              Request at  :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={formatDateAPI(OptionData?.Date) || ""}
+                            />
+                          </div>
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold ">
+                              Problem :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={OptionData?.Problem || ""}
+                            />
+                          </div>
+                          <div class="w-full  px-3">
+                            <label class="block  tracking-wide text-gray-700 text-xs font-bold ">
+                              Action :
+                            </label>
+                            <input
+                              type="text"
+                              class="appearance-none block w-full text-center  font-semibold bg-gray-100 text-slate-900 border rounded py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white"
+                              name="NamaPIC"
+                              readOnly
+                              value={OptionData?.Action || ""}
+                            />
+                          </div>
+                          <div class="w-full px-3">
+                            <label class="block tracking-wide text-gray-700 text-xs font-bold ">
+                              Down Time:
+                            </label>
+                            {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "PickNPlaceBotTop" || Button === "ReflowTop" || Button === "AOIBot" || Button === "RVSBot") && (
+                              <input
+                                type="text"
+                                className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                name="NamaPIC"
+                                readOnly
+                                value={
+                                  Button === "PrinterBot" ? TimePrinterBot :
+                                    Button === "SPIBot" ? TimeSPIBot :
+                                      Button === "PickNPlaceBot" ? TimePickNPlaceBot :
+                                        Button === "ReflowBot" ? TimeReflowBot :
+                                          Button === "AOIBot" ? TimeAOIBot :
+                                            Button === "RVSBot" ? TimeRVSBot :
+                                              ""
+                                }
+                              />
+                            )}
+                          </div>
+
+                        </div>
+
+                      </div>
 
 
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+{/* ------------------------------------- */}
+
+
+{/* Status Request Leader */}
 
       {/*Pop up leader  */}
       <td>
@@ -2287,7 +2404,7 @@ const SmtBot = () => {
                   aria-labelledby="modal-headline"
                 >
                   <div className="sm:flex sm:items-start">
-                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <div class="relative bg-white  rounded-lg shadow dark:bg-gray-700">
 
                       <button
                         className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
@@ -2396,15 +2513,15 @@ const SmtBot = () => {
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                                 name="NamaPIC"
                                 readOnly
-                              value={
-                                 Button === "PrinterBot" ? TimePrinterBot :
-                                  Button === "SPIBot" ? TimeSPIBot :
-                                  Button === "PickNPlaceBot" ? TimePickNPlaceBot :
-                                  Button === "ReflowBot" ? TimeReflowBot :
-                                  Button === "AOIBot" ? TimeAOIBot :
-                                  Button === "RVSBot" ? TimeRVSBot :
-                                    ""
-                              }
+                                value={
+                                  Button === "PrinterBot" ? TimePrinterBot :
+                                    Button === "SPIBot" ? TimeSPIBot :
+                                      Button === "PickNPlaceBot" ? TimePickNPlaceBot :
+                                        Button === "ReflowBot" ? TimeReflowBot :
+                                          Button === "AOIBot" ? TimeAOIBot :
+                                            Button === "RVSBot" ? TimeRVSBot :
+                                              ""
+                                }
                               />
                             )}
                           </div>
@@ -2425,9 +2542,91 @@ const SmtBot = () => {
         ) : null}
       </td>
 
+{/* -------------- */}
 
 
 
+
+
+{/* Status GO Atau Valid */}
+
+      {/*Pop up Validation Return  */}
+      <td>
+        {isOpenValidationReturn ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen pt-32 px-4 pb-20 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg  "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <form>
+                      <div class="relative bg-white 2xl:w-[500px] rounded-lg shadow dark:bg-gray-700">
+                        <button
+                          className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
+                          onClick={() => {
+
+                            setIsOpenValidationReturn(false);
+                          }}
+                        >
+                          <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
+                        <div class="p-6 text-center">
+                          <svg fill="#27AE60" class="mx-auto mb-4 animate-bounce w-32 h-14 " viewBox="0 0 64 64" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"><defs></defs><title /><path class="cls-1" d="M24.64,52.06a5.55,5.55,0,0,1-3.94-1.63L6.43,36.16a5.57,5.57,0,0,1,0-7.87,5.58,5.58,0,0,1,7.88,0L24.64,38.62l1.85-1.85a2,2,0,1,1,2.83,2.83l-3.26,3.26a2,2,0,0,1-2.83,0L11.48,31.11a1.57,1.57,0,0,0-2.22,2.22L23.53,47.6a1.59,1.59,0,0,0,2.22,0l29-29a1.57,1.57,0,0,0-2.22-2.21L36.63,32.29a2,2,0,0,1-2.83-2.83L49.69,13.57a5.57,5.57,0,0,1,7.88,7.87l-29,29A5.54,5.54,0,0,1,24.64,52.06Z" fill /></svg>
+                          <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-serif text-gray-500 dark:text-gray-400">
+                            <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong>  Return Validation Telah di lakukan
+                          </h3>
+
+                          <div className="flex flex-col mt-2">
+                            <div class="w-full px-3">
+                              <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                Last Down Time Total:
+                              </label>
+
+                              <input
+                                type="text"
+                                class="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                name="NamaPIC"
+                                readOnly
+                                value={OptionData?.DownTime || ""}
+                              />
+
+
+                            </div>
+                            <span className="font-mono mt-2 text-gray-500 ">PIC Validation :  {OptionData?.ValidationName || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Department :  {OptionData?.DepartTo || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Requestor Validation :  {OptionData?.Requestor || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Validation AT :  {formatDateAPI(OptionData?.ValidationDate) || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Validation Desc :  {OptionData?.ValidationDescription || ""} </span>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
 
       {/*Pop up Validation  */}
       <td>
@@ -2436,14 +2635,14 @@ const SmtBot = () => {
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-start justify-center min-h-screen pt-32 px-4 pb-20 text-center sm:block sm:p-0">
                 <div
-                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg  "
                   role="dialog"
                   aria-modal="true"
                   aria-labelledby="modal-headline"
                 >
                   <div className="sm:flex sm:items-start">
                     <form>
-                      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                      <div class="relative bg-white 2xl:w-[500px] rounded-lg shadow dark:bg-gray-700">
                         <button
                           className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
                           onClick={() => {
@@ -2469,7 +2668,7 @@ const SmtBot = () => {
                         <div class="p-6 text-center">
                           <svg fill="#27AE60" class="mx-auto mb-4 animate-bounce w-32 h-14 " viewBox="0 0 64 64" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"><defs></defs><title /><path class="cls-1" d="M24.64,52.06a5.55,5.55,0,0,1-3.94-1.63L6.43,36.16a5.57,5.57,0,0,1,0-7.87,5.58,5.58,0,0,1,7.88,0L24.64,38.62l1.85-1.85a2,2,0,1,1,2.83,2.83l-3.26,3.26a2,2,0,0,1-2.83,0L11.48,31.11a1.57,1.57,0,0,0-2.22,2.22L23.53,47.6a1.59,1.59,0,0,0,2.22,0l29-29a1.57,1.57,0,0,0-2.22-2.21L36.63,32.29a2,2,0,0,1-2.83-2.83L49.69,13.57a5.57,5.57,0,0,1,7.88,7.87l-29,29A5.54,5.54,0,0,1,24.64,52.06Z" fill /></svg>
                           <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-serif text-gray-500 dark:text-gray-400">
-                            Validation Telah di lakukan
+                            <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong>  Validation Telah di lakukan
                           </h3>
 
                           <div className="flex flex-col mt-2">
@@ -2485,6 +2684,7 @@ const SmtBot = () => {
                                 readOnly
                                 value={OptionData?.DownTime || ""}
                               />
+
 
                             </div>
                             <span className="font-mono mt-2 text-gray-500 ">PIC Validation :  {OptionData?.ValidationName || ""} </span>
@@ -2505,13 +2705,7 @@ const SmtBot = () => {
           </>
         ) : null}
       </td>
-
-
-
-
-
-
-
+{/* -------- */}
 
 
 

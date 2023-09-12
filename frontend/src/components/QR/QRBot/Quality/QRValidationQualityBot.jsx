@@ -17,17 +17,15 @@ const database = firebase.database();
 
 function QRValidationQualityBOT() {
 
-
-
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT BOT");
   const [isQRValidationQuality, setIsQRValidationQuality] = useState(true);
-  const [isLoader, setIsLoader] = useState(false);
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
   const [Status, setStatus] = useState("Running");
+  const [isLoader, setIsLoader] = useState(false);
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
@@ -42,9 +40,6 @@ function QRValidationQualityBOT() {
     useState(null);
   // ....
 
-
-
- 
 
 
 
@@ -91,13 +86,17 @@ function QRValidationQualityBOT() {
       });
   };
 
+ 
+
+    
+
 
   // SUBMIT FILE
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
 
-    const styles = {
+   const styles = {
         background: "linear-gradient(45deg, #000, #626658, #292d1f)",
         height: "1000px",
     };
@@ -133,9 +132,14 @@ function QRValidationQualityBOT() {
     setIsLoader(true);
 
     setTimeout(() => {
-      window.location.href = '/Quality'; // Ganti dengan URL halaman tujuan
+      window.location.href = '/ValidationQuality'; // Ganti dengan URL halaman tujuan
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
+
+
+  
+
+
 
 
   return (
@@ -344,7 +348,7 @@ function QRValidationQualityBOT() {
                           </button>
                         </div>
                       </form>
-                      <a href="/Quality">
+                      <a href="/ValidationQuality">
                         <button
                           class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
 

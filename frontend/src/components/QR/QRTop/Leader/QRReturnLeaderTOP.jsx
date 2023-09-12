@@ -71,7 +71,7 @@ function QRReturnValidationLeaderTOP() {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/Return${DepartTo}`, {
+    fetch(`http://192.168.101.12:3001/api/ReturnRepair`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

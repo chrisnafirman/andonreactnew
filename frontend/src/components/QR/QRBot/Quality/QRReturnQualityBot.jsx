@@ -18,7 +18,7 @@ const database = firebase.database();
 function QRReturnQualityBOT() {
 
 
-
+  const [Uid, setUid] = useState("");
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
@@ -36,19 +36,15 @@ function QRReturnQualityBOT() {
 
 
 
+
   const [selectedOptionDepartment, setSelectedOptionDepartment] =
     useState(null);
   // ....
 
 
 
- 
-
-
-
-
   // QR
-  const submitMaintenance = () => {
+  const submitReturnRequest = () => {
     if (!NamaPIC || !Line || !Area || !Department || !Kerusakan) {
       alert("Harap isi semua kolom!");
       return;
@@ -62,7 +58,7 @@ function QRReturnQualityBOT() {
       Department: Department,
       Requestor: Requestor,
       Kerusakan: Kerusakan,
-
+      Uid: Uid,
     };
 
     alert("Return Telah Berhasil Di Kirim Ke Team Terkait");
@@ -72,7 +68,7 @@ function QRReturnQualityBOT() {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/Return${DepartTo}`, {
+    fetch(`http://192.168.101.12:3001/api/ReturnRepair`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -102,7 +98,7 @@ function QRReturnQualityBOT() {
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.12:3001/api/PutReturnRequestValidation`, {
+    fetch(`http://192.168.101.12:3001/api/PutStatusReturnValidation`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -125,7 +121,7 @@ function QRReturnQualityBOT() {
 
 
 
-    const styles = {
+   const styles = {
         background: "linear-gradient(45deg, #000, #626658, #292d1f)",
         height: "1000px",
     };
@@ -157,15 +153,15 @@ function QRReturnQualityBOT() {
 
   const OptionsDepartment = [
     { value: "", label: "-- Pilih Depart --" },
-    { value: "PURCHASING,PPIC,MP&L", value2: "Others", label: "PURCHASING,PPIC,MP&L" },
-    { value: "PROCESS ENGINEERING", value2: "Others", label: "PROCESS ENGINEERING" },
-    { value: "PRODUCT DEVELOPMENT", value2: "Others", label: "PRODUCT DEVELOPMENT" },
+    { value: "PURCHASING,PPIC,MP&L", value2: "Repair", label: "PURCHASING,PPIC,MP&L" },
+    { value: "PROCESS ENGINEERING", value2: "Repair", label: "PROCESS ENGINEERING" },
+    { value: "PRODUCT DEVELOPMENT", value2: "Repair", label: "PRODUCT DEVELOPMENT" },
     {
-      value: "ADVANCED MANUFACTURING ENGINEERING", value2: "others",
+      value: "ADVANCED MANUFACTURING ENGINEERING", value2: "Repair",
       label: "ADVANCED MANUFACTURING ENGINEERING",
     },
-    { value: "HRGA & EHS", value2: "Others", label: "HRGA & EHS" },
-    { value: "MAINTENANCE & IT", value2: "Maintenance", label: "MAINTENANCE & IT" },
+    { value: "HRGA & EHS", value2: "Repair", label: "HRGA & EHS" },
+    { value: "MAINTENANCE & IT", value2: "Repair", label: "MAINTENANCE & IT" },
 
   ];
 
@@ -175,18 +171,44 @@ function QRReturnQualityBOT() {
     setDepartTo(selectedOptionDepartment.value2);
   };
 
-
   const handleButtonClick = () => {
     submitUpdate();
-    submitMaintenance();
+    submitReturnRequest();
     setIsLoader(true);
 
     setTimeout(() => {
-      window.location.href = '/Quality'; // Ganti dengan URL halaman tujuan
+      window.location.href = '/ValidationQuality'; // Ganti dengan URL halaman tujuan
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
 
 
+
+  useEffect(() => {
+    fetchLatestUidByStation();
+  }, [Station]);
+
+  
+const fetchLatestUidByStation = () => {
+  fetch("http://192.168.101.12:3001/api/Repair")
+    .then((response) => response.json())
+    .then((data) => {
+      // Filter objek yang memiliki Station sesuai dengan yang Anda inginkan, misalnya "SPI (BOT)"
+      const matchingObjects = data.filter((item) => item.Station === Station);
+
+      // Jika ada objek yang sesuai, ambil UID dari objek terbaru
+      if (matchingObjects.length > 0) {
+        const latestObject = matchingObjects[matchingObjects.length - 1];
+        const latestUid = latestObject.Uid;
+        setUid(latestUid);
+      } else {
+        // Jika tidak ada objek yang sesuai, atur UID menjadi kosong atau nilai default yang sesuai
+        setUid("");
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching data from API:", error);
+    });
+};
 
   return (
     <body style={styles}>
@@ -216,7 +238,7 @@ function QRReturnQualityBOT() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Return For Repairment</span>
+                          <span>Return For Repairment {Uid}</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div className="w-full mt-3 px-3 mb-2 md:mb-0">
@@ -411,7 +433,7 @@ function QRReturnQualityBOT() {
                           </button>
                         </div>
                       </form>  
-                      <a href="/Quality">  
+                      <a href="/ValidationQuality">  
                       <button
                             class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                           
@@ -431,6 +453,7 @@ function QRReturnQualityBOT() {
           </>
         ) : null}
       </td>
+
       <td class="">
         {isLoader ? (
           <>
@@ -466,6 +489,7 @@ function QRReturnQualityBOT() {
           </>
         ) : null}
       </td>
+
 
       <div className="relative">
         {showPopupMesin && (

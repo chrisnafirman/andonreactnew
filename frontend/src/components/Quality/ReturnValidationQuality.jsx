@@ -275,7 +275,7 @@ const Quality = () => {
     // Lakukan pencarian dengan kata kunci yang telah dimasukkan
     const searchTermLower = searchTerm.toLowerCase();
     const filteredResults = data.filter((item) =>
-      ` ${item.DepartTo} ${item.Problem} ${item.Line} ${item.Nama} ${item.ValidationName} ${item.Area} ${item.Station} ${item.Date} ${item.Requestor}  ${item.Status}`
+      ` ${item.DepartTo} ${item.Problem} ${item.Uid} ${item.Line} ${item.Nama} ${item.ValidationName} ${item.Area} ${item.Station} ${item.Date} ${item.Requestor}  ${item.Status}`
         .toLowerCase()
         .includes(searchTermLower)
     );

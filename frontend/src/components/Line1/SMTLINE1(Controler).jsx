@@ -301,12 +301,12 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      } else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 Destacker (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 Destacker (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -321,7 +321,47 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 Destacker (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 Destacker (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      }else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
         data === "Return PROCESS ENGINEERING" ||
@@ -369,6 +409,7 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
@@ -466,12 +507,52 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      } else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 Label (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 Label (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 Label (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 Label (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -534,6 +615,7 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
@@ -631,12 +713,52 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      } else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 Printer (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 Printer (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 Printer (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 Printer (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -699,6 +821,7 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
@@ -796,12 +919,52 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      } else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 SPI (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 SPI (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 SPI (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 SPI (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -864,6 +1027,7 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
@@ -961,12 +1125,52 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      } else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 Pick&Place (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 Pick&Place (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 Pick&Place (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 Pick&Place (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -1029,6 +1233,7 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
@@ -1126,12 +1331,52 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      } else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 Reflow (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 Reflow (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 Reflow (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 Reflow (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -1194,6 +1439,7 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
@@ -1291,12 +1537,52 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      } else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 AOI (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 AOI (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 AOI (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 AOI (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -1359,6 +1645,7 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
@@ -1456,12 +1743,52 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      } else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 RVS (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 RVS (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 RVS (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 RVS (TOP) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -1524,13 +1851,15 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
         audio.pause();
       }
     });
-
+    
+    
     // SMT BOT
     const ref24 = firebase.database().ref("SMTLine1BOT/Printer (BOT)");
     ref24.on("value", (snapshot) => {
@@ -1622,12 +1951,52 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      } else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 Printer (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 Printer (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 Printer (BOT) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 Printer (BOT) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -1690,6 +2059,7 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
@@ -1787,12 +2157,52 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      } else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 SPI (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 SPI (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 SPI (BOT) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 SPI (BOT) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -1855,6 +2265,7 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
@@ -1952,12 +2363,52 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      } else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 Pick&Place (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 Pick&Place (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 Pick&Place (BOT) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 Pick&Place (BOT) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -2020,6 +2471,7 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
@@ -2117,12 +2569,52 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      } else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 Reflow (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 Reflow (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 Reflow (BOT) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 Reflow (BOT) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -2185,6 +2677,7 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
@@ -2282,12 +2775,52 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      }else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 AOI (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 AOI (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 AOI (BOT) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 AOI (BOT) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -2350,6 +2883,7 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
@@ -2447,12 +2981,52 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader") {
+      } else if (data === "Production Leader" || data === "Sub Leader") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `Notification Request Production Leader SMT LINE 1 RVS (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+        const message = `Notification Request ${data} SMT LINE 1 RVS (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return QC" || data === "Return QA") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-912913885];
+        const message = `Notification Request ${data} SMT LINE 1 RVS (BOT) Status: "Permintaan Return Validation" - Please Check the Details In Return Department Side `;
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+      } else if (data === "Return Production Leader" || data === "Return Sub Leader") {
+        audio.pause();
+        audio.currentTime = 0;
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `Notification Request ${data} SMT LINE 1 RVS (BOT) Status: "Permintaan Return Validation" - Please Check the Details In Return Validation Department Side `;
 
         chatIds.forEach((chatId) => {
           fetch(
@@ -2515,6 +3089,7 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
+        data === "Go (Return)" ||
         data === "Repair" ||
         data === "Return Repair"
       ) {
@@ -2564,47 +3139,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusDestackerTop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
@@ -2613,47 +3198,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusLabelTop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
@@ -2662,47 +3257,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusPrinterTop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
@@ -2711,47 +3316,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusSPITop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
@@ -2760,47 +3375,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusPickNPlaceTop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
@@ -2809,47 +3434,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusReflowTop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
@@ -2858,47 +3493,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusAOITop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
@@ -2907,47 +3552,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusRVSTop(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
   // ------------------------------------
@@ -2958,47 +3613,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusPrinterBot(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
   const updateStatusSPIBot = (data) => {
@@ -3006,47 +3671,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusSPIBot(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
@@ -3055,47 +3730,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusPickNPlaceBot(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
@@ -3104,47 +3789,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusReflowBot(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
@@ -3153,47 +3848,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusAOIBot(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
 
@@ -3202,47 +3907,57 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusRVSBot(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
-          ? "#E9CE08"
-          : data === "Repair"
+        : data === "Go (Return)"
+          ? "#32cd32"
+          : data === "Return Repair"
             ? "#E9CE08"
-                : data === "Leader"
+            : data === "Repair"
+              ? "#E9CE08"
+              : data === "Leader"
+                ? "#C00000"
+                : data === "Return Leader"
                   ? "#C00000"
-                  : data === "Return Leader"
+                  : data === "HRGA & EHS"
                     ? "#C00000"
-                    : data === "HRGA & EHS"
+                    : data === "Return HRGA & EHS"
                       ? "#C00000"
-                      : data === "Return HRGA & EHS"
+                      : data === "PURCHASING,PPIC,MP&L"
                         ? "#C00000"
-                        : data === "PURCHASING,PPIC,MP&L"
+                        : data === "Return PURCHASING,PPIC,MP&L"
                           ? "#C00000"
-                          : data === "Return PURCHASING,PPIC,MP&L"
+                          : data === "PROCESS ENGINEERING"
                             ? "#C00000"
-                            : data === "PROCESS ENGINEERING"
+                            : data === "Return PROCESS ENGINEERING"
                               ? "#C00000"
-                              : data === "Return PROCESS ENGINEERING"
+                              : data === "PRODUCT DEVELOPMENT"
                                 ? "#C00000"
-                                : data === "PRODUCT DEVELOPMENT"
+                                : data === "Return PRODUCT DEVELOPMENT"
                                   ? "#C00000"
-                                  : data === "Return PRODUCT DEVELOPMENT"
+                                  : data === "ADVANCED MANUFACTURING ENGINEERING"
                                     ? "#C00000"
-                                    : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                       ? "#C00000"
-                                      : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                        ? "#C00000"
-                                        : data === "QA"
+                                      : data === "QA"
+                                        ? "#93c2c4"
+                                        : data === "QC"
                                           ? "#93c2c4"
-                                          : data === "QC"
+                                          : data === "Production Leader"
                                             ? "#93c2c4"
-                                            : data === "Production Leader"
+                                            : data === "Sub Leader"
                                               ? "#93c2c4"
-                                              : data === "Sub Leader"
+                                              : data === "Return QA"
                                                 ? "#93c2c4"
-                                                : data === "MAINTENANCE & IT"
-                                                  ? "#C00000"
-                                                  : data === "Return MAINTENANCE & IT"
-                                                    ? "#C00000"
-                                                    : "#565454"
+                                                : data === "Return QC"
+                                                  ? "#93c2c4"
+                                                  : data === "Return Production Leader"
+                                                    ? "#93c2c4"
+                                                    : data === "Return Sub Leader"
+                                                      ? "#93c2c4"
+                                                      : data === "MAINTENANCE & IT"
+                                                        ? "#C00000"
+                                                        : data === "Return MAINTENANCE & IT"
+                                                          ? "#C00000"
+                                                          : "#565454"
     );
   };
   // --------------------------------
@@ -3269,12 +3984,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusDestackerTop)) {
@@ -3308,7 +4027,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimeDestackerTop(timeString);
         }
       }, 1000);
-    } else if (StatusDestackerTop === "Go") {
+    } else if (StatusDestackerTop === "Go" || StatusDestackerTop === "Go (Return)") {
       setIsRunningDestackerTop(false);
       clearInterval(interval);
 
@@ -3322,18 +4041,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusDestackerTop, startTimeDestackerTop]);
 
   useEffect(() => {
+    let apiUrl = "";
+
     if (
-      StatusDestackerTop === "Go" &&
+      (StatusDestackerTop === "Go" || StatusDestackerTop === "Go (Return)") &&
       TimeDestackerTop !== null &&
       TimeDestackerTop !== ""
     ) {
+      if (StatusDestackerTop === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeDestackerTOPReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeDestackerTOP";
+      }
+
       const data = {
         TimeDestackerTop: TimeDestackerTop,
         DestackerTop: DestackerTop,
         StatusDestackerTop: StatusDestackerTop,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimeDestackerTOP`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -3356,6 +4083,7 @@ const SMTLINE1CONTROLLER = () => {
     }
   }, [TimeDestackerTop, DestackerTop, StatusDestackerTop]);
 
+
   // LabelTOP
   useEffect(() => {
     let interval;
@@ -3375,12 +4103,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusLabelTop)) {
@@ -3411,7 +4143,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimeLabelTop(timeString);
         }
       }, 1000);
-    } else if (StatusLabelTop === "Go") {
+    } else if (StatusLabelTop === "Go" || StatusLabelTop === "Go (Return)") {
       setIsRunningLabelTop(false);
       clearInterval(interval);
 
@@ -3425,18 +4157,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusLabelTop, startTimeLabelTop]);
 
   useEffect(() => {
+    let apiUrl = "";
+
     if (
-      StatusLabelTop === "Go" &&
+      (StatusLabelTop === "Go" || StatusLabelTop === "Go (Return)") &&
       TimeLabelTop !== null &&
       TimeLabelTop !== ""
     ) {
+      if (StatusLabelTop === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeLabelTOPReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeLabelTOP";
+      }
+
       const data = {
         TimeLabelTop: TimeLabelTop,
         LabelTop: LabelTop,
         StatusLabelTop: StatusLabelTop,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimeLabelTOP`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -3459,6 +4199,7 @@ const SMTLINE1CONTROLLER = () => {
     }
   }, [TimeLabelTop, LabelTop, StatusLabelTop]);
 
+
   // PrinterTOP
   useEffect(() => {
     let interval;
@@ -3478,12 +4219,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusPrinterTop)) {
@@ -3517,7 +4262,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimePrinterTop(timeString);
         }
       }, 1000);
-    } else if (StatusPrinterTop === "Go") {
+    } else if (StatusPrinterTop === "Go" || StatusPrinterTop === "Go (Return)") {
       setIsRunningPrinterTop(false);
       clearInterval(interval);
 
@@ -3531,18 +4276,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusPrinterTop, startTimePrinterTop]);
 
   useEffect(() => {
+    let apiUrl = "";
+
     if (
-      StatusPrinterTop === "Go" &&
+      (StatusPrinterTop === "Go" || StatusPrinterTop === "Go (Return)") &&
       TimePrinterTop !== null &&
       TimePrinterTop !== ""
     ) {
+      if (StatusPrinterTop === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimePrinterTOPReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimePrinterTOP";
+      }
+
       const data = {
         TimePrinterTop: TimePrinterTop,
         PrinterTop: PrinterTop,
         StatusPrinterTop: StatusPrinterTop,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimePrinterTOP`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -3565,6 +4318,7 @@ const SMTLINE1CONTROLLER = () => {
     }
   }, [TimePrinterTop, PrinterTop, StatusPrinterTop]);
 
+
   // SpiTOP
   useEffect(() => {
     let interval;
@@ -3584,12 +4338,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusSPITop)) {
@@ -3620,7 +4378,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimeSPITop(timeString);
         }
       }, 1000);
-    } else if (StatusSPITop === "Go") {
+    } else if (StatusSPITop === "Go" || StatusSPITop === "Go (Return)") {
       setIsRunningSPITop(false);
       clearInterval(interval);
 
@@ -3634,14 +4392,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusSPITop, startTimeSPITop]);
 
   useEffect(() => {
-    if (StatusSPITop === "Go" && TimeSPITop !== null && TimeSPITop !== "") {
+    let apiUrl = "";
+
+    if (
+      (StatusSPITop === "Go" || StatusSPITop === "Go (Return)") &&
+      TimeSPITop !== null &&
+      TimeSPITop !== ""
+    ) {
+      if (StatusSPITop === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeSPITOPReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeSPITOP";
+      }
+
       const data = {
         TimeSPITop: TimeSPITop,
         SPITop: SPITop,
         StatusSPITop: StatusSPITop,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimeSPITOP`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -3664,6 +4434,7 @@ const SMTLINE1CONTROLLER = () => {
     }
   }, [TimeSPITop, SPITop, StatusSPITop]);
 
+
   // PickNPlaceTOP
   useEffect(() => {
     let interval;
@@ -3683,12 +4454,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusPickNPlaceTop)) {
@@ -3722,7 +4497,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimePickNPlaceTop(timeString);
         }
       }, 1000);
-    } else if (StatusPickNPlaceTop === "Go") {
+    } else if (StatusPickNPlaceTop === "Go" || StatusPickNPlaceTop === "Go (Return)") {
       setIsRunningPickNPlaceTop(false);
       clearInterval(interval);
 
@@ -3736,18 +4511,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusPickNPlaceTop, startTimePickNPlaceTop]);
 
   useEffect(() => {
+    let apiUrl = "";
+
     if (
-      StatusPickNPlaceTop === "Go" &&
+      (StatusPickNPlaceTop === "Go" || StatusPickNPlaceTop === "Go (Return)") &&
       TimePickNPlaceTop !== null &&
       TimePickNPlaceTop !== ""
     ) {
+      if (StatusPickNPlaceTop === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimePickNPlaceTOPReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimePickNPlaceTOP";
+      }
+
       const data = {
         TimePickNPlaceTop: TimePickNPlaceTop,
         PickNPlaceTop: PickNPlaceTop,
         StatusPickNPlaceTop: StatusPickNPlaceTop,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimePickNPlaceTOP`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -3770,6 +4553,7 @@ const SMTLINE1CONTROLLER = () => {
     }
   }, [TimePickNPlaceTop, PickNPlaceTop, StatusPickNPlaceTop]);
 
+
   // ReflowTOP
   useEffect(() => {
     let interval;
@@ -3789,12 +4573,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusReflowTop)) {
@@ -3825,7 +4613,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimeReflowTop(timeString);
         }
       }, 1000);
-    } else if (StatusReflowTop === "Go") {
+    } else if (StatusReflowTop === "Go" || StatusReflowTop === "Go (Return)") {
       setIsRunningReflowTop(false);
       clearInterval(interval);
 
@@ -3839,18 +4627,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusReflowTop, startTimeReflowTop]);
 
   useEffect(() => {
+    let apiUrl = "";
+
     if (
-      StatusReflowTop === "Go" &&
+      (StatusReflowTop === "Go" || StatusReflowTop === "Go (Return)") &&
       TimeReflowTop !== null &&
       TimeReflowTop !== ""
     ) {
+      if (StatusReflowTop === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeReflowTOPReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeReflowTOP";
+      }
+
       const data = {
         TimeReflowTop: TimeReflowTop,
         ReflowTop: ReflowTop,
         StatusReflowTop: StatusReflowTop,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimeReflowTOP`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -3892,12 +4688,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusAOITop)) {
@@ -3928,7 +4728,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimeAOITop(timeString);
         }
       }, 1000);
-    } else if (StatusAOITop === "Go") {
+    } else if (StatusAOITop === "Go" || StatusAOITop === "Go (Return)") {
       setIsRunningAOITop(false);
       clearInterval(interval);
 
@@ -3942,14 +4742,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusAOITop, startTimeAOITop]);
 
   useEffect(() => {
-    if (StatusAOITop === "Go" && TimeAOITop !== null && TimeAOITop !== "") {
+    let apiUrl = "";
+
+    if (
+      (StatusAOITop === "Go" || StatusAOITop === "Go (Return)") &&
+      TimeAOITop !== null &&
+      TimeAOITop !== ""
+    ) {
+      if (StatusAOITop === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeAOITOPReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeAOITOP";
+      }
+
       const data = {
         TimeAOITop: TimeAOITop,
         AOITop: AOITop,
         StatusAOITop: StatusAOITop,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimeAOITOP`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -3972,6 +4784,7 @@ const SMTLINE1CONTROLLER = () => {
     }
   }, [TimeAOITop, AOITop, StatusAOITop]);
 
+
   // RVSTOP
   useEffect(() => {
     let interval;
@@ -3991,12 +4804,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusRVSTop)) {
@@ -4027,7 +4844,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimeRVSTop(timeString);
         }
       }, 1000);
-    } else if (StatusRVSTop === "Go") {
+    } else if (StatusRVSTop === "Go" || StatusRVSTop === "Go (Return)") {
       setIsRunningRVSTop(false);
       clearInterval(interval);
 
@@ -4041,14 +4858,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusRVSTop, startTimeRVSTop]);
 
   useEffect(() => {
-    if (StatusRVSTop === "Go" && TimeRVSTop !== null && TimeRVSTop !== "") {
+    let apiUrl = "";
+
+    if (
+      (StatusRVSTop === "Go" || StatusRVSTop === "Go (Return)") &&
+      TimeRVSTop !== null &&
+      TimeRVSTop !== ""
+    ) {
+      if (StatusRVSTop === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeRVSTOPReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeRVSTOP";
+      }
+
       const data = {
         TimeRVSTop: TimeRVSTop,
         RVSTop: RVSTop,
         StatusRVSTop: StatusRVSTop,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimeRVSTOP`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -4071,13 +4900,19 @@ const SMTLINE1CONTROLLER = () => {
     }
   }, [TimeRVSTop, RVSTop, StatusRVSTop]);
 
+
+
+
+
+
+
   // Line1 SMT BOT
   // PrinterBot
   useEffect(() => {
     let interval;
 
     const validStatuses = [
-            "Repair",
+      "Repair",
       "Return Repair",
       "Leader",
       "Return Leader",
@@ -4091,12 +4926,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusPrinterBot)) {
@@ -4130,7 +4969,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimePrinterBot(timeString);
         }
       }, 1000);
-    } else if (StatusPrinterBot === "Go") {
+    } else if (StatusPrinterBot === "Go" || StatusPrinterBot === "Go (Return)") {
       setIsRunningPrinterBot(false);
       clearInterval(interval);
 
@@ -4144,18 +4983,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusPrinterBot, startTimePrinterBot]);
 
   useEffect(() => {
+    let apiUrl = "";
+
     if (
-      StatusPrinterBot === "Go" &&
+      (StatusPrinterBot === "Go" || StatusPrinterBot === "Go (Return)") &&
       TimePrinterBot !== null &&
       TimePrinterBot !== ""
     ) {
+      if (StatusPrinterBot === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimePrinterBOTReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimePrinterBOT";
+      }
+
       const data = {
         TimePrinterBot: TimePrinterBot,
         PrinterBot: PrinterBot,
         StatusPrinterBot: StatusPrinterBot,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimePrinterBOT`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -4183,7 +5030,7 @@ const SMTLINE1CONTROLLER = () => {
     let interval;
 
     const validStatuses = [
-            "Repair",
+      "Repair",
       "Return Repair",
       "Leader",
       "Return Leader",
@@ -4197,12 +5044,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusSPIBot)) {
@@ -4233,7 +5084,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimeSPIBot(timeString);
         }
       }, 1000);
-    } else if (StatusSPIBot === "Go") {
+    } else if (StatusSPIBot === "Go" || StatusSPIBot === "Go (Return)") {
       setIsRunningSPIBot(false);
       clearInterval(interval);
 
@@ -4247,14 +5098,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusSPIBot, startTimeSPIBot]);
 
   useEffect(() => {
-    if (StatusSPIBot === "Go" && TimeSPIBot !== null && TimeSPIBot !== "") {
+    let apiUrl = "";
+
+    if (
+      (StatusSPIBot === "Go" || StatusSPIBot === "Go (Return)") &&
+      TimeSPIBot !== null &&
+      TimeSPIBot !== ""
+    ) {
+      if (StatusSPIBot === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeSPIBOTReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeSPIBOT";
+      }
+
       const data = {
         TimeSPIBot: TimeSPIBot,
         SPIBot: SPIBot,
         StatusSPIBot: StatusSPIBot,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimeSPIBOT`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -4296,12 +5159,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusPickNPlaceBot)) {
@@ -4335,7 +5202,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimePickNPlaceBot(timeString);
         }
       }, 1000);
-    } else if (StatusPickNPlaceBot === "Go") {
+    } else if (StatusPickNPlaceBot === "Go" || StatusPickNPlaceBot === "Go (Return)") {
       setIsRunningPickNPlaceBot(false);
       clearInterval(interval);
 
@@ -4349,18 +5216,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusPickNPlaceBot, startTimePickNPlaceBot]);
 
   useEffect(() => {
+    let apiUrl = "";
+
     if (
-      StatusPickNPlaceBot === "Go" &&
+      (StatusPickNPlaceBot === "Go" || StatusPickNPlaceBot === "Go (Return)") &&
       TimePickNPlaceBot !== null &&
       TimePickNPlaceBot !== ""
     ) {
+      if (StatusPickNPlaceBot === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimePickNPlaceBOTReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimePickNPlaceBOT";
+      }
+
       const data = {
         TimePickNPlaceBot: TimePickNPlaceBot,
         PickNPlaceBot: PickNPlaceBot,
         StatusPickNPlaceBot: StatusPickNPlaceBot,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimePickNPlaceBOT`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -4402,12 +5277,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusReflowBot)) {
@@ -4438,7 +5317,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimeReflowBot(timeString);
         }
       }, 1000);
-    } else if (StatusReflowBot === "Go") {
+    } else if (StatusReflowBot === "Go" || StatusReflowBot === "Go (Return)") {
       setIsRunningReflowBot(false);
       clearInterval(interval);
 
@@ -4452,18 +5331,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusReflowBot, startTimeReflowBot]);
 
   useEffect(() => {
+    let apiUrl = "";
+
     if (
-      StatusReflowBot === "Go" &&
+      (StatusReflowBot === "Go" || StatusReflowBot === "Go (Return)") &&
       TimeReflowBot !== null &&
       TimeReflowBot !== ""
     ) {
+      if (StatusReflowBot === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeReflowBOTReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeReflowBOT";
+      }
+
       const data = {
         TimeReflowBot: TimeReflowBot,
         ReflowBot: ReflowBot,
         StatusReflowBot: StatusReflowBot,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimeReflowBOT`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -4506,12 +5393,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusAOIBot)) {
@@ -4542,7 +5433,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimeAOIBot(timeString);
         }
       }, 1000);
-    } else if (StatusAOIBot === "Go") {
+    } else if (StatusAOIBot === "Go" || StatusAOIBot === "Go (Return)") {
       setIsRunningAOIBot(false);
       clearInterval(interval);
 
@@ -4556,18 +5447,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusAOIBot, startTimeAOIBot]);
 
   useEffect(() => {
+    let apiUrl = "";
+
     if (
-      StatusAOIBot === "Go" &&
+      (StatusAOIBot === "Go" || StatusAOIBot === "Go (Return)") &&
       TimeAOIBot !== null &&
       TimeAOIBot !== ""
     ) {
+      if (StatusAOIBot === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeAOIBOTReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeAOIBOT";
+      }
+
       const data = {
         TimeAOIBot: TimeAOIBot,
         AOIBot: AOIBot,
         StatusAOIBot: StatusAOIBot,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimeAOIBOT`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -4609,12 +5508,16 @@ const SMTLINE1CONTROLLER = () => {
       "Return PRODUCT DEVELOPMENT",
       "ADVANCED MANUFACTURING ENGINEERING",
       "Return ADVANCED MANUFACTURING ENGINEERING",
-      "QA",
-      "QC",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
       "Production Leader",
       "Sub Leader",
+      "QA",
+      "QC",
+      "Return Production Leader",
+      "Return Sub Leader",
+      "Return QA",
+      "Return QC",
     ];
 
     if (validStatuses.includes(StatusRVSBot)) {
@@ -4645,7 +5548,7 @@ const SMTLINE1CONTROLLER = () => {
           setTimeRVSBot(timeString);
         }
       }, 1000);
-    } else if (StatusRVSBot === "Go") {
+    } else if (StatusRVSBot === "Go" || StatusRVSBot === "Go (Return)") {
       setIsRunningRVSBot(false);
       clearInterval(interval);
 
@@ -4659,18 +5562,26 @@ const SMTLINE1CONTROLLER = () => {
   }, [StatusRVSBot, startTimeRVSBot]);
 
   useEffect(() => {
+    let apiUrl = "";
+
     if (
-      StatusRVSBot === "Go" &&
+      (StatusRVSBot === "Go" || StatusRVSBot === "Go (Return)") &&
       TimeRVSBot !== null &&
       TimeRVSBot !== ""
     ) {
+      if (StatusRVSBot === "Go (Return)") {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeRVSBOTReturn";
+      } else {
+        apiUrl = "http://192.168.101.12:3001/api/PutDownTimeRVSBOT";
+      }
+
       const data = {
         TimeRVSBot: TimeRVSBot,
         RVSBot: RVSBot,
         StatusRVSBot: StatusRVSBot,
       };
 
-      fetch(`http://192.168.101.12:3001/api/PutDownTimeRVSBOT`, {
+      fetch(apiUrl, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

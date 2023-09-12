@@ -291,7 +291,7 @@ const Maintenance = () => {
     // Lakukan pencarian dengan kata kunci yang telah dimasukkan
     const searchTermLower = searchTerm.toLowerCase();
     const filteredResults = data.filter((item) =>
-      ` ${item.DepartTo} ${item.Line} ${item.Nama}  ${item.Area} ${item.Station} ${item.Date} ${item.Requestor} ${item.Problem} ${item.Status}`
+      ` ${item.DepartTo} ${item.Uid} ${item.Line} ${item.Nama}  ${item.Area} ${item.Station} ${item.Date} ${item.Requestor} ${item.Problem} ${item.Status}`
         .toLowerCase()
         .includes(searchTermLower)
     );
@@ -331,7 +331,7 @@ const Maintenance = () => {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/${DepartTo}`, {
+    fetch(`http://192.168.101.12:3001/api/Validation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

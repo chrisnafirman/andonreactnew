@@ -17,7 +17,23 @@ const PutDownTimePrinterBOT = (req, res) => {
     );
   }
 
-// PrinterBOT
+  const PutDownTimePrinterBOTReturn = (req, res) => {
+    const { TimePrinterBot, PrinterBot, Area } = req.body;
+  
+    db.query(
+      "UPDATE returnvalidation SET DownTime = ? WHERE Station = ? AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1",
+      [TimePrinterBot, PrinterBot, Area],
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          return res.status(500).json({ message: 'Internal server error' });
+        }
+        res.status(200).json({ message: 'Data has been updated successfully' });
+      }
+    );
+  }
+
+// PrinterBot
 const getPrinterBOTLeader = (req, res) => {
     const sqlSelect = "SELECT * FROM leader WHERE Station = 'Printer (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
@@ -35,21 +51,6 @@ const getPrinterBOTLeader = (req, res) => {
 };
 
 
-const getPrinterBOTMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM maintenance WHERE Station = 'Printer (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
 
 const getPrinterBOTValidation = (req, res) => {
     const sqlSelect = "SELECT * FROM validation WHERE Station = 'Printer (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
@@ -67,28 +68,8 @@ const getPrinterBOTValidation = (req, res) => {
     });
 };
 
-
-
-
-const getPrinterBOTOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM Others WHERE Station = 'Printer (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
-    db.query(sqlSelect, (err, results) => {
-        if (err) {
-            console.log(err);
-            res.status(500).send("Error fetching data from the database.");
-        } else {
-            if (results.length > 0) {
-                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
-            } else {
-                res.status(404).send("No data found.");
-            }
-        }
-    });
-};
-
-
-const getPrinterBOTReturnMaintenance = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnmaintenance WHERE Station = 'Printer (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
+const getPrinterBOTValidationReturn = (req, res) => {
+    const sqlSelect = "SELECT * FROM returnvalidation WHERE Station = 'Printer (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -105,8 +86,8 @@ const getPrinterBOTReturnMaintenance = (req, res) => {
 
 
 
-const getPrinterBOTReturnOthers = (req, res) => {
-    const sqlSelect = "SELECT * FROM returnothers WHERE Station = 'Printer (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
+const getPrinterBOTRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM repair WHERE Station = 'Printer (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
     db.query(sqlSelect, (err, results) => {
         if (err) {
             console.log(err);
@@ -120,15 +101,34 @@ const getPrinterBOTReturnOthers = (req, res) => {
         }
     });
 };
+
+
+const getPrinterBOTReturnRepair = (req, res) => {
+    const sqlSelect = "SELECT * FROM returnrepair WHERE Station = 'Printer (BOT)' AND Line = 'SMT LINE 1' AND Area = 'SMT BOT' ORDER BY No DESC LIMIT 1";
+    db.query(sqlSelect, (err, results) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send("Error fetching data from the database.");
+        } else {
+            if (results.length > 0) {
+                res.send(results[0]); // Send the first (last) row as it will be the latest entry.
+            } else {
+                res.status(404).send("No data found.");
+            }
+        }
+    });
+};
+
+
 
 
 module.exports = {
 
     getPrinterBOTLeader,
     PutDownTimePrinterBOT,
-    getPrinterBOTMaintenance,
+    getPrinterBOTRepair,
     getPrinterBOTValidation,
-    getPrinterBOTOthers,
-    getPrinterBOTReturnMaintenance,
-    getPrinterBOTReturnOthers,
+    getPrinterBOTReturnRepair,
+    PutDownTimePrinterBOTReturn,
+    getPrinterBOTValidationReturn,
 };

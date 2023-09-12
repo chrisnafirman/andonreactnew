@@ -18,13 +18,12 @@ const database = firebase.database();
 function QRValidationValidationLeaderBOT() {
 
 
-
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
   const [Area, setArea] = useState("SMT BOT");
-  const [isQRValidation, setIsQRValidation] = useState(true);
   const [isLoader, setIsLoader] = useState(false);
+  const [isQRValidation, setIsQRValidation] = useState(true);
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
   const [Status, setStatus] = useState("Running");
@@ -36,15 +35,16 @@ function QRValidationValidationLeaderBOT() {
 
 
 
+
+
   const [selectedOptionDepartment, setSelectedOptionDepartment] =
     useState(null);
   // ....
 
 
 
-
-
   
+
 
 
 
@@ -129,13 +129,15 @@ function QRValidationValidationLeaderBOT() {
       });
   };
 
+ 
+
 
   // SUBMIT FILE
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
 
-    const styles = {
+  const styles = {
         background: "linear-gradient(45deg, #000, #626658, #292d1f)",
         height: "1000px",
     };
@@ -174,6 +176,8 @@ function QRValidationValidationLeaderBOT() {
       window.location.href = '/ValidationLeader'; // Ganti dengan URL halaman tujuan
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
+
+
 
   return (
     <body style={styles}>
@@ -436,6 +440,7 @@ function QRValidationValidationLeaderBOT() {
           </>
         ) : null}
       </td>
+
       <div className="relative">
         {showPopupMesin && (
           <QRScannerPopup

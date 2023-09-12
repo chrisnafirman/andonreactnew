@@ -210,7 +210,7 @@ const ReturnMaintenance = () => {
   setStation(null);
   setNamaPIC(null);
 
-  fetch(`http://192.168.101.12:3001/api/Return${DepartTo}`, {
+  fetch(`http://192.168.101.12:3001/api/ReturnValidation`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -274,16 +274,6 @@ const submitUpdate = () => {
 
 
 
-  const QRResponseLink = () => {
-    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRReturnResponseRepairTopMTC";
-    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRReturnResponseRepairBotMTC";
-    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRReturnResponseRepairBeMTC";
-    }else {
-    }
-  };
 
 
 
@@ -335,6 +325,18 @@ const submitUpdate = () => {
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
 
+  const QRResponseLink = () => {
+    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
+      return "/QRReturnResponseRepairTopMTC";
+    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
+      return "/QRReturnResponseRepairBotMTC";
+    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
+      return "/QRReturnResponseRepairBeMTC";
+    }else {
+    }
+  };
+
+  
   return (
     <body style={styles}>
       <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">

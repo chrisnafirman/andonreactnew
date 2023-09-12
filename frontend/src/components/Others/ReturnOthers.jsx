@@ -209,7 +209,7 @@ const ReturnOthers = () => {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/Return${DepartTo}`, {
+    fetch(`http://192.168.101.12:3001/api/ReturnValidation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -273,17 +273,6 @@ const ReturnOthers = () => {
 
 
 
-  const QRResponseLink = () => {
-    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRReturnResponseRepairTopOTH";
-    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRReturnResponseRepairBotOTH";
-    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRReturnResponseRepairBeOTH";
-    } else {
-    }
-  };
-
 
 
   const formatDateTimeAPI = (dateString) => {
@@ -331,6 +320,18 @@ const ReturnOthers = () => {
     setTimeout(() => {
       window.location.reload();
     }, 3000); // 5000 milidetik sama dengan 5 detik
+  };
+
+  
+  const QRResponseLink = () => {
+    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
+      return "/QRReturnResponseRepairTopOTH";
+    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
+      return "/QRReturnResponseRepairBotOTH";
+    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
+      return "/QRReturnResponseRepairBeOTH";
+    } else {
+    }
   };
 
 

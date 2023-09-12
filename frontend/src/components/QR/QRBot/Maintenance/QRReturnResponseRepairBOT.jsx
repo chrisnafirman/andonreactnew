@@ -13,12 +13,12 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRResponseMTCBOT() {
+function QRReturnResponseMTCBOT() {
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
   const [isLoader, setIsLoader] = useState(false);
-  const [isQRResponses, setIsQRResponses] = useState(true);
+  const [isQRReturn, setIsQRReturn] = useState(true);
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
   const [Status, setStatus] = useState("Repair");
@@ -29,9 +29,7 @@ function QRResponseMTCBOT() {
 
 
 
-
-
-
+ 
 
   const submitResponse = () => {
     if (!NamaPIC || !Area || !Station) {
@@ -49,11 +47,11 @@ function QRResponseMTCBOT() {
 
     alert("Response Telah Di Terima Selamat Bekerja");
 
-    firebase.database().ref(`SMTLine1BOT/${Station}`).set("Repair Maintenance");
+    firebase.database().ref(`SMTLine1BOT/${Station}`).set("Return Repair");
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.12:3001/api/PutResponseMaintenance`, {
+    fetch(`http://192.168.101.12:3001/api/PutReturnResponseRepair`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -74,49 +72,48 @@ function QRResponseMTCBOT() {
   };
 
   const styles = {
-    background: "linear-gradient(45deg, #000, #626658, #292d1f)",
-    height: "1000px",
-};
+        background: "linear-gradient(45deg, #000, #626658, #292d1f)",
+        height: "1000px",
+    };
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
-    setIsQRResponses(false);
+    setIsQRReturn(false);
   };
 
   const togglePopupMesin = () => {
     setShowPopupMesin(!showPopupMesin);
-    setIsQRResponses(false);
+    setIsQRReturn(false);
   };
 
   const handleScanSuccessNama = (data) => {
     setNamaPIC(data);
     setShowPopupNama(false);
     setShowPopupMesin(false);
-    setIsQRResponses(true);
+    setIsQRReturn(true);
   };
 
   const handleScanSuccessMesin = (data) => {
     setStation(data);
     setShowPopupMesin(false);
-    setIsQRResponses(true);
+    setIsQRReturn(true);
   };
 
 
 
   const handleButtonClick = () => {
     submitResponse();
-    // Mengalihkan pengguna ke halaman yang diinginkan
     setIsLoader(true);
 
     setTimeout(() => {
-      window.location.href = '/Maintenance'; // Ganti dengan URL halaman tujuan
-    }, 3000); // 5000 milidetik sama dengan 5 detik
+      window.location.href = '/ReturnMaintenance'; // Ganti dengan URL halaman tujuan
+    }, 3000); // Ganti dengan URL halaman tujuan
   };
 
   return (
     <body style={styles}>
       <td class="">
-        {isQRResponses ? (
+        {isQRReturn ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-[500px] text-center sm:block sm:p-0">
@@ -141,7 +138,7 @@ function QRResponseMTCBOT() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Repair</span>
+                          <span>Return Respon</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div className="w-full mt-1 px-3 mb-3 md:mb-0">
@@ -163,7 +160,7 @@ function QRResponseMTCBOT() {
                               </span>
                               <button onClick={() => {
                                 togglePopupNama();
-                                setIsQRResponses(false);
+                              setIsQRReturn(false);
                               }}>
                                 {showPopupNama ? (
                                   <svg
@@ -293,7 +290,7 @@ function QRResponseMTCBOT() {
                               <button
                                 onClick={() => {
                                   togglePopupMesin();
-                                  setIsQRResponses(false);
+                                  setIsQRReturn(false);
                                 }}
                               >
                                 {showPopupMesin ? (
@@ -415,11 +412,11 @@ function QRResponseMTCBOT() {
                             type="button"
                             onClick={handleButtonClick}
                           >
-                            Repair
+                            Repair 
                           </button>
                         </div>
                       </form>
-                      <a href="/Maintenance">
+                      <a href="/ReturnMaintenance">
                         <button class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                           <svg width="20px" viewBox="0 0 1024 1024">
                             <path
@@ -466,7 +463,7 @@ function QRResponseMTCBOT() {
                       <div className="inline-block  w-8 h-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status"></div>
                     </div>
                     <div className="flex justify-center items-center mt-3">
-                      <span className="text-center justify-center items-center mx-auto">Mohon Tunggu Ya Permintaanmu sedang kami proses</span>
+                    <span className="text-center justify-center items-center mx-auto">Mohon Tunggu Ya Permintaanmu sedang kami proses</span>
                     </div>
                   </div>
                 </div>
@@ -476,12 +473,14 @@ function QRResponseMTCBOT() {
           </>
         ) : null}
       </td>
+
+
       <div className="relative">
         {showPopupMesin && (
           <QRScannerPopup
             onClose={() => {
               togglePopupMesin();
-              setIsQRResponses(true);
+              setIsQRReturn(true);
             }}
             onScanSuccess={handleScanSuccessMesin}
           />
@@ -490,7 +489,7 @@ function QRResponseMTCBOT() {
           <QRScannerPopup
             onClose={() => {
               togglePopupNama();
-              setIsQRResponses(true);
+              setIsQRReturn(true);
             }}
             onScanSuccess={handleScanSuccessNama}
           />
@@ -500,4 +499,4 @@ function QRResponseMTCBOT() {
   );
 }
 
-export default QRResponseMTCBOT;
+export default QRReturnResponseMTCBOT;

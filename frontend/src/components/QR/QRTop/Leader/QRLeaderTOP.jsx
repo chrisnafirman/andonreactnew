@@ -66,7 +66,7 @@ function QRLeaderTOP() {
 
 
 
-    fetch(`http://192.168.101.12:3001/api/${DepartTo}`, {
+    fetch(`http://192.168.101.12:3001/api/Repair`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

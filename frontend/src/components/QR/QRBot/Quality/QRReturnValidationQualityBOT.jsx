@@ -15,12 +15,12 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRValidationQualityTOP() {
+function QRValidationQualityBOT() {
 
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
-  const [Area, setArea] = useState("SMT TOP");
+  const [Area, setArea] = useState("SMT BOT");
   const [isQRValidationQuality, setIsQRValidationQuality] = useState(true);
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
@@ -59,7 +59,7 @@ function QRValidationQualityTOP() {
       Desc: Desc,
     };
 
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Go (Return)");
+    firebase.database().ref(`SMTLine1BOT/${Station}`).set("Go (Return)");
     firebase.database().ref("StatusLine/SMTLine1").set("Running");
     alert("Validation Telah Berhasil ");
     setIsQRValidationQuality(false);
@@ -93,10 +93,10 @@ function QRValidationQualityTOP() {
     setFile(e.target.files[0]);
   };
 
-  const styles = {
-    background: "linear-gradient(45deg, #000, #768087, #87CEEB)",
-    height: "1500px",
-  };
+   const styles = {
+        background: "linear-gradient(45deg, #000, #626658, #292d1f)",
+        height: "1000px",
+    };
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
@@ -427,4 +427,4 @@ function QRValidationQualityTOP() {
   )
 }
 
-export default QRValidationQualityTOP;
+export default QRValidationQualityBOT;
