@@ -58,7 +58,7 @@ const Quality = () => {
     const tableData = [];
     
     // Header untuk tabel PDF
-    const headers = ["Requestor","Request at", "Nama", "Line", "Area", "Station", "Problem", "Action", "Validation To"];
+    const headers = ["Uid", "Requestor", "Request at", "Nama", "Line", "Area", "Station", "Problem", "Action", "Validation To"];
     
     // Warna teks header (abu-abu)
     const headerStyles = {
@@ -71,6 +71,7 @@ const Quality = () => {
     filteredData.forEach((item) => {
       if (item.DepartTo === 'QA' || item.DepartTo === 'QC') {
       const rowData = [
+        item.Uid,
         item.Requestor,
         item.Date,
         item.Nama,
@@ -117,10 +118,10 @@ const Quality = () => {
         fontStyle: fontSize, // Teks header tebal
       },
       columnStyles: {
-        8: { // Indeks 4 adalah kolom "Date"
+        9: { // Indeks 4 adalah kolom "Date"
           textColor: [5, 150, 27], // Warna teks merah dalam format RGB
         },
-        0: { // Indeks 4 adalah kolom "Date"
+        1: { // Indeks 4 adalah kolom "Date"
           textColor: [159, 0, 0], // Warna teks merah dalam format RGB
         },
       },
@@ -138,7 +139,7 @@ const Quality = () => {
       const tableData = [];
       
       // Header untuk tabel PDF
-      const headers = ["Requestor ", "Request at", "Validation PIC", "Validation Department", "Line", "Area", "Station",  "Description", "Validation Status",  "DownTime", "Validation Date", "Return To" ];
+      const headers = ["Uid", "Requestor ", "Request at", "Validation Department", "PIC", "Line", "Area", "Station",  "Description", "Validation Status",  "DownTime", "Validation Date", "Return To" ];
       
       // Warna teks header (abu-abu)
       const headerStyles = {
@@ -151,10 +152,11 @@ const Quality = () => {
       filteredData.forEach((item )  => {
         if (item.DepartTo === 'QA' || item.DepartTo === 'QC') {
         const rowData = [
+          item.Uid,
           item.Requestor,
           item.Date,
-          item.ValidationName,
           item.DepartTo,
+          item.ValidationName,
           item.Line,
           item.Area,
           item.Station,
@@ -188,7 +190,8 @@ const Quality = () => {
       
       doc.text(text, textX, textY);
 
-      const fontSize = 6; 
+      const fontSize = 7; // Atur ukuran font yang diinginkan
+      const scaleFactor = 2; //
       // Membuat tabel PDF dengan menggunakan autotable
       doc.autoTable({
         head: [headers],
@@ -197,19 +200,22 @@ const Quality = () => {
         headStyles: {
           fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
           textColor: 0, // Warna teks hitam (0)
-          fontStyle: fontSize, // Teks header tebal
+          fontStyle: "bold", // Teks header tebal
         },
         columnStyles: {
           3: { // Indeks 3 adalah kolom "Date"
             textColor: [5, 150, 27], // Warna teks merah dalam format RGB
           },
-          0: { // Indeks 0 adalah kolom "Date"
+          1: { // Indeks 0 adalah kolom "Date"
             textColor: [159, 0, 0], // Warna teks merah dalam format RGB
           },
-          8: { // Indeks 7 adalah kolom yang ingin Anda ubah menjadi huruf kapital dan bold
+          9: { // Indeks 7 adalah kolom yang ingin Anda ubah menjadi huruf kapital dan bold
             fontStyle: 'bold', // Mengatur teks menjadi bold
           },
-        },   
+        },
+        styles: {
+          fontSize: fontSize, // Atur ukuran font
+        },
       });
     
     
@@ -494,9 +500,9 @@ const Quality = () => {
                       if (item.DepartTo === 'QA' || item.DepartTo === 'QC') {
                         return (
                           <tr
-                            key={item.id}
-                            className={index === 0 ? "bg-green-400" : ""}
-                          >
+                          key={item.id}
+                          className={item.Status === "" ? "bg-red-400" : ""}
+                        >
                              <td className="p-2">
                               <div className="font-medium text-xs lg:text-sm text-gray-800">
                                 {item.Uid}

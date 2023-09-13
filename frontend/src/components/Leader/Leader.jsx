@@ -3,7 +3,6 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
-import QRScannerPopup from "../QR/QR";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
@@ -57,7 +56,7 @@ const ReuestLeader = () => {
     const tableData = [];
     
     // Header untuk tabel PDF
-    const headers = ["Request At", "Nama Operator", "Line", "Area", "Station", "Forward To", "Forward Date"];
+    const headers = ["Uid", "Request At", "Nama Operator", "Line", "Area", "Station", "Forward To", "Forward Date"];
     
     // Warna teks header (abu-abu)
     const headerStyles = {
@@ -69,6 +68,7 @@ const ReuestLeader = () => {
     // Mengisi data tabel PDF dengan properti yang Anda inginkan
     filteredData.forEach((item) => {
       const rowData = [
+        item.Uid,
         item.Date,
         item.Nama,
         item.Line,
@@ -120,7 +120,7 @@ const ReuestLeader = () => {
   
   
     // Menyimpan file PDF
-    doc.save(`Request Leader Andon [Data].pdf`);
+    doc.save(`Request Leader [Andon Data].pdf`);
   };
  
   
@@ -389,10 +389,10 @@ const ReuestLeader = () => {
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
                     {filteredData.map((item, index) => (
-                      <tr
-                        key={item.id}
-                        className={index === 0 ? "bg-green-400" : ""}
-                      >
+                       <tr
+                       key={item.id}
+                       className={item.Status === "" ? "bg-red-400" : ""}
+                     >
                         <td className="p-2">
                           <div className="font-medium text-xs lg:text-sm text-gray-800">
                             {item.Uid}

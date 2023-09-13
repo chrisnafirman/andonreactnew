@@ -43,7 +43,7 @@ const Maintenance = () => {
   const [isOpenSearch, setisOpenSearch] = useState(false);
   const [isButtonSearch, setisButtonSearch] = useState(true);
 
-  
+
 
   const [selectedOptionDepartment, setSelectedOptionDepartment] =
     useState(null);
@@ -89,160 +89,166 @@ const Maintenance = () => {
 
 
 
-    
-    const exportToPDFRequest = () => {
-      const doc = new jsPDF("landscape");
-      const tableData = [];
-      
-      // Header untuk tabel PDF
-      const headers = ["Requestor", "Request at", "Requestor PIC", "Line", "Area", "Station", "Problem"];
-      
-      // Warna teks header (abu-abu)
-      const headerStyles = {
+
+  const exportToPDFRequest = () => {
+    const doc = new jsPDF("landscape");
+    const tableData = [];
+
+    // Header untuk tabel PDF
+    const headers = ["Uid", "Requestor", "Request at", "Requestor PIC", "Line", "Area", "Station", "Problem"];
+
+    // Warna teks header (abu-abu)
+    const headerStyles = {
+      fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
+      textColor: 0, // Warna teks hitam (0)
+      fontStyle: "bold", // Teks header tebal
+    };
+
+    // Mengisi data tabel PDF dengan properti yang Anda inginkan
+    filteredData.forEach((item) => {
+      const rowData = [
+        item.Uid,
+        item.Requestor,
+        item.Date,
+        item.Nama,
+        item.Line,
+        item.Area,
+        item.Station,
+        item.Problem,
+      ];
+      tableData.push(rowData);
+    });
+
+    // Menambahkan logo perusahaan ke file PDF
+    const logoImg = new Image();
+    logoImg.src = process.env.PUBLIC_URL + "/avi.png";
+
+    // Mengukur logo sesuai dengan yang Anda inginkan
+    const logoWidth = 50; // Lebar logo
+    const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
+
+    doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
+
+    // Menambahkan teks di atas tabel dan di tengah-tengah
+    const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
+    const text = "Request Repairment Maintenance [Andon Data]";
+    const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
+
+    const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
+    const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
+
+    doc.text(text, textX, textY);
+
+    const fontSize = 6;
+    // Membuat tabel PDF dengan menggunakan autotable
+    doc.autoTable({
+      head: [headers],
+      body: tableData,
+      startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
+      headStyles: {
         fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
         textColor: 0, // Warna teks hitam (0)
-        fontStyle: "bold", // Teks header tebal
-      };
-    
-      // Mengisi data tabel PDF dengan properti yang Anda inginkan
-      filteredData.forEach((item) => {
-        const rowData = [
-          item.Requestor,
-          item.Date,
-          item.Nama,
-          item.Line,
-          item.Area,
-          item.Station,
-          item.Problem,
-        ];
-        tableData.push(rowData);
-      });
-    
-      // Menambahkan logo perusahaan ke file PDF
-      const logoImg = new Image();
-      logoImg.src = process.env.PUBLIC_URL + "/avi.png";
-      
-      // Mengukur logo sesuai dengan yang Anda inginkan
-      const logoWidth = 50; // Lebar logo
-      const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
-      
-      doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
-      
-      // Menambahkan teks di atas tabel dan di tengah-tengah
-      const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
-      const text = "Request Repairment Maintenance [Andon Data]";
-      const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
-      
-      const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
-      const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
-      
-      doc.text(text, textX, textY);
-      
-      const fontSize = 6; 
-      // Membuat tabel PDF dengan menggunakan autotable
-      doc.autoTable({
-        head: [headers],
-        body: tableData,
-        startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
-        headStyles: {
-          fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-          textColor: 0, // Warna teks hitam (0)
-          fontStyle: fontSize, // Teks header tebal
+        fontStyle: fontSize, // Teks header tebal
+      },
+      columnStyles: {
+        1: { // Indeks 4 adalah kolom "Date"
+          textColor: [159, 0, 0], // Warna teks merah dalam format RGB
         },
-        columnStyles: {
-          0: { // Indeks 4 adalah kolom "Date"
-            textColor: [159, 0, 0], // Warna teks merah dalam format RGB
-          },
-        },
-       
-      });
-    
-    
-      // Menyimpan file PDF
-      doc.save(`Request Repairment Maintenance [Andon Data].pdf`);
-    };
-  
-      //  fungsi export to pdf
-      const exportToPDFRepair = () => {
-        const doc = new jsPDF("landscape");
-        const tableData = [];
-        
-        // Header untuk tabel PDF
-        const headers = ["Requestor", "Request at", "Repair PIC", "Line", "Area", "Station", "Status", "Problem",  "Repair Start", "Forward To", "Forward at"];
-        
-        // Warna teks header (abu-abu)
-        const headerStyles = {
-          fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-          textColor: 0, // Warna teks hitam (0)
-          fontStyle: "bold", // Teks header tebal
-        };
-      
-        // Mengisi data tabel PDF dengan properti yang Anda inginkan
-        filteredData.forEach((item )  => {
-          const Requestat = `${item.Date} WIB`;
-          const rowData = [
-            item.Requestor,
-            Requestat,
-            item.ResponseName,
-            item.Line,
-            item.Area,
-            item.Station,
-            item.Status,
-            item.Problem,
-            formatDateTimeAPI(item.ResponseTime),
-            item.DepartTo,
-            formatDateTimeAPI(item.ResponseDone),
-          ];
-          tableData.push(rowData);
-        });
-      
-        // Menambahkan logo perusahaan ke file PDF
-        const logoImg = new Image();
-        logoImg.src = process.env.PUBLIC_URL + "/avi.png";
-        
-        // Mengukur logo sesuai dengan yang Anda inginkan
-        const logoWidth = 50; // Lebar logo
-        const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
-        
-        doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
-        
-        // Menambahkan teks di atas tabel dan di tengah-tengah
-        const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
-        const text = "Repairment PIC Maintenance [Andon Data]";
-        const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
-        
-        const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
-        const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
-        
-        doc.text(text, textX, textY);
-  
-        const fontSize = 6; 
-        // Membuat tabel PDF dengan menggunakan autotable
-        doc.autoTable({
-          head: [headers],
-          body: tableData,
-          startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
-          headStyles: {
-            fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-            textColor: 0, // Warna teks hitam (0)
-            fontStyle: fontSize, // Teks header tebal
-          },
-          columnStyles: {
-            9: { // Indeks 4 adalah kolom "Date"
-              textColor: [5, 150, 27], // Warna teks merah dalam format RGB
-            },
-            0: { // Indeks 4 adalah kolom "Date"
-              textColor: [159, 0, 0], // Warna teks merah dalam format RGB
-            },
-          },
-        });
-      
-      
-        // Menyimpan file PDF
-        doc.save(`Repairment PIC Maintenance [Andon Data].pdf`);
-      };
+      },
 
-      
+    });
+
+
+    // Menyimpan file PDF
+    doc.save(`Request Repairment Maintenance [Andon Data].pdf`);
+  };
+
+  //  fungsi export to pdf
+  const exportToPDFRepair = () => {
+    const doc = new jsPDF("landscape");
+    const tableData = [];
+
+    // Header untuk tabel PDF
+    const headers = ["Uid", "Requestor", "Request at", "Repair PIC", "Line", "Area", "Station", "Status", "Problem", "Repair Start", "Forward To", "Forward at"];
+
+    // Warna teks header (abu-abu)
+    const headerStyles = {
+      fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
+      textColor: 0, // Warna teks hitam (0)
+      fontStyle: "bold", // Teks header tebal
+    };
+
+    // Mengisi data tabel PDF dengan properti yang Anda inginkan
+    filteredData.forEach((item) => {
+      const Requestat = `${item.Date} WIB`;
+      const rowData = [
+        item.Uid,
+        item.Requestor,
+        Requestat,
+        item.ResponseName,
+        item.Line,
+        item.Area,
+        item.Station,
+        item.Status,
+        item.Problem,
+        formatDateTimeAPI(item.ResponseTime),
+        item.DepartTo,
+        formatDateTimeAPI(item.ResponseDone),
+      ];
+      tableData.push(rowData);
+    });
+
+    // Menambahkan logo perusahaan ke file PDF
+    const logoImg = new Image();
+    logoImg.src = process.env.PUBLIC_URL + "/avi.png";
+
+    // Mengukur logo sesuai dengan yang Anda inginkan
+    const logoWidth = 50; // Lebar logo
+    const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
+
+    doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
+
+    // Menambahkan teks di atas tabel dan di tengah-tengah
+    const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
+    const text = "Repairment PIC Maintenance [Andon Data]";
+    const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
+
+    const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
+    const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
+
+    doc.text(text, textX, textY);
+
+    const fontSize = 8; // Atur ukuran font yang diinginkan
+    const scaleFactor = 2;
+    // Membuat tabel PDF dengan menggunakan autotable
+    doc.autoTable({
+      head: [headers],
+      body: tableData,
+      startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
+      headStyles: {
+        fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
+        textColor: 0, // Warna teks hitam (0)
+        fontStyle: fontSize, // Teks header tebal
+      },
+      columnStyles: {
+        10: { // Indeks 4 adalah kolom "Date"
+          textColor: [5, 150, 27], // Warna teks merah dalam format RGB
+        },
+        1: { // Indeks 4 adalah kolom "Date"
+          textColor: [159, 0, 0], // Warna teks merah dalam format RGB
+        },
+      },
+      styles: {
+        fontSize: fontSize, // Atur ukuran font
+      },
+    });
+
+
+    // Menyimpan file PDF
+    doc.save(`Repairment PIC Maintenance [Andon Data].pdf`);
+  };
+
+
 
 
 
@@ -571,17 +577,17 @@ const Maintenance = () => {
                   alt=""
                 />
               </button> */}
-                 <header className="px-5 py-4 border-b border-gray-100">
+              <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-mono text-lg text-center text-gray-800">
                   Request Maintenance
                 </div>
-                <button className="flex text-sm" onClick={()=>{setisExportOption(true)}}>
-                <img
-                  className="w-[30px]"
-                  src={process.env.PUBLIC_URL + "/pdf.png"}
-                  alt=""
-                />
-              </button>
+                <button className="flex text-sm" onClick={() => { setisExportOption(true) }}>
+                  <img
+                    className="w-[30px]"
+                    src={process.env.PUBLIC_URL + "/pdf.png"}
+                    alt=""
+                  />
+                </button>
               </header>
 
               <div
@@ -591,7 +597,7 @@ const Maintenance = () => {
                 <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
-                    <th className="p-1 w-10 lg:w-32">
+                      <th className="p-1 w-10 lg:w-32">
                         <div className="font-sans lg:font-semibold text-left">Uid</div>
                       </th>
                       <th className="p-1 w-10 lg:w-32">
@@ -615,65 +621,65 @@ const Maintenance = () => {
                     </tr>
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
-                  {filteredData.map((item, index) => {
+                    {filteredData.map((item, index) => {
                       if (item.Department === "MAINTENANCE & IT") {
                         return (
-                      <tr
-                        key={item.id}
-                        className={index === 0 ? "bg-green-400" : ""}
-                      >
-                         <td className="p-2">
-                          <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.Uid}
-                          </div>
-                        </td>
-                        <td className="p-2">
-                          <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.Requestor}
-                          </div>
-                        </td>
-                        <td className="p-2">
-                          <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.Line}
-                          </div>
-                        </td>
-                        <td className="p-2">
-                          <div className="font-medium text-xs lg:text-sm text-gray-800">
-                            {item.Area}
-                          </div>
-                        </td>
-                        <td className="p-2">
-                          <div className="font-medium text-gray-800">
-                            {item.Station}
-                          </div>
-                        </td>
-                        <td className="p-2 ">
-                          {item.Status === "" && (
-                            <button
-                              onClick={() => setSelectedItem(item)}
-                              className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out"
-                            >
-                              <span className="text-xs  lg:text-sm">Open</span>
-                            </button>
-                          )}
-                          {item.Status === "Solved" && (
-                            <button
-                              onClick={() => setSelectedItem(item)}
-                              className="bg-green-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
-                            >
-                              <span className="text-xs lg:text-sm">Solved</span>
-                            </button>
-                          )}
-                          {item.Status === "Repair" && (
-                            <button
-                              onClick={() => setSelectedItem(item)}
-                              className="bg-yellow-500 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
-                            >
-                              <span className="text-xs lg:text-sm">Repair</span>
-                            </button>
-                          )}
-                        </td>
-                        {/* <td className="p-5 w-40">
+                          <tr
+                            key={item.id}
+                            className={item.Status === "Repair" ? "bg-yellow-400" : item.Status === "" ? "bg-red-400 " : ""}
+                          >
+                            <td className="p-2">
+                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                                {item.Uid}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                                {item.Requestor}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                                {item.Line}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                                {item.Area}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-medium text-gray-800">
+                                {item.Station}
+                              </div>
+                            </td>
+                            <td className="p-2 ">
+                              {item.Status === "" && (
+                                <button
+                                  onClick={() => setSelectedItem(item)}
+                                  className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out"
+                                >
+                                  <span className="text-xs  lg:text-sm">Open</span>
+                                </button>
+                              )}
+                              {item.Status === "Solved" && (
+                                <button
+                                  onClick={() => setSelectedItem(item)}
+                                  className="bg-green-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                                >
+                                  <span className="text-xs lg:text-sm">Solved</span>
+                                </button>
+                              )}
+                              {item.Status === "Repair" && (
+                                <button
+                                  onClick={() => setSelectedItem(item)}
+                                  className="bg-yellow-500 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                                >
+                                  <span className="text-xs lg:text-sm">Repair</span>
+                                </button>
+                              )}
+                            </td>
+                            {/* <td className="p-5 w-40">
                           <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -691,12 +697,12 @@ const Maintenance = () => {
                           </button>
                         </td> */}
 
-                        <td className="p-2">
-                          <div className="text-center h-6 text-black...">
-                            {item.Date} WIB
-                          </div>
-                        </td>
-                        </tr>
+                            <td className="p-2">
+                              <div className="text-center h-6 text-black...">
+                                {item.Date} WIB
+                              </div>
+                            </td>
+                          </tr>
                         );
                       }
                       return null;
@@ -1005,14 +1011,14 @@ const Maintenance = () => {
                                 Depart To
                               </label>
                               <Select
-                              value={selectedOptionDepartment}
-                              onChange={handleSelectDepartment}
-                              options={OptionsDepartment}
-                              isSearchable
-                              required
-                              placeholder="Pilih Department"
-                              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            />
+                                value={selectedOptionDepartment}
+                                onChange={handleSelectDepartment}
+                                options={OptionsDepartment}
+                                isSearchable
+                                required
+                                placeholder="Pilih Department"
+                                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                              />
                             </div>
                             <div className="w-full mt-1 px-3 mb-3 md:mb-0">
                               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
@@ -1238,7 +1244,7 @@ const Maintenance = () => {
                         </div>
 
                         <div className="flex justify-center">
-                        <button
+                          <button
                             onClick={exportToPDFRequest}
                             className="bg-blue-900 w-28 h-16 hover:bg-blue-700  text-white font-bold py-2 px-4  rounded mr-2"
                           >
@@ -1250,7 +1256,7 @@ const Maintenance = () => {
                           >
                             Repair
                           </button>
-                         
+
                         </div>
                       </div>
                     </div>
