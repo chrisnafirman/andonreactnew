@@ -42,7 +42,7 @@ function QRReturnValidationLeaderTOP() {
 
 
 
-  
+
 
 
 
@@ -148,9 +148,15 @@ function QRReturnValidationLeaderTOP() {
   };
 
   const handleScanSuccessMesin = (data) => {
-    setStation(data);
-    setShowPopupMesin(false)
-    setIsQRReturn(true);
+    // Check if "(TOP)" is present in the scanned data
+    if (data.includes("(TOP)")) {
+      setStation(data);
+      setShowPopupMesin(false)
+      setIsQRReturn(true);
+    } else {
+      // Show an error message or take appropriate action for "(TOP)" or other cases
+       alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(TOP)'");
+    }
   };
 
 
@@ -189,28 +195,28 @@ function QRReturnValidationLeaderTOP() {
     fetchLatestUidByStation();
   }, [Station]);
 
-  
-const fetchLatestUidByStation = () => {
-  fetch("http://192.168.101.12:3001/api/Repair")
-    .then((response) => response.json())
-    .then((data) => {
-      // Filter objek yang memiliki Station sesuai dengan yang Anda inginkan, misalnya "SPI (TOP)"
-      const matchingObjects = data.filter((item) => item.Station === Station);
 
-      // Jika ada objek yang sesuai, ambil UID dari objek terbaru
-      if (matchingObjects.length > 0) {
-        const latestObject = matchingObjects[matchingObjects.length - 1];
-        const latestUid = latestObject.Uid;
-        setUid(latestUid);
-      } else {
-        // Jika tidak ada objek yang sesuai, atur UID menjadi kosong atau nilai default yang sesuai
-        setUid("");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data from API:", error);
-    });
-};
+  const fetchLatestUidByStation = () => {
+    fetch("http://192.168.101.12:3001/api/Repair")
+      .then((response) => response.json())
+      .then((data) => {
+        // Filter objek yang memiliki Station sesuai dengan yang Anda inginkan, misalnya "SPI (TOP)"
+        const matchingObjects = data.filter((item) => item.Station === Station);
+
+        // Jika ada objek yang sesuai, ambil UID dari objek terbaru
+        if (matchingObjects.length > 0) {
+          const latestObject = matchingObjects[matchingObjects.length - 1];
+          const latestUid = latestObject.Uid;
+          setUid(latestUid);
+        } else {
+          // Jika tidak ada objek yang sesuai, atur UID menjadi kosong atau nilai default yang sesuai
+          setUid("");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data from API:", error);
+      });
+  };
 
   return (
     <body style={styles}>
@@ -276,7 +282,7 @@ const fetchLatestUidByStation = () => {
                               </span>
                               <button onClick={() => {
                                 togglePopupNama();
-                             setIsQRReturn(false);
+                                setIsQRReturn(false);
                               }}>
                                 {showPopupNama ? (
                                   <svg width="60px" height="40px" viewBox="0 0 24 24" fill="none" >
@@ -418,7 +424,7 @@ const fetchLatestUidByStation = () => {
                             }}
                             required
                           />
-                         
+
                         </div>
 
 
@@ -434,24 +440,24 @@ const fetchLatestUidByStation = () => {
                             Yes, I'm sure
                           </button>
                         </div>
-                      </form>  
-                      <a href="/ValidationLeader">  
-                      <button
-                            class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                          
-                          >
-                            <svg width="20px" viewBox="0 0 1024 1024">
-                              <path fill="#F7F7F7" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" />
-                              <path fill="#F7F7F7" d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" />
-                            </svg>
-                          </button>
-                          </a>
+                      </form>
+                      <a href="/ValidationLeader">
+                        <button
+                          class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+
+                        >
+                          <svg width="20px" viewBox="0 0 1024 1024">
+                            <path fill="#F7F7F7" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" />
+                            <path fill="#F7F7F7" d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" />
+                          </svg>
+                        </button>
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            
+
           </>
         ) : null}
       </td>
@@ -480,7 +486,7 @@ const fetchLatestUidByStation = () => {
                       <div className="inline-block  w-8 h-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status"></div>
                     </div>
                     <div className="flex justify-center items-center mt-3">
-                    <span className="text-center justify-center items-center mx-auto">Mohon Tunggu Ya Permintaanmu sedang kami proses</span>
+                      <span className="text-center justify-center items-center mx-auto">Mohon Tunggu Ya Permintaanmu sedang kami proses</span>
                     </div>
                   </div>
                 </div>

@@ -483,7 +483,7 @@ const Others = () => {
         <div class="mx-auto max-w-7xl px-4">
           <div>
             <div class="flex items-center">
-              <h1 class="text-base lg:text-xl font-sans tracking-tight text-gray-900">
+              <h1 class="text-xs lg:text-xl font-sans tracking-tight text-gray-900">
                 | Request All Department |
               </h1>
               <h1 class="text-base lg:text-xl  font-sans tracking-tight ml-4">
@@ -499,9 +499,9 @@ const Others = () => {
                 <span className="ml-4">|</span>
               </h1>
 
-              <h1 class="text-base lg:text-xl font-sans tracking-tight ml-4">
+              <h1 class="text-base lg:text-xl  font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
-                <span class="ml-4 text-green-500">RUNNING </span>|
+                <span class="ml-4 text-green-500">RUNNING</span>|
               </h1>
             </div>
           </div>
@@ -609,8 +609,8 @@ const Others = () => {
                       <th className="p-1 w-10">
                         <div className="font-semibold text-center">Status</div>
                       </th>
-                      <th className="p-1 w-56">
-                        <div className="font-semibold text-center">Date</div>
+                      <th className="p-1 w-24 justify-center items-center flex">
+                        <div className="font-mono text-center ">Date</div>
                       </th>
                     </tr>
                   </thead>
@@ -623,27 +623,27 @@ const Others = () => {
                           className={item.Status === "Repair" ? "bg-yellow-400" : item.Status === "" ? "bg-red-400" : ""}
                         >
                             <td className="p-2">
-                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                              <div className="font-sans text-xs lg:text-sm text-gray-800">
                                 {item.Uid}
                               </div>
                             </td>
                             <td className="p-2">
-                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                              <div className="font-sans text-xs lg:text-sm text-gray-800">
                                 {item.Department}
                               </div>
                             </td>
                             <td className="p-2">
-                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                              <div className="font-sans text-xs lg:text-sm text-gray-800">
                                 {item.Line}
                               </div>
                             </td>
                             <td className="p-2">
-                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                              <div className="font-sans text-xs lg:text-sm text-gray-800">
                                 {item.Area}
                               </div>
                             </td>
                             <td className="p-2">
-                              <div className="font-medium text-gray-800">
+                              <div className="font-sans text-gray-800">
                                 {item.Station}
                               </div>
                             </td>

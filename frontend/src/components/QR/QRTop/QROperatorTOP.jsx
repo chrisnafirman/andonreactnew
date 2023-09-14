@@ -428,11 +428,18 @@ function QROperatorTOP() {
     };
 
     const handleScanSuccessMesin = (data) => {
-        setStation(data);
-        setStationView(data);
-        setShowPopupMesin(false)
-        setIsQROperator(true);
-    };
+        // Check if "(TOP)" is present in the scanned data
+        if (data.includes("(TOP)")) {
+          setStation(data);
+          setStationView(data);
+          setShowPopupMesin(false);
+          setIsQROperator(true);
+        } else {
+          // Show an error message or take appropriate action for "(TOP)" or other cases
+          alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(TOP)'");
+        }
+      };
+      
 
 
     const handleScanSuccessNamaToMTC = (data) => {
@@ -443,12 +450,19 @@ function QROperatorTOP() {
 
     };
 
-    const handleScanSuccessMesinToMTC  = (data) => {
-        setStation(data);
-        setStationView(data);
-        setShowPopupMesinToMTC(false)
-        setIsQROperatorToMTC(true);
-    };
+    const handleScanSuccessMesinToMTC = (data) => {
+        // Check if "(TOP)" is present in the scanned data
+        if (data.includes("(TOP)")) {
+          setStation(data);
+          setStationView(data);
+          setShowPopupMesinToMTC(false);
+          setIsQROperatorToMTC(true);
+        } else {
+          // Show an error message or take appropriate action for "(TOP)" or other cases
+           alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(TOP)'");
+        }
+      };
+      
 
     const refreshPage = () => {
         window.location.reload();

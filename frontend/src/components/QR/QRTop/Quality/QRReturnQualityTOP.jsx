@@ -145,10 +145,17 @@ function QRReturnQualityTOP() {
   };
 
   const handleScanSuccessMesin = (data) => {
+    // Check if "(TOP)" is present in the scanned data
+    if (data.includes("(TOP)")) {
     setStation(data);
     setShowPopupMesin(false)
     setIsQRReturn(true);
-  };
+  } else {
+    // Show an error message or take appropriate action for "(TOP)" or other cases
+     alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(TOP)'");
+  }
+};
+
 
 
   const OptionsDepartment = [

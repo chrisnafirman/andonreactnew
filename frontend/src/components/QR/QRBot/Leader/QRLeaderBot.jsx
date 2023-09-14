@@ -136,7 +136,7 @@ function QRLeaderBOT() {
   const styles = {
     background: "linear-gradient(45deg, #000, #626658, #292d1f)",
     height: "1000px",
-};
+  };
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
@@ -157,9 +157,15 @@ function QRLeaderBOT() {
   };
 
   const handleScanSuccessMesin = (data) => {
-    setStation(data);
-    setShowPopupMesin(false)
-    setIsQRLeader(true);
+    // Check if "(BOT)" is present in the scanned data
+    if (data.includes("(BOT)")) {
+      setStation(data);
+      setShowPopupMesin(false)
+      setIsQRLeader(true);
+    } else {
+      // Show an error message or take appropriate action for "(BOT)" or other cases
+      alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(BOT)'");
+    }
   };
 
 
@@ -491,7 +497,7 @@ function QRLeaderBOT() {
                       <div className="inline-block  w-8 h-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status"></div>
                     </div>
                     <div className="flex justify-center items-center mt-3">
-                    <span className="text-center justify-center items-center mx-auto">Mohon Tunggu Ya Permintaanmu sedang kami proses</span>
+                      <span className="text-center justify-center items-center mx-auto">Mohon Tunggu Ya Permintaanmu sedang kami proses</span>
                     </div>
                   </div>
                 </div>

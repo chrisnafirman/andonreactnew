@@ -1,0 +1,43 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const https = require("https");
+const fs = require("fs");
+
+const app = express();
+const router = require("./routers/router");
+
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Pengaturan CORS
+const allowedOrigins = [
+  "https://andonline.astra-visteon.com:3003"
+];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
+app.use("/api", router);
+
+// Load sertifikat dan kunci
+const privateKey = fs.readFileSync('C:/Users/adminapp/Documents/AndonQR/andon.key', 'utf8');
+const certificate = fs.readFileSync('C:/Users/adminapp/Documents/AndonQR/andon.crt', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+
+const port = 3002;
+
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(port, () => {
+  console.log(`Server is running on port ${port} (HTTPS)`);
+});

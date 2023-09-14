@@ -117,10 +117,16 @@ function QRValidationLeaderBOT() {
   };
 
   const handleScanSuccessMesin = (data) => {
+    // Check if "(BOT)" is present in the scanned data
+    if (data.includes("(BOT)")) {
     setStation(data);
     setShowPopupMesin(false)
     setIsQRValidationLeader(true);
-  };
+  } else {
+    // Show an error message or take appropriate action for "(BOT)" or other cases
+     alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(BOT)'");
+  }
+};
 
 
 

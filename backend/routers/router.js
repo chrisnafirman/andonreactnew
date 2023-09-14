@@ -31,12 +31,23 @@ const ReflowBOT = require("../controller/SMTBOTDATA/ReflowBOT")
 const AOIBOT = require("../controller/SMTBOTDATA/AOIBOT")
 const RVSBOT = require("../controller/SMTBOTDATA/RVSBOT")
 
+
+// Be
+const DropinBE = require("../controller/SMTBEDATA/DropinBE")
+const FluxerBE = require("../controller/SMTBEDATA/FluxerBE")
+const PreheatBE = require("../controller/SMTBEDATA/PreheatBE")
+const Seho1BE = require("../controller/SMTBEDATA/Seho1BE")
+const Seho2BE = require("../controller/SMTBEDATA/Seho2BE")
+const TouchupBE = require("../controller/SMTBEDATA/TouchupBE")
+const ICTBE = require("../controller/SMTBEDATA/ICTBE")
+const FlashBE = require("../controller/SMTBEDATA/FlashBE")
+const RouterBE = require("../controller/SMTBEDATA/RouterBE")
+
 // lDR
 router.post("/Leader", LDRControllers.postRequestLeader);
 router.get("/Leader", LDRControllers.getRequestLeader);
 router.put("/PutStatusLeader", LDRControllers.PutStatusLeader);
 router.delete("/leader/:id", LDRControllers.DeleteReject);
-
 router.put("/PutUidLeader", LDRControllers.PutUidLeader);
 
 
@@ -252,7 +263,91 @@ router.get("/getRVSBOTReturnRepair", RVSBOT.getRVSBOTReturnRepair);
 
 
 
+// Fetch Data BE
+// Dropin
+router.put("/PutDownTimeDropinBE", DropinBE.PutDownTimeDropinBE);
+router.put("/PutDownTimeDropinBEReturn", DropinBE.PutDownTimeDropinBEReturn);
+router.get("/getDropinBELeader", DropinBE.getDropinBELeader);
+router.get("/getDropinBERepair", DropinBE.getDropinBERepair);
+router.get("/getDropinBEValidation", DropinBE.getDropinBEValidation);
+router.get("/getDropinBEValidationReturn", DropinBE.getDropinBEValidationReturn);
+router.get("/getDropinBEReturnRepair", DropinBE.getDropinBEReturnRepair);
 
+// Fluxer
+router.put("/PutDownTimeFluxerBE", FluxerBE.PutDownTimeFluxerBE);
+router.put("/PutDownTimeFluxerBEReturn", FluxerBE.PutDownTimeFluxerBEReturn);
+router.get("/getFluxerBELeader", FluxerBE.getFluxerBELeader);
+router.get("/getFluxerBERepair", FluxerBE.getFluxerBERepair);
+router.get("/getFluxerBEValidation", FluxerBE.getFluxerBEValidation);
+router.get("/getFluxerBEValidationReturn", FluxerBE.getFluxerBEValidationReturn);
+router.get("/getFluxerBEReturnRepair", FluxerBE.getFluxerBEReturnRepair);
+
+// Preheat
+router.put("/PutDownTimePreheatBE", PreheatBE.PutDownTimePreheatBE);
+router.put("/PutDownTimePreheatBEReturn", PreheatBE.PutDownTimePreheatBEReturn);
+router.get("/getPreheatBELeader", PreheatBE.getPreheatBELeader);
+router.get("/getPreheatBERepair", PreheatBE.getPreheatBERepair);
+router.get("/getPreheatBEValidation", PreheatBE.getPreheatBEValidation);
+router.get("/getPreheatBEValidationReturn", PreheatBE.getPreheatBEValidationReturn);
+router.get("/getPreheatBEReturnRepair", PreheatBE.getPreheatBEReturnRepair);
+
+// Seho1
+router.put("/PutDownTimeSeho1BE", Seho1BE.PutDownTimeSeho1BE);
+router.put("/PutDownTimeSeho1BEReturn", Seho1BE.PutDownTimeSeho1BEReturn);
+router.get("/getSeho1BELeader", Seho1BE.getSeho1BELeader);
+router.get("/getSeho1BERepair", Seho1BE.getSeho1BERepair);
+router.get("/getSeho1BEValidation", Seho1BE.getSeho1BEValidation);
+router.get("/getSeho1BEValidationReturn", Seho1BE.getSeho1BEValidationReturn);
+router.get("/getSeho1BEReturnRepair", Seho1BE.getSeho1BEReturnRepair);
+
+// Seho2
+router.put("/PutDownTimeSeho2BE", Seho2BE.PutDownTimeSeho2BE);
+router.put("/PutDownTimeSeho2BEReturn", Seho2BE.PutDownTimeSeho2BEReturn);
+router.get("/getSeho2BELeader", Seho2BE.getSeho2BELeader);
+router.get("/getSeho2BERepair", Seho2BE.getSeho2BERepair);
+router.get("/getSeho2BEValidation", Seho2BE.getSeho2BEValidation);
+router.get("/getSeho2BEValidationReturn", Seho2BE.getSeho2BEValidationReturn);
+router.get("/getSeho2BEReturnRepair", Seho2BE.getSeho2BEReturnRepair);
+
+
+// Touchup
+router.put("/PutDownTimeTouchupBE", TouchupBE.PutDownTimeTouchupBE);
+router.put("/PutDownTimeTouchupBEReturn", TouchupBE.PutDownTimeTouchupBEReturn);
+router.get("/getTouchupBELeader", TouchupBE.getTouchupBELeader);
+router.get("/getTouchupBERepair", TouchupBE.getTouchupBERepair);
+router.get("/getTouchupBEValidation", TouchupBE.getTouchupBEValidation);
+router.get("/getTouchupBEValidationReturn", TouchupBE.getTouchupBEValidationReturn);
+router.get("/getTouchupBEReturnRepair", TouchupBE.getTouchupBEReturnRepair);
+
+// ICT
+router.put("/PutDownTimeICTBE", ICTBE.PutDownTimeICTBE);
+router.put("/PutDownTimeICTBEReturn", ICTBE.PutDownTimeICTBEReturn);
+router.get("/getICTBELeader", ICTBE.getICTBELeader);
+router.get("/getICTBERepair", ICTBE.getICTBERepair);
+router.get("/getICTBEValidation", ICTBE.getICTBEValidation);
+router.get("/getICTBEValidationReturn", ICTBE.getICTBEValidationReturn);
+router.get("/getICTBEReturnRepair", ICTBE.getICTBEReturnRepair);
+
+
+// Flash
+router.put("/PutDownTimeFlashBE", FlashBE.PutDownTimeFlashBE);
+router.put("/PutDownTimeFlashBEReturn", FlashBE.PutDownTimeFlashBEReturn);
+router.get("/getFlashBELeader", FlashBE.getFlashBELeader);
+router.get("/getFlashBERepair", FlashBE.getFlashBERepair);
+router.get("/getFlashBEValidation", FlashBE.getFlashBEValidation);
+router.get("/getFlashBEReturnRepair", FlashBE.getFlashBEReturnRepair);
+router.get("/getFlashBEValidationReturn", FlashBE.getFlashBEValidationReturn);
+
+// Router
+router.put("/PutDownTimeRouterBE", RouterBE.PutDownTimeRouterBE);
+router.put("/PutDownTimeRouterBEReturn", RouterBE.PutDownTimeRouterBEReturn);
+router.get("/getRouterBELeader", RouterBE.getRouterBELeader);
+router.get("/getRouterBERepair", RouterBE.getRouterBERepair);
+router.get("/getRouterBEValidation", RouterBE.getRouterBEValidation);
+router.get("/getRouterBEValidationReturn", RouterBE.getRouterBEValidationReturn);
+router.get("/getRouterBEReturnRepair", RouterBE.getRouterBEReturnRepair);
+
+// ..........................................
 
 
 

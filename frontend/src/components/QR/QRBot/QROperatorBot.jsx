@@ -428,10 +428,16 @@ function QROperatorBOT() {
     };
 
     const handleScanSuccessMesin = (data) => {
+        // Check if "(BOT)" is present in the scanned data
+        if (data.includes("(BOT)")) {
         setStation(data);
         setStationView(data);
         setShowPopupMesin(false)
         setIsQROperator(true);
+    } else {
+        // Show an error message or take appropriate action for "(BOT)" or other cases
+         alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(BOT)'");
+      }
     };
 
 
@@ -444,10 +450,15 @@ function QROperatorBOT() {
     };
 
     const handleScanSuccessMesinToMTC  = (data) => {
+        if (data.includes("(BOT)")) {
         setStation(data);
         setStationView(data);
         setShowPopupMesinToMTC(false)
         setIsQROperatorToMTC(true);
+    } else {
+        // Show an error message or take appropriate action for "(BOT)" or other cases
+         alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(BOT)'");
+      }
     };
 
     const refreshPage = () => {

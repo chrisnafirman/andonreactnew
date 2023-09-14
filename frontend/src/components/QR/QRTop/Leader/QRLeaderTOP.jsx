@@ -157,11 +157,16 @@ function QRLeaderTOP() {
   };
 
   const handleScanSuccessMesin = (data) => {
-    setStation(data);
-    setShowPopupMesin(false)
-    setIsQRLeader(true);
+    // Check if "(TOP)" is present in the scanned data
+    if (data.includes("(TOP)")) {
+      setStation(data);
+      setShowPopupMesin(false)
+      setIsQRLeader(true);
+    } else {
+      // Show an error message or take appropriate action for "(BOT)" or other cases
+       alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(TOP)'");
+    }
   };
-
 
   const OptionsDepartment = [
     { value: "", label: "-- Pilih Depart --" },
@@ -491,7 +496,7 @@ function QRLeaderTOP() {
                       <div className="inline-block  w-8 h-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status"></div>
                     </div>
                     <div className="flex justify-center items-center mt-3">
-                    <span className="text-center justify-center items-center mx-auto">Mohon Tunggu Ya Permintaanmu sedang kami proses</span>
+                      <span className="text-center justify-center items-center mx-auto">Mohon Tunggu Ya Permintaanmu sedang kami proses</span>
                     </div>
                   </div>
                 </div>

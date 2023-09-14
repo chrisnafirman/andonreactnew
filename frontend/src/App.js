@@ -89,6 +89,30 @@ import QRReturnValidationLeaderBot from "./components/QR/QRBot/Leader/QRReturnVa
 
 // 
 
+// QR Be
+
+import QROperatorBe from "./components/QR/QRBe/QROperatorBE.jsx"
+import QRLeaderBe from "./components/QR/QRBe/Leader/QRLeaderBE.jsx"
+
+
+import QRReturnResponseRepairBeMTC from "./components/QR/QRBe/Maintenance/QRReturnResponseRepairBE.jsx"
+import QRResponseRepairBeMTC from "./components/QR/QRBe/Maintenance/QRResponseRepairBE.jsx"
+
+import QRReturnResponseRepairBeOTH from "./components/QR/QRBe/Others/QRReturnResponseRepairBE.jsx"
+import QRResponseRepairBeOTH from "./components/QR/QRBe/Others/QRResponseRepairBE.jsx"
+
+
+import QRReturnQualityBe from "./components/QR/QRBe/Quality/QRReturnQualityBE.jsx"
+import QRValidationQualityBe from "./components/QR/QRBe/Quality/QRValidationQualityBE.jsx"
+import QRReturnValidationQualityBe from "./components/QR/QRBe/Quality/QRReturnValidationQualityBE.jsx"
+
+import QRReturnLeaderBe from "./components/QR/QRBe/Leader/QRReturnLeaderBE.jsx"
+import QRValidationLeaderBe from "./components/QR/QRBe/Leader/QRValidationLeaderBE.jsx"
+import QRReturnValidationLeaderBe from "./components/QR/QRBe/Leader/QRReturnValidationLeaderBE.jsx"
+
+
+// 
+
 import PortalMaintenance from "./components/Portal/PortalMaintenance.jsx"
 import PortalLeader from "./components/Portal/PortalLeader.jsx"
 import PortalQuality from "./components/Portal/PortalQuality.jsx"
@@ -177,7 +201,7 @@ function App() {
 
         {/*  */}
 
-        {/* QR Top*/}
+        {/* QR Bot*/}
 
         <Route path="QRLeaderBot" element={<QRLeaderBot />} />
 
@@ -203,6 +227,35 @@ function App() {
         <Route path="QRReturnValidationLeaderBot" element={<QRReturnValidationLeaderBot />} />
 
         {/*  */}
+
+
+        {/* QR Be*/}
+
+        <Route path="QRLeaderBe" element={<QRLeaderBe />} />
+
+        <Route path="QROperatorBe" element={<QROperatorBe />} />
+
+
+
+        <Route path="QRResponseRepairBeMTC" element={<QRResponseRepairBeMTC />} />
+        <Route path="QRReturnResponseRepairBeMTC" element={<QRReturnResponseRepairBeMTC />} />
+
+        <Route path="QRResponseRepairBeOTH" element={<QRResponseRepairBeOTH />} />
+        <Route path="QRReturnResponseRepairBeOTH" element={<QRReturnResponseRepairBeOTH />} />
+
+
+
+
+        <Route path="QRReturnQualityBe" element={<QRReturnQualityBe />} />
+        <Route path="QRValidationQualityBe" element={<QRValidationQualityBe />} />
+        <Route path="QRReturnValidationQualityBe" element={<QRReturnValidationQualityBe />} />
+
+        <Route path="QRReturnLeaderBe" element={<QRReturnLeaderBe />} />
+        <Route path="QRValidationLeaderBe" element={<QRValidationLeaderBe />} />
+        <Route path="QRReturnValidationLeaderBe" element={<QRReturnValidationLeaderBe />} />
+
+        {/*  */}
+
         <Route path="PortalMaintenance" element={<PortalMaintenance />} />
         <Route path="PortalLeader" element={<PortalLeader />} />
         <Route path="PortalQuality" element={<PortalQuality />} />

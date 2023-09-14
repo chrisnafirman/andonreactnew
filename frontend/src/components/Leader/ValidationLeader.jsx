@@ -54,142 +54,142 @@ const ValidationLeader = () => {
 
 
 
-//  fungsi export to pdf
-const exportToPDFRequest = () => {
-  const doc = new jsPDF("landscape");
-  const tableData = [];
-  
-  // Header untuk tabel PDF
-  const headers = ["Uid", "Requestor", "Request at", "Nama", "Line", "Area", "Station", "Problem", "Action", "Validation To"];
-  
-  // Warna teks header (abu-abu)
-  const headerStyles = {
-    fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-    textColor: 0, // Warna teks hitam (0)
-    fontStyle: "bold", // Teks header tebal
-  };
-
-  // Mengisi data tabel PDF dengan properti yang Anda inginkan
-  filteredData.forEach((item) => {
-    if (item.DepartTo === 'Production Leader' || item.DepartTo === 'Sub Leader') {
-    const rowData = [
-      item.Uid,
-      item.Requestor,
-      item.Date,
-      item.Nama,
-      item.Line,
-      item.Area,
-      item.Station,
-      item.Problem,
-      item.Action,
-      item.DepartTo,
-    ];
-    tableData.push(rowData);
-  }
-  });
-
-  // Menambahkan logo perusahaan ke file PDF
-  const logoImg = new Image();
-  logoImg.src = process.env.PUBLIC_URL + "/avi.png";
-  
-  // Mengukur logo sesuai dengan yang Anda inginkan
-  const logoWidth = 50; // Lebar logo
-  const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
-  
-  doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
-  
-  // Menambahkan teks di atas tabel dan di tengah-tengah
-  const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
-  const text = "Request Validation Leader [Andon Data]";
-  const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
-  
-  const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
-  const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
-  
-  doc.text(text, textX, textY);
-  
-  const fontSize = 6; 
-  // Membuat tabel PDF dengan menggunakan autotable
-  doc.autoTable({
-    head: [headers],
-    body: tableData,
-    startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
-    headStyles: {
-      fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-      textColor: 0, // Warna teks hitam (0)
-      fontStyle: fontSize, // Teks header tebal
-    },
-    columnStyles: {
-      9: { // Indeks 4 adalah kolom "Date"
-        textColor: [5, 150, 27], // Warna teks merah dalam format RGB
-      },
-      1: { // Indeks 4 adalah kolom "Date"
-        textColor: [159, 0, 0], // Warna teks merah dalam format RGB
-      },
-    },
-   
-  });
-
-
-  // Menyimpan file PDF
-  doc.save(`Request Validation Leader [Andon Data].pdf`);
-};
-
   //  fungsi export to pdf
-  const exportToPDFValidation = () => {
+  const exportToPDFRequest = () => {
     const doc = new jsPDF("landscape");
     const tableData = [];
-    
+
     // Header untuk tabel PDF
-    const headers = ["Uid", "Requestor ", "Request at", "Validation Department", "PIC", "Line", "Area", "Station",  "Description", "Validation Status",  "DownTime", "Validation Date", "Return To" ];
-    
+    const headers = ["Uid", "Requestor", "Request at", "Nama", "Line", "Area", "Station", "Problem", "Action", "Validation To"];
+
     // Warna teks header (abu-abu)
     const headerStyles = {
       fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
       textColor: 0, // Warna teks hitam (0)
       fontStyle: "bold", // Teks header tebal
     };
-  
+
     // Mengisi data tabel PDF dengan properti yang Anda inginkan
-    filteredData.forEach((item )  => {
+    filteredData.forEach((item) => {
       if (item.DepartTo === 'Production Leader' || item.DepartTo === 'Sub Leader') {
-      const rowData = [
-        item.Uid,
-        item.Requestor,
-        item.Date,
-        item.DepartTo,
-        item.ValidationName,
-        item.Line,
-        item.Area,
-        item.Station,
-        item.ValidationDescription,
-        item.Status,
-        item.DownTime,
-        formatDateTimeAPI(item.ValidationDate),
-        item.ReturnDepartment,
-      ];
-      tableData.push(rowData);
-    }
+        const rowData = [
+          item.Uid,
+          item.Requestor,
+          item.Date,
+          item.Nama,
+          item.Line,
+          item.Area,
+          item.Station,
+          item.Problem,
+          item.Action,
+          item.DepartTo,
+        ];
+        tableData.push(rowData);
+      }
     });
-  
+
     // Menambahkan logo perusahaan ke file PDF
     const logoImg = new Image();
     logoImg.src = process.env.PUBLIC_URL + "/avi.png";
-    
+
     // Mengukur logo sesuai dengan yang Anda inginkan
     const logoWidth = 50; // Lebar logo
     const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
-    
+
     doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
-    
+
+    // Menambahkan teks di atas tabel dan di tengah-tengah
+    const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
+    const text = "Request Validation Leader [Andon Data]";
+    const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
+
+    const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
+    const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
+
+    doc.text(text, textX, textY);
+
+    const fontSize = 6;
+    // Membuat tabel PDF dengan menggunakan autotable
+    doc.autoTable({
+      head: [headers],
+      body: tableData,
+      startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
+      headStyles: {
+        fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
+        textColor: 0, // Warna teks hitam (0)
+        fontStyle: fontSize, // Teks header tebal
+      },
+      columnStyles: {
+        9: { // Indeks 4 adalah kolom "Date"
+          textColor: [5, 150, 27], // Warna teks merah dalam format RGB
+        },
+        1: { // Indeks 4 adalah kolom "Date"
+          textColor: [159, 0, 0], // Warna teks merah dalam format RGB
+        },
+      },
+
+    });
+
+
+    // Menyimpan file PDF
+    doc.save(`Request Validation Leader [Andon Data].pdf`);
+  };
+
+  //  fungsi export to pdf
+  const exportToPDFValidation = () => {
+    const doc = new jsPDF("landscape");
+    const tableData = [];
+
+    // Header untuk tabel PDF
+    const headers = ["Uid", "Requestor ", "Request at", "Validation Department", "PIC", "Line", "Area", "Station", "Description", "Validation Status", "DownTime", "Validation Date", "Return To"];
+
+    // Warna teks header (abu-abu)
+    const headerStyles = {
+      fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
+      textColor: 0, // Warna teks hitam (0)
+      fontStyle: "bold", // Teks header tebal
+    };
+
+    // Mengisi data tabel PDF dengan properti yang Anda inginkan
+    filteredData.forEach((item) => {
+      if (item.DepartTo === 'Production Leader' || item.DepartTo === 'Sub Leader') {
+        const rowData = [
+          item.Uid,
+          item.Requestor,
+          item.Date,
+          item.DepartTo,
+          item.ValidationName,
+          item.Line,
+          item.Area,
+          item.Station,
+          item.ValidationDescription,
+          item.Status,
+          item.DownTime,
+          formatDateTimeAPI(item.ValidationDate),
+          item.ReturnDepartment,
+        ];
+        tableData.push(rowData);
+      }
+    });
+
+    // Menambahkan logo perusahaan ke file PDF
+    const logoImg = new Image();
+    logoImg.src = process.env.PUBLIC_URL + "/avi.png";
+
+    // Mengukur logo sesuai dengan yang Anda inginkan
+    const logoWidth = 50; // Lebar logo
+    const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
+
+    doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
+
     // Menambahkan teks di atas tabel dan di tengah-tengah
     const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
     const text = "Validation Leader [Andon Data]";
     const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
-    
+
     const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
     const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
-    
+
     doc.text(text, textX, textY);
 
     const fontSize = 7; // Atur ukuran font yang diinginkan
@@ -219,8 +219,8 @@ const exportToPDFRequest = () => {
         fontSize: fontSize, // Atur ukuran font
       },
     });
-  
-  
+
+
     // Menyimpan file PDF
     doc.save(`Validation Leader [Andon Data].pdf`);
   };
@@ -358,10 +358,10 @@ const exportToPDFRequest = () => {
         <div class="mx-auto max-w-7xl px-4">
           <div>
             <div class="flex items-center">
-              <h1 class="text-base lg:text-xl font-sans tracking-tight text-gray-900">
+              <h1 class="text-xs lg:text-xl font-sans tracking-tight text-gray-900">
                 | Request Validation Leader |
               </h1>
-              <h1 class="text-base lg:text-xl  font-sans tracking-tight ml-4">
+               <h1 class="text-xs lg:text-xl  font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
                 <span
                   class="ml-4"
@@ -374,7 +374,7 @@ const exportToPDFRequest = () => {
                 <span className="ml-4">|</span>
               </h1>
 
-              <h1 class="text-base lg:text-xl font-sans tracking-tight ml-4">
+              <h1 class="text-xs lg:text-xl  font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 2:</span>
                 <span class="ml-4 text-green-500">RUNNING </span>|
               </h1>
@@ -486,11 +486,11 @@ const exportToPDFRequest = () => {
                       <th className="p-1  w-0 lg:w-40 ">
                         <div className="font-mono text-left">Station</div>
                       </th>
-                      <th className="p-1 w-0">
+                      <th className="p-1 w-96">
                         <div className="font-mono text-center">Status</div>
                       </th>
-                      <th className="p-1 w-56">
-                        <div className="font-mono text-center">Date</div>
+                      <th className="p-1 w-24 justify-center items-center flex">
+                        <div className="font-mono text-center ">Date</div>
                       </th>
                     </tr>
                   </thead>
@@ -503,32 +503,32 @@ const exportToPDFRequest = () => {
                             className={item.Status === "" ? "bg-red-400" : ""}
                           >
                             <td className="p-2">
-                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                              <div className="font-sans text-xs lg:text-sm text-gray-800">
                                 {item.Uid}
                               </div>
                             </td>
                             <td className="p-2">
-                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                              <div className="font-sans text-xs lg:text-sm text-gray-800">
                                 {item.DepartTo}
                               </div>
                             </td>
                             <td className="p-2">
-                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                              <div className="font-sans text-xs lg:text-sm text-gray-800">
                                 {item.Requestor}
                               </div>
                             </td>
                             <td className="p-2">
-                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                              <div className="font-sans text-xs lg:text-sm text-gray-800">
                                 {item.Line}
                               </div>
                             </td>
                             <td className="p-2">
-                              <div className="font-medium text-xs lg:text-sm text-gray-800">
+                              <div className="font-sans text-xs lg:text-sm text-gray-800">
                                 {item.Area}
                               </div>
                             </td>
                             <td className="p-2">
-                              <div className="font-medium text-gray-800">
+                              <div className="font-sans text-gray-800">
                                 {item.Station}
                               </div>
                             </td>
@@ -572,7 +572,7 @@ const exportToPDFRequest = () => {
                               )}
                             </td>
                             <td className="p-2">
-                              <div className="text-center h-6 text-black">
+                              <div className="text-center h-6 text-black...">
                                 {item.Date} WIB
                               </div>
                             </td>
