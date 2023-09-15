@@ -204,7 +204,7 @@ function QRLeaderTOP() {
   }, []);
 
   const generateUniqueUid = () => {
-    const randomId = `INC${Math.floor(Math.random() * 1000).toString().padStart(3, "0")}`;
+    const randomId = `REQ${Math.floor(Math.random() * 1000).toString().padStart(3, "0")}`;
 
     // Kirim permintaan ke API untuk memeriksa UID
     fetch("http://192.168.101.12:3001/api/Repair")

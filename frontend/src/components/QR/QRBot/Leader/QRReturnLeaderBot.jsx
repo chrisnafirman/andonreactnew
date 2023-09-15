@@ -27,7 +27,7 @@ function QRReturnValidationLeaderBOT() {
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
   const [Status, setStatus] = useState("Return");
-  const [Requestor, setRequestor] = useState("Leader");
+  const [Requestor, setRequestor] = useState("Leader(RTN)");
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
@@ -42,7 +42,7 @@ function QRReturnValidationLeaderBOT() {
 
 
 
-  
+
 
 
 
@@ -71,7 +71,7 @@ function QRReturnValidationLeaderBOT() {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/ReturnRepair`, {
+    fetch(`http://192.168.101.12:3001/api/Repair`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,12 +92,19 @@ function QRReturnValidationLeaderBOT() {
 
 
   const submitUpdate = () => {
+    if (!NamaPIC || !Line || !Area || !Department || !Kerusakan) {
+      return;
+    }
+
     const data = {
       Station: Station,
       Status: Status,
       Area: Area,
       Department: Department,
+      NamaPIC: NamaPIC,
+      Kerusakan: Kerusakan,
     };
+
 
     console.log("Sending data:", data);
 
@@ -125,9 +132,9 @@ function QRReturnValidationLeaderBOT() {
 
 
   const styles = {
-    background: "linear-gradient(45deg, #000, #626658, #292d1f)",
-    height: "1000px",
-};
+    background: "linear-gradient(45deg, #000, #768087, #87CEEB)",
+    height: "1500px",
+  };
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
@@ -150,14 +157,14 @@ function QRReturnValidationLeaderBOT() {
   const handleScanSuccessMesin = (data) => {
     // Check if "(BOT)" is present in the scanned data
     if (data.includes("(BOT)")) {
-    setStation(data);
-    setShowPopupMesin(false)
-    setIsQRReturn(true);
-  } else {
-    // Show an error message or take appropriate action for "(BOT)" or other cases
-     alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(BOT)'");
-  }
-};
+      setStation(data);
+      setShowPopupMesin(false)
+      setIsQRReturn(true);
+    } else {
+      // Show an error message or take appropriate action for "(BOT)" or other cases
+       alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(BOT)'");
+    }
+  };
 
 
   const OptionsDepartment = [
@@ -192,31 +199,31 @@ function QRReturnValidationLeaderBOT() {
 
 
   useEffect(() => {
-    fetchLatestUidByStation();
+    generateUniqueUid();
   }, [Station]);
 
   
-const fetchLatestUidByStation = () => {
-  fetch("http://192.168.101.12:3001/api/Repair")
-    .then((response) => response.json())
-    .then((data) => {
-      // Filter objek yang memiliki Station sesuai dengan yang Anda inginkan, misalnya "SPI (BOT)"
-      const matchingObjects = data.filter((item) => item.Station === Station);
+  const generateUniqueUid = () => {
+    const randomId = `RTN${Math.floor(Math.random() * 1000).toString().padStart(3, "0")}`;
 
-      // Jika ada objek yang sesuai, ambil UID dari objek terbaru
-      if (matchingObjects.length > 0) {
-        const latestObject = matchingObjects[matchingObjects.length - 1];
-        const latestUid = latestObject.Uid;
-        setUid(latestUid);
-      } else {
-        // Jika tidak ada objek yang sesuai, atur UID menjadi kosong atau nilai default yang sesuai
-        setUid("");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching data from API:", error);
-    });
-};
+    // Kirim permintaan ke API untuk memeriksa UID
+    fetch("http://192.168.101.12:3001/api/Repair")
+      .then((response) => response.json())
+      .then((data) => {
+        const uids = data.map((item) => item.Uid);
+        if (!uids.includes(randomId)) {
+          // Jika UID belum digunakan, set UID ke nilai randomId
+          setUid(randomId);
+        } else {
+          // Jika UID sudah digunakan, coba generate UID baru
+          generateUniqueUid();
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data from API:", error);
+      });
+  };
+
 
   return (
     <body style={styles}>
@@ -282,7 +289,7 @@ const fetchLatestUidByStation = () => {
                               </span>
                               <button onClick={() => {
                                 togglePopupNama();
-                             setIsQRReturn(false);
+                                setIsQRReturn(false);
                               }}>
                                 {showPopupNama ? (
                                   <svg width="60px" height="40px" viewBox="0 0 24 24" fill="none" >
@@ -411,7 +418,7 @@ const fetchLatestUidByStation = () => {
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                             for="grid-password"
                           >
-                            Description
+                            Problem
                           </label>
                           <input
                             class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -424,7 +431,7 @@ const fetchLatestUidByStation = () => {
                             }}
                             required
                           />
-                         
+
                         </div>
 
 
@@ -440,24 +447,24 @@ const fetchLatestUidByStation = () => {
                             Yes, I'm sure
                           </button>
                         </div>
-                      </form>  
-                      <a href="/ValidationLeader">  
-                      <button
-                            class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                          
-                          >
-                            <svg width="20px" viewBox="0 0 1024 1024">
-                              <path fill="#F7F7F7" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" />
-                              <path fill="#F7F7F7" d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" />
-                            </svg>
-                          </button>
-                          </a>
+                      </form>
+                      <a href="/ValidationLeader">
+                        <button
+                          class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+
+                        >
+                          <svg width="20px" viewBox="0 0 1024 1024">
+                            <path fill="#F7F7F7" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z" />
+                            <path fill="#F7F7F7" d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z" />
+                          </svg>
+                        </button>
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            
+
           </>
         ) : null}
       </td>
@@ -486,7 +493,7 @@ const fetchLatestUidByStation = () => {
                       <div className="inline-block  w-8 h-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status"></div>
                     </div>
                     <div className="flex justify-center items-center mt-3">
-                    <span className="text-center justify-center items-center mx-auto">Mohon Tunggu Ya Permintaanmu sedang kami proses</span>
+                      <span className="text-center justify-center items-center mx-auto">Mohon Tunggu Ya Permintaanmu sedang kami proses</span>
                     </div>
                   </div>
                 </div>

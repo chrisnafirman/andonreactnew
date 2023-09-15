@@ -573,7 +573,7 @@ const Others = () => {
               </button> */}
                <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-mono text-lg text-center text-gray-800">
-                  Request Request For All Department
+                   Request For All Department
                 </div>
                 <button className="flex text-sm" onClick={() => { setisExportOption(true) }}>
                   <img
@@ -588,22 +588,22 @@ const Others = () => {
                 className="overflow-x-auto p-3"
                 style={{ height: "300px", overflowY: "scroll" }}
               >
-                <table id="data-table" className="table-auto w-full">
+             <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
-                      <th className="p-1 w-10 lg:w-30">
+                      <th className="p-1 w-10 lg:w-32">
                         <div className="font-sans lg:font-semibold text-left">Uid</div>
                       </th>
-                      <th className="p-1 w-10 lg:w-30">
-                        <div className="font-sans lg:font-semibold text-left">To Department</div>
+                      <th className="p-1 w-10 lg:w-32">
+                        <div className="font-sans lg:font-semibold text-left">Requestor</div>
                       </th>
-                      <th className="p-1  w-20 lg:w-24">
+                      <th className="p-1  w-20 lg:w-28">
                         <div className="font-semibold text-left">Line</div>
                       </th>
-                      <th className="p-1  w-10 lg:w-24">
+                      <th className="p-1  w-20 lg:w-24">
                         <div className="font-semibold text-left">Area</div>
                       </th>
-                      <th className="p-1  w-10 lg:w-40">
+                      <th className="p-1  w-32 lg:w-40">
                         <div className="font-semibold text-left">Station</div>
                       </th>
                       <th className="p-1 w-10">
@@ -619,9 +619,9 @@ const Others = () => {
                       if (item.Department === "PURCHASING,PPIC,MP&L" || item.Department === "PROCESS ENGINEERING" || item.Department === "PRODUCT DEVELOPMENT" || item.Department === "ADVANCED MANUFACTURING ENGINEERING" || item.Department === "HRGA & EHS") {
                         return (
                           <tr
-                          key={item.id}
-                          className={item.Status === "Repair" ? "bg-yellow-400" : item.Status === "" ? "bg-red-400" : ""}
-                        >
+                            key={item.id}
+                            className={item.Status === "Repair" ? "bg-yellow-400" : item.Status === "" ? "bg-red-400 " : ""}
+                          >
                             <td className="p-2">
                               <div className="font-sans text-xs lg:text-sm text-gray-800">
                                 {item.Uid}
@@ -629,7 +629,7 @@ const Others = () => {
                             </td>
                             <td className="p-2">
                               <div className="font-sans text-xs lg:text-sm text-gray-800">
-                                {item.Department}
+                                {item.Requestor}
                               </div>
                             </td>
                             <td className="p-2">
@@ -651,33 +651,48 @@ const Others = () => {
                               {item.Status === "" && (
                                 <button
                                   onClick={() => setSelectedItem(item)}
-                                  className="bg-red-600 w-16  flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out"
+                                  className="bg-red-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out"
                                 >
-                                  <span className="text-xs lg:text-sm">Open</span>
+                                  <span className="text-xs  lg:text-sm">Open</span>
                                 </button>
                               )}
                               {item.Status === "Solved" && (
                                 <button
                                   onClick={() => setSelectedItem(item)}
-                                  className="bg-green-600 flex w-16 items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                                  className="bg-green-600 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                                 >
-                                  <span className="text-xs  lg:text-sm">Solved</span>
+                                  <span className="text-xs lg:text-sm">Solved</span>
                                 </button>
                               )}
                               {item.Status === "Repair" && (
                                 <button
                                   onClick={() => setSelectedItem(item)}
-                                  className="bg-yellow-500  flex items-center w-16 justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
+                                  className="bg-yellow-500 w-16 flex items-center justify-center rounded-md px-4 py-2 text-white  focus:outline-none  transition duration-300 ease-in-out"
                                 >
                                   <span className="text-xs lg:text-sm">Repair</span>
                                 </button>
                               )}
                             </td>
-
-
+                            {/* <td className="p-5 w-40">
+                          <button className="bg-blue-500 flex items-center justify-center rounded-md px-4 py-2 text-white hover:bg-red-600 focus:outline-none focus:bg-red-600 transition duration-300 ease-in-out">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              className="w-6 h-6 mr-2"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10 18a8 8 0 110-16 8 8 0 010 16zm0-2a6 6 0 100-12 6 6 0 000 12zM8 9a1 1 0 011-1h2a1 1 0 010 2H9a1 1 0 01-1-1zm5.293 5.293a1 1 0 00-1.414 0L11 14.586l-1.879-1.88a1 1 0 00-1.414 1.414l2.586 2.586a1 1 0 001.414 0l4.586-4.586a1 1 0 000-1.414z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                            <span>QUALITY</span>
+                          </button>
+                        </td> */}
 
                             <td className="p-2">
-                              <div className="text-center h-6 text-black">
+                              <div className="text-center h-6 text-black...">
                                 {item.Date} WIB
                               </div>
                             </td>

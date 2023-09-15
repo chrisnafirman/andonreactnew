@@ -55,17 +55,14 @@ router.put("/PutUidLeader", LDRControllers.PutUidLeader);
 // MTC
 router.post("/Repair", RepairControllers.postRequestRepair);
 router.get("/Repair", RepairControllers.getRequestRepair);
-router.post("/ReturnRepair", RepairControllers.postReturnRepair);
-router.get("/ReturnRepair", RepairControllers.getReturnRepair);
+
 
 router.put("/PutResponseRepair", RepairControllers.PutResponseRepair);
 router.put("/PutRepairDone", RepairControllers.PutRepairDone);
 
-router.put("/PutReturnResponseRepair", RepairControllers.PutReturnResponseRepair);
-router.put("/PutReturnRepairDone", RepairControllers.PutReturnRepairDone);
+
 
 router.put("/PutUidRepair", RepairControllers.PutUidRepair);
-router.put("/PutUidReturnRepair", RepairControllers.PutUidReturnRepair);
 
 
 
@@ -78,10 +75,10 @@ router.put("/PutUidReturnRepair", RepairControllers.PutUidReturnRepair);
 
 // Validation
 router.post("/Validation", ValidationControllers.postRequestValidation);
-router.post("/ReturnValidation", ValidationControllers.PostReturnRequestValidation);
+
 
 router.put("/PutValidation", ValidationControllers.PutValidation);
-router.put("/PutReturnValidation", ValidationControllers.PutReturnValidation);
+
 
 
 router.put("/PutStatusReturnValidation", ValidationControllers.PutStatusReturnValidation);
@@ -90,8 +87,6 @@ router.put("/PutUidValidation", ValidationControllers.PutUidValidation);
 
 router.get("/Validation", ValidationControllers.getRequestValidation);
 
-
-router.get("/ReturnValidation", ValidationControllers.getRequestReturnValidation);
 
 
 
@@ -122,77 +117,66 @@ router.get("/ScheduleProduction", TimeProductioncontrollers.getTimeProduction);
 // Fetch Data TOP
 // Destacker
 router.put("/PutDownTimeDestackerTOP", DestackerTOP.PutDownTimeDestackerTOP);
-router.put("/PutDownTimeDestackerTOPReturn", DestackerTOP.PutDownTimeDestackerTOPReturn);
+
 router.get("/getDestackerTOPLeader", DestackerTOP.getDestackerTOPLeader);
 router.get("/getDestackerTOPRepair", DestackerTOP.getDestackerTOPRepair);
 router.get("/getDestackerTOPValidation", DestackerTOP.getDestackerTOPValidation);
-router.get("/getDestackerTOPValidationReturn", DestackerTOP.getDestackerTOPValidationReturn);
-router.get("/getDestackerTOPReturnRepair", DestackerTOP.getDestackerTOPReturnRepair);
+
 
 // Label
 router.put("/PutDownTimeLabelTOP", LabelTOP.PutDownTimeLabelTOP);
-router.put("/PutDownTimeLabelTOPReturn", LabelTOP.PutDownTimeLabelTOPReturn);
+
 router.get("/getLabelTOPLeader", LabelTOP.getLabelTOPLeader);
 router.get("/getLabelTOPRepair", LabelTOP.getLabelTOPRepair);
 router.get("/getLabelTOPValidation", LabelTOP.getLabelTOPValidation);
-router.get("/getLabelTOPValidationReturn", LabelTOP.getLabelTOPValidationReturn);
-router.get("/getLabelTOPReturnRepair", LabelTOP.getLabelTOPReturnRepair);
+
 
 // Printer
 router.put("/PutDownTimePrinterTOP", PrinterTOP.PutDownTimePrinterTOP);
-router.put("/PutDownTimePrinterTOPReturn", PrinterTOP.PutDownTimePrinterTOPReturn);
+
 router.get("/getPrinterTOPLeader", PrinterTOP.getPrinterTOPLeader);
 router.get("/getPrinterTOPRepair", PrinterTOP.getPrinterTOPRepair);
 router.get("/getPrinterTOPValidation", PrinterTOP.getPrinterTOPValidation);
-router.get("/getPrinterTOPValidationReturn", PrinterTOP.getPrinterTOPValidationReturn);
-router.get("/getPrinterTOPReturnRepair", PrinterTOP.getPrinterTOPReturnRepair);
 
 // SPI
 router.put("/PutDownTimeSPITOP", SPITOP.PutDownTimeSPITOP);
-router.put("/PutDownTimeSPITOPReturn", SPITOP.PutDownTimeSPITOPReturn);
 router.get("/getSPITOPLeader", SPITOP.getSPITOPLeader);
 router.get("/getSPITOPRepair", SPITOP.getSPITOPRepair);
 router.get("/getSPITOPValidation", SPITOP.getSPITOPValidation);
-router.get("/getSPITOPValidationReturn", SPITOP.getSPITOPValidationReturn);
-router.get("/getSPITOPReturnRepair", SPITOP.getSPITOPReturnRepair);
+
 
 
 // PickNPlace
 router.put("/PutDownTimePickNPlaceTOP", PickNPlaceTOP.PutDownTimePickNPlaceTOP);
-router.put("/PutDownTimePickNPlaceTOPReturn", PickNPlaceTOP.PutDownTimePickNPlaceTOPReturn);
+
 router.get("/getPickNPlaceTOPLeader", PickNPlaceTOP.getPickNPlaceTOPLeader);
 router.get("/getPickNPlaceTOPRepair", PickNPlaceTOP.getPickNPlaceTOPRepair);
 router.get("/getPickNPlaceTOPValidation", PickNPlaceTOP.getPickNPlaceTOPValidation);
-router.get("/getPickNPlaceTOPValidationReturn", PickNPlaceTOP.getPickNPlaceTOPValidationReturn);
-router.get("/getPickNPlaceTOPReturnRepair", PickNPlaceTOP.getPickNPlaceTOPReturnRepair);
+
 
 // Reflow
 router.put("/PutDownTimeReflowTOP", ReflowTOP.PutDownTimeReflowTOP);
-router.put("/PutDownTimeReflowTOPReturn", ReflowTOP.PutDownTimeReflowTOPReturn);
+
 router.get("/getReflowTOPLeader", ReflowTOP.getReflowTOPLeader);
 router.get("/getReflowTOPRepair", ReflowTOP.getReflowTOPRepair);
 router.get("/getReflowTOPValidation", ReflowTOP.getReflowTOPValidation);
-router.get("/getReflowTOPValidationReturn", ReflowTOP.getReflowTOPValidationReturn);
-router.get("/getReflowTOPReturnRepair", ReflowTOP.getReflowTOPReturnRepair);
+
 
 
 // AOI
 router.put("/PutDownTimeAOITOP", AOITOP.PutDownTimeAOITOP);
-router.put("/PutDownTimeAOITOPReturn", AOITOP.PutDownTimeAOITOPReturn);
+
 router.get("/getAOITOPLeader", AOITOP.getAOITOPLeader);
 router.get("/getAOITOPRepair", AOITOP.getAOITOPRepair);
 router.get("/getAOITOPValidation", AOITOP.getAOITOPValidation);
-router.get("/getAOITOPReturnRepair", AOITOP.getAOITOPReturnRepair);
-router.get("/getAOITOPValidationReturn", AOITOP.getAOITOPValidationReturn);
+
 
 // RVS
 router.put("/PutDownTimeRVSTOP", RVSTOP.PutDownTimeRVSTOP);
-router.put("/PutDownTimeRVSTOPReturn", RVSTOP.PutDownTimeRVSTOPReturn);
 router.get("/getRVSTOPLeader", RVSTOP.getRVSTOPLeader);
 router.get("/getRVSTOPRepair", RVSTOP.getRVSTOPRepair);
 router.get("/getRVSTOPValidation", RVSTOP.getRVSTOPValidation);
-router.get("/getRVSTOPValidationReturn", RVSTOP.getRVSTOPValidationReturn);
-router.get("/getRVSTOPReturnRepair", RVSTOP.getRVSTOPReturnRepair);
+
 
 // ..........................................
 
@@ -202,59 +186,52 @@ router.get("/getRVSTOPReturnRepair", RVSTOP.getRVSTOPReturnRepair);
 // Fetch Data BOT
 // Printer
 router.put("/PutDownTimePrinterBOT", PrinterBOT.PutDownTimePrinterBOT);
-router.put("/PutDownTimePrinterBOTReturn", PrinterBOT.PutDownTimePrinterBOTReturn);
+
 router.get("/getPrinterBOTLeader", PrinterBOT.getPrinterBOTLeader);
 router.get("/getPrinterBOTRepair", PrinterBOT.getPrinterBOTRepair);
 router.get("/getPrinterBOTValidation", PrinterBOT.getPrinterBOTValidation);
-router.get("/getPrinterBOTValidationReturn", PrinterBOT.getPrinterBOTValidationReturn);
-router.get("/getPrinterBOTReturnRepair", PrinterBOT.getPrinterBOTReturnRepair);
 
 // SPI
 router.put("/PutDownTimeSPIBOT", SPIBOT.PutDownTimeSPIBOT);
-router.put("/PutDownTimeSPIBOTReturn", SPIBOT.PutDownTimeSPIBOTReturn);
+
 router.get("/getSPIBOTLeader", SPIBOT.getSPIBOTLeader);
 router.get("/getSPIBOTRepair", SPIBOT.getSPIBOTRepair);
 router.get("/getSPIBOTValidation", SPIBOT.getSPIBOTValidation);
-router.get("/getSPIBOTValidationReturn", SPIBOT.getSPIBOTValidationReturn);
-router.get("/getSPIBOTReturnRepair", SPIBOT.getSPIBOTReturnRepair);
+
 
 // PickNPlace
 router.put("/PutDownTimePickNPlaceBOT", PickNPlaceBOT.PutDownTimePickNPlaceBOT);
-router.put("/PutDownTimePickNPlaceBOTReturn", PickNPlaceBOT.PutDownTimePickNPlaceBOTReturn);
+
 router.get("/getPickNPlaceBOTLeader", PickNPlaceBOT.getPickNPlaceBOTLeader);
 router.get("/getPickNPlaceBOTRepair", PickNPlaceBOT.getPickNPlaceBOTRepair);
 router.get("/getPickNPlaceBOTValidation", PickNPlaceBOT.getPickNPlaceBOTValidation);
-router.get("/getPickNPlaceBOTValidationReturn", PickNPlaceBOT.getPickNPlaceBOTValidationReturn);
-router.get("/getPickNPlaceBOTReturnRepair", PickNPlaceBOT.getPickNPlaceBOTReturnRepair);
+
 
 
 // Reflow
 router.put("/PutDownTimeReflowBOT", ReflowBOT.PutDownTimeReflowBOT);
-router.put("/PutDownTimeReflowBOTReturn", ReflowBOT.PutDownTimeReflowBOTReturn);
+
 router.get("/getReflowBOTLeader", ReflowBOT.getReflowBOTLeader);
 router.get("/getReflowBOTRepair", ReflowBOT.getReflowBOTRepair);
 router.get("/getReflowBOTValidation", ReflowBOT.getReflowBOTValidation);
-router.get("/getReflowBOTValidationReturn", ReflowBOT.getReflowBOTValidationReturn);
-router.get("/getReflowBOTReturnRepair", ReflowBOT.getReflowBOTReturnRepair);
+
 
 
 // AOI
 router.put("/PutDownTimeAOIBOT", AOIBOT.PutDownTimeAOIBOT);
-router.put("/PutDownTimeAOIBOTReturn", AOIBOT.PutDownTimeAOIBOTReturn);
+
 router.get("/getAOIBOTLeader", AOIBOT.getAOIBOTLeader);
 router.get("/getAOIBOTRepair", AOIBOT.getAOIBOTRepair);
 router.get("/getAOIBOTValidation", AOIBOT.getAOIBOTValidation);
-router.get("/getAOIBOTValidationReturn", AOIBOT.getAOIBOTValidationReturn);
-router.get("/getAOIBOTReturnRepair", AOIBOT.getAOIBOTReturnRepair);
+
 
 // RVS
 router.put("/PutDownTimeRVSBOT", RVSBOT.PutDownTimeRVSBOT);
-router.put("/PutDownTimeRVSBOTReturn", RVSBOT.PutDownTimeRVSBOTReturn);
+
 router.get("/getRVSBOTLeader", RVSBOT.getRVSBOTLeader);
 router.get("/getRVSBOTRepair", RVSBOT.getRVSBOTRepair);
 router.get("/getRVSBOTValidation", RVSBOT.getRVSBOTValidation);
-router.get("/getRVSBOTValidationReturn", RVSBOT.getRVSBOTValidationReturn);
-router.get("/getRVSBOTReturnRepair", RVSBOT.getRVSBOTReturnRepair);
+
 
 
 
@@ -266,86 +243,76 @@ router.get("/getRVSBOTReturnRepair", RVSBOT.getRVSBOTReturnRepair);
 // Fetch Data BE
 // Dropin
 router.put("/PutDownTimeDropinBE", DropinBE.PutDownTimeDropinBE);
-router.put("/PutDownTimeDropinBEReturn", DropinBE.PutDownTimeDropinBEReturn);
+
 router.get("/getDropinBELeader", DropinBE.getDropinBELeader);
 router.get("/getDropinBERepair", DropinBE.getDropinBERepair);
 router.get("/getDropinBEValidation", DropinBE.getDropinBEValidation);
-router.get("/getDropinBEValidationReturn", DropinBE.getDropinBEValidationReturn);
-router.get("/getDropinBEReturnRepair", DropinBE.getDropinBEReturnRepair);
+
 
 // Fluxer
 router.put("/PutDownTimeFluxerBE", FluxerBE.PutDownTimeFluxerBE);
-router.put("/PutDownTimeFluxerBEReturn", FluxerBE.PutDownTimeFluxerBEReturn);
+
 router.get("/getFluxerBELeader", FluxerBE.getFluxerBELeader);
 router.get("/getFluxerBERepair", FluxerBE.getFluxerBERepair);
 router.get("/getFluxerBEValidation", FluxerBE.getFluxerBEValidation);
-router.get("/getFluxerBEValidationReturn", FluxerBE.getFluxerBEValidationReturn);
-router.get("/getFluxerBEReturnRepair", FluxerBE.getFluxerBEReturnRepair);
+
 
 // Preheat
 router.put("/PutDownTimePreheatBE", PreheatBE.PutDownTimePreheatBE);
-router.put("/PutDownTimePreheatBEReturn", PreheatBE.PutDownTimePreheatBEReturn);
+
 router.get("/getPreheatBELeader", PreheatBE.getPreheatBELeader);
 router.get("/getPreheatBERepair", PreheatBE.getPreheatBERepair);
 router.get("/getPreheatBEValidation", PreheatBE.getPreheatBEValidation);
-router.get("/getPreheatBEValidationReturn", PreheatBE.getPreheatBEValidationReturn);
-router.get("/getPreheatBEReturnRepair", PreheatBE.getPreheatBEReturnRepair);
 
 // Seho1
 router.put("/PutDownTimeSeho1BE", Seho1BE.PutDownTimeSeho1BE);
-router.put("/PutDownTimeSeho1BEReturn", Seho1BE.PutDownTimeSeho1BEReturn);
+
 router.get("/getSeho1BELeader", Seho1BE.getSeho1BELeader);
 router.get("/getSeho1BERepair", Seho1BE.getSeho1BERepair);
 router.get("/getSeho1BEValidation", Seho1BE.getSeho1BEValidation);
-router.get("/getSeho1BEValidationReturn", Seho1BE.getSeho1BEValidationReturn);
-router.get("/getSeho1BEReturnRepair", Seho1BE.getSeho1BEReturnRepair);
+
 
 // Seho2
 router.put("/PutDownTimeSeho2BE", Seho2BE.PutDownTimeSeho2BE);
-router.put("/PutDownTimeSeho2BEReturn", Seho2BE.PutDownTimeSeho2BEReturn);
+
 router.get("/getSeho2BELeader", Seho2BE.getSeho2BELeader);
 router.get("/getSeho2BERepair", Seho2BE.getSeho2BERepair);
 router.get("/getSeho2BEValidation", Seho2BE.getSeho2BEValidation);
-router.get("/getSeho2BEValidationReturn", Seho2BE.getSeho2BEValidationReturn);
-router.get("/getSeho2BEReturnRepair", Seho2BE.getSeho2BEReturnRepair);
+
 
 
 // Touchup
 router.put("/PutDownTimeTouchupBE", TouchupBE.PutDownTimeTouchupBE);
-router.put("/PutDownTimeTouchupBEReturn", TouchupBE.PutDownTimeTouchupBEReturn);
+
 router.get("/getTouchupBELeader", TouchupBE.getTouchupBELeader);
 router.get("/getTouchupBERepair", TouchupBE.getTouchupBERepair);
 router.get("/getTouchupBEValidation", TouchupBE.getTouchupBEValidation);
-router.get("/getTouchupBEValidationReturn", TouchupBE.getTouchupBEValidationReturn);
-router.get("/getTouchupBEReturnRepair", TouchupBE.getTouchupBEReturnRepair);
+
 
 // ICT
 router.put("/PutDownTimeICTBE", ICTBE.PutDownTimeICTBE);
-router.put("/PutDownTimeICTBEReturn", ICTBE.PutDownTimeICTBEReturn);
+
 router.get("/getICTBELeader", ICTBE.getICTBELeader);
 router.get("/getICTBERepair", ICTBE.getICTBERepair);
 router.get("/getICTBEValidation", ICTBE.getICTBEValidation);
-router.get("/getICTBEValidationReturn", ICTBE.getICTBEValidationReturn);
-router.get("/getICTBEReturnRepair", ICTBE.getICTBEReturnRepair);
+
 
 
 // Flash
 router.put("/PutDownTimeFlashBE", FlashBE.PutDownTimeFlashBE);
-router.put("/PutDownTimeFlashBEReturn", FlashBE.PutDownTimeFlashBEReturn);
+
 router.get("/getFlashBELeader", FlashBE.getFlashBELeader);
 router.get("/getFlashBERepair", FlashBE.getFlashBERepair);
 router.get("/getFlashBEValidation", FlashBE.getFlashBEValidation);
-router.get("/getFlashBEReturnRepair", FlashBE.getFlashBEReturnRepair);
-router.get("/getFlashBEValidationReturn", FlashBE.getFlashBEValidationReturn);
+
 
 // Router
 router.put("/PutDownTimeRouterBE", RouterBE.PutDownTimeRouterBE);
-router.put("/PutDownTimeRouterBEReturn", RouterBE.PutDownTimeRouterBEReturn);
+
 router.get("/getRouterBELeader", RouterBE.getRouterBELeader);
 router.get("/getRouterBERepair", RouterBE.getRouterBERepair);
 router.get("/getRouterBEValidation", RouterBE.getRouterBEValidation);
-router.get("/getRouterBEValidationReturn", RouterBE.getRouterBEValidationReturn);
-router.get("/getRouterBEReturnRepair", RouterBE.getRouterBEReturnRepair);
+
 
 // ..........................................
 

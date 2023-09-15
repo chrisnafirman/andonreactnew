@@ -27,7 +27,7 @@ function QRReturnValidationLeaderTOP() {
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
   const [Status, setStatus] = useState("Return");
-  const [Requestor, setRequestor] = useState("Leader");
+  const [Requestor, setRequestor] = useState("Leader(RTN)");
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
@@ -71,7 +71,7 @@ function QRReturnValidationLeaderTOP() {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/ReturnRepair`, {
+    fetch(`http://192.168.101.12:3001/api/Repair`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,12 +92,19 @@ function QRReturnValidationLeaderTOP() {
 
 
   const submitUpdate = () => {
+    if (!NamaPIC || !Line || !Area || !Department || !Kerusakan) {
+      return;
+    }
+
     const data = {
       Station: Station,
       Status: Status,
       Area: Area,
       Department: Department,
+      NamaPIC: NamaPIC,
+      Kerusakan: Kerusakan,
     };
+
 
     console.log("Sending data:", data);
 
@@ -192,31 +199,31 @@ function QRReturnValidationLeaderTOP() {
 
 
   useEffect(() => {
-    fetchLatestUidByStation();
+    generateUniqueUid();
   }, [Station]);
 
+  
+  const generateUniqueUid = () => {
+    const randomId = `RTN${Math.floor(Math.random() * 1000).toString().padStart(3, "0")}`;
 
-  const fetchLatestUidByStation = () => {
+    // Kirim permintaan ke API untuk memeriksa UID
     fetch("http://192.168.101.12:3001/api/Repair")
       .then((response) => response.json())
       .then((data) => {
-        // Filter objek yang memiliki Station sesuai dengan yang Anda inginkan, misalnya "SPI (TOP)"
-        const matchingObjects = data.filter((item) => item.Station === Station);
-
-        // Jika ada objek yang sesuai, ambil UID dari objek terbaru
-        if (matchingObjects.length > 0) {
-          const latestObject = matchingObjects[matchingObjects.length - 1];
-          const latestUid = latestObject.Uid;
-          setUid(latestUid);
+        const uids = data.map((item) => item.Uid);
+        if (!uids.includes(randomId)) {
+          // Jika UID belum digunakan, set UID ke nilai randomId
+          setUid(randomId);
         } else {
-          // Jika tidak ada objek yang sesuai, atur UID menjadi kosong atau nilai default yang sesuai
-          setUid("");
+          // Jika UID sudah digunakan, coba generate UID baru
+          generateUniqueUid();
         }
       })
       .catch((error) => {
         console.error("Error fetching data from API:", error);
       });
   };
+
 
   return (
     <body style={styles}>
@@ -411,7 +418,7 @@ function QRReturnValidationLeaderTOP() {
                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
                             for="grid-password"
                           >
-                            Description
+                            Problem
                           </label>
                           <input
                             class="appearance-none block w-full  text-gray-700 border bg-white border-b-slate-900 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"

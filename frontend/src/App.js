@@ -7,7 +7,7 @@ import Line from "./components/Line.jsx"
 import Line1 from "./components/Line1/Line1.jsx"
 
 import ValidationQuality from "./components/Quality/ValidationQuality.jsx"
-import ReturnValidationQuality from "./components/Quality/ReturnValidationQuality.jsx"
+
 
 
 import AndonLine1 from "./components/Line1/AndonLine1.jsx";
@@ -21,10 +21,10 @@ import RequestGeneral from "./components/General/RequestGeneral.jsx"
 
 
 import Others from "./components/Others/Others.jsx"
-import ReturnOthers from "./components/Others/ReturnOthers.jsx"
+
 
 import Maintenance from "./components/Maintenance/Maintenance.jsx"
-import ReturnMaintenance from "./components/Maintenance/ReturnMaintenance.jsx"
+
 
 
 import Leader from "./components/Leader/Leader.jsx"
@@ -32,7 +32,7 @@ import Leader from "./components/Leader/Leader.jsx"
 
 
 import ValidationLeader from "./components/Leader/ValidationLeader.jsx"
-import ReturnValidationLeader from "./components/Leader/ReturnValidationLeader.jsx"
+
 
 import UserMobile from "./components/User/UserMobile.jsx"
 import UserSMTTop from "./components/User/SmtTop.jsx"
@@ -46,20 +46,18 @@ import QROperatorTop from "./components/QR/QRTop/QROperatorTOP.jsx"
 import QRLeaderTop from "./components/QR/QRTop/Leader/QRLeaderTOP.jsx"
 
 
-import QRReturnResponseRepairTopMTC from "./components/QR/QRTop/Maintenance/QRReturnResponseRepairTOP.jsx"
 import QRResponseRepairTopMTC from "./components/QR/QRTop/Maintenance/QRResponseRepairTOP.jsx"
 
-import QRReturnResponseRepairTopOTH from "./components/QR/QRTop/Others/QRReturnResponseRepairTOP.jsx"
+
 import QRResponseRepairTopOTH from "./components/QR/QRTop/Others/QRResponseRepairTOP.jsx"
 
 
 import QRReturnQualityTop from "./components/QR/QRTop/Quality/QRReturnQualityTOP.jsx"
 import QRValidationQualityTop from "./components/QR/QRTop/Quality/QRValidationQualityTOP.jsx"
-import QRReturnValidationQualityTop from "./components/QR/QRTop/Quality/QRReturnValidationQualityTOP.jsx"
 
 import QRReturnLeaderTop from "./components/QR/QRTop/Leader/QRReturnLeaderTOP.jsx"
 import QRValidationLeaderTop from "./components/QR/QRTop/Leader/QRValidationLeaderTOP.jsx"
-import QRReturnValidationLeaderTop from "./components/QR/QRTop/Leader/QRReturnValidationLeaderTOP.jsx"
+
 
 
 // 
@@ -71,20 +69,18 @@ import QROperatorBot from "./components/QR/QRBot/QROperatorBOT.jsx"
 import QRLeaderBot from "./components/QR/QRBot/Leader/QRLeaderBOT.jsx"
 
 
-import QRReturnResponseRepairBotMTC from "./components/QR/QRBot/Maintenance/QRReturnResponseRepairBOT.jsx"
-import QRResponseRepairBotMTC from "./components/QR/QRBot/Maintenance/QRResponseRepairBOT.jsx"
 
-import QRReturnResponseRepairBotOTH from "./components/QR/QRBot/Others/QRReturnResponseRepairBOT.jsx"
+import QRResponseRepairBotMTC from "./components/QR/QRBot/Maintenance/QRResponseRepairBOT.jsx"
 import QRResponseRepairBotOTH from "./components/QR/QRBot/Others/QRResponseRepairBOT.jsx"
 
 
 import QRReturnQualityBot from "./components/QR/QRBot/Quality/QRReturnQualityBOT.jsx"
 import QRValidationQualityBot from "./components/QR/QRBot/Quality/QRValidationQualityBOT.jsx"
-import QRReturnValidationQualityBot from "./components/QR/QRBot/Quality/QRReturnValidationQualityBOT.jsx"
+
 
 import QRReturnLeaderBot from "./components/QR/QRBot/Leader/QRReturnLeaderBOT.jsx"
 import QRValidationLeaderBot from "./components/QR/QRBot/Leader/QRValidationLeaderBOT.jsx"
-import QRReturnValidationLeaderBot from "./components/QR/QRBot/Leader/QRReturnValidationLeaderBOT.jsx"
+
 
 
 // 
@@ -95,20 +91,15 @@ import QROperatorBe from "./components/QR/QRBe/QROperatorBE.jsx"
 import QRLeaderBe from "./components/QR/QRBe/Leader/QRLeaderBE.jsx"
 
 
-import QRReturnResponseRepairBeMTC from "./components/QR/QRBe/Maintenance/QRReturnResponseRepairBE.jsx"
 import QRResponseRepairBeMTC from "./components/QR/QRBe/Maintenance/QRResponseRepairBE.jsx"
-
-import QRReturnResponseRepairBeOTH from "./components/QR/QRBe/Others/QRReturnResponseRepairBE.jsx"
 import QRResponseRepairBeOTH from "./components/QR/QRBe/Others/QRResponseRepairBE.jsx"
 
 
 import QRReturnQualityBe from "./components/QR/QRBe/Quality/QRReturnQualityBE.jsx"
 import QRValidationQualityBe from "./components/QR/QRBe/Quality/QRValidationQualityBE.jsx"
-import QRReturnValidationQualityBe from "./components/QR/QRBe/Quality/QRReturnValidationQualityBE.jsx"
 
 import QRReturnLeaderBe from "./components/QR/QRBe/Leader/QRReturnLeaderBE.jsx"
 import QRValidationLeaderBe from "./components/QR/QRBe/Leader/QRValidationLeaderBE.jsx"
-import QRReturnValidationLeaderBe from "./components/QR/QRBe/Leader/QRReturnValidationLeaderBE.jsx"
 
 
 // 
@@ -160,22 +151,20 @@ function App() {
 
 
         <Route path="ValidationQuality" element={<ValidationQuality />} />
-        <Route path="ReturnValidationQuality" element={<ReturnValidationQuality />} />
+
 
         <Route path="Maintenance" element={<Maintenance />} />
-        <Route path="ReturnMaintenance" element={<ReturnMaintenance />} />
+
 
 
         <Route path="Others" element={<Others />} />
-        <Route path="ReturnOthers" element={<ReturnOthers />} />
 
 
         <Route path="ValidationLeader" element={<ValidationLeader />} />
-        <Route path="ReturnValidationLeader" element={<ReturnValidationLeader />} />
+
 
 
         {/* QR Top*/}
-
         <Route path="QRLeaderTop" element={<QRLeaderTop />} />
 
         <Route path="QROperatorTop" element={<QROperatorTop />} />
@@ -183,21 +172,17 @@ function App() {
 
 
         <Route path="QRResponseRepairTopMTC" element={<QRResponseRepairTopMTC />} />
-        <Route path="QRReturnResponseRepairTopMTC" element={<QRReturnResponseRepairTopMTC />} />
 
         <Route path="QRResponseRepairTopOTH" element={<QRResponseRepairTopOTH />} />
-        <Route path="QRReturnResponseRepairTopOTH" element={<QRReturnResponseRepairTopOTH />} />
 
 
 
 
         <Route path="QRReturnQualityTop" element={<QRReturnQualityTop />} />
         <Route path="QRValidationQualityTop" element={<QRValidationQualityTop />} />
-        <Route path="QRReturnValidationQualityTop" element={<QRReturnValidationQualityTop />} />
 
         <Route path="QRReturnLeaderTop" element={<QRReturnLeaderTop />} />
         <Route path="QRValidationLeaderTop" element={<QRValidationLeaderTop />} />
-        <Route path="QRReturnValidationLeaderTop" element={<QRReturnValidationLeaderTop />} />
 
         {/*  */}
 
@@ -210,21 +195,18 @@ function App() {
 
 
         <Route path="QRResponseRepairBotMTC" element={<QRResponseRepairBotMTC />} />
-        <Route path="QRReturnResponseRepairBotMTC" element={<QRReturnResponseRepairBotMTC />} />
 
         <Route path="QRResponseRepairBotOTH" element={<QRResponseRepairBotOTH />} />
-        <Route path="QRReturnResponseRepairBotOTH" element={<QRReturnResponseRepairBotOTH />} />
 
 
 
 
         <Route path="QRReturnQualityBot" element={<QRReturnQualityBot />} />
         <Route path="QRValidationQualityBot" element={<QRValidationQualityBot />} />
-        <Route path="QRReturnValidationQualityBot" element={<QRReturnValidationQualityBot />} />
 
         <Route path="QRReturnLeaderBot" element={<QRReturnLeaderBot />} />
         <Route path="QRValidationLeaderBot" element={<QRValidationLeaderBot />} />
-        <Route path="QRReturnValidationLeaderBot" element={<QRReturnValidationLeaderBot />} />
+
 
         {/*  */}
 
@@ -238,21 +220,19 @@ function App() {
 
 
         <Route path="QRResponseRepairBeMTC" element={<QRResponseRepairBeMTC />} />
-        <Route path="QRReturnResponseRepairBeMTC" element={<QRReturnResponseRepairBeMTC />} />
 
         <Route path="QRResponseRepairBeOTH" element={<QRResponseRepairBeOTH />} />
-        <Route path="QRReturnResponseRepairBeOTH" element={<QRReturnResponseRepairBeOTH />} />
 
 
 
 
         <Route path="QRReturnQualityBe" element={<QRReturnQualityBe />} />
         <Route path="QRValidationQualityBe" element={<QRValidationQualityBe />} />
-        <Route path="QRReturnValidationQualityBe" element={<QRReturnValidationQualityBe />} />
+
 
         <Route path="QRReturnLeaderBe" element={<QRReturnLeaderBe />} />
         <Route path="QRValidationLeaderBe" element={<QRValidationLeaderBe />} />
-        <Route path="QRReturnValidationLeaderBe" element={<QRReturnValidationLeaderBe />} />
+
 
         {/*  */}
 

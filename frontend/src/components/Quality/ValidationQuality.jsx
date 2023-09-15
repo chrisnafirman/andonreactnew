@@ -472,7 +472,7 @@ const Quality = () => {
                       </th>
 
                       <th className="p-1 w-10 lg:w-20">
-                        <div className="font-sans lg:font-semibold text-left">Option</div>
+                        <div className="font-sans lg:font-semibold text-left">To</div>
                       </th>
                       <th className="p-1 w-10 lg:w-32">
                         <div className="font-sans lg:font-semibold text-left">Department</div>
