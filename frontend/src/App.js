@@ -37,6 +37,7 @@ import ValidationLeader from "./components/Leader/ValidationLeader.jsx"
 import UserMobile from "./components/User/UserMobile.jsx"
 import UserSMTTop from "./components/User/SmtTop.jsx"
 import UserSMTBot from "./components/User/SmtBot.jsx"
+import UserSMTBe from "./components/User/SmtBe.jsx"
 import UserHome from "./components/User/Home.jsx"
 
 
@@ -135,6 +136,7 @@ function App() {
 
 
         <Route path="UserSMTTop" element={<UserSMTTop />} />
+        <Route path="UserSMTBe" element={<UserSMTBe />} />
         <Route path="UserSMTBot" element={<UserSMTBot />} />
         <Route path="UserHome" element={<UserHome />} />
 

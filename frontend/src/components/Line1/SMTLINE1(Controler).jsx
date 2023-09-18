@@ -7836,9 +7836,9 @@ const SMTLINE1CONTROLLER = () => {
   // Background
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/Background.jpg)`,
-    backgroundSize: "1300px",
+    backgroundSize: "1900px",
     backgroundPosition: "0px",
-    height: "900px", // Ubah tinggi (height) sesuai kebutuhan Anda
+    height: "1000px", // Ubah tinggi (height) sesuai kebutuhan Anda
   };
 
   return (
@@ -8175,6 +8175,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
+                    style={{ backgroundColor: backgroundColorStatusDropinBe }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -8191,7 +8192,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-
+                    style={{ backgroundColor: backgroundColorStatusFluxerBe }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -8208,7 +8209,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-
+                    style={{ backgroundColor: backgroundColorStatusPreheatBe }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -8225,7 +8226,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-
+                style={{ backgroundColor: backgroundColorStatusSeho1Be}}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -8247,7 +8248,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-
+                style={{ backgroundColor: backgroundColorStatusSeho2Be}}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -8264,7 +8265,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-
+                style={{ backgroundColor: backgroundColorStatusTouchupBe}}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -8281,7 +8282,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-
+                style={{ backgroundColor: backgroundColorStatusICTBe}}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -8296,7 +8297,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-
+                style={{ backgroundColor: backgroundColorStatusFlashBe}}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -8315,7 +8316,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-
+                style={{ backgroundColor: backgroundColorStatusRouterBe}}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">

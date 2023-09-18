@@ -1,63 +1,162 @@
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
 
 const PortalLeader = () => {
 
+    const [statusData, setStatusData] = useState([]);
+    const [ValidationData, setValidationData] = useState([]);
+    const [emptyStatusCount, setEmptyStatusCount] = useState(0);
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    useEffect(() => {
+        // Mengambil data status dari API yang memiliki Status kosong dan DepartTo adalah "Production Leader"
+        fetch('http://192.168.101.12:3001/api/Leader')
+          .then((response) => response.json())
+          .then((data) => {
+            const filteredData = data.filter((status) => status.Status === '' );
+            setStatusData(filteredData); // Menyimpan data status ke dalam state
+            // Menghitung jumlah status yang kosong
+            const count = filteredData.length;
+            setEmptyStatusCount(count);
+          })
+          .catch((error) => {
+            console.error('Error fetching repair data:', error);
+          });
+      
+        // Mengambil data validation dari API yang memiliki Status kosong dan DepartTo adalah "Production Leader"
+        fetch('http://192.168.101.12:3001/api/Validation')
+          .then((response) => response.json())
+          .then((data) => {
+            const filteredData = data.filter((status) => status.Status === '' && (status.DepartTo === 'Production Leader' || status.DepartTo === 'Sub Leader'));
+            setValidationData(filteredData); // Menyimpan data validation ke dalam state
+            // Menghitung jumlah status yang kosong di data validation
+            const count = filteredData.length;
+            setEmptyStatusCount((prevCount) => prevCount + count); // Menambahkan jumlah status kosong ke status sebelumnya
+          })
+          .catch((error) => {
+            console.error('Error fetching validation data:', error);
+          });
+      }, []);
+      
 
     const styles = {
         background: "linear-gradient(45deg, #000, #8a8b90, #16558f)",
         height: "1000px",
-      };
+    };
     return (
         <body style={styles}>
+            <nav class="bg-opacity-70">
+                <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                    <div class="relative flex h-16 items-center justify-between">
+                        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                            <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                                <div class="flex flex-shrink-0 items-center">
+                                    <img
+                                        src={process.env.PUBLIC_URL + "/avi.png"}
+                                        alt="Logo"
+                                        class="h-6 ml-4 sm:h-9 bg-white rounded-md"
+                                    />
+                                </div>
+                            </button>
+
+                        </div>
+                        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+
+
+                        </div>
+                        <div class="absolute inset-y-0 right-0 mt-3 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                            <span className="absolute -inset-1.5">
+                                {emptyStatusCount > 0 && <span className="bg-red-500 text-white rounded-full px-2 py-1 text-xs">{emptyStatusCount}</span>}
+                            </span>
+                            <button
+                                onClick={() => setShowDropdown(!showDropdown)}
+                                type="button"
+                                className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                            >
+
+                                <span className="sr-only">View notifications</span>
+                                <svg
+                                    className="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+                                    />
+                                </svg>
+                            </button>
+                            <div>
+                                {showDropdown && (
+                                    <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                                        <div className="py-1">
+                                            {statusData.concat(ValidationData) // Menggabungkan kedua array data
+                                                .filter((status) => status.Status === '')
+                                                .map((status) => (
+                                                    <a
+                                                        key={status.Uid}
+                                                        href={statusData.includes(status) ? '/Leader' : '/ValidationLeader'}
+                                                        className={`block px-4 py-2 text-sm ${statusData.includes(status) ? 'bg-red-200' : 'bg-green-200'
+                                                            } hover:bg-gray-100`}
+                                                    >
+                                                        {status.Uid}
+                                                    </a>
+                                                ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
             <div className="flex flex-col  items-center  h-screen ">
-                <h1 className="text-4xl mt-11  font-serif  mb-60 lg:mb-40">Leader</h1>
+                <h1 className="text-4xl mt-5  font-serif  mb-44 lg:mb-40">Leader</h1>
                 <div className="flex space-x-12">
                     <div className="flex-1">
                         <div className=" p-6 rounded-lg ">
                             <a href="Leader">
-                            <button className="w-full py-2 px-4  text-white rounded-md  hover:scale-75 ease-in duration-500 ">
-                                <svg width="100px"viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#b99204" stroke="#b99204">
 
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                                <button className="w-full py-2 px-4  text-white rounded-md  hover:scale-75 ease-in duration-500 ">
 
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                                    <svg width="100px" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#b99204" stroke="#b99204">
 
-                                    <g id="SVGRepo_iconCarrier">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
-                                        <path d="M810.666667 149.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h597.333334c23.466667 0 42.666667-19.2 42.666666-42.666667V192c0-23.466667-19.2-42.666667-42.666666-42.666667zM810.666667 405.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h597.333334c23.466667 0 42.666667-19.2 42.666666-42.666667v-128c0-23.466667-19.2-42.666667-42.666666-42.666667zM810.666667 661.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h597.333334c23.466667 0 42.666667-19.2 42.666666-42.666667v-128c0-23.466667-19.2-42.666667-42.666666-42.666667z" fill="#8D0303" />
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
 
-                                        <path d="M964.266667 812.8c2.133333-8.533333 2.133333-17.066667 2.133333-23.466667s0-17.066667-2.133333-23.466666l49.066666-36.266667c4.266667-4.266667 6.4-10.666667 4.266667-14.933333l-49.066667-83.2c-2.133333-4.266667-8.533333-6.4-14.933333-4.266667l-55.466667 25.6c-12.8-10.666667-27.733333-19.2-42.666666-25.6l-6.4-61.866667c0-6.4-6.4-10.666667-10.666667-10.666666h-96c-6.4 0-10.666667 4.266667-10.666667 10.666666l-6.4 61.866667c-14.933333 6.4-29.866667 14.933333-42.666666 25.6l-55.466667-25.6c-6.4-2.133333-12.8 0-14.933333 4.266667l-49.066667 83.2c-2.133333 4.266667-2.133333 12.8 4.266667 14.933333l49.066666 36.266667c-2.133333 8.533333-2.133333 17.066667-2.133333 23.466666s0 17.066667 2.133333 23.466667l-49.066666 36.266667c-4.266667 4.266667-6.4 10.666667-4.266667 14.933333l49.066667 83.2c2.133333 4.266667 8.533333 6.4 14.933333 4.266667l55.466667-25.6c12.8 10.666667 27.733333 19.2 42.666666 25.6l6.4 61.866666c0 6.4 6.4 10.666667 10.666667 10.666667h96c6.4 0 10.666667-4.266667 10.666667-10.666667l6.4-61.866666c14.933333-6.4 29.866667-14.933333 42.666666-25.6l55.466667 25.6c6.4 2.133333 12.8 0 14.933333-4.266667l49.066667-83.2c2.133333-4.266667 2.133333-12.8-4.266667-14.933333l-49.066666-36.266667zM789.333333 900.266667c-61.866667 0-110.933333-49.066667-110.933333-110.933334 0-61.866667 49.066667-110.933333 110.933333-110.933333 61.866667 0 110.933333 49.066667 110.933334 110.933333 0 61.866667-49.066667 110.933333-110.933334 110.933334z" fill="#607D8B" />
+                                        <g id="SVGRepo_iconCarrier">
 
-                                        <path d="M789.333333 661.333333c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128z m0 192c-36.266667 0-64-27.733333-64-64s27.733333-64 64-64 64 27.733333 64 64-27.733333 64-64 64z" fill="#455A64" />
+                                            <path d="M810.666667 149.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h597.333334c23.466667 0 42.666667-19.2 42.666666-42.666667V192c0-23.466667-19.2-42.666667-42.666666-42.666667zM810.666667 405.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h597.333334c23.466667 0 42.666667-19.2 42.666666-42.666667v-128c0-23.466667-19.2-42.666667-42.666666-42.666667zM810.666667 661.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h597.333334c23.466667 0 42.666667-19.2 42.666666-42.666667v-128c0-23.466667-19.2-42.666667-42.666666-42.666667z" fill="#8D0303" />
 
-                                    </g>
+                                            <path d="M964.266667 812.8c2.133333-8.533333 2.133333-17.066667 2.133333-23.466667s0-17.066667-2.133333-23.466666l49.066666-36.266667c4.266667-4.266667 6.4-10.666667 4.266667-14.933333l-49.066667-83.2c-2.133333-4.266667-8.533333-6.4-14.933333-4.266667l-55.466667 25.6c-12.8-10.666667-27.733333-19.2-42.666666-25.6l-6.4-61.866667c0-6.4-6.4-10.666667-10.666667-10.666666h-96c-6.4 0-10.666667 4.266667-10.666667 10.666666l-6.4 61.866667c-14.933333 6.4-29.866667 14.933333-42.666666 25.6l-55.466667-25.6c-6.4-2.133333-12.8 0-14.933333 4.266667l-49.066667 83.2c-2.133333 4.266667-2.133333 12.8 4.266667 14.933333l49.066666 36.266667c-2.133333 8.533333-2.133333 17.066667-2.133333 23.466666s0 17.066667 2.133333 23.466667l-49.066666 36.266667c-4.266667 4.266667-6.4 10.666667-4.266667 14.933333l49.066667 83.2c2.133333 4.266667 8.533333 6.4 14.933333 4.266667l55.466667-25.6c12.8 10.666667 27.733333 19.2 42.666666 25.6l6.4 61.866666c0 6.4 6.4 10.666667 10.666667 10.666667h96c6.4 0 10.666667-4.266667 10.666667-10.666667l6.4-61.866666c14.933333-6.4 29.866667-14.933333 42.666666-25.6l55.466667 25.6c6.4 2.133333 12.8 0 14.933333-4.266667l49.066667-83.2c2.133333-4.266667 2.133333-12.8-4.266667-14.933333l-49.066666-36.266667zM789.333333 900.266667c-61.866667 0-110.933333-49.066667-110.933333-110.933334 0-61.866667 49.066667-110.933333 110.933333-110.933333 61.866667 0 110.933333 49.066667 110.933334 110.933333 0 61.866667-49.066667 110.933333-110.933334 110.933334z" fill="#607D8B" />
 
-                                </svg>
-                                <span className='text-white font-serif'>Request</span>
-                            </button>
+                                            <path d="M789.333333 661.333333c-70.4 0-128 57.6-128 128s57.6 128 128 128 128-57.6 128-128-57.6-128-128-128z m0 192c-36.266667 0-64-27.733333-64-64s27.733333-64 64-64 64 27.733333 64 64-27.733333 64-64 64z" fill="#455A64" />
+
+                                        </g>
+
+                                    </svg>
+                                    <span className='text-white font-serif'>Request</span>
+                                </button>
                             </a>
-                        </div> 
-                    </div>
-                    <div className="flex-1">
-                        <div className=" p-6 rounded-lg ">
-                        <a href="ValidationLeader">
-                            <button className="w-full py-2 px-4  hover:scale-75 ease-in duration-500">
-                            <svg width="100px"  viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M810.666667 149.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h597.333334c23.466667 0 42.666667-19.2 42.666666-42.666667V192c0-23.466667-19.2-42.666667-42.666666-42.666667zM810.666667 405.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h535.466667c27.733333-27.733333 104.533333-19.2 104.533333-42.666667v-128c0-23.466667-19.2-42.666667-42.666666-42.666667zM733.866667 661.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h597.333334c23.466667 0 42.666667-19.2 42.666666-42.666667v-51.2c0-66.133333-53.333333-119.466667-119.466666-119.466667z" fill="#06AB1F" /><path d="M981.333333 533.333333H682.666667c-23.466667 0-42.666667 19.2-42.666667 42.666667v251.733333c0 27.733333 12.8 51.2 34.133333 68.266667l157.866667 117.333333 157.866667-117.333333c21.333333-17.066667 34.133333-40.533333 34.133333-68.266667V576c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#009688" /></svg>
-                            <span className='text-white font-serif'>Validation</span>
-                            </button>
-                        </a>
                         </div>
                     </div>
                     <div className="flex-1">
                         <div className=" p-6 rounded-lg ">
-                        <a href="ReturnValidationLeader">
-                            <button className="w-full py-2 px-4  hover:scale-75 ease-in duration-500">
-                            <svg width="100px"  viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M810.666667 149.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h597.333334c23.466667 0 42.666667-19.2 42.666666-42.666667V192c0-23.466667-19.2-42.666667-42.666666-42.666667zM810.666667 405.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h597.333334c23.466667 0 42.666667-19.2 42.666666-42.666667v-128c0-23.466667-19.2-42.666667-42.666666-42.666667zM810.666667 661.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h597.333334c23.466667 0 42.666667-19.2 42.666666-42.666667v-128c0-23.466667-19.2-42.666667-42.666666-42.666667z" fill="#C5D315" /><path d="M661.333333 640l149.333334 119.466667V520.533333z" fill="#2196F3" /><path d="M810.666667 597.333333c-6.4 0-14.933333 0-21.333334 2.133334v85.333333c6.4-2.133333 14.933333-2.133333 21.333334-2.133333 70.4 0 128 57.6 128 128s-57.6 128-128 128-128-57.6-128-128c0-6.4 0-12.8 2.133333-19.2l-72.533333-57.6c-8.533333 23.466667-14.933333 49.066667-14.933334 76.8 0 117.333333 96 213.333333 213.333334 213.333333s213.333333-96 213.333333-213.333333-96-213.333333-213.333333-213.333334z" fill="#2196F3" /></svg>
-                            <span className='text-white font-serif'>Return Validation</span>
-                            </button>
-                        </a>
+                            <a href="ValidationLeader">
+                                <button className="w-full py-2 px-4  hover:scale-75 ease-in duration-500">
+                                    <svg width="100px" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M810.666667 149.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h597.333334c23.466667 0 42.666667-19.2 42.666666-42.666667V192c0-23.466667-19.2-42.666667-42.666666-42.666667zM810.666667 405.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h535.466667c27.733333-27.733333 104.533333-19.2 104.533333-42.666667v-128c0-23.466667-19.2-42.666667-42.666666-42.666667zM733.866667 661.333333H213.333333c-23.466667 0-42.666667 19.2-42.666666 42.666667v128c0 23.466667 19.2 42.666667 42.666666 42.666667h597.333334c23.466667 0 42.666667-19.2 42.666666-42.666667v-51.2c0-66.133333-53.333333-119.466667-119.466666-119.466667z" fill="#06AB1F" /><path d="M981.333333 533.333333H682.666667c-23.466667 0-42.666667 19.2-42.666667 42.666667v251.733333c0 27.733333 12.8 51.2 34.133333 68.266667l157.866667 117.333333 157.866667-117.333333c21.333333-17.066667 34.133333-40.533333 34.133333-68.266667V576c0-23.466667-19.2-42.666667-42.666667-42.666667z" fill="#009688" /></svg>
+                                    <span className='text-white font-serif'>Validation</span>
+                                </button>
+                            </a>
                         </div>
                     </div>
+
                 </div>
             </div>
         </body>
