@@ -27,7 +27,7 @@ function QRReturnValidationLeaderBOT() {
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
   const [Status, setStatus] = useState("Return");
-  const [Requestor, setRequestor] = useState("Leader(RTN)");
+  const [Requestor, setRequestor] = useState("Leader");
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");

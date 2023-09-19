@@ -103,11 +103,11 @@ const postRequestValidation = (req, res) => {
 
 
 const PutStatusReturnValidation = (req, res) => {
-  const { Status, NamaPIC, Department, Kerusakan, Station, Area } = req.body;
+  const { Uid, Status, NamaPIC, Department, Kerusakan, Station, Area } = req.body;
 
   db.query(
-    "UPDATE validation SET Status = ?, ValidationName = ?, ReturnDepartment = ?, ValidationDescription = ?, ValidationDate = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
-    [Status, NamaPIC, Department, Kerusakan, Station, Area],
+    "UPDATE validation SET UidReturn = ?, Status = ?, ValidationName = ?, ReturnDepartment = ?, ValidationDescription = ?, ValidationDate = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [Uid, Status, NamaPIC, Department, Kerusakan, Station, Area],
     (error, results) => {
       if (error) {
         console.log(error);

@@ -28,7 +28,7 @@ function QRReturnQualityBOT() {
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
   const [Status, setStatus] = useState("Return");
-  const [Requestor, setRequestor] = useState("QA/QC(RTN)");
+  const [Requestor, setRequestor] = useState("QA/QC");
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
@@ -100,6 +100,7 @@ function QRReturnQualityBOT() {
       Department: Department,
       NamaPIC: NamaPIC,
       Kerusakan: Kerusakan,
+      Uid: Uid,
     };
 
 
@@ -124,7 +125,6 @@ function QRReturnQualityBOT() {
         console.log("Error:", err);
       });
   };
-
 
 
 

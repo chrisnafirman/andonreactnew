@@ -30,6 +30,9 @@ import Maintenance from "./components/Maintenance/Maintenance.jsx"
 import Leader from "./components/Leader/Leader.jsx"
 
 
+import ReportINC from "./components/Report/ReportINC.jsx"
+import ReportRTN from "./components/Report/ReportRTN.jsx"
+import ReportREQ from "./components/Report/ReportREQ.jsx"
 
 import ValidationLeader from "./components/Leader/ValidationLeader.jsx"
 
@@ -133,7 +136,9 @@ function App() {
         <Route path="Leader" element={<Leader />} />
 
 
-
+        <Route path="ReportINC" element={<ReportINC />} />
+        <Route path="ReportRTN" element={<ReportRTN />} />
+        <Route path="ReportREQ" element={<ReportREQ />} />
 
         <Route path="UserSMTTop" element={<UserSMTTop />} />
         <Route path="UserSMTBe" element={<UserSMTBe />} />
