@@ -11,33 +11,33 @@ const PortalLeader = () => {
     useEffect(() => {
         // Mengambil data status dari API yang memiliki Status kosong dan DepartTo adalah "Production Leader"
         fetch('http://192.168.101.12:3001/api/Leader')
-          .then((response) => response.json())
-          .then((data) => {
-            const filteredData = data.filter((status) => status.Status === '' );
-            setStatusData(filteredData); // Menyimpan data status ke dalam state
-            // Menghitung jumlah status yang kosong
-            const count = filteredData.length;
-            setEmptyStatusCount(count);
-          })
-          .catch((error) => {
-            console.error('Error fetching repair data:', error);
-          });
-      
-        // Mengambil data validation dari API yang memiliki Status kosong dan DepartTo adalah "Production Leader"
+            .then((response) => response.json())
+            .then((data) => {
+                const filteredData = data.filter((item) => item.Status === '');
+                setStatusData(filteredData); // Menyimpan data item ke dalam state
+                // Menghitung jumlah item yang kosong
+                const count = filteredData.length;
+                setEmptyStatusCount(count);
+            })
+            .catch((error) => {
+                console.error('Error fetching repair data:', error);
+            });
+
+        // Mengambil data validation dari API yang memiliki Status kosong dan DepartTo adalah "Production"
         fetch('http://192.168.101.12:3001/api/Validation')
-          .then((response) => response.json())
-          .then((data) => {
-            const filteredData = data.filter((status) => status.Status === '' && (status.DepartTo === 'Production Leader' || status.DepartTo === 'Sub Leader'));
-            setValidationData(filteredData); // Menyimpan data validation ke dalam state
-            // Menghitung jumlah status yang kosong di data validation
-            const count = filteredData.length;
-            setEmptyStatusCount((prevCount) => prevCount + count); // Menambahkan jumlah status kosong ke status sebelumnya
-          })
-          .catch((error) => {
-            console.error('Error fetching validation data:', error);
-          });
-      }, []);
-      
+            .then((response) => response.json())
+            .then((data) => {
+                const filteredData = data.filter((item) => item.Status === '' && (item.DepartTo === 'Production'));
+                setValidationData(filteredData); // Menyimpan data validation ke dalam state
+                // Menghitung jumlah item yang kosong di data validation
+                const count = filteredData.length;
+                setEmptyStatusCount((prevCount) => prevCount + count); // Menambahkan jumlah item kosong ke item sebelumnya
+            })
+            .catch((error) => {
+                console.error('Error fetching validation data:', error);
+            });
+    }, []);
+
 
     const styles = {
         background: "linear-gradient(45deg, #000, #8a8b90, #16558f)",
@@ -48,8 +48,8 @@ const PortalLeader = () => {
             <nav class="bg-opacity-70">
                 <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                     <div class="relative flex h-16 items-center justify-between">
-                        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                            <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                        <div class="absolute inset-y-0 left-0 flex items-center ">
+                            <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2  " aria-controls="mobile-menu" aria-expanded="false">
                                 <div class="flex flex-shrink-0 items-center">
                                     <img
                                         src={process.env.PUBLIC_URL + "/avi.png"}
@@ -65,15 +65,15 @@ const PortalLeader = () => {
 
                         </div>
                         <div class="absolute inset-y-0 right-0 mt-3 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                            <span className="absolute -inset-1.5">
-                                {emptyStatusCount > 0 && <span className="bg-red-500 text-white rounded-full px-2 py-1 text-xs">{emptyStatusCount}</span>}
-                            </span>
+
                             <button
                                 onClick={() => setShowDropdown(!showDropdown)}
                                 type="button"
                                 className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                             >
-
+                                <span className="absolute -inset-4">
+                                    {emptyStatusCount > 0 && <span className="bg-red-500 text-white rounded-full px-2 py-1 text-xs">{emptyStatusCount}</span>}
+                                </span>
                                 <span className="sr-only">View notifications</span>
                                 <svg
                                     className="h-6 w-6"
@@ -95,15 +95,16 @@ const PortalLeader = () => {
                                     <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                                         <div className="py-1">
                                             {statusData.concat(ValidationData) // Menggabungkan kedua array data
-                                                .filter((status) => status.Status === '')
-                                                .map((status) => (
+                                                .filter((item) => item.Status === '')
+                                                .map((item) => (
                                                     <a
-                                                        key={status.Uid}
-                                                        href={statusData.includes(status) ? '/Leader' : '/ValidationLeader'}
-                                                        className={`block px-4 py-2 text-sm ${statusData.includes(status) ? 'bg-red-200' : 'bg-green-200'
-                                                            } hover:bg-gray-100`}
+                                                        key={item.Uid}
+                                                        href={statusData.includes(item) ? '/Leader' : '/ValidationLeader'}
+                                                        className={`block px-4 py-2 text-sm ${statusData.includes(item) ? 'bg-red-200' : 'bg-green-200'
+                                                            } hover:bg-gray-100`}z
                                                     >
-                                                        {status.Uid}
+                                                       {item.Uid !== "" ?  item.Uid : (item.Station + " Need Action")}
+
                                                     </a>
                                                 ))}
                                         </div>
@@ -116,7 +117,9 @@ const PortalLeader = () => {
             </nav>
 
             <div className="flex flex-col  items-center  h-screen ">
-                <h1 className="text-4xl mt-5  font-serif  mb-44 lg:mb-40">Leader</h1>
+            <h1 className="text-4xl mt-5 text-[#2C2B27] font-serif mb-52 lg:mb-36" style={{ textShadow: '2px 2px 4px rgba(24,0,0,0.5)' }}>
+                    Leader
+                </h1>
                 <div className="flex space-x-12">
                     <div className="flex-1">
                         <div className=" p-6 rounded-lg ">

@@ -71,7 +71,7 @@ const ValidationLeader = () => {
 
     // Mengisi data tabel PDF dengan properti yang Anda inginkan
     filteredData.forEach((item) => {
-      if (item.DepartTo === 'Production Leader' || item.DepartTo === 'Sub Leader') {
+      if (item.DepartTo === 'Production') {
         const rowData = [
           item.Uid,
           item.Requestor,
@@ -152,7 +152,7 @@ const ValidationLeader = () => {
 
     // Mengisi data tabel PDF dengan properti yang Anda inginkan
     filteredData.forEach((item) => {
-      if (item.DepartTo === 'Production Leader' || item.DepartTo === 'Sub Leader') {
+      if (item.DepartTo === 'Production') {
         const rowData = [
           item.Uid,
           item.Requestor,
@@ -469,9 +469,6 @@ const ValidationLeader = () => {
                       <th className="p-1 w-0 lg:w-20">
                         <div className="font-sans lg:font-semibold text-left">Uid</div>
                       </th>
-                      <th className="p-1 w-0 lg:w-20">
-                        <div className="font-sans lg:font-semibold text-left">Option</div>
-                      </th>
                       <th className="p-1 w-0 lg:w-36">
                         <div className="font-sans lg:font-mono text-left">
                           Department
@@ -486,7 +483,7 @@ const ValidationLeader = () => {
                       <th className="p-1  w-0 lg:w-40 ">
                         <div className="font-mono text-left">Station</div>
                       </th>
-                      <th className="p-1 w-96">
+                      <th className="p-1 w-22">
                         <div className="font-mono text-center">Status</div>
                       </th>
                       <th className="p-1 w-24 justify-center items-center flex">
@@ -496,7 +493,7 @@ const ValidationLeader = () => {
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
                     {filteredData.map((item, index) => {
-                      if (item.DepartTo === "Production Leader" || item.DepartTo === "Sub Leader") {
+                      if (item.DepartTo === "Production" ) {
                         return (
                           <tr
                             key={item.id}
@@ -505,11 +502,6 @@ const ValidationLeader = () => {
                             <td className="p-2">
                               <div className="font-sans text-xs lg:text-sm text-gray-800">
                                 {item.Uid}
-                              </div>
-                            </td>
-                            <td className="p-2">
-                              <div className="font-sans text-xs lg:text-sm text-gray-800">
-                                {item.DepartTo}
                               </div>
                             </td>
                             <td className="p-2">

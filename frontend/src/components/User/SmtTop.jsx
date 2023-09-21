@@ -674,10 +674,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -724,10 +722,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -774,10 +770,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -824,10 +818,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -874,10 +866,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -924,10 +914,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -974,10 +962,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -1024,10 +1010,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -1357,7 +1341,7 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataDestackerTOPRepair);
                         setButton("DestackerTop");
-                      } else if (StatusDestackerTop === "QA" || StatusDestackerTop === "QC" || StatusDestackerTop === "Production Leader" || StatusDestackerTop === "Sub Leader") {
+                      } else if (StatusDestackerTop === "QA" || StatusDestackerTop === "QC" || StatusDestackerTop === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataDestackerTOPValidation);
                         setButton("DestackerTop");
@@ -1406,7 +1390,7 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataLabelTOPRepair);
                         setButton("LabelTop");
-                      } else if (StatusLabelTop === "QA" || StatusLabelTop === "QC" || StatusLabelTop === "Production Leader" || StatusLabelTop === "Sub Leader") {
+                      } else if (StatusLabelTop === "QA" || StatusLabelTop === "QC" || StatusLabelTop === "Production" ) {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataLabelTOPValidation);
                         setButton("LabelTop");
@@ -1455,7 +1439,7 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataPrinterTOPRepair);
                         setButton("PrinterTop");
-                      } else if (StatusPrinterTop === "QA" || StatusPrinterTop === "QC" || StatusPrinterTop === "Production Leader" || StatusPrinterTop === "Sub Leader") {
+                      } else if (StatusPrinterTop === "QA" || StatusPrinterTop === "QC" || StatusPrinterTop === "Production" ) {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataPrinterTOPValidation);
                         setButton("PrinterTop");
@@ -1505,7 +1489,7 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataSPITOPRepair);
                         setButton("SPITop");
-                      } else if (StatusSPITop === "QA" || StatusSPITop === "QC" || StatusSPITop === "Production Leader" || StatusSPITop === "Sub Leader") {
+                      } else if (StatusSPITop === "QA" || StatusSPITop === "QC" || StatusSPITop === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataSPITOPValidation);
                         setButton("SPITop");
@@ -1557,7 +1541,7 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataPickNPlaceTOPRepair);
                         setButton("PickNPlaceTop");
-                      } else if (StatusPickNPlaceTop === "QA" || StatusPickNPlaceTop === "QC" || StatusPickNPlaceTop === "Production Leader" || StatusPickNPlaceTop === "Sub Leader") {
+                      } else if (StatusPickNPlaceTop === "QA" || StatusPickNPlaceTop === "QC" || StatusPickNPlaceTop === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataPickNPlaceTOPValidation);
                         setButton("PickNPlaceTop");
@@ -1607,7 +1591,7 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataReflowTOPRepair);
                         setButton("ReflowTop");
-                      } else if (StatusReflowTop === "QA" || StatusReflowTop === "QC" || StatusReflowTop === "Production Leader" || StatusReflowTop === "Sub Leader") {
+                      } else if (StatusReflowTop === "QA" || StatusReflowTop === "QC" || StatusReflowTop === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataReflowTOPValidation);
                         setButton("ReflowTop");
@@ -1657,7 +1641,7 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataAOITOPRepair);
                         setButton("AOITop");
-                      } else if (StatusAOITop === "QA" || StatusAOITop === "QC" || StatusAOITop === "Production Leader" || StatusAOITop === "Sub Leader") {
+                      } else if (StatusAOITop === "QA" || StatusAOITop === "QC" || StatusAOITop === "Production" ) {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataAOITOPValidation);
                         setButton("AOITop");
@@ -1705,7 +1689,7 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataRVSTOPRepair);
                         setButton("RVSTop");
-                      } else if (StatusRVSTop === "QA" || StatusRVSTop === "QC" || StatusRVSTop === "Production Leader" || StatusRVSTop === "Sub Leader") {
+                      } else if (StatusRVSTop === "QA" || StatusRVSTop === "QC" || StatusRVSTop === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataRVSTOPValidation);
                         setButton("RVSTop");

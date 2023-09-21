@@ -62,7 +62,7 @@ const ReuestLeader = () => {
     const tableData = [];
 
     // Header untuk tabel PDF
-    const headers = ["Uid", "Start Downtime", "Request By", "Response at", "Response by", "Repair To", "Line", "Station", "Start Repair", "Repair By", "Problem", "Action", "Repair Done", " Validation To", " Validation By", "Validation Status", "Validation At", "Description", "Total Downtime", "Return To" , "Return ID"];
+    const headers = ["Uid", "Start Downtime", "Request By", "Response at", "Response by", "Repair To", "Line", "Station", "Start Repair", "Repair By", "Problem", "Action", "Repair Done", "Validation", " Validation PIC", "Validation At", "Validation Status", "Description", "Total Downtime", "Return To" , "Return ID"];
 
     // Warna teks header (abu-abu)
     const headerStyles = {
@@ -89,8 +89,8 @@ const ReuestLeader = () => {
         formatDateTimeAPI(item.DoneRepair),
         item.ValidationDepartment,
         item.ValidationBy,
-        item.ValidationStatus,
         formatDateTimeAPI(item.ValidationAt),
+        item.ValidationStatus,
         item.Description,
         item.TotalDowntime,
         item.ReturnTo,
@@ -119,17 +119,32 @@ const ReuestLeader = () => {
 
     doc.text(text, textX, textY);
 
+     
+     const subText = "Noted : Operator -> Leader -> Department(Repair) -> Validation";
+     const subTextWidth = textWidth / 2; // Setengah dari lebar teks utama
+     const subTextX = textX; // Sejajar dengan teks utama
+     const subTextY = textY + 8; // Tambahkan jarak 10 satuan dari teks utama
+     doc.setTextColor(128, 128, 128); 
+     doc.setFontSize(8); // Atur ukuran font yang lebih kecil
+     doc.text(subText, subTextX, subTextY);
+
     const fontSize = 4; // Atur ukuran font yang diinginkan
     const scaleFactor = 2;
     // Membuat tabel PDF dengan menggunakan autotable
     doc.autoTable({
       head: [headers],
       body: tableData,
-      startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
+      startY: subTextY + 10, // Mulai tabel setelah teks sub
       headStyles: {
-        fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
+        fillColor: [48, 151, 255],
         textColor: 0, // Warna teks hitam (0)
         fontStyle: fontSize, // Teks header tebal
+      },
+      columnStyles: {
+        16: { // Indeks 14 adalah kolom "Validation Status"
+          fontSize: 5,
+          fontStyle: 'bold', // Mengatur teks tebal (bold)
+        },
       },
       styles: {
         fontSize: fontSize, // Atur ukuran font
@@ -547,11 +562,11 @@ const ReuestLeader = () => {
                       <th className="p-1 min-w-[180px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Validation By</div>
                       </th>
-                      <th className="p-1 min-w-[140px] whitespace-no-wrap overflow-x-auto">
-                        <div className="text-center flex">Validation Status</div>
-                      </th>
                       <th className="p-1 min-w-[180px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Validation At</div>
+                      </th>
+                      <th className="p-1 min-w-[140px] whitespace-no-wrap overflow-x-auto">
+                        <div className="text-center flex">Validation Status</div>
                       </th>
                       <th className="p-1 min-w-[150px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Description</div>
@@ -652,12 +667,12 @@ const ReuestLeader = () => {
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
-                            {item.ValidationStatus}
+                            {formatDateTimeAPI(item.ValidationAt)}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
-                            {formatDateTimeAPI(item.ValidationAt)}
+                            {item.ValidationStatus}
                           </div>
                         </td>
                         <td className="p-2">

@@ -709,10 +709,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -758,10 +756,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -807,10 +803,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -856,10 +850,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -905,10 +897,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -954,10 +944,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -1003,10 +991,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -1052,10 +1038,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -1101,10 +1085,8 @@ const SmtTop = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -1426,6 +1408,36 @@ const SmtTop = () => {
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
                     style={{ backgroundColor: backgroundColorStatusDropinBe }}
+                    value={DropinBe}
+                    onClick={() => {
+                      if (StatusDropinBe === "Leader") {
+
+                        setIsOpenLeader(true);
+                        setOptionData(dataDropinBELeader);
+                        setButton("DropinBe");
+                      } else if (StatusDropinBe === "MAINTENANCE & IT" || StatusDropinBe === "HRGA & EHS" || StatusDropinBe === "PURCHASING,PPIC,MP&L" || StatusDropinBe === "PROCESS ENGINEERING" || StatusDropinBe === "PRODUCT DEVELOPMENT" || StatusDropinBe === "ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenRequest(true);
+                        setOptionData(dataDropinBERepair);
+                        setButton("DropinBe");
+                      } else if (StatusDropinBe === "Repair") {
+                        setIsOpenRepair(true);
+                        setOptionData(dataDropinBERepair);
+                        setButton("DropinBe");
+                      } else if (StatusDropinBe === "QA" || StatusDropinBe === "QC" || StatusDropinBe === "Production") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataDropinBEValidation);
+                        setButton("DropinBe");
+                      } else if (StatusDropinBe === "Return MAINTENANCE & IT" || StatusDropinBe === "Return HRGA & EHS" || StatusDropinBe === "Return PURCHASING,PPIC,MP&L" || StatusDropinBe === "Return PROCESS ENGINEERING" || StatusDropinBe === "Return PRODUCT DEVELOPMENT" || StatusDropinBe === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenReturn(true);
+                        setOptionData(dataDropinBERepair);
+                        setButton("DropinBe");
+                      } else if (StatusDropinBe === "Go") {
+                        setIsOpenValidation(true);
+                        setOptionData(dataDropinBEValidation);
+                        setButton("DropinBe");
+                      } 
+                      setStation(DropinBe);
+                    }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -1444,6 +1456,36 @@ const SmtTop = () => {
                   <button
                     style={{ backgroundColor: backgroundColorStatusFluxerBe }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                    value={FluxerBe}
+                    onClick={() => {
+                      if (StatusFluxerBe === "Leader") {
+
+                        setIsOpenLeader(true);
+                        setOptionData(dataFluxerBELeader);
+                        setButton("FluxerBe");
+                      } else if (StatusFluxerBe === "MAINTENANCE & IT" || StatusFluxerBe === "HRGA & EHS" || StatusFluxerBe === "PURCHASING,PPIC,MP&L" || StatusFluxerBe === "PROCESS ENGINEERING" || StatusFluxerBe === "PRODUCT DEVELOPMENT" || StatusFluxerBe === "ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenRequest(true);
+                        setOptionData(dataFluxerBERepair);
+                        setButton("FluxerBe");
+                      } else if (StatusFluxerBe === "Repair") {
+                        setIsOpenRepair(true);
+                        setOptionData(dataFluxerBERepair);
+                        setButton("FluxerBe");
+                      } else if (StatusFluxerBe === "QA" || StatusFluxerBe === "QC" || StatusFluxerBe === "Production") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataFluxerBEValidation);
+                        setButton("FluxerBe");
+                      } else if (StatusFluxerBe === "Return MAINTENANCE & IT" || StatusFluxerBe === "Return HRGA & EHS" || StatusFluxerBe === "Return PURCHASING,PPIC,MP&L" || StatusFluxerBe === "Return PROCESS ENGINEERING" || StatusFluxerBe === "Return PRODUCT DEVELOPMENT" || StatusFluxerBe === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenReturn(true);
+                        setOptionData(dataFluxerBERepair);
+                        setButton("FluxerBe");
+                      } else if (StatusFluxerBe === "Go") {
+                        setIsOpenValidation(true);
+                        setOptionData(dataFluxerBEValidation);
+                        setButton("FluxerBe");
+                      } 
+                      setStation(FluxerBe);
+                    }}
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1461,6 +1503,36 @@ const SmtTop = () => {
                   <button
                     style={{ backgroundColor: backgroundColorStatusPreheatBe }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                    value={PreheatBe}
+                    onClick={() => {
+                      if (StatusPreheatBe === "Leader") {
+
+                        setIsOpenLeader(true);
+                        setOptionData(dataPreheatBELeader);
+                        setButton("PreheatBe");
+                      } else if (StatusPreheatBe === "MAINTENANCE & IT" || StatusPreheatBe === "HRGA & EHS" || StatusPreheatBe === "PURCHASING,PPIC,MP&L" || StatusPreheatBe === "PROCESS ENGINEERING" || StatusPreheatBe === "PRODUCT DEVELOPMENT" || StatusPreheatBe === "ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenRequest(true);
+                        setOptionData(dataPreheatBERepair);
+                        setButton("PreheatBe");
+                      } else if (StatusPreheatBe === "Repair") {
+                        setIsOpenRepair(true);
+                        setOptionData(dataPreheatBERepair);
+                        setButton("PreheatBe");
+                      } else if (StatusPreheatBe === "QA" || StatusPreheatBe === "QC" || StatusPreheatBe === "Production") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataPreheatBEValidation);
+                        setButton("PreheatBe");
+                      } else if (StatusPreheatBe === "Return MAINTENANCE & IT" || StatusPreheatBe === "Return HRGA & EHS" || StatusPreheatBe === "Return PURCHASING,PPIC,MP&L" || StatusPreheatBe === "Return PROCESS ENGINEERING" || StatusPreheatBe === "Return PRODUCT DEVELOPMENT" || StatusPreheatBe === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenReturn(true);
+                        setOptionData(dataPreheatBERepair);
+                        setButton("PreheatBe");
+                      } else if (StatusPreheatBe === "Go") {
+                        setIsOpenValidation(true);
+                        setOptionData(dataPreheatBEValidation);
+                        setButton("PreheatBe");
+                      } 
+                      setStation(PreheatBe);
+                    }}
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1478,6 +1550,36 @@ const SmtTop = () => {
                   <button
                 style={{ backgroundColor: backgroundColorStatusSeho1Be}}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                    value={Seho1Be}
+                    onClick={() => {
+                      if (StatusSeho1Be === "Leader") {
+
+                        setIsOpenLeader(true);
+                        setOptionData(dataSeho1BELeader);
+                        setButton("Seho1Be");
+                      } else if (StatusSeho1Be === "MAINTENANCE & IT" || StatusSeho1Be === "HRGA & EHS" || StatusSeho1Be === "PURCHASING,PPIC,MP&L" || StatusSeho1Be === "PROCESS ENGINEERING" || StatusSeho1Be === "PRODUCT DEVELOPMENT" || StatusSeho1Be === "ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenRequest(true);
+                        setOptionData(dataSeho1BERepair);
+                        setButton("Seho1Be");
+                      } else if (StatusSeho1Be === "Repair") {
+                        setIsOpenRepair(true);
+                        setOptionData(dataSeho1BERepair);
+                        setButton("Seho1Be");
+                      } else if (StatusSeho1Be === "QA" || StatusSeho1Be === "QC" || StatusSeho1Be === "Production") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataSeho1BEValidation);
+                        setButton("Seho1Be");
+                      } else if (StatusSeho1Be === "Return MAINTENANCE & IT" || StatusSeho1Be === "Return HRGA & EHS" || StatusSeho1Be === "Return PURCHASING,PPIC,MP&L" || StatusSeho1Be === "Return PROCESS ENGINEERING" || StatusSeho1Be === "Return PRODUCT DEVELOPMENT" || StatusSeho1Be === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenReturn(true);
+                        setOptionData(dataSeho1BERepair);
+                        setButton("Seho1Be");
+                      } else if (StatusSeho1Be === "Go") {
+                        setIsOpenValidation(true);
+                        setOptionData(dataSeho1BEValidation);
+                        setButton("Seho1Be");
+                      } 
+                      setStation(Seho1Be);
+                    }}
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1500,6 +1602,36 @@ const SmtTop = () => {
                   <button
                 style={{ backgroundColor: backgroundColorStatusSeho2Be}}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                    value={Seho2Be}
+                    onClick={() => {
+                      if (StatusSeho2Be === "Leader") {
+
+                        setIsOpenLeader(true);
+                        setOptionData(dataSeho2BELeader);
+                        setButton("Seho2Be");
+                      } else if (StatusSeho2Be === "MAINTENANCE & IT" || StatusSeho2Be === "HRGA & EHS" || StatusSeho2Be === "PURCHASING,PPIC,MP&L" || StatusSeho2Be === "PROCESS ENGINEERING" || StatusSeho2Be === "PRODUCT DEVELOPMENT" || StatusSeho2Be === "ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenRequest(true);
+                        setOptionData(dataSeho2BERepair);
+                        setButton("Seho2Be");
+                      } else if (StatusSeho2Be === "Repair") {
+                        setIsOpenRepair(true);
+                        setOptionData(dataSeho2BERepair);
+                        setButton("Seho2Be");
+                      } else if (StatusSeho2Be === "QA" || StatusSeho2Be === "QC" || StatusSeho2Be === "Production") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataSeho2BEValidation);
+                        setButton("Seho2Be");
+                      } else if (StatusSeho2Be === "Return MAINTENANCE & IT" || StatusSeho2Be === "Return HRGA & EHS" || StatusSeho2Be === "Return PURCHASING,PPIC,MP&L" || StatusSeho2Be === "Return PROCESS ENGINEERING" || StatusSeho2Be === "Return PRODUCT DEVELOPMENT" || StatusSeho2Be === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenReturn(true);
+                        setOptionData(dataSeho2BERepair);
+                        setButton("Seho2Be");
+                      } else if (StatusSeho2Be === "Go") {
+                        setIsOpenValidation(true);
+                        setOptionData(dataSeho2BEValidation);
+                        setButton("Seho2Be");
+                      } 
+                      setStation(Seho2Be);
+                    }}
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1517,6 +1649,36 @@ const SmtTop = () => {
                   <button
                 style={{ backgroundColor: backgroundColorStatusTouchupBe}}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                    value={TouchupBe}
+                    onClick={() => {
+                      if (StatusTouchupBe === "Leader") {
+
+                        setIsOpenLeader(true);
+                        setOptionData(dataTouchupBELeader);
+                        setButton("TouchupBe");
+                      } else if (StatusTouchupBe === "MAINTENANCE & IT" || StatusTouchupBe === "HRGA & EHS" || StatusTouchupBe === "PURCHASING,PPIC,MP&L" || StatusTouchupBe === "PROCESS ENGINEERING" || StatusTouchupBe === "PRODUCT DEVELOPMENT" || StatusTouchupBe === "ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenRequest(true);
+                        setOptionData(dataTouchupBERepair);
+                        setButton("TouchupBe");
+                      } else if (StatusTouchupBe === "Repair") {
+                        setIsOpenRepair(true);
+                        setOptionData(dataTouchupBERepair);
+                        setButton("TouchupBe");
+                      } else if (StatusTouchupBe === "QA" || StatusTouchupBe === "QC" || StatusTouchupBe === "Production") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataTouchupBEValidation);
+                        setButton("TouchupBe");
+                      } else if (StatusTouchupBe === "Return MAINTENANCE & IT" || StatusTouchupBe === "Return HRGA & EHS" || StatusTouchupBe === "Return PURCHASING,PPIC,MP&L" || StatusTouchupBe === "Return PROCESS ENGINEERING" || StatusTouchupBe === "Return PRODUCT DEVELOPMENT" || StatusTouchupBe === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenReturn(true);
+                        setOptionData(dataTouchupBERepair);
+                        setButton("TouchupBe");
+                      } else if (StatusTouchupBe === "Go") {
+                        setIsOpenValidation(true);
+                        setOptionData(dataTouchupBEValidation);
+                        setButton("TouchupBe");
+                      } 
+                      setStation(TouchupBe);
+                    }}
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">
@@ -1534,6 +1696,36 @@ const SmtTop = () => {
                   <button
                 style={{ backgroundColor: backgroundColorStatusICTBe}}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                    value={ICTBe}
+                    onClick={() => {
+                      if (StatusICTBe === "Leader") {
+
+                        setIsOpenLeader(true);
+                        setOptionData(dataICTBELeader);
+                        setButton("ICTBe");
+                      } else if (StatusICTBe === "MAINTENANCE & IT" || StatusICTBe === "HRGA & EHS" || StatusICTBe === "PURCHASING,PPIC,MP&L" || StatusICTBe === "PROCESS ENGINEERING" || StatusICTBe === "PRODUCT DEVELOPMENT" || StatusICTBe === "ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenRequest(true);
+                        setOptionData(dataICTBERepair);
+                        setButton("ICTBe");
+                      } else if (StatusICTBe === "Repair") {
+                        setIsOpenRepair(true);
+                        setOptionData(dataICTBERepair);
+                        setButton("ICTBe");
+                      } else if (StatusICTBe === "QA" || StatusICTBe === "QC" || StatusICTBe === "Production") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataICTBEValidation);
+                        setButton("ICTBe");
+                      } else if (StatusICTBe === "Return MAINTENANCE & IT" || StatusICTBe === "Return HRGA & EHS" || StatusICTBe === "Return PURCHASING,PPIC,MP&L" || StatusICTBe === "Return PROCESS ENGINEERING" || StatusICTBe === "Return PRODUCT DEVELOPMENT" || StatusICTBe === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenReturn(true);
+                        setOptionData(dataICTBERepair);
+                        setButton("ICTBe");
+                      } else if (StatusICTBe === "Go") {
+                        setIsOpenValidation(true);
+                        setOptionData(dataICTBEValidation);
+                        setButton("ICTBe");
+                      } 
+                      setStation(ICTBe);
+                    }}
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-center text-white">ICT (BE)</div>
@@ -1549,6 +1741,36 @@ const SmtTop = () => {
                   <button
                 style={{ backgroundColor: backgroundColorStatusFlashBe}}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                    value={FlashBe}
+                    onClick={() => {
+                      if (StatusFlashBe === "Leader") {
+
+                        setIsOpenLeader(true);
+                        setOptionData(dataFlashBELeader);
+                        setButton("FlashBe");
+                      } else if (StatusFlashBe === "MAINTENANCE & IT" || StatusFlashBe === "HRGA & EHS" || StatusFlashBe === "PURCHASING,PPIC,MP&L" || StatusFlashBe === "PROCESS ENGINEERING" || StatusFlashBe === "PRODUCT DEVELOPMENT" || StatusFlashBe === "ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenRequest(true);
+                        setOptionData(dataFlashBERepair);
+                        setButton("FlashBe");
+                      } else if (StatusFlashBe === "Repair") {
+                        setIsOpenRepair(true);
+                        setOptionData(dataFlashBERepair);
+                        setButton("FlashBe");
+                      } else if (StatusFlashBe === "QA" || StatusFlashBe === "QC" || StatusFlashBe === "Production") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataFlashBEValidation);
+                        setButton("FlashBe");
+                      } else if (StatusFlashBe === "Return MAINTENANCE & IT" || StatusFlashBe === "Return HRGA & EHS" || StatusFlashBe === "Return PURCHASING,PPIC,MP&L" || StatusFlashBe === "Return PROCESS ENGINEERING" || StatusFlashBe === "Return PRODUCT DEVELOPMENT" || StatusFlashBe === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenReturn(true);
+                        setOptionData(dataFlashBERepair);
+                        setButton("FlashBe");
+                      } else if (StatusFlashBe === "Go") {
+                        setIsOpenValidation(true);
+                        setOptionData(dataFlashBEValidation);
+                        setButton("FlashBe");
+                      } 
+                      setStation(FlashBe);
+                    }}
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-sm text-center text-white">
@@ -1568,6 +1790,36 @@ const SmtTop = () => {
                   <button
                 style={{ backgroundColor: backgroundColorStatusRouterBe}}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                    value={RouterBe}
+                    onClick={() => {
+                      if (StatusRouterBe === "Leader") {
+
+                        setIsOpenLeader(true);
+                        setOptionData(dataRouterBELeader);
+                        setButton("RouterBe");
+                      } else if (StatusRouterBe === "MAINTENANCE & IT" || StatusRouterBe === "HRGA & EHS" || StatusRouterBe === "PURCHASING,PPIC,MP&L" || StatusRouterBe === "PROCESS ENGINEERING" || StatusRouterBe === "PRODUCT DEVELOPMENT" || StatusRouterBe === "ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenRequest(true);
+                        setOptionData(dataRouterBERepair);
+                        setButton("RouterBe");
+                      } else if (StatusRouterBe === "Repair") {
+                        setIsOpenRepair(true);
+                        setOptionData(dataRouterBERepair);
+                        setButton("RouterBe");
+                      } else if (StatusRouterBe === "QA" || StatusRouterBe === "QC" || StatusRouterBe === "Production") {
+                        setIsOpenRequestValidation(true);
+                        setOptionData(dataRouterBEValidation);
+                        setButton("RouterBe");
+                      } else if (StatusRouterBe === "Return MAINTENANCE & IT" || StatusRouterBe === "Return HRGA & EHS" || StatusRouterBe === "Return PURCHASING,PPIC,MP&L" || StatusRouterBe === "Return PROCESS ENGINEERING" || StatusRouterBe === "Return PRODUCT DEVELOPMENT" || StatusRouterBe === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                        setIsOpenReturn(true);
+                        setOptionData(dataRouterBERepair);
+                        setButton("RouterBe");
+                      } else if (StatusRouterBe === "Go") {
+                        setIsOpenValidation(true);
+                        setOptionData(dataRouterBEValidation);
+                        setButton("RouterBe");
+                      } 
+                      setStation(RouterBe);
+                    }}
                   >
                     <header class="px-5 py-4  ">
                       <div class="italic  text-sm text-center text-white">

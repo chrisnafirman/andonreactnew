@@ -682,10 +682,8 @@ const SmtBot = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -732,10 +730,8 @@ const SmtBot = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -782,10 +778,8 @@ const SmtBot = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -832,10 +826,8 @@ const SmtBot = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -882,10 +874,8 @@ const SmtBot = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -932,10 +922,8 @@ const SmtBot = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -1250,7 +1238,7 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataPrinterBOTRepair);
                         setButton("PrinterBot");
-                      } else if (StatusPrinterBot === "QA" || StatusPrinterBot === "QC" || StatusPrinterBot === "Production Leader" || StatusPrinterBot === "Sub Leader") {
+                      } else if (StatusPrinterBot === "QA" || StatusPrinterBot === "QC" || StatusPrinterBot === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataPrinterBOTValidation);
                         setButton("PrinterBot");
@@ -1299,7 +1287,7 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataSPIBOTRepair);
                         setButton("SPIBot");
-                      } else if (StatusSPIBot === "QA" || StatusSPIBot === "QC" || StatusSPIBot === "Production Leader" || StatusSPIBot === "Sub Leader") {
+                      } else if (StatusSPIBot === "QA" || StatusSPIBot === "QC" || StatusSPIBot === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataSPIBOTValidation);
                         setButton("SPIBot");
@@ -1346,7 +1334,7 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataPickNPlaceBOTRepair);
                         setButton("PickNPlaceBot");
-                      } else if (StatusPickNPlaceBot === "QA" || StatusPickNPlaceBot === "QC" || StatusPickNPlaceBot === "Production Leader" || StatusPickNPlaceBot === "Sub Leader") {
+                      } else if (StatusPickNPlaceBot === "QA" || StatusPickNPlaceBot === "QC" || StatusPickNPlaceBot === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataPickNPlaceBOTValidation);
                         setButton("PickNPlaceBot");
@@ -1395,7 +1383,7 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataReflowBOTRepair);
                         setButton("ReflowBot");
-                      } else if (StatusReflowBot === "QA" || StatusReflowBot === "QC" || StatusReflowBot === "Production Leader" || StatusReflowBot === "Sub Leader") {
+                      } else if (StatusReflowBot === "QA" || StatusReflowBot === "QC" || StatusReflowBot === "Production" ) {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataReflowBOTValidation);
                         setButton("ReflowBot");
@@ -1449,7 +1437,7 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataAOIBOTRepair);
                         setButton("AOIBot");
-                      } else if (StatusAOIBot === "QA" || StatusAOIBot === "QC" || StatusAOIBot === "Production Leader" || StatusAOIBot === "Sub Leader") {
+                      } else if (StatusAOIBot === "QA" || StatusAOIBot === "QC" || StatusAOIBot === "Production" ) {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataAOIBOTValidation);
                         setButton("AOIBot");
@@ -1496,7 +1484,7 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataRVSBOTRepair);
                         setButton("RVSBot");
-                      } else if (StatusRVSBot === "QA" || StatusRVSBot === "QC" || StatusRVSBot === "Production Leader" || StatusRVSBot === "Sub Leader") {
+                      } else if (StatusRVSBot === "QA" || StatusRVSBot === "QC" || StatusRVSBot === "Production" ) {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataRVSBOTValidation);
                         setButton("RVSBot");

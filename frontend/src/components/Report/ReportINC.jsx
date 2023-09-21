@@ -59,14 +59,8 @@ const ReuestLeader = () => {
     const tableData = [];
 
     // Header untuk tabel PDF
-    const headers = ["Uid", "Start Downtime",  "Requestor ", "Line", "Station", "Start Repair", "Repair By", "Problem", "Action", "Repair Done", " Validation To", " Validation By", "Validation Status", "Validation At", "Description", "Total Downtime", "Return To" , "Return ID"];
+    const headers = ["Uid", "Start Downtime", "Requestor ", "Line", "Station", "Start Repair", "Repair PIC", "Problem", "Action", "Repair Done", "Validation", "Validation PIC", "Validation At", "Validation Status", "Description", "Total Downtime", "Return To", "Return Id"];
 
-    // Warna teks header (abu-abu)
-    const headerStyles = {
-      fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-      textColor: 0, // Warna teks hitam (0)
-      fontStyle: "bold", // Teks header tebal
-    };
 
     // Mengisi data tabel PDF dengan properti yang Anda inginkan
     filteredData.forEach((item) => {
@@ -81,9 +75,10 @@ const ReuestLeader = () => {
         item.ProblemDesc,
         item.ActionDesc,
         formatDateTimeAPI(item.DoneRepair),
+        item.DepartTo,
         item.ValidationBy,
-        item.ValidationStatus,
         formatDateTimeAPI(item.ValidationAt),
+        item.ValidationStatus,
         item.Description,
         item.TotalDowntime,
         item.ReturnTo,
@@ -104,6 +99,7 @@ const ReuestLeader = () => {
 
     // Menambahkan teks di atas tabel dan di tengah-tengah
     const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
+    // ...
     const text = "Report Case Maintenance [INC]";
     const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
 
@@ -112,22 +108,38 @@ const ReuestLeader = () => {
 
     doc.text(text, textX, textY);
 
+    // Tambahkan teks "Operator - Maintenance - Validation" di bawah teks utama dengan ukuran font yang lebih kecil
+    const subText = "Noted : Operator -> Maintenance -> Validation";
+    const subTextWidth = textWidth / 2; // Setengah dari lebar teks utama
+    const subTextX = textX; // Sejajar dengan teks utama
+    const subTextY = textY + 8; // Tambahkan jarak 10 satuan dari teks utama
+    doc.setTextColor(128, 128, 128); 
+    doc.setFontSize(8); // Atur ukuran font yang lebih kecil
+    doc.text(subText, subTextX, subTextY);
+    
     const fontSize = 5; // Atur ukuran font yang diinginkan
     const scaleFactor = 2;
     // Membuat tabel PDF dengan menggunakan autotable
     doc.autoTable({
       head: [headers],
       body: tableData,
-      startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
+      startY: subTextY + 10, // Mulai tabel setelah teks sub
       headStyles: {
-        fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
+        fillColor: [48, 151, 255],
         textColor: 0, // Warna teks hitam (0)
         fontStyle: fontSize, // Teks header tebal
+      },
+      columnStyles: {
+        13: { // Indeks 14 adalah kolom "Validation Status"
+          fontSize: 5,
+          fontStyle: 'bold', // Mengatur teks tebal (bold)
+        },
       },
       styles: {
         fontSize: fontSize, // Atur ukuran font
       },
     });
+
 
 
     // Menyimpan file PDF
@@ -173,22 +185,22 @@ const ReuestLeader = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent form submission
-  
+
     // Split the search input into individual Uids
     const searchTerms = searchTerm.split(',').map((term) => term.trim());
-  
+
     // Filter the data to find items that match any of the Uids
     const filteredResults = filteredData.filter((item) =>
       searchTerms.some((searchTerm) =>
         item.Uid.toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
-  
+
     // Update the state with the filtered results
     setFilteredData(filteredResults);
   };
-  
-  
+
+
 
 
 
@@ -225,7 +237,7 @@ const ReuestLeader = () => {
           item.RepairBy = item.ResponseName;
           item.RequestorName = item.Nama;
           item.StartRepair = item.ResponseTime;
-    
+          item.DepartTo = item.DepartTo;
 
         });
         setRepairData(json);
@@ -234,23 +246,23 @@ const ReuestLeader = () => {
 
   useEffect(() => {
 
-    
+
     // Menyaring data Validation yang memiliki Uid dengan nilai "INC"
     const filteredValidationData = validationData.filter((validationItem) =>
       validationItem.Uid.includes("INC")
     );
-  
+
     // Menyaring data Repair yang memiliki Uid dengan nilai "INC"
     const filteredRepairData = repairData.filter((repairItem) =>
       repairItem.Uid.includes("INC")
     );
-  
+
     // Menggabungkan data Validation dan Repair berdasarkan Uid
     const mergedData = filteredValidationData.map((validationItem) => {
       const matchingRepairItem = filteredRepairData.find(
         (repairItem) => repairItem.Uid === validationItem.Uid
       );
-  
+
       if (matchingRepairItem) {
         // Jika ada data Repair yang cocok dengan Uid, gabungkan kedua data
         return {
@@ -261,7 +273,7 @@ const ReuestLeader = () => {
           RepairBy: matchingRepairItem.RepairBy,
           Line: matchingRepairItem.Line,
           Station: matchingRepairItem.Station,
-
+          DepartTo: matchingRepairItem.DepartTo,
 
           DoneRepair: validationItem.DoneRepair,
           ProblemDesc: validationItem.ProblemDesc,
@@ -280,12 +292,12 @@ const ReuestLeader = () => {
         return {};
       }
     });
-  
+
     setFilteredData(mergedData);
     mergedData.sort((a, b) => Date.parse(b.Downtime) - Date.parse(a.Downtime));
   }, [validationData, repairData]);
-  
-  
+
+
 
 
 
@@ -456,11 +468,11 @@ const ReuestLeader = () => {
                       <th className="p-1 min-w-[180px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Validation By</div>
                       </th>
-                      <th className="p-1 min-w-[140px] whitespace-no-wrap overflow-x-auto">
-                        <div className="text-center flex">Validation Status</div>
-                      </th>
                       <th className="p-1 min-w-[180px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Validation At</div>
+                      </th>
+                      <th className="p-1 min-w-[140px] whitespace-no-wrap overflow-x-auto">
+                        <div className="text-center flex">Validation Status</div>
                       </th>
                       <th className="p-1 min-w-[200px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Description</div>
@@ -474,7 +486,7 @@ const ReuestLeader = () => {
                       <th className="p-1 min-w-[140px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Return ID</div>
                       </th>
-                     
+
                     </tr>
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
@@ -484,17 +496,17 @@ const ReuestLeader = () => {
                       >
                         <td className="p-2">
                           <div className="font-sans text-xs lg:text-sm text-gray-800">
-                          {item.Uid}
+                            {item.Uid}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-xs lg:text-sm text-gray-800">
-                          {formatDateTimeAPI(item.Downtime)}
+                            {formatDateTimeAPI(item.Downtime)}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-xs lg:text-sm text-gray-800">
-                          {item.RequestorName}
+                            {item.RequestorName}
                           </div>
                         </td>
                         <td className="p-2">
@@ -530,10 +542,10 @@ const ReuestLeader = () => {
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
-                          {formatDateTimeAPI(item.DoneRepair)}
+                            {formatDateTimeAPI(item.DoneRepair)}
                           </div>
                         </td>
-                       
+
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
                             {item.ValidationBy}
@@ -541,12 +553,12 @@ const ReuestLeader = () => {
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
-                            {item.ValidationStatus}
+                            {formatDateTimeAPI(item.ValidationAt)}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
-                            {formatDateTimeAPI(item.ValidationAt)}
+                            {item.ValidationStatus}
                           </div>
                         </td>
                         <td className="p-2">
@@ -559,18 +571,18 @@ const ReuestLeader = () => {
                             {item.TotalDowntime}
                           </div>
                         </td>
-                        
+
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
-                          {item.ReturnTo}
+                            {item.ReturnTo}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
-                          {item.ReturnId}
+                            {item.ReturnId}
                           </div>
                         </td>
-                       
+
                       </tr>
 
 

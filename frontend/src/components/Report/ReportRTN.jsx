@@ -59,15 +59,9 @@ const ReuestLeader = () => {
     const tableData = [];
 
     // Header untuk tabel PDF
-    const headers = ["Uid", "Return at", "Return From", "Requestor ", "Line", "Station", "Start Repair", "Repair By", "Problem", "Action", "Repair Done", " Validation To", " Validation By", "Validation Status", "Validation At", "Description", "Total Downtime", "Return To" , "Return ID"];
+    const headers = ["Uid", "Return at", "Return From", "Requestor ", "Line", "Station", "Start Repair", "Repair By", "Problem", "Action", "Repair Done", "Validation", "Validation PIC", "Validation At", "Validation Status", "Description", "Total Downtime", "Return To" , "Return Id"];
 
-    // Warna teks header (abu-abu)
-    const headerStyles = {
-      fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-      textColor: 0, // Warna teks hitam (0)
-      fontStyle: "bold", // Teks header tebal
-    };
-
+  
     // Mengisi data tabel PDF dengan properti yang Anda inginkan
     filteredData.forEach((item) => {
       const rowData = [
@@ -84,8 +78,8 @@ const ReuestLeader = () => {
         formatDateTimeAPI(item.DoneRepair),
         item.ValidationDepartment,
         item.ValidationBy,
-        item.ValidationStatus,
         formatDateTimeAPI(item.ValidationAt),
+        item.ValidationStatus,
         item.Description,
         item.TotalDowntime,
         item.ReturnTo,
@@ -122,9 +116,15 @@ const ReuestLeader = () => {
       body: tableData,
       startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
       headStyles: {
-        fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
+        fillColor: [48, 151, 255], // Warna abu-abu dalam format RGB
         textColor: 0, // Warna teks hitam (0)
         fontStyle: fontSize, // Teks header tebal
+      },
+      columnStyles: {
+        14: { // Indeks 14 adalah kolom "Validation Status"
+          fontSize: 5,
+          fontStyle: 'bold', // Mengatur teks tebal (bold)
+        },
       },
       styles: {
         fontSize: fontSize, // Atur ukuran font
@@ -468,11 +468,11 @@ const ReuestLeader = () => {
                       <th className="p-1 min-w-[180px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Validation By</div>
                       </th>
-                      <th className="p-1 min-w-[140px] whitespace-no-wrap overflow-x-auto">
-                        <div className="text-center flex">Validation Status</div>
-                      </th>
                       <th className="p-1 min-w-[180px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Validation At</div>
+                      </th>
+                      <th className="p-1 min-w-[140px] whitespace-no-wrap overflow-x-auto">
+                        <div className="text-center flex">Validation Status</div>
                       </th>
                       <th className="p-1 min-w-[200px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Description</div>
@@ -562,12 +562,12 @@ const ReuestLeader = () => {
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
-                            {item.ValidationStatus}
+                            {formatDateTimeAPI(item.ValidationAt)}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
-                            {formatDateTimeAPI(item.ValidationAt)}
+                            {item.ValidationStatus}
                           </div>
                         </td>
                         <td className="p-2">

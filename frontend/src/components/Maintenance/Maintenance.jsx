@@ -428,8 +428,7 @@ const Maintenance = () => {
     { value: "", label: "-- Pilih Depart --" },
     { value: "QC", value2: "Validation", label: "QC" },
     { value: "QA", value2: "Validation", label: "QA" },
-    { value: "Production Leader", value2: "Validation", label: "Production Leader" },
-    { value: "Sub Leader", value2: "Validation", label: "Sub Leader" },
+    { value: "Production", value2: "Validation", label: "Production" },
   ];
 
   const handleSelectDepartment = (selectedOptionDepartment) => {

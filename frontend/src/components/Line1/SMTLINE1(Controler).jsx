@@ -399,7 +399,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -563,7 +563,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -727,7 +727,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -891,7 +891,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -1055,7 +1055,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -1219,7 +1219,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -1383,7 +1383,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -1547,7 +1547,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -1713,7 +1713,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -1877,7 +1877,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -2041,7 +2041,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -2205,7 +2205,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -2369,7 +2369,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -2533,7 +2533,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -2700,7 +2700,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -2865,7 +2865,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -3029,7 +3029,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -3193,7 +3193,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -3358,7 +3358,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -3522,7 +3522,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -3686,7 +3686,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -3851,7 +3851,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -4015,7 +4015,7 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production Leader" || data === "Sub Leader") {
+      } else if (data === "Production" ) {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
@@ -4163,10 +4163,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4212,10 +4210,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4261,10 +4257,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4310,10 +4304,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4359,10 +4351,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4408,10 +4398,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4457,10 +4445,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4506,10 +4492,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4557,10 +4541,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4605,10 +4587,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4654,10 +4634,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4703,10 +4681,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4752,10 +4728,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4801,10 +4775,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4852,10 +4824,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4901,10 +4871,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4950,10 +4918,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -4999,10 +4965,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -5048,10 +5012,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -5097,10 +5059,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -5146,10 +5106,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -5195,10 +5153,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -5244,10 +5200,8 @@ const SMTLINE1CONTROLLER = () => {
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
-                                        : data === "Production Leader"
+                                        : data === "Production"
                                           ? "#93c2c4"
-                                          : data === "Sub Leader"
-                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -5281,8 +5235,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -5394,8 +5347,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -5504,8 +5456,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -5617,8 +5568,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -5727,8 +5677,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -5840,8 +5789,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -5949,8 +5897,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -6059,8 +6006,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -6175,8 +6121,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -6287,8 +6232,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -6396,8 +6340,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -6508,8 +6451,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -6618,8 +6560,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -6727,8 +6668,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -6838,8 +6778,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -6951,8 +6890,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -7063,8 +7001,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -7175,8 +7112,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -7287,8 +7223,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -7399,8 +7334,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -7512,8 +7446,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -7625,8 +7558,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
@@ -7739,8 +7671,7 @@ const SMTLINE1CONTROLLER = () => {
       "Return ADVANCED MANUFACTURING ENGINEERING",
       "MAINTENANCE & IT",
       "Return MAINTENANCE & IT",
-      "Production Leader",
-      "Sub Leader",
+      "Production",
       "QA",
       "QC",
     ];
