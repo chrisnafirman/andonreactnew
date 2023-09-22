@@ -263,7 +263,7 @@ const Others = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Repair")
+    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -334,7 +334,7 @@ const Others = () => {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/Validation`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/Validation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -375,7 +375,7 @@ const Others = () => {
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.12:3001/api/PutRepairDone`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/PutRepairDone`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

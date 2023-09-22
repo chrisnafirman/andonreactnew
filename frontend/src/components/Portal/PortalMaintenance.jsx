@@ -7,7 +7,7 @@ const PortalMaintenance = () => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     useEffect(() => {
-        fetch('http://192.168.101.12:3001/api/Repair')
+        fetch('https://andonline.astra-visteon.com:3002/api/Repair')
             .then((response) => response.json())
             .then((data) => {
                 const filteredData = data.filter((item) => item.Status === '' && item.Department === 'MAINTENANCE & IT');

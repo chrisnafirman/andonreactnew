@@ -1324,7 +1324,7 @@ const SmtTop = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.12:3001/api/ScheduleProduction"
+          "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -1575,7 +1575,7 @@ const SmtTop = () => {
       Kerusakan: Kerusakan,
     };
 
-    fetch(`http://192.168.101.12:3001/api/Maintenance`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/Maintenance`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1617,7 +1617,7 @@ const SmtTop = () => {
     firebase.database().ref(`SMTLine1BE/${Station}`).set("QA");
     window.location.reload();
 
-    fetch(`http://192.168.101.12:3001/api/QA`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/QA`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1654,7 +1654,7 @@ const SmtTop = () => {
     firebase.database().ref(`SMTLine1BE/${Station}`).set("QC");
     window.location.reload();
 
-    fetch(`http://192.168.101.12:3001/api/QC`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/QC`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1689,7 +1689,7 @@ const SmtTop = () => {
       .set("Return Maintenance");
     window.location.reload();
 
-    fetch(`http://192.168.101.12:3001/api/ReturnMaintenance`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/ReturnMaintenance`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1723,7 +1723,7 @@ const SmtTop = () => {
     setIsOpen2(false);
     window.location.reload();
 
-    fetch("http://192.168.101.12:3001/api/ValidationQA", {
+    fetch("https://andonline.astra-visteon.com:3002/api/ValidationQA", {
       method: "POST",
       body: data,
     })
@@ -1751,7 +1751,7 @@ const SmtTop = () => {
     setIsOpen2(false);
     window.location.reload();
 
-    fetch("http://192.168.101.12:3001/api/ValidationQC", {
+    fetch("https://andonline.astra-visteon.com:3002/api/ValidationQC", {
       method: "POST",
       body: data,
     })
@@ -2114,7 +2114,7 @@ const SmtTop = () => {
   };
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Employee_Operator_Manufacturing")
+    fetch("https://andonline.astra-visteon.com:3002/api/Employee_Operator_Manufacturing")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({
@@ -2138,7 +2138,7 @@ const SmtTop = () => {
   };
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Employee_Team_Maintenance")
+    fetch("https://andonline.astra-visteon.com:3002/api/Employee_Team_Maintenance")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({
@@ -2162,7 +2162,7 @@ const SmtTop = () => {
   };
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Employee_Team_Quality")
+    fetch("https://andonline.astra-visteon.com:3002/api/Employee_Team_Quality")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({

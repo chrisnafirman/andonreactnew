@@ -320,9 +320,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Destacker (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -340,9 +342,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Destacker (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -366,9 +370,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Destacker (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -386,9 +392,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Destacker (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -399,16 +407,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Destacker (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -432,9 +442,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Destacker (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -452,9 +464,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Destacker (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -467,7 +481,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -484,9 +499,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Label (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -504,9 +521,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Label (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -530,9 +549,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Label (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -550,9 +571,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Label (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -563,16 +586,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Label (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -596,9 +621,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Label (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -616,9 +643,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Label (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -631,7 +660,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -648,9 +678,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Printer (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -668,9 +700,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Printer (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -694,9 +728,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Printer (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -714,9 +750,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Printer (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -727,16 +765,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Printer (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -760,9 +800,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Printer (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -780,9 +822,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Printer (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -795,7 +839,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -812,9 +857,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 SPI (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -832,9 +879,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 SPI (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -858,9 +907,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 SPI (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -878,9 +929,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 SPI (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -891,16 +944,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 SPI (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -924,9 +979,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 SPI (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -944,9 +1001,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 SPI (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -959,7 +1018,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -976,9 +1036,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Pick&Place (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -996,9 +1058,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Pick&Place (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1022,9 +1086,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Pick&Place (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1042,9 +1108,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Pick&Place (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1055,16 +1123,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Pick&Place (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1088,9 +1158,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Pick&Place (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1108,9 +1180,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Pick&Place (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1123,7 +1197,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -1140,9 +1215,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Reflow (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1160,9 +1237,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Reflow (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1186,9 +1265,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Reflow (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1206,9 +1287,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Reflow (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1219,16 +1302,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Reflow (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1252,9 +1337,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Reflow (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1272,9 +1359,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Reflow (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1287,7 +1376,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -1304,9 +1394,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 AOI (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1324,9 +1416,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 AOI (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1350,9 +1444,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 AOI (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1370,9 +1466,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 AOI (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1383,16 +1481,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 AOI (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1416,9 +1516,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 AOI (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1436,9 +1538,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 AOI (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1451,7 +1555,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -1468,9 +1573,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 RVS (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1488,9 +1595,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 RVS (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1514,9 +1623,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 RVS (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1534,9 +1645,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 RVS (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1547,16 +1660,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 RVS (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1580,9 +1695,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 RVS (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1600,9 +1717,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 RVS (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1615,7 +1734,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -1634,9 +1754,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Printer (BOT) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1654,9 +1776,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Printer (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1680,9 +1804,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Printer (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1700,9 +1826,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Printer (BOT) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1713,16 +1841,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Printer (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1746,9 +1876,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Printer (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1766,9 +1898,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Printer (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1781,7 +1915,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -1798,9 +1933,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 SPI (BOT) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1818,9 +1955,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 SPI (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1844,9 +1983,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 SPI (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1864,9 +2005,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 SPI (BOT) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1877,16 +2020,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 SPI (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1910,9 +2055,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 SPI (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1930,9 +2077,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 SPI (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1945,7 +2094,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -1962,9 +2112,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Pick&Place (BOT) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -1982,9 +2134,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Pick&Place (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2008,9 +2162,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Pick&Place (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2028,9 +2184,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Pick&Place (BOT) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2041,16 +2199,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Pick&Place (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2074,9 +2234,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Pick&Place (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2094,9 +2256,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Pick&Place (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2109,7 +2273,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -2126,9 +2291,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Reflow (BOT) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2146,9 +2313,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Reflow (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2172,9 +2341,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Reflow (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2192,9 +2363,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Reflow (BOT) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2205,16 +2378,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Reflow (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2238,9 +2413,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Reflow (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2258,9 +2435,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Reflow (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2273,7 +2452,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -2290,9 +2470,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 AOI (BOT) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2310,9 +2492,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 AOI (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2336,9 +2520,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 AOI (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2356,9 +2542,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 AOI (BOT) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2369,16 +2557,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 AOI (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2402,9 +2592,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 AOI (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2422,9 +2614,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 AOI (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2437,7 +2631,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -2454,9 +2649,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 RVS (BOT) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2474,9 +2671,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 RVS (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2500,9 +2699,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 RVS (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2520,9 +2721,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 RVS (BOT) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2533,16 +2736,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 RVS (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2566,9 +2771,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 RVS (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2586,9 +2793,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 RVS (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2601,7 +2810,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -2621,9 +2831,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Drop in (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2641,9 +2853,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Drop in (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2667,9 +2881,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Drop in (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2687,9 +2903,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Drop in (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2700,16 +2918,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Drop in (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2733,9 +2953,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Drop in (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2753,9 +2975,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Drop in (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2768,7 +2992,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -2786,9 +3011,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Fluxer (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2806,9 +3033,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Fluxer (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2832,9 +3061,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Fluxer (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2852,9 +3083,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Fluxer (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2865,16 +3098,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Fluxer (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2898,9 +3133,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Fluxer (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2918,9 +3155,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Fluxer (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2933,7 +3172,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -2950,9 +3190,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 PreHeat (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2970,9 +3212,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 PreHeat (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -2996,9 +3240,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 PreHeat (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3016,9 +3262,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 PreHeat (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3029,16 +3277,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 PreHeat (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3062,9 +3312,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 PreHeat (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3082,9 +3334,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 PreHeat (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3097,7 +3351,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -3114,9 +3369,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Seho1 (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3134,9 +3391,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Seho1 (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3160,9 +3419,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Seho1 (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3180,9 +3441,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Seho1 (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3193,16 +3456,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Seho1 (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3226,9 +3491,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Seho1 (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3246,9 +3513,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Seho1 (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3261,7 +3530,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -3279,9 +3549,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Seho2 (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3299,9 +3571,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Seho2 (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3325,9 +3599,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Seho2 (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3345,9 +3621,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Seho2 (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3358,16 +3636,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Seho2 (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3391,9 +3671,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Seho2 (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3411,9 +3693,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Seho2 (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3426,7 +3710,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -3443,9 +3728,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Touch UP (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3463,9 +3750,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Touch UP (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3489,9 +3778,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Touch UP (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3509,9 +3800,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Touch UP (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3522,16 +3815,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Touch UP (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3555,9 +3850,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Touch UP (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3575,9 +3872,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Touch UP (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3590,7 +3889,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -3607,9 +3907,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 ICT (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3627,9 +3929,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 ICT (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3653,9 +3957,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 ICT (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3673,9 +3979,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 ICT (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3686,16 +3994,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 ICT (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3719,9 +4029,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 ICT (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3739,9 +4051,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 ICT (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3754,7 +4068,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -3772,9 +4087,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Flash (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3792,9 +4109,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Flash (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3818,9 +4137,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Flash (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3838,9 +4159,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Flash (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3851,16 +4174,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Flash (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3884,9 +4209,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Flash (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3904,9 +4231,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Flash (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3919,7 +4248,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -3936,9 +4266,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-950877102];
         const message = `Notification Leader SMT LINE 1 Router (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3956,9 +4288,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Router (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -3982,9 +4316,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Router (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -4002,9 +4338,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-912913885];
         const message = `Notification Request ${data} SMT LINE 1 Router (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -4015,16 +4353,18 @@ const SMTLINE1CONTROLLER = () => {
               console.error(error);
             });
         });
-      } else if (data === "Production" ) {
+      } else if (data === "Production") {
         audio.pause();
         audio.currentTime = 0;
         const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
         const message = `Notification Request ${data} SMT LINE 1 Router (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -4048,9 +4388,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-921205810];
         const message = `Notification ${data} SMT LINE 1 Router (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -4068,9 +4410,11 @@ const SMTLINE1CONTROLLER = () => {
         const chatIds = [-993707437];
         const message = `Notification Maintenance SMT LINE 1 Router (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
 
+        const escapedMessage = message.replace(/&/g, '%26');
+
         chatIds.forEach((chatId) => {
           fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${message}`
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
           )
             .then((response) => {
               if (!response.ok) {
@@ -4083,7 +4427,8 @@ const SMTLINE1CONTROLLER = () => {
         });
       } else if (
         data === "Go" ||
-        data === "Repair"
+        data === "Repair" ||
+        data === "In Validation"
       ) {
         audio.pause();
       }
@@ -4165,11 +4510,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4212,11 +4557,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4259,11 +4604,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4306,11 +4651,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4353,11 +4698,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4400,11 +4745,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4447,11 +4792,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4494,11 +4839,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
   // ------------------------------------
@@ -4543,11 +4888,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
   const updateStatusSPIBot = (data) => {
@@ -4589,11 +4934,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4636,11 +4981,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4683,11 +5028,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4730,11 +5075,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4777,11 +5122,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
   // --------------------------------
@@ -4826,11 +5171,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4873,11 +5218,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4920,11 +5265,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -4967,11 +5312,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -5014,11 +5359,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -5027,45 +5372,45 @@ const SMTLINE1CONTROLLER = () => {
     setBackgroundColorStatusTouchupBe(
       data === "Go"
         ? "#32cd32"
-        : data === "Return Repair"
+        : data === "Repair"
           ? "#E9CE08"
-          : data === "Repair"
-            ? "#E9CE08"
-            : data === "Leader"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Return Leader"
               ? "#C00000"
-              : data === "Return Leader"
+              : data === "HRGA & EHS"
                 ? "#C00000"
-                : data === "HRGA & EHS"
+                : data === "Return HRGA & EHS"
                   ? "#C00000"
-                  : data === "Return HRGA & EHS"
+                  : data === "PURCHASING,PPIC,MP&L"
                     ? "#C00000"
-                    : data === "PURCHASING,PPIC,MP&L"
+                    : data === "Return PURCHASING,PPIC,MP&L"
                       ? "#C00000"
-                      : data === "Return PURCHASING,PPIC,MP&L"
+                      : data === "PROCESS ENGINEERING"
                         ? "#C00000"
-                        : data === "PROCESS ENGINEERING"
+                        : data === "Return PROCESS ENGINEERING"
                           ? "#C00000"
-                          : data === "Return PROCESS ENGINEERING"
+                          : data === "PRODUCT DEVELOPMENT"
                             ? "#C00000"
-                            : data === "PRODUCT DEVELOPMENT"
+                            : data === "Return PRODUCT DEVELOPMENT"
                               ? "#C00000"
-                              : data === "Return PRODUCT DEVELOPMENT"
+                              : data === "ADVANCED MANUFACTURING ENGINEERING"
                                 ? "#C00000"
-                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                : data === "Return ADVANCED MANUFACTURING ENGINEERING"
                                   ? "#C00000"
-                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
-                                    ? "#C00000"
-                                    : data === "QA"
+                                  : data === "QA"
+                                    ? "#93c2c4"
+                                    : data === "In Validation"
                                       ? "#93c2c4"
                                       : data === "QC"
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -5108,11 +5453,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -5155,11 +5500,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
 
@@ -5202,11 +5547,11 @@ const SMTLINE1CONTROLLER = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
-                                            : data === "MAINTENANCE & IT"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : data === "Return MAINTENANCE & IT"
-                                                ? "#C00000"
-                                                : "#565454"
+                                              : "#565454"
     );
   };
   // ------------------------------------
@@ -5220,7 +5565,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -5332,7 +5677,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -5441,7 +5786,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -5553,7 +5898,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -5662,7 +6007,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -5774,7 +6119,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -5882,7 +6227,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -5991,7 +6336,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -6106,7 +6451,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -6217,7 +6562,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -6325,7 +6670,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -6436,7 +6781,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -6545,7 +6890,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -6653,7 +6998,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -6763,7 +7108,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -6875,7 +7220,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -6986,7 +7331,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -7097,7 +7442,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -7208,7 +7553,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -7319,7 +7664,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -7431,7 +7776,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -7543,7 +7888,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -7656,7 +8001,7 @@ const SMTLINE1CONTROLLER = () => {
 
     const validStatuses = [
       "Repair",
-      "Return Repair",
+      "In Validation",
       "Leader",
       "Return Leader",
       "HRGA & EHS",
@@ -8157,7 +8502,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                style={{ backgroundColor: backgroundColorStatusSeho1Be}}
+                    style={{ backgroundColor: backgroundColorStatusSeho1Be }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -8179,7 +8524,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                style={{ backgroundColor: backgroundColorStatusSeho2Be}}
+                    style={{ backgroundColor: backgroundColorStatusSeho2Be }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -8196,7 +8541,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                style={{ backgroundColor: backgroundColorStatusTouchupBe}}
+                    style={{ backgroundColor: backgroundColorStatusTouchupBe }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -8213,7 +8558,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                style={{ backgroundColor: backgroundColorStatusICTBe}}
+                    style={{ backgroundColor: backgroundColorStatusICTBe }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -8228,7 +8573,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                style={{ backgroundColor: backgroundColorStatusFlashBe}}
+                    style={{ backgroundColor: backgroundColorStatusFlashBe }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">
@@ -8247,7 +8592,7 @@ const SMTLINE1CONTROLLER = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                style={{ backgroundColor: backgroundColorStatusRouterBe}}
+                    style={{ backgroundColor: backgroundColorStatusRouterBe }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                   >
                     <header class="px-5 py-4  ">

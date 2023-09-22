@@ -68,7 +68,7 @@ function QRReturnQualityBE() {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/Repair`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/Repair`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +106,7 @@ function QRReturnQualityBE() {
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.12:3001/api/PutStatusReturnValidation`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/PutStatusReturnValidation`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -206,7 +206,7 @@ function QRReturnQualityBE() {
     const randomId = `RTN${Math.floor(Math.random() * 1000).toString().padStart(3, "0")}`;
 
     // Kirim permintaan ke API untuk memeriksa UID
-    fetch("http://192.168.101.12:3001/api/Repair")
+    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
       .then((response) => response.json())
       .then((data) => {
         const uids = data.map((item) => item.Uid);

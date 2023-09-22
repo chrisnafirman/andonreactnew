@@ -154,7 +154,7 @@ const ReuestLeader = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Leader")
+    fetch("https://andonline.astra-visteon.com:3002/api/Leader")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -205,7 +205,7 @@ const ReuestLeader = () => {
   const handleDelete = () => {
     if (selectedItem) {
       // Send a request to the backend to delete data with the selected item's ID
-      fetch(`http://192.168.101.12:3001/api/leader/${selectedItem.No}`, {
+      fetch(`https://andonline.astra-visteon.com:3002/api/leader/${selectedItem.No}`, {
         method: "DELETE",
       })
         .then((response) => response.json())

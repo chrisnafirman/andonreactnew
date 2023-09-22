@@ -502,7 +502,7 @@ const SmtTop = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.12:3001/api/ScheduleProduction"
+          "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -1122,7 +1122,7 @@ const SmtTop = () => {
 
 
   const fetchData = (endpoint, setDataFunction) => {
-    fetch(`http://192.168.101.12:3001/api/${endpoint}`)
+    fetch(`https://andonline.astra-visteon.com:3002/api/${endpoint}`)
       .then((response) => response.json())
       .then((data) => {
         setDataFunction(data);

@@ -155,7 +155,7 @@ function QROperatorBOT() {
         firebase.database().ref("StatusLine/SMTLine1").set("Down");
 
 
-        fetch(`http://192.168.101.12:3001/api/Leader`, {
+        fetch(`https://andonline.astra-visteon.com:3002/api/Leader`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -205,7 +205,7 @@ function QROperatorBOT() {
         setStation(null);
         setNamaPIC(null);
 
-        fetch(`http://192.168.101.12:3001/api/Repair`, {
+        fetch(`https://andonline.astra-visteon.com:3002/api/Repair`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -378,7 +378,7 @@ function QROperatorBOT() {
         const fetchData = async () => {
             try {
                 const response = await fetch(
-                    "http://192.168.101.12:3001/api/ScheduleProduction"
+                    "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
                 );
                 const jsonData = await response.json();
                 const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -482,7 +482,7 @@ function QROperatorBOT() {
         const randomId = `INC${Math.floor(Math.random() * 1000).toString().padStart(3, "0")}`;
     
         // Kirim permintaan ke API untuk memeriksa UID
-        fetch("http://192.168.101.12:3001/api/Repair")
+        fetch("https://andonline.astra-visteon.com:3002/api/Repair")
           .then((response) => response.json())
           .then((data) => {
             const uids = data.map((item) => item.Uid);

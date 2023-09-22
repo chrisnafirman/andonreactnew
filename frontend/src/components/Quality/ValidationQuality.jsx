@@ -249,7 +249,7 @@ const Quality = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Validation")
+    fetch("https://andonline.astra-visteon.com:3002/api/Validation")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);

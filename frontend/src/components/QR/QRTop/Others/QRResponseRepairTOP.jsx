@@ -51,7 +51,7 @@ function QRResponseMTCTOP() {
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.12:3001/api/PutResponseRepair`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/PutResponseRepair`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

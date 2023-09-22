@@ -71,7 +71,7 @@ function QRValidationValidationLeaderBE() {
   //   setStation(null);
   //   setNamaPIC(null);
 
-  //   fetch("http://192.168.101.12:3001/api/PutValidationQA", {
+  //   fetch("https://andonline.astra-visteon.com:3002/api/PutValidationQA", {
   //     method: "PUT",
   //     body: data,
   //   })
@@ -109,7 +109,7 @@ function QRValidationValidationLeaderBE() {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/PutValidation`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/PutValidation`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
