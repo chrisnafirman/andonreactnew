@@ -872,7 +872,7 @@ const Andonline1 = () => {
     window.location.reload();
 
 
-    fetch("https://andonline.astra-visteon.com:3002/api/UpdateCMA", {
+    fetch("http://192.168.101.12:3001/api/UpdateCMA", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -906,7 +906,7 @@ const Andonline1 = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
+          "http://192.168.101.12:3001/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -1142,7 +1142,7 @@ const Andonline1 = () => {
         department = "";
     }
 
-    fetch(`https://andonline.astra-visteon.com:3002/api/${department}`, {
+    fetch(`http://192.168.101.12:3001/api/${department}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1177,7 +1177,7 @@ const Andonline1 = () => {
       Kerusakan: Kerusakan,
     };
 
-    fetch(`https://andonline.astra-visteon.com:3002/api/General`, {
+    fetch(`http://192.168.101.12:3001/api/General`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1216,7 +1216,7 @@ const Andonline1 = () => {
       Kerusakan: Kerusakan,
     };
 
-    fetch(`https://andonline.astra-visteon.com:3002/api/Others`, {
+    fetch(`http://192.168.101.12:3001/api/Others`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1403,7 +1403,7 @@ const Andonline1 = () => {
   };
 
   useEffect(() => {
-    fetch("https://andonline.astra-visteon.com:3002/api/Employee_Operator_Manufacturing")
+    fetch("http://192.168.101.12:3001/api/Employee_Operator_Manufacturing")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({
@@ -1432,7 +1432,7 @@ const Andonline1 = () => {
 
 
   useEffect(() => {
-    fetch("https://andonline.astra-visteon.com:3002/api/Employee_Operator")
+    fetch("http://192.168.101.12:3001/api/Employee_Operator")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({

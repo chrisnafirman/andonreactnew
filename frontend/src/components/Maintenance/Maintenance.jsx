@@ -27,7 +27,7 @@ const Maintenance = () => {
   const [NamaPIC, setNamaPIC] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
   const [Action, setAction] = useState("");
-
+  const [IsOpenRepairBy, setIsOpenRepairBy] = useState(false);
   const [Line, setLine] = useState("");
   const [isOpenRequestValidation, setisOpenRequestValidation] = useState(false);
   const [Department, setDepartment] = useState("");
@@ -265,7 +265,7 @@ const Maintenance = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
+    fetch("http://192.168.101.12:3001/api/Repair")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -337,7 +337,7 @@ const Maintenance = () => {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`https://andonline.astra-visteon.com:3002/api/Validation`, {
+    fetch(`http://192.168.101.12:3001/api/Validation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -378,7 +378,7 @@ const Maintenance = () => {
 
     console.log("Sending data:", data);
 
-    fetch(`https://andonline.astra-visteon.com:3002/api/PutRepairDone`, {
+    fetch(`http://192.168.101.12:3001/api/PutRepairDone`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -491,7 +491,7 @@ const Maintenance = () => {
               <h1 class="text-xs lg:text-xl font-sans tracking-tight text-gray-900">
                 | Request Maintenance |
               </h1>
-               <h1 class="text-xs lg:text-xl  font-sans tracking-tight ml-4">
+              <h1 class="text-xs lg:text-xl  font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
                 <span
                   class="ml-4"
@@ -922,16 +922,16 @@ const Maintenance = () => {
                                     )}
 
                                     {selectedItem.Status === "Solved" && (
-                                      <div
-                                        className="bg-slate-900 flex flex-col  text-white font-mono text-xs py-2 px-4 rounded mr-2"
-
-                                      >
-                                        <span >    Repair PIC : {selectedItem.ResponseName}</span>
-                                        <span>    Start At : {formatDateTimeAPI(selectedItem?.ResponseTime) || ""}</span>
-                                        <span>    Done At : {formatDateTimeAPI(selectedItem?.ResponseDone) || ""}</span>
-                                        <span>    Depart To : {selectedItem.DepartTo}</span>
+                                      <div className="flex space-x-32">
+                                        <button
+                                          className="bg-yellow-500 text-white font-bold py-2 px-4 rounded mr-2"
+                                          onClick={() => {
+                                            setIsOpenRepairBy(true);
+                                          }}
+                                        >
+                                          Repair By
+                                        </button>
                                       </div>
-
                                     )}
 
                                   </a>
@@ -1156,6 +1156,146 @@ const Maintenance = () => {
             </>
           ) : null}
         </td>
+
+        {IsOpenRepairBy && (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-[430px] text-center sm:block sm:p-0">
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                <div
+                  className="inline-block align-bottom bg-yellow-500 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="bg-yellow-500 px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                    <div className="sm:flex sm:items-start">
+                      {/* Close button */}
+                      <button
+                        className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
+                        onClick={() =>
+                          setIsOpenRepairBy(false)
+                        }
+                      >
+                        <svg
+                          className="w-6 h-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                      <div className="w-full max-w-lg">
+                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
+                          <span>Repair BY</span>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full  px-3 mb-3 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-black text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Nama PIC
+                            </label>
+                            <div
+                              class="appearance-none block w-full  bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              type="text"
+                            >
+                              {" "}
+                              {selectedItem.ResponseName}{" "}
+                            </div>
+                          </div>
+
+
+
+
+                          <div class="w-full px-3 mb-2 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Request At
+                            </label>
+                            <div
+                              class="appearance-none block w-full bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              type="text"
+                            >
+                              {" "}
+                              {selectedItem.Date} WIB
+                            </div>
+                          </div>
+
+
+                          <div className="flex space-x-6">
+                            <div class="w-full px-3 mb-2 md:mb-0">
+                              <label
+                                class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
+                                for="grid-city"
+                              >
+                               Start Repair 
+                              </label>
+                              <div
+                                class="appearance-none block w-52 bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                type="text"
+                              >
+                                {" "}
+                                {formatDateTimeAPI(selectedItem?.ResponseTime) || ""}
+                              </div>
+                            </div>
+                            <div class="w-full px-3 mb-2 md:mb-0">
+                              <label
+                                class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
+                                for="grid-city"
+                              >
+                                Repair Done
+                              </label>
+                              <div
+                                class="appearance-none block w-52 bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                type="text"
+                              >
+                                {" "}
+                                {formatDateTimeAPI(selectedItem?.ResponseDone) || ""}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="w-full px-3 mb-2 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Problem
+                            </label>
+                            <div
+                              class="appearance-none block w-full bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              type="text"
+                            >
+                              {" "}
+                              {selectedItem.Problem}
+                            </div>
+                          </div>
+                         
+                        </div>
+
+
+                        <div className="flex justify-end" >
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
 
         <td class="">
           {isLoader ? (

@@ -13,20 +13,21 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-function QRResponseMTCTOP() {
+function QRResponseValidationProductionBOT() {
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
   const [Line, setLine] = useState("SMT LINE 1");
+  // const [Area, setArea] = useState("SMT BOT");
+  const [isQRResponses, setIsQRResponses] = useState(true);
   const [isLoader, setIsLoader] = useState(false);
-  
-  const [isQRResponse, setIsQRResponse] = useState(true);
   const [showPopupNama, setShowPopupNama] = useState(false);
   const [showPopupMesin, setShowPopupMesin] = useState(false);
-  const [Status, setStatus] = useState("Repair");
-  const [Area, setArea] = useState("SMT TOP");
+  const [Status, setStatus] = useState("Validation");
+  const [Area, setArea] = useState("SMT BOT");
   const [Department, setDepartment] = useState("");
   const [DepartTo, setDepartTo] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
+
 
 
  
@@ -47,11 +48,11 @@ function QRResponseMTCTOP() {
 
     alert("Response Telah Di Terima Selamat Bekerja");
 
-    firebase.database().ref(`SMTLine1TOP/${Station}`).set("Repair");
+    firebase.database().ref(`SMTLine1BOT/${Station}`).set("In Validation");
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.12:3001/api/PutResponseRepair`, {
+    fetch(`http://192.168.101.12:3001/api/PutResponseValidation`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -78,48 +79,48 @@ function QRResponseMTCTOP() {
 
   const togglePopupNama = () => {
     setShowPopupNama(!showPopupNama);
-    setIsQRResponse(false);
+    setIsQRResponses(false);
   };
 
   const togglePopupMesin = () => {
     setShowPopupMesin(!showPopupMesin);
-    setIsQRResponse(false);
+    setIsQRResponses(false);
   };
 
   const handleScanSuccessNama = (data) => {
     setNamaPIC(data);
     setShowPopupNama(false);
     setShowPopupMesin(false);
-    setIsQRResponse(true);
+    setIsQRResponses(true);
   };
 
-
   const handleScanSuccessMesin = (data) => {
-    // Check if "(TOP)" is present in the scanned data
-    if (data.includes("(TOP)")) {
+    // Check if "(BOT)" is present in the scanned data
+    if (data.includes("(BOT)")) {
     setStation(data);
     setShowPopupMesin(false);
-    setIsQRResponse(true);
+    setIsQRResponses(true);
   } else {
-    // Show an error message or take appropriate action for "(TOP)" or other cases
-     alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(TOP)'");
+    // Show an error message or take appropriate action for "(BOT)" or other cases
+     alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(BOT)'");
   }
 };
+
 
 
   const handleButtonClick = () => {
     submitResponse();
     // Mengalihkan pengguna ke halaman yang diinginkan
     setIsLoader(true);
-      setTimeout(() => {
-      window.location.href = '/Others'; // Ganti dengan URL halaman tujuan
+    setTimeout(() => {
+      window.location.href = '/ValidationProduction'; // Ganti dengan URL halaman tujuan
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
 
   return (
     <body style={styles}>
       <td class="">
-        {isQRResponse ? (
+        {isQRResponses ? (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
               <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-[500px] text-center sm:block sm:p-0">
@@ -144,7 +145,7 @@ function QRResponseMTCTOP() {
                         }}
                       >
                         <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                          <span>Repair</span>
+                          <span>Validation</span>
                         </div>
                         <div class="flex flex-wrap -mx-3 ">
                           <div className="w-full mt-1 px-3 mb-3 md:mb-0">
@@ -166,7 +167,7 @@ function QRResponseMTCTOP() {
                               </span>
                               <button onClick={() => {
                                 togglePopupNama();
-                                setIsQRResponse(false);
+                                setIsQRResponses(false);
                               }}>
                                 {showPopupNama ? (
                                   <svg
@@ -296,7 +297,7 @@ function QRResponseMTCTOP() {
                               <button
                                 onClick={() => {
                                   togglePopupMesin();
-                                  setIsQRResponse(false);
+                                  setIsQRResponses(false);
                                 }}
                               >
                                 {showPopupMesin ? (
@@ -418,11 +419,11 @@ function QRResponseMTCTOP() {
                             type="button"
                             onClick={handleButtonClick}
                           >
-                            Repair
+                            Start Validation
                           </button>
                         </div>
                       </form>
-                      <a href="/Others">
+                      <a href="/ValidationProduction">
                         <button class="text-white bg-red-600 justify-start hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                           <svg width="20px" viewBox="0 0 1024 1024">
                             <path
@@ -479,12 +480,13 @@ function QRResponseMTCTOP() {
           </>
         ) : null}
       </td>
+
       <div className="relative">
         {showPopupMesin && (
           <QRScannerPopup
             onClose={() => {
               togglePopupMesin();
-              setIsQRResponse(true);
+              setIsQRResponses(true);
             }}
             onScanSuccess={handleScanSuccessMesin}
           />
@@ -493,7 +495,7 @@ function QRResponseMTCTOP() {
           <QRScannerPopup
             onClose={() => {
               togglePopupNama();
-              setIsQRResponse(true);
+              setIsQRResponses(true);
             }}
             onScanSuccess={handleScanSuccessNama}
           />
@@ -503,4 +505,4 @@ function QRResponseMTCTOP() {
   );
 }
 
-export default QRResponseMTCTOP;
+export default QRResponseValidationProductionBOT;

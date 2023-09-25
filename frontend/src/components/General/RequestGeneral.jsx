@@ -78,7 +78,7 @@
 //   updateTime();
 
 //   useEffect(() => {
-//     fetch("https://andonline.astra-visteon.com:3002/api/General")
+//     fetch("http://192.168.101.12:3001/api/General")
 //       .then((response) => response.json())
 //       .then((json) => {
 //         // mengubah properti timestamp menjadi tanggal dan Date
@@ -107,7 +107,7 @@
 //     const date = new Date(e.target.value);
 //     const selectedDate = date.toLocaleDateString();
 //     setSelectedDate(selectedDate);
-//     fetch(`https://andonline.astra-visteon.com:3002/api/General?date=${selectedDate}`)
+//     fetch(`http://192.168.101.12:3001/api/General?date=${selectedDate}`)
 //       .then((response) => response.json())
 //       .then((json) => {
 //         // mengubah properti Date menjadi tanggal saja

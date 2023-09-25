@@ -121,6 +121,7 @@ const SmtTop = () => {
   const [isOpenRequest, setIsOpenRequest] = useState(false);
   const [isOpenReturn, setIsOpenReturn] = useState(false);
   const [isOpenRepair, setIsOpenRepair] = useState(false);
+  const [isOpenInValidation, setIsOpenInValidation] = useState(false);
   const [isOpenRequestValidation, setIsOpenRequestValidation] = useState(false);
   const [isOpenValidation, setIsOpenValidation] = useState(false);
 
@@ -502,7 +503,7 @@ const SmtTop = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
+          "http://192.168.101.12:3001/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -676,6 +677,8 @@ const SmtTop = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -724,6 +727,8 @@ const SmtTop = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -772,6 +777,8 @@ const SmtTop = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -820,6 +827,8 @@ const SmtTop = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -868,6 +877,8 @@ const SmtTop = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -916,6 +927,8 @@ const SmtTop = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -964,6 +977,8 @@ const SmtTop = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -1012,6 +1027,8 @@ const SmtTop = () => {
                                         ? "#93c2c4"
                                         : data === "Production"
                                           ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
                                             : data === "MAINTENANCE & IT"
                                               ? "#C00000"
                                               : data === "Return MAINTENANCE & IT"
@@ -1118,11 +1135,11 @@ const SmtTop = () => {
   const fetchRVSTOPLeader = () => fetchData("/getRVSTOPLeader", setDataRVSTOPLeader);
   const fetchRVSTOPRepair = () => fetchData("/getRVSTOPRepair", setDataRVSTOPRepair);
   const fetchRVSTOPValidation = () => fetchData("/getRVSTOPValidation", setDataRVSTOPValidation);
- 
+
 
 
   const fetchData = (endpoint, setDataFunction) => {
-    fetch(`https://andonline.astra-visteon.com:3002/api/${endpoint}`)
+    fetch(`http://192.168.101.12:3001/api/${endpoint}`)
       .then((response) => response.json())
       .then((data) => {
         setDataFunction(data);
@@ -1345,11 +1362,15 @@ const SmtTop = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataDestackerTOPValidation);
                         setButton("DestackerTop");
-                      }  else if (StatusDestackerTop === "Return MAINTENANCE & IT" || StatusDestackerTop === "Return HRGA & EHS" || StatusDestackerTop === "Return PURCHASING,PPIC,MP&L" || StatusDestackerTop === "Return PROCESS ENGINEERING" || StatusDestackerTop === "Return PRODUCT DEVELOPMENT" || StatusDestackerTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                      } else if (StatusDestackerTop === "Return MAINTENANCE & IT" || StatusDestackerTop === "Return HRGA & EHS" || StatusDestackerTop === "Return PURCHASING,PPIC,MP&L" || StatusDestackerTop === "Return PROCESS ENGINEERING" || StatusDestackerTop === "Return PRODUCT DEVELOPMENT" || StatusDestackerTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataDestackerTOPRepair);
                         setButton("DestackerTop");
-                      }  else if (StatusDestackerTop === "Go") {
+                      } else if (StatusDestackerTop === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataDestackerTOPValidation);
+                        setButton("DestackerTop");
+                      } else if (StatusDestackerTop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataDestackerTOPValidation);
                         setButton("DestackerTop");
@@ -1390,19 +1411,23 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataLabelTOPRepair);
                         setButton("LabelTop");
-                      } else if (StatusLabelTop === "QA" || StatusLabelTop === "QC" || StatusLabelTop === "Production" ) {
+                      } else if (StatusLabelTop === "QA" || StatusLabelTop === "QC" || StatusLabelTop === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataLabelTOPValidation);
                         setButton("LabelTop");
-                      }  else if (StatusLabelTop === "Return MAINTENANCE & IT" || StatusLabelTop === "Return HRGA & EHS" || StatusLabelTop === "Return PURCHASING,PPIC,MP&L" || StatusLabelTop === "Return PROCESS ENGINEERING" || StatusLabelTop === "Return PRODUCT DEVELOPMENT" || StatusLabelTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                      } else if (StatusLabelTop === "Return MAINTENANCE & IT" || StatusLabelTop === "Return HRGA & EHS" || StatusLabelTop === "Return PURCHASING,PPIC,MP&L" || StatusLabelTop === "Return PROCESS ENGINEERING" || StatusLabelTop === "Return PRODUCT DEVELOPMENT" || StatusLabelTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataLabelTOPRepair);
                         setButton("LabelTop");
-                      }  else if (StatusLabelTop === "Go") {
+                      } else if (StatusLabelTop === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataLabelTOPValidation);
+                        setButton("LabelTop");
+                      } else if (StatusLabelTop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataLabelTOPValidation);
                         setButton("LabelTop");
-                      } 
+                      }
                       setStation(LabelTop);
                     }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
@@ -1439,19 +1464,23 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataPrinterTOPRepair);
                         setButton("PrinterTop");
-                      } else if (StatusPrinterTop === "QA" || StatusPrinterTop === "QC" || StatusPrinterTop === "Production" ) {
+                      } else if (StatusPrinterTop === "QA" || StatusPrinterTop === "QC" || StatusPrinterTop === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataPrinterTOPValidation);
                         setButton("PrinterTop");
-                      }  else if (StatusPrinterTop === "Return MAINTENANCE & IT" || StatusPrinterTop === "Return HRGA & EHS" || StatusPrinterTop === "Return PURCHASING,PPIC,MP&L" || StatusPrinterTop === "Return PROCESS ENGINEERING" || StatusPrinterTop === "Return PRODUCT DEVELOPMENT" || StatusPrinterTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                      } else if (StatusPrinterTop === "Return MAINTENANCE & IT" || StatusPrinterTop === "Return HRGA & EHS" || StatusPrinterTop === "Return PURCHASING,PPIC,MP&L" || StatusPrinterTop === "Return PROCESS ENGINEERING" || StatusPrinterTop === "Return PRODUCT DEVELOPMENT" || StatusPrinterTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataPrinterTOPRepair);
                         setButton("PrinterTop");
-                      }  else if (StatusPrinterTop === "Go") {
+                      } else if (StatusPrinterTop === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataPrinterTOPValidation);
+                        setButton("PrinterTop");
+                      } else if (StatusPrinterTop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataPrinterTOPValidation);
                         setButton("PrinterTop");
-                      } 
+                      }
                       setStation(PrinterTop);
                     }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
@@ -1497,7 +1526,11 @@ const SmtTop = () => {
                         setIsOpenReturn(true);
                         setOptionData(dataSPITOPRepair);
                         setButton("SPITop");
-                      }  else if (StatusSPITop === "Go") {
+                      } else if (StatusSPITop === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataSPITOPValidation);
+                        setButton("SPITop");
+                      } else if (StatusSPITop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataSPITOPValidation);
                         setButton("SPITop");
@@ -1545,15 +1578,19 @@ const SmtTop = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataPickNPlaceTOPValidation);
                         setButton("PickNPlaceTop");
-                      }  else if (StatusPickNPlaceTop === "Return MAINTENANCE & IT" || StatusPickNPlaceTop === "Return HRGA & EHS" || StatusPickNPlaceTop === "Return PURCHASING,PPIC,MP&L" || StatusPickNPlaceTop === "Return PROCESS ENGINEERING" || StatusPickNPlaceTop === "Return PRODUCT DEVELOPMENT" || StatusPickNPlaceTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                      } else if (StatusPickNPlaceTop === "Return MAINTENANCE & IT" || StatusPickNPlaceTop === "Return HRGA & EHS" || StatusPickNPlaceTop === "Return PURCHASING,PPIC,MP&L" || StatusPickNPlaceTop === "Return PROCESS ENGINEERING" || StatusPickNPlaceTop === "Return PRODUCT DEVELOPMENT" || StatusPickNPlaceTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataPickNPlaceTOPRepair);
                         setButton("PickNPlaceTop");
-                      }  else if (StatusPickNPlaceTop === "Go") {
+                      } else if (StatusPickNPlaceTop === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataPickNPlaceTOPValidation);
+                        setButton("PickNPlaceTop");
+                      } else if (StatusPickNPlaceTop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataPickNPlaceTOPValidation);
                         setButton("PickNPlaceTop");
-                      } 
+                      }
                       setStation(PickNPlaceTop);
                     }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
@@ -1595,15 +1632,19 @@ const SmtTop = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataReflowTOPValidation);
                         setButton("ReflowTop");
-                      }  else if (StatusReflowTop === "Return MAINTENANCE & IT" || StatusReflowTop === "Return HRGA & EHS" || StatusReflowTop === "Return PURCHASING,PPIC,MP&L" || StatusReflowTop === "Return PROCESS ENGINEERING" || StatusReflowTop === "Return PRODUCT DEVELOPMENT" || StatusReflowTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                      } else if (StatusReflowTop === "Return MAINTENANCE & IT" || StatusReflowTop === "Return HRGA & EHS" || StatusReflowTop === "Return PURCHASING,PPIC,MP&L" || StatusReflowTop === "Return PROCESS ENGINEERING" || StatusReflowTop === "Return PRODUCT DEVELOPMENT" || StatusReflowTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataReflowTOPRepair);
                         setButton("ReflowTop");
-                      }  else if (StatusReflowTop === "Go") {
+                      } else if (StatusReflowTop === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataReflowTOPValidation);
+                        setButton("ReflowTop");
+                      } else if (StatusReflowTop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataReflowTOPValidation);
                         setButton("ReflowTop");
-                      } 
+                      }
                       setStation(ReflowTop);
                     }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
@@ -1641,7 +1682,7 @@ const SmtTop = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataAOITOPRepair);
                         setButton("AOITop");
-                      } else if (StatusAOITop === "QA" || StatusAOITop === "QC" || StatusAOITop === "Production" ) {
+                      } else if (StatusAOITop === "QA" || StatusAOITop === "QC" || StatusAOITop === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataAOITOPValidation);
                         setButton("AOITop");
@@ -1649,11 +1690,15 @@ const SmtTop = () => {
                         setIsOpenReturn(true);
                         setOptionData(dataAOITOPRepair);
                         setButton("AOITop");
-                      }  else if (StatusAOITop === "Go") {
+                      } else if (StatusAOITop === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataAOITOPValidation);
+                        setButton("AOITop");
+                      } else if (StatusAOITop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataAOITOPValidation);
                         setButton("AOITop");
-                      } 
+                      }
                       setStation(AOITop);
                     }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
@@ -1693,15 +1738,19 @@ const SmtTop = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataRVSTOPValidation);
                         setButton("RVSTop");
-                      }  else if (StatusRVSTop === "Return MAINTENANCE & IT" || StatusRVSTop === "Return HRGA & EHS" || StatusRVSTop === "Return PURCHASING,PPIC,MP&L" || StatusRVSTop === "Return PROCESS ENGINEERING" || StatusRVSTop === "Return PRODUCT DEVELOPMENT" || StatusRVSTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                      } else if (StatusRVSTop === "Return MAINTENANCE & IT" || StatusRVSTop === "Return HRGA & EHS" || StatusRVSTop === "Return PURCHASING,PPIC,MP&L" || StatusRVSTop === "Return PROCESS ENGINEERING" || StatusRVSTop === "Return PRODUCT DEVELOPMENT" || StatusRVSTop === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataRVSTOPRepair);
                         setButton("RVSTop");
-                      }  else if (StatusRVSTop === "Go") {
+                      } else if (StatusRVSTop === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataRVSTOPValidation);
+                        setButton("RVSTop");
+                      } else if (StatusRVSTop === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataRVSTOPValidation);
                         setButton("RVSTop");
-                      } 
+                      }
                       setStation(RVSTop);
                     }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
@@ -1946,6 +1995,7 @@ const SmtTop = () => {
           </>
         ) : null}
       </td>
+
 
 
 
@@ -2372,7 +2422,106 @@ const SmtTop = () => {
 
       {/* -------------- */}
 
-      {/* Status GO Atau Valid */}
+    
+    {/* In Validation */}
+      <td>
+        {isOpenInValidation ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen pt-32 px-4 pb-20 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <form>
+                      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <button
+                          className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
+                          onClick={() => {
+
+                            setIsOpenInValidation(false);
+                          }}
+                        >
+                          <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
+                        <div class="p-6 text-center">
+                          <svg
+                            class="mx-auto mb-4 animate-pulse w-32 h-14 " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 1V5" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M19.4246 18.9246L16.5961 16.0962" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M22.5 11.5L18.5 11.5" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M12 18V22" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M7.40381 6.90381L4.57538 4.07538" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M5.5 11.5L1.5 11.5" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M7.40381 16.0962L4.57538 18.9246" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                          </svg>
+
+                          <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-serif text-gray-500 dark:text-gray-400">
+                            <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong> Sedang Dalam Proses Validation Oleh Team  {OptionData?.DepartTo || ""}
+                          </h3>
+
+                          <div className="flex flex-col mt-2">
+                            <div class="w-full px-3">
+                              <div className="w-full px-3">
+                                <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                  Down Time:
+                                </label>
+                                {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop") && (
+                                  <input
+                                    type="text"
+                                    className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                    name="NamaPIC"
+                                    readOnly
+                                    value={
+                                      Button === "DestackerTop" ? TimeDestackerTop :
+                                        Button === "LabelTop" ? TimeLabelTop :
+                                          Button === "PrinterTop" ? TimePrinterTop :
+                                            Button === "SPITop" ? TimeSPITop :
+                                              Button === "PickNPlaceTop" ? TimePickNPlaceTop :
+                                                Button === "ReflowTop" ? TimeReflowTop :
+                                                  Button === "AOITop" ? TimeAOITop :
+                                                    Button === "RVSTop" ? TimeRVSTop :
+                                                      ""
+                                    }
+                                  />
+                                )}
+                              </div>
+                            </div>
+                            <span className="font-mono mt-2 text-gray-500 ">PIC Validation :  {OptionData?.ValidationName || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Request at :  {formatDateAPI(OptionData?.Date) || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Start at :  {formatDateAPI(OptionData?.ResponseValidation) || ""} </span>
+                          </div>
+                          <div class="flex justify-center mt-4">
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
 
       {/*Pop up Validation  */}
       <td>
@@ -2432,11 +2581,13 @@ const SmtTop = () => {
                               />
 
                             </div>
-                            <span className="font-mono mt-2 text-gray-500 ">PIC Validation :  {OptionData?.ValidationName || ""} </span>
-                            <span className="font-mono mt-2 text-gray-500 ">Department :  {OptionData?.DepartTo || ""} </span>
-                            <span className="font-mono mt-2 text-gray-500 ">Requestor Validation :  {OptionData?.Requestor || ""}</span>
+                            <span className="font-mono mt-2 text-gray-500 ">Validation :  {OptionData?.ValidationName || ""} / {OptionData?.DepartTo || ""} </span>
                             <span className="font-mono mt-2 text-gray-500 ">Validation AT :  {formatDateAPI(OptionData?.ValidationDate) || ""} </span>
                             <span className="font-mono mt-2 text-gray-500 ">Validation Desc :  {OptionData?.ValidationDescription || ""} </span>
+                            <br />
+                            <span className="font-mono mt-2 text-gray-500 ">Repair PIC:  {OptionData?.Requestor || ""}</span>
+                            <span className="font-mono mt-2 text-gray-500 ">Problem Desc :  {OptionData?.Problem || ""} </span>
+
                           </div>
                         </div>
                       </div>

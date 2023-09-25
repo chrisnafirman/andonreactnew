@@ -93,7 +93,7 @@ const SmtTop = () => {
   const [backgroundColorStatusFlashBe, setBackgroundColorStatusFlashBe] = useState("");
   const [TimeFlashBe, setTimeFlashBe] = useState(null);
 
-    // Router BE
+  // Router BE
   const [StatusRouterBe, setStatusRouterBe] = useState("");
   const [RouterBe, setRouterBe] = useState("Router (BE)");
   const [backgroundColorStatusRouterBe, setBackgroundColorStatusRouterBe] = useState("");
@@ -127,6 +127,7 @@ const SmtTop = () => {
   const [isOpenRequest, setIsOpenRequest] = useState(false);
   const [isOpenReturn, setIsOpenReturn] = useState(false);
   const [isOpenRepair, setIsOpenRepair] = useState(false);
+  const [isOpenInValidation, setIsOpenInValidation] = useState(false);
   const [isOpenRequestValidation, setIsOpenRequestValidation] = useState(false);
   const [isOpenValidation, setIsOpenValidation] = useState(false);
 
@@ -310,7 +311,7 @@ const SmtTop = () => {
     ref40.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusFluxerBe(data);
-      
+
     });
 
     const ref32 = firebase.database().ref("SMTLine1BE/PreHeat (BE)");
@@ -323,7 +324,7 @@ const SmtTop = () => {
     ref33.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusSeho1Be(data);
-      
+
     });
 
 
@@ -331,21 +332,21 @@ const SmtTop = () => {
     ref34.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusSeho2Be(data);
-    
+
     });
 
     const ref35 = firebase.database().ref("SMTLine1BE/Touch UP (BE)");
     ref35.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusTouchupBe(data);
-     
+
     });
 
     const ref36 = firebase.database().ref("SMTLine1BE/ICT (BE)");
     ref36.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusICTBe(data);
-  
+
     });
 
 
@@ -353,14 +354,14 @@ const SmtTop = () => {
     ref37.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusFlashBe(data);
-  
+
     });
 
     const ref38 = firebase.database().ref("SMTLine1BE/Router (BE)");
     ref38.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusRouterBe(data);
-     
+
     });
 
 
@@ -536,7 +537,7 @@ const SmtTop = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
+          "http://192.168.101.12:3001/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -675,7 +676,7 @@ const SmtTop = () => {
   const updateStatusDropinBe = (data) => {
     setStatusDropinBe(data);
     setBackgroundColorStatusDropinBe(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -722,7 +723,7 @@ const SmtTop = () => {
   const updateStatusFluxerBe = (data) => {
     setStatusFluxerBe(data);
     setBackgroundColorStatusFluxerBe(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -769,7 +770,7 @@ const SmtTop = () => {
   const updateStatusPreheatBe = (data) => {
     setStatusPreheatBe(data);
     setBackgroundColorStatusPreheatBe(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -816,7 +817,7 @@ const SmtTop = () => {
   const updateStatusSeho1Be = (data) => {
     setStatusSeho1Be(data);
     setBackgroundColorStatusSeho1Be(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -863,7 +864,7 @@ const SmtTop = () => {
   const updateStatusSeho2Be = (data) => {
     setStatusSeho2Be(data);
     setBackgroundColorStatusSeho2Be(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -910,7 +911,7 @@ const SmtTop = () => {
   const updateStatusTouchupBe = (data) => {
     setStatusTouchupBe(data);
     setBackgroundColorStatusTouchupBe(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -957,7 +958,7 @@ const SmtTop = () => {
   const updateStatusICTBe = (data) => {
     setStatusICTBe(data);
     setBackgroundColorStatusICTBe(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -1004,7 +1005,7 @@ const SmtTop = () => {
   const updateStatusFlashBe = (data) => {
     setStatusFlashBe(data);
     setBackgroundColorStatusFlashBe(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -1051,7 +1052,7 @@ const SmtTop = () => {
   const updateStatusRouterBe = (data) => {
     setStatusRouterBe(data);
     setBackgroundColorStatusRouterBe(
-       data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -1197,12 +1198,12 @@ const SmtTop = () => {
   const fetchRouterBERepair = () => fetchData("/getRouterBERepair", setDataRouterBERepair);
   const fetchRouterBEValidation = () => fetchData("/getRouterBEValidation", setDataRouterBEValidation);
 
-  
- 
+
+
 
 
   const fetchData = (endpoint, setDataFunction) => {
-    fetch(`https://andonline.astra-visteon.com:3002/api/${endpoint}`)
+    fetch(`http://192.168.101.12:3001/api/${endpoint}`)
       .then((response) => response.json())
       .then((data) => {
         setDataFunction(data);
@@ -1431,11 +1432,15 @@ const SmtTop = () => {
                         setIsOpenReturn(true);
                         setOptionData(dataDropinBERepair);
                         setButton("DropinBe");
-                      } else if (StatusDropinBe === "Go") {
+                      } else if (StatusDropinBe === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataDropinBEValidation);
+                        setButton("DropinBe");
+                      }else if (StatusDropinBe === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataDropinBEValidation);
                         setButton("DropinBe");
-                      } 
+                      }
                       setStation(DropinBe);
                     }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
@@ -1479,11 +1484,15 @@ const SmtTop = () => {
                         setIsOpenReturn(true);
                         setOptionData(dataFluxerBERepair);
                         setButton("FluxerBe");
-                      } else if (StatusFluxerBe === "Go") {
+                      } else if (StatusFluxerBe === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataFluxerBEValidation);
+                        setButton("FluxerBe");
+                      }else if (StatusFluxerBe === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataFluxerBEValidation);
                         setButton("FluxerBe");
-                      } 
+                      }
                       setStation(FluxerBe);
                     }}
                   >
@@ -1526,11 +1535,15 @@ const SmtTop = () => {
                         setIsOpenReturn(true);
                         setOptionData(dataPreheatBERepair);
                         setButton("PreheatBe");
-                      } else if (StatusPreheatBe === "Go") {
+                      } else if (StatusPreheatBe === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataPreheatBEValidation);
+                        setButton("PreheatBe");
+                      }else if (StatusPreheatBe === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataPreheatBEValidation);
                         setButton("PreheatBe");
-                      } 
+                      }
                       setStation(PreheatBe);
                     }}
                   >
@@ -1548,7 +1561,7 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                style={{ backgroundColor: backgroundColorStatusSeho1Be}}
+                    style={{ backgroundColor: backgroundColorStatusSeho1Be }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                     value={Seho1Be}
                     onClick={() => {
@@ -1573,11 +1586,15 @@ const SmtTop = () => {
                         setIsOpenReturn(true);
                         setOptionData(dataSeho1BERepair);
                         setButton("Seho1Be");
-                      } else if (StatusSeho1Be === "Go") {
+                      } else if (StatusSeho1Be === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataSeho1BEValidation);
+                        setButton("Seho1Be");
+                      }else if (StatusSeho1Be === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataSeho1BEValidation);
                         setButton("Seho1Be");
-                      } 
+                      }
                       setStation(Seho1Be);
                     }}
                   >
@@ -1600,7 +1617,7 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                style={{ backgroundColor: backgroundColorStatusSeho2Be}}
+                    style={{ backgroundColor: backgroundColorStatusSeho2Be }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                     value={Seho2Be}
                     onClick={() => {
@@ -1625,11 +1642,15 @@ const SmtTop = () => {
                         setIsOpenReturn(true);
                         setOptionData(dataSeho2BERepair);
                         setButton("Seho2Be");
-                      } else if (StatusSeho2Be === "Go") {
+                      } else if (StatusSeho2Be === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataSeho2BEValidation);
+                        setButton("Seho2Be");
+                      }else if (StatusSeho2Be === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataSeho2BEValidation);
                         setButton("Seho2Be");
-                      } 
+                      }
                       setStation(Seho2Be);
                     }}
                   >
@@ -1647,7 +1668,7 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                style={{ backgroundColor: backgroundColorStatusTouchupBe}}
+                    style={{ backgroundColor: backgroundColorStatusTouchupBe }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                     value={TouchupBe}
                     onClick={() => {
@@ -1672,11 +1693,15 @@ const SmtTop = () => {
                         setIsOpenReturn(true);
                         setOptionData(dataTouchupBERepair);
                         setButton("TouchupBe");
-                      } else if (StatusTouchupBe === "Go") {
+                      } else if (StatusTouchupBe === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataTouchupBEValidation);
+                        setButton("TouchupBe");
+                      }else if (StatusTouchupBe === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataTouchupBEValidation);
                         setButton("TouchupBe");
-                      } 
+                      }
                       setStation(TouchupBe);
                     }}
                   >
@@ -1694,7 +1719,7 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                style={{ backgroundColor: backgroundColorStatusICTBe}}
+                    style={{ backgroundColor: backgroundColorStatusICTBe }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                     value={ICTBe}
                     onClick={() => {
@@ -1719,11 +1744,15 @@ const SmtTop = () => {
                         setIsOpenReturn(true);
                         setOptionData(dataICTBERepair);
                         setButton("ICTBe");
-                      } else if (StatusICTBe === "Go") {
+                      } else if (StatusICTBe === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataICTBEValidation);
+                        setButton("ICTBe");
+                      }else if (StatusICTBe === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataICTBEValidation);
                         setButton("ICTBe");
-                      } 
+                      }
                       setStation(ICTBe);
                     }}
                   >
@@ -1739,7 +1768,7 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                style={{ backgroundColor: backgroundColorStatusFlashBe}}
+                    style={{ backgroundColor: backgroundColorStatusFlashBe }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                     value={FlashBe}
                     onClick={() => {
@@ -1764,11 +1793,15 @@ const SmtTop = () => {
                         setIsOpenReturn(true);
                         setOptionData(dataFlashBERepair);
                         setButton("FlashBe");
-                      } else if (StatusFlashBe === "Go") {
+                      } else if (StatusFlashBe === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataFlashBEValidation);
+                        setButton("FlashBe");
+                      }else if (StatusFlashBe === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataFlashBEValidation);
                         setButton("FlashBe");
-                      } 
+                      }
                       setStation(FlashBe);
                     }}
                   >
@@ -1788,7 +1821,7 @@ const SmtTop = () => {
                 {/* <!-- Table --> */}
                 <div className="w-72 pt-2 sm:w-48 lg:w-72">
                   <button
-                style={{ backgroundColor: backgroundColorStatusRouterBe}}
+                    style={{ backgroundColor: backgroundColorStatusRouterBe }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                     value={RouterBe}
                     onClick={() => {
@@ -1813,11 +1846,15 @@ const SmtTop = () => {
                         setIsOpenReturn(true);
                         setOptionData(dataRouterBERepair);
                         setButton("RouterBe");
-                      } else if (StatusRouterBe === "Go") {
+                      } else if (StatusRouterBe === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataRouterBEValidation);
+                        setButton("RouterBe");
+                      }else if (StatusRouterBe === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataRouterBEValidation);
                         setButton("RouterBe");
-                      } 
+                      }
                       setStation(RouterBe);
                     }}
                   >
@@ -1921,7 +1958,7 @@ const SmtTop = () => {
                             <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                               Down Time:
                             </label>
-                           {(Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe" ) && (
+                            {(Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe") && (
                               <input
                                 type="text"
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -1936,8 +1973,8 @@ const SmtTop = () => {
                                             Button === "TouchupBe" ? TimeTouchupBe :
                                               Button === "ICTBe" ? TimeICTBe :
                                                 Button === "FlashBe" ? TimeFlashBe :
-                                                Button === "RouterBe" ? TimeRouterBe :
-                                                  ""
+                                                  Button === "RouterBe" ? TimeRouterBe :
+                                                    ""
                                 }
                               />
                             )}
@@ -2023,26 +2060,26 @@ const SmtTop = () => {
                                 <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                                   Down Time:
                                 </label>
-                                {(Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe" ) && (
-                              <input
-                                type="text"
-                                className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                                name="NamaPIC"
-                                readOnly
-                                value={
-                                  Button === "DropinBe" ? TimeDropinBe :
-                                    Button === "FluxerBe" ? TimeFluxerBe :
-                                      Button === "PreheatBe" ? TimePreheatBe :
-                                        Button === "Seho1Be" ? TimeSeho1Be :
-                                          Button === "Seho2Be" ? TimeSeho2Be :
-                                            Button === "TouchupBe" ? TimeTouchupBe :
-                                              Button === "ICTBe" ? TimeICTBe :
-                                                Button === "FlashBe" ? TimeFlashBe :
-                                                Button === "RouterBe" ? TimeRouterBe :
-                                                  ""
-                                }
-                              />
-                            )}
+                                {(Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe") && (
+                                  <input
+                                    type="text"
+                                    className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                    name="NamaPIC"
+                                    readOnly
+                                    value={
+                                      Button === "DropinBe" ? TimeDropinBe :
+                                        Button === "FluxerBe" ? TimeFluxerBe :
+                                          Button === "PreheatBe" ? TimePreheatBe :
+                                            Button === "Seho1Be" ? TimeSeho1Be :
+                                              Button === "Seho2Be" ? TimeSeho2Be :
+                                                Button === "TouchupBe" ? TimeTouchupBe :
+                                                  Button === "ICTBe" ? TimeICTBe :
+                                                    Button === "FlashBe" ? TimeFlashBe :
+                                                      Button === "RouterBe" ? TimeRouterBe :
+                                                        ""
+                                    }
+                                  />
+                                )}
                               </div>
                             </div>
                             <span className="font-mono mt-2 text-gray-500 ">PIC Repairment :  {OptionData?.ResponseName || ""} </span>
@@ -2154,7 +2191,7 @@ const SmtTop = () => {
                             <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                               Down Time:
                             </label>
-                            {(Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe" ) && (
+                            {(Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe") && (
                               <input
                                 type="text"
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -2169,8 +2206,8 @@ const SmtTop = () => {
                                             Button === "TouchupBe" ? TimeTouchupBe :
                                               Button === "ICTBe" ? TimeICTBe :
                                                 Button === "FlashBe" ? TimeFlashBe :
-                                                Button === "RouterBe" ? TimeRouterBe :
-                                                  ""
+                                                  Button === "RouterBe" ? TimeRouterBe :
+                                                    ""
                                 }
                               />
                             )}
@@ -2293,7 +2330,7 @@ const SmtTop = () => {
                             <label class="block tracking-wide text-gray-700 text-xs font-bold ">
                               Down Time:
                             </label>
-                           {(Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe" ) && (
+                            {(Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe") && (
                               <input
                                 type="text"
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -2308,8 +2345,8 @@ const SmtTop = () => {
                                             Button === "TouchupBe" ? TimeTouchupBe :
                                               Button === "ICTBe" ? TimeICTBe :
                                                 Button === "FlashBe" ? TimeFlashBe :
-                                                Button === "RouterBe" ? TimeRouterBe :
-                                                  ""
+                                                  Button === "RouterBe" ? TimeRouterBe :
+                                                    ""
                                 }
                               />
                             )}
@@ -2452,7 +2489,7 @@ const SmtTop = () => {
                             <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                               Down Time:
                             </label>
-                           {(Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe" ) && (
+                            {(Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe") && (
                               <input
                                 type="text"
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -2467,8 +2504,8 @@ const SmtTop = () => {
                                             Button === "TouchupBe" ? TimeTouchupBe :
                                               Button === "ICTBe" ? TimeICTBe :
                                                 Button === "FlashBe" ? TimeFlashBe :
-                                                Button === "RouterBe" ? TimeRouterBe :
-                                                  ""
+                                                  Button === "RouterBe" ? TimeRouterBe :
+                                                    ""
                                 }
                               />
                             )}
@@ -2492,7 +2529,106 @@ const SmtTop = () => {
 
       {/* -------------- */}
 
-      {/* Status GO Atau Valid */}
+    {/* In Validation */}
+      <td>
+        {isOpenInValidation ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen pt-32 px-4 pb-20 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <form>
+                      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <button
+                          className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
+                          onClick={() => {
+
+                            setIsOpenInValidation(false);
+                          }}
+                        >
+                          <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
+                        <div class="p-6 text-center">
+                          <svg
+                            class="mx-auto mb-4 animate-pulse w-32 h-14 " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 1V5" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M19.4246 18.9246L16.5961 16.0962" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M22.5 11.5L18.5 11.5" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M12 18V22" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M7.40381 6.90381L4.57538 4.07538" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M5.5 11.5L1.5 11.5" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M7.40381 16.0962L4.57538 18.9246" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                          </svg>
+
+                          <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-serif text-gray-500 dark:text-gray-400">
+                            <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong> Sedang Dalam Proses Validation Oleh Team  {OptionData?.DepartTo || ""}
+                          </h3>
+
+                          <div className="flex flex-col mt-2">
+                            <div class="w-full px-3">
+                              <div className="w-full px-3">
+                                <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                  Down Time:
+                                </label>
+                                {(Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe") && (
+                              <input
+                                type="text"
+                                className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                name="NamaPIC"
+                                readOnly
+                                value={
+                                  Button === "DropinBe" ? TimeDropinBe :
+                                    Button === "FluxerBe" ? TimeFluxerBe :
+                                      Button === "PreheatBe" ? TimePreheatBe :
+                                        Button === "Seho1Be" ? TimeSeho1Be :
+                                          Button === "Seho2Be" ? TimeSeho2Be :
+                                            Button === "TouchupBe" ? TimeTouchupBe :
+                                              Button === "ICTBe" ? TimeICTBe :
+                                                Button === "FlashBe" ? TimeFlashBe :
+                                                  Button === "RouterBe" ? TimeRouterBe :
+                                                    ""
+                                }
+                              />
+                            )}
+                              </div>
+                            </div>
+                            <span className="font-mono mt-2 text-gray-500 ">PIC Validation :  {OptionData?.ValidationName || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Request at :  {formatDateAPI(OptionData?.Date) || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Start at :  {formatDateAPI(OptionData?.ResponseValidation) || ""} </span>
+                          </div>
+                          <div class="flex justify-center mt-4">
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
 
       {/*Pop up Validation  */}
       <td>
@@ -2552,11 +2688,13 @@ const SmtTop = () => {
                               />
 
                             </div>
-                            <span className="font-mono mt-2 text-gray-500 ">PIC Validation :  {OptionData?.ValidationName || ""} </span>
-                            <span className="font-mono mt-2 text-gray-500 ">Department :  {OptionData?.DepartTo || ""} </span>
-                            <span className="font-mono mt-2 text-gray-500 ">Requestor Validation :  {OptionData?.Requestor || ""}</span>
+                            <span className="font-mono mt-2 text-gray-500 ">Validation :  {OptionData?.ValidationName || ""} / {OptionData?.DepartTo || ""} </span>
                             <span className="font-mono mt-2 text-gray-500 ">Validation AT :  {formatDateAPI(OptionData?.ValidationDate) || ""} </span>
                             <span className="font-mono mt-2 text-gray-500 ">Validation Desc :  {OptionData?.ValidationDescription || ""} </span>
+                            <br />
+                            <span className="font-mono mt-2 text-gray-500 ">Repair PIC:  {OptionData?.Requestor || ""}</span>
+                            <span className="font-mono mt-2 text-gray-500 ">Problem Desc :  {OptionData?.Problem || ""} </span>
+
                           </div>
                         </div>
                       </div>

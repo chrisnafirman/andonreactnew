@@ -216,7 +216,7 @@ const ReuestLeader = () => {
 
 
   useEffect(() => {
-    fetch("https://andonline.astra-visteon.com:3002/api/Validation")
+    fetch("http://192.168.101.12:3001/api/Validation")
       .then((response) => response.json())
       .then((json) => {
         // Lakukan pengolahan data Validation jika diperlukan
@@ -236,7 +236,7 @@ const ReuestLeader = () => {
         setValidationData(json);
       });
 
-    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
+    fetch("http://192.168.101.12:3001/api/Repair")
       .then((response) => response.json())
       .then((json) => {
         // Lakukan pengolahan data Repair jika diperlukan
@@ -257,7 +257,7 @@ const ReuestLeader = () => {
   }, []);
 
  useEffect(() => {
-    fetch("https://andonline.astra-visteon.com:3002/api/Validation")
+    fetch("http://192.168.101.12:3001/api/Validation")
       .then((response) => response.json())
       .then((json) => {
         // Lakukan pengolahan data Validation jika diperlukan
@@ -277,7 +277,7 @@ const ReuestLeader = () => {
         setValidationData(json);
       });
 
-    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
+    fetch("http://192.168.101.12:3001/api/Repair")
       .then((response) => response.json())
       .then((json) => {
         // Lakukan pengolahan data Repair jika diperlukan
@@ -294,7 +294,7 @@ const ReuestLeader = () => {
         setRepairData(json);
       });
 
-    fetch("https://andonline.astra-visteon.com:3002/api/leader")
+    fetch("http://192.168.101.12:3001/api/leader")
       .then((response) => response.json())
       .then((json) => {
         // Lakukan pengolahan data Leader jika diperlukan

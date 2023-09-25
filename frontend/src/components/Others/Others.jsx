@@ -30,6 +30,7 @@ const Others = () => {
   const [Action, setAction] = useState("");
   const [Line, setLine] = useState("");
   const [isOpenRequestValidation, setisOpenRequestValidation] = useState(false);
+  const [IsOpenRepairBy, setIsOpenRepairBy] = useState(false);
   const [Department, setDepartment] = useState("");
   const [Requestor, setRequestor] = useState("");
   const [DepartTo, setDepartTo] = useState("");
@@ -92,17 +93,17 @@ const Others = () => {
   const exportToPDFRequest = () => {
     const doc = new jsPDF("landscape");
     const tableData = [];
-    
+
     // Header untuk tabel PDF
     const headers = ["Uid", "Requestor", "Request at", "Requestor PIC", "Line", "Area", "Station", "Problem"];
-    
+
     // Warna teks header (abu-abu)
     const headerStyles = {
       fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
       textColor: 0, // Warna teks hitam (0)
       fontStyle: "bold", // Teks header tebal
     };
-  
+
     // Mengisi data tabel PDF dengan properti yang Anda inginkan
     filteredData.forEach((item) => {
       const rowData = [
@@ -117,28 +118,28 @@ const Others = () => {
       ];
       tableData.push(rowData);
     });
-  
+
     // Menambahkan logo perusahaan ke file PDF
     const logoImg = new Image();
     logoImg.src = process.env.PUBLIC_URL + "/avi.png";
-    
+
     // Mengukur logo sesuai dengan yang Anda inginkan
     const logoWidth = 50; // Lebar logo
     const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
-    
+
     doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
-    
+
     // Menambahkan teks di atas tabel dan di tengah-tengah
     const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
     const text = "Request Repairment [Andon Data]";
     const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
-    
+
     const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
     const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
-    
+
     doc.text(text, textX, textY);
-    
-    const fontSize = 6; 
+
+    const fontSize = 6;
     // Membuat tabel PDF dengan menggunakan autotable
     doc.autoTable({
       head: [headers],
@@ -154,99 +155,99 @@ const Others = () => {
           textColor: [159, 0, 0], // Warna teks merah dalam format RGB
         },
       },
-     
+
     });
-  
-  
+
+
     // Menyimpan file PDF
     doc.save(`Request Repairment  [Andon Data].pdf`);
   };
 
-    //  fungsi export to pdf
-    const exportToPDFRepair = () => {
-      const doc = new jsPDF("landscape");
-      const tableData = [];
-      
-      // Header untuk tabel PDF
-      const headers = ["Uid", "Requestor", "Request at", "Repair PIC", "Line", "Area", "Station", "Status", "Problem",  "Repair Start", "Forward To", "Forward at"];
-      
-      // Warna teks header (abu-abu)
-      const headerStyles = {
+  //  fungsi export to pdf
+  const exportToPDFRepair = () => {
+    const doc = new jsPDF("landscape");
+    const tableData = [];
+
+    // Header untuk tabel PDF
+    const headers = ["Uid", "Requestor", "Request at", "Repair PIC", "Line", "Area", "Station", "Status", "Problem", "Repair Start", "Forward To", "Forward at"];
+
+    // Warna teks header (abu-abu)
+    const headerStyles = {
+      fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
+      textColor: 0, // Warna teks hitam (0)
+      fontStyle: "bold", // Teks header tebal
+    };
+
+    // Mengisi data tabel PDF dengan properti yang Anda inginkan
+    filteredData.forEach((item) => {
+      const Requestat = `${item.Date} WIB`;
+      const rowData = [
+        item.Uid,
+        item.Requestor,
+        Requestat,
+        item.ResponseName,
+        item.Line,
+        item.Area,
+        item.Station,
+        item.Status,
+        item.Problem,
+        formatDateTimeAPI(item.ResponseTime),
+        item.DepartTo,
+        formatDateTimeAPI(item.ResponseDone),
+      ];
+      tableData.push(rowData);
+    });
+
+    // Menambahkan logo perusahaan ke file PDF
+    const logoImg = new Image();
+    logoImg.src = process.env.PUBLIC_URL + "/avi.png";
+
+    // Mengukur logo sesuai dengan yang Anda inginkan
+    const logoWidth = 50; // Lebar logo
+    const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
+
+    doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
+
+    // Menambahkan teks di atas tabel dan di tengah-tengah
+    const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
+    const text = "Repairment PIC [Andon Data]";
+    const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
+
+    const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
+    const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
+
+    doc.text(text, textX, textY);
+
+    const fontSize = 8; // Atur ukuran font yang diinginkan
+    const scaleFactor = 2;
+    // Membuat tabel PDF dengan menggunakan autotable
+    doc.autoTable({
+      head: [headers],
+      body: tableData,
+      startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
+      headStyles: {
         fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
         textColor: 0, // Warna teks hitam (0)
-        fontStyle: "bold", // Teks header tebal
-      };
-    
-      // Mengisi data tabel PDF dengan properti yang Anda inginkan
-      filteredData.forEach((item )  => {
-        const Requestat = `${item.Date} WIB`;
-        const rowData = [
-          item.Uid,
-          item.Requestor,
-          Requestat,
-          item.ResponseName,
-          item.Line,
-          item.Area,
-          item.Station,
-          item.Status,
-          item.Problem,
-          formatDateTimeAPI(item.ResponseTime),
-          item.DepartTo,
-          formatDateTimeAPI(item.ResponseDone),
-        ];
-        tableData.push(rowData);
-      });
-    
-      // Menambahkan logo perusahaan ke file PDF
-      const logoImg = new Image();
-      logoImg.src = process.env.PUBLIC_URL + "/avi.png";
-      
-      // Mengukur logo sesuai dengan yang Anda inginkan
-      const logoWidth = 50; // Lebar logo
-      const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
-      
-      doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
-      
-      // Menambahkan teks di atas tabel dan di tengah-tengah
-      const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
-      const text = "Repairment PIC [Andon Data]";
-      const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
-      
-      const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
-      const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
-      
-      doc.text(text, textX, textY);
-
-      const fontSize = 8; // Atur ukuran font yang diinginkan
-    const scaleFactor = 2;
-      // Membuat tabel PDF dengan menggunakan autotable
-      doc.autoTable({
-        head: [headers],
-        body: tableData,
-        startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
-        headStyles: {
-          fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-          textColor: 0, // Warna teks hitam (0)
-          fontStyle: fontSize, // Teks header tebal
+        fontStyle: fontSize, // Teks header tebal
+      },
+      columnStyles: {
+        10: { // Indeks 4 adalah kolom "Date"
+          textColor: [5, 150, 27], // Warna teks merah dalam format RGB
         },
-        columnStyles: {
-          10: { // Indeks 4 adalah kolom "Date"
-            textColor: [5, 150, 27], // Warna teks merah dalam format RGB
-          },
-          1: { // Indeks 4 adalah kolom "Date"
-            textColor: [159, 0, 0], // Warna teks merah dalam format RGB
-          },
+        1: { // Indeks 4 adalah kolom "Date"
+          textColor: [159, 0, 0], // Warna teks merah dalam format RGB
         },
+      },
       styles: {
-    fontSize: fontSize, // Atur ukuran font
-  },
-});
+        fontSize: fontSize, // Atur ukuran font
+      },
+    });
 
-    
-    
-      // Menyimpan file PDF
-      doc.save(`Repairment PIC [Andon Data].pdf`);
-    };
+
+
+    // Menyimpan file PDF
+    doc.save(`Repairment PIC [Andon Data].pdf`);
+  };
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
@@ -263,7 +264,7 @@ const Others = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
+    fetch("http://192.168.101.12:3001/api/Repair")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -334,7 +335,7 @@ const Others = () => {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`https://andonline.astra-visteon.com:3002/api/Validation`, {
+    fetch(`http://192.168.101.12:3001/api/Validation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -375,7 +376,7 @@ const Others = () => {
 
     console.log("Sending data:", data);
 
-    fetch(`https://andonline.astra-visteon.com:3002/api/PutRepairDone`, {
+    fetch(`http://192.168.101.12:3001/api/PutRepairDone`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -412,7 +413,7 @@ const Others = () => {
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
 
-    return `${day}/${month}/${year} ~~ ${hours}:${minutes} WIB`;
+    return `${day}/${month}/${year} / ${hours}:${minutes} WIB`;
   };
 
 
@@ -570,9 +571,9 @@ const Others = () => {
                   alt=""
                 />
               </button> */}
-               <header className="px-5 py-4 border-b border-gray-100">
+              <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-mono text-lg text-center text-gray-800">
-                   Request For All Department
+                  Request For All Department
                 </div>
                 <button className="flex text-sm" onClick={() => { setisExportOption(true) }}>
                   <img
@@ -587,7 +588,7 @@ const Others = () => {
                 className="overflow-x-auto p-3"
                 style={{ height: "300px", overflowY: "scroll" }}
               >
-             <table id="data-table" className="table-auto w-full">
+                <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
                       <th className="p-1 w-10 lg:w-32">
@@ -931,16 +932,16 @@ const Others = () => {
                                     )}
 
                                     {selectedItem.Status === "Solved" && (
-                                      <div
-                                        className="bg-slate-900 flex flex-col  text-white font-mono text-xs py-2 px-4 rounded mr-2"
-
-                                      >
-                                        <span >    Repair PIC : {selectedItem.ResponseName}</span>
-                                        <span>    Start At : {formatDateTimeAPI(selectedItem?.ResponseTime) || ""}</span>
-                                        <span>    Done At : {formatDateTimeAPI(selectedItem?.ResponseDone) || ""}</span>
-                                        <span>    Depart To : {selectedItem.DepartTo}</span>
+                                      <div className="flex space-x-32">
+                                        <button
+                                          className="bg-yellow-500 text-white font-bold py-2 px-4 rounded mr-2"
+                                          onClick={() => {
+                                            setIsOpenRepairBy(true);
+                                          }}
+                                        >
+                                          Repair By
+                                        </button>
                                       </div>
-
                                     )}
 
                                   </a>
@@ -1165,6 +1166,145 @@ const Others = () => {
             </>
           ) : null}
         </td>
+        {IsOpenRepairBy && (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-[430px] text-center sm:block sm:p-0">
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                <div
+                  className="inline-block align-bottom bg-yellow-500 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="bg-yellow-500 px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                    <div className="sm:flex sm:items-start">
+                      {/* Close button */}
+                      <button
+                        className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
+                        onClick={() =>
+                          setIsOpenRepairBy(false)
+                        }
+                      >
+                        <svg
+                          className="w-6 h-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                      <div className="w-full max-w-lg">
+                        <div className="justify-center mb-3 items-center flex font-bold uppercase text-black ">
+                          <span>Repair BY</span>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 ">
+                          <div class="w-full  px-3 mb-3 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-black text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Nama PIC
+                            </label>
+                            <div
+                              class="appearance-none block w-full  bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              type="text"
+                            >
+                              {" "}
+                              {selectedItem.ResponseName}{" "}
+                            </div>
+                          </div>
+
+
+
+
+                          <div class="w-full px-3 mb-2 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Request At
+                            </label>
+                            <div
+                              class="appearance-none block w-full bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              type="text"
+                            >
+                              {" "}
+                              {selectedItem.Date} WIB
+                            </div>
+                          </div>
+
+
+                          <div className="flex space-x-6">
+                            <div class="w-full px-3 mb-2 md:mb-0">
+                              <label
+                                class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
+                                for="grid-city"
+                              >
+                               Start Repair 
+                              </label>
+                              <div
+                                class="appearance-none block w-52 bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                type="text"
+                              >
+                                {" "}
+                                {formatDateTimeAPI(selectedItem?.ResponseTime) || ""}
+                              </div>
+                            </div>
+                            <div class="w-full px-3 mb-2 md:mb-0">
+                              <label
+                                class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
+                                for="grid-city"
+                              >
+                                Repair Done
+                              </label>
+                              <div
+                                class="appearance-none block w-52 bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                type="text"
+                              >
+                                {" "}
+                                {formatDateTimeAPI(selectedItem?.ResponseDone) || ""}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="w-full px-3 mb-2 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Problem
+                            </label>
+                            <div
+                              class="appearance-none block w-full bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              type="text"
+                            >
+                              {" "}
+                              {selectedItem.Problem}
+                            </div>
+                          </div>
+                         
+                        </div>
+
+
+                        <div className="flex justify-end" >
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
         <td class="">
           {isLoader ? (
             <>
@@ -1201,75 +1341,75 @@ const Others = () => {
           ) : null}
         </td>
         <td class="">
-        {isExportOption ? (
-          <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-96 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
-                </div>
+          {isExportOption ? (
+            <>
+              <div className="fixed z-10 inset-0 overflow-y-auto">
+                <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-96 text-center sm:block sm:p-0">
+                  <div className="fixed inset-0 transition-opacity">
+                    <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
+                  </div>
 
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                  <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
 
-                <div
-                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
-                >
-                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <div className="flex justify-end">
-                        <button
-                          onClick={() => setisExportOption(false)}
-                          className="absolute top-0 right-0 mt-2 mr-2"
-                        >
-                          <svg
-                            className="h-6 w-6 text-gray-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
+                  <div
+                    className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="modal-headline"
+                  >
+                    <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                      <div className="sm:flex sm:items-start">
+                        <div className="flex justify-end">
+                          <button
+                            onClick={() => setisExportOption(false)}
+                            className="absolute top-0 right-0 mt-2 mr-2"
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M6 18L18 6M6 6l12 12"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-
-                      <div className="w-full h-60 max-w-lg">
-                        <div className="justify-center mb-20 items-center flex font-bold uppercase text-black">
-                          <span>Pilih</span>
+                            <svg
+                              className="h-6 w-6 text-gray-500"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            </svg>
+                          </button>
                         </div>
 
-                        <div className="flex justify-center">
-                        <button
-                            onClick={exportToPDFRequest}
-                            className="bg-blue-900 w-28 h-16 hover:bg-blue-700  text-white font-bold py-2 px-4  rounded mr-2"
-                          >
-                            Request
-                          </button>
-                          <button
-                            onClick={exportToPDFRepair}
-                            className="bg-yellow-400 w-28 h-16 hover:bg-yellow-400 text-white font-bold py-2 px-4 ml-16 rounded"
-                          >
-                            Repair
-                          </button>
-                         
+                        <div className="w-full h-60 max-w-lg">
+                          <div className="justify-center mb-20 items-center flex font-bold uppercase text-black">
+                            <span>Pilih</span>
+                          </div>
+
+                          <div className="flex justify-center">
+                            <button
+                              onClick={exportToPDFRequest}
+                              className="bg-blue-900 w-28 h-16 hover:bg-blue-700  text-white font-bold py-2 px-4  rounded mr-2"
+                            >
+                              Request
+                            </button>
+                            <button
+                              onClick={exportToPDFRepair}
+                              className="bg-yellow-400 w-28 h-16 hover:bg-yellow-400 text-white font-bold py-2 px-4 ml-16 rounded"
+                            >
+                              Repair
+                            </button>
+
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </>
-        ) : null}
-      </td>
+            </>
+          ) : null}
+        </td>
       </main>
     </body>
   );

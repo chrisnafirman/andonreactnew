@@ -97,6 +97,21 @@ const postRequestValidation = (req, res) => {
 
 
 
+const PutResponseValidation = (req, res) => {
+  const { NamaPIC, Status, Station, Area} = req.body;
+
+  db.query(
+    "UPDATE validation SET ValidationName = ?, Status = ?, ResponseValidation = NOW() WHERE Station = ? AND Area = ? ORDER BY No DESC LIMIT 1",
+    [NamaPIC, Status, Station, Area],
+    (error, results) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      res.status(200).json({ message: 'Data has been updated successfully' });
+    }
+  );
+};
 
 
 
@@ -166,5 +181,6 @@ module.exports = {
   PutValidation,
   PutFileValidation,
   PutUidValidation,
+  PutResponseValidation,
   PutStatusReturnValidation,
 };

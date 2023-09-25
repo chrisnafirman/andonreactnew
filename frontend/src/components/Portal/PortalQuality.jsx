@@ -6,7 +6,7 @@ const PortalQuality = () => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     useEffect(() => {
-        fetch('https://andonline.astra-visteon.com:3002/api/Validation')
+        fetch('http://192.168.101.12:3001/api/Validation')
             .then((response) => response.json())
             .then((data) => {
                 const filteredData = data.filter((item) => item.Status === '' && (item.DepartTo === 'QA' || item.DepartTo === 'QC'));

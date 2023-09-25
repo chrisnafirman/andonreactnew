@@ -87,7 +87,7 @@ router.put("/PutUidValidation", ValidationControllers.PutUidValidation);
 
 router.get("/Validation", ValidationControllers.getRequestValidation);
 
-
+router.put("/PutResponseValidation", ValidationControllers.PutResponseValidation);
 
 
 router.put("/PutFileValidation", ValidationControllers.PutFileValidation);

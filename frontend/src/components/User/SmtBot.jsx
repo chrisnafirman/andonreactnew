@@ -100,6 +100,7 @@ const SmtBot = () => {
   const [isOpenRequestValidation, setIsOpenRequestValidation] = useState(false);
   const [isOpenRequestValidationReturn, setIsOpenRequestValidationReturn] = useState(false);
   const [isOpenValidation, setIsOpenValidation] = useState(false);
+  const [isOpenInValidation, setIsOpenInValidation] = useState(false);
   const [isOpenValidationReturn, setIsOpenValidationReturn] = useState(false);
 
   // ----------------------
@@ -247,103 +248,6 @@ const SmtBot = () => {
     ref8.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusPrinterBot(data);
-      if (data === "Maintenance") {
-        const audio = new Audio("Sound.mp3");
-        audio.autoplay = true;
-        audio.play();
-        const link = "http://10.14.81.43:3003/RequestMaintenance";
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Printer (BOT) Status: DOWN - Please Check the Details In Department Side`;
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-              message
-            )}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return Maintenance") {
-        const audio = new Audio("Sound.mp3");
-        audio.autoplay = true;
-        audio.play();
-
-        const link = "http://10.14.81.43:3003/ReturnMaintenance";
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Return Maintenance SMT LINE 1 Printer (BOT) Status: DOWN - Please Check the Details In Department Side`;
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-              message
-            )}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-
-        });
-      } else if (data === "QC") {
-
-        const link = "http://10.14.81.43:3003/RequestQC";
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request Quality Control SMT LINE 1 Printer (BOT) Status: DOWN - Please Check the Details In Department Side`;
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-              message
-            )}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-
-        });
-      } else if (data === "QA") {
-
-        const link = "http://10.14.81.43:3003/RequestQA";
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request Quality Assurance SMT LINE 1 Printer (BOT) Status: DOWN - Please Check the Details In Department Side`;
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${encodeURIComponent(
-              message
-            )}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-
-        });
-      }
     });
 
     const ref9 = firebase.database().ref("SMTLine1BOT/SPI (BOT)");
@@ -531,7 +435,7 @@ const SmtBot = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
+          "http://192.168.101.12:3001/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -648,7 +552,7 @@ const SmtBot = () => {
   const updateStatusPrinterBot = (data) => {
     setStatusPrinterBot(data);
     setBackgroundColorStatusPrinterBot(
-        data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -696,7 +600,7 @@ const SmtBot = () => {
   const updateStatusSPIBot = (data) => {
     setStatusSPIBot(data);
     setBackgroundColorStatusSPIBot(
-        data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -744,7 +648,7 @@ const SmtBot = () => {
   const updateStatusPickNPlaceBot = (data) => {
     setStatusPickNPlaceBot(data);
     setBackgroundColorStatusPickNPlaceBot(
-        data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -792,7 +696,7 @@ const SmtBot = () => {
   const updateStatusReflowBot = (data) => {
     setStatusReflowBot(data);
     setBackgroundColorStatusReflowBot(
-        data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -840,7 +744,7 @@ const SmtBot = () => {
   const updateStatusAOIBot = (data) => {
     setStatusAOIBot(data);
     setBackgroundColorStatusAOIBot(
-        data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -888,7 +792,7 @@ const SmtBot = () => {
   const updateStatusRVSBot = (data) => {
     setStatusRVSBot(data);
     setBackgroundColorStatusRVSBot(
-        data === "Go"
+      data === "Go"
         ? "#32cd32"
         : data === "Repair"
           ? "#E9CE08"
@@ -1028,7 +932,7 @@ const SmtBot = () => {
 
 
   const fetchData = (endpoint, setDataFunction) => {
-    fetch(`https://andonline.astra-visteon.com:3002/api/${endpoint}`)
+    fetch(`http://192.168.101.12:3001/api/${endpoint}`)
       .then((response) => response.json())
       .then((data) => {
         setDataFunction(data);
@@ -1044,12 +948,12 @@ const SmtBot = () => {
       fetchPrinterBOTLeader,
       fetchPrinterBOTRepair,
       fetchPrinterBOTValidation,
- 
+
 
       fetchSPIBOTLeader,
       fetchSPIBOTRepair,
       fetchSPIBOTValidation,
- 
+
 
       fetchPickNPlaceBOTLeader,
       fetchPickNPlaceBOTRepair,
@@ -1064,7 +968,7 @@ const SmtBot = () => {
       fetchAOIBOTLeader,
       fetchAOIBOTRepair,
       fetchAOIBOTValidation,
- 
+
 
       fetchRVSBOTLeader,
       fetchRVSBOTRepair,
@@ -1242,11 +1146,15 @@ const SmtBot = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataPrinterBOTValidation);
                         setButton("PrinterBot");
-                      }  else if (StatusPrinterBot === "Return MAINTENANCE & IT" || StatusPrinterBot === "Return HRGA & EHS" || StatusPrinterBot === "Return PURCHASING,PPIC,MP&L" || StatusPrinterBot === "Return PROCESS ENGINEERING" || StatusPrinterBot === "Return PRODUCT DEVELOPMENT" || StatusPrinterBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                      } else if (StatusPrinterBot === "Return MAINTENANCE & IT" || StatusPrinterBot === "Return HRGA & EHS" || StatusPrinterBot === "Return PURCHASING,PPIC,MP&L" || StatusPrinterBot === "Return PROCESS ENGINEERING" || StatusPrinterBot === "Return PRODUCT DEVELOPMENT" || StatusPrinterBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataPrinterBOTRepair);
                         setButton("PrinterBot");
-                      }  else if (StatusPrinterBot === "Go") {
+                      } else if (StatusPrinterBot === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataPrinterBOTValidation);
+                        setButton("PrinterBot");
+                      } else if (StatusPrinterBot === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataPrinterBOTValidation);
                         setButton("PrinterBot");
@@ -1291,11 +1199,15 @@ const SmtBot = () => {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataSPIBOTValidation);
                         setButton("SPIBot");
-                      }  else if (StatusSPIBot === "Return MAINTENANCE & IT" || StatusSPIBot === "Return HRGA & EHS" || StatusSPIBot === "Return PURCHASING,PPIC,MP&L" || StatusSPIBot === "Return PROCESS ENGINEERING" || StatusSPIBot === "Return PRODUCT DEVELOPMENT" || StatusSPIBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                      } else if (StatusSPIBot === "Return MAINTENANCE & IT" || StatusSPIBot === "Return HRGA & EHS" || StatusSPIBot === "Return PURCHASING,PPIC,MP&L" || StatusSPIBot === "Return PROCESS ENGINEERING" || StatusSPIBot === "Return PRODUCT DEVELOPMENT" || StatusSPIBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataSPIBOTRepair);
                         setButton("SPIBot");
-                      }  else if (StatusSPIBot === "Go") {
+                      } else if (StatusSPIBot === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataSPIBOTValidation);
+                        setButton("SPIBot");
+                      } else if (StatusSPIBot === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataSPIBOTValidation);
                         setButton("SPIBot");
@@ -1342,11 +1254,15 @@ const SmtBot = () => {
                         setIsOpenReturn(true);
                         setOptionData(dataPickNPlaceBOTRepair);
                         setButton("PickNPlaceBot");
+                      } else if (StatusPickNPlaceBot === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataPickNPlaceBOTValidation);
+                        setButton("PickNPlaceBot");
                       } else if (StatusPickNPlaceBot === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataPickNPlaceBOTValidation);
                         setButton("PickNPlaceBot");
-                      } 
+                      }
                       setStation(PickNPlaceBot);
                     }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
@@ -1383,19 +1299,23 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataReflowBOTRepair);
                         setButton("ReflowBot");
-                      } else if (StatusReflowBot === "QA" || StatusReflowBot === "QC" || StatusReflowBot === "Production" ) {
+                      } else if (StatusReflowBot === "QA" || StatusReflowBot === "QC" || StatusReflowBot === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataReflowBOTValidation);
                         setButton("ReflowBot");
-                      }  else if (StatusReflowBot === "Return MAINTENANCE & IT" || StatusReflowBot === "Return HRGA & EHS" || StatusReflowBot === "Return PURCHASING,PPIC,MP&L" || StatusReflowBot === "Return PROCESS ENGINEERING" || StatusReflowBot === "Return PRODUCT DEVELOPMENT" || StatusReflowBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                      } else if (StatusReflowBot === "Return MAINTENANCE & IT" || StatusReflowBot === "Return HRGA & EHS" || StatusReflowBot === "Return PURCHASING,PPIC,MP&L" || StatusReflowBot === "Return PROCESS ENGINEERING" || StatusReflowBot === "Return PRODUCT DEVELOPMENT" || StatusReflowBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataReflowBOTRepair);
                         setButton("ReflowBot");
-                      }  else if (StatusReflowBot === "Go") {
+                      } else if (StatusReflowBot === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataReflowBOTValidation);
+                        setButton("ReflowBot");
+                      } else if (StatusReflowBot === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataReflowBOTValidation);
                         setButton("ReflowBot");
-                      } 
+                      }
                       setStation(ReflowBot);
                     }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
@@ -1437,19 +1357,23 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataAOIBOTRepair);
                         setButton("AOIBot");
-                      } else if (StatusAOIBot === "QA" || StatusAOIBot === "QC" || StatusAOIBot === "Production" ) {
+                      } else if (StatusAOIBot === "QA" || StatusAOIBot === "QC" || StatusAOIBot === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataAOIBOTValidation);
                         setButton("AOIBot");
-                      }  else if (StatusAOIBot === "Return MAINTENANCE & IT" || StatusAOIBot === "Return HRGA & EHS" || StatusAOIBot === "Return PURCHASING,PPIC,MP&L" || StatusAOIBot === "Return PROCESS ENGINEERING" || StatusAOIBot === "Return PRODUCT DEVELOPMENT" || StatusAOIBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                      } else if (StatusAOIBot === "Return MAINTENANCE & IT" || StatusAOIBot === "Return HRGA & EHS" || StatusAOIBot === "Return PURCHASING,PPIC,MP&L" || StatusAOIBot === "Return PROCESS ENGINEERING" || StatusAOIBot === "Return PRODUCT DEVELOPMENT" || StatusAOIBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataAOIBOTRepair);
                         setButton("AOIBot");
-                      }else if (StatusAOIBot === "Go") {
+                      } else if (StatusAOIBot === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataAOIBOTValidation);
+                        setButton("AOIBot");
+                      } else if (StatusAOIBot === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataAOIBOTValidation);
                         setButton("AOIBot");
-                      } 
+                      }
                       setStation(AOIBot);
                     }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
@@ -1484,19 +1408,23 @@ const SmtBot = () => {
                         setIsOpenRepair(true);
                         setOptionData(dataRVSBOTRepair);
                         setButton("RVSBot");
-                      } else if (StatusRVSBot === "QA" || StatusRVSBot === "QC" || StatusRVSBot === "Production" ) {
+                      } else if (StatusRVSBot === "QA" || StatusRVSBot === "QC" || StatusRVSBot === "Production") {
                         setIsOpenRequestValidation(true);
                         setOptionData(dataRVSBOTValidation);
                         setButton("RVSBot");
-                      }  else if (StatusRVSBot === "Return MAINTENANCE & IT" || StatusRVSBot === "Return HRGA & EHS" || StatusRVSBot === "Return PURCHASING,PPIC,MP&L" || StatusRVSBot === "Return PROCESS ENGINEERING" || StatusRVSBot === "Return PRODUCT DEVELOPMENT" || StatusRVSBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                      } else if (StatusRVSBot === "Return MAINTENANCE & IT" || StatusRVSBot === "Return HRGA & EHS" || StatusRVSBot === "Return PURCHASING,PPIC,MP&L" || StatusRVSBot === "Return PROCESS ENGINEERING" || StatusRVSBot === "Return PRODUCT DEVELOPMENT" || StatusRVSBot === "Return ADVANCED MANUFACTURING ENGINEERING") {
                         setIsOpenReturn(true);
                         setOptionData(dataRVSBOTRepair);
                         setButton("RVSBot");
-                      }  else if (StatusRVSBot === "Go") {
+                      } else if (StatusRVSBot === "In Validation") {
+                        setIsOpenInValidation(true);
+                        setOptionData(dataRVSBOTValidation);
+                        setButton("RVSBot");
+                      } else if (StatusRVSBot === "Go") {
                         setIsOpenValidation(true);
                         setOptionData(dataRVSBOTValidation);
                         setButton("RVSBot");
-                      } 
+                      }
                       setStation(RVSBot);
                     }}
                     class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
@@ -1512,7 +1440,7 @@ const SmtBot = () => {
         </div>
       </main>
 
-{/* Status Request Perbaikan  */}
+      {/* Status Request Perbaikan  */}
       {/*Pop up Request */}
       <td>
         {isOpenRequest ? (
@@ -1634,12 +1562,12 @@ const SmtBot = () => {
           </>
         ) : null}
       </td>
-{/* ---------------------- */}
+      {/* ---------------------- */}
 
 
 
 
-{/* Status Repair  */}
+      {/* Status Repair  */}
       {/*Pop up Repair  */}
       <td>
         {isOpenRepair ? (
@@ -1739,10 +1667,10 @@ const SmtBot = () => {
       </td>
 
 
-{/* ---------------------- */}
+      {/* ---------------------- */}
 
 
-{/* Status Return  */}
+      {/* Status Return  */}
       {/*Pop up Return */}
       <td>
         {isOpenReturn ? (
@@ -1862,12 +1790,12 @@ const SmtBot = () => {
           </>
         ) : null}
       </td>
-{/* ---------------------- */}
+      {/* ---------------------- */}
 
 
 
 
-{/* Status Request Validation */}
+      {/* Status Request Validation */}
       {/*Pop up Request Validation  */}
       <td>
         {isOpenRequestValidation ? (
@@ -2002,11 +1930,11 @@ const SmtBot = () => {
       </td>
 
 
- 
-{/* ------------------------------------- */}
+
+      {/* ------------------------------------- */}
 
 
-{/* Status Request Leader */}
+      {/* Status Request Leader */}
 
       {/*Pop up leader  */}
       <td>
@@ -2159,13 +2087,107 @@ const SmtBot = () => {
         ) : null}
       </td>
 
-{/* -------------- */}
+      {/* -------------- */}
 
 
 
+    {/* In Validation */}
+      <td>
+        {isOpenInValidation ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-start justify-center min-h-screen pt-32 px-4 pb-20 text-center sm:block sm:p-0">
+                <div
+                  className="inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg "
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="sm:flex sm:items-start">
+                    <form>
+                      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <button
+                          className="absolute top-0 right-0 p-2 text-gray-400 hover:text-gray-600"
+                          onClick={() => {
 
+                            setIsOpenInValidation(false);
+                          }}
+                        >
+                          <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
+                        <div class="p-6 text-center">
+                          <svg
+                            class="mx-auto mb-4 animate-pulse w-32 h-14 " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 1V5" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M19.4246 18.9246L16.5961 16.0962" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M22.5 11.5L18.5 11.5" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M12 18V22" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M7.40381 6.90381L4.57538 4.07538" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M5.5 11.5L1.5 11.5" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                            <path d="M7.40381 16.0962L4.57538 18.9246" stroke="#A7C7E7" stroke-width="1.7" stroke-linecap="round" />
+                          </svg>
 
-{/* Status GO Atau Valid */}
+                          <h3 class="mb-5 text-lg sm:text-sm lg:text-lg font-serif text-gray-500 dark:text-gray-400">
+                            <strong className="font-bold text-sm ">[{OptionData?.Uid || ""}]</strong> Sedang Dalam Proses Validation Oleh Team  {OptionData?.DepartTo || ""}
+                          </h3>
+
+                          <div className="flex flex-col mt-2">
+                            <div class="w-full px-3">
+                              <div className="w-full px-3">
+                                <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+                                  Down Time:
+                                </label>
+                                {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "PickNPlaceBotTop" || Button === "ReflowTop" || Button === "AOIBot" || Button === "RVSBot") && (
+                                  <input
+                                    type="text"
+                                    className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                    name="NamaPIC"
+                                    readOnly
+                                    value={
+                                      Button === "PrinterBot" ? TimePrinterBot :
+                                        Button === "SPIBot" ? TimeSPIBot :
+                                          Button === "PickNPlaceBot" ? TimePickNPlaceBot :
+                                            Button === "ReflowBot" ? TimeReflowBot :
+                                              Button === "AOIBot" ? TimeAOIBot :
+                                                Button === "RVSBot" ? TimeRVSBot :
+                                                  ""
+                                    }
+                                  />
+                                )}
+                              </div>
+                            </div>
+                            <span className="font-mono mt-2 text-gray-500 ">PIC Validation :  {OptionData?.ValidationName || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Request at :  {formatDateAPI(OptionData?.Date) || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Start at :  {formatDateAPI(OptionData?.ResponseValidation) || ""} </span>
+                          </div>
+                          <div class="flex justify-center mt-4">
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 z-0 bg-gray-500 opacity-75"></div>
+          </>
+        ) : null}
+      </td>
+
 
 
 
@@ -2228,11 +2250,12 @@ const SmtBot = () => {
 
 
                             </div>
-                            <span className="font-mono mt-2 text-gray-500 ">PIC Validation :  {OptionData?.ValidationName || ""} </span>
-                            <span className="font-mono mt-2 text-gray-500 ">Department :  {OptionData?.DepartTo || ""} </span>
-                            <span className="font-mono mt-2 text-gray-500 ">Requestor Validation :  {OptionData?.Requestor || ""} </span>
+                            <span className="font-mono mt-2 text-gray-500 ">Validation :  {OptionData?.ValidationName || ""} / {OptionData?.DepartTo || ""} </span>
                             <span className="font-mono mt-2 text-gray-500 ">Validation AT :  {formatDateAPI(OptionData?.ValidationDate) || ""} </span>
                             <span className="font-mono mt-2 text-gray-500 ">Validation Desc :  {OptionData?.ValidationDescription || ""} </span>
+                            <br />
+                            <span className="font-mono mt-2 text-gray-500 ">Repair PIC:  {OptionData?.Requestor || ""}</span>
+                            <span className="font-mono mt-2 text-gray-500 ">Problem Desc :  {OptionData?.Problem || ""} </span>
                           </div>
                         </div>
                       </div>
@@ -2246,7 +2269,7 @@ const SmtBot = () => {
           </>
         ) : null}
       </td>
-{/* -------- */}
+      {/* -------- */}
 
 
 
