@@ -98,7 +98,7 @@ const PortalOthers = () => {
 
             <div className="flex flex-col  items-center  h-screen ">
             <h1 className="text-4xl mt-5 text-[#2C2B27] font-serif mb-52 lg:mb-36" style={{ textShadow: '2px 2px 4px rgba(24,0,0,0.5)' }}>
-                    Andon
+                  Astra Visteon Indonesia [Andon]
                 </h1>
 
                 <div className="flex space-x-12">

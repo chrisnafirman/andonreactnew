@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import jsPDF from "jspdf";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import Select from "react-select";
@@ -17,9 +16,7 @@ const Quality = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [selectedDate, setSelectedDate] = useState("");
   const [showDrawer, setShowDrawer] = useState(false);
-  const [isOpenAction, setisOpenAction] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [IsOpenValidation, setIsOpenValidation] = useState(false);
   const [IsOpenReturn, setIsOpenReturn] = useState(false);
@@ -41,7 +38,6 @@ const Quality = () => {
   const [NamaPIC, setNamaPIC] = useState("");
   const [Desc, setDesc] = useState("");
   const [Kerusakan, setKerusakan] = useState("");
-  const [Action, setAction] = useState("");
 
   const [Line, setLine] = useState("");
 
@@ -81,178 +77,9 @@ const Quality = () => {
 
 
 
-  //  fungsi export to pdf
-  const exportToPDFRequest = () => {
-    const doc = new jsPDF("landscape");
-    const tableData = [];
+ 
 
-    // Header untuk tabel PDF
-    const headers = ["Uid", "Requestor", "Request at", "Nama", "Line", "Area", "Station", "Problem", "Action", "Validation To"];
-
-    // Warna teks header (abu-abu)
-    const headerStyles = {
-      fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-      textColor: 0, // Warna teks hitam (0)
-      fontStyle: "bold", // Teks header tebal
-    };
-
-    // Mengisi data tabel PDF dengan properti yang Anda inginkan
-    filteredData.forEach((item) => {
-      if (item.DepartTo === 'QA' || item.DepartTo === 'QC') {
-        const rowData = [
-          item.Uid,
-          item.Requestor,
-          item.Date,
-          item.Nama,
-          item.Line,
-          item.Area,
-          item.Station,
-          item.Problem,
-          item.Action,
-          item.DepartTo,
-        ];
-        tableData.push(rowData);
-      }
-    });
-
-    // Menambahkan logo perusahaan ke file PDF
-    const logoImg = new Image();
-    logoImg.src = process.env.PUBLIC_URL + "/avi.png";
-
-    // Mengukur logo sesuai dengan yang Anda inginkan
-    const logoWidth = 50; // Lebar logo
-    const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
-
-    doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
-
-    // Menambahkan teks di atas tabel dan di tengah-tengah
-    const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
-    const text = "Request Validation Quality [Andon Data]";
-    const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
-
-    const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
-    const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
-
-    doc.text(text, textX, textY);
-
-    const fontSize = 6;
-    // Membuat tabel PDF dengan menggunakan autotable
-    doc.autoTable({
-      head: [headers],
-      body: tableData,
-      startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
-      headStyles: {
-        fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-        textColor: 0, // Warna teks hitam (0)
-        fontStyle: fontSize, // Teks header tebal
-      },
-      columnStyles: {
-        9: { // Indeks 4 adalah kolom "Date"
-          textColor: [5, 150, 27], // Warna teks merah dalam format RGB
-        },
-        1: { // Indeks 4 adalah kolom "Date"
-          textColor: [159, 0, 0], // Warna teks merah dalam format RGB
-        },
-      },
-
-    });
-
-
-    // Menyimpan file PDF
-    doc.save(`Request Validation Quality [Andon Data].pdf`);
-  };
-
-  //  fungsi export to pdf
-  const exportToPDFValidation = () => {
-    const doc = new jsPDF("landscape");
-    const tableData = [];
-
-    // Header untuk tabel PDF
-    const headers = ["Uid", "Requestor ", "Request at", "Validation Department", "PIC", "Line", "Area", "Station", "Description", "Validation Status", "DownTime", "Validation Date", "Return To"];
-
-    // Warna teks header (abu-abu)
-    const headerStyles = {
-      fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-      textColor: 0, // Warna teks hitam (0)
-      fontStyle: "bold", // Teks header tebal
-    };
-
-    // Mengisi data tabel PDF dengan properti yang Anda inginkan
-    filteredData.forEach((item) => {
-      if (item.DepartTo === 'QA' || item.DepartTo === 'QC') {
-        const rowData = [
-          item.Uid,
-          item.Requestor,
-          item.Date,
-          item.DepartTo,
-          item.ValidationName,
-          item.Line,
-          item.Area,
-          item.Station,
-          item.ValidationDescription,
-          item.Status,
-          item.DownTime,
-          formatDateTimeAPI(item.ValidationDate),
-          item.ReturnDepartment,
-        ];
-        tableData.push(rowData);
-      }
-    });
-
-    // Menambahkan logo perusahaan ke file PDF
-    const logoImg = new Image();
-    logoImg.src = process.env.PUBLIC_URL + "/avi.png";
-
-    // Mengukur logo sesuai dengan yang Anda inginkan
-    const logoWidth = 50; // Lebar logo
-    const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
-
-    doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
-
-    // Menambahkan teks di atas tabel dan di tengah-tengah
-    const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
-    const text = "Validation Quality [Andon Data]";
-    const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
-
-    const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
-    const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
-
-    doc.text(text, textX, textY);
-
-    const fontSize = 7; // Atur ukuran font yang diinginkan
-    const scaleFactor = 2; //
-    // Membuat tabel PDF dengan menggunakan autotable
-    doc.autoTable({
-      head: [headers],
-      body: tableData,
-      startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
-      headStyles: {
-        fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-        textColor: 0, // Warna teks hitam (0)
-        fontStyle: "bold", // Teks header tebal
-      },
-      columnStyles: {
-        3: { // Indeks 3 adalah kolom "Date"
-          textColor: [5, 150, 27], // Warna teks merah dalam format RGB
-        },
-        1: { // Indeks 0 adalah kolom "Date"
-          textColor: [159, 0, 0], // Warna teks merah dalam format RGB
-        },
-        9: { // Indeks 7 adalah kolom yang ingin Anda ubah menjadi huruf kapital dan bold
-          fontStyle: 'bold', // Mengatur teks menjadi bold
-        },
-      },
-      styles: {
-        fontSize: fontSize, // Atur ukuran font
-      },
-    });
-
-
-    // Menyimpan file PDF
-    doc.save(`Validation Quality [Andon Data].pdf`);
-  };
-
-
+ 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
@@ -400,8 +227,7 @@ const Quality = () => {
         Uid: Uid,
       };
   
-      alert("Return Telah Berhasil Di Kirim Ke Team Terkait");
-  
+      alert("Return Perbaikan Telah Di Kirim Ke Team Terkait");
       firebase.database().ref(`SMTLine1${AreaFirebase}/${Station}`).set(`Return ${Department}`);
       firebase.database().ref("StatusLine/SMTLine1").set("Down");
       setStation(null);
@@ -583,7 +409,7 @@ const Quality = () => {
             <a href="/PortalQuality">
               <div class="flex-shrink-0">
                 <img
-                  src={process.env.PUBLIC_URL + "/smt.jpeg"}
+                  src={process.env.PUBLIC_URL + "/avi.png"}
                   alt="Logo"
                   class="h-6 ml-4 sm:h-9 bg-white rounded-md"
                 />
@@ -1792,19 +1618,22 @@ const Quality = () => {
                         </div>
 
                         <div className="flex justify-center">
+                          <a href="/ReportReq">
                           <button
-                            onClick={exportToPDFRequest}
-                            className="bg-blue-900 w-28 h-16 hover:bg-blue-700  text-white font-bold py-2 px-4  rounded mr-2"
+                            
+                            className="bg-lime-600 w-28 h-16 hover:bg-lime-700  text-white font-bold py-2 px-4  rounded mr-2"
                           >
-                            Request
+                            REQ
                           </button>
+                          </a>
+                          <a href="ReportRtn">
                           <button
-                            onClick={exportToPDFValidation}
-                            className="bg-lime-700 w-28 h-16 hover:bg-lime-400 text-white font-bold py-2 px-4 ml-16 rounded"
-                          >
-                            Validation
-                          </button>
 
+                            className="bg-yellow-400 w-28 h-16 hover:bg-yellow-400 text-white font-bold py-2 px-4 ml-16 rounded"
+                          >
+                            RTN
+                          </button>
+                          </a>
                         </div>
                       </div>
                     </div>

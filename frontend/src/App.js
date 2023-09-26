@@ -40,6 +40,8 @@ import ValidationProduction from "./components/Production/ValidationProduction.j
 import UserMobile from "./components/User/UserMobile.jsx"
 import UserSMTTop from "./components/User/SmtTop.jsx"
 import UserSMTBot from "./components/User/SmtBot.jsx"
+import UserSMTLine1 from "./components/User/SMTLine1.jsx"
+
 import UserSMTBe from "./components/User/SmtBe.jsx"
 import UserHome from "./components/User/Home.jsx"
 
@@ -99,7 +101,7 @@ import QRResponseProductionBe from "./components/QR/QRBe/Production/QRResponsePr
 // 
 
 import PortalMaintenance from "./components/Portal/PortalMaintenance.jsx"
-import PortalLeader from "./components/Portal/PortalLeader.jsx"
+import PortalProduction from "./components/Portal/PortalProduction.jsx"
 import PortalQuality from "./components/Portal/PortalQuality.jsx"
 import PortalOthers from "./components/Portal/PortalOthers.jsx"
 
@@ -133,6 +135,7 @@ function App() {
         <Route path="UserSMTTop" element={<UserSMTTop />} />
         <Route path="UserSMTBe" element={<UserSMTBe />} />
         <Route path="UserSMTBot" element={<UserSMTBot />} />
+        <Route path="UserSMTLine1" element={<UserSMTLine1 />} />
         <Route path="UserHome" element={<UserHome />} />
 
         <Route path="SMTLine1Controller" element={<SmtLine1Controller />} />
@@ -212,7 +215,7 @@ function App() {
         {/*  */}
 
         <Route path="PortalMaintenance" element={<PortalMaintenance />} />
-        <Route path="PortalLeader" element={<PortalLeader />} />
+        <Route path="PortalProduction" element={<PortalProduction />} />
         <Route path="PortalQuality" element={<PortalQuality />} />
         <Route path="PortalOthers" element={<PortalOthers />} />
 

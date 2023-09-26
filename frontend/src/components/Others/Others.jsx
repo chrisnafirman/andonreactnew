@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import Select from "react-select";
-import { Link } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
@@ -89,165 +86,7 @@ const Others = () => {
   const formattedTime = `${currentTime.getDate()}/${currentTime.getMonth() + 1
     }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
-  //  fungsi export to pdf
-  const exportToPDFRequest = () => {
-    const doc = new jsPDF("landscape");
-    const tableData = [];
-
-    // Header untuk tabel PDF
-    const headers = ["Uid", "Requestor", "Request at", "Requestor PIC", "Line", "Area", "Station", "Problem"];
-
-    // Warna teks header (abu-abu)
-    const headerStyles = {
-      fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-      textColor: 0, // Warna teks hitam (0)
-      fontStyle: "bold", // Teks header tebal
-    };
-
-    // Mengisi data tabel PDF dengan properti yang Anda inginkan
-    filteredData.forEach((item) => {
-      const rowData = [
-        item.Uid,
-        item.Requestor,
-        item.Date,
-        item.Nama,
-        item.Line,
-        item.Area,
-        item.Station,
-        item.Problem,
-      ];
-      tableData.push(rowData);
-    });
-
-    // Menambahkan logo perusahaan ke file PDF
-    const logoImg = new Image();
-    logoImg.src = process.env.PUBLIC_URL + "/avi.png";
-
-    // Mengukur logo sesuai dengan yang Anda inginkan
-    const logoWidth = 50; // Lebar logo
-    const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
-
-    doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
-
-    // Menambahkan teks di atas tabel dan di tengah-tengah
-    const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
-    const text = "Request Repairment [Andon Data]";
-    const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
-
-    const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
-    const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
-
-    doc.text(text, textX, textY);
-
-    const fontSize = 6;
-    // Membuat tabel PDF dengan menggunakan autotable
-    doc.autoTable({
-      head: [headers],
-      body: tableData,
-      startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
-      headStyles: {
-        fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-        textColor: 0, // Warna teks hitam (0)
-        fontStyle: fontSize, // Teks header tebal
-      },
-      columnStyles: {
-        1: { // Indeks 4 adalah kolom "Date"
-          textColor: [159, 0, 0], // Warna teks merah dalam format RGB
-        },
-      },
-
-    });
-
-
-    // Menyimpan file PDF
-    doc.save(`Request Repairment  [Andon Data].pdf`);
-  };
-
-  //  fungsi export to pdf
-  const exportToPDFRepair = () => {
-    const doc = new jsPDF("landscape");
-    const tableData = [];
-
-    // Header untuk tabel PDF
-    const headers = ["Uid", "Requestor", "Request at", "Repair PIC", "Line", "Area", "Station", "Status", "Problem", "Repair Start", "Forward To", "Forward at"];
-
-    // Warna teks header (abu-abu)
-    const headerStyles = {
-      fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-      textColor: 0, // Warna teks hitam (0)
-      fontStyle: "bold", // Teks header tebal
-    };
-
-    // Mengisi data tabel PDF dengan properti yang Anda inginkan
-    filteredData.forEach((item) => {
-      const Requestat = `${item.Date} WIB`;
-      const rowData = [
-        item.Uid,
-        item.Requestor,
-        Requestat,
-        item.ResponseName,
-        item.Line,
-        item.Area,
-        item.Station,
-        item.Status,
-        item.Problem,
-        formatDateTimeAPI(item.ResponseTime),
-        item.DepartTo,
-        formatDateTimeAPI(item.ResponseDone),
-      ];
-      tableData.push(rowData);
-    });
-
-    // Menambahkan logo perusahaan ke file PDF
-    const logoImg = new Image();
-    logoImg.src = process.env.PUBLIC_URL + "/avi.png";
-
-    // Mengukur logo sesuai dengan yang Anda inginkan
-    const logoWidth = 50; // Lebar logo
-    const logoHeight = (logoWidth / logoImg.width) * logoImg.height; // Menghitung tinggi logo sesuai dengan lebar yang diinginkan
-
-    doc.addImage(logoImg, "JPEG", 10, 10, logoWidth, logoHeight); // Tambahkan logo pada koordinat (10, 10) dengan ukuran yang sesuai
-
-    // Menambahkan teks di atas tabel dan di tengah-tengah
-    const pageWidth = doc.internal.pageSize.getWidth(); // Lebar halaman PDF
-    const text = "Repairment PIC [Andon Data]";
-    const textWidth = doc.getStringUnitWidth(text) * doc.internal.getFontSize() / doc.internal.scaleFactor; // Lebar teks
-
-    const textX = (pageWidth - textWidth) / 2; // Pusat teks secara horizontal
-    const textY = 10 + logoHeight + 10; // Atas tabel dan tambahkan jarak 20 satuan
-
-    doc.text(text, textX, textY);
-
-    const fontSize = 8; // Atur ukuran font yang diinginkan
-    const scaleFactor = 2;
-    // Membuat tabel PDF dengan menggunakan autotable
-    doc.autoTable({
-      head: [headers],
-      body: tableData,
-      startY: textY + 10, // Mulai tabel setelah teks dan tambahkan jarak 10
-      headStyles: {
-        fillColor: [192, 192, 192], // Warna abu-abu dalam format RGB
-        textColor: 0, // Warna teks hitam (0)
-        fontStyle: fontSize, // Teks header tebal
-      },
-      columnStyles: {
-        10: { // Indeks 4 adalah kolom "Date"
-          textColor: [5, 150, 27], // Warna teks merah dalam format RGB
-        },
-        1: { // Indeks 4 adalah kolom "Date"
-          textColor: [159, 0, 0], // Warna teks merah dalam format RGB
-        },
-      },
-      styles: {
-        fontSize: fontSize, // Atur ukuran font
-      },
-    });
-
-
-
-    // Menyimpan file PDF
-    doc.save(`Repairment PIC [Andon Data].pdf`);
-  };
+  
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
@@ -468,7 +307,7 @@ const Others = () => {
             <a href="/PortalOthers">
               <div class="flex-shrink-0">
                 <img
-                  src={process.env.PUBLIC_URL + "/smt.jpeg"}
+                  src={process.env.PUBLIC_URL + "/avi.png"}
                   alt="Logo"
                   class="h-6 ml-4 sm:h-9 bg-white rounded-md"
                 />
@@ -1341,75 +1180,78 @@ const Others = () => {
           ) : null}
         </td>
         <td class="">
-          {isExportOption ? (
-            <>
-              <div className="fixed z-10 inset-0 overflow-y-auto">
-                <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-96 text-center sm:block sm:p-0">
-                  <div className="fixed inset-0 transition-opacity">
-                    <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
-                  </div>
+        {isExportOption ? (
+          <>
+            <div className="fixed z-10 inset-0 overflow-y-auto">
+              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-96 text-center sm:block sm:p-0">
+                <div className="fixed inset-0 transition-opacity">
+                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
+                </div>
 
-                  <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
 
-                  <div
-                    className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                    role="dialog"
-                    aria-modal="true"
-                    aria-labelledby="modal-headline"
-                  >
-                    <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                      <div className="sm:flex sm:items-start">
-                        <div className="flex justify-end">
-                          <button
-                            onClick={() => setisExportOption(false)}
-                            className="absolute top-0 right-0 mt-2 mr-2"
+                <div
+                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="modal-headline"
+                >
+                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                    <div className="sm:flex sm:items-start">
+                      <div className="flex justify-end">
+                        <button
+                          onClick={() => setisExportOption(false)}
+                          className="absolute top-0 right-0 mt-2 mr-2"
+                        >
+                          <svg
+                            className="h-6 w-6 text-gray-500"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
                           >
-                            <svg
-                              className="h-6 w-6 text-gray-500"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M6 18L18 6M6 6l12 12"
-                              />
-                            </svg>
-                          </button>
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+
+                      <div className="w-full h-60 max-w-lg">
+                        <div className="justify-center mb-20 items-center flex font-bold uppercase text-black">
+                          <span>Pilih</span>
                         </div>
 
-                        <div className="w-full h-60 max-w-lg">
-                          <div className="justify-center mb-20 items-center flex font-bold uppercase text-black">
-                            <span>Pilih</span>
-                          </div>
+                        <div className="flex justify-center">
+                          <a href="/ReportReq">
+                          <button
+                            
+                            className="bg-lime-600 w-28 h-16 hover:bg-lime-700  text-white font-bold py-2 px-4  rounded mr-2"
+                          >
+                            REQ
+                          </button>
+                          </a>
+                          <a href="ReportRtn">
+                          <button
 
-                          <div className="flex justify-center">
-                            <button
-                              onClick={exportToPDFRequest}
-                              className="bg-blue-900 w-28 h-16 hover:bg-blue-700  text-white font-bold py-2 px-4  rounded mr-2"
-                            >
-                              Request
-                            </button>
-                            <button
-                              onClick={exportToPDFRepair}
-                              className="bg-yellow-400 w-28 h-16 hover:bg-yellow-400 text-white font-bold py-2 px-4 ml-16 rounded"
-                            >
-                              Repair
-                            </button>
-
-                          </div>
+                            className="bg-yellow-400 w-28 h-16 hover:bg-yellow-400 text-white font-bold py-2 px-4 ml-16 rounded"
+                          >
+                            RTN
+                          </button>
+                          </a>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </>
-          ) : null}
-        </td>
+            </div>
+          </>
+        ) : null}
+      </td>
       </main>
     </body>
   );

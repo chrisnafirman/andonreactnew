@@ -47,6 +47,7 @@ const RouterBE = require("../controller/SMTBEDATA/RouterBE")
 router.post("/Leader", LDRControllers.postRequestLeader);
 router.get("/Leader", LDRControllers.getRequestLeader);
 router.put("/PutStatusLeader", LDRControllers.PutStatusLeader);
+router.put("/PutRejectStatusLeader", LDRControllers.PutRejectStatusLeader);
 router.delete("/leader/:id", LDRControllers.DeleteReject);
 router.put("/PutUidLeader", LDRControllers.PutUidLeader);
 

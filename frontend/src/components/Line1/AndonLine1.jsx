@@ -1499,7 +1499,7 @@ if (urlParams.get('refresh') === 'true') {
             <a href="/Andonline1">
               <div class="flex-shrink-0">
                 <img
-                  src={process.env.PUBLIC_URL + "/smt.jpeg"}
+                  src={process.env.PUBLIC_URL + "/avi.png"}
                   alt="Logo"
                   class="h-6 ml-4 sm:h-9 bg-white rounded-md"
                 />

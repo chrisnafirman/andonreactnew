@@ -3,6 +3,8 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
+import * as ExcelJS from 'exceljs';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
@@ -59,7 +61,7 @@ const ReuestLeader = () => {
     const tableData = [];
 
     // Header untuk tabel PDF
-    const headers = ["Uid", "Return at", "Return From", "Requestor ", "Line", "Station", "Start Repair", "Repair By", "Problem", "Action", "Repair Done", "Validation", "Validation PIC", "Validation At", "Validation Status", "Description", "Total Downtime", "Return To" , "Return Id"];
+    const headers = ["Uid", "Return at", "Return From", "Requestor ", "Line", "Station", "Start Repair", "Repair PIC", "Problem", "Action", "End Repair", "Validation", "Validation PIC", "Start Validation", "End Validation", "Station Status", "Description", "Total Downtime", "Return To" , "Return Id"];
 
   
     // Mengisi data tabel PDF dengan properti yang Anda inginkan
@@ -78,6 +80,7 @@ const ReuestLeader = () => {
         formatDateTimeAPI(item.DoneRepair),
         item.ValidationDepartment,
         item.ValidationBy,
+        formatDateTimeAPI(item.StartValidation),
         formatDateTimeAPI(item.ValidationAt),
         item.ValidationStatus,
         item.Description,
@@ -121,7 +124,7 @@ const ReuestLeader = () => {
         fontStyle: fontSize, // Teks header tebal
       },
       columnStyles: {
-        14: { // Indeks 14 adalah kolom "Validation Status"
+        18: { // Indeks 14 adalah kolom "Validation Status"
           fontSize: 5,
           fontStyle: 'bold', // Mengatur teks tebal (bold)
         },
@@ -138,7 +141,54 @@ const ReuestLeader = () => {
 
 
 
-
+  const exportToExcel = () => {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Data');
+  
+    const headers = ["Uid", "Return at", "Return From", "Requestor ", "Line", "Station", "Start Repair", "Repair PIC", "Problem", "Action", "End Repair", "Validation", "Validation PIC", "Start Validation", "End Validation", "Station Status", "Description", "Total Downtime", "Return To" , "Return Id"];
+  
+    worksheet.addRow(headers);
+  
+    filteredData.forEach((item) => {
+      const rowData = [
+        item.Uid,
+        formatDateTimeAPI(item.ReturnAt),
+        item.ReuestorDeparment,
+        item.RequestorName,
+        item.Line,
+        item.Station,
+        formatDateTimeAPI(item.StartRepair),
+        item.RepairBy,
+        item.ProblemDesc,
+        item.ActionDesc,
+        formatDateTimeAPI(item.DoneRepair),
+        item.ValidationDepartment,
+        item.ValidationBy,
+        formatDateTimeAPI(item.StartValidation),
+        formatDateTimeAPI(item.ValidationAt),
+        item.ValidationStatus,
+        item.Description,
+        item.TotalDowntime,
+        item.ReturnTo,
+        item.ReturnId
+      ];
+      worksheet.addRow(rowData);
+    });
+  
+    workbook.xlsx.writeBuffer().then((buffer) => {
+      const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const url = window.URL.createObjectURL(blob);
+  
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Report Case Return [RTN].xlsx';
+  
+      a.click();
+  
+      window.URL.revokeObjectURL(url);
+    });
+  };
+  
 
 
 
@@ -212,6 +262,7 @@ const ReuestLeader = () => {
           item.ReturnTo = item.ReturnDepartment;
           item.ReturnId = item.UidReturn;
           item.Description = item.ValidationDescription;
+          item.StartValidation = item.ResponseValidation;
         });
         setValidationData(json);
       });
@@ -280,6 +331,7 @@ const ReuestLeader = () => {
           Description: validationItem.Description,
           ReturnTo: validationItem.ReturnTo,
           ReturnId: validationItem.ReturnId,
+          StartValidation: validationItem.StartValidation,
 
         };
       } else {
@@ -289,6 +341,7 @@ const ReuestLeader = () => {
     });
   
     setFilteredData(mergedData);
+    mergedData.sort((a, b) => Date.parse(b.ReturnAt) - Date.parse(a.ReturnAt));
   }, [validationData, repairData]);
   
   
@@ -298,7 +351,7 @@ const ReuestLeader = () => {
 
 
   const styles = {
-    background: "linear-gradient(45deg, #000, #8a8b90, #7085ed)",
+    background: "linear-gradient(45deg, #000, #8a8b90, #5D6D7E )",
     height: "1000px",
   };
 
@@ -310,7 +363,7 @@ const ReuestLeader = () => {
             <a href="/PortalLeader">
               <div class="flex-shrink-0">
                 <img
-                  src={process.env.PUBLIC_URL + "/smt.jpeg"}
+                  src={process.env.PUBLIC_URL + "/avi.png"}
                   alt="Logo"
                   class="h-6 ml-4 sm:h-9 bg-white rounded-md"
                 />
@@ -413,6 +466,7 @@ const ReuestLeader = () => {
                 <div className="font-mono text-lg text-center text-gray-800">
                   Report RTN
                 </div>
+                <div className="flex space-x-2">
                 <button className="flex text-sm" onClick={exportToPDF}>
                   <img
                     className="w-[30px]"
@@ -420,6 +474,14 @@ const ReuestLeader = () => {
                     alt=""
                   />
                 </button>
+                <button className="flex text-sm" onClick={exportToExcel}>
+                  <img
+                    className="w-[35px]"
+                    src={process.env.PUBLIC_URL + "/excel.png"}
+                    alt=""
+                  />
+                </button>
+                </div>
               </header>
 
               <div
@@ -467,6 +529,9 @@ const ReuestLeader = () => {
                       </th>
                       <th className="p-1 min-w-[180px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Validation By</div>
+                      </th>
+                      <th className="p-1 min-w-[180px] whitespace-no-wrap overflow-x-auto">
+                        <div className="text-center flex">Start Validation</div>
                       </th>
                       <th className="p-1 min-w-[180px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Validation At</div>
@@ -558,6 +623,11 @@ const ReuestLeader = () => {
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
                             {item.ValidationBy}
+                          </div>
+                        </td>
+                        <td className="p-2">
+                          <div className="font-sans text-gray-800">
+                            {formatDateTimeAPI(item.StartValidation)}
                           </div>
                         </td>
                         <td className="p-2">
