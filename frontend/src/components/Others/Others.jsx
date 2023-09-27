@@ -86,7 +86,7 @@ const Others = () => {
   const formattedTime = `${currentTime.getDate()}/${currentTime.getMonth() + 1
     }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
-  
+
 
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
@@ -436,6 +436,9 @@ const Others = () => {
                       <th className="p-1 w-10 lg:w-32">
                         <div className="font-sans lg:font-semibold text-left">Requestor</div>
                       </th>
+                      <th className="p-1 w-10 lg:w-32">
+                        <div className="font-sans lg:font-semibold text-left">Request To</div>
+                      </th>
                       <th className="p-1  w-20 lg:w-28">
                         <div className="font-semibold text-left">Line</div>
                       </th>
@@ -469,6 +472,11 @@ const Others = () => {
                             <td className="p-2">
                               <div className="font-sans text-xs lg:text-sm text-gray-800">
                                 {item.Requestor}
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="font-sans text-xs lg:text-sm text-gray-800">
+                                {item.Department}
                               </div>
                             </td>
                             <td className="p-2">
@@ -1087,7 +1095,7 @@ const Others = () => {
                                 class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
                                 for="grid-city"
                               >
-                               Start Repair 
+                                Start Repair
                               </label>
                               <div
                                 class="appearance-none block w-52 bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -1128,7 +1136,7 @@ const Others = () => {
                               {selectedItem.Problem}
                             </div>
                           </div>
-                         
+
                         </div>
 
 
@@ -1180,78 +1188,78 @@ const Others = () => {
           ) : null}
         </td>
         <td class="">
-        {isExportOption ? (
-          <>
-            <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-96 text-center sm:block sm:p-0">
-                <div className="fixed inset-0 transition-opacity">
-                  <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
-                </div>
+          {isExportOption ? (
+            <>
+              <div className="fixed z-10 inset-0 overflow-y-auto">
+                <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-96 text-center sm:block sm:p-0">
+                  <div className="fixed inset-0 transition-opacity">
+                    <div className="absolute inset-0 bg-slate-800 opacity-75"></div>
+                  </div>
 
-                <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
+                  <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
 
-                <div
-                  className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
-                >
-                  <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <div className="flex justify-end">
-                        <button
-                          onClick={() => setisExportOption(false)}
-                          className="absolute top-0 right-0 mt-2 mr-2"
-                        >
-                          <svg
-                            className="h-6 w-6 text-gray-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
+                  <div
+                    className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="modal-headline"
+                  >
+                    <div className="bg-white px-4 pt-1 pb-4 sm:p-6 sm:pb-4">
+                      <div className="sm:flex sm:items-start">
+                        <div className="flex justify-end">
+                          <button
+                            onClick={() => setisExportOption(false)}
+                            className="absolute top-0 right-0 mt-2 mr-2"
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M6 18L18 6M6 6l12 12"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-
-                      <div className="w-full h-60 max-w-lg">
-                        <div className="justify-center mb-20 items-center flex font-bold uppercase text-black">
-                          <span>Pilih</span>
+                            <svg
+                              className="h-6 w-6 text-gray-500"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            </svg>
+                          </button>
                         </div>
 
-                        <div className="flex justify-center">
-                          <a href="/ReportReq">
-                          <button
-                            
-                            className="bg-lime-600 w-28 h-16 hover:bg-lime-700  text-white font-bold py-2 px-4  rounded mr-2"
-                          >
-                            REQ
-                          </button>
-                          </a>
-                          <a href="ReportRtn">
-                          <button
+                        <div className="w-full h-60 max-w-lg">
+                          <div className="justify-center mb-20 items-center flex font-bold uppercase text-black">
+                            <span>Pilih</span>
+                          </div>
 
-                            className="bg-yellow-400 w-28 h-16 hover:bg-yellow-400 text-white font-bold py-2 px-4 ml-16 rounded"
-                          >
-                            RTN
-                          </button>
-                          </a>
+                          <div className="flex justify-center">
+                            <a href="/ReportReq">
+                              <button
+
+                                className="bg-lime-600 w-28 h-16 hover:bg-lime-700  text-white font-bold py-2 px-4  rounded mr-2"
+                              >
+                                REQ
+                              </button>
+                            </a>
+                            <a href="ReportRtn">
+                              <button
+
+                                className="bg-yellow-400 w-28 h-16 hover:bg-yellow-400 text-white font-bold py-2 px-4 ml-16 rounded"
+                              >
+                                RTN
+                              </button>
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </>
-        ) : null}
-      </td>
+            </>
+          ) : null}
+        </td>
       </main>
     </body>
   );
