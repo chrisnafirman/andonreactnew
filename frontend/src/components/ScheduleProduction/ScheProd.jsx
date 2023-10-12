@@ -3,9 +3,9 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
   databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -41,7 +41,7 @@ const SmtTop = () => {
   }
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/ScheduleProduction")
+    fetch("https://andonline.astra-visteon.com:3002/api/ScheduleProduction")
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti timestamp menjadi tanggal dan PDATE
@@ -68,7 +68,7 @@ const SmtTop = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://192.168.101.12:3001/api/ScheduleProduction?date=${selectedDate}`)
+    fetch(`https://andonline.astra-visteon.com:3002/api/ScheduleProduction?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti PDATE menjadi tanggal saja
@@ -131,7 +131,7 @@ const SmtTop = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.12:3001/api/ScheduleProduction"
+          "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir

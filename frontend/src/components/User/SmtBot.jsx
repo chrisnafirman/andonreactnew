@@ -4,9 +4,9 @@ import "firebase/compat/database";
 import Select from "react-select";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
   databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -157,6 +157,9 @@ const SmtBot = () => {
   const [dataRVSBOTLeader, setDataRVSBOTLeader] = useState(null);
   const [dataRVSBOTRepair, setDataRVSBOTRepair] = useState(null);
   const [dataRVSBOTValidation, setDataRVSBOTValidation] = useState(null);
+
+
+  
 
   // -----------------
 
@@ -435,7 +438,7 @@ const SmtBot = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.12:3001/api/ScheduleProduction"
+          "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -932,7 +935,7 @@ const SmtBot = () => {
 
 
   const fetchData = (endpoint, setDataFunction) => {
-    fetch(`http://192.168.101.12:3001/api/${endpoint}`)
+    fetch(`https://andonline.astra-visteon.com:3002/api/${endpoint}`)
       .then((response) => response.json())
       .then((data) => {
         setDataFunction(data);
@@ -1525,7 +1528,7 @@ const SmtBot = () => {
                             <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                               Down Time:
                             </label>
-                            {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "PickNPlaceBotTop" || Button === "ReflowTop" || Button === "AOIBot" || Button === "RVSBot") && (
+                            {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot") && (
                               <input
                                 type="text"
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -1626,7 +1629,7 @@ const SmtBot = () => {
                                 <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                                   Down Time:
                                 </label>
-                                {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "PickNPlaceBotTop" || Button === "ReflowTop" || Button === "AOIBot" || Button === "RVSBot") && (
+                                {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot") && (
                                   <input
                                     type="text"
                                     className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -1757,7 +1760,7 @@ const SmtBot = () => {
                             <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                               Down Time:
                             </label>
-                            {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "PickNPlaceBotTop" || Button === "ReflowTop" || Button === "AOIBot" || Button === "RVSBot") && (
+                            {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot") && (
                               <input
                                 type="text"
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -1894,7 +1897,7 @@ const SmtBot = () => {
                             <label class="block tracking-wide text-gray-700 text-xs font-bold ">
                               Down Time:
                             </label>
-                            {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "PickNPlaceBotTop" || Button === "ReflowTop" || Button === "AOIBot" || Button === "RVSBot") && (
+                            {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot") && (
                               <input
                                 type="text"
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -2052,7 +2055,7 @@ const SmtBot = () => {
                             <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                               Down Time:
                             </label>
-                            {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "PickNPlaceBotTop" || Button === "ReflowTop" || Button === "AOIBot" || Button === "RVSBot") && (
+                            {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot") && (
                               <input
                                 type="text"
                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -2150,7 +2153,7 @@ const SmtBot = () => {
                                 <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                                   Down Time:
                                 </label>
-                                {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "PickNPlaceBotTop" || Button === "ReflowTop" || Button === "AOIBot" || Button === "RVSBot") && (
+                                {(Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot") && (
                                   <input
                                     type="text"
                                     className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"

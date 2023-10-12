@@ -10,7 +10,7 @@ const PortalProduction = () => {
 
     useEffect(() => {
         // Mengambil data status dari API yang memiliki Status kosong dan DepartTo adalah "Production Leader"
-        fetch('http://192.168.101.12:3001/api/Leader')
+        fetch('https://andonline.astra-visteon.com:3002/api/Leader')
             .then((response) => response.json())
             .then((data) => {
                 const filteredData = data.filter((item) => item.Status === '');
@@ -24,7 +24,7 @@ const PortalProduction = () => {
             });
 
         // Mengambil data validation dari API yang memiliki Status kosong dan DepartTo adalah "Production"
-        fetch('http://192.168.101.12:3001/api/Validation')
+        fetch('https://andonline.astra-visteon.com:3002/api/Validation')
             .then((response) => response.json())
             .then((data) => {
                 const filteredData = data.filter((item) => item.Status === '' && (item.DepartTo === 'Production'));

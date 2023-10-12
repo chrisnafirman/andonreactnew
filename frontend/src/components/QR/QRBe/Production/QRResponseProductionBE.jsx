@@ -5,9 +5,9 @@ import Select from "react-select";
 import QRScannerPopup from "../../QR";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
   databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -47,12 +47,12 @@ function QRResponseValidationProductionBE() {
     console.log("Sending data:", data);
 
     alert("Response Telah Di Terima Selamat Bekerja");
-
+    notificationValidation();
     firebase.database().ref(`SMTLine1BE/${Station}`).set("In Validation");
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.12:3001/api/PutResponseValidation`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/PutResponseValidation`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -116,6 +116,31 @@ function QRResponseValidationProductionBE() {
       window.location.href = '/ValidationProduction'; // Ganti dengan URL halaman tujuan
     }, 3000); // 5000 milidetik sama dengan 5 detik
   };
+
+  const notificationValidation = () => {
+
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+    const chatIds = [-950877102];
+    const message = `!! Attention SMT LINE 1 In Validation Production !!%0A%0AValidation By : ${NamaPIC}%0AStation : ${Station}`;
+
+    const escapedMessage = message.replace(/&/g, '%26');
+
+    chatIds.forEach((chatId) => {
+      fetch(
+        `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error sending telegram message");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+
+  }
+
 
   return (
     <body style={styles}>

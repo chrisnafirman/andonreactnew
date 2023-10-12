@@ -3,9 +3,9 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
   databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -85,7 +85,7 @@ const ReuestLeader = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Leader")
+    fetch("https://andonline.astra-visteon.com:3002/api/Leader")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -143,7 +143,7 @@ const ReuestLeader = () => {
 
 
   const handelReject = () => {
-    if (!Area || !Station || !Uid || !Status) {
+    if (!Station || !Uid || !Status) {
       return;
     }
 
@@ -159,7 +159,7 @@ const ReuestLeader = () => {
     firebase.database().ref(`SMTLine1${AreaFirebase}/${Station}`).set(`Go`);
     firebase.database().ref("StatusLine/SMTLine1").set("Running");
 
-    fetch(`http://192.168.101.12:3001/api/PutRejectStatusLeader`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/PutRejectStatusLeader`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -218,6 +218,34 @@ const ReuestLeader = () => {
       setAreaFirebase("BE");
     }
   }, [Area]); // Efek samping ini hanya akan dipanggil ketika nilai Area berubah
+
+
+//   const notificationReject = () => {
+//     const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+//     const chatIds = [-4080609939,-921205810]; // Default chat id
+
+//     // Pemeriksaan jika Department adalah Maintenance
+  
+
+//     const message = `!! SMT LINE 1 Request Action Leader Has Been Rejected !!%0 ${Station} SMT LINE 1 Already Running Again`;
+
+//     const escapedMessage = message.replace(/&/g, '%26');
+
+//     chatIds.forEach((chatId) => {
+//         fetch(
+//             `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
+//         )
+//         .then((response) => {
+//             if (!response.ok) {
+//                 throw new Error("Error sending telegram message");
+//             }
+//         })
+//         .catch((error) => {
+//             console.error(error);
+//         });
+//     });
+// }
+  
 
   return (
     <body style={styles}>

@@ -3,9 +3,9 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
   databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -151,7 +151,7 @@ const SmtTop = () => {
     alert("Sucsess");
     window.location.reload();
 
-    fetch("http://192.168.101.12:3001/api/ScheduleProduction", {
+    fetch("https://andonline.astra-visteon.com:3002/api/ScheduleProduction", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -208,7 +208,7 @@ const SmtTop = () => {
     };
 
     const UpdateReal = (event) => {
-      fetch(`http://192.168.101.12:3001/api/UpdateRealProduction`, {
+      fetch(`https://andonline.astra-visteon.com:3002/api/UpdateRealProduction`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -217,7 +217,7 @@ const SmtTop = () => {
       })
         .then((response) => {
           if (response.status === 200) {
-            fetch(`http://192.168.101.12:3001/api/ScheduleProduction`, {
+            fetch(`https://andonline.astra-visteon.com:3002/api/ScheduleProduction`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -291,7 +291,7 @@ const SmtTop = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.12:3001/api/ScheduleProduction"
+          "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -597,7 +597,7 @@ const SmtTop = () => {
       OT_OUT: OT_OUT,
     };
     fetch(
-      `http://192.168.101.12:3001/api/UpdateOverTime`,
+      `https://andonline.astra-visteon.com:3002/api/UpdateOverTime`,
       {
         method: "PUT",
         headers: {

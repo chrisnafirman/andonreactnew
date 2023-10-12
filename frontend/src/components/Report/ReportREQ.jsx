@@ -6,9 +6,9 @@ import "firebase/compat/database";
 import * as ExcelJS from 'exceljs';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
   databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -264,7 +264,7 @@ const ReuestLeader = () => {
 
 
  useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Validation")
+    fetch("https://andonline.astra-visteon.com:3002/api/Validation")
       .then((response) => response.json())
       .then((json) => {
         // Lakukan pengolahan data Validation jika diperlukan
@@ -285,7 +285,7 @@ const ReuestLeader = () => {
         setValidationData(json);
       });
 
-    fetch("http://192.168.101.12:3001/api/Repair")
+    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
       .then((response) => response.json())
       .then((json) => {
         // Lakukan pengolahan data Repair jika diperlukan
@@ -302,7 +302,7 @@ const ReuestLeader = () => {
         setRepairData(json);
       });
 
-    fetch("http://192.168.101.12:3001/api/leader")
+    fetch("https://andonline.astra-visteon.com:3002/api/leader")
       .then((response) => response.json())
       .then((json) => {
         // Lakukan pengolahan data Leader jika diperlukan
@@ -422,7 +422,7 @@ const ReuestLeader = () => {
           <div>
             <div class="flex items-center">
               <h1 class="text-xs lg:text-xl font-sans tracking-tight text-gray-900">
-                | Report REQ |
+                | Report Request |
               </h1>
               <h1 class="text-xs lg:text-xl  font-sans tracking-tight ml-4">
                 <span class="text-black">SMT LINE 1:</span>
@@ -507,7 +507,7 @@ const ReuestLeader = () => {
 
               <header className="px-5 py-4 border-b border-gray-100">
                 <div className="font-mono text-lg text-center text-gray-800">
-                  Report REQ
+                  REPORT REQUEST
                 </div>
                 <div className="flex space-x-2">
                 <button className="flex text-sm" onClick={exportToPDF}>

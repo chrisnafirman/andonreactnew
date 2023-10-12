@@ -7,9 +7,9 @@ import QRScannerPopup from "../../QR";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
   databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -47,8 +47,8 @@ function QRLeaderBOT() {
 
 
   // QR
-  const submitMaintenance = () => {
-    if (!NamaPIC || !Line || !Area || !Department || !Kerusakan) {
+  const submitRepair = () => {
+    if (!NamaPIC  | !Department || !Kerusakan || !Station) {
       alert("Harap isi semua kolom!");
       return;
     }
@@ -66,7 +66,7 @@ function QRLeaderBOT() {
 
 
 
-    fetch(`http://192.168.101.12:3001/api/Repair`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/Repair`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,6 +75,7 @@ function QRLeaderBOT() {
     })
       .then((response) => {
         if (response.status === 200) {
+          notificationRequestRepair();
           alert(`Laporan Telah Berhasil Di Kirim Ke Team ${Department} `);
           firebase.database().ref(`SMTLine1BOT/${Station}`).set(`${Department}`);
           firebase.database().ref("StatusLine/SMTLine1").set("Down");
@@ -93,7 +94,7 @@ function QRLeaderBOT() {
 
 
   const submitUpdate = () => {
-    if (!NamaPIC || !Area || !Station || !Department) {
+    if (!NamaPIC  | !Department || !Kerusakan || !Station) {
       return;
     }
 
@@ -110,7 +111,7 @@ function QRLeaderBOT() {
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.12:3001/api/PutStatusLeader`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/PutStatusLeader`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -191,7 +192,7 @@ function QRLeaderBOT() {
 
   const handleButtonClick = () => {
     submitUpdate();
-    submitMaintenance();
+    submitRepair();
     setIsLoader(true);
 
     setTimeout(() => {
@@ -208,7 +209,7 @@ function QRLeaderBOT() {
     const randomId = `REQ${Math.floor(Math.random() * 1000).toString().padStart(4, "0")}`;
 
     // Kirim permintaan ke API untuk memeriksa UID
-    fetch("http://192.168.101.12:3001/api/Repair")
+    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
       .then((response) => response.json())
       .then((data) => {
         const uids = data.map((item) => item.Uid);
@@ -225,6 +226,33 @@ function QRLeaderBOT() {
       });
   };
 
+  const notificationRequestRepair = () => {
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+    let chatIds = [-921205810]; // Default chat id
+
+    // Pemeriksaan jika Department adalah Maintenance
+    if (Department === "MAINTENANCE & IT") {
+        chatIds = [-993707437]; // Ganti chat id jika Department adalah Maintenance
+    }
+
+const message = `!! Attention SMT LINE 1 Down !!%0A%0ARequest Repair ${Department}%0A%0ARequest By : ${NamaPIC}%0AStation : ${Station}%0AUid : ${Uid}%0AProblem : ${Kerusakan}`;
+
+    const escapedMessage = message.replace(/&/g, '%26');
+
+    chatIds.forEach((chatId) => {
+        fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
+        )
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error sending telegram message");
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    });
+}
 
   return (
     <body style={styles}>

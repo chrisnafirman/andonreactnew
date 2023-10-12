@@ -4,9 +4,9 @@ import "firebase/compat/database";
 import Select from "react-select";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
   databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -872,7 +872,7 @@ const Andonline1 = () => {
     window.location.reload();
 
 
-    fetch("http://192.168.101.12:3001/api/UpdateCMA", {
+    fetch("https://andonline.astra-visteon.com:3002/api/UpdateCMA", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -906,7 +906,7 @@ const Andonline1 = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.12:3001/api/ScheduleProduction"
+          "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -1142,7 +1142,7 @@ const Andonline1 = () => {
         department = "";
     }
 
-    fetch(`http://192.168.101.12:3001/api/${department}`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/${department}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1177,7 +1177,7 @@ const Andonline1 = () => {
       Kerusakan: Kerusakan,
     };
 
-    fetch(`http://192.168.101.12:3001/api/General`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/General`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1216,7 +1216,7 @@ const Andonline1 = () => {
       Kerusakan: Kerusakan,
     };
 
-    fetch(`http://192.168.101.12:3001/api/Others`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/Others`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -1403,7 +1403,7 @@ const Andonline1 = () => {
   };
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Employee_Operator_Manufacturing")
+    fetch("https://andonline.astra-visteon.com:3002/api/Employee_Operator_Manufacturing")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({
@@ -1432,7 +1432,7 @@ const Andonline1 = () => {
 
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Employee_Operator")
+    fetch("https://andonline.astra-visteon.com:3002/api/Employee_Operator")
       .then((response) => response.json())
       .then((data) => {
         const transformedOptions = data.map((item) => ({

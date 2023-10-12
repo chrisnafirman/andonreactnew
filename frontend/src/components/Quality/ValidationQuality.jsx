@@ -4,9 +4,9 @@ import "firebase/compat/database";
 import Select from "react-select";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
   databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -105,7 +105,7 @@ const Quality = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Validation")
+    fetch("https://andonline.astra-visteon.com:3002/api/Validation")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -181,12 +181,13 @@ const Quality = () => {
 
     firebase.database().ref(`SMTLine1${AreaFirebase}/${Station}`).set("Go");
     firebase.database().ref("StatusLine/SMTLine1").set("Running");
+    notificationValidation();
     alert("Validation Telah Berhasil ");
     setisOpenRunValidation(false);
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/PutValidation`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/PutValidation`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -211,7 +212,7 @@ const Quality = () => {
 
     // QR
    const submitReturnRequest = () => {
-      if (!NamaPIC || !Line || !Area || !Department || !Kerusakan) {
+      if (!NamaPIC  | !Department || !Kerusakan || !Station) {
         alert("Harap isi semua kolom!");
         return;
       }
@@ -228,12 +229,13 @@ const Quality = () => {
       };
   
       alert("Return Perbaikan Telah Di Kirim Ke Team Terkait");
+      notificationReturn();
       firebase.database().ref(`SMTLine1${AreaFirebase}/${Station}`).set(`Return ${Department}`);
       firebase.database().ref("StatusLine/SMTLine1").set("Down");
       setStation(null);
       setNamaPIC(null);
   
-      fetch(`http://192.168.101.12:3001/api/Repair`, {
+      fetch(`https://andonline.astra-visteon.com:3002/api/Repair`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -254,7 +256,7 @@ const Quality = () => {
   
   
     const submitUpdateReturn = () => {
-      if (!NamaPIC || !Line || !Area || !Department || !Kerusakan) {
+      if (!NamaPIC  | !Department || !Kerusakan || !Station) {
         return;
       }
   
@@ -271,7 +273,7 @@ const Quality = () => {
   
       console.log("Sending data:", data);
   
-      fetch(`http://192.168.101.12:3001/api/PutStatusReturnValidation`, {
+      fetch(`https://andonline.astra-visteon.com:3002/api/PutStatusReturnValidation`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -382,7 +384,7 @@ const Quality = () => {
     const randomId = `RTN${Math.floor(Math.random() * 1000).toString().padStart(4, "0")}`;
 
     // Kirim permintaan ke API untuk memeriksa UID
-    fetch("http://192.168.101.12:3001/api/Repair")
+    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
       .then((response) => response.json())
       .then((data) => {
         const uids = data.map((item) => item.Uid);
@@ -400,6 +402,61 @@ const Quality = () => {
    
       });
   };
+
+
+  const notificationReturn = () => {
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+    let chatIds = [-921205810]; // Default chat id
+
+    // Pemeriksaan jika Department adalah Maintenance
+    if (Department === "MAINTENANCE & IT") {
+        chatIds = [-993707437]; // Ganti chat id jika Department adalah Maintenance
+    }
+
+    const message = `!! Attention Station Down Has Been Return !!%0A%0AReturn By ${Requestor}%0AReturn PIC : ${NamaPIC}%0AStation : ${Station}%0AUid Return : ${Uid}%0AReturn To : ${Department}%0AProblem : ${Kerusakan}`;
+
+    const escapedMessage = message.replace(/&/g, '%26');
+
+    chatIds.forEach((chatId) => {
+        fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
+        )
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error sending telegram message");
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    });
+}
+
+
+const notificationValidation = () => {
+  const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+  const chatIds = [-912913885 , -950877102]; // Default chat id
+
+
+  const message = `!! ${Station} SMT LINE 1 Already Running !!%0A%0AValidation By ${Requestor}%0AValidation PIC : ${NamaPIC}%0AStation : ${Station}%0ADescription : ${Desc}`;
+
+  const escapedMessage = message.replace(/&/g, '%26');
+
+  chatIds.forEach((chatId) => {
+      fetch(
+          `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
+      )
+      .then((response) => {
+          if (!response.ok) {
+              throw new Error("Error sending telegram message");
+          }
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+  });
+}
+
 
   return (
     <body style={styles}>

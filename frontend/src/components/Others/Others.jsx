@@ -4,9 +4,9 @@ import "firebase/compat/database";
 import Select from "react-select";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
   databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -26,8 +26,8 @@ const Others = () => {
   const [Kerusakan, setKerusakan] = useState("");
   const [Action, setAction] = useState("");
   const [Line, setLine] = useState("");
-  const [isOpenRequestValidation, setisOpenRequestValidation] = useState(false);
   const [IsOpenRepairBy, setIsOpenRepairBy] = useState(false);
+  const [isOpenRequestValidation, setisOpenRequestValidation] = useState(false);
   const [Department, setDepartment] = useState("");
   const [Requestor, setRequestor] = useState("");
   const [DepartTo, setDepartTo] = useState("");
@@ -103,7 +103,7 @@ const Others = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3001/api/Repair")
+    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -148,7 +148,7 @@ const Others = () => {
 
   // QR
   const submitRequestValidation = () => {
-    if (!NamaPIC || !Line || !Area || !Requestor || !Kerusakan || !Station || !Action) {
+    if (!NamaPIC || !Requestor || !Kerusakan || !Station || !Action || !Department ) {
       alert("Harap isi semua kolom!");
       return;
     }
@@ -168,13 +168,13 @@ const Others = () => {
     };
 
     alert("Laporan Telah Berhasil Di Kirim Ke Team Validation ");
-
+    notificationRequestValidation();
     firebase.database().ref(`SMTLine1${AreaFirebase}/${Station}`).set(`${Department}`);
     firebase.database().ref("StatusLine/SMTLine1").set("Down");
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3001/api/Validation`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/Validation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -197,7 +197,7 @@ const Others = () => {
 
 
   const submitUpdate = () => {
-    if (!Area || !Requestor || !Action || !Station || !Kerusakan) {
+    if (!NamaPIC || !Requestor || !Kerusakan || !Station || !Action || !Department) {
       return;
     }
 
@@ -215,7 +215,7 @@ const Others = () => {
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.12:3001/api/PutRepairDone`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/PutRepairDone`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -298,6 +298,35 @@ const Others = () => {
 
     }
   };
+
+
+  const notificationRequestValidation = () => {
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+    let chatIds = [-912913885,-921205810]; // Default chat id
+
+    // Pemeriksaan jika Department adalah Maintenance
+    if (Department === "Production") {
+        chatIds = [-950877102,-921205810]; // Ganti chat id jika Department adalah Maintenance
+    }// Default chat id
+
+    const message = `!! SMT LINE 1 Repair Completed, Awaiting Validation ${Department} !!%0A%0ARequest Validation By ${Requestor}%0ARequest By : ${NamaPIC}%0AStation : ${Station}%0AUid : ${Uid}%0AProblem : ${Kerusakan}%0AAction : ${Action}`;
+
+    const escapedMessage = message.replace(/&/g, '%26');
+
+    chatIds.forEach((chatId) => {
+        fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
+        )
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error sending telegram message");
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    });
+}
 
   return (
     <body style={styles}>
@@ -855,7 +884,7 @@ const Others = () => {
                           }}
                         >
                           <div className="justify-center mb-2 w-96 items-center flex font-bold uppercase text-black ">
-                            <span>Request Validation</span>
+                            <span>Request Validation {Uid} </span>
                           </div>
                           <div class="flex flex-wrap -mx-3 ">
                             <div className="w-full mt-3 px-3 mb-2 md:mb-0">
@@ -1013,10 +1042,12 @@ const Others = () => {
             </>
           ) : null}
         </td>
+
+        <td class="">
         {IsOpenRepairBy && (
           <>
             <div className="fixed z-10 inset-0 overflow-y-auto">
-              <div className="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-[430px] text-center sm:block sm:p-0">
+              <div className="flex items-end justify-center min-h-screen bg-slate-800 bg-opacity-75 pt-4 px-4 pb-[450px] text-center sm:block sm:p-0">
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
                 <div
                   className="inline-block align-bottom bg-yellow-500 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
@@ -1068,7 +1099,21 @@ const Others = () => {
                               {selectedItem.ResponseName}{" "}
                             </div>
                           </div>
-
+                          <div class="w-full  px-3 mb-3 md:mb-0">
+                            <label
+                              class="block uppercase tracking-wide text-black text-xs font-bold mb-2"
+                              for="grid-city"
+                            >
+                              Validation To
+                            </label>
+                            <div
+                              class="appearance-none block w-full  bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                              type="text"
+                            >
+                              {" "}
+                              {selectedItem.DepartTo}{" "}
+                            </div>
+                          </div>
 
 
 
@@ -1095,7 +1140,7 @@ const Others = () => {
                                 class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
                                 for="grid-city"
                               >
-                                Start Repair
+                                Repair at
                               </label>
                               <div
                                 class="appearance-none block w-52 bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -1110,7 +1155,7 @@ const Others = () => {
                                 class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
                                 for="grid-city"
                               >
-                                Repair Done
+                                Repair Done 
                               </label>
                               <div
                                 class="appearance-none block w-52 bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -1121,28 +1166,8 @@ const Others = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="w-full px-3 mb-2 md:mb-0">
-                            <label
-                              class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
-                              for="grid-city"
-                            >
-                              Problem
-                            </label>
-                            <div
-                              class="appearance-none block w-full bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                              type="text"
-                            >
-                              {" "}
-                              {selectedItem.Problem}
-                            </div>
-                          </div>
-
                         </div>
-
-
                         <div className="flex justify-end" >
-
-
                         </div>
                       </div>
                     </div>
@@ -1152,6 +1177,7 @@ const Others = () => {
             </div>
           </>
         )}
+        </td>
         <td class="">
           {isLoader ? (
             <>

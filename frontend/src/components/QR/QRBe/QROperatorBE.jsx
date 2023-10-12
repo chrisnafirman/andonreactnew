@@ -6,9 +6,9 @@ import QRScannerPopup from "../QR";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+    apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
     databaseURL:
-        "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+        "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -142,7 +142,7 @@ function QROperatorBE() {
             Station: Station,
         };
 
-
+        notificationLeader();
         setIsQROperator(false);
         setIsOpenQR(false);
         setIsOpenISA(false);
@@ -155,7 +155,7 @@ function QROperatorBE() {
         firebase.database().ref("StatusLine/SMTLine1").set("Down");
 
 
-        fetch(`http://192.168.101.12:3001/api/Leader`, {
+        fetch(`https://andonline.astra-visteon.com:3002/api/Leader`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -178,7 +178,7 @@ function QROperatorBE() {
 
     // QR
     const submitMaintenance = () => {
-        if (!NamaPIC || !Line || !Area || !Department || !Kerusakan) {
+        if (!NamaPIC || !Area || !Department || !Station || !Kerusakan) {
             alert("Harap isi semua kolom!");
             return;
         }
@@ -194,7 +194,7 @@ function QROperatorBE() {
             Uid: Uid,
         };
         alert(`Laporan Telah Berhasil Di Kirim Ke Team MAINTENANCE & IT `);
-
+        notificationMaintenance();
         firebase.database().ref(`SMTLine1BE/${Station}`).set("MAINTENANCE & IT");
         firebase.database().ref("StatusLine/SMTLine1").set("Down");
         setIsQROperatorToMTC(false);
@@ -205,7 +205,7 @@ function QROperatorBE() {
         setStation(null);
         setNamaPIC(null);
 
-        fetch(`http://192.168.101.12:3001/api/Repair`, {
+        fetch(`https://andonline.astra-visteon.com:3002/api/Repair`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -378,7 +378,7 @@ function QROperatorBE() {
         const fetchData = async () => {
             try {
                 const response = await fetch(
-                    "http://192.168.101.12:3001/api/ScheduleProduction"
+                    "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
                 );
                 const jsonData = await response.json();
                 const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -476,7 +476,7 @@ function QROperatorBE() {
         const randomId = `INC${Math.floor(Math.random() * 1000).toString().padStart(4, "0")}`;
 
         // Kirim permintaan ke API untuk memeriksa UID
-        fetch("http://192.168.101.12:3001/api/Repair")
+        fetch("https://andonline.astra-visteon.com:3002/api/Repair")
             .then((response) => response.json())
             .then((data) => {
                 const uids = data.map((item) => item.Uid);
@@ -493,6 +493,55 @@ function QROperatorBE() {
             });
     };
 
+    
+    const notificationLeader = () => {
+    
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-950877102];
+        const message = `!! Attention Station Down !!%0A%0ASMT LINE 1 Request Action Leader%0A%0ARequest By : ${NamaPIC}%0AStation : ${Station}`;
+
+
+        const escapedMessage = message.replace(/&/g, '%26');
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+    
+    }
+
+    const notificationMaintenance = () => {
+    
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+        const chatIds = [-993707437];
+        const message = `!! Attention Station Down !!%0A%0ASMT LINE 1 Request Repair Maintenance%0A%0ARequest By : ${NamaPIC}%0AStation : ${Station}%0AUid : ${Uid}%0AProblem : ${Kerusakan}`;
+
+        const escapedMessage = message.replace(/&/g, '%26');
+
+        chatIds.forEach((chatId) => {
+          fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error sending telegram message");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+    
+    }
 
     return (
         <body style={styles}>

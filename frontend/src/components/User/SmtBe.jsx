@@ -3,9 +3,9 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
   databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -537,7 +537,7 @@ const SmtTop = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.12:3001/api/ScheduleProduction"
+          "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -1146,54 +1146,54 @@ const SmtTop = () => {
   };
 
 
-  // Destacker
+  // Drop in
   const fetchDropinBELeader = () => fetchData("/getDropinBELeader", setDataDropinBELeader);
   const fetchDropinBERepair = () => fetchData("/getDropinBERepair", setDataDropinBERepair);
   const fetchDropinBEValidation = () => fetchData("/getDropinBEValidation", setDataDropinBEValidation);
 
 
-  // Label
+  // Fluxer
   const fetchFluxerBELeader = () => fetchData("/getFluxerBELeader", setDataFluxerBELeader);
   const fetchFluxerBERepair = () => fetchData("/getFluxerBERepair", setDataFluxerBERepair);
   const fetchFluxerBEValidation = () => fetchData("/getFluxerBEValidation", setDataFluxerBEValidation);
 
 
-  // Printer
+  // Preheat
   const fetchPreheatBELeader = () => fetchData("/getPreheatBELeader", setDataPreheatBELeader);
   const fetchPreheatBERepair = () => fetchData("/getPreheatBERepair", setDataPreheatBERepair);
   const fetchPreheatBEValidation = () => fetchData("/getPreheatBEValidation", setDataPreheatBEValidation);
 
 
-  // SPI
+  // Seho 1
   const fetchSeho1BELeader = () => fetchData("/getSeho1BELeader", setDataSeho1BELeader);
   const fetchSeho1BERepair = () => fetchData("/getSeho1BERepair", setDataSeho1BERepair);
   const fetchSeho1BEValidation = () => fetchData("/getSeho1BEValidation", setDataSeho1BEValidation);
 
 
-  // PickNPlace
+  // Seho 2
   const fetchSeho2BELeader = () => fetchData("/getSeho2BELeader", setDataSeho2BELeader);
   const fetchSeho2BERepair = () => fetchData("/getSeho2BERepair", setDataSeho2BERepair);
   const fetchSeho2BEValidation = () => fetchData("/getSeho2BEValidation", setDataSeho2BEValidation);
 
 
-  // Reflow
+  // Touch Up
   const fetchTouchupBELeader = () => fetchData("/getTouchupBELeader", setDataTouchupBELeader);
   const fetchTouchupBERepair = () => fetchData("/getTouchupBERepair", setDataTouchupBERepair);
   const fetchTouchupBEValidation = () => fetchData("/getTouchupBEValidation", setDataTouchupBEValidation);
 
 
-  // SPI
+  // ICT
   const fetchICTBELeader = () => fetchData("/getICTBELeader", setDataICTBELeader);
   const fetchICTBERepair = () => fetchData("/getICTBERepair", setDataICTBERepair);
   const fetchICTBEValidation = () => fetchData("/getICTBEValidation", setDataICTBEValidation);
 
 
-  // RVS
+  // Flash
   const fetchFlashBELeader = () => fetchData("/getFlashBELeader", setDataFlashBELeader);
   const fetchFlashBERepair = () => fetchData("/getFlashBERepair", setDataFlashBERepair);
   const fetchFlashBEValidation = () => fetchData("/getFlashBEValidation", setDataFlashBEValidation);
 
-
+  // Router
   const fetchRouterBELeader = () => fetchData("/getRouterBELeader", setDataRouterBELeader);
   const fetchRouterBERepair = () => fetchData("/getRouterBERepair", setDataRouterBERepair);
   const fetchRouterBEValidation = () => fetchData("/getRouterBEValidation", setDataRouterBEValidation);
@@ -1203,7 +1203,7 @@ const SmtTop = () => {
 
 
   const fetchData = (endpoint, setDataFunction) => {
-    fetch(`http://192.168.101.12:3001/api/${endpoint}`)
+    fetch(`https://andonline.astra-visteon.com:3002/api/${endpoint}`)
       .then((response) => response.json())
       .then((data) => {
         setDataFunction(data);

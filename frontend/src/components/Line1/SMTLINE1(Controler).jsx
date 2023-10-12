@@ -4,13 +4,14 @@ import "firebase/compat/database";
 import Select from "react-select";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
   databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
+const audio = new Audio("Sound.mp3");
 
 const SMTLINE1CONTROLLER = () => {
   // NAVBAR
@@ -280,7 +281,7 @@ const SMTLINE1CONTROLLER = () => {
 
   // Audio
 
-  const audio = new Audio("Sound.mp3");
+
   // ..................................
 
   // refresh
@@ -309,126 +310,24 @@ const SMTLINE1CONTROLLER = () => {
       setStatusLine(data);
     });
 
-    const ref8 = firebase.database().ref("SMTLine1TOP/Destacker (TOP)");
+    const ref8 = firebase.database().ref("SMTLine1TOP/Destacker (TOP)");   
     ref8.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusDestackerTop(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Destacker (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Destacker (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Destacker (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Destacker (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Destacker (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -438,53 +337,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Destacker (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Destacker (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -492,122 +347,20 @@ const SMTLINE1CONTROLLER = () => {
     ref9.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusLabelTop(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Label (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Label (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Label (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Label (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Label (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -617,53 +370,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Label (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Label (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -671,122 +380,20 @@ const SMTLINE1CONTROLLER = () => {
     ref18.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusPrinterTop(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Printer (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Printer (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Printer (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Printer (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Printer (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -796,53 +403,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Printer (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Printer (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -850,122 +413,20 @@ const SMTLINE1CONTROLLER = () => {
     ref19.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusSPITop(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 SPI (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 SPI (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 SPI (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 SPI (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 SPI (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -975,53 +436,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 SPI (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 SPI (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -1029,122 +446,20 @@ const SMTLINE1CONTROLLER = () => {
     ref20.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusPickNPlaceTop(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Pick&Place (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Pick&Place (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Pick&Place (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Pick&Place (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Pick&Place (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -1154,53 +469,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Pick&Place (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.play();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Pick&Place (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -1208,122 +479,20 @@ const SMTLINE1CONTROLLER = () => {
     ref21.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusReflowTop(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Reflow (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Reflow (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Reflow (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Reflow (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Reflow (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -1333,53 +502,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Reflow (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Reflow (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -1387,122 +512,20 @@ const SMTLINE1CONTROLLER = () => {
     ref22.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusAOITop(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 AOI (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 AOI (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 AOI (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 AOI (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 AOI (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -1512,53 +535,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 AOI (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 AOI (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -1566,122 +545,20 @@ const SMTLINE1CONTROLLER = () => {
     ref23.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusRVSTop(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 RVS (TOP) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 RVS (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 RVS (TOP) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 RVS (TOP) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 RVS (TOP) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -1691,53 +568,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 RVS (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 RVS (TOP) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -1747,122 +580,20 @@ const SMTLINE1CONTROLLER = () => {
     ref24.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusPrinterBot(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Printer (BOT) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Printer (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Printer (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Printer (BOT) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Printer (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -1872,53 +603,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Printer (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Printer (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -1926,122 +613,20 @@ const SMTLINE1CONTROLLER = () => {
     ref25.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusSPIBot(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 SPI (BOT) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 SPI (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 SPI (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 SPI (BOT) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 SPI (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -2051,53 +636,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 SPI (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 SPI (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -2105,122 +646,20 @@ const SMTLINE1CONTROLLER = () => {
     ref26.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusPickNPlaceBot(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Pick&Place (BOT) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Pick&Place (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Pick&Place (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Pick&Place (BOT) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Pick&Place (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -2230,53 +669,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Pick&Place (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Pick&Place (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -2284,122 +679,20 @@ const SMTLINE1CONTROLLER = () => {
     ref27.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusReflowBot(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Reflow (BOT) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Reflow (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Reflow (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Reflow (BOT) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Reflow (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -2409,53 +702,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Reflow (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Reflow (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -2463,122 +712,20 @@ const SMTLINE1CONTROLLER = () => {
     ref28.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusAOIBot(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 AOI (BOT) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 AOI (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 AOI (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 AOI (BOT) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 AOI (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -2588,53 +735,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 AOI (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 AOI (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -2642,122 +745,20 @@ const SMTLINE1CONTROLLER = () => {
     ref29.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusRVSBot(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 RVS (BOT) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 RVS (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 RVS (BOT) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 RVS (BOT) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 RVS (BOT) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -2767,56 +768,11 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 RVS (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 RVS (BOT) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
-
 
 
     // SMT BE
@@ -2824,122 +780,20 @@ const SMTLINE1CONTROLLER = () => {
     ref30.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusDropinBe(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Drop in (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Drop in (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Drop in (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Drop in (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Drop in (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -2949,53 +803,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Drop in (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Drop in (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -3004,122 +814,20 @@ const SMTLINE1CONTROLLER = () => {
     ref31.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusFluxerBe(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Fluxer (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Fluxer (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Fluxer (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Fluxer (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Fluxer (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -3129,53 +837,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Fluxer (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Fluxer (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -3183,122 +847,20 @@ const SMTLINE1CONTROLLER = () => {
     ref32.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusPreheatBe(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 PreHeat (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 PreHeat (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 PreHeat (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 PreHeat (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 PreHeat (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -3308,53 +870,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 PreHeat (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 PreHeat (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -3362,122 +880,20 @@ const SMTLINE1CONTROLLER = () => {
     ref33.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusSeho1Be(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Seho1 (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Seho1 (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Seho1 (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Seho1 (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Seho1 (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -3487,53 +903,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Seho1 (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Seho1 (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -3542,122 +914,20 @@ const SMTLINE1CONTROLLER = () => {
     ref34.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusSeho2Be(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Seho2 (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Seho2 (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Seho2 (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Seho2 (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Seho2 (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -3667,53 +937,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Seho2 (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Seho2 (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -3721,122 +947,20 @@ const SMTLINE1CONTROLLER = () => {
     ref35.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusTouchupBe(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Touch UP (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Touch UP (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Touch UP (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Touch UP (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Touch UP (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -3846,53 +970,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Touch UP (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Touch UP (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -3900,122 +980,20 @@ const SMTLINE1CONTROLLER = () => {
     ref36.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusICTBe(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 ICT (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 ICT (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 ICT (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 ICT (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 ICT (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -4025,53 +1003,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 ICT (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 ICT (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -4080,122 +1014,20 @@ const SMTLINE1CONTROLLER = () => {
     ref37.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusFlashBe(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Flash (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Flash (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Flash (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Flash (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Flash (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -4205,53 +1037,9 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Flash (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Flash (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
@@ -4259,122 +1047,20 @@ const SMTLINE1CONTROLLER = () => {
     ref38.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusRouterBe(data);
-      if (data === "Leader") {
-        audio.currentTime = 0;
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Leader SMT LINE 1 Router (BE) Status: "Permintaan ACTION" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Router (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
       } else if (
         data === "HRGA & EHS" ||
         data === "PURCHASING,PPIC,MP&L" ||
         data === "PROCESS ENGINEERING" ||
         data === "PRODUCT DEVELOPMENT" ||
-        data === "ADVANCED MANUFACTURING ENGINEERING"
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
       ) {
         audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Router (BE) Status: "Permintaan Perbaikan" - Please Check the Details In Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "QC" || data === "QA") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-912913885];
-        const message = `Notification Request ${data} SMT LINE 1 Router (BE) Status: "Permintaan Validation" - Please Check the Details In Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Production") {
-        audio.pause();
-        audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-950877102];
-        const message = `Notification Request ${data} SMT LINE 1 Router (BE) Status: "Permintaan Validation" - Please Check the Details In Validation Department Side `;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
+      audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -4384,57 +1070,17 @@ const SMTLINE1CONTROLLER = () => {
       ) {
         audio.pause();
         audio.currentTime = 0;
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-921205810];
-        const message = `Notification ${data} SMT LINE 1 Router (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (data === "Return MAINTENANCE & IT") {
-        audio.currentTime = 0;
-        audio.play();
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
-        const chatIds = [-993707437];
-        const message = `Notification Maintenance SMT LINE 1 Router (BE) Status: "Perbaikan Di Kembalikan" - Please Check the Details In Return Department Side`;
-
-        const escapedMessage = message.replace(/&/g, '%26');
-
-        chatIds.forEach((chatId) => {
-          fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Error sending telegram message");
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        });
-      } else if (
-        data === "Go" ||
-        data === "Repair" ||
-        data === "In Validation"
-      ) {
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
+      audio.currentTime = 0;
       }
     });
 
-    return () => { };
+    return () => {
+      // Clean up the audio element
+      audio.pause();
+      audio.currentTime = 0;
+    };
   }, []);
   // ------------------------
 
@@ -4445,25 +1091,10 @@ const SMTLINE1CONTROLLER = () => {
   // FUNGSI WAKTU
 
   // Mengubah Format Waktu
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-  const formattedTime = `${currentTime.getDate()}/${currentTime.getMonth() + 1
-    }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+  
 
   // fungsi time di navbar
-  function updateTime() {
-    const interval = setInterval(() => {
-      setTime(new Date().toLocaleString());
-    }, 1000);
-    return () => clearInterval(interval);
-  }
-  useEffect(() => {
-    updateTime();
-  }, []);
+ 
 
   // ...................
 
@@ -5682,7 +2313,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeDestackerTop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeDestackerTOP";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeDestackerTOP";
 
 
       const data = {
@@ -5791,7 +2422,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeLabelTop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeLabelTOP";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeLabelTOP";
 
 
       const data = {
@@ -5903,7 +2534,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePrinterTop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimePrinterTOP";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimePrinterTOP";
 
 
       const data = {
@@ -6012,7 +2643,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeSPITop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeSPITOP";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeSPITOP";
 
 
       const data = {
@@ -6124,7 +2755,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePickNPlaceTop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimePickNPlaceTOP";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimePickNPlaceTOP";
 
 
       const data = {
@@ -6233,7 +2864,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeReflowTop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeReflowTOP";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeReflowTOP";
 
 
       const data = {
@@ -6341,7 +2972,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeAOITop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeAOITOP";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeAOITOP";
 
 
       const data = {
@@ -6450,7 +3081,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeRVSTop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeRVSTOP";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeRVSTOP";
 
 
       const data = {
@@ -6568,7 +3199,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePrinterBot !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimePrinterBOT";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimePrinterBOT";
 
 
       const data = {
@@ -6676,7 +3307,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeSPIBot !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeSPIBOT";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeSPIBOT";
 
 
       const data = {
@@ -6787,7 +3418,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePickNPlaceBot !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimePickNPlaceBOT";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimePickNPlaceBOT";
 
 
       const data = {
@@ -6895,7 +3526,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeReflowBot !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeReflowBOT";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeReflowBOT";
 
 
       const data = {
@@ -7004,7 +3635,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeAOIBot !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeAOIBOT";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeAOIBOT";
 
 
       const data = {
@@ -7112,7 +3743,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeRVSBot !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeRVSBOT";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeRVSBOT";
 
 
       const data = {
@@ -7225,7 +3856,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeDropinBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeDropinBE";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeDropinBE";
 
 
       const data = {
@@ -7337,7 +3968,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeFluxerBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeFluxerBE";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeFluxerBE";
 
 
       const data = {
@@ -7448,7 +4079,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePreheatBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimePreheatBE";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimePreheatBE";
 
 
       const data = {
@@ -7559,7 +4190,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeSeho1Be !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeSeho1BE";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeSeho1BE";
 
 
       const data = {
@@ -7670,7 +4301,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeSeho2Be !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeSeho2BE";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeSeho2BE";
 
 
       const data = {
@@ -7781,7 +4412,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeTouchupBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeTouchupBE";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeTouchupBE";
 
 
       const data = {
@@ -7893,7 +4524,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeICTBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeICTBE";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeICTBE";
 
 
       const data = {
@@ -8005,7 +4636,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeFlashBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeFlashBE";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeFlashBE";
 
 
       const data = {
@@ -8118,7 +4749,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeRouterBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3001/api/PutDownTimeRouterBE";
+      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeRouterBE";
 
 
       const data = {
@@ -8174,7 +4805,6 @@ const SMTLINE1CONTROLLER = () => {
               />
             </div>
           </div>
-          <p class="text-gray-500 text-sm">{formattedTime}</p>
         </div>
       </nav>
 
@@ -8378,7 +5008,7 @@ const SMTLINE1CONTROLLER = () => {
 
         <div className=" pt-3">
           <span className=" pt-4 sm:ml-5 text-2xl text-white font-thin px-2">
-            SMT BOT
+            SMT BOTTOM
           </span>
         </div>
 
@@ -8484,7 +5114,7 @@ const SMTLINE1CONTROLLER = () => {
 
         <div className=" pt-3">
           <span className=" pt-4 sm:ml-5 text-2xl text-white font-thin px-2">
-            SMT BE
+            SMT BACKEND
           </span>
         </div>
 

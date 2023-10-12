@@ -7,9 +7,9 @@ import QRScannerPopup from "../../QR";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
+  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
   databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -47,8 +47,8 @@ function QRLeaderTOP() {
 
 
   // QR
-  const submitMaintenance = () => {
-    if (!NamaPIC || !Line || !Area || !Department || !Kerusakan) {
+  const submitRepair = () => {
+    if (!NamaPIC  | !Department || !Kerusakan || !Station) {
       alert("Harap isi semua kolom!");
       return;
     }
@@ -66,7 +66,7 @@ function QRLeaderTOP() {
 
 
 
-    fetch(`http://192.168.101.12:3001/api/Repair`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/Repair`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -76,6 +76,7 @@ function QRLeaderTOP() {
       .then((response) => {
         if (response.status === 200) {
           alert(`Laporan Telah Berhasil Di Kirim Ke Team ${Department} `);
+          notificationRequestRepair();
           firebase.database().ref(`SMTLine1TOP/${Station}`).set(`${Department}`);
           firebase.database().ref("StatusLine/SMTLine1").set("Down");
           setStation(null);
@@ -93,7 +94,7 @@ function QRLeaderTOP() {
 
 
   const submitUpdate = () => {
-    if (!NamaPIC || !Area || !Station || !Department) {
+    if (!NamaPIC  | !Department || !Kerusakan || !Station) {
       return;
     }
 
@@ -110,7 +111,7 @@ function QRLeaderTOP() {
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.12:3001/api/PutStatusLeader`, {
+    fetch(`https://andonline.astra-visteon.com:3002/api/PutStatusLeader`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -164,7 +165,7 @@ function QRLeaderTOP() {
       setIsQRLeader(true);
     } else {
       // Show an error message or take appropriate action for "(BOT)" or other cases
-       alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(TOP)'");
+      alert("Invalid scan. Scan Hanya Bisa Di Lakukan Di Mesin Area '(TOP)'");
     }
   };
 
@@ -190,7 +191,7 @@ function QRLeaderTOP() {
 
   const handleButtonClick = () => {
     submitUpdate();
-    submitMaintenance();
+    submitRepair();
     setIsLoader(true);
 
     setTimeout(() => {
@@ -207,7 +208,7 @@ function QRLeaderTOP() {
     const randomId = `REQ${Math.floor(Math.random() * 1000).toString().padStart(4, "0")}`;
 
     // Kirim permintaan ke API untuk memeriksa UID
-    fetch("http://192.168.101.12:3001/api/Repair")
+    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
       .then((response) => response.json())
       .then((data) => {
         const uids = data.map((item) => item.Uid);
@@ -223,6 +224,34 @@ function QRLeaderTOP() {
         console.error("Error fetching data from API:", error);
       });
   };
+
+  const notificationRequestRepair = () => {
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+    let chatIds = [-921205810]; // Default chat id
+
+    // Pemeriksaan jika Department adalah Maintenance
+    if (Department === "MAINTENANCE & IT") {
+        chatIds = [-993707437]; // Ganti chat id jika Department adalah Maintenance
+    }
+
+    const message = `!! Attention SMT LINE 1 Down !!%0A%0ARequest Repair ${Department}%0A%0ARequest By : ${NamaPIC}%0AStation : ${Station}%0AUid : ${Uid}%0AProblem : ${Kerusakan}`;
+
+    const escapedMessage = message.replace(/&/g, '%26');
+
+    chatIds.forEach((chatId) => {
+        fetch(
+            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
+        )
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error sending telegram message");
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    });
+}
 
 
   return (
