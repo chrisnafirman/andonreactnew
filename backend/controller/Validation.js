@@ -79,11 +79,11 @@ const PutValidation = (req, res) => {
 
 
 const postRequestValidation = (req, res) => {
-  const { Uid, NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor } = req.body;
+  const { Sid, Uid, NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor } = req.body;
 
   db.query(
-    "INSERT INTO validation (Uid, Nama, Area, Line, Station, Problem, Action, DepartTo, Requestor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    [Uid, NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor],
+    "INSERT INTO validation (Sid, Uid, Nama, Area, Line, Station, Problem, Action, DepartTo, Requestor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [Sid, Uid, NamaPIC, Area, Line, Station, Kerusakan, Action, Department, Requestor],
     (error, results) => {
       if (error) {
         console.log(error);

@@ -1,16 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/database";
+import { db } from "./../../Firebase.js";
 import Select from "react-select";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
-  databaseURL:
-    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
-};
-firebase.initializeApp(firebaseConfig);
 
-const database = firebase.database();
 const audio = new Audio("Sound.mp3");
 
 const SMTLINE1CONTROLLER = () => {
@@ -279,13 +271,10 @@ const SMTLINE1CONTROLLER = () => {
 
   // Production
 
-  // Audio
-
 
   // ..................................
 
-  // refresh
-
+  // Fungsi Pencegahan Refresh
   useEffect(() => {
     const onBeforeUnload = (ev) => {
       ev.returnValue = "";
@@ -299,18 +288,19 @@ const SMTLINE1CONTROLLER = () => {
     };
   }, []);
 
+
   //  fungsi mengambil data dari firebase
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
   };
   useEffect(() => {
-    const ref3 = firebase.database().ref("StatusLine/SMTLine1");
+    const ref3 = db.ref("StatusLine/SMTLine1");
     ref3.on("value", (snapshot) => {
       const data = snapshot.val();
       setStatusLine(data);
     });
 
-    const ref8 = firebase.database().ref("SMTLine1TOP/Destacker (TOP)");   
+    const ref8 = db.ref("SMTLine1TOP/Destacker (TOP)");
     ref8.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusDestackerTop(data);
@@ -327,7 +317,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -339,11 +329,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref9 = firebase.database().ref("SMTLine1TOP/Label (TOP)");
+    const ref9 = db.ref("SMTLine1TOP/Label (TOP)");
     ref9.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusLabelTop(data);
@@ -360,7 +350,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -372,11 +362,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref18 = firebase.database().ref("/SMTLine1TOP/Printer (TOP)");
+    const ref18 = db.ref("/SMTLine1TOP/Printer (TOP)");
     ref18.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusPrinterTop(data);
@@ -393,7 +383,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -405,11 +395,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref19 = firebase.database().ref("/SMTLine1TOP/SPI (TOP)");
+    const ref19 = db.ref("/SMTLine1TOP/SPI (TOP)");
     ref19.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusSPITop(data);
@@ -426,7 +416,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -438,11 +428,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref20 = firebase.database().ref("/SMTLine1TOP/Pick&Place (TOP)");
+    const ref20 = db.ref("/SMTLine1TOP/Pick&Place (TOP)");
     ref20.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusPickNPlaceTop(data);
@@ -459,7 +449,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -471,11 +461,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref21 = firebase.database().ref("/SMTLine1TOP/Reflow (TOP)");
+    const ref21 = db.ref("/SMTLine1TOP/Reflow (TOP)");
     ref21.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusReflowTop(data);
@@ -492,7 +482,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -504,11 +494,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref22 = firebase.database().ref("/SMTLine1TOP/AOI (TOP)");
+    const ref22 = db.ref("/SMTLine1TOP/AOI (TOP)");
     ref22.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusAOITop(data);
@@ -525,7 +515,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -537,11 +527,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref23 = firebase.database().ref("/SMTLine1TOP/RVS (TOP)");
+    const ref23 = db.ref("/SMTLine1TOP/RVS (TOP)");
     ref23.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusRVSTop(data);
@@ -558,7 +548,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -570,13 +560,13 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
 
     // SMT BOT
-    const ref24 = firebase.database().ref("SMTLine1BOT/Printer (BOT)");
+    const ref24 = db.ref("SMTLine1BOT/Printer (BOT)");
     ref24.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusPrinterBot(data);
@@ -593,7 +583,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -605,11 +595,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref25 = firebase.database().ref("SMTLine1BOT/SPI (BOT)");
+    const ref25 = db.ref("SMTLine1BOT/SPI (BOT)");
     ref25.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusSPIBot(data);
@@ -626,7 +616,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -638,11 +628,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref26 = firebase.database().ref("SMTLine1BOT/Pick&Place (BOT)");
+    const ref26 = db.ref("SMTLine1BOT/Pick&Place (BOT)");
     ref26.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusPickNPlaceBot(data);
@@ -659,7 +649,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -671,11 +661,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref27 = firebase.database().ref("SMTLine1BOT/Reflow (BOT)");
+    const ref27 = db.ref("SMTLine1BOT/Reflow (BOT)");
     ref27.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusReflowBot(data);
@@ -692,7 +682,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -704,11 +694,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref28 = firebase.database().ref("SMTLine1BOT/AOI (BOT)");
+    const ref28 = db.ref("SMTLine1BOT/AOI (BOT)");
     ref28.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusAOIBot(data);
@@ -725,7 +715,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -737,11 +727,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref29 = firebase.database().ref("SMTLine1BOT/RVS (BOT)");
+    const ref29 = db.ref("SMTLine1BOT/RVS (BOT)");
     ref29.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusRVSBot(data);
@@ -758,7 +748,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -770,13 +760,13 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
 
     // SMT BE
-    const ref30 = firebase.database().ref("SMTLine1BE/Drop in (BE)");
+    const ref30 = db.ref("SMTLine1BE/Drop in (BE)");
     ref30.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusDropinBe(data);
@@ -793,7 +783,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -805,12 +795,12 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
 
-    const ref31 = firebase.database().ref("SMTLine1BE/Fluxer (BE)");
+    const ref31 = db.ref("SMTLine1BE/Fluxer (BE)");
     ref31.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusFluxerBe(data);
@@ -827,7 +817,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -839,11 +829,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref32 = firebase.database().ref("SMTLine1BE/PreHeat (BE)");
+    const ref32 = db.ref("SMTLine1BE/PreHeat (BE)");
     ref32.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusPreheatBe(data);
@@ -860,7 +850,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -872,11 +862,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref33 = firebase.database().ref("SMTLine1BE/Seho1 (BE)");
+    const ref33 = db.ref("SMTLine1BE/Seho1 (BE)");
     ref33.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusSeho1Be(data);
@@ -893,7 +883,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -905,12 +895,12 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
 
-    const ref34 = firebase.database().ref("SMTLine1BE/Seho2 (BE)");
+    const ref34 = db.ref("SMTLine1BE/Seho2 (BE)");
     ref34.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusSeho2Be(data);
@@ -927,7 +917,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -939,11 +929,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref35 = firebase.database().ref("SMTLine1BE/Touch UP (BE)");
+    const ref35 = db.ref("SMTLine1BE/Touch UP (BE)");
     ref35.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusTouchupBe(data);
@@ -960,7 +950,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -972,11 +962,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref36 = firebase.database().ref("SMTLine1BE/ICT (BE)");
+    const ref36 = db.ref("SMTLine1BE/ICT (BE)");
     ref36.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusICTBe(data);
@@ -993,7 +983,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -1005,12 +995,12 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
 
-    const ref37 = firebase.database().ref("SMTLine1BE/Flash (BE)");
+    const ref37 = db.ref("SMTLine1BE/Flash (BE)");
     ref37.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusFlashBe(data);
@@ -1027,7 +1017,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -1039,11 +1029,11 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
-    const ref38 = firebase.database().ref("SMTLine1BE/Router (BE)");
+    const ref38 = db.ref("SMTLine1BE/Router (BE)");
     ref38.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusRouterBe(data);
@@ -1060,7 +1050,7 @@ const SMTLINE1CONTROLLER = () => {
         data === "Production"
       ) {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       } else if (
         data === "Return HRGA & EHS" ||
         data === "Return PURCHASING,PPIC,MP&L" ||
@@ -1072,7 +1062,7 @@ const SMTLINE1CONTROLLER = () => {
         audio.currentTime = 0;
       } else if (data === "Go" || data === "Repair" || data === "In Validation") {
         audio.pause();
-      audio.currentTime = 0;
+        audio.currentTime = 0;
       }
     });
 
@@ -1084,23 +1074,9 @@ const SMTLINE1CONTROLLER = () => {
   }, []);
   // ------------------------
 
-  // PRODUCTION FUNTION
-
-  // .................................
-
-  // FUNGSI WAKTU
-
-  // Mengubah Format Waktu
-  
-
-  // fungsi time di navbar
- 
-
-  // ...................
 
   // FUNGSI UPDATE STATUS
   // fungsi mengubah warna status
-
   // LINE 1 SMT TOP
   const updateStatusDestackerTop = (data) => {
     setStatusDestackerTop(data);
@@ -1142,12 +1118,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1191,12 +1167,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1240,12 +1216,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1289,12 +1265,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1338,12 +1314,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1387,12 +1363,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1436,12 +1412,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1485,16 +1461,18 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
   // ------------------------------------
 
+  // FUNGSI UPDATE STATUS
+  // fungsi mengubah warna status
   // LINE 1 SMT BOT
   const updateStatusPrinterBot = (data) => {
     setStatusPrinterBot(data);
@@ -1536,12 +1514,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
   const updateStatusSPIBot = (data) => {
@@ -1584,12 +1562,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1633,12 +1611,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1682,12 +1660,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1731,12 +1709,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1780,17 +1758,19 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
   // --------------------------------
 
-  // LINE 1 SMT TOP
+  // FUNGSI UPDATE STATUS
+  // fungsi mengubah warna status
+  // LINE 1 SMT BE
   const updateStatusDropinBe = (data) => {
     setStatusDropinBe(data);
     setBackgroundColorStatusDropinBe(
@@ -1831,12 +1811,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1880,12 +1860,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1929,12 +1909,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -1978,12 +1958,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -2027,12 +2007,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -2123,12 +2103,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -2172,12 +2152,12 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
 
@@ -2221,20 +2201,19 @@ const SMTLINE1CONTROLLER = () => {
                                         : data === "Production"
                                           ? "#93c2c4"
                                           : data === "In Validation"
-                                          ? "#93c2c4"
-                                          : data === "MAINTENANCE & IT"
-                                            ? "#C00000"
-                                            : data === "Return MAINTENANCE & IT"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
                                               ? "#C00000"
-                                              : "#565454"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
     );
   };
   // ------------------------------------
 
-  // DownTime Result Time Function
-
+  // Realtime Function + Downtime Function
   // Line1 SMT TOP
-  // DestackerTOP
+  // Destacker Top
   useEffect(() => {
     let interval;
 
@@ -2283,8 +2262,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1TOP/DestackerTopTime")
             .set(timeString);
 
@@ -2313,7 +2291,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeDestackerTop !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeDestackerTOP";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeDestackerTOP";
 
 
       const data = {
@@ -2395,7 +2373,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase.database().ref("/SMTLine1TOP/LabelTopTime").set(timeString);
+          db.ref("/SMTLine1TOP/LabelTopTime").set(timeString);
 
           setTimeLabelTop(timeString);
         }
@@ -2422,7 +2400,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeLabelTop !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeLabelTOP";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeLabelTOP";
 
 
       const data = {
@@ -2504,8 +2482,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1TOP/PrinterTopTime")
             .set(timeString);
 
@@ -2534,7 +2511,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePrinterTop !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimePrinterTOP";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimePrinterTOP";
 
 
       const data = {
@@ -2616,7 +2593,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase.database().ref("/SMTLine1TOP/SPITopTime").set(timeString);
+          db.ref("/SMTLine1TOP/SPITopTime").set(timeString);
 
           setTimeSPITop(timeString);
         }
@@ -2643,7 +2620,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeSPITop !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeSPITOP";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeSPITOP";
 
 
       const data = {
@@ -2725,8 +2702,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1TOP/PickNPlaceTopTime")
             .set(timeString);
 
@@ -2755,7 +2731,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePickNPlaceTop !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimePickNPlaceTOP";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimePickNPlaceTOP";
 
 
       const data = {
@@ -2837,7 +2813,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase.database().ref("/SMTLine1TOP/ReflowTopTime").set(timeString);
+          db.ref("/SMTLine1TOP/ReflowTopTime").set(timeString);
 
           setTimeReflowTop(timeString);
         }
@@ -2864,7 +2840,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeReflowTop !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeReflowTOP";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeReflowTOP";
 
 
       const data = {
@@ -2945,7 +2921,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase.database().ref("/SMTLine1TOP/AOITopTime").set(timeString);
+          db.ref("/SMTLine1TOP/AOITopTime").set(timeString);
 
           setTimeAOITop(timeString);
         }
@@ -2972,7 +2948,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeAOITop !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeAOITOP";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeAOITOP";
 
 
       const data = {
@@ -3054,7 +3030,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase.database().ref("/SMTLine1TOP/RVSTopTime").set(timeString);
+          db.ref("/SMTLine1TOP/RVSTopTime").set(timeString);
 
           setTimeRVSTop(timeString);
         }
@@ -3081,7 +3057,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeRVSTop !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeRVSTOP";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeRVSTOP";
 
 
       const data = {
@@ -3119,6 +3095,7 @@ const SMTLINE1CONTROLLER = () => {
 
 
 
+  // Realtime Function + Downtime Function
   // Line1 SMT BOT
   // PrinterBot
   useEffect(() => {
@@ -3169,8 +3146,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1BOT/PrinterBotTime")
             .set(timeString);
 
@@ -3199,7 +3175,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePrinterBot !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimePrinterBOT";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimePrinterBOT";
 
 
       const data = {
@@ -3280,7 +3256,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase.database().ref("/SMTLine1BOT/SPIBotTime").set(timeString);
+          db.ref("/SMTLine1BOT/SPIBotTime").set(timeString);
 
           setTimeSPIBot(timeString);
         }
@@ -3307,7 +3283,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeSPIBot !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeSPIBOT";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeSPIBOT";
 
 
       const data = {
@@ -3388,8 +3364,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1BOT/PickNPlaceBotTime")
             .set(timeString);
 
@@ -3418,7 +3393,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePickNPlaceBot !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimePickNPlaceBOT";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimePickNPlaceBOT";
 
 
       const data = {
@@ -3499,7 +3474,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase.database().ref("/SMTLine1BOT/ReflowBotTime").set(timeString);
+          db.ref("/SMTLine1BOT/ReflowBotTime").set(timeString);
 
           setTimeReflowBot(timeString);
         }
@@ -3526,7 +3501,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeReflowBot !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeReflowBOT";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeReflowBOT";
 
 
       const data = {
@@ -3608,7 +3583,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase.database().ref("/SMTLine1BOT/AOIBotTime").set(timeString);
+          db.ref("/SMTLine1BOT/AOIBotTime").set(timeString);
 
           setTimeAOIBot(timeString);
         }
@@ -3635,7 +3610,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeAOIBot !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeAOIBOT";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeAOIBOT";
 
 
       const data = {
@@ -3716,7 +3691,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase.database().ref("/SMTLine1BOT/RVSBotTime").set(timeString);
+          db.ref("/SMTLine1BOT/RVSBotTime").set(timeString);
 
           setTimeRVSBot(timeString);
         }
@@ -3743,7 +3718,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeRVSBot !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeRVSBOT";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeRVSBOT";
 
 
       const data = {
@@ -3776,6 +3751,7 @@ const SMTLINE1CONTROLLER = () => {
   }, [TimeRVSBot, RVSBot, StatusRVSBot]);
 
 
+  // Realtime Function + Downtime Function
   // Line1 SMT BE
   // DropinBe
   useEffect(() => {
@@ -3826,8 +3802,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1BE/DropinBeTime")
             .set(timeString);
 
@@ -3856,7 +3831,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeDropinBe !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeDropinBE";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeDropinBE";
 
 
       const data = {
@@ -3938,8 +3913,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1BE/FluxerBeTime")
             .set(timeString);
 
@@ -3968,7 +3942,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeFluxerBe !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeFluxerBE";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeFluxerBE";
 
 
       const data = {
@@ -4049,8 +4023,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1BE/PreheatBeTime")
             .set(timeString);
 
@@ -4079,7 +4052,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePreheatBe !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimePreheatBE";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimePreheatBE";
 
 
       const data = {
@@ -4160,8 +4133,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1BE/Seho1BeTime")
             .set(timeString);
 
@@ -4190,7 +4162,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeSeho1Be !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeSeho1BE";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeSeho1BE";
 
 
       const data = {
@@ -4271,8 +4243,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1BE/Seho2BeTime")
             .set(timeString);
 
@@ -4301,7 +4272,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeSeho2Be !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeSeho2BE";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeSeho2BE";
 
 
       const data = {
@@ -4382,8 +4353,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1BE/TouchupBeTime")
             .set(timeString);
 
@@ -4412,7 +4382,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeTouchupBe !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeTouchupBE";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeTouchupBE";
 
 
       const data = {
@@ -4494,8 +4464,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1BE/ICTBeTime")
             .set(timeString);
 
@@ -4524,7 +4493,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeICTBe !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeICTBE";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeICTBE";
 
 
       const data = {
@@ -4606,8 +4575,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1BE/FlashBeTime")
             .set(timeString);
 
@@ -4636,7 +4604,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeFlashBe !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeFlashBE";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeFlashBE";
 
 
       const data = {
@@ -4719,8 +4687,7 @@ const SMTLINE1CONTROLLER = () => {
 
           const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
 
-          firebase
-            .database()
+          db
             .ref("/SMTLine1BE/RouterBeTime")
             .set(timeString);
 
@@ -4749,7 +4716,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeRouterBe !== ""
     ) {
 
-      apiUrl = "https://andonline.astra-visteon.com:3002/api/PutDownTimeRouterBE";
+      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeRouterBE";
 
 
       const data = {

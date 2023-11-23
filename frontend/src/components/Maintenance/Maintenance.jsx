@@ -1,16 +1,8 @@
 import React, { useState, useEffect } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/database";
+import { db } from "./../../Firebase.js";
 import Select from "react-select";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
-  databaseURL:
-    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
-};
-firebase.initializeApp(firebaseConfig);
 
-const database = firebase.database();
 
 const Maintenance = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
@@ -18,6 +10,7 @@ const Maintenance = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [Uid, setUid] = useState("");
+  const [Sid, setSid] = useState("");
   const [currentTime, setCurrentTime] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState(null);
   const [Station, setStation] = useState("");
@@ -39,7 +32,7 @@ const Maintenance = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpenSearch, setisOpenSearch] = useState(false);
   const [isButtonSearch, setisButtonSearch] = useState(true);
-
+  const [LineFirebase, setLineFirebase] = useState("");
 
 
   const [selectedOptionDepartment, setSelectedOptionDepartment] =
@@ -48,23 +41,30 @@ const Maintenance = () => {
 
 
 
+  
+  // set area firebase d function update/ post
+useEffect(() => {
+  if (Area === "SMT TOP") {
+    setAreaFirebase("SMTLine1TOP");
+    setLineFirebase("SMTLine1");
+  } else if (Area === "SMT BOT") {
+    setAreaFirebase("SMTLine1BOT");
+    setLineFirebase("SMTLine1");
+  } else if (Area === "SMT BE") {
+    setAreaFirebase("SMTLine1BE");
+    setLineFirebase("SMTLine1");
+  } else if (Area === "SMT") {
+    setAreaFirebase("SMTLine2");
+    setLineFirebase("SMTLine2");
+  }
+}, [Area]); 
 
+
+
+
+//  fungsi mengambil data dari firebase
   useEffect(() => {
-    if (Area === "SMT TOP") {
-      setAreaFirebase("TOP");
-    } else if (Area === "SMT BOT") {
-      setAreaFirebase("BOT");
-    } else if (Area === "SMT BE") {
-      setAreaFirebase("BE");
-    }
-  }, [Area]); // Efek samping ini hanya akan dipanggil ketika nilai Area berubah
-
-
-
-
-
-  useEffect(() => {
-    const ref3 = firebase.database().ref("StatusLine/SMTLine1");
+    const ref3 = db.ref("StatusLine/SMTLine1");
     ref3.on("value", (snapshot) => {
       const data = snapshot.val();
       setStatusLine(data);
@@ -84,12 +84,7 @@ const Maintenance = () => {
     }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
 
 
-
-
-
-
-
-
+// function time
   function updateTime() {
     const interval = setInterval(() => {
       setTime(new Date().toLocaleString());
@@ -99,8 +94,10 @@ const Maintenance = () => {
 
   updateTime();
 
+
+  // Fetching Data
   useEffect(() => {
-    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
+    fetch("http://192.168.101.12:3000/api/Repair")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -146,7 +143,7 @@ const Maintenance = () => {
 
   // QR
   const submitRequestValidation = () => {
-    if (!NamaPIC || !Requestor || !Kerusakan || !Station || !Action || !Department  ) {
+    if (!NamaPIC || !Requestor || !Kerusakan || !Station || !Action || !Department || !Sid  ) {
       alert("Harap isi semua kolom!");
       return;
     }
@@ -163,16 +160,17 @@ const Maintenance = () => {
       Department: Department,
       AreaFirebase: AreaFirebase,
       Uid: Uid,
+      Sid: Sid,
     };
 
     alert("Laporan Telah Berhasil Di Kirim Ke Team Validation ");
     notificationRequestValidation();
-    firebase.database().ref(`SMTLine1${AreaFirebase}/${Station}`).set(`${Department}`);
-    firebase.database().ref("StatusLine/SMTLine1").set("Down");
+    db.ref(`${AreaFirebase}/${Station}`).set(`${Department}`);
+    db.ref(`StatusLine/${LineFirebase}`).set("Down");
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`https://andonline.astra-visteon.com:3002/api/Validation`, {
+    fetch(`http://192.168.101.12:3000/api/Validation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -213,7 +211,7 @@ const Maintenance = () => {
 
     console.log("Sending data:", data);
 
-    fetch(`https://andonline.astra-visteon.com:3002/api/PutRepairDone`, {
+    fetch(`http://192.168.101.12:3000/api/PutRepairDone`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -290,18 +288,18 @@ const Maintenance = () => {
 
   const QRResponseLink = () => {
     if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRResponseRepairTopMTC";
+      return "/QRResponseRepairMTC";
     } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRResponseRepairBotMTC";
+      return "/QRResponseRepairMTC";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRResponseRepairBeMTC";
+      return "/QRResponseRepairMTC";
     } else {
     }
   };
 
 
   const notificationRequestValidation = () => {
-    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x1";
     let chatIds = [-912913885,-993707437]; // Default chat id
 
     // Pemeriksaan jika Department adalah Maintenance
@@ -727,6 +725,7 @@ const Maintenance = () => {
                                             setUid(selectedItem.Uid)
                                             setRequestor(selectedItem.Department)
                                             setArea(selectedItem.Area)
+                                            setSid(selectedItem.Sid)
                                             setLine(selectedItem.Line)
                                             setStation(selectedItem.Station)
 

@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/database";
+import { db } from "./../../Firebase.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
-  databaseURL:
-    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
-};
-firebase.initializeApp(firebaseConfig);
 
-const database = firebase.database();
 
 const SmtTop = () => {
   const [InputSchedule, setInputSchedule] = useState(false);
@@ -62,54 +54,48 @@ const SmtTop = () => {
   const [Total, setTotal] = useState("");
 
   useEffect(() => {
-    const ref1 = firebase.database().ref("/StatusLine/SMTLine1CMAOnGoing");
+    const ref1 = db.ref("/StatusLine/SMTLine1CMAOnGoing");
     ref1.on("value", (snapshot) => {
       const data = snapshot.val();
       setResultsCMA(data);
     });
 
-    const ref2 = firebase
-      .database()
+    const ref2 = db
       .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1");
     ref2.on("value", (snapshot) => {
       const data = snapshot.val();
       setRealPT1(data);
     });
 
-    const ref3 = firebase
-      .database()
+    const ref3 = db
       .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2");
     ref3.on("value", (snapshot) => {
       const data = snapshot.val();
       setRealPT2(data);
     });
 
-    const ref4 = firebase
-      .database()
+    const ref4 = db
       .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3");
     ref4.on("value", (snapshot) => {
       const data = snapshot.val();
       setRealPT3(data);
     });
 
-    const ref5 = firebase
-      .database()
+    const ref5 = db
       .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4");
     ref5.on("value", (snapshot) => {
       const data = snapshot.val();
       setRealPT4(data);
     });
 
-    const ref6 = firebase
-      .database()
+    const ref6 = db
       .ref("/StatusLine/SMTLine1ProductionTime/DownTime");
     ref6.on("value", (snapshot) => {
       const data = snapshot.val();
       setRealPD(data);
     });
 
-    const ref7 = firebase
-      .database()
+    const ref7 = db
       .ref("/StatusLine/SMTLine1ProductionTime/OverTime");
     ref7.on("value", (snapshot) => {
       const data = snapshot.val();
@@ -151,7 +137,7 @@ const SmtTop = () => {
     alert("Sucsess");
     window.location.reload();
 
-    fetch("https://andonline.astra-visteon.com:3002/api/ScheduleProduction", {
+    fetch("http://192.168.101.12:3000/api/ScheduleProduction", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -208,7 +194,7 @@ const SmtTop = () => {
     };
 
     const UpdateReal = (event) => {
-      fetch(`https://andonline.astra-visteon.com:3002/api/UpdateRealProduction`, {
+      fetch(`http://192.168.101.12:3000/api/UpdateRealProduction`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -217,7 +203,7 @@ const SmtTop = () => {
       })
         .then((response) => {
           if (response.status === 200) {
-            fetch(`https://andonline.astra-visteon.com:3002/api/ScheduleProduction`, {
+            fetch(`http://192.168.101.12:3000/api/ScheduleProduction`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -226,28 +212,22 @@ const SmtTop = () => {
             })
               .then((response) => {
                 if (response.status === 200) {
-                  firebase
-                    .database()
+                  db
                     .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime1")
                     .set("Waiting...");
-                  firebase
-                    .database()
+                  db
                     .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime2")
                     .set("Waiting...");
-                  firebase
-                    .database()
+                  db
                     .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime3")
                     .set("Waiting...");
-                  firebase
-                    .database()
+                  db
                     .ref("/StatusLine/SMTLine1ProductionTime/ProductionTime4")
                     .set("Waiting...");
-                  firebase
-                    .database()
+                  db
                     .ref("/StatusLine/SMTLine1ProductionTime/DownTime")
                     .set("Waiting...");
-                  firebase
-                    .database()
+                  db
                     .ref("/StatusLine/SMTLine1ProductionTime/OverTime")
                     .set("Waiting...");
                   alert("Production Berhasil Di Reset");
@@ -291,7 +271,7 @@ const SmtTop = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://andonline.astra-visteon.com:3002/api/ScheduleProduction"
+          "http://192.168.101.12:3000/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -363,8 +343,7 @@ const SmtTop = () => {
           }
 
           // Send the countdown value to Firebase
-          firebase
-            .database()
+          db
             .ref(`/StatusLine/SMTLine1ProductionTime/${productionTimeKey}`)
             .set(formatTime(remainingTime));
         } else if (currentTime >= outTime) {
@@ -495,8 +474,7 @@ const SmtTop = () => {
     setTotal(output);
 
     // Mengirim hasil total ke Firebase
-    firebase
-      .database()
+    db
       .ref("/StatusLine/SMTLine1ProductionTime/Total")
       .set(output)
       .then(() => {
@@ -597,7 +575,7 @@ const SmtTop = () => {
       OT_OUT: OT_OUT,
     };
     fetch(
-      `https://andonline.astra-visteon.com:3002/api/UpdateOverTime`,
+      `http://192.168.101.12:3000/api/UpdateOverTime`,
       {
         method: "PUT",
         headers: {

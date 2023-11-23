@@ -1,16 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/database";
+import { db } from "./../../Firebase.js"; 
 import Select from "react-select";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
-    databaseURL:
-        "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
-};
-firebase.initializeApp(firebaseConfig);
-
-const database = firebase.database();
 
 const SMTLINE1CONTROLLER = () => {
     // NAVBAR
@@ -31,9 +22,8 @@ const SMTLINE1CONTROLLER = () => {
 
     const [Line, setLine] = useState("SMT LINE 1");
     // //////
-    const [isSMTTOP, setIsSMTTOP] = useState(true);
-    const [isSMTBOT, setIsSMTBOT] = useState(true);
-    const [isSMTBE, setIsSMTBE] = useState(true);
+    const [isSMTLINE1, setIsSMTLINE1] = useState(true);
+    const [isSMTLINE2, setIsSMTLINE2] = useState(true);
 
     //  STATION Funtion
 
@@ -450,62 +440,62 @@ const SMTLINE1CONTROLLER = () => {
         setShowDrawer(!showDrawer);
     };
     useEffect(() => {
-        const ref3 = firebase.database().ref("StatusLine/SMTLine1");
+        const ref3 = db.ref("StatusLine/SMTLine1");
         ref3.on("value", (snapshot) => {
             const data = snapshot.val();
             setStatusLine(data);
         });
 
-        const ref8 = firebase.database().ref("SMTLine1TOP/Destacker (TOP)");
+        const ref8 = db.ref("SMTLine1TOP/Destacker (TOP)");
         ref8.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusDestackerTop(data);
 
         });
 
-        const ref9 = firebase.database().ref("SMTLine1TOP/Label (TOP)");
+        const ref9 = db.ref("SMTLine1TOP/Label (TOP)");
         ref9.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusLabelTop(data);
 
         });
 
-        const ref18 = firebase.database().ref("/SMTLine1TOP/Printer (TOP)");
+        const ref18 = db.ref("/SMTLine1TOP/Printer (TOP)");
         ref18.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusPrinterTop(data);
 
         });
 
-        const ref19 = firebase.database().ref("/SMTLine1TOP/SPI (TOP)");
+        const ref19 = db.ref("/SMTLine1TOP/SPI (TOP)");
         ref19.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusSPITop(data);
 
         });
 
-        const ref20 = firebase.database().ref("/SMTLine1TOP/Pick&Place (TOP)");
+        const ref20 = db.ref("/SMTLine1TOP/Pick&Place (TOP)");
         ref20.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusPickNPlaceTop(data);
 
         });
 
-        const ref21 = firebase.database().ref("/SMTLine1TOP/Reflow (TOP)");
+        const ref21 = db.ref("/SMTLine1TOP/Reflow (TOP)");
         ref21.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusReflowTop(data);
 
         });
 
-        const ref22 = firebase.database().ref("/SMTLine1TOP/AOI (TOP)");
+        const ref22 = db.ref("/SMTLine1TOP/AOI (TOP)");
         ref22.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusAOITop(data);
 
         });
 
-        const ref23 = firebase.database().ref("/SMTLine1TOP/RVS (TOP)");
+        const ref23 = db.ref("/SMTLine1TOP/RVS (TOP)");
         ref23.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusRVSTop(data);
@@ -514,41 +504,41 @@ const SMTLINE1CONTROLLER = () => {
 
 
         // SMT BOT
-        const ref24 = firebase.database().ref("SMTLine1BOT/Printer (BOT)");
+        const ref24 = db.ref("SMTLine1BOT/Printer (BOT)");
         ref24.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusPrinterBot(data);
 
         });
 
-        const ref25 = firebase.database().ref("SMTLine1BOT/SPI (BOT)");
+        const ref25 = db.ref("SMTLine1BOT/SPI (BOT)");
         ref25.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusSPIBot(data);
         });
 
-        const ref26 = firebase.database().ref("SMTLine1BOT/Pick&Place (BOT)");
+        const ref26 = db.ref("SMTLine1BOT/Pick&Place (BOT)");
         ref26.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusPickNPlaceBot(data);
 
         });
 
-        const ref27 = firebase.database().ref("SMTLine1BOT/Reflow (BOT)");
+        const ref27 = db.ref("SMTLine1BOT/Reflow (BOT)");
         ref27.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusReflowBot(data);
 
         });
 
-        const ref28 = firebase.database().ref("SMTLine1BOT/AOI (BOT)");
+        const ref28 = db.ref("SMTLine1BOT/AOI (BOT)");
         ref28.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusAOIBot(data);
 
         });
 
-        const ref29 = firebase.database().ref("SMTLine1BOT/RVS (BOT)");
+        const ref29 = db.ref("SMTLine1BOT/RVS (BOT)");
         ref29.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusRVSBot(data);
@@ -558,7 +548,7 @@ const SMTLINE1CONTROLLER = () => {
 
 
         // SMT BE
-        const ref30 = firebase.database().ref("SMTLine1BE/Drop in (BE)");
+        const ref30 = db.ref("SMTLine1BE/Drop in (BE)");
         ref30.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusDropinBe(data);
@@ -566,41 +556,41 @@ const SMTLINE1CONTROLLER = () => {
         });
 
 
-        const ref31 = firebase.database().ref("SMTLine1BE/Fluxer (BE)");
+        const ref31 = db.ref("SMTLine1BE/Fluxer (BE)");
         ref31.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusFluxerBe(data);
         });
 
-        const ref32 = firebase.database().ref("SMTLine1BE/PreHeat (BE)");
+        const ref32 = db.ref("SMTLine1BE/PreHeat (BE)");
         ref32.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusPreheatBe(data);
 
         });
 
-        const ref33 = firebase.database().ref("SMTLine1BE/Seho1 (BE)");
+        const ref33 = db.ref("SMTLine1BE/Seho1 (BE)");
         ref33.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusSeho1Be(data);
         });
 
 
-        const ref34 = firebase.database().ref("SMTLine1BE/Seho2 (BE)");
+        const ref34 = db.ref("SMTLine1BE/Seho2 (BE)");
         ref34.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusSeho2Be(data);
 
         });
 
-        const ref35 = firebase.database().ref("SMTLine1BE/Touch UP (BE)");
+        const ref35 = db.ref("SMTLine1BE/Touch UP (BE)");
         ref35.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusTouchupBe(data);
 
         });
 
-        const ref36 = firebase.database().ref("SMTLine1BE/ICT (BE)");
+        const ref36 = db.ref("SMTLine1BE/ICT (BE)");
         ref36.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusICTBe(data);
@@ -608,14 +598,14 @@ const SMTLINE1CONTROLLER = () => {
         });
 
 
-        const ref37 = firebase.database().ref("SMTLine1BE/Flash (BE)");
+        const ref37 = db.ref("SMTLine1BE/Flash (BE)");
         ref37.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusFlashBe(data);
 
         });
 
-        const ref38 = firebase.database().ref("SMTLine1BE/Router (BE)");
+        const ref38 = db.ref("SMTLine1BE/Router (BE)");
         ref38.on("value", (snapshot) => {
             const data = snapshot.val();
             updateStatusRouterBe(data);
@@ -624,141 +614,141 @@ const SMTLINE1CONTROLLER = () => {
 
         // RealTime
 
-        const ref74 = firebase.database().ref("/SMTLine1TOP/DestackerTopTime");
+        const ref74 = db.ref("/SMTLine1TOP/DestackerTopTime");
         ref74.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeDestackerTop(data);
         });
 
-        const ref75 = firebase.database().ref("/SMTLine1TOP/LabelTopTime");
+        const ref75 = db.ref("/SMTLine1TOP/LabelTopTime");
         ref75.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeLabelTop(data);
         });
 
-        const ref76 = firebase.database().ref("/SMTLine1TOP/PrinterTopTime");
+        const ref76 = db.ref("/SMTLine1TOP/PrinterTopTime");
         ref76.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimePrinterTop(data);
         });
 
-        const ref77 = firebase.database().ref("/SMTLine1TOP/SPITopTime");
+        const ref77 = db.ref("/SMTLine1TOP/SPITopTime");
         ref77.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeSPITop(data);
         });
 
-        const ref78 = firebase.database().ref("/SMTLine1TOP/PickNPlaceTopTime");
+        const ref78 = db.ref("/SMTLine1TOP/PickNPlaceTopTime");
         ref78.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimePickNPlaceTop(data);
         });
 
-        const ref79 = firebase.database().ref("/SMTLine1TOP/ReflowTopTime");
+        const ref79 = db.ref("/SMTLine1TOP/ReflowTopTime");
         ref79.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeReflowTop(data);
         });
 
 
-        const ref71 = firebase.database().ref("/SMTLine1TOP/AOITopTime");
+        const ref71 = db.ref("/SMTLine1TOP/AOITopTime");
         ref71.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeAOITop(data);
         });
 
-        const ref72 = firebase.database().ref("/SMTLine1TOP/RVSTopTime");
+        const ref72 = db.ref("/SMTLine1TOP/RVSTopTime");
         ref72.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeRVSTop(data);
         });
 
-        const ref84 = firebase.database().ref("/SMTLine1BOT/PrinterBotTime");
+        const ref84 = db.ref("/SMTLine1BOT/PrinterBotTime");
         ref84.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimePrinterBot(data);
         });
 
-        const ref85 = firebase.database().ref("/SMTLine1BOT/SPIBotTime");
+        const ref85 = db.ref("/SMTLine1BOT/SPIBotTime");
         ref85.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeSPIBot(data);
         });
 
-        const ref86 = firebase.database().ref("/SMTLine1BOT/PickNPlaceBotTime");
+        const ref86 = db.ref("/SMTLine1BOT/PickNPlaceBotTime");
         ref86.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimePickNPlaceBot(data);
         });
 
-        const ref87 = firebase.database().ref("/SMTLine1BOT/ReflowBotTime");
+        const ref87 = db.ref("/SMTLine1BOT/ReflowBotTime");
         ref87.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeReflowBot(data);
         });
 
-        const ref88 = firebase.database().ref("/SMTLine1BOT/AOIBotTime");
+        const ref88 = db.ref("/SMTLine1BOT/AOIBotTime");
         ref88.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeAOIBot(data);
         });
 
-        const ref89 = firebase.database().ref("/SMTLine1BOT/RVSBotTime");
+        const ref89 = db.ref("/SMTLine1BOT/RVSBotTime");
         ref89.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeRVSBot(data);
         });
 
-        const ref54 = firebase.database().ref("/SMTLine1BE/DropinBeTime");
+        const ref54 = db.ref("/SMTLine1BE/DropinBeTime");
         ref54.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeDropinBe(data);
         });
 
-        const ref55 = firebase.database().ref("/SMTLine1BE/FluxerBeTime");
+        const ref55 = db.ref("/SMTLine1BE/FluxerBeTime");
         ref55.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeFluxerBe(data);
         });
 
-        const ref56 = firebase.database().ref("/SMTLine1BE/PreheatBeTime");
+        const ref56 = db.ref("/SMTLine1BE/PreheatBeTime");
         ref56.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimePreheatBe(data);
         });
 
-        const ref57 = firebase.database().ref("/SMTLine1BE/Seho1BeTime");
+        const ref57 = db.ref("/SMTLine1BE/Seho1BeTime");
         ref57.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeSeho1Be(data);
         });
 
-        const ref58 = firebase.database().ref("/SMTLine1BE/Seho5BeTime");
+        const ref58 = db.ref("/SMTLine1BE/Seho5BeTime");
         ref58.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeSeho2Be(data);
         });
 
-        const ref59 = firebase.database().ref("/SMTLine1BE/TouchupBeTime");
+        const ref59 = db.ref("/SMTLine1BE/TouchupBeTime");
         ref59.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeTouchupBe(data);
         });
 
 
-        const ref60 = firebase.database().ref("/SMTLine1BE/ICTBeTime");
+        const ref60 = db.ref("/SMTLine1BE/ICTBeTime");
         ref60.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeICTBe(data);
         });
 
-        const ref61 = firebase.database().ref("/SMTLine1BE/FlashBeTime");
+        const ref61 = db.ref("/SMTLine1BE/FlashBeTime");
         ref61.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeFlashBe(data);
         });
 
-        const ref62 = firebase.database().ref("/SMTLine1BE/RouterBeTime");
+        const ref62 = db.ref("/SMTLine1BE/RouterBeTime");
         ref62.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeRouterBe(data);
@@ -2088,7 +2078,7 @@ const SMTLINE1CONTROLLER = () => {
 
 
     const fetchData = (endpoint, setDataFunction) => {
-        fetch(`https://andonline.astra-visteon.com:3002/api/${endpoint}`)
+        fetch(`http://192.168.101.12:3000/api/${endpoint}`)
             .then((response) => response.json())
             .then((data) => {
                 setDataFunction(data);
@@ -2228,76 +2218,64 @@ const SMTLINE1CONTROLLER = () => {
     const styles = {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${process.env.PUBLIC_URL}/Line.jpg)`,
         backgroundSize: "1600px",
+        backgroundPosition: "50% 0",
         height: "730px",
     };
-    
+
 
     return (
         <body style={styles}>
-            <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
+             <nav class="bg-slate px-3 sm:px-4 dark:bg-gray-900 bg-{#fff} w-full z-20 top-0 left-0 dark:border-gray-600">
                 <div class="flex h-14 items-center justify-between">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <img
-                                src={process.env.PUBLIC_URL + "/avi.png"}
-                                alt="Logo"
-                                class="h-6 ml-4 sm:h-9 bg-white rounded-md"
-                            />
-                        </div>
-                    </div>
-                    <p class="text-gray-500 text-sm">{formattedTime}</p>
-                </div>
-            </nav>
+                   
+                   
 
-            <header class="bg-white shadow mb-3">
-                <div class="mx-auto max-w-7xl px-4">
                     <div>
-                        <div class="flex ">
-                            <button>
-                                <h1 class="text-xl font-sans tracking-tight text-gray-900">
-                                    | SMT Line 1 |
-                                </h1>
-                            </button>
-                            <h1 class="text-xl font-sans tracking-tight ml-4">
-                                <span class="text-black">SMT LINE 1:</span>
+                        <div class=" bg-gray-300 flex flex-col w-44 sm:w-44 md:w-44 lg:w-44  rounded-lg">
+                            
+                            <h1 class="text-sm lg:text-sm sm:text-xs md:text-xs font-mono tracking-tight ml-4">
+                                <span class="text-black">SMT LINE 1 = </span>
                                 <span
-                                    class="ml-4"
+                                    class=""
                                     style={{
                                         color: StatusLine === "Running" ? "green" : "red",
                                     }}
                                 >
                                     {StatusLine}
                                 </span>
-                                <span className="ml-4">|</span>
+                            </h1>  <h1 class="text-sm lg:text-sm sm:text-xs md:text-xs  font-mono tracking-tight ml-4">
+                                <span class="text-black">SMT LINE 2 = </span>
+                                <span class=" text-green-700">Running </span>
                             </h1>
-                            <h1 class="text-xl font-sans tracking-tight ml-4">
-                                <span class="text-black">SMT LINE 2:</span>
-                                <span class="ml-4 text-green-500">RUNNING </span>|
-                            </h1>
+                            
                         </div>
+                           
+                    </div>
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <img
+                                src={process.env.PUBLIC_URL + "/avi.png"}
+                                alt="Logo"
+                                class="h-6 ml-4 sm:h-12 rounded-md"
+                            />
+                        </div>
+
                     </div>
                 </div>
-            </header>
+            </nav>
+
+
+      
 
             {/*  */}
             <main>
-                <div className=" justify-center items-center mx-auto text-center">
-                    <span className=" pt-4 sm:ml-5 text-2xl text-white font-thin px-2">
-                        SMT LINE 1
-                    </span>
-                </div>
-                <div>
-
-
-                </div>
-
-                <button onClick={() => setIsSMTTOP((prevValue) => !prevValue)} className="flex">
-                    <div className=" pt-2 sm:ml-5 text-2xl text-white font-thin px-2"
+                <button onClick={() => setIsSMTLINE1((prevValue) => !prevValue)} className="flex">
+                    <div className="  sm:ml-5 text-xl text-white font-semibold px-2"
                     >
-                        SMT TOP
+                        SMT LINE 1
                     </div>
-                    <div className="mt-3">
-                        <svg width="25px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                    <div className="mt-1">
+                        <svg width="17px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
 
                             <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
@@ -2309,15 +2287,15 @@ const SMTLINE1CONTROLLER = () => {
                     </div>
                 </button>
 
-                {isSMTTOP ? (
+                {isSMTLINE1 ? (
                     <>
                         <div>
-                            <div class=" flex    p-4 sm:ml-5">
-                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                            <div class=" flex    p-2 sm:ml-5">
+                                <section class="antialiased  text-gray-600  px-3" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
 
-                                        <div className="  w-50 sm:w-50 lg:w-50">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusDestackerTop,
@@ -2447,11 +2425,10 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        DESTACKER TOP
-                                                    </div>
-                                                </header>
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    DESTACKER TOP
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -2459,7 +2436,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusLabelTop,
@@ -2591,11 +2568,9 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        LABEL TOP
-                                                    </div>
-                                                </header>
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    LABEL TOP
+                                                </span>
                                             </button>
                                         </div>
                                     </div>
@@ -2603,7 +2578,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusPrinterTop,
@@ -2732,11 +2707,11 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        PRINTER TOP
-                                                    </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    PRINTER TOP
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -2744,7 +2719,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusSPITop,
@@ -2873,9 +2848,9 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">SPI TOP </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">SPI TOP </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -2883,7 +2858,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusPickNPlaceTop,
@@ -3012,11 +2987,9 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        PICK & PLACE TOP
-                                                    </div>
-                                                </header>
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    PICK & PLACE TOP
+                                                </span>
                                             </button>
                                         </div>
                                     </div>
@@ -3028,7 +3001,7 @@ const SMTLINE1CONTROLLER = () => {
                                 >
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusReflowTop,
@@ -3158,11 +3131,9 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        REFLOW TOP
-                                                    </div>
-                                                </header>
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    REFLOW TOP
+                                                </span>
                                             </button>
                                         </div>
                                     </div>
@@ -3170,7 +3141,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusAOITop,
@@ -3300,9 +3271,9 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">AOI TOP</div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">AOI TOP</span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -3310,7 +3281,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusRVSTop,
@@ -3440,11 +3411,11 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        RVS TOP
-                                                    </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    RVS TOP
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -3452,38 +3423,15 @@ const SMTLINE1CONTROLLER = () => {
                             </div>
                         </div>
 
-                       
-                    </>
-                ) : null}
 
+                        {/* SMT BOT */}
 
-                <button onClick={() => setIsSMTBOT((prevValue) => !prevValue)} className="flex">
-                    <div className=" pt-2 sm:ml-5 text-2xl text-white font-thin px-2"
-                    >
-                        SMT BOTTOM
-                    </div>
-                    <div className="mt-3">
-                        <svg width="25px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
-
-                            <g id="SVGRepo_bgCarrier" stroke-width="0" />
-
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-
-                            <g id="SVGRepo_iconCarrier"> <rect x="0" fill="none" width="24" height="24" /> <g> <path d="M7 10l5 5 5-5" /> </g> </g>
-
-                        </svg>
-                    </div>
-                </button>
-
-
-                {isSMTBOT ? (
-                    <>
                         <div>
-                            <div class="pt-4 flex    p-4 sm:ml-5">
-                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                            <div class=" flex    p-2 sm:ml-5">
+                                <section class="antialiased  text-gray-600  px-3" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusPrinterBot,
@@ -3612,11 +3560,11 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        PRINTER BOT
-                                                    </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    PRINTER BOT
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -3624,7 +3572,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusSPIBot,
@@ -3753,9 +3701,9 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">SPI BOT</div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">SPI BOT</span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -3763,7 +3711,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusPickNPlaceBot,
@@ -3892,11 +3840,11 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        PICK & PLACE BOT
-                                                    </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    PICK & PLACE BOT
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -3904,7 +3852,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusReflowBot,
@@ -4033,11 +3981,11 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        REFLOW BOT
-                                                    </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    REFLOW BOT
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -4045,7 +3993,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusAOIBot,
@@ -4174,9 +4122,9 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">AOI BOT</div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">AOI BOT</span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -4184,7 +4132,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusRVSBot,
@@ -4313,45 +4261,25 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">RVS BOT</div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">RVS BOT</span>
+
                                             </button>
                                         </div>
                                     </div>
                                 </section>
                             </div>
                         </div>
-                    </>
-                ) : null}
 
 
-                <button onClick={() => setIsSMTBE((prevValue) => !prevValue)} className="flex">
-                    <div className=" pt-2 sm:ml-5 text-2xl text-white font-thin px-2"
-                    >
-                        SMT BACKEND
-                    </div>
-                    <div className="mt-3">
-                        <svg width="25px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
 
-                            <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-
-                            <g id="SVGRepo_iconCarrier"> <rect x="0" fill="none" width="24" height="24" /> <g> <path d="M7 10l5 5 5-5" /> </g> </g>
-
-                        </svg>
-                    </div>
-                </button>
-
-                {isSMTBE ? (
-                    <>
                         <div>
-                            <div class="pt-4 flex    p-4 sm:ml-5">
-                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                            <div class=" flex    p-2 sm:ml-5">
+                                <section class="antialiased  text-gray-600  px-3" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{ backgroundColor: backgroundColorStatusDropinBe }}
                                                 value={DropinBe}
@@ -4479,11 +4407,11 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        DROP IN (BE)
-                                                    </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    DROP IN BE
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -4491,7 +4419,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{ backgroundColor: backgroundColorStatusFluxerBe }}
 
@@ -4621,11 +4549,11 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        FLUXER (BE)
-                                                    </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    FLUXER BE
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -4633,7 +4561,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{ backgroundColor: backgroundColorStatusPreheatBe }}
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
@@ -4762,11 +4690,11 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        PREHEAT (BE)
-                                                    </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    PREHEAT BE
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -4774,7 +4702,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{ backgroundColor: backgroundColorStatusSeho1Be }}
 
@@ -4903,11 +4831,11 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        SEHO 1 (BE)
-                                                    </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    SEHO 1 BE
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -4915,7 +4843,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{ backgroundColor: backgroundColorStatusSeho2Be }}
 
@@ -5044,11 +4972,11 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        SEHO2 (BE)
-                                                    </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    SEHO2 BE
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -5056,7 +4984,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{ backgroundColor: backgroundColorStatusTouchupBe }}
 
@@ -5185,11 +5113,11 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        TOUCH UP (BE)
-                                                    </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    TOUCH UP BE
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -5197,7 +5125,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{ backgroundColor: backgroundColorStatusICTBe }}
 
@@ -5326,9 +5254,9 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">ICT (BE)</div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">ICT BE</span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -5336,7 +5264,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{ backgroundColor: backgroundColorStatusFlashBe }}
 
@@ -5465,11 +5393,11 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        FLASH (BE)
-                                                    </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    FLASH BE
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -5477,7 +5405,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-50 sm:w-50 lg:w-50 ">
+                                        <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
                                                 style={{ backgroundColor: backgroundColorStatusRouterBe }}
 
@@ -5606,11 +5534,11 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <header class="px-5 py-2  ">
-                                                    <div class="italic  text-center text-sm text-white">
-                                                        ROUTER (BE)
-                                                    </div>
-                                                </header>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    ROUTER BE
+                                                </span>
+
                                             </button>
                                         </div>
                                     </div>
@@ -5619,9 +5547,1844 @@ const SMTLINE1CONTROLLER = () => {
                             </div>
                         </div>
 
-                     
+
                     </>
                 ) : null}
+
+                <button onClick={() => setIsSMTLINE2((prevValue) => !prevValue)} className="flex">
+                    <div className="  sm:ml-5 text-xl text-white font-semibold px-2"
+                    >
+                        SMT LINE 2
+                    </div>
+                    <div className="mt-1">
+                        <svg width="17px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+
+                            <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+
+                            <g id="SVGRepo_iconCarrier"> <rect x="0" fill="none" width="24" height="24" /> <g> <path d="M7 10l5 5 5-5" /> </g> </g>
+
+                        </svg>
+                    </div>
+                </button>
+
+                {isSMTLINE2 ? (
+                    <>
+                        <div>
+                            <div class=" flex    p-2 sm:ml-5">
+                                <section class="antialiased  text-gray-600  px-3" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+				c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+				s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+				 M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+				H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+				c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+				c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+				 M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+				v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+				h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+				c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+				z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+				C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+				C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+				C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+				C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+				c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+				V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+				c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+				V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+				C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+				c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+				C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+				c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+				C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+				c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+				C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+				c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+				C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+				s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+				C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+				c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    DESTACKER TOP
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+
+                                                class="w-full max-w-sm bg-[#4d5661] shadow-lg rounded-xl "
+
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+				c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+				s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+				 M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+				H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+				c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+				c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+				 M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+				v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+				h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+				c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+				z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+				C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+				C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+				C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+				C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+				c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+				V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+				c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+				V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+				C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+				c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+				C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+				c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+				C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+				c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+				C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+				c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+				C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+				s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+				C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+				c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    LABEL TOP
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            ><svg
+                                                width="50px"
+                                                fill="#2e3436"
+                                                fill-opacity="0.7000"
+                                                className="justify-center items-center mx-auto mt-1"
+                                                version="1.1"
+                                                id="Layer_1"
+                                                viewBox="0 0 512 512"
+                                            >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    PRINTER TOP
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            ><svg
+                                                width="50px"
+                                                fill="#2e3436"
+                                                fill-opacity="0.7000"
+                                                className="justify-center items-center mx-auto mt-1"
+                                                version="1.1"
+                                                id="Layer_1"
+                                                viewBox="0 0 512 512"
+                                            >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">SPI TOP </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            ><svg
+                                                width="50px"
+                                                fill="#2e3436"
+                                                fill-opacity="0.7000"
+                                                className="justify-center items-center mx-auto mt-1"
+                                                version="1.1"
+                                                id="Layer_1"
+                                                viewBox="0 0 512 512"
+                                            >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    PICK & PLACE TOP
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section
+                                    class="antialiased 
+          text-gray-600  px-2"
+                                    x-data="app"
+                                >
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    REFLOW TOP
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">AOI TOP</span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    RVS TOP
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                        <div>
+                            <div class=" flex    p-2 sm:ml-5">
+                                <section class="antialiased  text-gray-600  px-3" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    DROP IN BE
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    FLUXER BE
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    PREHEAT BE
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    SEHO 1 BE
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    SEHO2 BE
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    TOUCH UP BE
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">ICT BE</span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    FLASH BE
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+
+                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="50px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    ROUTER BE
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </section>
+                            </div>
+                        </div>
+
+
+                    </>
+                ) : null}
+
             </main>
 
 

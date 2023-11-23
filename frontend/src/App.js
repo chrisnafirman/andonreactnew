@@ -35,64 +35,30 @@ import ReportREQ from "./components/Report/ReportREQ.jsx"
 import ValidationProduction from "./components/Production/ValidationProduction.jsx"
 
 
-import UserSMTTop from "./components/User/SmtTop.jsx"
-import UserSMTBot from "./components/User/SmtBot.jsx"
 import UserSMTLine1 from "./components/User/SMTLine1.jsx"
 
-import UserSMTBe from "./components/User/SmtBe.jsx"
-import UserHome from "./components/User/Home.jsx"
-
-
-// QR Top
-
-import QROperatorTop from "./components/QR/QRTop/QROperatorTOP.jsx"
-import QRLeaderTop from "./components/QR/QRTop/Leader/QRLeaderTOP.jsx"
-
-
-import QRResponseRepairTopMTC from "./components/QR/QRTop/Maintenance/QRResponseRepairTOP.jsx"
-
-
-import QRResponseRepairTopOTH from "./components/QR/QRTop/Others/QRResponseRepairTOP.jsx"
-
-
-import QRResponseQualityTop from "./components/QR/QRTop/Quality/QRResponseQualityTOP.jsx"
-
-
-import QRResponseProductionTop from "./components/QR/QRTop/Production/QRResponseProductionTOP.jsx"
 
 
 
 
 
-// 
 
+import QROperator from "./components/QR/QRAndon/QROperator.jsx"
+import QRLeader from "./components/QR/QRAndon/QRLeader.jsx"
 
-// QR Bot
-
-import QROperatorBot from "./components/QR/QRBot/QROperatorBOT.jsx"
-import QRLeaderBot from "./components/QR/QRBot/Leader/QRLeaderBOT.jsx"
-
-
-
-import QRResponseRepairBotMTC from "./components/QR/QRBot/Maintenance/QRResponseRepairBOT.jsx"
-import QRResponseRepairBotOTH from "./components/QR/QRBot/Others/QRResponseRepairBOT.jsx"
-import QRResponseQualityBot from "./components/QR/QRBot/Quality/QRResponseQualityBOT.jsx"
-import QRResponseProductionBot from "./components/QR/QRBot/Production/QRResponseProductionBOT.jsx"
+import QRResponseRepairMTC from "./components/QR/QRAndon/Maintenance/QRResponseRepairMaintenance.jsx"
+import QRResponseRepairOTH from "./components/QR/QRAndon/Others/QRResponseRepairOthers.jsx"
+import QRResponseQuality from "./components/QR/QRAndon/Quality/QRResponseQuality.jsx"
+import QRResponseProduction from "./components/QR/QRAndon/Production/QRResponseProduction.jsx"
 
 
 
-// 
-
-// QR Be
-
-import QROperatorBe from "./components/QR/QRBe/QROperatorBE.jsx"
-import QRLeaderBe from "./components/QR/QRBe/Leader/QRLeaderBE.jsx"
 
 
-import QRResponseRepairBeMTC from "./components/QR/QRBe/Maintenance/QRResponseRepairBE.jsx"
-import QRResponseRepairBeOTH from "./components/QR/QRBe/Others/QRResponseRepairBE.jsx"
-import QRResponseQualityBe from "./components/QR/QRBe/Quality/QRResponseQualityBE.jsx"
-import QRResponseProductionBe from "./components/QR/QRBe/Production/QRResponseProductionBE.jsx"
+
+
+
+import QRCHECKSHEET from "./components/QR/QRMaintenance/QRCHECKSHEET.jsx"
 
 
 // 
@@ -129,11 +95,11 @@ function App() {
         <Route path="ReportRTN" element={<ReportRTN />} />
         <Route path="ReportREQ" element={<ReportREQ />} />
 
-        <Route path="UserSMTTop" element={<UserSMTTop />} />
-        <Route path="UserSMTBe" element={<UserSMTBe />} />
-        <Route path="UserSMTBot" element={<UserSMTBot />} />
+
+
+
         <Route path="UserSMTLine1" element={<UserSMTLine1 />} />
-        <Route path="UserHome" element={<UserHome />} />
+
 
         <Route path="SMTLine1Controller" element={<SmtLine1Controller />} />
 
@@ -160,51 +126,24 @@ function App() {
 
 
 
-        {/* QR Top*/}
-        <Route path="QRLeaderTop" element={<QRLeaderTop />} />
-
-        <Route path="QROperatorTop" element={<QROperatorTop />} />
 
 
-
-        <Route path="QRResponseRepairTopMTC" element={<QRResponseRepairTopMTC />} />
-        <Route path="QRResponseRepairTopOTH" element={<QRResponseRepairTopOTH />} />
-        <Route path="QRResponseQualityTOP" element={<QRResponseQualityTop />} />
-        <Route path="QRResponseProductionTOP" element={<QRResponseProductionTop />} />
-
-        {/*  */}
-
-        {/* QR Bot*/}
-
-        <Route path="QRLeaderBot" element={<QRLeaderBot />} />
-
-        <Route path="QROperatorBot" element={<QROperatorBot />} />
-
-
-
-        <Route path="QRResponseRepairBotMTC" element={<QRResponseRepairBotMTC />} />
-        <Route path="QRResponseRepairBotOTH" element={<QRResponseRepairBotOTH />} />
-        <Route path="QRResponseQualityBOT" element={<QRResponseQualityBot />} />
-        <Route path="QRResponseProductionBOT" element={<QRResponseProductionBot />} />
+        <Route path="QRLeader" element={<QRLeader />} />
+        <Route path="QROperator" element={<QROperator />} />
 
 
 
 
-        {/*  */}
+        <Route path="QRResponseRepairMTC" element={<QRResponseRepairMTC />} />
+        <Route path="QRResponseRepairOTH" element={<QRResponseRepairOTH />} />
+        <Route path="QRResponseQuality" element={<QRResponseQuality />} />
+        <Route path="QRResponseProduction" element={<QRResponseProduction />} />
 
 
-        {/* QR Be*/}
+ 
 
-        <Route path="QRLeaderBe" element={<QRLeaderBe />} />
-
-        <Route path="QROperatorBe" element={<QROperatorBe />} />
-
-
-
-        <Route path="QRResponseRepairBeMTC" element={<QRResponseRepairBeMTC />} />
-        <Route path="QRResponseRepairBeOTH" element={<QRResponseRepairBeOTH />} />
-        <Route path="QRResponseQualityBE" element={<QRResponseQualityBe />} />
-        <Route path="QRResponseProductionBE" element={<QRResponseProductionBe />} />
+      {/* QR MAINTENANCE  */}
+        <Route path="QRCHECKSHEET" element={<QRCHECKSHEET />} />
 
 
 

@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/database";
+import { db } from "./../../Firebase.js";
 import Select from "react-select";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
-  databaseURL:
-    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
-};
-firebase.initializeApp(firebaseConfig);
-
-const database = firebase.database();
 
 const Quality = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
@@ -31,9 +22,10 @@ const Quality = () => {
   const [isOpenRunValidation, setisOpenRunValidation] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [Station, setStation] = useState("");
-
+  const [LineFirebase, setLineFirebase] = useState("");
 
   const [Uid, setUid] = useState("");
+  const [Sid, setSid] = useState("");
 
   const [NamaPIC, setNamaPIC] = useState("");
   const [Desc, setDesc] = useState("");
@@ -56,7 +48,7 @@ const Quality = () => {
 
 
   useEffect(() => {
-    const ref3 = firebase.database().ref("StatusLine/SMTLine1");
+    const ref3 = db.ref("StatusLine/SMTLine1");
     ref3.on("value", (snapshot) => {
       const data = snapshot.val();
       setStatusLine(data);
@@ -105,7 +97,7 @@ const Quality = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("https://andonline.astra-visteon.com:3002/api/Validation")
+    fetch("http://192.168.101.12:3000/api/Validation")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -179,15 +171,15 @@ const Quality = () => {
       Desc: Desc,
     };
 
-    firebase.database().ref(`SMTLine1${AreaFirebase}/${Station}`).set("Go");
-    firebase.database().ref("StatusLine/SMTLine1").set("Running");
+    db.ref(`${AreaFirebase}/${Station}`).set("Go");
+    db.ref(`StatusLine/${LineFirebase}`).set("Running");
     notificationValidation();
     alert("Validation Telah Berhasil ");
     setisOpenRunValidation(false);
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`https://andonline.astra-visteon.com:3002/api/PutValidation`, {
+    fetch(`http://192.168.101.12:3000/api/PutValidation`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -212,7 +204,7 @@ const Quality = () => {
 
     // QR
    const submitReturnRequest = () => {
-      if (!NamaPIC  | !Department || !Kerusakan || !Station) {
+      if (!NamaPIC  | !Department || !Kerusakan || !Station || !Sid) {
         alert("Harap isi semua kolom!");
         return;
       }
@@ -226,16 +218,17 @@ const Quality = () => {
         Requestor: Requestor,
         Kerusakan: Kerusakan,
         Uid: Uid,
+        Sid: Sid,
       };
   
       alert("Return Perbaikan Telah Di Kirim Ke Team Terkait");
       notificationReturn();
-      firebase.database().ref(`SMTLine1${AreaFirebase}/${Station}`).set(`Return ${Department}`);
-      firebase.database().ref("StatusLine/SMTLine1").set("Down");
+      db.ref(`${AreaFirebase}/${Station}`).set(`Return ${Department}`);
+      db.ref(`StatusLine/${LineFirebase}`).set("Down");
       setStation(null);
       setNamaPIC(null);
   
-      fetch(`https://andonline.astra-visteon.com:3002/api/Repair`, {
+      fetch(`http://192.168.101.12:3000/api/Repair`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -273,7 +266,7 @@ const Quality = () => {
   
       console.log("Sending data:", data);
   
-      fetch(`https://andonline.astra-visteon.com:3002/api/PutStatusReturnValidation`, {
+      fetch(`http://192.168.101.12:3000/api/PutStatusReturnValidation`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -355,24 +348,30 @@ const Quality = () => {
 
   const QRResponseLink = () => {
     if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRResponseQualityTOP";
+      return "/QRResponseQuality";
     } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRResponseQualityBOT";
+      return "/QRResponseQuality";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRResponseQualityBE";
+      return "/QRResponseQuality";
     } else {
     }
   };
 
-  useEffect(() => {
-    if (Area === "SMT TOP") {
-      setAreaFirebase("TOP");
-    } else if (Area === "SMT BOT") {
-      setAreaFirebase("BOT");
-    } else if (Area === "SMT BE") {
-      setAreaFirebase("BE");
-    }
-  }, [Area]); // Efek samping ini hanya akan dipanggil ketika nilai Area berubah
+useEffect(() => {
+  if (Area === "SMT TOP") {
+    setAreaFirebase("SMTLine1TOP");
+    setLineFirebase("SMTLine1");
+  } else if (Area === "SMT BOT") {
+    setAreaFirebase("SMTLine1BOT");
+    setLineFirebase("SMTLine1");
+  } else if (Area === "SMT BE") {
+    setAreaFirebase("SMTLine1BE");
+    setLineFirebase("SMTLine1");
+  } else if (Area === "SMT") {
+    setAreaFirebase("SMTLine2");
+    setLineFirebase("SMTLine2");
+  }
+}, [Area]); // Efek samping ini hanya akan dipanggil ketika nilai Area berubah
 
 
   useEffect(() => {
@@ -384,7 +383,7 @@ const Quality = () => {
     const randomId = `RTN${Math.floor(Math.random() * 1000).toString().padStart(4, "0")}`;
 
     // Kirim permintaan ke API untuk memeriksa UID
-    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
+    fetch("http://192.168.101.12:3000/api/Repair")
       .then((response) => response.json())
       .then((data) => {
         const uids = data.map((item) => item.Uid);
@@ -405,7 +404,7 @@ const Quality = () => {
 
 
   const notificationReturn = () => {
-    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x1";
     let chatIds = [-921205810]; // Default chat id
 
     // Pemeriksaan jika Department adalah Maintenance
@@ -434,7 +433,7 @@ const Quality = () => {
 
 
 const notificationValidation = () => {
-  const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+  const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x1";
   const chatIds = [-912913885 , -950877102]; // Default chat id
 
 
@@ -891,6 +890,7 @@ const notificationValidation = () => {
                                               setNamaPIC(selectedItem.ValidationName)
                                               setRequestor(selectedItem.DepartTo)
                                               setArea(selectedItem.Area)
+                                              setSid(selectedItem.Sid)
                                               setLine(selectedItem.Line)
                                               setStation(selectedItem.Station)
                                               setStatus("Return")
@@ -916,6 +916,7 @@ const notificationValidation = () => {
                                               setNamaPIC(selectedItem.ValidationName)
                                               setRequestor(selectedItem.DepartTo)
                                               setArea(selectedItem.Area)
+                                              setSid(selectedItem.Sid)
                                               setLine(selectedItem.Line)
                                               setStation(selectedItem.Station)
                                               setStatus("Running")

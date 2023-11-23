@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/database";
+import { db } from "./../../Firebase.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
-  databaseURL:
-    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
-};
-firebase.initializeApp(firebaseConfig);
-
-const database = firebase.database();
-
-const ReuestLeader = () => {
+const Leader = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -30,11 +20,12 @@ const ReuestLeader = () => {
   const [isButtonSearch, setisButtonSearch] = useState(true);
   const [isLoader, setIsLoader] = useState(false);
   const [AreaFirebase, setAreaFirebase] = useState("");
+  const [LineFirebase, setLineFirebase] = useState("");
   // button search
 
 
   useEffect(() => {
-    const ref3 = firebase.database().ref("StatusLine/SMTLine1");
+    const ref3 = db.ref("StatusLine/SMTLine1");
     ref3.on("value", (snapshot) => {
       const data = snapshot.val();
       setStatusLine(data);
@@ -85,7 +76,7 @@ const ReuestLeader = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("https://andonline.astra-visteon.com:3002/api/Leader")
+    fetch("http://192.168.101.12:3000/api/Leader")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -156,10 +147,10 @@ const ReuestLeader = () => {
     };
 
     console.log("Sending data:", data);
-    firebase.database().ref(`SMTLine1${AreaFirebase}/${Station}`).set(`Go`);
-    firebase.database().ref("StatusLine/SMTLine1").set("Running");
+    db.ref(`${AreaFirebase}/${Station}`).set(`Go`);
+    db.ref(`StatusLine/${LineFirebase}`).set("Running");
 
-    fetch(`https://andonline.astra-visteon.com:3002/api/PutRejectStatusLeader`, {
+    fetch(`http://192.168.101.12:3000/api/PutRejectStatusLeader`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -181,16 +172,6 @@ const ReuestLeader = () => {
 
 
 
-  const QRValidationLink = () => {
-    if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRLeaderTop";
-    } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRLeaderBot";
-    } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRLeaderBE";
-    } else {
-    }
-  };
 
 
   const styles = {
@@ -209,19 +190,25 @@ const ReuestLeader = () => {
   };
 
 
-  useEffect(() => {
-    if (Area === "SMT TOP") {
-      setAreaFirebase("TOP");
-    } else if (Area === "SMT BOT") {
-      setAreaFirebase("BOT");
-    } else if (Area === "SMT BE") {
-      setAreaFirebase("BE");
-    }
-  }, [Area]); // Efek samping ini hanya akan dipanggil ketika nilai Area berubah
+useEffect(() => {
+  if (Area === "SMT TOP") {
+    setAreaFirebase("SMTLine1TOP");
+    setLineFirebase("SMTLine1");
+  } else if (Area === "SMT BOT") {
+    setAreaFirebase("SMTLine1BOT");
+    setLineFirebase("SMTLine1");
+  } else if (Area === "SMT BE") {
+    setAreaFirebase("SMTLine1BE");
+    setLineFirebase("SMTLine1");
+  } else if (Area === "SMT") {
+    setAreaFirebase("SMTLine2");
+    setLineFirebase("SMTLine2");
+  }
+}, [Area]); // Efek samping ini hanya akan dipanggil ketika nilai Area berubah
 
 
 //   const notificationReject = () => {
-//     const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+//     const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x1";
 //     const chatIds = [-4080609939,-921205810]; // Default chat id
 
 //     // Pemeriksaan jika Department adalah Maintenance
@@ -553,7 +540,7 @@ const ReuestLeader = () => {
 
                                 {/* Add Solved and Reject buttons */}
                                 <div className="flex justify-between space-x-6 mt-4">
-                                  <a href={QRValidationLink()}>
+                                  <a href="QRLeader">
                                     {selectedItem.Status === "" && (
                                       <button
                                         className="bg-green-500 flex  hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
@@ -810,4 +797,4 @@ const ReuestLeader = () => {
   );
 };
 
-export default ReuestLeader;
+export default Leader;

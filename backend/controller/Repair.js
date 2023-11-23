@@ -2,11 +2,11 @@ const db = require("../models/init");
 
 
 const postRequestRepair = (req, res) => {
-  const { Uid, NamaPIC, Area, Line, Department, Station, Kerusakan, Requestor } = req.body;
+  const { Sid, Uid, NamaPIC, Area, Line, Department, Station, Kerusakan, Requestor } = req.body;
 
   db.query(
-    "INSERT INTO repair (Uid, Nama, Area, Line, Department, Station, Problem, Requestor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-    [Uid, NamaPIC, Area, Line, Department, Station, Kerusakan, Requestor],
+    "INSERT INTO repair (Sid, Uid, Nama, Area, Line, Department, Station, Problem, Requestor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [Sid, Uid, NamaPIC, Area, Line, Department, Station, Kerusakan, Requestor],
     (error, results) => {
       if (error) {
         console.log(error);

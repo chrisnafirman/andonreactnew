@@ -2,11 +2,11 @@ const db = require("../models/init");
 
 
 const postRequestLeader = (req, res) => {
-  const { NamaPIC, Area, Line, Station } = req.body;
+  const { Sid, NamaPIC, Area, Line, Station } = req.body;
 
   db.query(
-    "INSERT INTO leader (Nama, Area, Line, Station) VALUES (?, ?, ?, ?)",
-    [NamaPIC, Area, Line, Station],
+    "INSERT INTO leader (Sid, Nama, Area, Line, Station) VALUES (?, ?, ?, ?, ?)",
+    [ Sid, NamaPIC, Area, Line, Station],
     (error, results) => {
       if (error) {
         console.log(error);

@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/database";
+import { db } from "./../../Firebase.js";
 import Select from "react-select";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
-  databaseURL:
-    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
-};
-firebase.initializeApp(firebaseConfig);
-
-const database = firebase.database();
 
 const Others = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
@@ -34,6 +25,7 @@ const Others = () => {
   const [StatusLine, setStatusLine] = useState("");
   const [Status, setStatus] = useState("Solved");
   const [Area, setArea] = useState("");
+  const [Sid, setSid] = useState("");
   const [AreaFirebase, setAreaFirebase] = useState("");
   const [isLoader, setIsLoader] = useState(false);
   const [Uid, setUid] = useState("");
@@ -41,20 +33,10 @@ const Others = () => {
   const [isOpenSearch, setisOpenSearch] = useState(false);
   const [isButtonSearch, setisButtonSearch] = useState(true);
   const [isExportOption, setisExportOption] = useState(false);
-
+  const [LineFirebase, setLineFirebase] = useState("");
   const [selectedOptionDepartment, setSelectedOptionDepartment] =
     useState(null);
 
-
-  useEffect(() => {
-    if (Area === "SMT TOP") {
-      setAreaFirebase("TOP");
-    } else if (Area === "SMT BOT") {
-      setAreaFirebase("BOT");
-    } else if (Area === "SMT BE") {
-      setAreaFirebase("BE");
-    }
-  }, [Area]);
 
   // button search
   function handleToggleDatePicker() {
@@ -67,7 +49,7 @@ const Others = () => {
   }, []);
 
   useEffect(() => {
-    const ref3 = firebase.database().ref("StatusLine/SMTLine1");
+    const ref3 = db.ref("StatusLine/SMTLine1");
     ref3.on("value", (snapshot) => {
       const data = snapshot.val();
       setStatusLine(data);
@@ -103,7 +85,7 @@ const Others = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
+    fetch("http://192.168.101.12:3000/api/Repair")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -148,7 +130,7 @@ const Others = () => {
 
   // QR
   const submitRequestValidation = () => {
-    if (!NamaPIC || !Requestor || !Kerusakan || !Station || !Action || !Department ) {
+    if (!NamaPIC || !Requestor || !Kerusakan || !Station || !Action || !Department || !Sid ) {
       alert("Harap isi semua kolom!");
       return;
     }
@@ -165,16 +147,17 @@ const Others = () => {
       Department: Department,
       AreaFirebase: AreaFirebase,
       Uid: Uid,
+      Sid: Sid,
     };
 
     alert("Laporan Telah Berhasil Di Kirim Ke Team Validation ");
     notificationRequestValidation();
-    firebase.database().ref(`SMTLine1${AreaFirebase}/${Station}`).set(`${Department}`);
-    firebase.database().ref("StatusLine/SMTLine1").set("Down");
+    db.ref(`${AreaFirebase}/${Station}`).set(`${Department}`);
+    db.ref(`StatusLine/${LineFirebase}`).set("Down");
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`https://andonline.astra-visteon.com:3002/api/Validation`, {
+    fetch(`http://192.168.101.12:3000/api/Validation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -215,7 +198,7 @@ const Others = () => {
 
     console.log("Sending data:", data);
 
-    fetch(`https://andonline.astra-visteon.com:3002/api/PutRepairDone`, {
+    fetch(`http://192.168.101.12:3000/api/PutRepairDone`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -289,19 +272,34 @@ const Others = () => {
 
   const QRResponseLink = () => {
     if (selectedItem.Area === "SMT TOP" && selectedItem.Status === "") {
-      return "/QRResponseRepairTopOTH";
+      return "/QRResponseRepairOTH";
     } else if (selectedItem.Area === "SMT BOT" && selectedItem.Status === "") {
-      return "/QRResponseRepairBotOTH";
+      return "/QRResponseRepairOTH";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
-      return "/QRResponseRepairBeOTH";
+      return "/QRResponseRepairOTH";
     } else {
 
     }
   };
 
+useEffect(() => {
+  if (Area === "SMT TOP") {
+    setAreaFirebase("SMTLine1TOP");
+    setLineFirebase("SMTLine1");
+  } else if (Area === "SMT BOT") {
+    setAreaFirebase("SMTLine1BOT");
+    setLineFirebase("SMTLine1");
+  } else if (Area === "SMT BE") {
+    setAreaFirebase("SMTLine1BE");
+    setLineFirebase("SMTLine1");
+  } else if (Area === "SMT") {
+    setAreaFirebase("SMTLine2");
+    setLineFirebase("SMTLine2");
+  }
+}, [Area]); 
 
   const notificationRequestValidation = () => {
-    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x1";
     let chatIds = [-912913885,-921205810]; // Default chat id
 
     // Pemeriksaan jika Department adalah Maintenance
@@ -745,6 +743,7 @@ const Others = () => {
                                             setisOpenRequestValidation(true)
                                             setNamaPIC(selectedItem.ResponseName)
                                             setUid(selectedItem.Uid)
+                                            setSid(selectedItem.Sid)
                                             setRequestor(selectedItem.Department)
                                             setArea(selectedItem.Area)
                                             setLine(selectedItem.Line)

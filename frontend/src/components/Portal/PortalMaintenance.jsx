@@ -7,7 +7,7 @@ const PortalMaintenance = () => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     useEffect(() => {
-        fetch('https://andonline.astra-visteon.com:3002/api/Repair')
+        fetch('http://192.168.101.12:3000/api/Repair')
             .then((response) => response.json())
             .then((data) => {
                 const filteredData = data.filter((item) => item.Status === '' && item.Department === 'MAINTENANCE & IT');
@@ -97,7 +97,7 @@ const PortalMaintenance = () => {
             </nav>
 
             <div className="flex flex-col  items-center  h-screen ">
-            <h1 className="text-4xl mt-5 text-[#2C2B27] font-serif mb-52 lg:mb-36" style={{ textShadow: '2px 2px 4px rgba(24,0,0,0.5)' }}>
+                <h1 className="text-4xl mt-5 text-[#2C2B27] font-serif mb-52 lg:mb-36" style={{ textShadow: '2px 2px 4px rgba(24,0,0,0.5)' }}>
                     Maintenance
                 </h1>
 
@@ -123,7 +123,23 @@ const PortalMaintenance = () => {
                                         </g>
 
                                     </svg>
-                                    <span className='text-white font-serif'>Request Repair</span>
+                                    <span className='text-white text-xs font-serif'>Request Repair</span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <div className="flex-1">
+                        <div className=" p-6 rounded-lg ">
+                            <a href="/--">
+                                <button className="w-full py-2 px-4  hover:scale-75 ease-in duration-500">
+                                    <svg width="100px" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19.88 16.44V19.89C19.88 20.16 19.66 20.38 19.39 20.38H13.97" stroke="#0F0F0F" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.97 4.62H19.39C19.66 4.62 19.88 4.84 19.88 5.11V10.53" stroke="#0F0F0F" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M4.12 10.53V5.11C4.12 4.84 4.33999 4.62 4.60999 4.62H10.03" stroke="#0F0F0F" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M4.12 16.44V19.89C4.12 20.16 4.33999 20.38 4.60999 20.38H10.03" stroke="#0F0F0F" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2.48999 14.47H21.51" stroke="#0F0F0F" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <span className='text-white text-xs font-serif'>CHECKSHEET</span>
                                 </button>
                             </a>
                         </div>

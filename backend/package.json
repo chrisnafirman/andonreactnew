@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "andon.js",
   "scripts": {
-    "start": "node app.js",
-    "devStart": "nodemon app.js",
+    "start": "node andon.js",
+    "devStart": "nodemon andon.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

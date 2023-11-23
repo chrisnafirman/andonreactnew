@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import firebase from "firebase/compat/app";
-import "firebase/compat/database";
+import { db } from "./../../Firebase.js";
 import * as ExcelJS from 'exceljs';
 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAuJMa_ODFS06DHoK25kxkbY46wajkTuT4",
-  databaseURL:
-    "https://andon-73506-default-rtdb.asia-southeast1.firebasedatabase.app",
-};
-firebase.initializeApp(firebaseConfig);
-
-const database = firebase.database();
 
 const ReuestLeader = () => {
   const [time, setTime] = useState(new Date().toLocaleString());
@@ -34,7 +25,7 @@ const ReuestLeader = () => {
 
 
   useEffect(() => {
-    const ref3 = firebase.database().ref("StatusLine/SMTLine1");
+    const ref3 = db.ref("StatusLine/SMTLine1");
     ref3.on("value", (snapshot) => {
       const data = snapshot.val();
       setStatusLine(data);
@@ -61,12 +52,13 @@ const ReuestLeader = () => {
     const tableData = [];
 
     // Header untuk tabel PDF
-    const headers = ["Uid", "Return at", "Return From", "Requestor ", "Line", "Station", "Start Repair", "Repair PIC", "Problem", "Action", "End Repair", "Validation", "Validation PIC", "Start Validation", "End Validation", "Station Status", "Description", "Total Downtime", "Return To" , "Return Id"];
+    const headers = ["Sid", "Uid", "Return at", "Return From", "Requestor ", "Line", "Station", "Start Repair", "Repair PIC", "Problem", "Action", "End Repair", "Validation", "Validation PIC", "Start Validation", "End Validation", "Station Status", "Description", "Total Downtime", "Return To", "Return Id"];
 
-  
+
     // Mengisi data tabel PDF dengan properti yang Anda inginkan
     filteredData.forEach((item) => {
       const rowData = [
+        item.Sid,
         item.Uid,
         formatDateTimeAPI(item.ReturnAt),
         item.ReuestorDeparment,
@@ -124,7 +116,7 @@ const ReuestLeader = () => {
         fontStyle: fontSize, // Teks header tebal
       },
       columnStyles: {
-        18: { // Indeks 14 adalah kolom "Validation Status"
+        19: { // Indeks 14 adalah kolom "Validation Status"
           fontSize: 5,
           fontStyle: 'bold', // Mengatur teks tebal (bold)
         },
@@ -144,13 +136,14 @@ const ReuestLeader = () => {
   const exportToExcel = () => {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Data');
-  
-    const headers = ["Uid", "Return at", "Return From", "Requestor ", "Line", "Station", "Start Repair", "Repair PIC", "Problem", "Action", "End Repair", "Validation", "Validation PIC", "Start Validation", "End Validation", "Station Status", "Description", "Total Downtime", "Return To" , "Return Id"];
-  
+
+    const headers = ["Sid", "Uid", "Return at", "Return From", "Requestor ", "Line", "Station", "Start Repair", "Repair PIC", "Problem", "Action", "End Repair", "Validation", "Validation PIC", "Start Validation", "End Validation", "Station Status", "Description", "Total Downtime", "Return To", "Return Id"];
+
     worksheet.addRow(headers);
-  
+
     filteredData.forEach((item) => {
       const rowData = [
+        item.Sid,
         item.Uid,
         formatDateTimeAPI(item.ReturnAt),
         item.ReuestorDeparment,
@@ -174,21 +167,21 @@ const ReuestLeader = () => {
       ];
       worksheet.addRow(rowData);
     });
-  
+
     workbook.xlsx.writeBuffer().then((buffer) => {
       const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       const url = window.URL.createObjectURL(blob);
-  
+
       const a = document.createElement('a');
       a.href = url;
       a.download = 'Report Case Return [RTN].xlsx';
-  
+
       a.click();
-  
+
       window.URL.revokeObjectURL(url);
     });
   };
-  
+
 
 
 
@@ -223,30 +216,31 @@ const ReuestLeader = () => {
   };
 
 
-  const handleSubmit = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault(); // Prevent form submission
-  
+
     // Split the search input into individual Uids
     const searchTerms = searchTerm.split(',').map((term) => term.trim());
-  
-    // Filter the data to find items that match any of the Uids
+
+    // Filter the data to find items that match any of the Uids or date/time
     const filteredResults = filteredData.filter((item) =>
       searchTerms.some((searchTerm) =>
-        item.Uid.toLowerCase().includes(searchTerm.toLowerCase())
+        item.Sid.toLowerCase().includes(searchTerm.toLowerCase()) || item.Uid.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        formatDateTimeAPI(item.Downtime).toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
-  
+
     // Update the state with the filtered results
     setFilteredData(filteredResults);
   };
-  
-  
+
+
 
 
 
 
   useEffect(() => {
-    fetch("https://andonline.astra-visteon.com:3002/api/Validation")
+    fetch("http://192.168.101.12:3000/api/Validation")
       .then((response) => response.json())
       .then((json) => {
         // Lakukan pengolahan data Validation jika diperlukan
@@ -257,7 +251,7 @@ const ReuestLeader = () => {
           item.ValidationBy = item.ValidationName;
           item.ValidationAt = item.ValidationDate;
           item.TotalDowntime = item.DownTime;
-          item.ValidationDepartment = item.DepartTo; 
+          item.ValidationDepartment = item.DepartTo;
           item.ValidationStatus = item.Status;
           item.ReturnTo = item.ReturnDepartment;
           item.ReturnId = item.UidReturn;
@@ -267,7 +261,7 @@ const ReuestLeader = () => {
         setValidationData(json);
       });
 
-    fetch("https://andonline.astra-visteon.com:3002/api/Repair")
+    fetch("http://192.168.101.12:3000/api/Repair")
       .then((response) => response.json())
       .then((json) => {
         // Lakukan pengolahan data Repair jika diperlukan
@@ -275,13 +269,14 @@ const ReuestLeader = () => {
           item.Line = item.Line
           item.Station = item.Station
           item.Uid = item.Uid
+          item.Sid = item.Sid
           item.ReturnAt = item.Date;
           item.RepairBy = item.ResponseName;
           item.RequestorName = item.Nama;
           item.ReuestorDeparment = item.Requestor;
           item.StartRepair = item.ResponseTime;
 
-      
+
 
         });
         setRepairData(json);
@@ -290,27 +285,28 @@ const ReuestLeader = () => {
 
   useEffect(() => {
 
-    
+
     // Menyaring data Validation yang memiliki Uid dengan nilai "RTN"
     const filteredValidationData = validationData.filter((validationItem) =>
       validationItem.Uid.includes("RTN")
     );
-  
+
     // Menyaring data Repair yang memiliki Uid dengan nilai "RTN"
     const filteredRepairData = repairData.filter((repairItem) =>
       repairItem.Uid.includes("RTN")
     );
-  
+
     // Menggabungkan data Validation dan Repair berdasarkan Uid
     const mergedData = filteredValidationData.map((validationItem) => {
       const matchingRepairItem = filteredRepairData.find(
         (repairItem) => repairItem.Uid === validationItem.Uid
       );
-  
+
       if (matchingRepairItem) {
         // Jika ada data Repair yang cocok dengan Uid, gabungkan kedua data
         return {
           Uid: matchingRepairItem.Uid,
+          Sid: matchingRepairItem.Sid,
           ReturnAt: matchingRepairItem.ReturnAt,
           RequestorName: matchingRepairItem.RequestorName,
           ReuestorDeparment: matchingRepairItem.ReuestorDeparment,
@@ -339,12 +335,12 @@ const ReuestLeader = () => {
         return {};
       }
     });
-  
+
     setFilteredData(mergedData);
     mergedData.sort((a, b) => Date.parse(b.ReturnAt) - Date.parse(a.ReturnAt));
   }, [validationData, repairData]);
-  
-  
+
+
 
 
 
@@ -416,7 +412,7 @@ const ReuestLeader = () => {
             {isOpenSearch && (
               <>
                 <div className="w-96">
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleSearch}>
                     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div class="relative">
                       <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -467,20 +463,20 @@ const ReuestLeader = () => {
                   REPORT RETURN
                 </div>
                 <div className="flex space-x-2">
-                <button className="flex text-sm" onClick={exportToPDF}>
-                  <img
-                    className="w-[30px]"
-                    src={process.env.PUBLIC_URL + "/pdf.png"}
-                    alt=""
-                  />
-                </button>
-                <button className="flex text-sm" onClick={exportToExcel}>
-                  <img
-                    className="w-[35px]"
-                    src={process.env.PUBLIC_URL + "/excel.png"}
-                    alt=""
-                  />
-                </button>
+                  <button className="flex text-sm" onClick={exportToPDF}>
+                    <img
+                      className="w-[30px]"
+                      src={process.env.PUBLIC_URL + "/pdf.png"}
+                      alt=""
+                    />
+                  </button>
+                  <button className="flex text-sm" onClick={exportToExcel}>
+                    <img
+                      className="w-[35px]"
+                      src={process.env.PUBLIC_URL + "/excel.png"}
+                      alt=""
+                    />
+                  </button>
                 </div>
               </header>
 
@@ -491,6 +487,9 @@ const ReuestLeader = () => {
                 <table id="data-table" className="table-auto w-full">
                   <thead className="text-xs font-mono uppercase text-gray-400 bg-gray-50">
                     <tr>
+                      <th className="p-1 min-w-[80px] whitespace-no-wrap overflow-x-auto">
+                        <div className="text-center flex">Sid</div>
+                      </th>
                       <th className="p-1 min-w-[80px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Uid</div>
                       </th>
@@ -551,7 +550,7 @@ const ReuestLeader = () => {
                       <th className="p-1 min-w-[140px] whitespace-no-wrap overflow-x-auto">
                         <div className="text-center flex">Return ID</div>
                       </th>
-                     
+
                     </tr>
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
@@ -561,22 +560,27 @@ const ReuestLeader = () => {
                       >
                         <td className="p-2">
                           <div className="font-sans text-xs lg:text-sm text-gray-800">
-                          {item.Uid}
+                            {item.Sid}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-xs lg:text-sm text-gray-800">
-                          {formatDateTimeAPI(item.ReturnAt)}
+                            {item.Uid}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-xs lg:text-sm text-gray-800">
-                          {item.ReuestorDeparment}
+                            {formatDateTimeAPI(item.ReturnAt)}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-xs lg:text-sm text-gray-800">
-                          {item.RequestorName}
+                            {item.ReuestorDeparment}
+                          </div>
+                        </td>
+                        <td className="p-2">
+                          <div className="font-sans text-xs lg:text-sm text-gray-800">
+                            {item.RequestorName}
                           </div>
                         </td>
                         <td className="p-2">
@@ -612,7 +616,7 @@ const ReuestLeader = () => {
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
-                          {formatDateTimeAPI(item.DoneRepair)}
+                            {formatDateTimeAPI(item.DoneRepair)}
                           </div>
                         </td>
                         <td className="p-2">
@@ -652,15 +656,15 @@ const ReuestLeader = () => {
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
-                          {item.ReturnTo}
+                            {item.ReturnTo}
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="font-sans text-gray-800">
-                          {item.ReturnId}
+                            {item.ReturnId}
                           </div>
                         </td>
-                       
+
                       </tr>
 
 
