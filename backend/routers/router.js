@@ -23,6 +23,8 @@ const ReflowTOP = require("../controller/SMTTOPDATA/ReflowTOP")
 const AOITOP = require("../controller/SMTTOPDATA/AOITOP")
 const RVSTOP = require("../controller/SMTTOPDATA/RVSTOP")
 
+
+
 // Bot
 const PrinterBOT = require("../controller/SMTBOTDATA/PrinterBOT")
 const SPIBOT = require("../controller/SMTBOTDATA/SPIBOT")
@@ -42,6 +44,25 @@ const TouchupBE = require("../controller/SMTBEDATA/TouchupBE")
 const ICTBE = require("../controller/SMTBEDATA/ICTBE")
 const FlashBE = require("../controller/SMTBEDATA/FlashBE")
 const RouterBE = require("../controller/SMTBEDATA/RouterBE")
+
+
+// SMT LINE 2
+const Destacker = require("../controller/SMTLINE2/Destacker")
+const Label = require("../controller/SMTLINE2/Label")
+const Printer = require("../controller/SMTLINE2/Printer")
+const SPI = require("../controller/SMTLINE2/SPI")
+const PickNPlace = require("../controller/SMTLINE2/PickNPlace")
+const Reflow = require("../controller/SMTLINE2/Reflow")
+const AOI = require("../controller/SMTLINE2/AOI")
+const RVS = require("../controller/SMTLINE2/RVS")
+const Dropin = require("../controller/SMTLINE2/Dropin")
+const Fluxer = require("../controller/SMTLINE2/Fluxer")
+const Preheat = require("../controller/SMTLINE2/Preheat")
+const Selective = require("../controller/SMTLINE2/Selective")
+const Touchup = require("../controller/SMTLINE2/Touchup")
+const ICT = require("../controller/SMTLINE2/ICT")
+const Flash = require("../controller/SMTLINE2/Flash")
+const Router = require("../controller/SMTLINE2/Router")
 
 // lDR
 router.post("/Leader", LDRControllers.postRequestLeader);
@@ -316,6 +337,136 @@ router.get("/getRouterBEValidation", RouterBE.getRouterBEValidation);
 
 
 // ..........................................
+
+
+// Fetch Data SMTLINE2
+// Destacker
+router.put("/PutDownTimeDestacker", Destacker.PutDownTimeDestacker);
+router.get("/getDestackerLeader", Destacker.getDestackerLeader);
+router.get("/getDestackerRepair", Destacker.getDestackerRepair);
+router.get("/getDestackerValidation", Destacker.getDestackerValidation);
+
+
+// Label
+router.put("/PutDownTimeLabel", Label.PutDownTimeLabel);
+
+router.get("/getLabelLeader", Label.getLabelLeader);
+router.get("/getLabelRepair", Label.getLabelRepair);
+router.get("/getLabelValidation", Label.getLabelValidation);
+
+
+// Printer
+router.put("/PutDownTimePrinter", Printer.PutDownTimePrinter);
+
+router.get("/getPrinterLeader", Printer.getPrinterLeader);
+router.get("/getPrinterRepair", Printer.getPrinterRepair);
+router.get("/getPrinterValidation", Printer.getPrinterValidation);
+
+// SPI
+router.put("/PutDownTimeSPI", SPI.PutDownTimeSPI);
+router.get("/getSPILeader", SPI.getSPILeader);
+router.get("/getSPIRepair", SPI.getSPIRepair);
+router.get("/getSPIValidation", SPI.getSPIValidation);
+
+
+
+// PickNPlace
+router.put("/PutDownTimePickNPlace", PickNPlace.PutDownTimePickNPlace);
+
+router.get("/getPickNPlaceLeader", PickNPlace.getPickNPlaceLeader);
+router.get("/getPickNPlaceRepair", PickNPlace.getPickNPlaceRepair);
+router.get("/getPickNPlaceValidation", PickNPlace.getPickNPlaceValidation);
+
+
+// Reflow
+router.put("/PutDownTimeReflow", Reflow.PutDownTimeReflow);
+
+router.get("/getReflowLeader", Reflow.getReflowLeader);
+router.get("/getReflowRepair", Reflow.getReflowRepair);
+router.get("/getReflowValidation", Reflow.getReflowValidation);
+
+
+
+// AOI
+router.put("/PutDownTimeAOI", AOI.PutDownTimeAOI);
+
+router.get("/getAOILeader", AOI.getAOILeader);
+router.get("/getAOIRepair", AOI.getAOIRepair);
+router.get("/getAOIValidation", AOI.getAOIValidation);
+
+
+// RVS
+router.put("/PutDownTimeRVS", RVS.PutDownTimeRVS);
+router.get("/getRVSLeader", RVS.getRVSLeader);
+router.get("/getRVSRepair", RVS.getRVSRepair);
+router.get("/getRVSValidation", RVS.getRVSValidation);
+
+// Dropin
+router.put("/PutDownTimeDropin", Dropin.PutDownTimeDropin);
+
+router.get("/getDropinLeader", Dropin.getDropinLeader);
+router.get("/getDropinRepair", Dropin.getDropinRepair);
+router.get("/getDropinValidation", Dropin.getDropinValidation);
+
+
+// Fluxer
+router.put("/PutDownTimeFluxer", Fluxer.PutDownTimeFluxer);
+
+router.get("/getFluxerLeader", Fluxer.getFluxerLeader);
+router.get("/getFluxerRepair", Fluxer.getFluxerRepair);
+router.get("/getFluxerValidation", Fluxer.getFluxerValidation);
+
+
+// Preheat
+router.put("/PutDownTimePreheat", Preheat.PutDownTimePreheat);
+
+router.get("/getPreheatLeader", Preheat.getPreheatLeader);
+router.get("/getPreheatRepair", Preheat.getPreheatRepair);
+router.get("/getPreheatValidation", Preheat.getPreheatValidation);
+
+// Selective
+router.put("/PutDownTimeSelective", Selective.PutDownTimeSelective);
+
+router.get("/getSelectiveLeader", Selective.getSelectiveLeader);
+router.get("/getSelectiveRepair", Selective.getSelectiveRepair);
+router.get("/getSelectiveValidation", Selective.getSelectiveValidation);
+
+
+
+// Touchup
+router.put("/PutDownTimeTouchup", Touchup.PutDownTimeTouchup);
+
+router.get("/getTouchupLeader", Touchup.getTouchupLeader);
+router.get("/getTouchupRepair", Touchup.getTouchupRepair);
+router.get("/getTouchupValidation", Touchup.getTouchupValidation);
+
+
+// ICT
+router.put("/PutDownTimeICT", ICT.PutDownTimeICT);
+
+router.get("/getICTLeader", ICT.getICTLeader);
+router.get("/getICTRepair", ICT.getICTRepair);
+router.get("/getICTValidation", ICT.getICTValidation);
+
+
+
+// Flash
+router.put("/PutDownTimeFlash", Flash.PutDownTimeFlash);
+
+router.get("/getFlashLeader", Flash.getFlashLeader);
+router.get("/getFlashRepair", Flash.getFlashRepair);
+router.get("/getFlashValidation", Flash.getFlashValidation);
+
+
+// Router
+router.put("/PutDownTimeRouter", Router.PutDownTimeRouter);
+
+router.get("/getRouterLeader", Router.getRouterLeader);
+router.get("/getRouterRepair", Router.getRouterRepair);
+router.get("/getRouterValidation", Router.getRouterValidation);
+
+
+// --------------------------------------------------------
 
 
 

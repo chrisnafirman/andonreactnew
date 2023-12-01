@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import firebase from "firebase/compat/app";
 import { db } from "./../../Firebase.js";
 import Select from "react-select";
+import Navbar from "../ComponentsStyle/Navbar.jsx";
+import HeaderStatus from "../ComponentsStyle/HeaderStatus.jsx";
 
 
 
@@ -15,8 +16,6 @@ const ValidationProduction = () => {
   const [IsOpenReturn, setIsOpenReturn] = useState(false);
   const [isOpenRequestReturn, setIsOpenRequestReturn] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(true);
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [StatusLine, setStatusLine] = useState("");
   const [isExportOption, setisExportOption] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpenSearch, setisOpenSearch] = useState(false);
@@ -49,27 +48,6 @@ const ValidationProduction = () => {
     useState(null);
 
 
-  useEffect(() => {
-    const ref3 = db.ref("StatusLine/SMTLine1");
-    ref3.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setStatusLine(data);
-    });
-    return () => { };
-  }, []);
-
-  // waktu navbar
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const formattedTime = `${currentTime.getDate()}/${currentTime.getMonth() + 1
-    }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
-
-
 
   //  fungsi export to pdf
 
@@ -99,7 +77,7 @@ const ValidationProduction = () => {
   updateTime();
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3000/api/Validation")
+    fetch("https://andonline.astra-visteon.com:3000/api/Validation")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -181,7 +159,7 @@ const ValidationProduction = () => {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3000/api/PutValidation`, {
+    fetch(`https://andonline.astra-visteon.com:3000/api/PutValidation`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -204,91 +182,91 @@ const ValidationProduction = () => {
 
   // Return
 
-    // QR
-   const submitReturnRequest = () => {
-      if (!NamaPIC  | !Department || !Kerusakan || !Station || !Sid) {
-        alert("Harap isi semua kolom!");
-        return;
-      }
-  
-      const data = {
-        NamaPIC: NamaPIC,
-        Area: Area,
-        Line: Line,
-        Station: Station,
-        Department: Department,
-        Requestor: Requestor,
-        Kerusakan: Kerusakan,
-        Uid: Uid,
-        Sid: Sid,
-      };
-  
-      alert("Return Telah Berhasil Di Kirim Ke Team Terkait");
-      notificationValidation();
-      db.ref(`${AreaFirebase}/${Station}`).set(`Return ${Department}`);
-      db.ref(`StatusLine/${LineFirebase}`).set("Down");
-      setStation(null);
-      setNamaPIC(null);
-  
-      fetch(`http://192.168.101.12:3000/api/Repair`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((response) => {
-          if (response.status === 200) {
-            // Handle success if needed
-          } else {
-            throw new Error("Error adding data");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  // QR
+  const submitReturnRequest = () => {
+    if (!NamaPIC | !Department || !Kerusakan || !Station || !Sid) {
+      alert("Harap isi semua kolom!");
+      return;
+    }
+
+    const data = {
+      NamaPIC: NamaPIC,
+      Area: Area,
+      Line: Line,
+      Station: Station,
+      Department: Department,
+      Requestor: Requestor,
+      Kerusakan: Kerusakan,
+      Uid: Uid,
+      Sid: Sid,
     };
-  
-  
-    const submitUpdateReturn = () => {
-      if (!NamaPIC  | !Department || !Kerusakan || !Station) {
-        return;
-      }
-  
-      const data = {
-        Station: Station,
-        Status: Status,
-        Area: Area,
-        Department: Department,
-        NamaPIC: NamaPIC,
-        Kerusakan: Kerusakan,
-        Uid: Uid,
-      };
-  
-  
-      console.log("Sending data:", data);
-      notificationReturn()
-      fetch(`http://192.168.101.12:3000/api/PutStatusReturnValidation`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+
+    alert("Return Telah Berhasil Di Kirim Ke Team Terkait");
+    notificationValidation();
+    db.ref(`${AreaFirebase}/${Station}`).set(`Return ${Department}`);
+    db.ref(`StatusLine/${LineFirebase}`).set("Down");
+    setStation(null);
+    setNamaPIC(null);
+
+    fetch(`https://andonline.astra-visteon.com:3000/api/Repair`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          // Handle success if needed
+        } else {
+          throw new Error("Error adding data");
+        }
       })
-        .then((response) => {
-          console.log("Response status:", response.status);
-          if (response.status === 200) {
-            console.log("PUT request successful");
-          } else {
-            throw new Error("Error updating data");
-          }
-        })
-        .catch((err) => {
-          console.log("Error:", err);
-        });
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
+  const submitUpdateReturn = () => {
+    if (!NamaPIC | !Department || !Kerusakan || !Station) {
+      return;
+    }
+
+    const data = {
+      Station: Station,
+      Status: Status,
+      Area: Area,
+      Department: Department,
+      NamaPIC: NamaPIC,
+      Kerusakan: Kerusakan,
+      Uid: Uid,
     };
-  
-  
+
+
+    console.log("Sending data:", data);
+    notificationReturn()
+    fetch(`https://andonline.astra-visteon.com:3000/api/PutStatusReturnValidation`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        console.log("Response status:", response.status);
+        if (response.status === 200) {
+          console.log("PUT request successful");
+        } else {
+          throw new Error("Error updating data");
+        }
+      })
+      .catch((err) => {
+        console.log("Error:", err);
+      });
+  };
+
+
 
 
 
@@ -331,14 +309,14 @@ const ValidationProduction = () => {
   };
 
 
-  
+
   const handleButtonClickReturn = () => {
     setIsOpenRequestReturn(false)
     setSelectedItem(false)
     setIsLoader(true);
     submitReturnRequest();
     submitUpdateReturn();
-    
+
 
     setTimeout(() => {
       window.location.reload();
@@ -347,58 +325,58 @@ const ValidationProduction = () => {
 
 
   const notificationReturn = () => {
-    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x1";
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
     let chatIds = [-921205810]; // Default chat id
 
     // Pemeriksaan jika Department adalah Maintenance
     if (Department === "MAINTENANCE & IT") {
-        chatIds = [-993707437]; // Ganti chat id jika Department adalah Maintenance
+      chatIds = [-993707437]; // Ganti chat id jika Department adalah Maintenance
     }
 
 
-    const message = `!! Attention SMT LINE 1 Station Down Has Been Return !!%0A%0AReturn By ${Requestor}%0AReturn PIC : ${NamaPIC}%0AStation : ${Station}%0AUid Return : ${Uid}%0AReturn To : ${Department}%0AProblem : ${Kerusakan}`;
+    const message = `!! Attention ${Line} Station Down Has Been Return !!%0A%0AReturn By ${Requestor}%0AReturn PIC : ${NamaPIC}%0AStation : ${Station}%0AUid Return : ${Uid}%0AReturn To : ${Department}%0AProblem : ${Kerusakan}`;
 
     const escapedMessage = message.replace(/&/g, '%26');
 
     chatIds.forEach((chatId) => {
-        fetch(
-            `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
-        )
+      fetch(
+        `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
+      )
         .then((response) => {
-            if (!response.ok) {
-                throw new Error("Error sending telegram message");
-            }
+          if (!response.ok) {
+            throw new Error("Error sending telegram message");
+          }
         })
         .catch((error) => {
-            console.error(error);
+          console.error(error);
         });
     });
-}
+  }
 
 
-const notificationValidation = () => {
-  const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x1";
-  const chatIds = [-950877102]; // Default chat id
+  const notificationValidation = () => {
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
+    const chatIds = [-950877102]; // Default chat id
 
 
-  const message = `!! ${Station} SMT LINE 1 Already Running !!%0A%0AValidation By ${Requestor}%0AValidation PIC : ${NamaPIC}%0AStation : ${Station}%0ADescription : ${Desc}`;
+    const message = `!! ${Station} ${Line} Already Running !!%0A%0AValidation By ${Requestor}%0AValidation PIC : ${NamaPIC}%0AStation : ${Station}%0ADescription : ${Desc}`;
 
-  const escapedMessage = message.replace(/&/g, '%26');
+    const escapedMessage = message.replace(/&/g, '%26');
 
-  chatIds.forEach((chatId) => {
+    chatIds.forEach((chatId) => {
       fetch(
-          `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
+        `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&parse_mode=HTML&text=${escapedMessage}`
       )
-      .then((response) => {
+        .then((response) => {
           if (!response.ok) {
-              throw new Error("Error sending telegram message");
+            throw new Error("Error sending telegram message");
           }
-      })
-      .catch((error) => {
+        })
+        .catch((error) => {
           console.error(error);
-      });
-  });
-}
+        });
+    });
+  }
 
 
   const QRResponseLink = () => {
@@ -408,44 +386,46 @@ const notificationValidation = () => {
       return "/QRResponseProduction";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
       return "/QRResponseProduction";
+    } else if (selectedItem.Area === "SMT" && selectedItem.Status === "") {
+      return "/QRResponseProduction";
     } else {
     }
   };
 
-useEffect(() => {
-  if (Area === "SMT TOP") {
-    setAreaFirebase("SMTLine1TOP");
-    setLineFirebase("SMTLine1");
-  } else if (Area === "SMT BOT") {
-    setAreaFirebase("SMTLine1BOT");
-    setLineFirebase("SMTLine1");
-  } else if (Area === "SMT BE") {
-    setAreaFirebase("SMTLine1BE");
-    setLineFirebase("SMTLine1");
-  } else if (Area === "SMT") {
-    setAreaFirebase("SMTLine2");
-    setLineFirebase("SMTLine2");
-  }
-}, [Area]); // Efek samping ini hanya akan dipanggil ketika nilai Area berubah
+  useEffect(() => {
+    if (Area === "SMT TOP") {
+      setAreaFirebase("SMTLine1TOP");
+      setLineFirebase("SMTLine1");
+    } else if (Area === "SMT BOT") {
+      setAreaFirebase("SMTLine1BOT");
+      setLineFirebase("SMTLine1");
+    } else if (Area === "SMT BE") {
+      setAreaFirebase("SMTLine1BE");
+      setLineFirebase("SMTLine1");
+    } else if (Area === "SMT") {
+      setAreaFirebase("SMTLine2");
+      setLineFirebase("SMTLine2");
+    }
+  }, [Area]); // Efek samping ini hanya akan dipanggil ketika nilai Area berubah
 
 
   useEffect(() => {
     generateUniqueUid();
   }, [Station]);
 
-  
+
   const generateUniqueUid = () => {
     const randomId = `RTN${Math.floor(Math.random() * 1000).toString().padStart(4, "0")}`;
 
     // Kirim permintaan ke API untuk memeriksa UID
-    fetch("http://192.168.101.12:3000/api/Repair")
+    fetch("https://andonline.astra-visteon.com:3000/api/Repair")
       .then((response) => response.json())
       .then((data) => {
         const uids = data.map((item) => item.Uid);
         if (!uids.includes(randomId)) {
           // Jika UID belum digunakan, set UID ke nilai randomId
           setUid(randomId);
-     
+
         } else {
           // Jika UID sudah digunakan, coba generate UID baru
           generateUniqueUid();
@@ -453,57 +433,17 @@ useEffect(() => {
       })
       .catch((error) => {
         console.error("Error fetching data from API:", error);
-   
+
       });
   };
 
+  const navHref = "/PortalProduction";
+
+
   return (
     <body style={styles}>
-      <nav class="bg-slate px-3 sm:px-4 dark:bg-gray-900 bg-gray-900   w-full z-20 top-0 left-0  dark:border-gray-600">
-        <div class="flex h-14 items-center justify-between">
-          <div class="flex items-center">
-            <a href="/PortalProduction">
-              <div class="flex-shrink-0">
-                <img
-                  src={process.env.PUBLIC_URL + "/avi.png"}
-                  alt="Logo"
-                  class="h-6 ml-4 sm:h-9 bg-white rounded-md"
-                />
-              </div>
-            </a>
-          </div>
-          <p class="text-gray-500 text-sm">{formattedTime}</p>
-        </div>
-      </nav>
-
-      <header class="bg-white shadow mb-3">
-        <div class="mx-auto max-w-7xl px-4">
-          <div>
-            <div class="flex items-center">
-              <h1 class="text-xs lg:text-xl font-sans tracking-tight text-gray-900">
-                | Request Validation Production |
-              </h1>
-              <h1 class="text-xs lg:text-xl  font-sans tracking-tight ml-4">
-                <span class="text-black">SMT LINE 1:</span>
-                <span
-                  class="ml-4"
-                  style={{
-                    color: StatusLine === "Running" ? "green" : "red",
-                  }}
-                >
-                  {StatusLine}
-                </span>
-                <span className="ml-4">|</span>
-              </h1>
-
-              <h1 class="text-xs lg:text-xl  font-sans tracking-tight ml-4">
-                <span class="text-black">SMT LINE 2:</span>
-                <span class="ml-4 text-green-500">RUNNING </span>|
-              </h1>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Navbar navHref={navHref} />
+      <HeaderStatus />
 
 
 
@@ -617,7 +557,7 @@ useEffect(() => {
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
                     {filteredData.map((item, index) => {
-                      if (item.DepartTo === 'Production' ) {
+                      if (item.DepartTo === 'Production') {
                         return (
                           <tr
                             key={item.id}
@@ -1031,7 +971,7 @@ useEffect(() => {
                                           class="block uppercase tracking-wide  text-black text-xs font-bold mb-2"
                                           for="grid-city"
                                         >
-                                         Request At
+                                          Request At
                                         </label>
                                         <div
                                           class="appearance-none block w-full bg-gray-200 text-black border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -1231,7 +1171,7 @@ useEffect(() => {
             </div>
           </div>
         </section>
-        
+
         <td class="">
           {isOpenRunValidation ? (
             <>
@@ -1379,7 +1319,7 @@ useEffect(() => {
                               required
                             />
                           </div>
-        
+
 
                           <div className="flex justify-end">
 
@@ -1404,7 +1344,7 @@ useEffect(() => {
         </td>
 
         <td class="">
-          {isOpenRequestReturn? (
+          {isOpenRequestReturn ? (
             <>
               <div className="fixed z-10 inset-0 overflow-y-auto">
                 <div className="flex items-end justify-center min-h-screen pt-2 px-4 pb-80 text-center sm:block sm:p-0">
@@ -1453,7 +1393,7 @@ useEffect(() => {
                             <span>Return Repair</span>
                           </div>
                           <div class="flex flex-wrap -mx-3 ">
-                          <div className="w-full mt-3 px-3 mb-2 md:mb-0">
+                            <div className="w-full mt-3 px-3 mb-2 md:mb-0">
                               <label
                                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                 htmlFor="grid-city"
@@ -1567,7 +1507,7 @@ useEffect(() => {
                               required
                             />
                           </div>
-        
+
 
                           <div className="flex justify-end">
 
@@ -1677,20 +1617,20 @@ useEffect(() => {
 
                         <div className="flex justify-center">
                           <a href="/ReportReq">
-                          <button
-                            
-                            className="bg-lime-600 w-28 h-16 hover:bg-lime-700  text-white font-bold py-2 px-4  rounded mr-2"
-                          >
-                            REQ
-                          </button>
+                            <button
+
+                              className="bg-lime-600 w-28 h-16 hover:bg-lime-700  text-white font-bold py-2 px-4  rounded mr-2"
+                            >
+                              REQ
+                            </button>
                           </a>
                           <a href="ReportRtn">
-                          <button
+                            <button
 
-                            className="bg-yellow-400 w-28 h-16 hover:bg-yellow-400 text-white font-bold py-2 px-4 ml-16 rounded"
-                          >
-                            RTN
-                          </button>
+                              className="bg-yellow-400 w-28 h-16 hover:bg-yellow-400 text-white font-bold py-2 px-4 ml-16 rounded"
+                            >
+                              RTN
+                            </button>
                           </a>
                         </div>
                       </div>

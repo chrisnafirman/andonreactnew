@@ -1,29 +1,17 @@
 import React, { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
-import "firebase/compat/database";
+import Navbar from "../ComponentsStyle/Navbar.jsx";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
-  databaseURL:
-    "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
-};
-firebase.initializeApp(firebaseConfig);
 
-const database = firebase.database();
 
 const SmtTop = () => {
 
   const [time, setTime] = useState(new Date().toLocaleString());
-
   const [showDrawer, setShowDrawer] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
-
   const [showDatePicker, setShowDatePicker] = useState(true);
 
   // popup 1
-
-
-
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
@@ -41,7 +29,7 @@ const SmtTop = () => {
   }
 
   useEffect(() => {
-    fetch("http://192.168.101.12:3000/api/ScheduleProduction")
+    fetch("https://andonline.astra-visteon.com:3000/api/ScheduleProduction")
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti timestamp menjadi tanggal dan PDATE
@@ -68,7 +56,7 @@ const SmtTop = () => {
     const date = new Date(e.target.value);
     const selectedDate = date.toLocaleDateString();
     setSelectedDate(selectedDate);
-    fetch(`http://192.168.101.12:3000/api/ScheduleProduction?date=${selectedDate}`)
+    fetch(`https://andonline.astra-visteon.com:3000/api/ScheduleProduction?date=${selectedDate}`)
       .then((response) => response.json())
       .then((json) => {
         // mengubah properti PDATE menjadi tanggal saja
@@ -131,7 +119,7 @@ const SmtTop = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.12:3000/api/ScheduleProduction"
+          "https://andonline.astra-visteon.com:3000/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -145,10 +133,7 @@ const SmtTop = () => {
     fetchData();
   }, []);
 
-  //  fungsi mengambil data dari firebase
-  const toggleDrawer = () => {
-    setShowDrawer(!showDrawer);
-  };
+
 
   function updateTime() {
     const interval = setInterval(() => {
@@ -161,15 +146,7 @@ const SmtTop = () => {
     updateTime();
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const formattedTime = `${currentTime.getDate()}/${currentTime.getMonth() + 1
-    }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+  
 
   const styles = {
     backgroundImage: `url(${process.env.PUBLIC_URL}/l.jpg)`,
@@ -180,20 +157,7 @@ const SmtTop = () => {
 
   return (
     <body style={styles}>
-      <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
-        <div class="flex h-14 items-center justify-between">
-          <div class="flex items-center">
-            <div class="flex-shrink-0">
-              <img
-                src={process.env.PUBLIC_URL + "/avi.png"}
-                alt="Logo"
-                class="h-6 ml-4 sm:h-9 bg-white rounded-md"
-              />
-            </div>
-          </div>
-          <p class="text-gray-500 text-sm">{formattedTime}</p>
-        </div>
-      </nav>
+    <Navbar  />
 
       <header class="bg-white shadow mb-3">
         <div class="mx-auto max-w-7xl px-4">

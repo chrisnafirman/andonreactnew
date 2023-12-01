@@ -61,7 +61,7 @@ function QRLeader() {
 
 
 
-    fetch(`http://192.168.101.12:3000/api/Repair`, {
+    fetch(`https://andonline.astra-visteon.com:3000/api/Repair`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +106,7 @@ function QRLeader() {
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.12:3000/api/PutStatusLeader`, {
+    fetch(`https://andonline.astra-visteon.com:3000/api/PutStatusLeader`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -155,7 +155,7 @@ function QRLeader() {
   const handleScanSuccessMesin = async (data) => {
     try {
         // Fetch data from the API
-        const response = await fetch("http://192.168.101.12:3021/api/smt");
+        const response = await fetch("https://andonline.astra-visteon.com:3021/api/smt");
         const stations = await response.json();
 
         // Find the station with the matching Id_Station
@@ -236,7 +236,7 @@ useEffect(() => {
     const randomId = `REQ${Math.floor(Math.random() * 1000).toString().padStart(4, "0")}`;
 
     // Kirim permintaan ke API untuk memeriksa UID
-    fetch("http://192.168.101.12:3000/api/Repair")
+    fetch("https://andonline.astra-visteon.com:3000/api/Repair")
       .then((response) => response.json())
       .then((data) => {
         const uids = data.map((item) => item.Uid);
@@ -254,7 +254,7 @@ useEffect(() => {
   };
 
   const notificationRequestRepair = () => {
-    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x1";
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
     let chatIds = [-921205810]; // Default chat id
 
     // Pemeriksaan jika Department adalah Maintenance
@@ -262,7 +262,7 @@ useEffect(() => {
         chatIds = [-993707437]; // Ganti chat id jika Department adalah Maintenance
     }
 
-    const message = `!! Attention SMT LINE 1 Down !!%0A%0ARequest Repair ${Department}%0A%0ARequest By : ${NamaPIC}%0AStation : ${Station}%0AUid : ${Uid}%0AProblem : ${Kerusakan}`;
+    const message = `!! Attention ${Line} Down !!%0A%0ARequest Repair ${Department}%0A%0ARequest By : ${NamaPIC}%0AStation : ${Station}%0AUid : ${Uid}%0AProblem : ${Kerusakan}`;
 
     const escapedMessage = message.replace(/&/g, '%26');
 

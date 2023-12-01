@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { db } from "./../../Firebase.js"; 
+import { db } from "./../../Firebase.js";
 import Select from "react-select";
 
 
@@ -15,7 +15,8 @@ const SMTLINE1CONTROLLER = () => {
     // SUBMIT FILE
     const [file, setFile] = useState(null);
     // -------
-    const [StatusLine, setStatusLine] = useState("");
+    const [StatusLine1, setStatusLine1] = useState("");
+    const [StatusLine2, setStatusLine2] = useState("");
     const [Station, setStation] = useState("");
     const [Button, setButton] = useState("");
     // SMT TOP LINE 1
@@ -271,6 +272,178 @@ const SMTLINE1CONTROLLER = () => {
     const [TimeRouterBe, setTimeRouterBe] = useState(null);
     // ---------------------------
 
+
+    // SMT LINE 2
+    // DESTACKER
+    const [Destacker, setDestacker] = useState("Destacker");
+    const [StatusDestacker, setStatusDestacker] = useState("");
+    const [
+        backgroundColorStatusDestacker,
+        setBackgroundColorStatusDestacker,
+    ] = useState("");
+    const [startTimeDestacker, setStartTimeDestacker] = useState(null);
+    const [isRunningDestacker, setIsRunningDestacker] = useState(false);
+    const [TimeDestacker, setTimeDestacker] = useState(null);
+    // ---------------------------
+
+    // Label 
+    const [StatusLabel, setStatusLabel] = useState("");
+    const [Label, setLabel] = useState("Label");
+    const [backgroundColorStatusLabel, setBackgroundColorStatusLabel] =
+        useState("");
+    const [startTimeLabel, setStartTimeLabel] = useState(null);
+    const [isRunningLabel, setIsRunningLabel] = useState(false);
+    const [TimeLabel, setTimeLabel] = useState(null);
+    // ---------------------------
+
+    // Printer 
+    const [StatusPrinter, setStatusPrinter] = useState("");
+    const [Printer, setPrinter] = useState("Printer");
+    const [backgroundColorStatusPrinter, setBackgroundColorStatusPrinter] =
+        useState("");
+    const [startTimePrinter, setStartTimePrinter] = useState(null);
+    const [isRunningPrinter, setIsRunningPrinter] = useState(false);
+    const [TimePrinter, setTimePrinter] = useState(null);
+    // ---------------------------
+
+    // Spi 
+    const [StatusSPI, setStatusSPI] = useState("");
+    const [SPI, setSPI] = useState("SPI");
+    const [backgroundColorStatusSPI, setBackgroundColorStatusSPI] =
+        useState("");
+    const [startTimeSPI, setStartTimeSPI] = useState(null);
+    const [isRunningSPI, setIsRunningSPI] = useState(false);
+    const [TimeSPI, setTimeSPI] = useState(null);
+    // ---------------------------
+
+    // PickNPlace 
+    const [StatusPickNPlace, setStatusPickNPlace] = useState("");
+    const [PickNPlace, setPickNPlace] = useState("Pick&Place");
+    const [
+        backgroundColorStatusPickNPlace,
+        setBackgroundColorStatusPickNPlace,
+    ] = useState("");
+    const [startTimePickNPlace, setStartTimePickNPlace] = useState(null);
+    const [isRunningPickNPlace, setIsRunningPickNPlace] = useState(false);
+    const [TimePickNPlace, setTimePickNPlace] = useState(null);
+    // ---------------------------
+
+    // Reflow 
+
+    const [StatusReflow, setStatusReflow] = useState("");
+    const [Reflow, setReflow] = useState("Reflow");
+    const [backgroundColorStatusReflow, setBackgroundColorStatusReflow] =
+        useState("");
+    const [startTimeReflow, setStartTimeReflow] = useState(null);
+    const [isRunningReflow, setIsRunningReflow] = useState(false);
+    const [TimeReflow, setTimeReflow] = useState(null);
+    // ---------------------------
+
+    // AOI 
+    const [StatusAOI, setStatusAOI] = useState("");
+    const [AOI, setAOI] = useState("AOI");
+    const [backgroundColorStatusAOI, setBackgroundColorStatusAOI] =
+        useState("");
+    const [startTimeAOI, setStartTimeAOI] = useState(null);
+    const [isRunningAOI, setIsRunningAOI] = useState(false);
+    const [TimeAOI, setTimeAOI] = useState(null);
+    // ---------------------------
+
+    // RVS 
+    const [StatusRVS, setStatusRVS] = useState("");
+    const [RVS, setRVS] = useState("RVS");
+    const [backgroundColorStatusRVS, setBackgroundColorStatusRVS] =
+        useState("");
+    const [startTimeRVS, setStartTimeRVS] = useState(null);
+    const [isRunningRVS, setIsRunningRVS] = useState(false);
+    const [TimeRVS, setTimeRVS] = useState(null);
+
+    // ---------------------------
+
+    // Dropin 
+    const [Dropin, setDropin] = useState("Drop in");
+    const [StatusDropin, setStatusDropin] = useState("");
+    const [
+        backgroundColorStatusDropin,
+        setBackgroundColorStatusDropin,
+    ] = useState("");
+    const [startTimeDropin, setStartTimeDropin] = useState(null);
+    const [isRunningDropin, setIsRunningDropin] = useState(false);
+    const [TimeDropin, setTimeDropin] = useState(null);
+    // ---------------------------
+
+    // Fluxer 
+    const [StatusFluxer, setStatusFluxer] = useState("");
+    const [Fluxer, setFluxer] = useState("Fluxer");
+    const [backgroundColorStatusFluxer, setBackgroundColorStatusFluxer] =
+        useState("");
+    const [startTimeFluxer, setStartTimeFluxer] = useState(null);
+    const [isRunningFluxer, setIsRunningFluxer] = useState(false);
+    const [TimeFluxer, setTimeFluxer] = useState(null);
+    // ---------------------------
+
+    // Preheat 
+    const [StatusPreheat, setStatusPreheat] = useState("");
+    const [Preheat, setPreheat] = useState("PreHeat");
+    const [backgroundColorStatusPreheat, setBackgroundColorStatusPreheat] =
+        useState("");
+    const [startTimePreheat, setStartTimePreheat] = useState(null);
+    const [isRunningPreheat, setIsRunningPreheat] = useState(false);
+    const [TimePreheat, setTimePreheat] = useState(null);
+    // ---------------------------
+
+    // Selective 
+    const [StatusSelective, setStatusSelective] = useState("");
+    const [Selective, setSelective] = useState("Selective");
+    const [backgroundColorStatusSelective, setBackgroundColorStatusSelective] =
+        useState("");
+    const [startTimeSelective, setStartTimeSelective] = useState(null);
+    const [isRunningSelective, setIsRunningSelective] = useState(false);
+    const [TimeSelective, setTimeSelective] = useState(null);
+    // ---------------------------
+
+
+
+    // Touchup 
+
+    const [StatusTouchup, setStatusTouchup] = useState("");
+    const [Touchup, setTouchup] = useState("Touch UP");
+    const [backgroundColorStatusTouchup, setBackgroundColorStatusTouchup] =
+        useState("");
+    const [startTimeTouchup, setStartTimeTouchup] = useState(null);
+    const [isRunningTouchup, setIsRunningTouchup] = useState(false);
+    const [TimeTouchup, setTimeTouchup] = useState(null);
+    // ---------------------------
+
+    // ICT 
+    const [StatusICT, setStatusICT] = useState("");
+    const [ICT, setICT] = useState("ICT");
+    const [backgroundColorStatusICT, setBackgroundColorStatusICT] =
+        useState("");
+    const [startTimeICT, setStartTimeICT] = useState(null);
+    const [isRunningICT, setIsRunningICT] = useState(false);
+    const [TimeICT, setTimeICT] = useState(null);
+    // ---------------------------
+
+    // Flash 
+    const [StatusFlash, setStatusFlash] = useState("");
+    const [Flash, setFlash] = useState("Flash");
+    const [backgroundColorStatusFlash, setBackgroundColorStatusFlash] =
+        useState("");
+    const [startTimeFlash, setStartTimeFlash] = useState(null);
+    const [isRunningFlash, setIsRunningFlash] = useState(false);
+    const [TimeFlash, setTimeFlash] = useState(null);
+
+
+    // Router 
+    const [StatusRouter, setStatusRouter] = useState("");
+    const [Router, setRouter] = useState("Router");
+    const [backgroundColorStatusRouter, setBackgroundColorStatusRouter] =
+        useState("");
+    const [startTimeRouter, setStartTimeRouter] = useState(null);
+    const [isRunningRouter, setIsRunningRouter] = useState(false);
+    const [TimeRouter, setTimeRouter] = useState(null);
+
     // POPUP
     // ISA
     const [isOpen2, setIsOpen2] = useState(false);
@@ -415,6 +588,91 @@ const SMTLINE1CONTROLLER = () => {
     const [dataRouterBERepair, setDataRouterBERepair] = useState(null);
     const [dataRouterBEValidation, setDataRouterBEValidation] = useState(null);
 
+    // Line2
+    const [dataDestackerLeader, setDataDestackerLeader] = useState(null);
+    const [dataDestackerRepair, setDataDestackerRepair] = useState(null);
+    const [dataDestackerValidation, setDataDestackerValidation] = useState(null);
+
+
+
+    const [dataLabelLeader, setDataLabelLeader] = useState(null);
+    const [dataLabelRepair, setDataLabelRepair] = useState(null);
+    const [dataLabelValidation, setDataLabelValidation] = useState(null);
+
+
+
+    const [dataPrinterLeader, setDataPrinterLeader] = useState(null);
+    const [dataPrinterRepair, setDataPrinterRepair] = useState(null);
+    const [dataPrinterValidation, setDataPrinterValidation] = useState(null);
+
+
+    const [dataSPILeader, setDataSPILeader] = useState(null);
+    const [dataSPIRepair, setDataSPIRepair] = useState(null);
+    const [dataSPIValidation, setDataSPIValidation] = useState(null);
+
+
+    const [dataPickNPlaceLeader, setDataPickNPlaceLeader] = useState(null);
+    const [dataPickNPlaceRepair, setDataPickNPlaceRepair] = useState(null);
+    const [dataPickNPlaceValidation, setDataPickNPlaceValidation] = useState(null);
+
+
+    const [dataReflowLeader, setDataReflowLeader] = useState(null);
+    const [dataReflowRepair, setDataReflowRepair] = useState(null);
+    const [dataReflowValidation, setDataReflowValidation] = useState(null);
+
+
+
+    const [dataAOILeader, setDataAOILeader] = useState(null);
+    const [dataAOIRepair, setDataAOIRepair] = useState(null);
+    const [dataAOIValidation, setDataAOIValidation] = useState(null);
+
+
+    const [dataRVSLeader, setDataRVSLeader] = useState(null);
+    const [dataRVSRepair, setDataRVSRepair] = useState(null);
+    const [dataRVSValidation, setDataRVSValidation] = useState(null);
+
+
+    const [dataDropinLeader, setDataDropinLeader] = useState(null);
+    const [dataDropinRepair, setDataDropinRepair] = useState(null);
+    const [dataDropinValidation, setDataDropinValidation] = useState(null);
+
+
+
+    const [dataFluxerLeader, setDataFluxerLeader] = useState(null);
+    const [dataFluxerRepair, setDataFluxerRepair] = useState(null);
+    const [dataFluxerValidation, setDataFluxerValidation] = useState(null);
+
+
+
+    const [dataPreheatLeader, setDataPreheatLeader] = useState(null);
+    const [dataPreheatRepair, setDataPreheatRepair] = useState(null);
+    const [dataPreheatValidation, setDataPreheatValidation] = useState(null);
+
+
+    const [dataSelectiveLeader, setDataSelectiveLeader] = useState(null);
+    const [dataSelectiveRepair, setDataSelectiveRepair] = useState(null);
+    const [dataSelectiveValidation, setDataSelectiveValidation] = useState(null);
+
+
+    const [dataTouchupLeader, setDataTouchupLeader] = useState(null);
+    const [dataTouchupRepair, setDataTouchupRepair] = useState(null);
+    const [dataTouchupValidation, setDataTouchupValidation] = useState(null);
+
+
+
+    const [dataICTLeader, setDataICTLeader] = useState(null);
+    const [dataICTRepair, setDataICTRepair] = useState(null);
+    const [dataICTValidation, setDataICTValidation] = useState(null);
+
+
+    const [dataFlashLeader, setDataFlashLeader] = useState(null);
+    const [dataFlashRepair, setDataFlashRepair] = useState(null);
+    const [dataFlashValidation, setDataFlashValidation] = useState(null);
+
+    const [dataRouterLeader, setDataRouterLeader] = useState(null);
+    const [dataRouterRepair, setDataRouterRepair] = useState(null);
+    const [dataRouterValidation, setDataRouterValidation] = useState(null);
+
     //   ------------------
 
 
@@ -443,9 +701,15 @@ const SMTLINE1CONTROLLER = () => {
         const ref3 = db.ref("StatusLine/SMTLine1");
         ref3.on("value", (snapshot) => {
             const data = snapshot.val();
-            setStatusLine(data);
+            setStatusLine1(data);
         });
 
+
+        const ref0 = db.ref("StatusLine/SMTLine2");
+        ref0.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setStatusLine2(data);
+        });
         const ref8 = db.ref("SMTLine1TOP/Destacker (TOP)");
         ref8.on("value", (snapshot) => {
             const data = snapshot.val();
@@ -612,6 +876,122 @@ const SMTLINE1CONTROLLER = () => {
 
         });
 
+        // SMT LINE 2
+        const ref39 = db.ref("SMTLine2/Destacker");
+        ref39.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusDestacker(data);
+
+        });
+
+        const ref40 = db.ref("SMTLine2/Label");
+        ref40.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusLabel(data);
+
+        });
+
+        const ref41 = db.ref("/SMTLine2/Printer");
+        ref41.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusPrinter(data);
+
+        });
+
+        const ref42 = db.ref("/SMTLine2/SPI");
+        ref42.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusSPI(data);
+
+        });
+
+        const ref43 = db.ref("/SMTLine2/Pick&Place");
+        ref43.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusPickNPlace(data);
+
+        });
+
+        const ref44 = db.ref("/SMTLine2/Reflow");
+        ref44.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusReflow(data);
+
+        });
+
+        const ref45 = db.ref("/SMTLine2/AOI");
+        ref45.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusAOI(data);
+
+        });
+
+        const ref46 = db.ref("/SMTLine2/RVS");
+        ref46.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusRVS(data);
+
+        });
+
+        const ref47 = db.ref("SMTLine2/Drop in");
+        ref47.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusDropin(data);
+
+        });
+
+
+        const ref48 = db.ref("SMTLine2/Fluxer");
+        ref48.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusFluxer(data);
+
+        });
+
+        const ref49 = db.ref("SMTLine2/PreHeat");
+        ref49.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusPreheat(data);
+
+        });
+
+        const ref50 = db.ref("SMTLine2/Selective");
+        ref50.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusSelective(data);
+
+        });
+
+        const ref52 = db.ref("SMTLine2/Touch UP");
+        ref52.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusTouchup(data);
+
+        });
+
+        const ref53 = db.ref("SMTLine2/ICT");
+        ref53.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusICT(data);
+
+        });
+
+
+        const ref54 = db.ref("SMTLine2/Flash");
+        ref54.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusFlash(data);
+
+        });
+
+        const ref55 = db.ref("SMTLine2/Router");
+        ref55.on("value", (snapshot) => {
+            const data = snapshot.val();
+            updateStatusRouter(data);
+
+        });
+
+
         // RealTime
 
         const ref74 = db.ref("/SMTLine1TOP/DestackerTopTime");
@@ -699,14 +1079,14 @@ const SMTLINE1CONTROLLER = () => {
             setTimeRVSBot(data);
         });
 
-        const ref54 = db.ref("/SMTLine1BE/DropinBeTime");
-        ref54.on("value", (snapshot) => {
+        const ref90 = db.ref("/SMTLine1BE/DropinBeTime");
+        ref90.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeDropinBe(data);
         });
 
-        const ref55 = db.ref("/SMTLine1BE/FluxerBeTime");
-        ref55.on("value", (snapshot) => {
+        const ref91 = db.ref("/SMTLine1BE/FluxerBeTime");
+        ref91.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeFluxerBe(data);
         });
@@ -723,7 +1103,7 @@ const SMTLINE1CONTROLLER = () => {
             setTimeSeho1Be(data);
         });
 
-        const ref58 = db.ref("/SMTLine1BE/Seho5BeTime");
+        const ref58 = db.ref("/SMTLine1BE/Seho2BeTime");
         ref58.on("value", (snapshot) => {
             const data = snapshot.val();
             setTimeSeho2Be(data);
@@ -754,6 +1134,105 @@ const SMTLINE1CONTROLLER = () => {
             setTimeRouterBe(data);
         });
 
+        // SMT LINE 2 REALTIME
+        const ref100 = db.ref("/SMTLine2/DestackerTime");
+        ref100.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimeDestacker(data);
+        });
+
+        const ref101 = db.ref("/SMTLine2/LabelTime");
+        ref101.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimeLabel(data);
+        });
+
+        const ref102 = db.ref("/SMTLine2/PrinterTime");
+        ref102.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimePrinter(data);
+        });
+
+        const ref103 = db.ref("/SMTLine2/SPITime");
+        ref103.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimeSPI(data);
+        });
+
+        const ref104 = db.ref("/SMTLine2/PickNPlaceTime");
+        ref104.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimePickNPlace(data);
+        });
+
+        const ref105 = db.ref("/SMTLine2/ReflowTime");
+        ref105.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimeReflow(data);
+        });
+
+
+        const ref106 = db.ref("/SMTLine2/AOITime");
+        ref106.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimeAOI(data);
+        });
+
+        const ref107 = db.ref("/SMTLine2/RVSTime");
+        ref107.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimeRVS(data);
+        });
+
+        const ref108 = db.ref("/SMTLine2/DropinTime");
+        ref108.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimeDropin(data);
+        });
+
+        const ref109 = db.ref("/SMTLine2/FluxerTime");
+        ref109.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimeFluxer(data);
+        });
+
+        const ref110 = db.ref("/SMTLine2/PreheatTime");
+        ref110.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimePreheat(data);
+        });
+
+        const ref111 = db.ref("/SMTLine2/SelectiveTime");
+        ref111.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimeSelective(data);
+        });
+
+
+        const ref113 = db.ref("/SMTLine2/TouchupTime");
+        ref113.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimeTouchup(data);
+        });
+
+
+        const ref114 = db.ref("/SMTLine2/ICTTime");
+        ref114.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimeICT(data);
+        });
+
+        const ref115 = db.ref("/SMTLine2/FlashTime");
+        ref115.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimeFlash(data);
+        });
+
+        const ref116 = db.ref("/SMTLine2/RouterTime");
+        ref116.on("value", (snapshot) => {
+            const data = snapshot.val();
+            setTimeRouter(data);
+        });
 
         return () => { };
     }, []);
@@ -1919,6 +2398,792 @@ const SMTLINE1CONTROLLER = () => {
                                                                                                 : "#565454"
         );
     };
+
+
+    // LINE 2 SMT 
+    const updateStatusDestacker = (data) => {
+        setStatusDestacker(data);
+        setBackgroundColorStatusDestacker(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusLabel = (data) => {
+        setStatusLabel(data);
+        setBackgroundColorStatusLabel(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusPrinter = (data) => {
+        setStatusPrinter(data);
+        setBackgroundColorStatusPrinter(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusSPI = (data) => {
+        setStatusSPI(data);
+        setBackgroundColorStatusSPI(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusPickNPlace = (data) => {
+        setStatusPickNPlace(data);
+        setBackgroundColorStatusPickNPlace(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusReflow = (data) => {
+        setStatusReflow(data);
+        setBackgroundColorStatusReflow(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusAOI = (data) => {
+        setStatusAOI(data);
+        setBackgroundColorStatusAOI(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusRVS = (data) => {
+        setStatusRVS(data);
+        setBackgroundColorStatusRVS(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusDropin = (data) => {
+        setStatusDropin(data);
+        setBackgroundColorStatusDropin(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusFluxer = (data) => {
+        setStatusFluxer(data);
+        setBackgroundColorStatusFluxer(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusPreheat = (data) => {
+        setStatusPreheat(data);
+        setBackgroundColorStatusPreheat(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusSelective = (data) => {
+        setStatusSelective(data);
+        setBackgroundColorStatusSelective(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusTouchup = (data) => {
+        setStatusTouchup(data);
+        setBackgroundColorStatusTouchup(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Repair"
+                    ? "#E9CE08"
+                    : data === "Leader"
+                        ? "#C00000"
+                        : data === "Return Leader"
+                            ? "#C00000"
+                            : data === "HRGA & EHS"
+                                ? "#C00000"
+                                : data === "Return HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "PURCHASING,PPIC,MP&L"
+                                        ? "#C00000"
+                                        : data === "Return PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "PROCESS ENGINEERING"
+                                                ? "#C00000"
+                                                : data === "Return PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "PRODUCT DEVELOPMENT"
+                                                        ? "#C00000"
+                                                        : data === "Return PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                ? "#C00000"
+                                                                : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "QA"
+                                                                        ? "#93c2c4"
+                                                                        : data === "In Validation"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "MAINTENANCE & IT"
+                                                                                        ? "#C00000"
+                                                                                        : data === "Return MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : "#565454"
+        );
+    };
+
+    const updateStatusICT = (data) => {
+        setStatusICT(data);
+        setBackgroundColorStatusICT(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusFlash = (data) => {
+        setStatusFlash(data);
+        setBackgroundColorStatusFlash(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+    const updateStatusRouter = (data) => {
+        setStatusRouter(data);
+        setBackgroundColorStatusRouter(
+            data === "Go"
+                ? "#32cd32"
+                : data === "Return Repair"
+                    ? "#E9CE08"
+                    : data === "Repair"
+                        ? "#E9CE08"
+                        : data === "Leader"
+                            ? "#C00000"
+                            : data === "Return Leader"
+                                ? "#C00000"
+                                : data === "HRGA & EHS"
+                                    ? "#C00000"
+                                    : data === "Return HRGA & EHS"
+                                        ? "#C00000"
+                                        : data === "PURCHASING,PPIC,MP&L"
+                                            ? "#C00000"
+                                            : data === "Return PURCHASING,PPIC,MP&L"
+                                                ? "#C00000"
+                                                : data === "PROCESS ENGINEERING"
+                                                    ? "#C00000"
+                                                    : data === "Return PROCESS ENGINEERING"
+                                                        ? "#C00000"
+                                                        : data === "PRODUCT DEVELOPMENT"
+                                                            ? "#C00000"
+                                                            : data === "Return PRODUCT DEVELOPMENT"
+                                                                ? "#C00000"
+                                                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                                                    ? "#C00000"
+                                                                    : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                                                        ? "#C00000"
+                                                                        : data === "QA"
+                                                                            ? "#93c2c4"
+                                                                            : data === "QC"
+                                                                                ? "#93c2c4"
+                                                                                : data === "Production"
+                                                                                    ? "#93c2c4"
+                                                                                    : data === "In Validation"
+                                                                                        ? "#93c2c4"
+                                                                                        : data === "MAINTENANCE & IT"
+                                                                                            ? "#C00000"
+                                                                                            : data === "Return MAINTENANCE & IT"
+                                                                                                ? "#C00000"
+                                                                                                : "#565454"
+        );
+    };
+
+
     // ------------------------------------
 
     // Fetch Data By Station
@@ -2021,64 +3286,159 @@ const SMTLINE1CONTROLLER = () => {
     const fetchRVSBOTValidation = () => fetchData("/getRVSBOTValidation", setDataRVSBOTValidation);
 
     //   SMT BE
-    // Destacker
+    // Drop in
     const fetchDropinBELeader = () => fetchData("/getDropinBELeader", setDataDropinBELeader);
     const fetchDropinBERepair = () => fetchData("/getDropinBERepair", setDataDropinBERepair);
     const fetchDropinBEValidation = () => fetchData("/getDropinBEValidation", setDataDropinBEValidation);
 
 
-    // Label
+    // Fluxer
     const fetchFluxerBELeader = () => fetchData("/getFluxerBELeader", setDataFluxerBELeader);
     const fetchFluxerBERepair = () => fetchData("/getFluxerBERepair", setDataFluxerBERepair);
     const fetchFluxerBEValidation = () => fetchData("/getFluxerBEValidation", setDataFluxerBEValidation);
 
 
-    // Printer
+    // Preheat
     const fetchPreheatBELeader = () => fetchData("/getPreheatBELeader", setDataPreheatBELeader);
     const fetchPreheatBERepair = () => fetchData("/getPreheatBERepair", setDataPreheatBERepair);
     const fetchPreheatBEValidation = () => fetchData("/getPreheatBEValidation", setDataPreheatBEValidation);
 
 
-    // SPI
+    // Seho1
     const fetchSeho1BELeader = () => fetchData("/getSeho1BELeader", setDataSeho1BELeader);
     const fetchSeho1BERepair = () => fetchData("/getSeho1BERepair", setDataSeho1BERepair);
     const fetchSeho1BEValidation = () => fetchData("/getSeho1BEValidation", setDataSeho1BEValidation);
 
 
-    // PickNPlace
+    // Seho2
     const fetchSeho2BELeader = () => fetchData("/getSeho2BELeader", setDataSeho2BELeader);
     const fetchSeho2BERepair = () => fetchData("/getSeho2BERepair", setDataSeho2BERepair);
     const fetchSeho2BEValidation = () => fetchData("/getSeho2BEValidation", setDataSeho2BEValidation);
 
 
-    // Reflow
+    // TouchUp
     const fetchTouchupBELeader = () => fetchData("/getTouchupBELeader", setDataTouchupBELeader);
     const fetchTouchupBERepair = () => fetchData("/getTouchupBERepair", setDataTouchupBERepair);
     const fetchTouchupBEValidation = () => fetchData("/getTouchupBEValidation", setDataTouchupBEValidation);
 
 
-    // SPI
+    // ICT
     const fetchICTBELeader = () => fetchData("/getICTBELeader", setDataICTBELeader);
     const fetchICTBERepair = () => fetchData("/getICTBERepair", setDataICTBERepair);
     const fetchICTBEValidation = () => fetchData("/getICTBEValidation", setDataICTBEValidation);
 
 
-    // RVS
+    // Flash
     const fetchFlashBELeader = () => fetchData("/getFlashBELeader", setDataFlashBELeader);
     const fetchFlashBERepair = () => fetchData("/getFlashBERepair", setDataFlashBERepair);
     const fetchFlashBEValidation = () => fetchData("/getFlashBEValidation", setDataFlashBEValidation);
 
-
+    //  Router
     const fetchRouterBELeader = () => fetchData("/getRouterBELeader", setDataRouterBELeader);
     const fetchRouterBERepair = () => fetchData("/getRouterBERepair", setDataRouterBERepair);
     const fetchRouterBEValidation = () => fetchData("/getRouterBEValidation", setDataRouterBEValidation);
 
 
+    // Line2
+    // Destacker
+    const fetchDestackerLeader = () => fetchData("/getDestackerLeader", setDataDestackerLeader);
+    const fetchDestackerRepair = () => fetchData("/getDestackerRepair", setDataDestackerRepair);
+    const fetchDestackerValidation = () => fetchData("/getDestackerValidation", setDataDestackerValidation);
+
+
+    // Label
+    const fetchLabelLeader = () => fetchData("/getLabelLeader", setDataLabelLeader);
+    const fetchLabelRepair = () => fetchData("/getLabelRepair", setDataLabelRepair);
+    const fetchLabelValidation = () => fetchData("/getLabelValidation", setDataLabelValidation);
+
+
+    // Printer
+    const fetchPrinterLeader = () => fetchData("/getPrinterLeader", setDataPrinterLeader);
+    const fetchPrinterRepair = () => fetchData("/getPrinterRepair", setDataPrinterRepair);
+    const fetchPrinterValidation = () => fetchData("/getPrinterValidation", setDataPrinterValidation);
+
+
+    // SPI
+    const fetchSPILeader = () => fetchData("/getSPILeader", setDataSPILeader);
+    const fetchSPIRepair = () => fetchData("/getSPIRepair", setDataSPIRepair);
+    const fetchSPIValidation = () => fetchData("/getSPIValidation", setDataSPIValidation);
+
+
+    // PickNPlace
+    const fetchPickNPlaceLeader = () => fetchData("/getPickNPlaceLeader", setDataPickNPlaceLeader);
+    const fetchPickNPlaceRepair = () => fetchData("/getPickNPlaceRepair", setDataPickNPlaceRepair);
+    const fetchPickNPlaceValidation = () => fetchData("/getPickNPlaceValidation", setDataPickNPlaceValidation);
+
+
+    // Reflow
+    const fetchReflowLeader = () => fetchData("/getReflowLeader", setDataReflowLeader);
+    const fetchReflowRepair = () => fetchData("/getReflowRepair", setDataReflowRepair);
+    const fetchReflowValidation = () => fetchData("/getReflowValidation", setDataReflowValidation);
+
+
+    // SPI
+    const fetchAOILeader = () => fetchData("/getAOILeader", setDataAOILeader);
+    const fetchAOIRepair = () => fetchData("/getAOIRepair", setDataAOIRepair);
+    const fetchAOIValidation = () => fetchData("/getAOIValidation", setDataAOIValidation);
+
+
+    // RVS
+    const fetchRVSLeader = () => fetchData("/getRVSLeader", setDataRVSLeader);
+    const fetchRVSRepair = () => fetchData("/getRVSRepair", setDataRVSRepair);
+    const fetchRVSValidation = () => fetchData("/getRVSValidation", setDataRVSValidation);
+
+    // Drop in
+    const fetchDropinLeader = () => fetchData("/getDropinLeader", setDataDropinLeader);
+    const fetchDropinRepair = () => fetchData("/getDropinRepair", setDataDropinRepair);
+    const fetchDropinValidation = () => fetchData("/getDropinValidation", setDataDropinValidation);
+
+
+    // Fluxer
+    const fetchFluxerLeader = () => fetchData("/getFluxerLeader", setDataFluxerLeader);
+    const fetchFluxerRepair = () => fetchData("/getFluxerRepair", setDataFluxerRepair);
+    const fetchFluxerValidation = () => fetchData("/getFluxerValidation", setDataFluxerValidation);
+
+
+    // Preheat
+    const fetchPreheatLeader = () => fetchData("/getPreheatLeader", setDataPreheatLeader);
+    const fetchPreheatRepair = () => fetchData("/getPreheatRepair", setDataPreheatRepair);
+    const fetchPreheatValidation = () => fetchData("/getPreheatValidation", setDataPreheatValidation);
+
+
+    // Selective
+    const fetchSelectiveLeader = () => fetchData("/getSelectiveLeader", setDataSelectiveLeader);
+    const fetchSelectiveRepair = () => fetchData("/getSelectiveRepair", setDataSelectiveRepair);
+    const fetchSelectiveValidation = () => fetchData("/getSelectiveValidation", setDataSelectiveValidation);
+
+
+
+
+    // TouchUp
+    const fetchTouchupLeader = () => fetchData("/getTouchupLeader", setDataTouchupLeader);
+    const fetchTouchupRepair = () => fetchData("/getTouchupRepair", setDataTouchupRepair);
+    const fetchTouchupValidation = () => fetchData("/getTouchupValidation", setDataTouchupValidation);
+
+
+    // ICT
+    const fetchICTLeader = () => fetchData("/getICTLeader", setDataICTLeader);
+    const fetchICTRepair = () => fetchData("/getICTRepair", setDataICTRepair);
+    const fetchICTValidation = () => fetchData("/getICTValidation", setDataICTValidation);
+
+
+    // Flash
+    const fetchFlashLeader = () => fetchData("/getFlashLeader", setDataFlashLeader);
+    const fetchFlashRepair = () => fetchData("/getFlashRepair", setDataFlashRepair);
+    const fetchFlashValidation = () => fetchData("/getFlashValidation", setDataFlashValidation);
+
+    //  Router
+    const fetchRouterLeader = () => fetchData("/getRouterLeader", setDataRouterLeader);
+    const fetchRouterRepair = () => fetchData("/getRouterRepair", setDataRouterRepair);
+    const fetchRouterValidation = () => fetchData("/getRouterValidation", setDataRouterValidation);
 
 
 
     const fetchData = (endpoint, setDataFunction) => {
-        fetch(`http://192.168.101.12:3000/api/${endpoint}`)
+        fetch(`https://andonline.astra-visteon.com:3000/api/${endpoint}`)
             .then((response) => response.json())
             .then((data) => {
                 setDataFunction(data);
@@ -2202,6 +3562,84 @@ const SMTLINE1CONTROLLER = () => {
             fetchRouterBERepair,
             fetchRouterBEValidation,
 
+            // Line2
+            fetchDestackerLeader,
+            fetchDestackerRepair,
+            fetchDestackerValidation,
+
+
+            fetchLabelLeader,
+            fetchLabelRepair,
+            fetchLabelValidation,
+
+
+            fetchPrinterLeader,
+            fetchPrinterRepair,
+            fetchPrinterValidation,
+
+
+            fetchSPILeader,
+            fetchSPIRepair,
+            fetchSPIValidation,
+
+
+            fetchPickNPlaceLeader,
+            fetchPickNPlaceRepair,
+            fetchPickNPlaceValidation,
+
+
+            fetchReflowLeader,
+            fetchReflowRepair,
+            fetchReflowValidation,
+
+
+            fetchAOILeader,
+            fetchAOIRepair,
+            fetchAOIValidation,
+
+
+            fetchRVSLeader,
+            fetchRVSRepair,
+            fetchRVSValidation,
+
+            fetchDropinLeader,
+            fetchDropinRepair,
+            fetchDropinValidation,
+
+
+            fetchFluxerLeader,
+            fetchFluxerRepair,
+            fetchFluxerValidation,
+
+
+            fetchPreheatLeader,
+            fetchPreheatRepair,
+            fetchPreheatValidation,
+
+
+            fetchSelectiveLeader,
+            fetchSelectiveRepair,
+            fetchSelectiveValidation,
+
+
+            fetchTouchupLeader,
+            fetchTouchupRepair,
+            fetchTouchupValidation,
+
+
+            fetchICTLeader,
+            fetchICTRepair,
+            fetchICTValidation,
+
+
+            fetchFlashLeader,
+            fetchFlashRepair,
+            fetchFlashValidation,
+
+            fetchRouterLeader,
+            fetchRouterRepair,
+            fetchRouterValidation,
+
 
         ];
 
@@ -2218,38 +3656,45 @@ const SMTLINE1CONTROLLER = () => {
     const styles = {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${process.env.PUBLIC_URL}/Line.jpg)`,
         backgroundSize: "1600px",
-        backgroundPosition: "50% 0",
+        backgroundPosition: "70% 0",
         height: "730px",
     };
 
 
     return (
         <body style={styles}>
-             <nav class="bg-slate px-3 sm:px-4 dark:bg-gray-900 bg-{#fff} w-full z-20 top-0 left-0 dark:border-gray-600">
+            <nav class="bg-slate px-3 sm:px-4 dark:bg-gray-900 bg-{#fff} w-full z-20 top-0 left-0 dark:border-gray-600">
                 <div class="flex h-14 items-center justify-between">
-                   
-                   
+
+
 
                     <div>
                         <div class=" bg-gray-300 flex flex-col w-44 sm:w-44 md:w-44 lg:w-44  rounded-lg">
-                            
+
                             <h1 class="text-sm lg:text-sm sm:text-xs md:text-xs font-mono tracking-tight ml-4">
                                 <span class="text-black">SMT LINE 1 = </span>
                                 <span
                                     class=""
                                     style={{
-                                        color: StatusLine === "Running" ? "green" : "red",
+                                        color: StatusLine1 === "Running" ? "green" : "red",
                                     }}
                                 >
-                                    {StatusLine}
+                                    {StatusLine1}
                                 </span>
                             </h1>  <h1 class="text-sm lg:text-sm sm:text-xs md:text-xs  font-mono tracking-tight ml-4">
                                 <span class="text-black">SMT LINE 2 = </span>
-                                <span class=" text-green-700">Running </span>
+                                <span
+                                    class=""
+                                    style={{
+                                        color: StatusLine2 === "Running" ? "green" : "red",
+                                    }}
+                                >
+                                    {StatusLine2}
+                                </span>
                             </h1>
-                            
+
                         </div>
-                           
+
                     </div>
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
@@ -2265,7 +3710,7 @@ const SMTLINE1CONTROLLER = () => {
             </nav>
 
 
-      
+
 
             {/*  */}
             <main>
@@ -2295,7 +3740,7 @@ const SMTLINE1CONTROLLER = () => {
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
 
-                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                        <div className=" w-28 sm:w-20 lg:w-28 ">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusDestackerTop,
@@ -2337,7 +3782,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -2425,7 +3870,7 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     DESTACKER TOP
                                                 </span>
 
@@ -2480,7 +3925,7 @@ const SMTLINE1CONTROLLER = () => {
 
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -2568,7 +4013,7 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     LABEL TOP
                                                 </span>
                                             </button>
@@ -2578,7 +4023,7 @@ const SMTLINE1CONTROLLER = () => {
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
-                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                        <div className=" w-28 sm:w-20 lg:w-28 xl:w-20 2xl:w-20 ">
                                             <button
                                                 style={{
                                                     backgroundColor: backgroundColorStatusPrinterTop,
@@ -2619,7 +4064,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 }}
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             ><svg
-                                                width="50px"
+                                                width="30px"
                                                 fill="#2e3436"
                                                 fill-opacity="0.7000"
                                                 className="justify-center items-center mx-auto mt-1"
@@ -2708,8 +4153,8 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    PRINTER TOP
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    PRINTING TOP
                                                 </span>
 
                                             </button>
@@ -2760,7 +4205,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 }}
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             ><svg
-                                                width="50px"
+                                                width="30px"
                                                 fill="#2e3436"
                                                 fill-opacity="0.7000"
                                                 className="justify-center items-center mx-auto mt-1"
@@ -2849,7 +4294,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">SPI TOP </span>
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">SPI TOP </span>
 
                                             </button>
                                         </div>
@@ -2899,7 +4344,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 }}
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             ><svg
-                                                width="50px"
+                                                width="30px"
                                                 fill="#2e3436"
                                                 fill-opacity="0.7000"
                                                 className="justify-center items-center mx-auto mt-1"
@@ -2987,7 +4432,7 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     PICK & PLACE TOP
                                                 </span>
                                             </button>
@@ -3043,7 +4488,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -3131,7 +4576,7 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     REFLOW TOP
                                                 </span>
                                             </button>
@@ -3183,7 +4628,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -3272,7 +4717,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">AOI TOP</span>
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">AOI TOP</span>
 
                                             </button>
                                         </div>
@@ -3323,7 +4768,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -3412,7 +4857,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     RVS TOP
                                                 </span>
 
@@ -3420,14 +4865,6 @@ const SMTLINE1CONTROLLER = () => {
                                         </div>
                                     </div>
                                 </section>
-                            </div>
-                        </div>
-
-
-                        {/* SMT BOT */}
-
-                        <div>
-                            <div class=" flex    p-2 sm:ml-5">
                                 <section class="antialiased  text-gray-600  px-3" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
@@ -3472,7 +4909,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 }}
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -3561,14 +4998,23 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    PRINTER BOT
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    PRINTING BOT
                                                 </span>
 
                                             </button>
                                         </div>
                                     </div>
                                 </section>
+                            </div>
+                        </div>
+
+
+                        {/* SMT BOT */}
+
+                        <div>
+                            <div class=" flex    p-2 sm:ml-5">
+                              
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
@@ -3613,7 +5059,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 }}
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -3702,7 +5148,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">SPI BOT</span>
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">SPI BOT</span>
 
                                             </button>
                                         </div>
@@ -3752,7 +5198,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 }}
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -3841,7 +5287,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     PICK & PLACE BOT
                                                 </span>
 
@@ -3893,7 +5339,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 }}
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -3982,7 +5428,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     REFLOW BOT
                                                 </span>
 
@@ -4034,7 +5480,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 }}
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -4123,7 +5569,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">AOI BOT</span>
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">AOI BOT</span>
 
                                             </button>
                                         </div>
@@ -4173,7 +5619,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 }}
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl ">
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -4262,20 +5708,12 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">RVS BOT</span>
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">RVS BOT</span>
 
                                             </button>
                                         </div>
                                     </div>
                                 </section>
-                            </div>
-                        </div>
-
-
-
-
-                        <div>
-                            <div class=" flex    p-2 sm:ml-5">
                                 <section class="antialiased  text-gray-600  px-3" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
@@ -4319,7 +5757,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -4408,7 +5846,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     DROP IN BE
                                                 </span>
 
@@ -4461,7 +5899,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -4550,7 +5988,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     FLUXER BE
                                                 </span>
 
@@ -4602,7 +6040,7 @@ const SMTLINE1CONTROLLER = () => {
 
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -4691,7 +6129,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     PREHEAT BE
                                                 </span>
 
@@ -4743,7 +6181,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -4832,7 +6270,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     SEHO 1 BE
                                                 </span>
 
@@ -4840,6 +6278,15 @@ const SMTLINE1CONTROLLER = () => {
                                         </div>
                                     </div>
                                 </section>
+                            </div>
+                        </div>
+
+
+
+
+                        <div>
+                            <div class=" flex    p-2 sm:ml-5">
+                               
                                 <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
@@ -4884,7 +6331,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -4973,7 +6420,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     SEHO2 BE
                                                 </span>
 
@@ -5025,7 +6472,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -5114,7 +6561,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     TOUCH UP BE
                                                 </span>
 
@@ -5166,7 +6613,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -5255,7 +6702,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">ICT BE</span>
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">ICT BE</span>
 
                                             </button>
                                         </div>
@@ -5305,7 +6752,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -5394,7 +6841,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     FLASH BE
                                                 </span>
 
@@ -5446,7 +6893,7 @@ const SMTLINE1CONTROLLER = () => {
                                                 class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -5535,8 +6982,221 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
                                                     ROUTER BE
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+                                             
+                                                class="w-full max-w-sm  bg-[#595959] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="30px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                   FCT
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+                                               
+                                                class="w-full max-w-sm  bg-[#595959] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="30px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    COATING
                                                 </span>
 
                                             </button>
@@ -5579,11 +7239,47 @@ const SMTLINE1CONTROLLER = () => {
 
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
+                                                style={{
+                                                    backgroundColor: backgroundColorStatusDestacker,
+                                                }}
+                                                value={Destacker}
+                                                onClick={() => {
+                                                    if (StatusDestacker === "Leader") {
 
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataDestackerLeader);
+                                                        setButton("Destacker");
+                                                    } else if (StatusDestacker === "MAINTENANCE & IT" || StatusDestacker === "HRGA & EHS" || StatusDestacker === "PURCHASING,PPIC,MP&L" || StatusDestacker === "PROCESS ENGINEERING" || StatusDestacker === "PRODUCT DEVELOPMENT" || StatusDestacker === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataDestackerRepair);
+                                                        setButton("Destacker");
+                                                    } else if (StatusDestacker === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataDestackerRepair);
+                                                        setButton("Destacker");
+                                                    } else if (StatusDestacker === "QA" || StatusDestacker === "QC" || StatusDestacker === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataDestackerValidation);
+                                                        setButton("Destacker");
+                                                    } else if (StatusDestacker === "Return MAINTENANCE & IT" || StatusDestacker === "Return HRGA & EHS" || StatusDestacker === "Return PURCHASING,PPIC,MP&L" || StatusDestacker === "Return PROCESS ENGINEERING" || StatusDestacker === "Return PRODUCT DEVELOPMENT" || StatusDestacker === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataDestackerRepair);
+                                                        setButton("Destacker");
+                                                    } else if (StatusDestacker === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataDestackerValidation);
+                                                        setButton("Destacker");
+                                                    } else if (StatusDestacker === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataDestackerValidation);
+                                                        setButton("Destacker");
+                                                    }
+                                                    setStation(Destacker);
+                                                }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -5671,8 +7367,8 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    DESTACKER TOP
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    DESTACKER
                                                 </span>
 
                                             </button>
@@ -5684,13 +7380,49 @@ const SMTLINE1CONTROLLER = () => {
                                         {/* <!-- Table --> */}
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
+                                                style={{
+                                                    backgroundColor: backgroundColorStatusLabel,
+                                                }}
+                                                value={Label}
+                                                onClick={() => {
+                                                    if (StatusLabel === "Leader") {
 
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataLabelLeader);
+                                                        setButton("Label");
+                                                    } else if (StatusLabel === "MAINTENANCE & IT" || StatusLabel === "HRGA & EHS" || StatusLabel === "PURCHASING,PPIC,MP&L" || StatusLabel === "PROCESS ENGINEERING" || StatusLabel === "PRODUCT DEVELOPMENT" || StatusLabel === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataLabelRepair);
+                                                        setButton("Label");
+                                                    } else if (StatusLabel === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataLabelRepair);
+                                                        setButton("Label");
+                                                    } else if (StatusLabel === "QA" || StatusLabel === "QC" || StatusLabel === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataLabelValidation);
+                                                        setButton("Label");
+                                                    } else if (StatusLabel === "Return MAINTENANCE & IT" || StatusLabel === "Return HRGA & EHS" || StatusLabel === "Return PURCHASING,PPIC,MP&L" || StatusLabel === "Return PROCESS ENGINEERING" || StatusLabel === "Return PRODUCT DEVELOPMENT" || StatusLabel === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataLabelRepair);
+                                                        setButton("Label");
+                                                    } else if (StatusLabel === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataLabelValidation);
+                                                        setButton("Label");
+                                                    } else if (StatusLabel === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataLabelValidation);
+                                                        setButton("Label");
+                                                    }
+                                                    setStation(Label);
+                                                }}
 
-                                                class="w-full max-w-sm bg-[#4d5661] shadow-lg rounded-xl "
+                                                class="w-full max-w-sm bg-[#5D6D7E] shadow-lg rounded-xl "
 
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -5778,8 +7510,8 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    LABEL TOP
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    LABEL
                                                 </span>
                                             </button>
                                         </div>
@@ -5790,10 +7522,46 @@ const SMTLINE1CONTROLLER = () => {
                                         {/* <!-- Table --> */}
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
+                                                style={{
+                                                    backgroundColor: backgroundColorStatusPrinter,
+                                                }}
+                                                value={Printer}
+                                                onClick={() => {
+                                                    if (StatusPrinter === "Leader") {
 
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataPrinterLeader);
+                                                        setButton("Printer");
+                                                    } else if (StatusPrinter === "MAINTENANCE & IT" || StatusPrinter === "HRGA & EHS" || StatusPrinter === "PURCHASING,PPIC,MP&L" || StatusPrinter === "PROCESS ENGINEERING" || StatusPrinter === "PRODUCT DEVELOPMENT" || StatusPrinter === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataPrinterRepair);
+                                                        setButton("Printer");
+                                                    } else if (StatusPrinter === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataPrinterRepair);
+                                                        setButton("Printer");
+                                                    } else if (StatusPrinter === "QA" || StatusPrinter === "QC" || StatusPrinter === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataPrinterValidation);
+                                                        setButton("Printer");
+                                                    } else if (StatusPrinter === "Return MAINTENANCE & IT" || StatusPrinter === "Return HRGA & EHS" || StatusPrinter === "Return PURCHASING,PPIC,MP&L" || StatusPrinter === "Return PROCESS ENGINEERING" || StatusPrinter === "Return PRODUCT DEVELOPMENT" || StatusPrinter === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataPrinterRepair);
+                                                        setButton("Printer");
+                                                    } else if (StatusPrinter === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataPrinterValidation);
+                                                        setButton("Printer");
+                                                    } else if (StatusPrinter === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataPrinterValidation);
+                                                        setButton("Printer");
+                                                    }
+                                                    setStation(Printer);
+                                                }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             ><svg
-                                                width="50px"
+                                                width="30px"
                                                 fill="#2e3436"
                                                 fill-opacity="0.7000"
                                                 className="justify-center items-center mx-auto mt-1"
@@ -5882,8 +7650,8 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    PRINTER TOP
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    PRINTING
                                                 </span>
 
                                             </button>
@@ -5895,10 +7663,46 @@ const SMTLINE1CONTROLLER = () => {
                                         {/* <!-- Table --> */}
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
+                                                style={{
+                                                    backgroundColor: backgroundColorStatusSPI,
+                                                }}
+                                                value={SPI}
+                                                onClick={() => {
+                                                    if (StatusSPI === "Leader") {
 
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataSPILeader);
+                                                        setButton("SPI");
+                                                    } else if (StatusSPI === "MAINTENANCE & IT" || StatusSPI === "HRGA & EHS" || StatusSPI === "PURCHASING,PPIC,MP&L" || StatusSPI === "PROCESS ENGINEERING" || StatusSPI === "PRODUCT DEVELOPMENT" || StatusSPI === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataSPIRepair);
+                                                        setButton("SPI");
+                                                    } else if (StatusSPI === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataSPIRepair);
+                                                        setButton("SPI");
+                                                    } else if (StatusSPI === "QA" || StatusSPI === "QC" || StatusSPI === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataSPIValidation);
+                                                        setButton("SPI");
+                                                    } else if (StatusSPI === "Return MAINTENANCE & IT" || StatusSPI === "Return HRGA & EHS" || StatusSPI === "Return PURCHASING,PPIC,MP&L" || StatusSPI === "Return PROCESS ENGINEERING" || StatusSPI === "Return PRODUCT DEVELOPMENT" || StatusSPI === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataSPIRepair);
+                                                        setButton("SPI");
+                                                    } else if (StatusSPI === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataSPIValidation);
+                                                        setButton("SPI");
+                                                    } else if (StatusSPI === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataSPIValidation);
+                                                        setButton("SPI");
+                                                    }
+                                                    setStation(SPI);
+                                                }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             ><svg
-                                                width="50px"
+                                                width="30px"
                                                 fill="#2e3436"
                                                 fill-opacity="0.7000"
                                                 className="justify-center items-center mx-auto mt-1"
@@ -5987,7 +7791,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">SPI TOP </span>
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">SPI  </span>
 
                                             </button>
                                         </div>
@@ -5998,10 +7802,46 @@ const SMTLINE1CONTROLLER = () => {
                                         {/* <!-- Table --> */}
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
+                                                style={{
+                                                    backgroundColor: backgroundColorStatusPickNPlace,
+                                                }}
+                                                value={PickNPlace}
+                                                onClick={() => {
+                                                    if (StatusPickNPlace === "Leader") {
 
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataPickNPlaceLeader);
+                                                        setButton("PickNPlace");
+                                                    } else if (StatusPickNPlace === "MAINTENANCE & IT" || StatusPickNPlace === "HRGA & EHS" || StatusPickNPlace === "PURCHASING,PPIC,MP&L" || StatusPickNPlace === "PROCESS ENGINEERING" || StatusPickNPlace === "PRODUCT DEVELOPMENT" || StatusPickNPlace === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataPickNPlaceRepair);
+                                                        setButton("PickNPlace");
+                                                    } else if (StatusPickNPlace === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataPickNPlaceRepair);
+                                                        setButton("PickNPlace");
+                                                    } else if (StatusPickNPlace === "QA" || StatusPickNPlace === "QC" || StatusPickNPlace === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataPickNPlaceValidation);
+                                                        setButton("PickNPlace");
+                                                    } else if (StatusPickNPlace === "Return MAINTENANCE & IT" || StatusPickNPlace === "Return HRGA & EHS" || StatusPickNPlace === "Return PURCHASING,PPIC,MP&L" || StatusPickNPlace === "Return PROCESS ENGINEERING" || StatusPickNPlace === "Return PRODUCT DEVELOPMENT" || StatusPickNPlace === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataPickNPlaceRepair);
+                                                        setButton("PickNPlace");
+                                                    } else if (StatusPickNPlace === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataPickNPlaceValidation);
+                                                        setButton("PickNPlace");
+                                                    } else if (StatusPickNPlace === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataPickNPlaceValidation);
+                                                        setButton("PickNPlace");
+                                                    }
+                                                    setStation(PickNPlace);
+                                                }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             ><svg
-                                                width="50px"
+                                                width="30px"
                                                 fill="#2e3436"
                                                 fill-opacity="0.7000"
                                                 className="justify-center items-center mx-auto mt-1"
@@ -6089,8 +7929,8 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    PICK & PLACE TOP
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    PICK & PLACE
                                                 </span>
                                             </button>
                                         </div>
@@ -6105,11 +7945,47 @@ const SMTLINE1CONTROLLER = () => {
                                         {/* <!-- Table --> */}
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
+                                                style={{
+                                                    backgroundColor: backgroundColorStatusReflow,
+                                                }}
+                                                value={Reflow}
+                                                onClick={() => {
+                                                    if (StatusReflow === "Leader") {
 
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataReflowLeader);
+                                                        setButton("Reflow");
+                                                    } else if (StatusReflow === "MAINTENANCE & IT" || StatusReflow === "HRGA & EHS" || StatusReflow === "PURCHASING,PPIC,MP&L" || StatusReflow === "PROCESS ENGINEERING" || StatusReflow === "PRODUCT DEVELOPMENT" || StatusReflow === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataReflowRepair);
+                                                        setButton("Reflow");
+                                                    } else if (StatusReflow === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataReflowRepair);
+                                                        setButton("Reflow");
+                                                    } else if (StatusReflow === "QA" || StatusReflow === "QC" || StatusReflow === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataReflowValidation);
+                                                        setButton("Reflow");
+                                                    } else if (StatusReflow === "Return MAINTENANCE & IT" || StatusReflow === "Return HRGA & EHS" || StatusReflow === "Return PURCHASING,PPIC,MP&L" || StatusReflow === "Return PROCESS ENGINEERING" || StatusReflow === "Return PRODUCT DEVELOPMENT" || StatusReflow === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataReflowRepair);
+                                                        setButton("Reflow");
+                                                    } else if (StatusReflow === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataReflowValidation);
+                                                        setButton("Reflow");
+                                                    } else if (StatusReflow === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataReflowValidation);
+                                                        setButton("Reflow");
+                                                    }
+                                                    setStation(Reflow);
+                                                }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -6197,8 +8073,8 @@ const SMTLINE1CONTROLLER = () => {
                                                         </g>
                                                     </g>
                                                 </svg>
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    REFLOW TOP
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    REFLOW
                                                 </span>
                                             </button>
                                         </div>
@@ -6209,11 +8085,47 @@ const SMTLINE1CONTROLLER = () => {
                                         {/* <!-- Table --> */}
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
+                                                style={{
+                                                    backgroundColor: backgroundColorStatusAOI,
+                                                }}
+                                                value={AOI}
+                                                onClick={() => {
+                                                    if (StatusAOI === "Leader") {
 
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataAOILeader);
+                                                        setButton("AOI");
+                                                    } else if (StatusAOI === "MAINTENANCE & IT" || StatusAOI === "HRGA & EHS" || StatusAOI === "PURCHASING,PPIC,MP&L" || StatusAOI === "PROCESS ENGINEERING" || StatusAOI === "PRODUCT DEVELOPMENT" || StatusAOI === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataAOIRepair);
+                                                        setButton("AOI");
+                                                    } else if (StatusAOI === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataAOIRepair);
+                                                        setButton("AOI");
+                                                    } else if (StatusAOI === "QA" || StatusAOI === "QC" || StatusAOI === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataAOIValidation);
+                                                        setButton("AOI");
+                                                    } else if (StatusAOI === "Return MAINTENANCE & IT" || StatusAOI === "Return HRGA & EHS" || StatusAOI === "Return PURCHASING,PPIC,MP&L" || StatusAOI === "Return PROCESS ENGINEERING" || StatusAOI === "Return PRODUCT DEVELOPMENT" || StatusAOI === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataAOIRepair);
+                                                        setButton("AOI");
+                                                    } else if (StatusAOI === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataAOIValidation);
+                                                        setButton("AOI");
+                                                    } else if (StatusAOI === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataAOIValidation);
+                                                        setButton("AOI");
+                                                    }
+                                                    setStation(AOI);
+                                                }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -6302,7 +8214,7 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">AOI TOP</span>
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">AOI </span>
 
                                             </button>
                                         </div>
@@ -6313,11 +8225,47 @@ const SMTLINE1CONTROLLER = () => {
                                         {/* <!-- Table --> */}
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
+                                                style={{
+                                                    backgroundColor: backgroundColorStatusRVS,
+                                                }}
+                                                value={RVS}
+                                                onClick={() => {
+                                                    if (StatusRVS === "Leader") {
 
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataRVSLeader);
+                                                        setButton("RVS");
+                                                    } else if (StatusRVS === "MAINTENANCE & IT" || StatusRVS === "HRGA & EHS" || StatusRVS === "PURCHASING,PPIC,MP&L" || StatusRVS === "PROCESS ENGINEERING" || StatusRVS === "PRODUCT DEVELOPMENT" || StatusRVS === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataRVSRepair);
+                                                        setButton("RVS");
+                                                    } else if (StatusRVS === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataRVSRepair);
+                                                        setButton("RVS");
+                                                    } else if (StatusRVS === "QA" || StatusRVS === "QC" || StatusRVS === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataRVSValidation);
+                                                        setButton("RVS");
+                                                    } else if (StatusRVS === "Return MAINTENANCE & IT" || StatusRVS === "Return HRGA & EHS" || StatusRVS === "Return PURCHASING,PPIC,MP&L" || StatusRVS === "Return PROCESS ENGINEERING" || StatusRVS === "Return PRODUCT DEVELOPMENT" || StatusRVS === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataRVSRepair);
+                                                        setButton("RVS");
+                                                    } else if (StatusRVS === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataRVSValidation);
+                                                        setButton("RVS");
+                                                    } else if (StatusRVS === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataRVSValidation);
+                                                        setButton("RVS");
+                                                    }
+                                                    setStation(RVS);
+                                                }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -6406,8 +8354,148 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    RVS TOP
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    RVS
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-3" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+                                                style={{ backgroundColor: backgroundColorStatusDropin }}
+                                                value={Dropin}
+                                                onClick={() => {
+                                                    if (StatusDropin === "Leader") {
+
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataDropinLeader);
+                                                        setButton("Dropin");
+                                                    } else if (StatusDropin === "MAINTENANCE & IT" || StatusDropin === "HRGA & EHS" || StatusDropin === "PURCHASING,PPIC,MP&L" || StatusDropin === "PROCESS ENGINEERING" || StatusDropin === "PRODUCT DEVELOPMENT" || StatusDropin === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataDropinRepair);
+                                                        setButton("Dropin");
+                                                    } else if (StatusDropin === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataDropinRepair);
+                                                        setButton("Dropin");
+                                                    } else if (StatusDropin === "QA" || StatusDropin === "QC" || StatusDropin === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataDropinValidation);
+                                                        setButton("Dropin");
+                                                    } else if (StatusDropin === "Return MAINTENANCE & IT" || StatusDropin === "Return HRGA & EHS" || StatusDropin === "Return PURCHASING,PPIC,MP&L" || StatusDropin === "Return PROCESS ENGINEERING" || StatusDropin === "Return PRODUCT DEVELOPMENT" || StatusDropin === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataDropinRepair);
+                                                        setButton("Dropin");
+                                                    } else if (StatusDropin === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataDropinValidation);
+                                                        setButton("Dropin");
+                                                    } else if (StatusDropin === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataDropinValidation);
+                                                        setButton("Dropin");
+                                                    }
+                                                    setStation(Dropin);
+                                                }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="30px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    DROP IN
                                                 </span>
 
                                             </button>
@@ -6424,17 +8512,53 @@ const SMTLINE1CONTROLLER = () => {
 
 
                         <div>
-                            <div class=" flex    p-2 sm:ml-5">
-                                <section class="antialiased  text-gray-600  px-3" x-data="app">
+                            <div class=" flex    p-2 sm:ml-5">        
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
                                     <div class="flex flex-col ">
                                         {/* <!-- Table --> */}
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
+                                                style={{ backgroundColor: backgroundColorStatusFluxer }}
 
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                                value={Fluxer}
+                                                onClick={() => {
+                                                    if (StatusFluxer === "Leader") {
+
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataFluxerLeader);
+                                                        setButton("Fluxer");
+                                                    } else if (StatusFluxer === "MAINTENANCE & IT" || StatusFluxer === "HRGA & EHS" || StatusFluxer === "PURCHASING,PPIC,MP&L" || StatusFluxer === "PROCESS ENGINEERING" || StatusFluxer === "PRODUCT DEVELOPMENT" || StatusFluxer === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataFluxerRepair);
+                                                        setButton("Fluxer");
+                                                    } else if (StatusFluxer === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataFluxerRepair);
+                                                        setButton("Fluxer");
+                                                    } else if (StatusFluxer === "QA" || StatusFluxer === "QC" || StatusFluxer === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataFluxerValidation);
+                                                        setButton("Fluxer");
+                                                    } else if (StatusFluxer === "Return MAINTENANCE & IT" || StatusFluxer === "Return HRGA & EHS" || StatusFluxer === "Return PURCHASING,PPIC,MP&L" || StatusFluxer === "Return PROCESS ENGINEERING" || StatusFluxer === "Return PRODUCT DEVELOPMENT" || StatusFluxer === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataFluxerRepair);
+                                                        setButton("Fluxer");
+                                                    } else if (StatusFluxer === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataFluxerValidation);
+                                                        setButton("Fluxer");
+                                                    } else if (StatusFluxer === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataFluxerValidation);
+                                                        setButton("Fluxer");
+                                                    }
+                                                    setStation(Fluxer);
+                                                }}
+
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -6523,8 +8647,8 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    DROP IN BE
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    FLUXER
                                                 </span>
 
                                             </button>
@@ -6536,12 +8660,46 @@ const SMTLINE1CONTROLLER = () => {
                                         {/* <!-- Table --> */}
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
+                                                style={{ backgroundColor: backgroundColorStatusPreheat }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                                                value={Preheat}
+                                                onClick={() => {
+                                                    if (StatusPreheat === "Leader") {
 
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataPreheatLeader);
+                                                        setButton("Preheat");
+                                                    } else if (StatusPreheat === "MAINTENANCE & IT" || StatusPreheat === "HRGA & EHS" || StatusPreheat === "PURCHASING,PPIC,MP&L" || StatusPreheat === "PROCESS ENGINEERING" || StatusPreheat === "PRODUCT DEVELOPMENT" || StatusPreheat === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataPreheatRepair);
+                                                        setButton("Preheat");
+                                                    } else if (StatusPreheat === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataPreheatRepair);
+                                                        setButton("Preheat");
+                                                    } else if (StatusPreheat === "QA" || StatusPreheat === "QC" || StatusPreheat === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataPreheatValidation);
+                                                        setButton("Preheat");
+                                                    } else if (StatusPreheat === "Return MAINTENANCE & IT" || StatusPreheat === "Return HRGA & EHS" || StatusPreheat === "Return PURCHASING,PPIC,MP&L" || StatusPreheat === "Return PROCESS ENGINEERING" || StatusPreheat === "Return PRODUCT DEVELOPMENT" || StatusPreheat === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataPreheatRepair);
+                                                        setButton("Preheat");
+                                                    } else if (StatusPreheat === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataPreheatValidation);
+                                                        setButton("Preheat");
+                                                    } else if (StatusPreheat === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataPreheatValidation);
+                                                        setButton("Preheat");
+                                                    }
+                                                    setStation(Preheat);
+                                                }}
 
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -6630,8 +8788,8 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    FLUXER BE
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    PREHEAT
                                                 </span>
 
                                             </button>
@@ -6643,10 +8801,46 @@ const SMTLINE1CONTROLLER = () => {
                                         {/* <!-- Table --> */}
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                                style={{ backgroundColor: backgroundColorStatusSelective }}
+
+                                                value={Selective}
+                                                onClick={() => {
+                                                    if (StatusSelective === "Leader") {
+
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataSelectiveLeader);
+                                                        setButton("Selective");
+                                                    } else if (StatusSelective === "MAINTENANCE & IT" || StatusSelective === "HRGA & EHS" || StatusSelective === "PURCHASING,PPIC,MP&L" || StatusSelective === "PROCESS ENGINEERING" || StatusSelective === "PRODUCT DEVELOPMENT" || StatusSelective === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataSelectiveRepair);
+                                                        setButton("Selective");
+                                                    } else if (StatusSelective === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataSelectiveRepair);
+                                                        setButton("Selective");
+                                                    } else if (StatusSelective === "QA" || StatusSelective === "QC" || StatusSelective === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataSelectiveValidation);
+                                                        setButton("Selective");
+                                                    } else if (StatusSelective === "Return MAINTENANCE & IT" || StatusSelective === "Return HRGA & EHS" || StatusSelective === "Return PURCHASING,PPIC,MP&L" || StatusSelective === "Return PROCESS ENGINEERING" || StatusSelective === "Return PRODUCT DEVELOPMENT" || StatusSelective === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataSelectiveRepair);
+                                                        setButton("Selective");
+                                                    } else if (StatusSelective === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataSelectiveValidation);
+                                                        setButton("Selective");
+                                                    } else if (StatusSelective === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataSelectiveValidation);
+                                                        setButton("Selective");
+                                                    }
+                                                    setStation(Selective);
+                                                }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -6735,8 +8929,150 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    PREHEAT BE
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    SELECTIVE
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+                                                style={{ backgroundColor: backgroundColorStatusTouchup }}
+
+                                                value={Touchup}
+                                                onClick={() => {
+                                                    if (StatusTouchup === "Leader") {
+
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataTouchupLeader);
+                                                        setButton("Touchup");
+                                                    } else if (StatusTouchup === "MAINTENANCE & IT" || StatusTouchup === "HRGA & EHS" || StatusTouchup === "PURCHASING,PPIC,MP&L" || StatusTouchup === "PROCESS ENGINEERING" || StatusTouchup === "PRODUCT DEVELOPMENT" || StatusTouchup === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataTouchupRepair);
+                                                        setButton("Touchup");
+                                                    } else if (StatusTouchup === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataTouchupRepair);
+                                                        setButton("Touchup");
+                                                    } else if (StatusTouchup === "QA" || StatusTouchup === "QC" || StatusTouchup === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataTouchupValidation);
+                                                        setButton("Touchup");
+                                                    } else if (StatusTouchup === "Return MAINTENANCE & IT" || StatusTouchup === "Return HRGA & EHS" || StatusTouchup === "Return PURCHASING,PPIC,MP&L" || StatusTouchup === "Return PROCESS ENGINEERING" || StatusTouchup === "Return PRODUCT DEVELOPMENT" || StatusTouchup === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataTouchupRepair);
+                                                        setButton("Touchup");
+                                                    } else if (StatusTouchup === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataTouchupValidation);
+                                                        setButton("Touchup");
+                                                    } else if (StatusTouchup === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataTouchupValidation);
+                                                        setButton("Touchup");
+                                                    }
+                                                    setStation(Touchup);
+                                                }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="30px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    TOUCH UP
                                                 </span>
 
                                             </button>
@@ -6748,11 +9084,46 @@ const SMTLINE1CONTROLLER = () => {
                                         {/* <!-- Table --> */}
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
+                                                style={{ backgroundColor: backgroundColorStatusICT }}
 
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                                value={ICT}
+                                                onClick={() => {
+                                                    if (StatusICT === "Leader") {
+
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataICTLeader);
+                                                        setButton("ICT");
+                                                    } else if (StatusICT === "MAINTENANCE & IT" || StatusICT === "HRGA & EHS" || StatusICT === "PURCHASING,PPIC,MP&L" || StatusICT === "PROCESS ENGINEERING" || StatusICT === "PRODUCT DEVELOPMENT" || StatusICT === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataICTRepair);
+                                                        setButton("ICT");
+                                                    } else if (StatusICT === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataICTRepair);
+                                                        setButton("ICT");
+                                                    } else if (StatusICT === "QA" || StatusICT === "QC" || StatusICT === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataICTValidation);
+                                                        setButton("ICT");
+                                                    } else if (StatusICT === "Return MAINTENANCE & IT" || StatusICT === "Return HRGA & EHS" || StatusICT === "Return PURCHASING,PPIC,MP&L" || StatusICT === "Return PROCESS ENGINEERING" || StatusICT === "Return PRODUCT DEVELOPMENT" || StatusICT === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataICTRepair);
+                                                        setButton("ICT");
+                                                    } else if (StatusICT === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataICTValidation);
+                                                        setButton("ICT");
+                                                    } else if (StatusICT === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataICTValidation);
+                                                        setButton("ICT");
+                                                    }
+                                                    setStation(ICT);
+                                                }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -6841,8 +9212,147 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    SEHO 1 BE
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">ICT </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+                                                style={{ backgroundColor: backgroundColorStatusFlash }}
+
+                                                value={Flash}
+                                                onClick={() => {
+                                                    if (StatusFlash === "Leader") {
+
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataFlashLeader);
+                                                        setButton("Flash");
+                                                    } else if (StatusFlash === "MAINTENANCE & IT" || StatusFlash === "HRGA & EHS" || StatusFlash === "PURCHASING,PPIC,MP&L" || StatusFlash === "PROCESS ENGINEERING" || StatusFlash === "PRODUCT DEVELOPMENT" || StatusFlash === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataFlashRepair);
+                                                        setButton("Flash");
+                                                    } else if (StatusFlash === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataFlashRepair);
+                                                        setButton("Flash");
+                                                    } else if (StatusFlash === "QA" || StatusFlash === "QC" || StatusFlash === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataFlashValidation);
+                                                        setButton("Flash");
+                                                    } else if (StatusFlash === "Return MAINTENANCE & IT" || StatusFlash === "Return HRGA & EHS" || StatusFlash === "Return PURCHASING,PPIC,MP&L" || StatusFlash === "Return PROCESS ENGINEERING" || StatusFlash === "Return PRODUCT DEVELOPMENT" || StatusFlash === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataFlashRepair);
+                                                        setButton("Flash");
+                                                    } else if (StatusFlash === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataFlashValidation);
+                                                        setButton("Flash");
+                                                    } else if (StatusFlash === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataFlashValidation);
+                                                        setButton("Flash");
+                                                    }
+                                                    setStation(Flash);
+                                                }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="30px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    FLASH
                                                 </span>
 
                                             </button>
@@ -6854,11 +9364,46 @@ const SMTLINE1CONTROLLER = () => {
                                         {/* <!-- Table --> */}
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
+                                                style={{ backgroundColor: backgroundColorStatusRouter }}
 
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                                value={Router}
+                                                onClick={() => {
+                                                    if (StatusRouter === "Leader") {
+
+                                                        setIsOpenLeader(true);
+                                                        setOptionData(dataRouterLeader);
+                                                        setButton("Router");
+                                                    } else if (StatusRouter === "MAINTENANCE & IT" || StatusRouter === "HRGA & EHS" || StatusRouter === "PURCHASING,PPIC,MP&L" || StatusRouter === "PROCESS ENGINEERING" || StatusRouter === "PRODUCT DEVELOPMENT" || StatusRouter === "ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenRequest(true);
+                                                        setOptionData(dataRouterRepair);
+                                                        setButton("Router");
+                                                    } else if (StatusRouter === "Repair") {
+                                                        setIsOpenRepair(true);
+                                                        setOptionData(dataRouterRepair);
+                                                        setButton("Router");
+                                                    } else if (StatusRouter === "QA" || StatusRouter === "QC" || StatusRouter === "Production") {
+                                                        setIsOpenRequestValidation(true);
+                                                        setOptionData(dataRouterValidation);
+                                                        setButton("Router");
+                                                    } else if (StatusRouter === "Return MAINTENANCE & IT" || StatusRouter === "Return HRGA & EHS" || StatusRouter === "Return PURCHASING,PPIC,MP&L" || StatusRouter === "Return PROCESS ENGINEERING" || StatusRouter === "Return PRODUCT DEVELOPMENT" || StatusRouter === "Return ADVANCED MANUFACTURING ENGINEERING") {
+                                                        setIsOpenReturn(true);
+                                                        setOptionData(dataRouterRepair);
+                                                        setButton("Router");
+                                                    } else if (StatusRouter === "In Validation") {
+                                                        setIsOpenInValidation(true);
+                                                        setOptionData(dataRouterValidation);
+                                                        setButton("Router");
+                                                    } else if (StatusRouter === "Go") {
+                                                        setIsOpenValidation(true);
+                                                        setOptionData(dataRouterValidation);
+                                                        setButton("Router");
+                                                    }
+                                                    setStation(Router);
+                                                }}
+                                                class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -6947,8 +9492,115 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    SEHO2 BE
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    ROUTER
+                                                </span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </section>
+                                <section class="antialiased  text-gray-600  px-2" x-data="app">
+                                    <div class="flex flex-col ">
+                                        {/* <!-- Table --> */}
+                                        <div className=" w-28 sm:w-20 lg:w-28">
+                                            <button
+                                             
+                                                class="w-full max-w-sm  bg-[#595959] shadow-lg rounded-xl "
+                                            >
+                                                <svg
+                                                    width="30px"
+                                                    fill="#2e3436"
+                                                    fill-opacity="0.7000"
+                                                    className="justify-center items-center mx-auto mt-1"
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    viewBox="0 0 512 512"
+                                                >
+                                                    <g>
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
+        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
+        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
+         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
+        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
+        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
+        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
+         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
+        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
+        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
+        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
+        z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C358.4,175.38,362.221,179.2,366.933,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C477.867,140.354,474.046,136.533,469.333,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
+        C426.667,175.38,430.487,179.2,435.2,179.2z"
+                                                                />
+                                                                <path
+                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
+        C409.6,140.354,405.78,136.533,401.067,136.533z"
+                                                                />
+                                                                <path
+                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
+        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
+        V213.333z"
+                                                                />
+                                                                <path
+                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
+        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
+        V230.4z"
+                                                                />
+                                                                <path
+                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
+        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
+        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
+        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
+        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
+                                                                />
+                                                                <path
+                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
+        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
+                                                                />
+                                                                <path
+                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
+        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
+        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                   FCT
                                                 </span>
 
                                             </button>
@@ -6960,11 +9612,11 @@ const SMTLINE1CONTROLLER = () => {
                                         {/* <!-- Table --> */}
                                         <div className=" w-28 sm:w-20 lg:w-28">
                                             <button
-
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
+                                               
+                                                class="w-full max-w-sm  bg-[#595959] shadow-lg rounded-xl "
                                             >
                                                 <svg
-                                                    width="50px"
+                                                    width="30px"
                                                     fill="#2e3436"
                                                     fill-opacity="0.7000"
                                                     className="justify-center items-center mx-auto mt-1"
@@ -7053,324 +9705,8 @@ const SMTLINE1CONTROLLER = () => {
                                                     </g>
                                                 </svg>
 
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    TOUCH UP BE
-                                                </span>
-
-                                            </button>
-                                        </div>
-                                    </div>
-                                </section>
-                                <section class="antialiased  text-gray-600  px-2" x-data="app">
-                                    <div class="flex flex-col ">
-                                        {/* <!-- Table --> */}
-                                        <div className=" w-28 sm:w-20 lg:w-28">
-                                            <button
-
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
-                                            >
-                                                <svg
-                                                    width="50px"
-                                                    fill="#2e3436"
-                                                    fill-opacity="0.7000"
-                                                    className="justify-center items-center mx-auto mt-1"
-                                                    version="1.1"
-                                                    id="Layer_1"
-                                                    viewBox="0 0 512 512"
-                                                >
-                                                    <g>
-                                                        <g>
-                                                            <g>
-                                                                <path
-                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
-        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
-        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
-         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
-        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
-        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
-        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
-         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
-        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
-        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
-                                                                />
-                                                                <path
-                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
-        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
-        z"
-                                                                />
-                                                                <path
-                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
-        C358.4,175.38,362.221,179.2,366.933,179.2z"
-                                                                />
-                                                                <path
-                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
-        C477.867,140.354,474.046,136.533,469.333,136.533z"
-                                                                />
-                                                                <path
-                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
-        C426.667,175.38,430.487,179.2,435.2,179.2z"
-                                                                />
-                                                                <path
-                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
-        C409.6,140.354,405.78,136.533,401.067,136.533z"
-                                                                />
-                                                                <path
-                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
-        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
-        V213.333z"
-                                                                />
-                                                                <path
-                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
-        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
-        V230.4z"
-                                                                />
-                                                                <path
-                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
-        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
-        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
-                                                                />
-                                                                <path
-                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
-        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
-        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
-                                                                />
-                                                                <path
-                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
-        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
-        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
-                                                                />
-                                                                <path
-                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
-        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
-        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
-                                                                />
-                                                                <path
-                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
-        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
-        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
-                                                                />
-                                                                <path
-                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
-        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
-        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
-                                                                />
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                </svg>
-
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">ICT BE</span>
-
-                                            </button>
-                                        </div>
-                                    </div>
-                                </section>
-                                <section class="antialiased  text-gray-600  px-2" x-data="app">
-                                    <div class="flex flex-col ">
-                                        {/* <!-- Table --> */}
-                                        <div className=" w-28 sm:w-20 lg:w-28">
-                                            <button
-
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
-                                            >
-                                                <svg
-                                                    width="50px"
-                                                    fill="#2e3436"
-                                                    fill-opacity="0.7000"
-                                                    className="justify-center items-center mx-auto mt-1"
-                                                    version="1.1"
-                                                    id="Layer_1"
-                                                    viewBox="0 0 512 512"
-                                                >
-                                                    <g>
-                                                        <g>
-                                                            <g>
-                                                                <path
-                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
-        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
-        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
-         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
-        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
-        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
-        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
-         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
-        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
-        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
-                                                                />
-                                                                <path
-                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
-        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
-        z"
-                                                                />
-                                                                <path
-                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
-        C358.4,175.38,362.221,179.2,366.933,179.2z"
-                                                                />
-                                                                <path
-                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
-        C477.867,140.354,474.046,136.533,469.333,136.533z"
-                                                                />
-                                                                <path
-                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
-        C426.667,175.38,430.487,179.2,435.2,179.2z"
-                                                                />
-                                                                <path
-                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
-        C409.6,140.354,405.78,136.533,401.067,136.533z"
-                                                                />
-                                                                <path
-                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
-        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
-        V213.333z"
-                                                                />
-                                                                <path
-                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
-        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
-        V230.4z"
-                                                                />
-                                                                <path
-                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
-        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
-        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
-                                                                />
-                                                                <path
-                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
-        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
-        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
-                                                                />
-                                                                <path
-                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
-        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
-        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
-                                                                />
-                                                                <path
-                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
-        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
-        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
-                                                                />
-                                                                <path
-                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
-        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
-        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
-                                                                />
-                                                                <path
-                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
-        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
-        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
-                                                                />
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                </svg>
-
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    FLASH BE
-                                                </span>
-
-                                            </button>
-                                        </div>
-                                    </div>
-                                </section>
-                                <section class="antialiased  text-gray-600  px-2" x-data="app">
-                                    <div class="flex flex-col ">
-                                        {/* <!-- Table --> */}
-                                        <div className=" w-28 sm:w-20 lg:w-28">
-                                            <button
-
-                                                class="w-full max-w-sm  bg-[#4d5661] shadow-lg rounded-xl "
-                                            >
-                                                <svg
-                                                    width="50px"
-                                                    fill="#2e3436"
-                                                    fill-opacity="0.7000"
-                                                    className="justify-center items-center mx-auto mt-1"
-                                                    version="1.1"
-                                                    id="Layer_1"
-                                                    viewBox="0 0 512 512"
-                                                >
-                                                    <g>
-                                                        <g>
-                                                            <g>
-                                                                <path
-                                                                    d="M503.467,0H332.8H59.733h-51.2C3.82,0,0,3.82,0,8.533V281.6V384c0,4.713,3.82,8.533,8.533,8.533H25.6v102.4H8.533
-        c-4.713,0-8.533,3.82-8.533,8.533S3.82,512,8.533,512h25.6h51.2h341.333h51.2h25.6c4.713,0,8.533-3.82,8.533-8.533
-        s-3.82-8.533-8.533-8.533H486.4v-102.4h17.067c4.713,0,8.533-3.82,8.533-8.533V281.6V8.533C512,3.82,508.18,0,503.467,0z
-         M494.933,273.067h-153.6v-102.4v-51.2v-102.4h153.6V273.067z M324.267,162.133h-34.133V128h34.133V162.133z M324.267,110.933
-        H281.6c-4.713,0-8.533,3.82-8.533,8.533v51.2c0,4.713,3.82,8.533,8.533,8.533h42.667v93.867h-256v-76.8h51.2v8.533
-        c0,4.713,3.82,8.533,8.533,8.533h68.267c4.713,0,8.533-3.821,8.533-8.533V85.333c0-4.713-3.82-8.533-8.533-8.533H128
-        c-4.713,0-8.533,3.82-8.533,8.533v8.533h-51.2v-76.8h256V110.933z M136.533,187.733V102.4v-8.533h51.2v102.4h-51.2V187.733z
-         M119.467,179.2h-51.2v-68.267h51.2V179.2z M17.067,17.067H51.2V102.4v85.333v85.333H17.067V17.067z M42.667,494.933v-102.4H76.8
-        v102.4H42.667z M418.133,392.533v102.4H93.867v-102.4H418.133z M469.333,494.933H435.2v-102.4h34.133V494.933z M494.933,375.467
-        h-17.067h-51.2H85.333h-51.2H17.067v-85.333h42.667H332.8h162.133V375.467z"
-                                                                />
-                                                                <path
-                                                                    d="M366.933,119.467h102.4c4.713,0,8.533-3.82,8.533-8.533V42.667c0-4.713-3.82-8.533-8.533-8.533h-102.4
-        c-4.713,0-8.533,3.82-8.533,8.533v68.267C358.4,115.646,362.221,119.467,366.933,119.467z M375.467,51.2H460.8v51.2h-85.333V51.2
-        z"
-                                                                />
-                                                                <path
-                                                                    d="M366.933,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
-        C358.4,175.38,362.221,179.2,366.933,179.2z"
-                                                                />
-                                                                <path
-                                                                    d="M469.333,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.82,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
-        C477.867,140.354,474.046,136.533,469.333,136.533z"
-                                                                />
-                                                                <path
-                                                                    d="M435.2,179.2c4.713,0,8.533-3.82,8.533-8.533v-25.6c0-4.713-3.82-8.533-8.533-8.533s-8.533,3.82-8.533,8.533v25.6
-        C426.667,175.38,430.487,179.2,435.2,179.2z"
-                                                                />
-                                                                <path
-                                                                    d="M401.067,136.533c-4.713,0-8.533,3.82-8.533,8.533v25.6c0,4.713,3.821,8.533,8.533,8.533s8.533-3.82,8.533-8.533v-25.6
-        C409.6,140.354,405.78,136.533,401.067,136.533z"
-                                                                />
-                                                                <path
-                                                                    d="M366.933,247.467h34.133c4.713,0,8.533-3.82,8.533-8.533V204.8c0-4.713-3.82-8.533-8.533-8.533h-34.133
-        c-4.713,0-8.533,3.82-8.533,8.533v34.133C358.4,243.646,362.221,247.467,366.933,247.467z M375.467,213.333h17.067V230.4h-17.067
-        V213.333z"
-                                                                />
-                                                                <path
-                                                                    d="M469.333,196.267H435.2c-4.713,0-8.533,3.82-8.533,8.533v34.133c0,4.713,3.82,8.533,8.533,8.533h34.133
-        c4.713,0,8.533-3.82,8.533-8.533V204.8C477.867,200.087,474.046,196.267,469.333,196.267z M460.8,230.4h-17.067v-17.067H460.8
-        V230.4z"
-                                                                />
-                                                                <path
-                                                                    d="M85.333,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
-        C110.933,318.658,99.476,307.2,85.333,307.2z M85.333,341.333c-4.716,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
-        c4.717,0,8.533,3.817,8.533,8.533C93.867,337.517,90.05,341.333,85.333,341.333z"
-                                                                />
-                                                                <path
-                                                                    d="M153.6,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6c14.142,0,25.6-11.458,25.6-25.6
-        C179.2,318.658,167.742,307.2,153.6,307.2z M153.6,341.333c-4.717,0-8.533-3.817-8.533-8.533c0-4.716,3.817-8.533,8.533-8.533
-        c4.716,0,8.533,3.817,8.533,8.533C162.133,337.517,158.317,341.333,153.6,341.333z"
-                                                                />
-                                                                <path
-                                                                    d="M221.867,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
-        C247.467,318.658,236.009,307.2,221.867,307.2z M221.867,341.333c-4.717,0-8.533-3.817-8.533-8.533
-        c0-4.716,3.817-8.533,8.533-8.533c4.716,0,8.533,3.817,8.533,8.533C230.4,337.517,226.583,341.333,221.867,341.333z"
-                                                                />
-                                                                <path
-                                                                    d="M290.133,307.2c-14.142,0-25.6,11.458-25.6,25.6c0,14.142,11.458,25.6,25.6,25.6s25.6-11.458,25.6-25.6
-        C315.733,318.658,304.276,307.2,290.133,307.2z M290.133,341.333c-4.716,0-8.533-3.817-8.533-8.533
-        c0-4.716,3.817-8.533,8.533-8.533s8.533,3.817,8.533,8.533C298.667,337.517,294.85,341.333,290.133,341.333z"
-                                                                />
-                                                                <path
-                                                                    d="M358.4,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
-        C332.8,346.942,344.258,358.4,358.4,358.4z M358.4,324.267c4.716,0,8.533,3.817,8.533,8.533c0,4.717-3.817,8.533-8.533,8.533
-        s-8.533-3.817-8.533-8.533C349.867,328.083,353.684,324.267,358.4,324.267z"
-                                                                />
-                                                                <path
-                                                                    d="M426.667,358.4c14.142,0,25.6-11.458,25.6-25.6c0-14.142-11.458-25.6-25.6-25.6s-25.6,11.458-25.6,25.6
-        C401.067,346.942,412.525,358.4,426.667,358.4z M426.667,324.267c4.716,0,8.533,3.817,8.533,8.533
-        c0,4.717-3.817,8.533-8.533,8.533s-8.533-3.817-8.533-8.533C418.133,328.083,421.95,324.267,426.667,324.267z"
-                                                                />
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                </svg>
-
-                                                <span class="italic text-center  text-xs lg:text-xs sm:text-xsm  text-white">
-                                                    ROUTER BE
+                                                <span class="font-semibold text-center  text-xs lg:text-xs sm:text-xsm  text-white">
+                                                    COATING
                                                 </span>
 
                                             </button>
@@ -7380,7 +9716,6 @@ const SMTLINE1CONTROLLER = () => {
                                 </section>
                             </div>
                         </div>
-
 
                     </>
                 ) : null}
@@ -7474,7 +9809,7 @@ const SMTLINE1CONTROLLER = () => {
                                                         <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                                                             Down Time:
                                                         </label>
-                                                        {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop" || Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot" || Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe") && (
+                                                        {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop" || Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot" || Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe" || Button === "Destacker" || Button === "Label" || Button === "Printer" || Button === "SPI" || Button === "PickNPlace" || Button === "Reflow" || Button === "AOI" || Button === "RVS" || Button === "Dropin" || Button === "Fluxer" || Button === "Preheat" || Button === "Selective" || Button === "Touchup" || Button === "ICT" || Button === "Flash" || Button === "Router") && (
                                                             <input
                                                                 type="text"
                                                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -7504,7 +9839,24 @@ const SMTLINE1CONTROLLER = () => {
                                                                                                                                                     Button === "ICTBe" ? TimeICTBe :
                                                                                                                                                         Button === "FlashBe" ? TimeFlashBe :
                                                                                                                                                             Button === "RouterBe" ? TimeRouterBe :
-                                                                                                                                                                ""
+                                                                                                                                                                // line2
+                                                                                                                                                                Button === "Destacker" ? TimeDestacker :
+                                                                                                                                                                    Button === "Label" ? TimeLabel :
+                                                                                                                                                                        Button === "Printer" ? TimePrinter :
+                                                                                                                                                                            Button === "SPI" ? TimeSPI :
+                                                                                                                                                                                Button === "PickNPlace" ? TimePickNPlace :
+                                                                                                                                                                                    Button === "Reflow" ? TimeReflow :
+                                                                                                                                                                                        Button === "AOI" ? TimeAOI :
+                                                                                                                                                                                            Button === "RVS" ? TimeRVS :
+                                                                                                                                                                                                Button === "Dropin" ? TimeDropin :
+                                                                                                                                                                                                    Button === "Fluxer" ? TimeFluxer :
+                                                                                                                                                                                                        Button === "Preheat" ? TimePreheat :
+                                                                                                                                                                                                            Button === "Selective" ? TimeSelective :
+                                                                                                                                                                                                                Button === "Touchup" ? TimeTouchup :
+                                                                                                                                                                                                                    Button === "ICT" ? TimeICT :
+                                                                                                                                                                                                                        Button === "Flash" ? TimeFlash :
+                                                                                                                                                                                                                            Button === "Router" ? TimeRouter :
+                                                                                                                                                                                                                                ""
                                                                 }
                                                             />
                                                         )}
@@ -7590,7 +9942,7 @@ const SMTLINE1CONTROLLER = () => {
                                                                 <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                                                                     Down Time:
                                                                 </label>
-                                                                {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop" || Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot" || Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe") && (
+                                                                {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop" || Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot" || Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe" || Button === "Destacker" || Button === "Label" || Button === "Printer" || Button === "SPI" || Button === "PickNPlace" || Button === "Reflow" || Button === "AOI" || Button === "RVS" || Button === "Dropin" || Button === "Fluxer" || Button === "Preheat" || Button === "Selective" || Button === "Touchup" || Button === "ICT" || Button === "Flash" || Button === "Router") && (
                                                                     <input
                                                                         type="text"
                                                                         className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -7620,7 +9972,24 @@ const SMTLINE1CONTROLLER = () => {
                                                                                                                                                             Button === "ICTBe" ? TimeICTBe :
                                                                                                                                                                 Button === "FlashBe" ? TimeFlashBe :
                                                                                                                                                                     Button === "RouterBe" ? TimeRouterBe :
-                                                                                                                                                                        ""
+                                                                                                                                                                        // line2
+                                                                                                                                                                        Button === "Destacker" ? TimeDestacker :
+                                                                                                                                                                            Button === "Label" ? TimeLabel :
+                                                                                                                                                                                Button === "Printer" ? TimePrinter :
+                                                                                                                                                                                    Button === "SPI" ? TimeSPI :
+                                                                                                                                                                                        Button === "PickNPlace" ? TimePickNPlace :
+                                                                                                                                                                                            Button === "Reflow" ? TimeReflow :
+                                                                                                                                                                                                Button === "AOI" ? TimeAOI :
+                                                                                                                                                                                                    Button === "RVS" ? TimeRVS :
+                                                                                                                                                                                                        Button === "Dropin" ? TimeDropin :
+                                                                                                                                                                                                            Button === "Fluxer" ? TimeFluxer :
+                                                                                                                                                                                                                Button === "Preheat" ? TimePreheat :
+                                                                                                                                                                                                                    Button === "Selective" ? TimeSelective :
+                                                                                                                                                                                                                        Button === "Touchup" ? TimeTouchup :
+                                                                                                                                                                                                                            Button === "ICT" ? TimeICT :
+                                                                                                                                                                                                                                Button === "Flash" ? TimeFlash :
+                                                                                                                                                                                                                                    Button === "Router" ? TimeRouter :
+                                                                                                                                                                                                                                        ""
                                                                         }
                                                                     />
                                                                 )}
@@ -7736,7 +10105,7 @@ const SMTLINE1CONTROLLER = () => {
                                                         <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                                                             Down Time:
                                                         </label>
-                                                        {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop" || Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot" || Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe") && (
+                                                        {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop" || Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot" || Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe" || Button === "Destacker" || Button === "Label" || Button === "Printer" || Button === "SPI" || Button === "PickNPlace" || Button === "Reflow" || Button === "AOI" || Button === "RVS" || Button === "Dropin" || Button === "Fluxer" || Button === "Preheat" || Button === "Selective" || Button === "Touchup" || Button === "ICT" || Button === "Flash" || Button === "Router") && (
                                                             <input
                                                                 type="text"
                                                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -7766,7 +10135,24 @@ const SMTLINE1CONTROLLER = () => {
                                                                                                                                                     Button === "ICTBe" ? TimeICTBe :
                                                                                                                                                         Button === "FlashBe" ? TimeFlashBe :
                                                                                                                                                             Button === "RouterBe" ? TimeRouterBe :
-                                                                                                                                                                ""
+                                                                                                                                                                // line2
+                                                                                                                                                                Button === "Destacker" ? TimeDestacker :
+                                                                                                                                                                    Button === "Label" ? TimeLabel :
+                                                                                                                                                                        Button === "Printer" ? TimePrinter :
+                                                                                                                                                                            Button === "SPI" ? TimeSPI :
+                                                                                                                                                                                Button === "PickNPlace" ? TimePickNPlace :
+                                                                                                                                                                                    Button === "Reflow" ? TimeReflow :
+                                                                                                                                                                                        Button === "AOI" ? TimeAOI :
+                                                                                                                                                                                            Button === "RVS" ? TimeRVS :
+                                                                                                                                                                                                Button === "Dropin" ? TimeDropin :
+                                                                                                                                                                                                    Button === "Fluxer" ? TimeFluxer :
+                                                                                                                                                                                                        Button === "Preheat" ? TimePreheat :
+                                                                                                                                                                                                            Button === "Selective" ? TimeSelective :
+                                                                                                                                                                                                                Button === "Touchup" ? TimeTouchup :
+                                                                                                                                                                                                                    Button === "ICT" ? TimeICT :
+                                                                                                                                                                                                                        Button === "Flash" ? TimeFlash :
+                                                                                                                                                                                                                            Button === "Router" ? TimeRouter :
+                                                                                                                                                                                                                                ""
                                                                 }
                                                             />
                                                         )}
@@ -7889,7 +10275,7 @@ const SMTLINE1CONTROLLER = () => {
                                                         <label class="block tracking-wide text-gray-700 text-xs font-bold ">
                                                             Down Time:
                                                         </label>
-                                                        {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop" || Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot" || Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe") && (
+                                                        {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop" || Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot" || Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe" || Button === "Destacker" || Button === "Label" || Button === "Printer" || Button === "SPI" || Button === "PickNPlace" || Button === "Reflow" || Button === "AOI" || Button === "RVS" || Button === "Dropin" || Button === "Fluxer" || Button === "Preheat" || Button === "Selective" || Button === "Touchup" || Button === "ICT" || Button === "Flash" || Button === "Router") && (
                                                             <input
                                                                 type="text"
                                                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -7919,7 +10305,24 @@ const SMTLINE1CONTROLLER = () => {
                                                                                                                                                     Button === "ICTBe" ? TimeICTBe :
                                                                                                                                                         Button === "FlashBe" ? TimeFlashBe :
                                                                                                                                                             Button === "RouterBe" ? TimeRouterBe :
-                                                                                                                                                                ""
+                                                                                                                                                                // line2
+                                                                                                                                                                Button === "Destacker" ? TimeDestacker :
+                                                                                                                                                                    Button === "Label" ? TimeLabel :
+                                                                                                                                                                        Button === "Printer" ? TimePrinter :
+                                                                                                                                                                            Button === "SPI" ? TimeSPI :
+                                                                                                                                                                                Button === "PickNPlace" ? TimePickNPlace :
+                                                                                                                                                                                    Button === "Reflow" ? TimeReflow :
+                                                                                                                                                                                        Button === "AOI" ? TimeAOI :
+                                                                                                                                                                                            Button === "RVS" ? TimeRVS :
+                                                                                                                                                                                                Button === "Dropin" ? TimeDropin :
+                                                                                                                                                                                                    Button === "Fluxer" ? TimeFluxer :
+                                                                                                                                                                                                        Button === "Preheat" ? TimePreheat :
+                                                                                                                                                                                                            Button === "Selective" ? TimeSelective :
+                                                                                                                                                                                                                Button === "Touchup" ? TimeTouchup :
+                                                                                                                                                                                                                    Button === "ICT" ? TimeICT :
+                                                                                                                                                                                                                        Button === "Flash" ? TimeFlash :
+                                                                                                                                                                                                                            Button === "Router" ? TimeRouter :
+                                                                                                                                                                                                                                ""
                                                                 }
                                                             />
                                                         )}
@@ -8062,7 +10465,7 @@ const SMTLINE1CONTROLLER = () => {
                                                         <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                                                             Down Time:
                                                         </label>
-                                                        {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop" || Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot" || Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe") && (
+                                                        {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop" || Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot" || Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe" || Button === "Destacker" || Button === "Label" || Button === "Printer" || Button === "SPI" || Button === "PickNPlace" || Button === "Reflow" || Button === "AOI" || Button === "RVS" || Button === "Dropin" || Button === "Fluxer" || Button === "Preheat" || Button === "Selective" || Button === "Touchup" || Button === "ICT" || Button === "Flash" || Button === "Router") && (
                                                             <input
                                                                 type="text"
                                                                 className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -8092,7 +10495,24 @@ const SMTLINE1CONTROLLER = () => {
                                                                                                                                                     Button === "ICTBe" ? TimeICTBe :
                                                                                                                                                         Button === "FlashBe" ? TimeFlashBe :
                                                                                                                                                             Button === "RouterBe" ? TimeRouterBe :
-                                                                                                                                                                ""
+                                                                                                                                                                // line2
+                                                                                                                                                                Button === "Destacker" ? TimeDestacker :
+                                                                                                                                                                    Button === "Label" ? TimeLabel :
+                                                                                                                                                                        Button === "Printer" ? TimePrinter :
+                                                                                                                                                                            Button === "SPI" ? TimeSPI :
+                                                                                                                                                                                Button === "PickNPlace" ? TimePickNPlace :
+                                                                                                                                                                                    Button === "Reflow" ? TimeReflow :
+                                                                                                                                                                                        Button === "AOI" ? TimeAOI :
+                                                                                                                                                                                            Button === "RVS" ? TimeRVS :
+                                                                                                                                                                                                Button === "Dropin" ? TimeDropin :
+                                                                                                                                                                                                    Button === "Fluxer" ? TimeFluxer :
+                                                                                                                                                                                                        Button === "Preheat" ? TimePreheat :
+                                                                                                                                                                                                            Button === "Selective" ? TimeSelective :
+                                                                                                                                                                                                                Button === "Touchup" ? TimeTouchup :
+                                                                                                                                                                                                                    Button === "ICT" ? TimeICT :
+                                                                                                                                                                                                                        Button === "Flash" ? TimeFlash :
+                                                                                                                                                                                                                            Button === "Router" ? TimeRouter :
+                                                                                                                                                                                                                                ""
                                                                 }
                                                             />
                                                         )}
@@ -8176,7 +10596,7 @@ const SMTLINE1CONTROLLER = () => {
                                                                 <label className="block tracking-wide text-gray-700 text-xs font-bold mb-2">
                                                                     Down Time:
                                                                 </label>
-                                                                {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop" || Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot" || Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe") && (
+                                                                {(Button === "DestackerTop" || Button === "LabelTop" || Button === "PrinterTop" || Button === "SPITop" || Button === "PickNPlaceTop" || Button === "ReflowTop" || Button === "AOITop" || Button === "RVSTop" || Button === "PrinterBot" || Button === "SPIBot" || Button === "PickNPlaceBot" || Button === "ReflowBot" || Button === "AOIBot" || Button === "RVSBot" || Button === "DropinBe" || Button === "FluxerBe" || Button === "PreheatBe" || Button === "Seho1Be" || Button === "Seho2Be" || Button === "TouchupBe" || Button === "ICTBe" || Button === "FlashBe" || Button === "RouterBe" || Button === "Destacker" || Button === "Label" || Button === "Printer" || Button === "SPI" || Button === "PickNPlace" || Button === "Reflow" || Button === "AOI" || Button === "RVS" || Button === "Dropin" || Button === "Fluxer" || Button === "Preheat" || Button === "Selective" || Button === "Touchup" || Button === "ICT" || Button === "Flash" || Button === "Router") && (
                                                                     <input
                                                                         type="text"
                                                                         className="appearance-none block w-full text-center font-semibold bg-black text-red-600 border-yellow-500 border-4 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -8206,7 +10626,24 @@ const SMTLINE1CONTROLLER = () => {
                                                                                                                                                             Button === "ICTBe" ? TimeICTBe :
                                                                                                                                                                 Button === "FlashBe" ? TimeFlashBe :
                                                                                                                                                                     Button === "RouterBe" ? TimeRouterBe :
-                                                                                                                                                                        ""
+                                                                                                                                                                        // line2
+                                                                                                                                                                        Button === "Destacker" ? TimeDestacker :
+                                                                                                                                                                            Button === "Label" ? TimeLabel :
+                                                                                                                                                                                Button === "Printer" ? TimePrinter :
+                                                                                                                                                                                    Button === "SPI" ? TimeSPI :
+                                                                                                                                                                                        Button === "PickNPlace" ? TimePickNPlace :
+                                                                                                                                                                                            Button === "Reflow" ? TimeReflow :
+                                                                                                                                                                                                Button === "AOI" ? TimeAOI :
+                                                                                                                                                                                                    Button === "RVS" ? TimeRVS :
+                                                                                                                                                                                                        Button === "Dropin" ? TimeDropin :
+                                                                                                                                                                                                            Button === "Fluxer" ? TimeFluxer :
+                                                                                                                                                                                                                Button === "Preheat" ? TimePreheat :
+                                                                                                                                                                                                                    Button === "Selective" ? TimeSelective :
+                                                                                                                                                                                                                        Button === "Touchup" ? TimeTouchup :
+                                                                                                                                                                                                                            Button === "ICT" ? TimeICT :
+                                                                                                                                                                                                                                Button === "Flash" ? TimeFlash :
+                                                                                                                                                                                                                                    Button === "Router" ? TimeRouter :
+                                                                                                                                                                                                                                        ""
                                                                         }
                                                                     />
                                                                 )}

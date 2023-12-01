@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { db } from "./../../Firebase.js";
 import Select from "react-select";
+import Navbar from "../ComponentsStyle/Navbar.jsx";
+import HeaderStatus from "../ComponentsStyle/HeaderStatus.jsx";
 
 
 const audio = new Audio("Sound.mp3");
 
 const SMTLINE1CONTROLLER = () => {
   // NAVBAR
-  const [currentTime, setCurrentTime] = useState(new Date());
   const [time, setTime] = useState(new Date().toLocaleString());
   // -----
 
@@ -19,14 +20,11 @@ const SMTLINE1CONTROLLER = () => {
   // -------
 
   // SMT TOP LINE 1
-  const [StatusLine, setStatusLine] = useState("");
-  const [Line, setLine] = useState("SMT LINE 1");
   // //////
 
   //  STATION Funtion
 
   // LINE 1 SMT TOP
-
   // Destacker TOP
   const [DestackerTop, setDestackerTop] = useState("Destacker (TOP)");
   const [StatusDestackerTop, setStatusDestackerTop] = useState("");
@@ -269,8 +267,173 @@ const SMTLINE1CONTROLLER = () => {
   const [TimeRouterBe, setTimeRouterBe] = useState(null);
   // ---------------------------
 
-  // Production
+  // LINE 2 SMT 
+  // Destacker 
+  const [Destacker, setDestacker] = useState("Destacker");
+  const [StatusDestacker, setStatusDestacker] = useState("");
+  const [
+    backgroundColorStatusDestacker,
+    setBackgroundColorStatusDestacker,
+  ] = useState("");
+  const [startTimeDestacker, setStartTimeDestacker] = useState(null);
+  const [isRunningDestacker, setIsRunningDestacker] = useState(false);
+  const [TimeDestacker, setTimeDestacker] = useState(null);
+  // ---------------------------
 
+  // Label 
+  const [StatusLabel, setStatusLabel] = useState("");
+  const [Label, setLabel] = useState("Label");
+  const [backgroundColorStatusLabel, setBackgroundColorStatusLabel] =
+    useState("");
+  const [startTimeLabel, setStartTimeLabel] = useState(null);
+  const [isRunningLabel, setIsRunningLabel] = useState(false);
+  const [TimeLabel, setTimeLabel] = useState(null);
+  // ---------------------------
+
+  // Printer 
+  const [StatusPrinter, setStatusPrinter] = useState("");
+  const [Printer, setPrinter] = useState("Printer");
+  const [backgroundColorStatusPrinter, setBackgroundColorStatusPrinter] =
+    useState("");
+  const [startTimePrinter, setStartTimePrinter] = useState(null);
+  const [isRunningPrinter, setIsRunningPrinter] = useState(false);
+  const [TimePrinter, setTimePrinter] = useState(null);
+  // ---------------------------
+
+  // Spi 
+  const [StatusSPI, setStatusSPI] = useState("");
+  const [SPI, setSPI] = useState("SPI");
+  const [backgroundColorStatusSPI, setBackgroundColorStatusSPI] =
+    useState("");
+  const [startTimeSPI, setStartTimeSPI] = useState(null);
+  const [isRunningSPI, setIsRunningSPI] = useState(false);
+  const [TimeSPI, setTimeSPI] = useState(null);
+  // ---------------------------
+
+  // PickNPlace 
+  const [StatusPickNPlace, setStatusPickNPlace] = useState("");
+  const [PickNPlace, setPickNPlace] = useState("Pick&Place");
+  const [
+    backgroundColorStatusPickNPlace,
+    setBackgroundColorStatusPickNPlace,
+  ] = useState("");
+  const [startTimePickNPlace, setStartTimePickNPlace] = useState(null);
+  const [isRunningPickNPlace, setIsRunningPickNPlace] = useState(false);
+  const [TimePickNPlace, setTimePickNPlace] = useState(null);
+  // ---------------------------
+
+  // Reflow 
+
+  const [StatusReflow, setStatusReflow] = useState("");
+  const [Reflow, setReflow] = useState("Reflow");
+  const [backgroundColorStatusReflow, setBackgroundColorStatusReflow] =
+    useState("");
+  const [startTimeReflow, setStartTimeReflow] = useState(null);
+  const [isRunningReflow, setIsRunningReflow] = useState(false);
+  const [TimeReflow, setTimeReflow] = useState(null);
+  // ---------------------------
+
+  // AOI 
+  const [StatusAOI, setStatusAOI] = useState("");
+  const [AOI, setAOI] = useState("AOI");
+  const [backgroundColorStatusAOI, setBackgroundColorStatusAOI] =
+    useState("");
+  const [startTimeAOI, setStartTimeAOI] = useState(null);
+  const [isRunningAOI, setIsRunningAOI] = useState(false);
+  const [TimeAOI, setTimeAOI] = useState(null);
+  // ---------------------------
+
+  // RVS 
+  const [StatusRVS, setStatusRVS] = useState("");
+  const [RVS, setRVS] = useState("RVS");
+  const [backgroundColorStatusRVS, setBackgroundColorStatusRVS] =
+    useState("");
+  const [startTimeRVS, setStartTimeRVS] = useState(null);
+  const [isRunningRVS, setIsRunningRVS] = useState(false);
+  const [TimeRVS, setTimeRVS] = useState(null);
+  // ---------------------------
+
+  // Dropin 
+  const [Dropin, setDropin] = useState("Drop in");
+  const [StatusDropin, setStatusDropin] = useState("");
+  const [
+    backgroundColorStatusDropin,
+    setBackgroundColorStatusDropin,
+  ] = useState("");
+  const [startTimeDropin, setStartTimeDropin] = useState(null);
+  const [isRunningDropin, setIsRunningDropin] = useState(false);
+  const [TimeDropin, setTimeDropin] = useState(null);
+  // ---------------------------
+
+  // Fluxer 
+  const [StatusFluxer, setStatusFluxer] = useState("");
+  const [Fluxer, setFluxer] = useState("Fluxer");
+  const [backgroundColorStatusFluxer, setBackgroundColorStatusFluxer] =
+    useState("");
+  const [startTimeFluxer, setStartTimeFluxer] = useState(null);
+  const [isRunningFluxer, setIsRunningFluxer] = useState(false);
+  const [TimeFluxer, setTimeFluxer] = useState(null);
+  // ---------------------------
+
+  // Preheat 
+  const [StatusPreheat, setStatusPreheat] = useState("");
+  const [Preheat, setPreheat] = useState("PreHeat");
+  const [backgroundColorStatusPreheat, setBackgroundColorStatusPreheat] =
+    useState("");
+  const [startTimePreheat, setStartTimePreheat] = useState(null);
+  const [isRunningPreheat, setIsRunningPreheat] = useState(false);
+  const [TimePreheat, setTimePreheat] = useState(null);
+  // ---------------------------
+
+  // Selective 
+  const [StatusSelective, setStatusSelective] = useState("");
+  const [Selective, setSelective] = useState("Selective");
+  const [backgroundColorStatusSelective, setBackgroundColorStatusSelective] =
+    useState("");
+  const [startTimeSelective, setStartTimeSelective] = useState(null);
+  const [isRunningSelective, setIsRunningSelective] = useState(false);
+  const [TimeSelective, setTimeSelective] = useState(null);
+  // ---------------------------
+
+  // Touchup 
+
+  const [StatusTouchup, setStatusTouchup] = useState("");
+  const [Touchup, setTouchup] = useState("Touch UP");
+  const [backgroundColorStatusTouchup, setBackgroundColorStatusTouchup] =
+    useState("");
+  const [startTimeTouchup, setStartTimeTouchup] = useState(null);
+  const [isRunningTouchup, setIsRunningTouchup] = useState(false);
+  const [TimeTouchup, setTimeTouchup] = useState(null);
+  // ---------------------------
+
+  // ICT 
+  const [StatusICT, setStatusICT] = useState("");
+  const [ICT, setICT] = useState("ICT");
+  const [backgroundColorStatusICT, setBackgroundColorStatusICT] =
+    useState("");
+  const [startTimeICT, setStartTimeICT] = useState(null);
+  const [isRunningICT, setIsRunningICT] = useState(false);
+  const [TimeICT, setTimeICT] = useState(null);
+  // ---------------------------
+
+  // Flash 
+  const [StatusFlash, setStatusFlash] = useState("");
+  const [Flash, setFlash] = useState("Flash");
+  const [backgroundColorStatusFlash, setBackgroundColorStatusFlash] =
+    useState("");
+  const [startTimeFlash, setStartTimeFlash] = useState(null);
+  const [isRunningFlash, setIsRunningFlash] = useState(false);
+  const [TimeFlash, setTimeFlash] = useState(null);
+
+
+  // Router 
+  const [StatusRouter, setStatusRouter] = useState("");
+  const [Router, setRouter] = useState("Router");
+  const [backgroundColorStatusRouter, setBackgroundColorStatusRouter] =
+    useState("");
+  const [startTimeRouter, setStartTimeRouter] = useState(null);
+  const [isRunningRouter, setIsRunningRouter] = useState(false);
+  const [TimeRouter, setTimeRouter] = useState(null);
 
   // ..................................
 
@@ -294,11 +457,6 @@ const SMTLINE1CONTROLLER = () => {
     setShowDrawer(!showDrawer);
   };
   useEffect(() => {
-    const ref3 = db.ref("StatusLine/SMTLine1");
-    ref3.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setStatusLine(data);
-    });
 
     const ref8 = db.ref("SMTLine1TOP/Destacker (TOP)");
     ref8.on("value", (snapshot) => {
@@ -1037,6 +1195,539 @@ const SMTLINE1CONTROLLER = () => {
     ref38.on("value", (snapshot) => {
       const data = snapshot.val();
       updateStatusRouterBe(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+
+
+    // SMT LINE 2
+    const ref39 = db.ref("SMTLine2/Destacker");
+    ref39.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusDestacker(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    const ref40 = db.ref("SMTLine2/Label");
+    ref40.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusLabel(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    const ref41 = db.ref("/SMTLine2/Printer");
+    ref41.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusPrinter(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    const ref42 = db.ref("/SMTLine2/SPI");
+    ref42.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusSPI(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    const ref43 = db.ref("/SMTLine2/Pick&Place");
+    ref43.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusPickNPlace(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    const ref44 = db.ref("/SMTLine2/Reflow");
+    ref44.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusReflow(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    const ref45 = db.ref("/SMTLine2/AOI");
+    ref45.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusAOI(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    const ref46 = db.ref("/SMTLine2/RVS");
+    ref46.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusRVS(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    const ref47 = db.ref("SMTLine2/Drop in");
+    ref47.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusDropin(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+
+    const ref48 = db.ref("SMTLine2/Fluxer");
+    ref48.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusFluxer(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    const ref49 = db.ref("SMTLine2/PreHeat");
+    ref49.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusPreheat(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    const ref50 = db.ref("SMTLine2/Selective");
+    ref50.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusSelective(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    const ref52 = db.ref("SMTLine2/Touch UP");
+    ref52.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusTouchup(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    const ref53 = db.ref("SMTLine2/ICT");
+    ref53.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusICT(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+
+    const ref54 = db.ref("SMTLine2/Flash");
+    ref54.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusFlash(data);
+      if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
+        audio.play();
+      } else if (
+        data === "HRGA & EHS" ||
+        data === "PURCHASING,PPIC,MP&L" ||
+        data === "PROCESS ENGINEERING" ||
+        data === "PRODUCT DEVELOPMENT" ||
+        data === "ADVANCED MANUFACTURING ENGINEERING" ||
+        data === "QC" ||
+        data === "QA" ||
+        data === "Production"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (
+        data === "Return HRGA & EHS" ||
+        data === "Return PURCHASING,PPIC,MP&L" ||
+        data === "Return PROCESS ENGINEERING" ||
+        data === "Return PRODUCT DEVELOPMENT" ||
+        data === "Return ADVANCED MANUFACTURING ENGINEERING"
+      ) {
+        audio.pause();
+        audio.currentTime = 0;
+      } else if (data === "Go" || data === "Repair" || data === "In Validation") {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    const ref55 = db.ref("SMTLine2/Router");
+    ref55.on("value", (snapshot) => {
+      const data = snapshot.val();
+      updateStatusRouter(data);
       if (data === "Leader" || data === "MAINTENANCE & IT" || data === "Return MAINTENANCE & IT") {
         audio.play();
       } else if (
@@ -2211,6 +2902,800 @@ const SMTLINE1CONTROLLER = () => {
   };
   // ------------------------------------
 
+
+  // FUNGSI UPDATE STATUS
+  // fungsi mengubah warna status
+  // LINE 2 SMT 
+  const updateStatusDestacker = (data) => {
+    setStatusDestacker(data);
+    setBackgroundColorStatusDestacker(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+  const updateStatusLabel = (data) => {
+    setStatusLabel(data);
+    setBackgroundColorStatusLabel(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+  const updateStatusPrinter = (data) => {
+    setStatusPrinter(data);
+    setBackgroundColorStatusPrinter(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+  const updateStatusSPI = (data) => {
+    setStatusSPI(data);
+    setBackgroundColorStatusSPI(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+  const updateStatusPickNPlace = (data) => {
+    setStatusPickNPlace(data);
+    setBackgroundColorStatusPickNPlace(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+  const updateStatusReflow = (data) => {
+    setStatusReflow(data);
+    setBackgroundColorStatusReflow(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+  const updateStatusAOI = (data) => {
+    setStatusAOI(data);
+    setBackgroundColorStatusAOI(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+  const updateStatusRVS = (data) => {
+    setStatusRVS(data);
+    setBackgroundColorStatusRVS(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+  const updateStatusDropin = (data) => {
+    setStatusDropin(data);
+    setBackgroundColorStatusDropin(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+  const updateStatusFluxer = (data) => {
+    setStatusFluxer(data);
+    setBackgroundColorStatusFluxer(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+  const updateStatusPreheat = (data) => {
+    setStatusPreheat(data);
+    setBackgroundColorStatusPreheat(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+  const updateStatusSelective = (data) => {
+    setStatusSelective(data);
+    setBackgroundColorStatusSelective(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+
+
+  const updateStatusTouchup = (data) => {
+    setStatusTouchup(data);
+    setBackgroundColorStatusTouchup(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Repair"
+          ? "#E9CE08"
+          : data === "Leader"
+            ? "#C00000"
+            : data === "Return Leader"
+              ? "#C00000"
+              : data === "HRGA & EHS"
+                ? "#C00000"
+                : data === "Return HRGA & EHS"
+                  ? "#C00000"
+                  : data === "PURCHASING,PPIC,MP&L"
+                    ? "#C00000"
+                    : data === "Return PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "PROCESS ENGINEERING"
+                        ? "#C00000"
+                        : data === "Return PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "PRODUCT DEVELOPMENT"
+                            ? "#C00000"
+                            : data === "Return PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                ? "#C00000"
+                                : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "QA"
+                                    ? "#93c2c4"
+                                    : data === "In Validation"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "MAINTENANCE & IT"
+                                            ? "#C00000"
+                                            : data === "Return MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : "#565454"
+    );
+  };
+
+  const updateStatusICT = (data) => {
+    setStatusICT(data);
+    setBackgroundColorStatusICT(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+  const updateStatusFlash = (data) => {
+    setStatusFlash(data);
+    setBackgroundColorStatusFlash(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+  const updateStatusRouter = (data) => {
+    setStatusRouter(data);
+    setBackgroundColorStatusRouter(
+      data === "Go"
+        ? "#32cd32"
+        : data === "Return Repair"
+          ? "#E9CE08"
+          : data === "Repair"
+            ? "#E9CE08"
+            : data === "Leader"
+              ? "#C00000"
+              : data === "Return Leader"
+                ? "#C00000"
+                : data === "HRGA & EHS"
+                  ? "#C00000"
+                  : data === "Return HRGA & EHS"
+                    ? "#C00000"
+                    : data === "PURCHASING,PPIC,MP&L"
+                      ? "#C00000"
+                      : data === "Return PURCHASING,PPIC,MP&L"
+                        ? "#C00000"
+                        : data === "PROCESS ENGINEERING"
+                          ? "#C00000"
+                          : data === "Return PROCESS ENGINEERING"
+                            ? "#C00000"
+                            : data === "PRODUCT DEVELOPMENT"
+                              ? "#C00000"
+                              : data === "Return PRODUCT DEVELOPMENT"
+                                ? "#C00000"
+                                : data === "ADVANCED MANUFACTURING ENGINEERING"
+                                  ? "#C00000"
+                                  : data === "Return ADVANCED MANUFACTURING ENGINEERING"
+                                    ? "#C00000"
+                                    : data === "QA"
+                                      ? "#93c2c4"
+                                      : data === "QC"
+                                        ? "#93c2c4"
+                                        : data === "Production"
+                                          ? "#93c2c4"
+                                          : data === "In Validation"
+                                            ? "#93c2c4"
+                                            : data === "MAINTENANCE & IT"
+                                              ? "#C00000"
+                                              : data === "Return MAINTENANCE & IT"
+                                                ? "#C00000"
+                                                : "#565454"
+    );
+  };
+
+
+
+
+
+  // ---------------------------------------------------
+
   // Realtime Function + Downtime Function
   // Line1 SMT TOP
   // Destacker Top
@@ -2291,7 +3776,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeDestackerTop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeDestackerTOP";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeDestackerTOP";
 
 
       const data = {
@@ -2400,7 +3885,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeLabelTop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeLabelTOP";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeLabelTOP";
 
 
       const data = {
@@ -2511,7 +3996,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePrinterTop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimePrinterTOP";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimePrinterTOP";
 
 
       const data = {
@@ -2620,7 +4105,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeSPITop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeSPITOP";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeSPITOP";
 
 
       const data = {
@@ -2731,7 +4216,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePickNPlaceTop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimePickNPlaceTOP";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimePickNPlaceTOP";
 
 
       const data = {
@@ -2840,7 +4325,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeReflowTop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeReflowTOP";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeReflowTOP";
 
 
       const data = {
@@ -2948,7 +4433,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeAOITop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeAOITOP";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeAOITOP";
 
 
       const data = {
@@ -3057,7 +4542,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeRVSTop !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeRVSTOP";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeRVSTOP";
 
 
       const data = {
@@ -3175,7 +4660,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePrinterBot !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimePrinterBOT";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimePrinterBOT";
 
 
       const data = {
@@ -3283,7 +4768,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeSPIBot !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeSPIBOT";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeSPIBOT";
 
 
       const data = {
@@ -3393,7 +4878,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePickNPlaceBot !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimePickNPlaceBOT";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimePickNPlaceBOT";
 
 
       const data = {
@@ -3501,7 +4986,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeReflowBot !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeReflowBOT";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeReflowBOT";
 
 
       const data = {
@@ -3610,7 +5095,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeAOIBot !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeAOIBOT";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeAOIBOT";
 
 
       const data = {
@@ -3718,7 +5203,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeRVSBot !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeRVSBOT";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeRVSBOT";
 
 
       const data = {
@@ -3831,7 +5316,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeDropinBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeDropinBE";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeDropinBE";
 
 
       const data = {
@@ -3942,7 +5427,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeFluxerBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeFluxerBE";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeFluxerBE";
 
 
       const data = {
@@ -4052,7 +5537,7 @@ const SMTLINE1CONTROLLER = () => {
       TimePreheatBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimePreheatBE";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimePreheatBE";
 
 
       const data = {
@@ -4162,7 +5647,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeSeho1Be !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeSeho1BE";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeSeho1BE";
 
 
       const data = {
@@ -4272,7 +5757,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeSeho2Be !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeSeho2BE";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeSeho2BE";
 
 
       const data = {
@@ -4382,7 +5867,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeTouchupBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeTouchupBE";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeTouchupBE";
 
 
       const data = {
@@ -4493,7 +5978,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeICTBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeICTBE";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeICTBE";
 
 
       const data = {
@@ -4604,7 +6089,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeFlashBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeFlashBE";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeFlashBE";
 
 
       const data = {
@@ -4716,7 +6201,7 @@ const SMTLINE1CONTROLLER = () => {
       TimeRouterBe !== ""
     ) {
 
-      apiUrl = "http://192.168.101.12:3000/api/PutDownTimeRouterBE";
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeRouterBE";
 
 
       const data = {
@@ -4751,59 +6236,1781 @@ const SMTLINE1CONTROLLER = () => {
 
   // ...............................................
 
-  // Background
-  const styles = {
-    backgroundImage: `url(${process.env.PUBLIC_URL}/Background.jpg)`,
-    backgroundSize: "1900px",
-    backgroundPosition: "0px",
-    height: "1000px", // Ubah tinggi (height) sesuai kebutuhan Anda
-  };
+
+  // SMT LINE 2
+  // Realtime Function + Downtime Function
+  // Line1 SMT TOP
+  // Destacker Top
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusDestacker)) {
+      setIsRunningDestacker(true);
+
+      if (StatusDestacker === "Leader") {
+        setStartTimeDestacker(Date.now());
+      } else if (
+        StatusDestacker === "MAINTENANCE & IT" &&
+        startTimeDestacker === null
+      ) {
+        setStartTimeDestacker(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimeDestacker) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimeDestacker;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db
+            .ref("/SMTLine2/DestackerTime")
+            .set(timeString);
+
+          setTimeDestacker(timeString);
+        }
+      }, 1000);
+    } else if (StatusDestacker === "Go") {
+      setIsRunningDestacker(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimeDestacker(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusDestacker, startTimeDestacker]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusDestacker === "Go") &&
+      TimeDestacker !== null &&
+      TimeDestacker !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeDestacker";
+
+
+      const data = {
+        TimeDestacker: TimeDestacker,
+        Destacker: Destacker,
+        StatusDestacker: StatusDestacker,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimeDestacker);
+          console.log(Destacker);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimeDestacker, Destacker, StatusDestacker]);
+
+
+  // Label
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusLabel)) {
+      setIsRunningLabel(true);
+
+      if (StatusLabel === "Leader") {
+        setStartTimeLabel(Date.now());
+      } else if (
+        StatusLabel === "MAINTENANCE & IT" &&
+        startTimeLabel === null
+      ) {
+        setStartTimeLabel(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimeLabel) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimeLabel;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db.ref("/SMTLine2/LabelTime").set(timeString);
+
+          setTimeLabel(timeString);
+        }
+      }, 1000);
+    } else if (StatusLabel === "Go") {
+      setIsRunningLabel(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimeLabel(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusLabel, startTimeLabel]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusLabel === "Go") &&
+      TimeLabel !== null &&
+      TimeLabel !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeLabel";
+
+
+      const data = {
+        TimeLabel: TimeLabel,
+        Label: Label,
+        StatusLabel: StatusLabel,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimeLabel);
+          console.log(Label);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimeLabel, Label, StatusLabel]);
+
+
+  // Printer
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusPrinter)) {
+      setIsRunningPrinter(true);
+
+      if (StatusPrinter === "Leader") {
+        setStartTimePrinter(Date.now());
+      } else if (
+        StatusPrinter === "MAINTENANCE & IT" &&
+        startTimePrinter === null
+      ) {
+        setStartTimePrinter(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimePrinter) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimePrinter;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db
+            .ref("/SMTLine2/PrinterTime")
+            .set(timeString);
+
+          setTimePrinter(timeString);
+        }
+      }, 1000);
+    } else if (StatusPrinter === "Go") {
+      setIsRunningPrinter(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimePrinter(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusPrinter, startTimePrinter]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusPrinter === "Go") &&
+      TimePrinter !== null &&
+      TimePrinter !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimePrinter";
+
+
+      const data = {
+        TimePrinter: TimePrinter,
+        Printer: Printer,
+        StatusPrinter: StatusPrinter,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimePrinter);
+          console.log(Printer);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimePrinter, Printer, StatusPrinter]);
+
+
+  // Spi
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusSPI)) {
+      setIsRunningSPI(true);
+
+      if (StatusSPI === "Leader") {
+        setStartTimeSPI(Date.now());
+      } else if (
+        StatusSPI === "MAINTENANCE & IT" &&
+        startTimeSPI === null
+      ) {
+        setStartTimeSPI(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimeSPI) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimeSPI;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db.ref("/SMTLine2/SPITime").set(timeString);
+
+          setTimeSPI(timeString);
+        }
+      }, 1000);
+    } else if (StatusSPI === "Go") {
+      setIsRunningSPI(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimeSPI(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusSPI, startTimeSPI]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusSPI === "Go") &&
+      TimeSPI !== null &&
+      TimeSPI !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeSPI";
+
+
+      const data = {
+        TimeSPI: TimeSPI,
+        SPI: SPI,
+        StatusSPI: StatusSPI,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimeSPI);
+          console.log(SPI);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimeSPI, SPI, StatusSPI]);
+
+
+  // PickNPlace
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusPickNPlace)) {
+      setIsRunningPickNPlace(true);
+
+      if (StatusPickNPlace === "Leader") {
+        setStartTimePickNPlace(Date.now());
+      } else if (
+        StatusPickNPlace === "MAINTENANCE & IT" &&
+        startTimePickNPlace === null
+      ) {
+        setStartTimePickNPlace(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimePickNPlace) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimePickNPlace;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db
+            .ref("/SMTLine2/PickNPlaceTime")
+            .set(timeString);
+
+          setTimePickNPlace(timeString);
+        }
+      }, 1000);
+    } else if (StatusPickNPlace === "Go") {
+      setIsRunningPickNPlace(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimePickNPlace(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusPickNPlace, startTimePickNPlace]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusPickNPlace === "Go") &&
+      TimePickNPlace !== null &&
+      TimePickNPlace !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimePickNPlace";
+
+
+      const data = {
+        TimePickNPlace: TimePickNPlace,
+        PickNPlace: PickNPlace,
+        StatusPickNPlace: StatusPickNPlace,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimePickNPlace);
+          console.log(PickNPlace);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimePickNPlace, PickNPlace, StatusPickNPlace]);
+
+
+  // Reflow
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusReflow)) {
+      setIsRunningReflow(true);
+
+      if (StatusReflow === "Leader") {
+        setStartTimeReflow(Date.now());
+      } else if (
+        StatusReflow === "MAINTENANCE & IT" &&
+        startTimeReflow === null
+      ) {
+        setStartTimeReflow(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimeReflow) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimeReflow;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db.ref("/SMTLine2/ReflowTime").set(timeString);
+
+          setTimeReflow(timeString);
+        }
+      }, 1000);
+    } else if (StatusReflow === "Go") {
+      setIsRunningReflow(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimeReflow(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusReflow, startTimeReflow]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusReflow === "Go") &&
+      TimeReflow !== null &&
+      TimeReflow !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeReflow";
+
+
+      const data = {
+        TimeReflow: TimeReflow,
+        Reflow: Reflow,
+        StatusReflow: StatusReflow,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimeReflow);
+          console.log(Reflow);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimeReflow, Reflow, StatusReflow]);
+
+  // AOI
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusAOI)) {
+      setIsRunningAOI(true);
+
+      if (StatusAOI === "Leader") {
+        setStartTimeAOI(Date.now());
+      } else if (
+        StatusAOI === "MAINTENANCE & IT" &&
+        startTimeAOI === null
+      ) {
+        setStartTimeAOI(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimeAOI) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimeAOI;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db.ref("/SMTLine2/AOITime").set(timeString);
+
+          setTimeAOI(timeString);
+        }
+      }, 1000);
+    } else if (StatusAOI === "Go") {
+      setIsRunningAOI(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimeAOI(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusAOI, startTimeAOI]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusAOI === "Go") &&
+      TimeAOI !== null &&
+      TimeAOI !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeAOI";
+
+
+      const data = {
+        TimeAOI: TimeAOI,
+        AOI: AOI,
+        StatusAOI: StatusAOI,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimeAOI);
+          console.log(AOI);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimeAOI, AOI, StatusAOI]);
+
+
+  // RVS
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusRVS)) {
+      setIsRunningRVS(true);
+
+      if (StatusRVS === "Leader") {
+        setStartTimeRVS(Date.now());
+      } else if (
+        StatusRVS === "MAINTENANCE & IT" &&
+        startTimeRVS === null
+      ) {
+        setStartTimeRVS(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimeRVS) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimeRVS;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db.ref("/SMTLine2/RVSTime").set(timeString);
+
+          setTimeRVS(timeString);
+        }
+      }, 1000);
+    } else if (StatusRVS === "Go") {
+      setIsRunningRVS(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimeRVS(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusRVS, startTimeRVS]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusRVS === "Go") &&
+      TimeRVS !== null &&
+      TimeRVS !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeRVS";
+
+
+      const data = {
+        TimeRVS: TimeRVS,
+        RVS: RVS,
+        StatusRVS: StatusRVS,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimeRVS);
+          console.log(RVS);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimeRVS, RVS, StatusRVS]);
+
+
+  // DropinBe
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusDropin)) {
+      setIsRunningDropin(true);
+
+      if (StatusDropin === "Leader") {
+        setStartTimeDropin(Date.now());
+      } else if (
+        StatusDropin === "MAINTENANCE & IT" &&
+        startTimeDropin === null
+      ) {
+        setStartTimeDropin(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimeDropin) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimeDropin;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db
+            .ref("/SMTLine2/DropinTime")
+            .set(timeString);
+
+          setTimeDropin(timeString);
+        }
+      }, 1000);
+    } else if (StatusDropin === "Go") {
+      setIsRunningDropin(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimeDropin(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusDropin, startTimeDropin]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusDropin === "Go") &&
+      TimeDropin !== null &&
+      TimeDropin !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeDropin";
+
+
+      const data = {
+        TimeDropin: TimeDropin,
+        Dropin: Dropin,
+        StatusDropin: StatusDropin,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimeDropin);
+          console.log(Dropin);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimeDropin, Dropin, StatusDropin]);
+
+
+  // Fluxer
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusFluxer)) {
+      setIsRunningFluxer(true);
+
+      if (StatusFluxer === "Leader") {
+        setStartTimeFluxer(Date.now());
+      } else if (
+        StatusFluxer === "MAINTENANCE & IT" &&
+        startTimeFluxer === null
+      ) {
+        setStartTimeFluxer(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimeFluxer) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimeFluxer;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db
+            .ref("/SMTLine2/FluxerTime")
+            .set(timeString);
+
+          setTimeFluxer(timeString);
+        }
+      }, 1000);
+    } else if (StatusFluxer === "Go") {
+      setIsRunningFluxer(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimeFluxer(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusFluxer, startTimeFluxer]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusFluxer === "Go") &&
+      TimeFluxer !== null &&
+      TimeFluxer !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeFluxer";
+
+
+      const data = {
+        TimeFluxer: TimeFluxer,
+        Fluxer: Fluxer,
+        StatusFluxer: StatusFluxer,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimeFluxer);
+          console.log(Fluxer);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimeFluxer, Fluxer, StatusFluxer]);
+
+  // Preheat
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusPreheat)) {
+      setIsRunningPreheat(true);
+
+      if (StatusPreheat === "Leader") {
+        setStartTimePreheat(Date.now());
+      } else if (
+        StatusPreheat === "MAINTENANCE & IT" &&
+        startTimePreheat === null
+      ) {
+        setStartTimePreheat(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimePreheat) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimePreheat;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db
+            .ref("/SMTLine2/PreheatTime")
+            .set(timeString);
+
+          setTimePreheat(timeString);
+        }
+      }, 1000);
+    } else if (StatusPreheat === "Go") {
+      setIsRunningPreheat(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimePreheat(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusPreheat, startTimePreheat]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusPreheat === "Go") &&
+      TimePreheat !== null &&
+      TimePreheat !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimePreheat";
+
+
+      const data = {
+        TimePreheat: TimePreheat,
+        Preheat: Preheat,
+        StatusPreheat: StatusPreheat,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimePreheat);
+          console.log(Preheat);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimePreheat, Preheat, StatusPreheat]);
+
+  // Selective
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusSelective)) {
+      setIsRunningSelective(true);
+
+      if (StatusSelective === "Leader") {
+        setStartTimeSelective(Date.now());
+      } else if (
+        StatusSelective === "MAINTENANCE & IT" &&
+        startTimeSelective === null
+      ) {
+        setStartTimeSelective(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimeSelective) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimeSelective;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db
+            .ref("/SMTLine2/SelectiveTime")
+            .set(timeString);
+
+          setTimeSelective(timeString);
+        }
+      }, 1000);
+    } else if (StatusSelective === "Go") {
+      setIsRunningSelective(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimeSelective(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusSelective, startTimeSelective]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusSelective === "Go") &&
+      TimeSelective !== null &&
+      TimeSelective !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeSelective";
+
+
+      const data = {
+        TimeSelective: TimeSelective,
+        Selective: Selective,
+        StatusSelective: StatusSelective,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimeSelective);
+          console.log(Selective);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimeSelective, Selective, StatusSelective]);
+
+
+  // Touchup
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusTouchup)) {
+      setIsRunningTouchup(true);
+
+      if (StatusTouchup === "Leader") {
+        setStartTimeTouchup(Date.now());
+      } else if (
+        StatusTouchup === "MAINTENANCE & IT" &&
+        startTimeTouchup === null
+      ) {
+        setStartTimeTouchup(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimeTouchup) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimeTouchup;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db
+            .ref("/SMTLine2/TouchupTime")
+            .set(timeString);
+
+          setTimeTouchup(timeString);
+        }
+      }, 1000);
+    } else if (StatusTouchup === "Go") {
+      setIsRunningTouchup(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimeTouchup(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusTouchup, startTimeTouchup]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusTouchup === "Go") &&
+      TimeTouchup !== null &&
+      TimeTouchup !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeTouchup";
+
+
+      const data = {
+        TimeTouchup: TimeTouchup,
+        Touchup: Touchup,
+        StatusTouchup: StatusTouchup,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimeTouchup);
+          console.log(Touchup);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimeTouchup, Touchup, StatusTouchup]);
+
+
+  // ICT
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusICT)) {
+      setIsRunningICT(true);
+
+      if (StatusICT === "Leader") {
+        setStartTimeICT(Date.now());
+      } else if (
+        StatusICT === "MAINTENANCE & IT" &&
+        startTimeICT === null
+      ) {
+        setStartTimeICT(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimeICT) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimeICT;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db
+            .ref("/SMTLine2/ICTTime")
+            .set(timeString);
+
+          setTimeICT(timeString);
+        }
+      }, 1000);
+    } else if (StatusICT === "Go") {
+      setIsRunningICT(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimeICT(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusICT, startTimeICT]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusICT === "Go") &&
+      TimeICT !== null &&
+      TimeICT !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeICT";
+
+
+      const data = {
+        TimeICT: TimeICT,
+        ICT: ICT,
+        StatusICT: StatusICT,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimeICT);
+          console.log(ICT);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimeICT, ICT, StatusICT]);
+
+
+  // Flash
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusFlash)) {
+      setIsRunningFlash(true);
+
+      if (StatusFlash === "Leader") {
+        setStartTimeFlash(Date.now());
+      } else if (
+        StatusFlash === "MAINTENANCE & IT" &&
+        startTimeFlash === null
+      ) {
+        setStartTimeFlash(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimeFlash) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimeFlash;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db
+            .ref("/SMTLine2/FlashTime")
+            .set(timeString);
+
+          setTimeFlash(timeString);
+        }
+      }, 1000);
+    } else if (StatusFlash === "Go") {
+      setIsRunningFlash(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimeFlash(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusFlash, startTimeFlash]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusFlash === "Go") &&
+      TimeFlash !== null &&
+      TimeFlash !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeFlash";
+
+
+      const data = {
+        TimeFlash: TimeFlash,
+        Flash: Flash,
+        StatusFlash: StatusFlash,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimeFlash);
+          console.log(Flash);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimeFlash, Flash, StatusFlash]);
+
+
+
+  // Router
+  useEffect(() => {
+    let interval;
+
+    const validStatuses = [
+      "Repair",
+      "In Validation",
+      "Leader",
+      "Return Leader",
+      "HRGA & EHS",
+      "Return HRGA & EHS",
+      "PURCHASING,PPIC,MP&L",
+      "Return PURCHASING,PPIC,MP&L",
+      "PROCESS ENGINEERING",
+      "Return PROCESS ENGINEERING",
+      "PRODUCT DEVELOPMENT",
+      "Return PRODUCT DEVELOPMENT",
+      "ADVANCED MANUFACTURING ENGINEERING",
+      "Return ADVANCED MANUFACTURING ENGINEERING",
+      "MAINTENANCE & IT",
+      "Return MAINTENANCE & IT",
+      "Production",
+      "QA",
+      "QC",
+    ];
+
+    if (validStatuses.includes(StatusRouter)) {
+      setIsRunningRouter(true);
+
+      if (StatusRouter === "Leader") {
+        setStartTimeRouter(Date.now());
+      } else if (
+        StatusRouter === "MAINTENANCE & IT" &&
+        startTimeRouter === null
+      ) {
+        setStartTimeRouter(Date.now());
+      }
+
+      interval = setInterval(() => {
+        if (startTimeRouter) {
+          const currentTime = Date.now();
+          const elapsedTime = currentTime - startTimeRouter;
+
+          const hours = Math.floor(elapsedTime / 3600000);
+          const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+          const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+          const timeString = `${hours} Hours : ${minutes} Minutes : ${seconds} Seconds `;
+
+          db
+            .ref("/SMTLine2/RouterTime")
+            .set(timeString);
+
+          setTimeRouter(timeString);
+        }
+      }, 1000);
+    } else if (StatusRouter === "Go") {
+      setIsRunningRouter(false);
+      clearInterval(interval);
+
+      // Clear startTime when status changes to 'Go'
+      setStartTimeRouter(null);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [StatusRouter, startTimeRouter]);
+
+  useEffect(() => {
+    let apiUrl = "";
+
+    if (
+      (StatusRouter === "Go") &&
+      TimeRouter !== null &&
+      TimeRouter !== ""
+    ) {
+
+      apiUrl = "https://andonline.astra-visteon.com:3000/api/PutDownTimeRouter";
+
+
+      const data = {
+        TimeRouter: TimeRouter,
+        Router: Router,
+        StatusRouter: StatusRouter,
+      };
+
+      fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          console.log("Response status:", response.status);
+          console.log(TimeRouter);
+          console.log(Router);
+          if (response.status === 200) {
+            console.log("Mantap");
+          } else {
+            throw new Error("Error updating data");
+          }
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    }
+  }, [TimeRouter, Router, StatusRouter]);
+
+  // -------------------------------
+   const navHref = "/SMTLine1controller"; 
+
 
   return (
-    <body style={styles}>
-      <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
-        <div class="flex h-14 items-center justify-between">
-          <div class="flex items-center">
-            <div class="flex-shrink-0">
-              <img
-                src={process.env.PUBLIC_URL + "/avi.png"}
-                alt="Logo"
-                class="h-6 ml-4 sm:h-9 bg-white rounded-md"
-              />
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <header class="bg-white shadow mb-3">
-        <div class="mx-auto max-w-7xl px-4">
-          <div>
-            <div class="flex items-center">
-              <button>
-                <h1 class="text-xl font-sans tracking-tight text-gray-900">
-                  | SMT Line 1 - TOP |
-                </h1>
-              </button>
-              <h1 class="text-xl font-sans tracking-tight ml-4">
-                <span class="text-black">SMT LINE 1:</span>
-                <span
-                  class="ml-4"
-                  style={{
-                    color: StatusLine === "Running" ? "green" : "red",
-                  }}
-                >
-                  {StatusLine}
-                </span>
-                <span className="ml-4">|</span>
-              </h1>
-              <h1 class="text-xl font-sans tracking-tight ml-4">
-                <span class="text-black">SMT LINE 2:</span>
-                <span class="ml-4 text-green-500">RUNNING </span>|
-              </h1>
-            </div>
-          </div>
-        </div>
-      </header>
+    <body className="bg-slate-700 w-full h-full" >
+      <Navbar navHref={navHref} />
+      <HeaderStatus />
 
       {/*  */}
       <main>
@@ -5248,6 +8455,309 @@ const SMTLINE1CONTROLLER = () => {
           </div>
         </div>
 
+
+        {/* SMT LINE 2 */}
+        <div className=" pt-3">
+          <span className=" pt-4 sm:ml-5 text-2xl text-white font-thin px-2">
+            SMT BOTTOM
+          </span>
+        </div>
+        <div>
+          <div class="pt-4 flex   flex-col md:flex-row p-4 sm:ml-5">
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{
+                      backgroundColor: backgroundColorStatusDestacker,
+                    }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-center text-white">
+                        DESTACKER
+                      </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusLabel }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-center text-white">
+                        LABEL
+                      </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusPrinter }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-center text-white">
+                        PRINTER
+                      </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusSPI }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-center text-white">SPI  </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div>
+          <div class="pt-4 flex   flex-col md:flex-row p-4 sm:ml-5">
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{
+                      backgroundColor: backgroundColorStatusPickNPlace,
+                    }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-center text-white">
+                        PICK & PLACE
+                      </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section
+              class="antialiased 
+          text-gray-600  px-2"
+              x-data="app"
+            >
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusReflow }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-center text-white">
+                        REFLOW
+                      </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusAOI }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-center text-white">AOI </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusRVS }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-sm text-center text-white">
+                        RVS
+                      </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+
+
+        <div>
+          <div class="pt-4 flex   flex-col md:flex-row p-4 sm:ml-5">
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusDropin }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-center text-white">
+                        DROP IN
+                      </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusFluxer }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-center text-white">
+                        FLUXER
+                      </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusPreheat }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-center text-white">
+                        PREHEAT
+                      </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusSelective }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-center text-white">
+                        Selective
+                      </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div>
+          <div class="pt-4 flex   flex-col md:flex-row p-4 sm:ml-5">
+
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusTouchup }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-center text-white">
+                        TOUCH UP
+                      </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusICT }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-center text-white">ICT </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusFlash }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-sm text-center text-white">
+                        FLASH
+                      </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section class="antialiased  text-gray-600  px-2" x-data="app">
+              <div class="flex flex-col ">
+                {/* <!-- Table --> */}
+                <div className="w-72 pt-2 sm:w-48 lg:w-72">
+                  <button
+                    style={{ backgroundColor: backgroundColorStatusRouter }}
+                    class="w-full max-w-sm  bg-[#565454] shadow-lg rounded-xl "
+                  >
+                    <header class="px-5 py-4  ">
+                      <div class="italic  text-sm text-center text-white">
+                        ROUTER
+                      </div>
+                    </header>
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
       </main>
     </body>
   );

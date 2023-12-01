@@ -44,7 +44,7 @@ function QRResponseMTCTOP() {
    db.ref(`StatusLine/${LineFirebase}`).set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.12:3000/api/PutResponseRepair`, {
+    fetch(`https://andonline.astra-visteon.com:3000/api/PutResponseRepair`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +92,7 @@ function QRResponseMTCTOP() {
   const handleScanSuccessMesin = async (data) => {
     try {
       // Fetch data from the API
-      const response = await fetch("http://192.168.101.12:3021/api/smt");
+      const response = await fetch("https://andonline.astra-visteon.com:3021/api/smt");
       const stations = await response.json();
 
       // Find the station with the matching Id_Station
@@ -145,9 +145,9 @@ useEffect(() => {
 
   const notificationRepairment = () => {
 
-    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x1";
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
     const chatIds = [-921205810];
-    const message = `!! Attention SMT LINE 1 Under Repairment !!%0A%0ARepair By : ${NamaPIC}%0AStation : ${Station}`;
+    const message = `!! Attention ${Line} Under Repairment !!%0A%0ARepair By : ${NamaPIC}%0AStation : ${Station}`;
 
 
     const escapedMessage = message.replace(/&/g, '%26');

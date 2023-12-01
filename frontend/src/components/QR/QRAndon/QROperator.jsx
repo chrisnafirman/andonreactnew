@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { db } from "./../../../Firebase.js";
+import { db } from "./../../../Firebase";
 import Select from "react-select";
 import QRScannerPopup from "../QR";
 
@@ -144,7 +144,7 @@ function QROperator() {
         db.ref(`StatusLine/${LineFirebase}`).set("Down");
 
 
-        fetch(`http://192.168.101.12:3000/api/Leader`, {
+        fetch(`https://andonline.astra-visteon.com:3000/api/Leader`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -198,7 +198,7 @@ function QROperator() {
         setStation(null);
         setNamaPIC(null);
 
-        fetch(`http://192.168.101.12:3000/api/Repair`, {
+        fetch(`https://andonline.astra-visteon.com:3000/api/Repair`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -369,7 +369,7 @@ function QROperator() {
         const fetchData = async () => {
             try {
                 const response = await fetch(
-                    "http://192.168.101.12:3000/api/ScheduleProduction"
+                    "https://andonline.astra-visteon.com:3000/api/ScheduleProduction"
                 );
                 const jsonData = await response.json();
                 const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -421,7 +421,7 @@ function QROperator() {
     const handleScanSuccessMesin = async (data) => {
         try {
             // Fetch data from the API
-            const response = await fetch("http://192.168.101.12:3021/api/smt");
+            const response = await fetch("https://andonline.astra-visteon.com:3021/api/smt");
             const stations = await response.json();
 
             // Find the station with the matching Id_Station
@@ -460,7 +460,7 @@ function QROperator() {
     const handleScanSuccessMesinToMTC = async (data) => {
         try {
             // Fetch data from the API
-            const response = await fetch("http://192.168.101.12:3021/api/smt");
+            const response = await fetch("https://andonline.astra-visteon.com:3021/api/smt");
             const stations = await response.json();
 
             // Find the station with the matching Id_Station
@@ -520,7 +520,7 @@ function QROperator() {
         const randomId = `INC${Math.floor(Math.random() * 1000).toString().padStart(4, "0")}`;
 
         // Kirim permintaan ke API untuk memeriksa UID
-        fetch("http://192.168.101.12:3000/api/Repair")
+        fetch("https://andonline.astra-visteon.com:3000/api/Repair")
             .then((response) => response.json())
             .then((data) => {
                 const uids = data.map((item) => item.Uid);
@@ -543,9 +543,9 @@ function QROperator() {
 
     const notificationLeader = () => {
 
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x1";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-950877102];
-        const message = `!! Attention Station Down !!%0ASMT LINE 1 Request Action Leader%0A%0ARequest By : ${NamaPIC}%0AStation : ${Station}`;
+        const message = `!! Attention Station Down !!%0A${Line} Request Action Leader%0A%0ARequest By : ${NamaPIC}%0AStation : ${Station}`;
 
 
         const escapedMessage = message.replace(/&/g, '%26');
@@ -568,9 +568,9 @@ function QROperator() {
 
     const notificationMaintenance = () => {
 
-        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x1";
+        const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
         const chatIds = [-993707437];
-        const message = `!! Attention Station Down !!%0ASMT LINE 1 Request Repair Maintenance%0A%0ARequest By : ${NamaPIC}%0AStation : ${Station}%0AUid : ${Uid}%0AProblem : ${Kerusakan}`;
+        const message = `!! Attention Station Down !!%0A${Line} Request Repair Maintenance%0A%0ARequest By : ${NamaPIC}%0AStation : ${Station}%0AUid : ${Uid}%0AProblem : ${Kerusakan}`;
 
         const escapedMessage = message.replace(/&/g, '%26');
 

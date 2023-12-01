@@ -46,7 +46,7 @@ function QRResponseValidationTOP() {
     db.ref(`StatusLine/${LineFirebase}`).set("Down");
     setNamaPIC(null);
     setStation(null);
-    fetch(`http://192.168.101.12:3000/api/PutResponseValidation`, {
+    fetch(`https://andonline.astra-visteon.com:3000/api/PutResponseValidation`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -91,7 +91,7 @@ function QRResponseValidationTOP() {
   const handleScanSuccessMesin = async (data) => {
     try {
       // Fetch data from the API
-      const response = await fetch("http://192.168.101.12:3021/api/smt");
+      const response = await fetch("https://andonline.astra-visteon.com:3021/api/smt");
       const stations = await response.json();
 
       // Find the station with the matching Id_Station
@@ -143,9 +143,9 @@ useEffect(() => {
 
   const notificationValidation = () => {
 
-    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x1";
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
     const chatIds = [-912913885];
-    const message = `!! Attention SMT LINE 1 In Validation Quality !!%0A%0AValidation By : ${NamaPIC}%0AStation : ${Station}`;
+    const message = `!! Attention ${Line} In Validation Quality !!%0A%0AValidation By : ${NamaPIC}%0AStation : ${Station}`;
 
     const escapedMessage = message.replace(/&/g, '%26');
 

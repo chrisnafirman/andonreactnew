@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db } from "./../../Firebase.js";
-
+import Navbar from "../ComponentsStyle/Navbar.jsx";
 
 
 const SmtTop = () => {
@@ -137,7 +137,7 @@ const SmtTop = () => {
     alert("Sucsess");
     window.location.reload();
 
-    fetch("http://192.168.101.12:3000/api/ScheduleProduction", {
+    fetch("https://andonline.astra-visteon.com:3000/api/ScheduleProduction", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -194,7 +194,7 @@ const SmtTop = () => {
     };
 
     const UpdateReal = (event) => {
-      fetch(`http://192.168.101.12:3000/api/UpdateRealProduction`, {
+      fetch(`https://andonline.astra-visteon.com:3000/api/UpdateRealProduction`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -203,7 +203,7 @@ const SmtTop = () => {
       })
         .then((response) => {
           if (response.status === 200) {
-            fetch(`http://192.168.101.12:3000/api/ScheduleProduction`, {
+            fetch(`https://andonline.astra-visteon.com:3000/api/ScheduleProduction`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -271,7 +271,7 @@ const SmtTop = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.101.12:3000/api/ScheduleProduction"
+          "https://andonline.astra-visteon.com:3000/api/ScheduleProduction"
         );
         const jsonData = await response.json();
         const latestData = jsonData[jsonData.length - 1]; // Ambil data terakhir
@@ -575,7 +575,7 @@ const SmtTop = () => {
       OT_OUT: OT_OUT,
     };
     fetch(
-      `http://192.168.101.12:3000/api/UpdateOverTime`,
+      `https://andonline.astra-visteon.com:3000/api/UpdateOverTime`,
       {
         method: "PUT",
         headers: {
@@ -600,20 +600,7 @@ const SmtTop = () => {
 
   return (
     <body style={styles}>
-      <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
-        <div class="flex h-14 items-center justify-between">
-          <div class="flex items-center">
-            <div class="flex-shrink-0">
-              <img
-                src={process.env.PUBLIC_URL + "/avi.png"}
-                alt="Logo"
-                class="h-6 ml-4 sm:h-9 bg-white rounded-md"
-              />
-            </div>
-          </div>
-          <p class="text-gray-500 text-sm">{formattedTime}</p>
-        </div>
-      </nav>
+      <Navbar />
 
       <sidebar>
         <div

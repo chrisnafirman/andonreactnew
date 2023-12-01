@@ -7,7 +7,7 @@ const PortalMaintenance = () => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     useEffect(() => {
-        fetch('http://192.168.101.12:3000/api/Repair')
+        fetch('https://andonline.astra-visteon.com:3000/api/Repair')
             .then((response) => response.json())
             .then((data) => {
                 const filteredData = data.filter((item) => item.Status === '' && item.Department === 'MAINTENANCE & IT');
@@ -130,7 +130,7 @@ const PortalMaintenance = () => {
                     </div>
                     <div className="flex-1">
                         <div className=" p-6 rounded-lg ">
-                            <a href="/--">
+                            <a href="QRCHECKSHEET">
                                 <button className="w-full py-2 px-4  hover:scale-75 ease-in duration-500">
                                     <svg width="100px" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M19.88 16.44V19.89C19.88 20.16 19.66 20.38 19.39 20.38H13.97" stroke="#0F0F0F" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { db } from "./../../Firebase.js";
 import Select from "react-select";
-
+import Navbar from "../ComponentsStyle/Navbar.jsx";
+import HeaderStatus from "../ComponentsStyle/HeaderStatus.jsx";
 
 
 const Maintenance = () => {
@@ -11,7 +12,7 @@ const Maintenance = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [Uid, setUid] = useState("");
   const [Sid, setSid] = useState("");
-  const [currentTime, setCurrentTime] = useState(new Date());
+
   const [selectedItem, setSelectedItem] = useState(null);
   const [Station, setStation] = useState("");
   const [NamaPIC, setNamaPIC] = useState("");
@@ -23,7 +24,6 @@ const Maintenance = () => {
   const [Department, setDepartment] = useState("");
   const [Requestor, setRequestor] = useState("");
   const [DepartTo, setDepartTo] = useState("");
-  const [StatusLine, setStatusLine] = useState("");
   const [Status, setStatus] = useState("Solved");
   const [isLoader, setIsLoader] = useState(false);
   const [Area, setArea] = useState("");
@@ -62,26 +62,9 @@ useEffect(() => {
 
 
 
-//  fungsi mengambil data dari firebase
-  useEffect(() => {
-    const ref3 = db.ref("StatusLine/SMTLine1");
-    ref3.on("value", (snapshot) => {
-      const data = snapshot.val();
-      setStatusLine(data);
-    });
-    return () => { };
-  }, []);
 
-  // waktu navbar
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
-  const formattedTime = `${currentTime.getDate()}/${currentTime.getMonth() + 1
-    }/${currentTime.getFullYear()} ~ ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+  
 
 
 // function time
@@ -97,7 +80,7 @@ useEffect(() => {
 
   // Fetching Data
   useEffect(() => {
-    fetch("http://192.168.101.12:3000/api/Repair")
+    fetch("https://andonline.astra-visteon.com:3000/api/Repair")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -170,7 +153,7 @@ useEffect(() => {
     setStation(null);
     setNamaPIC(null);
 
-    fetch(`http://192.168.101.12:3000/api/Validation`, {
+    fetch(`https://andonline.astra-visteon.com:3000/api/Validation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -211,7 +194,7 @@ useEffect(() => {
 
     console.log("Sending data:", data);
 
-    fetch(`http://192.168.101.12:3000/api/PutRepairDone`, {
+    fetch(`https://andonline.astra-visteon.com:3000/api/PutRepairDone`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -293,13 +276,15 @@ useEffect(() => {
       return "/QRResponseRepairMTC";
     } else if (selectedItem.Area === "SMT BE" && selectedItem.Status === "") {
       return "/QRResponseRepairMTC";
+    } else if (selectedItem.Area === "SMT" && selectedItem.Status === "") {
+      return "/QRResponseRepairMTC";
     } else {
     }
   };
 
 
   const notificationRequestValidation = () => {
-    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x1";
+    const botToken = "5960720527:AAFn6LH_L3iD_wGKt8FMVOnmiaKEcR0x17A";
     let chatIds = [-912913885,-993707437]; // Default chat id
 
     // Pemeriksaan jika Department adalah Maintenance
@@ -307,7 +292,7 @@ useEffect(() => {
         chatIds = [-950877102,-993707437]; // Ganti chat id jika Department adalah Maintenance
     }// Default chat id
 
-    const message = `!! SMT LINE 1 Repair Completed, Awaiting Validation ${Department} !!%0A%0ARequest Validation By ${Requestor}%0ARequest By : ${NamaPIC}%0AStation : ${Station}%0AUid : ${Uid}%0AProblem : ${Kerusakan}%0AAction : ${Action}`;
+    const message = `!! ${Line} Repair Completed, Awaiting Validation ${Department} !!%0A%0ARequest Validation By ${Requestor}%0ARequest By : ${NamaPIC}%0AStation : ${Station}%0AUid : ${Uid}%0AProblem : ${Kerusakan}%0AAction : ${Action}`;
 
     const escapedMessage = message.replace(/&/g, '%26');
 
@@ -328,57 +313,15 @@ useEffect(() => {
 
 
 
+  // Add your logic to get formattedTime, StatusLine1, and StatusLine2
+      const navHref = "/PortalMaintenance"; // Set your dynamic href value
+
 
 
   return (
     <body style={styles}>
-      <nav class="bg-slate px-3 sm:px-4   dark:bg-gray-900 bg-gray-900 w-full z-20 top-0 left-0  dark:border-gray-600">
-        <div class="flex h-14 items-center justify-between">
-          <div class="flex items-center">
-            <a href="/PortalMaintenance">
-              <div class="flex-shrink-0">
-                <img
-                  src={process.env.PUBLIC_URL + "/avi.png"}
-                  alt="Logo"
-                  class="h-6 ml-4 sm:h-9 bg-white rounded-md"
-                />
-              </div>
-            </a>
-          </div>
-          <p class="text-gray-500 text-sm">{formattedTime}</p>
-        </div>
-      </nav>
-
-      <header class="bg-white shadow mb-3">
-        <div class="mx-auto max-w-7xl px-4">
-          <div>
-            <div class="flex items-center">
-              <h1 class="text-xs lg:text-xl font-sans tracking-tight text-gray-900">
-                | Request Maintenance |
-              </h1>
-              <h1 class="text-xs lg:text-xl  font-sans tracking-tight ml-4">
-                <span class="text-black">SMT LINE 1:</span>
-                <span
-                  class="ml-4"
-                  style={{
-                    color: StatusLine === "Running" ? "green" : "red",
-                  }}
-                >
-                  {StatusLine}
-                </span>
-                <span className="ml-4">|</span>
-              </h1>
-
-              <h1 class="text-xs lg:text-xl  font-sans tracking-tight ml-4">
-                <span class="text-black">SMT LINE 2:</span>
-                <span class="ml-4 text-green-500">RUNNING </span>|
-              </h1>
-            </div>
-          </div>
-        </div>
-      </header>
-
-
+      <Navbar  navHref={navHref} />
+      <HeaderStatus />
       <main>
         <section
           className="antialiased  text-gray-600 h-screen px-4"

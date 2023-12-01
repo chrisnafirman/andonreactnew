@@ -1,17 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/database";
 import Select from "react-select";
 import QRScannerPopup from "../QR";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyBn6iDHHW-vU7bB6GL3iOvlD6QI0wmTOE8",
-    databaseURL:
-        "https://andon-a0ad5-default-rtdb.asia-southeast1.firebasedatabase.app",
-};
-firebase.initializeApp(firebaseConfig);
 
-const database = firebase.database();
 
 function QRCHECKSHEET() {
     const [Station, setStation] = useState("");
@@ -51,26 +42,39 @@ function QRCHECKSHEET() {
 
     useEffect(() => {
         // Check if Station is "AOI(TOP)" and redirect if true
-        if (Station === "AOI (TOP)") {
-            window.location.href = 'http://192.168.101.12:3004/';
+        if (Station === "") {
+            window.location.href = 'https://andonline.astra-visteon.com:3004/checksheetaoitop';
         }
     }, [Station]);
     
 
-    const handleScanSuccessMesin = (data) => {
-        // Check if "(TOP)" is present in the scanned data
-        if (data.includes("(TOP)")) {
-            setStation(data);
-            setShowPopupMesin(false);
-            setIsQRResponses(true);
 
-            // Check if Station is "AOI(TOP)" and redirect if true
-           
-        } else {
-            // Show an error message or take appropriate action for "(TOP)" or other cases
-            alert("Invalid scan. Scan Hanya Bisa Dilakukan Di Mesin Area '(TOP)'");
+
+    const handleScanSuccessMesin = async (data) => {
+        try {
+            // Fetch data from the API
+            const response = await fetch("https://andonline.astra-visteon.com:3021/api/smt");
+            const stations = await response.json();
+
+            // Find the station with the matching Id_Station
+            const matchedStation = stations.find(station => station.Id_Station === data);
+
+            if (matchedStation) {
+                // Set the Area_Station and Line_Station based on the matched station
+                setStation(data);
+                setShowPopupMesin(false);
+                setIsQRResponses(true);
+            } else {
+                // Show an error message if the Id_Station is not found in the API response
+                alert("Invalid scan. Station not found in the database.");
+            }
+        } catch (error) {
+            // Handle any errors that may occur during the API request
+            console.error("Error fetching data from the API:", error);
+            alert("Error fetching data from the API. Please try again.");
         }
     };
+
 
 
 
